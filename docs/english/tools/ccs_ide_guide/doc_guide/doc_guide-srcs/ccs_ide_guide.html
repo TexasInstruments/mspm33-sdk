@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Code Composer Studio IDE Version 20.4.0+ for MSPM33 MCUs &mdash; Code Composer Studio v12 Eclipse IDE for MSPM33 MCUs 1.02.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Code Composer Studio v12 Eclipse IDE for MSPM33 MCUs" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Code Composer Studio v12 Eclipse IDE for MSPM33 MCUs
+          </a>
+              <div class="version">
+                1.02.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Code Composer Studio IDE Version 20.4.0+ for MSPM33 MCUs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#read-this-first">Read This First</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-use-this-guide">How to Use This Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#information-about-cautions">Information About Cautions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#related-documentation-from-texas-instruments">Related Documentation From Texas Instruments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#if-you-need-assistance">If You Need Assistance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#software-installation">1. Software Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#development-flow">2. Development Flow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">2.1 Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-project-from-scratch">2.2 Creating a Project From Scratch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-ti-resource-explorer-in-ccs">2.3 Using TI Resource Explorer in CCS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-sysconfig-with-ccs">2.4 Using SysConfig with CCS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#migrating-between-mspm33-derivatives">2.5 Migrating Between MSPM33 Derivatives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sysconfig-project-migration">2.5.1 SysConfig Project Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#non-sysconfig-compatible-project-migration">2.5.2 Non-SysConfig Compatible Project Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manual-migration">2.5.3 Manual Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stack-and-heap-management-and-linker-files">2.6 Stack and Heap Management and Linker Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configure-stack-and-heap-using-ti-arm-clang-compiler">2.6.1 Configure Stack and Heap using TI Arm Clang compiler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configure-stack-and-heap-using-arm-gcc">2.6.2 Configure Stack and Heap using Arm GCC</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-generate-ti-txt-and-other-format-files">2.7 How to Generate TI .TXT (and Other Format) Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-arm-hex-utility">2.7.1 Using Arm Hex Utility</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-objcopy-utility">2.7.2 Using Objcopy Utility</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#overriding-pre-built-libraries">2.8 Overriding Pre-built Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-from-sram">2.9 Running from SRAM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#running-a-complete-application-from-sram">2.9.1 Running a complete application from SRAM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-a-function-from-sram">2.9.2 Running a function from SRAM</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#debugging-the-application">3. Debugging the Application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-ti-xds-tools">3.1 Using TI XDS Tools</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#flash-loader">3.1.1 Flash Loader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#erasing-and-updating-nonmain-memory">3.1.2 Erasing and Updating NONMAIN Memory</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#using-segger-j-link">3.2 Using Segger J-Link</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#breakpoint-types">3.3 Breakpoint Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debugging-pre-built-libraries">3.4 Debugging Pre-built Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dssm-commands">3.5 DSSM Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dssm-mass-erase-factory-reset-wait-for-debug-and-set-reset-mode">3.5.1 DSSM Mass Erase, Factory Reset, Wait for Debug, and Set Reset Mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dssm-set-reset-mode-post-execution-steps">3.5.1.1 DSSM Set Reset Mode Post-Execution Steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dssm-wait-for-debug-post-execution-steps">3.5.1.2 DSSM Wait for Debug Post-Execution Steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dssm-swd-password-mechanism">3.5.2 DSSM SWD Password Mechanism</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#connecting-to-an-incorrect-device">3.6 Connecting to an Incorrect Device</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-arm-gcc">4. Installing Arm GCC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#known-issues-and-frequently-asked-questions-faqs">5. Known Issues and Frequently Asked Questions (FAQs)</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Code Composer Studio v12 Eclipse IDE for MSPM33 MCUs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Code Composer Studio IDE Version 20.4.0+ for MSPM33 MCUs</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="code-composer-studio-ide-version-20-4-0-for-mspm33-mcus">
+<h1>Code Composer Studio IDE Version 20.4.0+ for MSPM33 MCUs<a class="headerlink" href="#code-composer-studio-ide-version-20-4-0-for-mspm33-mcus" title="Permalink to this heading">¶</a></h1>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="#read-this-first">Read This First</a></p></li>
+<li><p><a class="reference external" href="#software-installation">Software Installation</a></p></li>
+<li><p><a class="reference external" href="#development-flow">Development Flow</a></p></li>
+<li><p><a class="reference external" href="#debugging-the-application">Debugging the Application</a></p></li>
+<li><p><a class="reference external" href="#installing-arm-gcc">Installing Arm GCC</a></p></li>
+<li><p><a class="reference external" href="#known-issues-and-frequently-asked-questions-faqs">Known Issues and Frequently Asked Questions (FAQs)</a></p></li>
+</ul>
+</section>
+<section id="read-this-first">
+<h2>Read This First<a class="headerlink" href="#read-this-first" title="Permalink to this heading">¶</a></h2>
+<section id="how-to-use-this-guide">
+<h3>How to Use This Guide<a class="headerlink" href="#how-to-use-this-guide" title="Permalink to this heading">¶</a></h3>
+<p>This guide describes only the setup and basic operation of the software development environment, but it does not fully describe the MSPM33 microcontrollers or the complete development software and hardware systems. For details of these items, see the appropriate TI and CCS documents listed in section <a class="reference external" href="#related-documentation-from-texas-instruments">Related Documentation From Texas Instruments</a>.</p>
+</section>
+<section id="information-about-cautions">
+<h3>Information About Cautions<a class="headerlink" href="#information-about-cautions" title="Permalink to this heading">¶</a></h3>
+<p>This guide may contain cautions.</p>
+<p><strong>Caution</strong> - This is an example of a caution statement. A caution statement describes a situation that could potentially damage your software or equipment.</p>
+<p>Read each caution carefully.</p>
+</section>
+<section id="related-documentation-from-texas-instruments">
+<h3>Related Documentation From Texas Instruments<a class="headerlink" href="#related-documentation-from-texas-instruments" title="Permalink to this heading">¶</a></h3>
+<p>MSPM33 development tools documentation:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/lit/sprui94">XDS110 Debug Probe User’s Guide</a></p></li>
+</ul>
+<p>MSPM33 device documentation:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/lit/slau869">LP-MSPM33C321A User’s Guide</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/lit/slau847">MSPM33 C-Series Technical Reference Manual</a></p></li>
+</ul>
+<p>Code Composer documentation:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/tool/CCSTUDIO#tech-docs">Code Composer Studio Documentation</a></p></li>
+<li><p><a class="reference external" href="https://software-dl.ti.com/ccs/esd/documents/users_guide/index.html">Code Composer Studio User’s Guide</a></p></li>
+</ul>
+</section>
+<section id="if-you-need-assistance">
+<h3>If You Need Assistance<a class="headerlink" href="#if-you-need-assistance" title="Permalink to this heading">¶</a></h3>
+<p>The <a class="reference external" href="https://e2e.ti.com/support/microcontrollers/">E2E Community Support Forums</a> for MSPM33 MCUs are available to provide open interaction with peer engineers, TI engineers, and other experts. Additional device-specific information can be found on the <a class="reference external" href="https://www.ti.com/mspm33">MSPM33 website</a>.</p>
+</section>
+</section>
+<section id="software-installation">
+<h2>1. Software Installation<a class="headerlink" href="#software-installation" title="Permalink to this heading">¶</a></h2>
+<p>Code Composer Studio IDE is available from <a class="reference external" href="https://www.ti.com/tool/CCSTUDIO">TI.com</a>.</p>
+<p>MSPM33 microcontrollers and the MSPM33 SDK require CCS 20.4.0 or higher.</p>
+<p>Code Composer Studio (CCS) IDE is available from <a class="reference external" href="https://www.ti.com/tool/CCSTUDIO">TI.com</a>. Installation instructions for CCS 20.4.0 are available <a class="reference external" href="https://software-dl.ti.com/ccs/esd/documents/users_guide_20.4.0/ccs_installation.html#installation-process">here</a>.</p>
+<p><a class="reference external" href="https://www.ti.com/tool/ARM-CGT">TI Arm Clang</a> is the recommended compiler for CCS and it will be installed by default when MSPM33 is selected during installation.</p>
+<p>Arm GCC is also available for use inside CCS; however, it’s not installed by default. Section <a class="reference external" href="#installing-arm-gcc">Installing Arm GCC</a> explains how to install GCC for CCS.</p>
+</section>
+<section id="development-flow">
+<h2>2. Development Flow<a class="headerlink" href="#development-flow" title="Permalink to this heading">¶</a></h2>
+<p>This chapter describes how to use CCS to run the demonstration programs and develop application software.</p>
+<section id="overview">
+<h3>2.1 Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h3>
+<p>Code Composer Studio (CCS) is an integrated development environment (IDE) that supports TI’s Microcontroller and Embedded Processors portfolio. CCS comprises a suite of tools used to develop and debug embedded applications.</p>
+<p>This guide only explains some features and capabilities of the CCS IDE using MSPM33.</p>
+<p>More documentation for CCS is available at <a class="reference external" href="https://www.ti.com/tool/CCSTUDIO#tech-docs">TI.com</a> or in the Help menu included in the IDE.</p>
+</section>
+<section id="creating-a-project-from-scratch">
+<h3>2.2 Creating a Project From Scratch<a class="headerlink" href="#creating-a-project-from-scratch" title="Permalink to this heading">¶</a></h3>
+<p><strong>Note</strong>: Creating a project from scratch is <strong>not recommended</strong> since creating the project from scratch doesn’t add all of the necessary device support files by default. To start from a blank project, TI recommends importing the Empty Driverlib example project from the MSPM33 SDK.</p>
+</section>
+<section id="using-ti-resource-explorer-in-ccs">
+<h3>2.3 Using TI Resource Explorer in CCS<a class="headerlink" href="#using-ti-resource-explorer-in-ccs" title="Permalink to this heading">¶</a></h3>
+<p>TI Resource Explorer (TI-Rex) helps you find all the latest examples, libraries, demo applications, datasheets, and more for your chosen platform.</p>
+<p>This tool is available at <a class="reference external" href="https://dev.ti.com/tirex">https://dev.ti.com/tirex</a>, but it’s also integrated into CCS allowing for a more integrated user experience.</p>
+<ol class="arabic">
+<li><p>Select <strong>Help</strong> → <strong>Getting Started</strong>.</p>
+<p><img alt="image0" src="../_images/ccs_gettingstarted.png" /></p>
+</li>
+<li><p>Click on <strong>Resource Explorer</strong></p></li>
+<li><p>The navigation panel can be used to view different TI products, documentation, software, etc.</p></li>
+<li><p>TI Resource Explorer also allows to select a specific SDK version by clicking next to a product and selecting <strong>Manage Versions</strong>. Note that installed products are also shown with a green check mark.</p>
+<p><img alt="image1" src="../_images/ccs_tirex_sdk.png" /></p>
+</li>
+<li><p>Use the integrated search to filter by LaunchPad (i.e. LP-MSPM33C) device (i.e. MSPM33C), middleware (i.e. DriverLib), or solution (i.e. LIN). Note that TI-Rex will automatically detect a connected LaunchPad.</p>
+<p><img alt="image2" src="../_images/ccs_tirex.png" /></p>
+</li>
+<li><p>Selecting an example will show a useful Readme document with a description of the example, peripheral and pin usage and how to run it.</p>
+<p><img alt="image3" src="../_images/ccs_tirex_project.png" /></p>
+</li>
+<li><p>Select a CCS project for the example and click on Import to add it to your workspace.</p>
+<p><img alt="image4" src="../_images/ccs_tirex_projectimport.png" /></p>
+</li>
+</ol>
+<p>Note that CCS will automatically detect any dependencies, including SDKs and compilers, and it will request installation if needed.</p>
+</section>
+<section id="using-sysconfig-with-ccs">
+<h3>2.4 Using SysConfig with CCS<a class="headerlink" href="#using-sysconfig-with-ccs" title="Permalink to this heading">¶</a></h3>
+<p>Some examples in the MSPM33 SDK have SysConfig support. <a class="reference external" href="https://www.ti.com/tool/SYSCONFIG">SysConfig</a> is an intuitive and comprehensive collection of graphical utilities for configuring pins, peripherals, radios, subsystems, and other components. SysConfig helps you manage, expose, and resolve conflicts visually so that you have more time to create differentiated applications.</p>
+<p>The SysConfig tool is delivered as a standalone installer, it can be used on the cloud at <a class="reference external" href="https://dev.ti.com/sysconfig">dev.ti.com</a>, or it’s integrated into CCS for better and easier experience.</p>
+<p>After importing a MSPM33 project in CCS, simply double-click the <code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> file and this will open SysConfig.</p>
+<p><img alt="image5" src="../_images/ccs_sysconfig.png" /></p>
+<p>For more information about using SysConfig with MSPM33, visit the <a class="reference external" href="../../../sysconfig_guide/doc_guide/doc_guide-srcs/sysconfig_guide.html">Using SysConfig with MSPM33</a> guide.</p>
+</section>
+<section id="migrating-between-mspm33-derivatives">
+<h3>2.5 Migrating Between MSPM33 Derivatives<a class="headerlink" href="#migrating-between-mspm33-derivatives" title="Permalink to this heading">¶</a></h3>
+<p>In order to migrate a project configuration to a new MSPM33 derivative (such as a new board, device, or package), the MSPM33 SDK supports several project migration processes. Project migration in this scope means updating relevant project configuration files and settings that are specific to the derivative, including linker files, startup files, and included libraries. The available options for migration depend on the project configuration, and the user should consult the desired project’s README for more information on which approach is supported. An overview of the available migration options and when they can be used are given below: - <a class="reference external" href="#251-sysconfig-project-migration">SysConfig Project Migration</a>: This is the default approach for SysConfig compatible projects, in which all the configuration files can be handled by SysConfig. - <a class="reference external" href="#252-non-sysconfig-compatible-project-migration">Non-SysConfig Compatible Project Migration</a>: This is the default approach for non-SysConfig
+compatible projects, where all the configuration files can be handled by the built-in device support package - <a class="reference external" href="#253-manual-migration">Manual Migration</a>: For all other cases that require custom projectspecs or other incompatible configurations, the user can follow these steps for manual migration.</p>
+</section>
+<section id="sysconfig-project-migration">
+<h3>2.5.1 SysConfig Project Migration<a class="headerlink" href="#sysconfig-project-migration" title="Permalink to this heading">¶</a></h3>
+<p>In order to facilitate project migration, SysConfig will generate Project Configuration files by default, which can be controlled through the Project Configuration module. The steps below apply to TI Arm Clang and Arm GCC.</p>
+<p><img alt="image6" src="../_images/ccs_migrate8.png" /></p>
+<p>For more details on generated Project Configuration files, visit the <a class="reference external" href="../../../sysconfig_guide/doc_guide/doc_guide-srcs/sysconfig_guide.html">Using SysConfig with MSPM33</a> Guide.</p>
+<ol class="arabic simple">
+<li><p>In SysConfig, enable the Device View and click on <strong>SWITCH</strong></p></li>
+</ol>
+<p><img alt="image7" src="../_images/ccs_migrate1.png" /></p>
+<ol class="arabic simple" start="2">
+<li><p>Select the New Values for the <strong>Device</strong>, <strong>Package</strong>, and <strong>CCS Launch Device</strong> to migrate the project configuration to, and then click <strong>CONFIRM</strong>.</p></li>
+</ol>
+<p><img alt="image8" src="../_images/ccs_migrate2.png" /></p>
+<ol class="arabic simple" start="3">
+<li><p>After Confirming the new device values, SysConfig will highlight an error on the Project Configuration module. The user must choose the new device in the <strong>Select Device</strong> options. Make sure the device selection matches what was chosen for <strong>CCS Launch Device</strong> in the previous step.</p></li>
+</ol>
+<p><img alt="image9" src="../_images/ccs_migrate6.png" /></p>
+<ol class="arabic simple" start="4">
+<li><p>Note that SysConfig will highlight any conflicts with the migration, such as unavailable pins and peripherals. Fix any conflicts as needed, and save all the changes to the SysConfig configuration script.</p></li>
+</ol>
+<p>CCS will automatically migrate the device variant and will add a corresponding .ccxml file. SysConfig will update the relevant project configuration files, including linker and startup files.</p>
+<p>Migration is now complete and the user can build their project for the new target device.</p>
+<p><img alt="image10" src="../_images/ccs_migrate3.png" /></p>
+<p>Note: If the user wants to manually modify any Project Configuration files, they should disable the option to generate that file from the Project Configuration module and then manually add their desired file to the project. Otherwise, changes that are made to any generated file will be overwritten by SysConfig when the project is built. Keep in mind that the steps above are intended to be followed when all the project configuration files are handled by SysConfig.</p>
+<p><img alt="image11" src="../_images/ccs_migrate7.png" /></p>
+</section>
+<section id="non-sysconfig-compatible-project-migration">
+<h3>2.5.2 Non-SysConfig Compatible Project Migration<a class="headerlink" href="#non-sysconfig-compatible-project-migration" title="Permalink to this heading">¶</a></h3>
+<p>For non-SysConfig compatible projects, migration is handled seamlessly by the built-in device support package.</p>
+<ol class="arabic simple">
+<li><p>In CCS, open the example project Properties and choose a different MSPM33 device.</p></li>
+</ol>
+<p><img alt="image12" src="../_images/ccs_migrate_non_sysconfig_properties.png" /></p>
+<ol class="arabic" start="2">
+<li><p>Hitting <strong>Apply and Close</strong> will automatically make the following updates to the project, corresponding to the newly selected device:</p>
+<ul class="simple">
+<li><p>Include a new CMSIS startup file</p></li>
+<li><p>Include a new linker command file</p></li>
+<li><p>Switch the device <em>Predefine Symbol</em> in the project compiler settings</p></li>
+<li><p>Switch the linked DriverLib library in the project linker settings</p></li>
+</ul>
+<p><strong>Important Note</strong>: The CMSIS startup file and linker command file from the previous device are NOT removed. Instead they are simply excluded from the project build.</p>
+</li>
+</ol>
+<p><img alt="image13" src="../_images/ccs_migrate_non_sysconfig_updated_files.png" /></p>
+<p>Migration is now complete and the user can build their project for the new target device.</p>
+</section>
+<section id="manual-migration">
+<h3>2.5.3 Manual Migration<a class="headerlink" href="#manual-migration" title="Permalink to this heading">¶</a></h3>
+<p>SysConfig allows for an easier migration between MSPM33 derivatives; however for some projects manual modifications are required. The steps below apply to TI Arm Clang but similar steps apply to Arm GCC.</p>
+<p>Note: Steps 1-3 don’t apply when not using SysConfig, and step 4 needs to be done manually.</p>
+<ol class="arabic simple">
+<li><p>In SysConfig, enable the Device View and click on <strong>SWITCH</strong></p></li>
+</ol>
+<p><img alt="image14" src="../_images/ccs_migrate1.png" /></p>
+<ol class="arabic simple" start="2">
+<li><p>Select the corresponding options for the new MSPM33 device and click <strong>CONFIRM</strong>.</p></li>
+</ol>
+<p><img alt="image15" src="../_images/ccs_migrate2.png" /></p>
+<ol class="arabic simple" start="3">
+<li><p>Note that SysConfig will highlight any conflicts with the migration, such as unavailable pins and peripherals. Fix any conflicts as needed.</p></li>
+<li><p>CCS will automatically migrate the device variant and will add a corresponding .ccxml file.</p></li>
+</ol>
+<p><img alt="image16" src="../_images/ccs_migrate3.png" /></p>
+<ol class="arabic simple" start="5">
+<li><p>In the project properties, select <strong>Build</strong> → <strong>Arm Compiler</strong> → <strong>Predefined Symbols</strong>. Select the device definition and update it.</p></li>
+</ol>
+<p><img alt="image17" src="../_images/ccs_migrate4.png" /></p>
+<ol class="arabic simple" start="6">
+<li><p>Update the linker and startup files. The MSPM33 SDK includes default files for all MSPM33 derivatives at <code class="docutils literal notranslate"><span class="pre">&lt;sdk&gt;\source\ti\devices\msp\m33\linker_files\ticlang</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;sdk&gt;\source\ti\devices\msp\m33\startup_system_files\ticlang</span></code> respectively.</p></li>
+</ol>
+<p>Note that previous files should be excluded or removed from the project.</p>
+<p><img alt="image18" src="../_images/ccs_migrate5.png" /></p>
+<ol class="arabic simple" start="7">
+<li><p>Resolve any other dependencies such as incompatible libraries and source code.</p></li>
+</ol>
+</section>
+<section id="stack-and-heap-management-and-linker-files">
+<h3>2.6 Stack and Heap Management and Linker Files<a class="headerlink" href="#stack-and-heap-management-and-linker-files" title="Permalink to this heading">¶</a></h3>
+<p>The reserved stack and heap size can be configured using project settings or in the linker files.</p>
+<section id="configure-stack-and-heap-using-ti-arm-clang-compiler">
+<h4>2.6.1 Configure Stack and Heap using TI Arm Clang compiler<a class="headerlink" href="#configure-stack-and-heap-using-ti-arm-clang-compiler" title="Permalink to this heading">¶</a></h4>
+<p>Right-click on a project and select <strong>Properties</strong>. Select <strong>Build</strong> → <strong>Arm Linker</strong> → <strong>Basic Options</strong> and set the stack and heap accordingly.</p>
+<p><img alt="image19" src="../_images/ccs_stack.png" /></p>
+<p>The stack and heap can also be modified directly on the linker .cmd file by adding or editing <code class="docutils literal notranslate"><span class="pre">--stack_size=xx</span></code> or <code class="docutils literal notranslate"><span class="pre">--heap_size=xx</span></code>.</p>
+</section>
+<section id="configure-stack-and-heap-using-arm-gcc">
+<h4>2.6.2 Configure Stack and Heap using Arm GCC<a class="headerlink" href="#configure-stack-and-heap-using-arm-gcc" title="Permalink to this heading">¶</a></h4>
+<p>The stack can be modified directly on the linker .lds file by adding or editing <code class="docutils literal notranslate"><span class="pre">_Min_Heap_Size</span> <span class="pre">=</span> <span class="pre">xx</span></code> or <code class="docutils literal notranslate"><span class="pre">_Min_Stack_Size</span> <span class="pre">=</span> <span class="pre">xx</span></code>.</p>
+</section>
+</section>
+<section id="how-to-generate-ti-txt-and-other-format-files">
+<h3>2.7 How to Generate TI .TXT (and Other Format) Files<a class="headerlink" href="#how-to-generate-ti-txt-and-other-format-files" title="Permalink to this heading">¶</a></h3>
+<p>CCS includes utilities which can be used to generate output objects in multiple formats for use with programming tools such as <a class="reference external" href="https://www.ti.com/tool/MSP-GANG">MSP-GANG</a> and <a class="reference external" href="https://www.ti.com/tool/UNIFLASH">UniFlash</a>.</p>
+<section id="using-arm-hex-utility">
+<h4>2.7.1 Using Arm Hex Utility<a class="headerlink" href="#using-arm-hex-utility" title="Permalink to this heading">¶</a></h4>
+<p>The following steps explain how to enable the TI TXT format using the Hex Utility which is integrated into CCS.</p>
+<ol class="arabic simple">
+<li><p>Right-click on a project and select <strong>Properties</strong>. Select <strong>Build</strong> → <strong>Arm Hex Utility</strong> and select <strong>Enable Arm Hex Utility</strong>.</p></li>
+</ol>
+<p><img alt="image20" src="../_images/ccs_outputtxt.png" /></p>
+<ol class="arabic simple" start="2">
+<li><p>Select <strong>Output Format Options</strong>. Then select the <strong>TI-TXT hex (–ti_txt)</strong> option.</p></li>
+</ol>
+<p><img alt="image21" src="../_images/ccs_outputtxt2.png" /></p>
+<p>This same process can be used to generate other formats; however, some formats might require other parameters.</p>
+<p>A common one is Intel HEX format which in addition to selecting the output format <strong>Intel hex (–intel, -i)</strong>, requires to specify the memory and ROM width as parameters.</p>
+<p>When using Intel HEX for MSPM33, select a memory and ROM width of 8 in <strong>Build</strong> → <strong>Arm Hex Utility</strong> → <strong>General Options</strong>.</p>
+<p><img alt="image22" src="../_images/ccs_outputhex.png" /></p>
+<p>For more information, visit <a class="reference external" href="https://software-dl.ti.com/ccs/esd/documents/ccs_hex-utility.html">Hex utility in CCS</a>.</p>
+</section>
+<section id="using-objcopy-utility">
+<h4>2.7.2 Using Objcopy Utility<a class="headerlink" href="#using-objcopy-utility" title="Permalink to this heading">¶</a></h4>
+<p>CCS includes the Arm Objcopy Utility which is a LLVM-based tool that can be used to generate binaries in multiple formats.</p>
+<p>The following steps explain how to enable intel Hex format using ObjCopy.</p>
+<ol class="arabic simple">
+<li><p>Right-click on a project and select <strong>Properties</strong>. Select <strong>Build</strong> → <strong>Arm ObjCopy Utility</strong> and select <strong>Enable Arm Objcopy Utility</strong>.</p></li>
+</ol>
+<p><img alt="image23" src="../_images/ccs_objcopy1.png" /></p>
+<ol class="arabic simple" start="2">
+<li><p>Specify the output file name using .hex extension.</p></li>
+</ol>
+<p><img alt="image24" src="../_images/ccs_objcopy2.png" /></p>
+<p>For more information about Objcopy, visit this <a class="reference external" href="https://llvm.org/docs/CommandGuide/llvm-objcopy.html">Objcopy guide</a>.</p>
+</section>
+</section>
+<section id="overriding-pre-built-libraries">
+<h3>2.8 Overriding Pre-built Libraries<a class="headerlink" href="#overriding-pre-built-libraries" title="Permalink to this heading">¶</a></h3>
+<p>Projects might include pre-built libraries which simplify development and build time; however, they don’t allow developers to modify source code easily.</p>
+<p>An example of such libraries is the MSPM33 DriverLib which is shown below.</p>
+<p><img alt="image25" src="../_images/ccs_lib.png" /></p>
+<p>One option to override the library is to simply add any or all source files to the project. The MSPM33 SDK includes the <code class="docutils literal notranslate"><span class="pre">empty_driverlib_src</span></code> example which includes all DriverLib source by default:</p>
+<p><img alt="image26" src="../_images/ccs_lib_src.png" /></p>
+<p>See <a class="reference external" href="#debugging-pre-built-libraries">Debugging Pre-built Libraries</a> for information on how to debug pre-built libraries.</p>
+</section>
+<section id="running-from-sram">
+<h3>2.9 Running from SRAM<a class="headerlink" href="#running-from-sram" title="Permalink to this heading">¶</a></h3>
+<p>The examples included in the MSPM33-SDK will commonly have linker files which create applications which are intended to run from internal Flash and will execute after reset or power cycling the device. However, in some scenarios, it can be useful to download and execute code from SRAM.</p>
+<p>This section describes step-by-step instructions to execute some functions or complete applications from SRAM.</p>
+<section id="running-a-complete-application-from-sram">
+<h4>2.9.1 Running a complete application from SRAM<a class="headerlink" href="#running-a-complete-application-from-sram" title="Permalink to this heading">¶</a></h4>
+<p>The following steps show how to modify a basic gpio_toggle_output example for the LP_MSPM33C321A to run from SRAM. Similar steps apply to other examples and devices.</p>
+<ol class="arabic simple">
+<li><p>Open the linker .cmd file and modify it to use SRAM as shown below:</p></li>
+</ol>
+<p><img alt="image27" src="../_images/ccs_runFromRAM_1.png" /></p>
+<ol class="arabic" start="2">
+<li><p>Disable the System Reset which is executed by default in CCS.</p>
+<p>CCS includes .gel files which execute certain functions on the device. These files are included inside the CCS installation folder at <code class="docutils literal notranslate"><span class="pre">&lt;ccs&gt;\ccs_base\emulation\gel&gt;</span></code>. The screenshot below shows the modification necessary for MSPM33C321A:</p>
+</li>
+</ol>
+<p><img alt="image28" src="../_images/ccs_runFromRAM_2.png" /></p>
+<ol class="arabic simple" start="3">
+<li><p>Download code and note that the device will execute from SRAM.</p></li>
+</ol>
+<p><img alt="image29" src="../_images/ccs_runFromRAM_3.png" /></p>
+</section>
+<section id="running-a-function-from-sram">
+<h4>2.9.2 Running a function from SRAM<a class="headerlink" href="#running-a-function-from-sram" title="Permalink to this heading">¶</a></h4>
+<p>The following steps show how to declare a function which is executed from SRAM.</p>
+<ol class="arabic simple">
+<li><p>Move the function to the <code class="docutils literal notranslate"><span class="pre">.TI.ramfunc</span></code> section. This can be accomplished by declaring the function with the attributes <code class="docutils literal notranslate"><span class="pre">__attribute__((section(&quot;.TI.ramfunc&quot;)))</span> <span class="pre">__attribute__((noinline))</span></code> as observed below:</p></li>
+</ol>
+<p><img alt="image30" src="../_images/ccs_runFunctionFromRAM_1.png" /></p>
+<ol class="arabic simple" start="2">
+<li><p>The linker file should include a placement of <code class="docutils literal notranslate"><span class="pre">.TI.ramfunc</span></code>. Note that the linker files included in MSPM33-SDK already include this placement but it will only be applicable if any functions are placed in <code class="docutils literal notranslate"><span class="pre">.TI.ramfunc</span></code>.</p></li>
+</ol>
+<p><img alt="image31" src="../_images/ccs_runFunctionFromRAM_2.png" /></p>
+<ol class="arabic simple" start="3">
+<li><p>Download code and note that the device will execute the function from SRAM.</p></li>
+</ol>
+<p><img alt="image32" src="../_images/ccs_runFunctionFromRAM_3.png" /></p>
+</section>
+</section>
+</section>
+<section id="debugging-the-application">
+<h2>3. Debugging the Application<a class="headerlink" href="#debugging-the-application" title="Permalink to this heading">¶</a></h2>
+<p>The following debug probes have been tested successfully with Code Composer Studio IDE.</p>
+<ul class="simple">
+<li><p>TI XDS Tools, including the XDS110 integrated into MSPM33 LaunchPads.</p></li>
+<li><p>Segger J-Link Emulator</p></li>
+</ul>
+<section id="using-ti-xds-tools">
+<h3>3.1 Using TI XDS Tools<a class="headerlink" href="#using-ti-xds-tools" title="Permalink to this heading">¶</a></h3>
+<p>TI offers a range of debug probes for Arm-based devices, including the XDS110 which is integrated with MSPM33 LaunchPads.</p>
+<p>To use the TI-XDS debug probes, open the project options, click on <strong>General</strong> → <strong>Connection</strong> and select <strong>Texas Instruments XDS110 USB Debug Probe</strong>.</p>
+<p><img alt="image33" src="../_images/ccs_debug_connection_xds.png" /></p>
+<section id="flash-loader">
+<h4>3.1.1 Flash Loader<a class="headerlink" href="#flash-loader" title="Permalink to this heading">¶</a></h4>
+<p>The Flash Loader settings allow to configure some settings when programming and erasing the device.</p>
+<p>To view and modify these settings, open the project properties and select <strong>Debug</strong> → <strong>Category:MSPM33 Flash Settings</strong>.</p>
+<p><img alt="image34" src="../_images/ccs_flash_settings.png" /></p>
+<p>The Flash Loader has the following options:</p>
+<ul class="simple">
+<li><p><strong>Reset Configuration</strong>: allows to perform soft or hard reset before and after programming.</p></li>
+<li><p><strong>Program Configuration</strong>: enables/disables CRC verification while programming. Note that CRC validation of NONMAIN is performed when programming/erasing NONMAIN regardless of this setting.</p></li>
+<li><p><strong>Erase Configuration</strong>: configures the behavior when erasing memory. The options are:</p>
+<ul>
+<li><p><strong>Erase MAIN memory only</strong>: Only MAIN memory will be mass erased. An error will be thrown when attempting to write NONMAIN.</p></li>
+<li><p><strong>Erase MAIN and NONMAIN memory</strong>: Both MAIN and NONMAIN will be mass erased. See <a class="reference external" href="#erasing-and-updating-nonmain-memory">Erasing and Updating NONMAIN Memory</a> for information about NONMAIN usage.</p></li>
+<li><p><strong>Erase MAIN and NONMAIN necessary sectors only</strong>: Only sectors being updated will be erased, including both MAIN and NONMAIN. Check the device datasheet for information on the size of flash sectors. See <a class="reference external" href="#erasing-and-updating-nonmain-memory">Erasing and Updating NONMAIN Memory</a> for information about NONMAIN usage.</p></li>
+<li><p><strong>Erase MAIN memory sectors by range</strong>: Only sectors defined between <strong>Sector Erase Start Address</strong> and <strong>Sector Erase End Address</strong> will be erased. Check the device datasheet for information on the size of flash sectors and note that the addresses are inclusive. For example, a region from 0x0000_0100 to 0x0000_0400 on a MSPM33 device with 1kB sectors will erase sectors 0x0000_0000-0x0000_03FF and 0x0000_0400-0x0000_07FF. Note that only sectors in MAIN will be erased. An error will be thrown when attempting to write NONMAIN.</p></li>
+<li><p><strong>Do not erase Flash memory</strong>: Flash will not be erased. An error will be thrown when attempting to write NONMAIN without erasing.</p></li>
+</ul>
+</li>
+<li><p><strong>Advanced Configuration</strong>: disables validating the device ID. Used for debugging purposes and not recommended to disable.</p></li>
+<li><p><strong>Enable Verbose Output</strong>: enables showing debug information while running the flash loader.</p></li>
+</ul>
+</section>
+<section id="erasing-and-updating-nonmain-memory">
+<h4>3.1.2 Erasing and Updating NONMAIN Memory<a class="headerlink" href="#erasing-and-updating-nonmain-memory" title="Permalink to this heading">¶</a></h4>
+<p><strong>Caution</strong>: Extreme care should be taken when erasing and programming NONMAIN. If done incorrectly, the device will become <strong>locked in a permanently unrecoverable state</strong>.</p>
+<p>NONMAIN is a dedicated region of flash memory which stores configuration data which define the behavior of the device after booting. <strong>NONMAIN should not be used for any other purpose</strong>. See the device Technical Reference Manual for more information.</p>
+<p>TI recommends using the NONMAIN configurator available in SysConfig when configuring NONMAIN. See <a class="reference external" href="../../../sysconfig_guide/doc_guide/doc_guide-srcs/sysconfig_guide.html">Using SysConfig with MSPM33</a> for more information.</p>
+<p>As described in the <a class="reference external" href="#flash-loader">Flash Loader</a> section, NONMAIN is erased by selecting <strong>Erase main and NON-MAIN memory</strong> or <strong>Erase MAIN and NONMAIN necessary sectors only</strong> in the erase configuration.</p>
+<p>Note that the Flash Loader will erase NONMAIN if any of these options are enabled; however, it will run a CRC after the programming sequence is completed, and it will attempt to restore default values if NONMAIN is corrupted.</p>
+</section>
+</section>
+<section id="using-segger-j-link">
+<h3>3.2 Using Segger J-Link<a class="headerlink" href="#using-segger-j-link" title="Permalink to this heading">¶</a></h3>
+<p>To use the Segger J-Link debug probe, open the project options, click on <strong>General</strong> → <strong>Connection</strong> and select <strong>SEGGER J-Link Emulator</strong>.</p>
+<p><img alt="image35" src="../_images/ccs_debug_connection_segger.png" /></p>
+<p>Note: update of the Segger drivers might be necessary. Follow instructions on how to use J-Link with CCS <a class="reference external" href="https://www.segger.com/products/debug-probes/j-link/technology/ides/ti-code-composer/">here</a>.</p>
+</section>
+<section id="breakpoint-types">
+<h3>3.3 Breakpoint Types<a class="headerlink" href="#breakpoint-types" title="Permalink to this heading">¶</a></h3>
+<p>The CCS debugger uses a limited number of on-chip debugging resources (specifically 4 hardware breakpoints and 2 hardware watchpoints). Software breakpoints in Flash are not supported on MSPM33. This means that a maximum of 4 hardware breakpoints can be set within CCS.</p>
+<p>CCS can use a breakpoint to stop at main or halt the device at exit. These settings can be updated in the project properties by selecting <strong>Debug</strong> → <strong>Program/Memory Load Options</strong>.</p>
+<p><img alt="image36" src="../_images/ccs_breakpoint.png" /></p>
+<p>If the max number of breakpoints are set, the following warning will be displayed.</p>
+<p><img alt="image37" src="../_images/ccs_debug_breakpoint.png" /></p>
+</section>
+<section id="debugging-pre-built-libraries">
+<h3>3.4 Debugging Pre-built Libraries<a class="headerlink" href="#debugging-pre-built-libraries" title="Permalink to this heading">¶</a></h3>
+<p>Projects might include pre-built libraries which can be difficult to debug if symbols are not available. An example of such libraries is the MSPM33 DriverLib which is used by many MSPM33 SDK examples. This issue can be fixed by adding the source code to the lookup path.</p>
+<p>In project properties, select <strong>Debug</strong> → <strong>Source Lookup Path</strong> and add the path of the source for the pre-built library.</p>
+<p><img alt="image38" src="../_images/ccs_lib_debug_error.png" /></p>
+<p>See <a class="reference external" href="#overriding-pre-built-libraries">Overriding Pre-built Libraries</a> for information on how to override and modify source code from libraries.</p>
+</section>
+<section id="dssm-commands">
+<h3>3.5 DSSM Commands<a class="headerlink" href="#dssm-commands" title="Permalink to this heading">¶</a></h3>
+<p>MSPM33 allows communication to the device over SWD from a debug probe using the Debug Subsystem Mailbox (DSSM). These commands are not available in SWD security level 2, but they are optionally available in security level 0 and 1. See the device Technical Reference Manual for more information about security policies and DSSM.</p>
+<p>The MSPM33 CCS support package includes GEL files not only to perform device initialization, but to send DSSM commands which are explained in the following sections.</p>
+<p>For more information about GEL commands in CCS, visit the <a class="reference external" href="https://software-dl.ti.com/ccs/esd/documents/users_guide/ccs_debug-gel.html">CCS online documentation</a>.</p>
+<section id="dssm-mass-erase-factory-reset-wait-for-debug-and-set-reset-mode">
+<h4>3.5.1 DSSM Mass Erase, Factory Reset, Wait for Debug, and Set Reset Mode<a class="headerlink" href="#dssm-mass-erase-factory-reset-wait-for-debug-and-set-reset-mode" title="Permalink to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>DSSM Mass Erase: A DSSM mass erase is an erase of the MAIN flash regions only, which typically includes the user application. NONMAIN flash region are not affected by a mass erase. A mass erase is useful for erasing all application code and data while leaving the device configuration itself intact.</p></li>
+<li><p>DSSM Factory Reset: A DSSM factory reset is an erase of the MAIN flash regions followed by a reset of the NONMAIN flash region to default values. Such an erase is useful for completely resetting the NONMAIN boot policies while also erasing the application code and data.</p></li>
+<li><p>DSSM Wait for Debug: A DSSM wait for debug puts the device in a halted state where it remains at the reset handler until the user runs the application or power cycles the board. This command is useful because it allows the previously flashed application to be halted and forced to wait in the reset handler. Doing so allows for a better debugging session as it allows the user to see what occurs before hitting main().</p></li>
+<li><p>DSSM Set Reset Mode: A DSSM set reset mode puts the device in a reset state which halts the previously flashed application from running. The command will halt the application giving back control to the device allowing for a new project to be flashed onto the device.</p></li>
+</ul>
+<p>The SWD mass erase, factory reset, wait for debug, and set reset mode DSSM commands supersede any static write protection policies. For example, if SWD factory reset is configured to be enabled or enabled with password, the NONMAIN configuration data can be reset even if it is statically write protected.</p>
+<p><strong>Note</strong>: DSSM wait for debug and set reset mode vary slightly in use. The main purpose of the Wait for Debug command is to put the device inside the reset handler of the pre-existing application. Doing so provides the user with a better debug experience, as this allows the user to see what is happening before hitting main() in the current application. The main purpose of the Set Reset Command is to halt the device in a reset state (not the reset handler) where the user can flash a new project to the device, regardless of any errors in the pre-existing application. This command is not intended for debugging.</p>
+<p>To execute a DSSM Mass Erase, DSSM Factory Reset, DSSM Wait for Debug, or DSSM Set Reset Mode follow the next steps:</p>
+<ol class="arabic">
+<li><p>On the CCS menu, select <strong>View</strong> → <strong>Target Configurations</strong>.</p></li>
+<li><p>On the <strong>Target Configurations</strong> window, right-click the .ccxml of an active project and select <strong>Launch Selected Configuration</strong>.</p>
+<p><img alt="image39" src="../_images/ccs_dssm1.png" /></p>
+</li>
+<li><p>On the debugger window menu, select <strong>Scripts</strong> → <strong>MSPM33xxxx_Commands</strong> (where MSPM33xxxx depends on the current MSPM33 device), and select one of the following options:</p>
+<ul class="simple">
+<li><p><strong>MSPM33_MailboxMassErase_Manual</strong>: A mass erase will be performed asking the user to press the reset button.</p></li>
+<li><p><strong>MSPM33_MailboxMassErase_Auto</strong>: A mass erase will be performed forcing reset using the XDS110 reset line.</p></li>
+<li><p><strong>MSPM33_MailboxFactoryReset_Manual</strong>: A factory reset will be performed asking the user to press the reset button.</p></li>
+<li><p><strong>MSPM33_MailboxFactoryReset_Auto</strong>: A factory reset will be performed forcing reset using the XDS110 reset line.</p></li>
+<li><p><strong>MSPM33_MailboxWaitForDebug_Auto</strong>: Wait for debug will be performed using the XDS110 reset line and asking the user to click on “clear reset” button.</p></li>
+<li><p><strong>MSPM33_MailboxSetResetMode</strong>: Set in reset will be performed using the XDS110 reset line, putting the device in reset until the next debugging session.</p></li>
+</ul>
+<p><img alt="image40" src="../_images/ccs_dssm2.png" /></p>
+</li>
+</ol>
+</section>
+<section id="dssm-set-reset-mode-post-execution-steps">
+<h4>3.5.1.1 DSSM Set Reset Mode Post-Execution Steps<a class="headerlink" href="#dssm-set-reset-mode-post-execution-steps" title="Permalink to this heading">¶</a></h4>
+<p><strong>Note</strong>: To succesfully execute the DSSM Set Reset Mode command, the device must have a reset pin.</p>
+<p>The following steps must be followed for a DSSM Set Reset Mode command to properly put the device in reset mode <strong>after</strong> following the steps described in section 3.5.1.</p>
+<ol class="arabic">
+<li><p>Allow the DSSM command to fully execute.</p>
+<p><img alt="image41" src="../_images/ccs_dssm3.png" /></p>
+</li>
+<li><p>Once the command is finished, the device will now be in a reset state. Afterwards, any attempt to flash the device will throw an expected error message stating the device is in reset.</p>
+<p><img alt="image42" src="../_images/ccs_dssm4.png" /></p>
+</li>
+<li><p>The device will exit from the reset state once <strong>Clear wait</strong> has been selected in the error window. This allows the new application to be flashed on to the device.</p>
+<p><img alt="image43" src="../_images/ccs_dssm5.png" /></p>
+</li>
+</ol>
+</section>
+<section id="dssm-wait-for-debug-post-execution-steps">
+<h4>3.5.1.2 DSSM Wait for Debug Post-Execution Steps<a class="headerlink" href="#dssm-wait-for-debug-post-execution-steps" title="Permalink to this heading">¶</a></h4>
+<p><strong>Note</strong>: To succesfully execute the DSSM Wait for Debug command, the device must have a reset pin.</p>
+<p>The following steps must be for a DSSM Wait for Debug command to properly put the device in wait for debug <strong>after</strong> following the steps described in section 3.5.1.</p>
+<ol class="arabic">
+<li><p>Allow the DSSM command to fully execute.</p>
+<p><img alt="image44" src="../_images/ccs_dssm3.png" /></p>
+</li>
+<li><p>Once the command is finished, the device will now be in a reset state. Afterwards, a connection will be automatically attempted, causing an expected error message stating the device is in reset.</p>
+<p><img alt="image45" src="../_images/ccs_dssm4.png" /></p>
+</li>
+<li><p>The device will exit from the reset state once <strong>Clear wait</strong> has been selected in the error window</p>
+<p><img alt="image46" src="../_images/ccs_dssm5.png" /></p>
+</li>
+<li><p>Now the device should be in the reset handler. This allows the user to access their previously downloaded code before it has reached main, or load a new application on to the device.</p>
+<p><img alt="image47" src="../_images/ccs_dssm6.png" /></p>
+</li>
+</ol>
+<section id="dssm-after-power-up">
+<h5>3.5.1.3 DSSM after Power-up<a class="headerlink" href="#dssm-after-power-up" title="Permalink to this heading">¶</a></h5>
+<p>The device might not respond to DSSM commands in some scenarios such as when the reset line or SWD pins are used for other functions. In such conditions, it can be useful to follow the next steps:</p>
+<ol class="arabic simple">
+<li><p>Power off the device</p></li>
+<li><p>Hold the reset line (NRST) low</p></li>
+<li><p>Power up the device, while holding NRST low</p></li>
+<li><p>Execute one of the <strong>Manual</strong> DSSM commands mentioned in previous section</p></li>
+<li><p>When prompted, release NRST</p></li>
+</ol>
+</section>
+</section>
+<section id="dssm-swd-password-mechanism">
+<h4>3.5.2 DSSM SWD Password Mechanism<a class="headerlink" href="#dssm-swd-password-mechanism" title="Permalink to this heading">¶</a></h4>
+<p>The SWD interface can be configured to be disabled, enabled, or enabled with a 128-bit password by writing the BOOTCFG0 and SWDPW registers in NONMAIN. See the device Technical Reference Manual for more information about NONMAIN and SWD password.</p>
+<p>TI recommends using the NONMAIN configurator available in SysConfig when configuring NONMAIN. See <a class="reference external" href="../../../sysconfig_guide/doc_guide/doc_guide-srcs/sysconfig_guide.html">Using SysConfig with MSPM33</a> for more information.</p>
+<p>The following steps can be followed to unlock a device using DSSM Password mechanism.</p>
+<ol class="arabic">
+<li><p>Assume the following password configured in NONMAIN configurator:</p>
+<p><img alt="image48" src="../_images/ccs_dssm_password1.png" /></p>
+</li>
+<li><p>Attempting to program the device after configuring the password will show the following error:</p>
+<p><img alt="image49" src="../_images/ccs_dssm_password2.png" /></p>
+</li>
+<li><p>To configure the password, double-click the .ccxml inside the CCS project, go to the <strong>Advanced</strong> tab and select the MSPM33 device:</p>
+<p><img alt="image50" src="../_images/ccs_dssm_password3.png" /></p>
+</li>
+<li><p>Write the password</p>
+<p><img alt="image51" src="../_images/ccs_dssm_password4.png" /></p>
+</li>
+<li><p>On the CCS menu, select <strong>View</strong> → <strong>Target Configurations</strong>.</p></li>
+<li><p>On the <strong>Target Configurations</strong> window, right-click the .ccxml of an active project and select <strong>Launch Selected Configuration</strong>.</p></li>
+<li><p>On the debugger window menu, select <strong>Scripts</strong> → <strong>MSPM33xxxx_Commands</strong> (where MSPM33xxxx depends on the current MSPM33 device), and select <strong>MSPM33_MailboxPasswordAuthentication_Auto</strong>.</p>
+<p><img alt="image52" src="../_images/ccs_dssm_password5.png" /></p>
+</li>
+<li><p>CCS should be able to connect to the device. At this point, the device can be reprogrammed but note that this action doesn’t erase NONMAIN, so the password will remain active unless NONMAIN is modified.</p></li>
+</ol>
+<p>Note: this mechanism is expected to be automated in future versions of the CCS support package.</p>
+</section>
+</section>
+<section id="connecting-to-an-incorrect-device">
+<h3>3.6 Connecting to an Incorrect Device<a class="headerlink" href="#connecting-to-an-incorrect-device" title="Permalink to this heading">¶</a></h3>
+<p>CCS will show a warning if an unsupported device is connected as shown below:</p>
+<p><img alt="image53" src="../_images/ccs_connectionerror1.png" /> <img alt="image54" src="../_images/ccs_connectionerror2.png" /></p>
+<p>Programming an incorrect device is not recommended and can lead to unexpected and unrecoverable behavior.</p>
+</section>
+</section>
+<section id="installing-arm-gcc">
+<h2>4. Installing Arm GCC<a class="headerlink" href="#installing-arm-gcc" title="Permalink to this heading">¶</a></h2>
+<p>The MSPM33 SDK includes examples supporting both TI Arm Clang and GCC; however, TI Arm Clang is installed by default in CCS, while GCC is not.</p>
+<p>GCC can be installed by selecting <strong>Help→Install GCC ARM Compiler Tools</strong>:</p>
+<p><img alt="image55" src="../_images/ccs_gcc_install1.png" /></p>
+<p>Select the version to install. CCS and the MSPM33-SDK only include and support some versions of the toolchain. Refer to release notes of your installed MSPM33-SDK version for information about the supported GCC version(s).</p>
+<p><img alt="image56" src="../_images/ccs_gcc_install2.png" /></p>
+<p>If the installation was successful, click on <strong>Window→Preferences</strong>, then <strong>Code Composer Studio→Build→Compilers</strong> to see a list of the compilers installed in CCS.</p>
+<p><img alt="image57" src="../_images/ccs_gcc_install3.png" /></p>
+</section>
+<section id="known-issues-and-frequently-asked-questions-faqs">
+<h2>5. Known Issues and Frequently Asked Questions (FAQs)<a class="headerlink" href="#known-issues-and-frequently-asked-questions-faqs" title="Permalink to this heading">¶</a></h2>
+<p>Please refer to <a class="reference external" href="../../../../../../known_issues_FAQ.html">Known Issues and FAQ</a> inside the SDK.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Code Composer Studio v12 Eclipse IDE for MSPM33 MCUs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">1995-2023, Texas Instruments Incorporated. All rights reserved</a>, Texas Instruments Incorporated. All rights reserved. <br/>
+      <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

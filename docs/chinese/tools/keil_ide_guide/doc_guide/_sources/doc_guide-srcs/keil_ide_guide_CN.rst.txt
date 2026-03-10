@@ -1,0 +1,275 @@
+适用于 MSPM33 MCU 的 Arm Keil MDK IDE 5.38+ 版
+==============================================
+
+目录
+----
+
+-  `请先阅读 <#read-this-first>`__
+-  `软件安装 <#software-installation>`__
+-  `开发流程 <#development-flow>`__
+-  `调试应用 <#debugging-the-application>`__
+-  `已知问题和常见问题解答 （FAQ） <#known-issues-and-frequently-asked-questions-faqs>`__
+
+请先阅读
+--------
+
+如何使用本指南
+~~~~~~~~~~~~~~
+
+本指南仅说明软件开发环境的设置和基本操作， 但并未全面介绍 MSPM33 微控制器或完整的开发软件与硬件系统。 如需了解相关详细信息，请参阅 `德州仪器 （TI） 相关文档 <#related-documentation-from-texas-instruments>`__\ 部分中列出的相应 TI 和 Keil 文档。
+
+本指南适用于 `TI XDS-110 <https://www.ti.com/tool/TMDSEMU110-U>`__\ 、\ `Arm ULINK <https://www2.keil.com/mdk5/ulink>`__ 和 `Segger J-Link <https://www.segger.com/products/debug-probes/j-link/>`__ 开发工具系列的使用。
+
+这些工具包含封装时可用的最新材料。有关最新材料 （包括数据表、用户指南、软件和应用信息），请访问 `TI MSPM33 网站 <https://www.ti.com/mspm33>`__\ 或联系当地的 TI 销售办事处。
+
+与注意事项有关的信息
+~~~~~~~~~~~~~~~~~~~~
+
+本指南可能包含注意事项。
+
+**注意** - 这是注意事项语句的示例。 注意事项语句描述了一种可能对软件或者器件造成潜在损坏的情况。
+
+请仔细阅读每条注意事项。
+
+德州仪器 （TI） 提供的相关文档
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+MSPM33 开发工具文档：
+
+-  `XDS110 调试探针用户指南 <https://www.ti.com/lit/sprui94>`__
+
+MSPM33 器件文档：
+
+-  `LP-MSPM33C321A 用户指南 <https://www.ti.com/lit/slau869>`__
+-  `MSPM33 C 系列技术参考手册 <https://www.ti.com/lit/slau847>`__
+
+如果您需要协助
+~~~~~~~~~~~~~~
+
+请访问关于 MSPM33 MCU 的 `E2E 社区支持论坛 <https://e2e.ti.com/support/microcontrollers/>`__\ ，与同行工程师、 TI 工程师和其他专家进行公开交流。更多器件特定信息可在 `MSPM33 网站 <https://www.ti.com/mspm33>`__\ 上找到。
+
+1. 软件安装
+-----------
+
+Arm Keil MDK， 包括 µVision IDE、调试器和 Arm C/C++ 编译器，可从 `Keil 网站 <https://www.keil.com/>`__\ 获得。MSPM33 微控制器和 MSPM33 SDK 需要 Keil MDK 5.38 或更高版本。
+
+要查找适合您 IDE 版本的 SDK，请参阅 `MSPM33 SDK <https://www.ti.com/tool/MSPM33-SDK>`__ 文档。
+
+2. 开发流程
+-----------
+
+本章说明了如何使用 Keil MDK 运行演示程序、开发应用软件以及如何进行调试。
+
+2.1 概述
+~~~~~~~~
+
+有关 Keil MDK 的文档非常广泛，可在 `Keil MDK 页面 <https://www2.keil.com/mdk5>`__\ 上 或通过 IDE 中的“Help”选项卡在线获取。
+
+2.2 从 MSPM33 SDK 创建 MSPM33 工程
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+请参阅\ `适用于 Keil 的 MSPM33 SDK 快速入门指南 <../../../../quickstart_guides/doc_guide/doc_guide-srcs/quickstart_guide_keil_CN.html>`__\ ，其中包含有关如何安装 MSPM33 SDK 以及在 Keil 中导入和编译 SDK 示例的说明。
+
+2.3 从头开始创建工程
+~~~~~~~~~~~~~~~~~~~~
+
+**注意**\ ：\ **不建议**\ 从头开始创建工程，因为从头开始创建工程不会 默认添加所有必要的器件支持文件。要从空白工程开始，TI 建议从 SDK 导入空 Driverlib 示例 工程。
+
+2.4 将 SysConfig 与 Keil 配合使用
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+MSPM33 SDK 中的一些示例支持 SysConfig。\ `SysConfig <https://www.ti.com/tool/SYSCONFIG>`__ 是一个直观而全面的图形实用程序集合，用于配置引脚、外设、无线电、子系统和其他 组件。SysConfig 可助您直观地管理、发现和解决冲突，以便您有更多时间 创建差异化应用。
+
+SysConfig 工具作为独立安装程序交付，可手动集成到 Keil 中，也可通过 dev.ti.com 云工具门户使用。
+
+在 Keil 中启动 SysConfig 工程的最佳方式是从 SDK 将其导入；不过在首次启动时， 需执行一些步骤以在 Keil 中初始化 SysConfig。请参阅\ `适用于 Keil 的 MSPM33 SDK 快速入门指南 <../../../../quickstart_guides/doc_guide/doc_guide-srcs/quickstart_guide_keil_CN.html>`__\ ，详细了解如何安装 SysConfig 和为 Keil 启用 SysConfig。
+
+有关如何将 SysConfig 与 MSPM33 配合使用的详细信息，请访问\ `将 SysConfig 与 MSPM33 配合使用 <../../../sysconfig_guide/doc_guide/doc_guide-srcs/sysconfig_guide_CN.html>`__\ 指南。
+
+2.5 在 MSPM33 衍生产品之间进行迁移
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+通过 SysConfig，可以更轻松地在 MSPM33 衍生产品之间进行迁移；不过需进行一些手动修改。
+
+1. 在 SysConfig 中，启用器件视图并点击 **SWITCH**
+
+|image0|
+
+2. 选择新 MSPM33 器件的相应选项，然后点击 **CONFIRM**\ 。
+
+|image1|
+
+3. 请注意，SysConfig 将突出显示与迁移的任何冲突，例如不可用的引脚和外设。 根据需要修复任何冲突。
+
+4. 在 Keil IDE 中，在工程选项中打开 **Device** 选项卡，然后选择新的 MSPM33 衍生产品。
+
+|image2|
+
+5. 依次选择 **C/C++ (AC6)** → **Preprocessor Symbols** → **Define**\ ，更新器件定义。 根据所选器件添加器件定义。
+
+|image3|
+
+6. 在 **Linker** → **Scatter File** 中更新链接器文件。 MSPM33 SDK 在 ``<sdk>\source\ti\devices\msp\m33\linker_files\keil`` 包含所有 MSPM33 衍生产品的默认文件。
+
+|image4|
+
+7. 将新衍生产品的启动文件添加到工程，并删除现有启动文件。MSPM33 SDK 在 ``<sdk>\source\ti\devices\msp\m33\startup_system_files\keil`` 包含所有 MSPM33 衍生产品的默认文件。
+
+|image5|
+
+8. 解析任何其他依赖项，例如不兼容的库和源代码。
+
+注意：未使用 SysConfig 时，步骤 1-3 不适用。
+
+2.6 将新生成的 SysConfig 文件添加至工程
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+使用会生成除 ``ti_msp_dl_config.h`` 和 ``ti_msp_dl_config.c`` 以外的文件的 SysConfig 模块（如 NONMAIN 配置器）时，必须将新生成的文件手动添加至工程，因为 Keil 不会自动添加。要详细了解哪些模块会生成额外文件，请参阅\ `将 SysConfig 与 MSPM33 配合使用 <../../../sysconfig_guide/doc_guide/doc_guide-srcs/sysconfig_guide_CN.html>`__\ 指南。
+
+以 NONMAIN 配置器为例，它将生成 2 个额外文件：\ ``boot_config.h`` 和 ``boot_config.c``\ 。
+
+|image6|
+
+要将这些文件包括在编译工程中，请执行以下步骤：
+
+1. 添加 SysConfig 模块并保存所做更改后，导航回 Keil IDE 应显示一条消息，表明 .syscfg 文件已修改。点击 **Yes** 以重新加载文件。
+
+|image7|
+
+2. 右键点击工程，并选择 **Rebuild all target files** 以重新编译工程。\ **Build Output** 窗口将显示 SysConfig 已生成这些文件。
+
+   |image8|
+
+   |image9|
+
+3. 要添加额外新生成的文件（在本例中为 ``boot_config.h`` 和 ``boot_config.c``\ ），右键点击 **Source** 目录并选择 **Add Existing Files to Group ‘Source’**\ 。
+
+   |image10|
+
+4. 导航至示例工程根目录，选择需要添加的文件，然后点击 **Add**\ 。
+
+   |image11|
+
+5. 重新编译工程。这些文件应显示在 IDE 的工程 **Source** 目录中。
+
+   |image12|
+
+2.7 栈和堆管理及 .s 文件
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+可通过直接修改 .s 启动汇编文件来配置保留的栈和堆大小。有关此文件的完整说明，请参阅 Keil 文档。
+
+可对提供的 .s 文件进行修改，以根据应用需求调整栈和堆大小；编辑 ``Stack_Size EQU xx`` 或 ``Heap_Size EQU xx`` 可为栈或堆分配 xx 个字节。
+
+2.8 如何生成 Hex 文件
+~~~~~~~~~~~~~~~~~~~~~
+
+可将链接器配置为以 Intel Hex 格式输出对象，以与 `MSP-GANG <https://www.ti.com/tool/MSP-GANG>`__ 和 `UniFlash <https://www.ti.com/tool/UNIFLASH>`__ 等编程工具一起使用。
+
+依次点击 **Project** → **Options** → **Output** → **Create Hex File** → **Ok**\ 。
+
+2.9 为 MSPM33 擦除 NONMAIN
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**注意**\ ：在擦除和编程 NONMAIN 时应特别小心。如果操作错误，器件将 **锁定在永久不可恢复的状态**\ 。
+
+1. 依次点击 **Options** → **Debug** → **Settings** → **Flash Download**\ 。
+
+2. 添加 NONMAIN 编程算法，然后点击“OK”。
+
+   |image13|
+
+2.10 覆盖预编译库
+~~~~~~~~~~~~~~~~~
+
+工程可能包括预编译库，可简化开发和编译过程；不过， 开发人员无法轻松修改源代码。
+
+下面显示了此类库的一个示例 MSPM33 DriverLib。
+
+|image14|
+
+覆盖库的一个选项是删除 **driverlib.a**\ ，并直接向工程添加任何或所有源文件。 MSPM33 SDK 包括 ``empty_driverlib_src`` 示例，其中默认包括所有 DriverLib 源：
+
+|image15|
+
+3. 调试应用程序
+---------------
+
+3.1 使用 TI XDS 工具
+~~~~~~~~~~~~~~~~~~~~
+
+TI 提供各种适用于基于 Arm 的器件的调试探针，包括与 MSPM33 LaunchPad 集成的 XDS110。
+
+**注意**\ ：TI XDS110 调试器在本地受支持或通过 CMSIS DAP 受支持。TI XDS 本地支持需要 在默认文件夹 ``C:\ti\ccs-base`` 中单独安装 TI 仿真包软件。
+
+要使用 XDS110 调试探针，右键点击活动工程，然后选择 **Options for Target**\ 。 在“Target Options”窗口中，选择 **Debug** 窗格。在下拉菜单中，选择 CMSIS-DAP 调试器或 TI XDS 调试器。
+
+|image16|
+
+|image17|
+
+-  注意所选仿真器。以上示例在 CSMSIS-DAP 模式下使用集成在 LaunchPad 中的 XDS110。
+-  所选接口是 MSPM33 支持的 SWD。
+-  XDS 工具使用闪存加载程序将代码下载到器件。在 **Options** → **Debug** → **Settings** → **Flash Download** 中确认使用。请参阅\ `适用于 Keil 的 MSPM33 SDK 快速入门指南 <../../../../quickstart_guides/doc_guide/doc_guide-srcs/quickstart_guide_keil_CN.html>`__ ，了解更多详细信息。
+
+3.2 使用 Segger J-Link 调试探针
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+要使用 J-Link，右键点击活动工程，然后选择 **Options for Target**\ 。 在“Target Options”窗口中，选择 **Debug** 窗格。从下拉菜单中，选择 J-Link 调试器选项。
+
+|image18|
+
+|image19|
+
+请参阅\ `适用于 Keil 的 MSPM33 SDK 快速入门指南 <../../../../quickstart_guides/doc_guide/doc_guide-srcs/quickstart_guide_keil_CN.html>`__\ ，以详细了解如何使用 Segger J-Link。
+
+3.3 使用 Arm ULINK 调试适配器
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+要使用 ULINK，右键点击活动工程，然后选择 **Options for Target**\ 。 在“Target Options”窗口中，选择 **Debug** 窗格。从下拉菜单中，选择 ULINK 调试器选项。
+
+|image20|
+
+|image21|
+
+-  ULINK 工具使用闪存加载程序将代码下载到器件。在 **Options** → **Debug** → **Settings** → **Flash Download** 中确认使用。
+
+3.4 断点类型
+~~~~~~~~~~~~
+
+uVision 断点机制使用有限数量的片上调试资源（具体为 4 个硬件断点 和 2 个硬件观察点）。MSPM33 不支持软件断点。这意味着在 uVision 中最多可设置 4 个断点。
+
+重置程序和“运行至光标”操作临时需要1个断点。因此，只有 3 个断点 可处于活动状态。
+
+如果设置了断点最大数量，将显示以下警告。
+
+|image22|
+
+4. 已知问题和常见问题解答 （FAQ）
+---------------------------------
+
+请参阅 SDK 中的\ `已知问题和 FAQ <../../../../../../known_issues_FAQ.html>`__\ 。
+
+.. |image0| image:: ./images/keil_ide_guide/keil_ide_migrate_1.png
+.. |image1| image:: ./images/keil_ide_guide/keil_ide_migrate_2.png
+.. |image2| image:: ./images/keil_ide_guide/keil_ide_migrate_3.png
+.. |image3| image:: ./images/keil_ide_guide/keil_ide_migrate_4.png
+.. |image4| image:: ./images/keil_ide_guide/keil_ide_migrate_5.png
+.. |image5| image:: ./images/keil_ide_guide/keil_ide_migrate_6.png
+.. |image6| image:: ./images/keil_ide_guide/keil_ide_sysconfig_additional_generated_files.png
+.. |image7| image:: ./images/keil_ide_guide/keil_ide_reload_sysconfig_file.png
+.. |image8| image:: ./images/keil_ide_guide/keil_ide_rebuild_target.png
+.. |image9| image:: ./images/keil_ide_guide/keil_ide_build_log.png
+.. |image10| image:: ./images/keil_ide_guide/keil_ide_add_files_to_source.png
+.. |image11| image:: ./images/keil_ide_guide/keil_ide_select_files_to_add.png
+.. |image12| image:: ./images/keil_ide_guide/keil_ide_updated_source_directory.png
+.. |image13| image:: ./images/keil_ide_guide/keil_ide_add_nonmain.png
+.. |image14| image:: ./images/keil_ide_guide/keil_ide_driverlib_library.png
+.. |image15| image:: ./images/keil_ide_guide/keil_ide_empty_driverlib_project.png
+.. |image16| image:: ./images/keil_ide_guide/keil_ide_select_xds110.png
+.. |image17| image:: ./images/keil_ide_guide/keil_ide_xds110_settings.png
+.. |image18| image:: ./images/keil_ide_guide/keil_ide_select_jlink.png
+.. |image19| image:: ./images/keil_ide_guide/keil_ide_jlink_settings.png
+.. |image20| image:: ./images/keil_ide_guide/keil_ide_select_ulink.png
+.. |image21| image:: ./images/keil_ide_guide/keil_ide_ulink_settings.png
+.. |image22| image:: ./images/keil_ide_guide/keil_ide_max_breakpoints.png

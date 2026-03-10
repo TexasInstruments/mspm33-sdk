@@ -1,0 +1,225 @@
+%%{
+/*
+ * Copyright (c) 2025, Texas Instruments Incorporated - http://www.ti.com
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ */
+
+/*
+ *  ======== HSADC.Board.c.xdt ========
+ */
+    /* args[] passed by /ti/drivers/templates/Board.c.xdt during function call: */
+    let MODULE = args[0];
+    let content = args[1];
+
+    /* shorthand names for some common references in template below */
+    let instances = MODULE.$instances;
+    if (instances.length == 0) return;
+    /* get ti/drivers common utility functions */
+    let Common = system.getScript("/ti/driverlib/Common.js");
+
+    switch(content){
+        case "Call":
+            printCall();
+            break;
+        case "Reset":
+            printReset();
+            break;
+        case "Power":
+            printPower();
+            break;
+        case "GPIO":
+            printGPIO();
+            break;
+        case "Function":
+            printFunction();
+            break;
+        default:
+            /* Do nothing */
+        break;
+    }
+%%}
+% function printCall(){
+%   for (let i in instances) {
+%       let inst = instances[i];
+    SYSCFG_DL_`inst.$name`_init();
+%   }
+% }
+% function printReset(){
+% for (let i in instances) {
+%       let inst = instances[i];
+    DL_HSADC_reset(`inst.$name`_INST);
+%   }
+% }
+% function printPower(){
+%   for (let i in instances) {
+%       let inst = instances[i];
+    DL_HSADC_enablePower(`inst.$name`_INST);
+%   }
+% }
+% function printGPIO(){
+%   for (let i in instances) {
+%       let inst = instances[i];
+%       if (inst.outputEnable) {
+%           let gpioStr = "GPIO_"+inst.$name;
+%           let outIomux = gpioStr+"_IOMUX_OUT";
+%           let outFunc = gpioStr+"_IOMUX_OUT_FUNC";
+    DL_GPIO_initPeripheralOutputFunction(
+        `outIomux`, `outFunc`);
+%       }
+%       /* Peripheral GPIO Configuration */
+%       let initIOMux = Common.getGPIOConfigBoardC(inst);
+%       /* Check if generating empty code */
+%       if (/\S/.test(initIOMux)) {
+    `initIOMux`
+%       }
+%   } // for(let i in instances)
+% }
+% function printFunction(){
+% for(let i = 0; i < instances.length; i++) {
+%    let inst = instances[i];
+%    let baseName = inst.$name + "_INST";
+
+SYSCONFIG_WEAK void SYSCFG_DL_`inst.$name`_init(void)
+{
+    DL_HSADC_setClockDivideRatio(`baseName`,`inst.adcClockPrescaler`);
+
+%   for (let i = 0; i < inst.enabledSOCs.length; i++) {
+%   let socnum = inst.enabledSOCs[i].replace("ADC_SOC_NUMBER", "");
+    DL_HSADC_SOCChannelSelect(`baseName`, DL_HS`inst.enabledSOCs[i]`, DL_HS`inst["soc" + socnum + "Channel"].replace("_CH", "")`);
+%   if (inst["soc" + i + "enableComparator"]){
+    DL_HSADC_enableSOCComparator(`baseName`, DL_HS`inst.enabledSOCs[i]`);
+%   }
+%   }
+
+%   for (let i = 0; i < inst.enabledSEQs.length; i++) {
+%   let seqnum = inst.enabledSEQs[i].replace("ADC_SEQ_NUMBER", "");
+    DL_HSADC_setupSequencer(`baseName`, DL_HS`inst.enabledSEQs[i]`, `inst["seq" + seqnum + "SampleWindow"]`, DL_HS`inst["seq" + seqnum + "TriggerSel"]`, DL_HS`inst["seq" + seqnum + "StartSOC"]`);
+%   if (inst["seq" + seqnum + "Enable"]){
+    DL_HSADC_enableSequencer(`baseName`, DL_HS`inst.enabledSEQs[i]`);
+%   }
+%   if (inst["seq" + seqnum + "DisableSampleCAPReset"]){
+    DL_HSADC_disableSampleCapReset(`baseName`, DL_HS`inst.enabledSEQs[i]`);
+%   }
+%   if (inst["seq" + seqnum + "sampleCAPResetSelect"] == "ADC_CAP_RESET_VREFHIBY2"){
+    DL_HSADC_setSampleCapReset(`baseName`, DL_HS`inst.enabledSEQs[i]`, DL_HSADC_SAMPCAPRESET_HALF_VREFHI);
+%   }
+%   }
+%   if(inst.enabledSEQs.length > 0){
+%   if(inst.seqPreemptMode != "ADC_PREEMPT_DISABLE"){
+    DL_HSADC_setSequencerPreempt(`baseName`, DL_HS`inst.seqPreemptMode`);
+%   }
+    DL_HSADC_setEndOfSequencer(`baseName`, DL_HS`inst.seqEndSOC`);
+%   }
+
+%   for (let i=1; i < (inst.enabledInts.length + 1); i++){
+    DL_HSADC_InterruptStatusClear(`baseName`, DL_HS`inst.enabledInts[i-1].replace("_NUMBER", "")`);
+%   if(inst["enableInterrupt" + i + "ContinuousMode"]){
+    DL_HSADC_enableContinueToInterruptMode(`baseName`, DL_HS`inst.enabledInts[i-1].replace("_NUMBER", "")`);
+%   }
+    DL_HSADC_InterruptSourceSelect(`baseName`, DL_HS`inst.enabledInts[i-1].replace("_NUMBER", "")`, DL_HS`inst["interrupt" + i + "SOCSource"]`);
+%   if(inst["enableInterrupt" + i]){
+    DL_HSADC_enableInterrupt(`baseName`, DL_HS`inst.enabledInts[i-1].replace("_NUMBER", "")`);
+%   }
+%   }
+
+%   for (let i=1; i < (inst.enabledDMAInts.length + 1); i++){
+    DL_HSADC_DMAInterruptStatusClear(`baseName`, DL_HS`(inst.enabledDMAInts[i-1].replace("_NUMBER", "")).replace("_INT", "_DMA_INT")`);
+%   if(inst["enableDMAInterrupt" + i + "ContinuousMode"]){
+    DL_HSADC_enableDMAContinueToInterruptMode(`baseName`, DL_HS`(inst.enabledDMAInts[i-1].replace("_NUMBER", "")).replace("_INT", "_DMA_INT")`);
+%   }
+    DL_HSADC_DMAInterruptSourceSelect(`baseName`, DL_HS`(inst.enabledDMAInts[i-1].replace("_NUMBER", "")).replace("_INT", "_DMA_INT")`, DL_HS`inst["dmaInterrupt" + i + "SOCSource"]`);
+%   if(inst["enableDMAInterrupt" + i]){
+    DL_HSADC_enableDMAInterrupt(`baseName`, DL_HS`(inst.enabledDMAInts[i-1].replace("_NUMBER", "")).replace("_INT", "_DMA_INT")`);
+%   }
+%   }
+%   if(inst.interruptPulseMode == "ADC_PULSE_END_OF_CONV"){
+    DL_HSADC_SetInterruptPulsePosition(`baseName`, DL_HSADC_INT_PULSE_POS_EOC);
+%   }
+
+%   for (let i=1; i < (inst.enabledPPBs.length + 1); i++){
+%   for (let j=0; j < inst["ppb" + i + "EventEnable"].length; j++){
+%   if(inst["ppb" + i + "EventEnable"][j] == "ADC_EVT_TRIPHI"){
+    DL_HSADC_enablePPBTripHighEvent(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`);
+%   }
+%   if(inst["ppb" + i + "EventEnable"][j] == "ADC_EVT_TRIPLO"){
+    DL_HSADC_enablePPBTripLowEvent(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`);
+%   }
+%   if(inst["ppb" + i + "EventEnable"][j] == "ADC_EVT_ZERO"){
+    DL_HSADC_enablePPBTripZeroEvent(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`);
+%   }
+%   if(inst["ppb" + i + "EventEnable"][j] == "ADC_EVT_INLIMIT"){
+    DL_HSADC_enablePPBTripInLimitEvent(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`);
+%   }
+%   }
+%   if(inst["ppb" + i + "EventEnable"].length > 0){
+    DL_HSADC_setPPBTripHighLimit(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`, `inst["ppb" + i + "HighTripLimit"]`);
+    DL_HSADC_setPPBTripLowLimit(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`, `inst["ppb" + i + "LowTripLimit"]`);
+%   }
+%   for (let j=0; j < inst["ppb" + i + "EventInterruptEnable"].length; j++){
+%   if(inst["ppb" + i + "EventInterruptEnable"][j] == "ADC_EVT_TRIPHI"){
+    DL_HSADC_enablePPBTripHighInterrupt(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`);
+%   }
+%   if(inst["ppb" + i + "EventInterruptEnable"][j] == "ADC_EVT_TRIPLO"){
+    DL_HSADC_enablePPBTripLowInterrupt(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`);
+%   }
+%   if(inst["ppb" + i + "EventInterruptEnable"][j] == "ADC_EVT_ZERO"){
+    DL_HSADC_enablePPBTripZeroInterrupt(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`);
+%   }
+%   if(inst["ppb" + i + "EventInterruptEnable"][j] == "ADC_EVT_INLIMIT"){
+    DL_HSADC_enablePPBTripInLimitInterrupt(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`);
+%   }
+%   }
+%   if(inst["ppb" + i + "AccumulationLimit"] != "ADC_OversamplingLimit_Nil"){
+    DL_HSADC_setPPBOversamplingLimit(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`, DL_HS`inst["ppb" + i + "AccumulationLimit"]`);
+%   }
+%   if(inst["ppb" + i + "CompSource"] == "ADC_PPB_COMPSOURCE_SUM"){
+    DL_HSADC_selectCompareSourceAsPPBSum(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`);
+%   }
+%   if(inst["ppb" + i + "Rightshift"] != "0"){
+    DL_HSADC_setPPBRightShift(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`, DL_HSADC_PPB_RIGHTSHIFT_`inst["ppb" + i + "Rightshift"]`);
+%   }
+%   }
+
+%   for (let k=1; k<5; k++){
+%   if(inst["ADCevent" + k + "PublisherChannel"] != "0"){
+    DL_HSADC_setPublisherChanID(`baseName`, DL_HSADC_PUBLISHER_INDEX_`k-1`, `inst["ADCevent" + k + "PublisherChannel"]`);
+%   }
+%   if(inst["ADCsubscriber" + k + "Channel"] != "0"){
+    DL_HSADC_setSubscriberChanID(`baseName`, DL_HSADC_SUBSCRIBER_INDEX_`k-1`, `inst["ADCsubscriber" + k + "Channel"]`);
+%   }
+%   }
+%   if(inst.enableConverter){
+    DL_HSADC_PowerUp(`baseName`);
+%   }
+}
+
+%}
+%}

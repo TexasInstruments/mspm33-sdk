@@ -1,0 +1,7 @@
+.. toctree::
+   :maxdepth: 1
+
+   TI Arm Clang Compiler User Manual (external) <https://software-dl.ti.com/codegen/docs/tiarmclang/compiler_tools_user_guide/compiler_manual/index.html>
+   Blog "The future of compiler tools for TI Arm Cortex-based MCUs" (external) <https://e2e.ti.com/blogs_/b/process/posts/the-future-of-compiler-tools-for-ti-arm-cortex-based-mcus>
+   MSPM33 SDK QuickStart Guide for Code Composer Studio <../../../quickstart_guides/doc_guide/doc_guide-srcs/quickstart_guide_ccs_theia.html#http://>
+   Code Composer Studio IDE Guide for MSPM33 MCUs <../../ccs_theia_ide_guide/doc_guide/doc_guide-srcs/ccs_theia_ide_guide.html#http://>

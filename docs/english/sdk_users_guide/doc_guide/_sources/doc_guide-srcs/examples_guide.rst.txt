@@ -1,0 +1,8282 @@
+MSPM33 SDK Examples Guide
+=========================
+
+1. Introduction
+---------------
+
+The MSPM33 SDK is packaged with a wide selection of code examples to enable engineers to develop applications on Texas Instruments’ MSPM33 family of microcontrollers.
+
+The examples folder is divided into RTOS and non-RTOS subfolders. These folders contain examples for each LaunchPad and are organized based on function with lower-level Driverlib examples, security examples, boot manager examples, BSL examples, CMSIS DSP examples, and demo applications.
+
+Some examples support `SysConfig <https://www.ti.com/tool/SYSCONFIG>`__ to simplify the device configuration and accelerate software development. Refer to the SDK QuickStart guide for more details on how to get started using SysConfig, and look for the SysConfig symbol |image0| in the sections below.
+
+2. MSPM33 SDK Examples
+----------------------
+
+2.1 Demos
+~~~~~~~~~
+
+The MSPM33 SDK includes several demos to showcase the functionalities of various devices.
+
+Each demo is packaged with its own documentation, full source code, and project files for different supported IDEs and compilers, making the demos easy to use.
+
+Stay tuned for more examples and functionality.
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+cc3200boosterpack_audio_playback
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Audio playback demo using CC3200 BoosterPack
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+Y
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+lvgl
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+LVGL graphics library demonstration
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+Y
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2 FreeRTOS
+~~~~~~~~~~~~
+
+The MSPM33 SDK includes FreeRTOS examples to demonstrate how to use the FreeRTOS real-time operating system with MSPM33 devices.
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+blink_led
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Simple FreeRTOS LED blinky demo using two tasks
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+Y
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.3 BSL (Boot Strap Loader)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The MSPM33 SDK includes BSL examples to demonstrate boot strap loader functionality for firmware updates.
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+bsl_host_mcu_to_mspm33c321a_target_i2c
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+BSL host MCU to MSPM33C321A target using I2C communication
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+Y
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+bsl_host_mcu_to_mspm33c321a_target_uart
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+BSL host MCU to MSPM33C321A target using UART communication
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+Y
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.4 CMSIS DSP
+~~~~~~~~~~~~~
+
+The MSPM33 SDK includes CMSIS DSP examples to demonstrate digital signal processing capabilities.
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+cmsis_dsp_empty
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Empty CMSIS DSP project template
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+Y
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+cmsis_dsp_fft_q15
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+CMSIS DSP FFT Q15 format example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+Y
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.5 Security
+~~~~~~~~~~~~
+
+The MSPM33 SDK includes security examples to demonstrate the security features of MSPM33 devices.
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+debug_unlock_L2
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Debug unlock Level 2 security example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image1|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+empty
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Empty security project template
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image2|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+gpio_toggle
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+GPIO toggle example with security features
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image3|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+memory_hide_protect
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Memory hide and protection example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image4|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+memory_protect
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Memory protection example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image5|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+peripheral_protect_basic
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Basic peripheral protection example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image6|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+peripheral_protect_dma
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+DMA peripheral protection example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image7|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.6 Boot Manager
+~~~~~~~~~~~~~~~~
+
+The MSPM33 SDK includes boot manager examples to demonstrate secure booting capabilities.
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+customer_secure_code
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Customer Secure Code based off MCUBoot
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+Y
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+customer_secure_sample_image
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Customer Secure Sample Image for secure boot
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+Y
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7 DriverLib
+~~~~~~~~~~~~~
+
+DriverLib is a set of low level drivers providing an API for accessing MSPM33 registers and full device functionality.
+
+The examples below use the Driverlib API to demonstrate the device functionality and range from simple use cases such as toggling a GPIO output pin to more complex use cases where multiple device peripherals are used.
+
+Each example is packaged with its own documentation, full source code, and project files for different supported IDEs and compilers, making the examples easy to use.
+
+2.7.1 aesadv
+^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+aesadv_cbc_256_enc_dec
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+AES256 CBC encryption and decryption example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image8|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+aesadv_cfb_256_enc_dec
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+AES CFB 256 bit encryption and decryption example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image9|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+aesadv_ctr_128_enc_dec
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+AES CTR 128 bit encryption and decryption example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image10|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+aesadv_ecb_256_encrypt
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+AES ECB 256 bit encryption example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image11|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+aesadv_ecb_256_encrypt_interrupt
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+AES ECB 256 bit encryption example using interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image12|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+aesadv_gcm_128_enc_dec
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+AES GCM 128 bit encryption and decryption example, with keystore
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image13|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+aesadv_gcm_auto_128_enc_dec
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+AES GCM auto 128 bit encryption and decryption example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image14|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+aesadv_ofb_256_enc_dec
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+AES OFB 256 bit encryption and decryption example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image15|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.2 Comparator (COMP)
+^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+comp_analog_filter
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Comparator using external inputs with hysteresis and output analog filter
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image16|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+comp_dac_to_timer_event
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Comparator output using 8-bit DAC triggers a timer event to measure timing
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image17|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+comp_hs_dac_vref_external
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Comparator in high-speed mode using 8-bit DAC with external VREF
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image18|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+comp_hs_tima_pwm_fault
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Comparator in high-speed mode triggers a TIMA fault
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image19|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+comp_lp_dac_vref_internal
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Comparator in low-power mode using 8-bit DAC with internal VREF
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image20|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.3 CRCP
+^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+crcp_calculate_checksum
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+CRCP16 checksum calculation of a memory block
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image21|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+crcp_calculate_checksum_32bit
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+CRCP32 checksum calculation of a memory block
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image22|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+crcp_calculate_checksum_dma
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+CRCP16 checksum calculation of a memory block using DMA block transfer
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image23|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+crcp_calculate_checksum_dma_32bit
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+CRCP32 checksum calculation of a memory block using DMA block transfer
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image24|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.4 Crypto SHA
+^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+crypto_sha_224
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SHA-224 hash calculation example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image25|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+crypto_sha_256
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SHA-256 hash calculation example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image26|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+crypto_sha_256_hmac
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SHA-256 HMAC calculation example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image27|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.5 Direct Memory Access (DMA)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+dma_block_transfer
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+DMA copies from Flash main memory to SRAM memory
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image28|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+dma_fill_data
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+DMA memory fill of SRAM using DMA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image29|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+dma_table_transfer
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+DMA using Table mode with DMA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image30|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+dma1_block_transfer
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+DMA1 copies from Flash main memory to SRAM memory
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image31|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+dma1_fill_data
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+DMA1 memory fill of SRAM using DMA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image32|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+dma1_table_transfer
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+DMA1 using Table mode with DMA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image33|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.6 EAM
+^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+eam_fpi_security_error
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+EAM FPI security error example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image34|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.7 Non-Volatile Memory (FLASHCTL)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+flashctl_dynamic_memory_protection
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Flash configured with dynamic protection
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image35|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+flashctl_ecc_error_injection
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Flash ECC testing and SEC and DED error detection
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image36|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+flashctl_multiple_size_read_verify
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Implementation of Flash read verify commands on multiple data sizes, with and without ECC
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image37|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+flashctl_multiple_size_write
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Flash writing of different size data
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image38|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+flashctl_program_with_ecc
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Flash writing of different size data with ECC
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image39|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.8 GPIO
+^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+gpio_input_capture
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+GPIO triggers interrupt by input capture pin
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image40|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+gpio_simultaneous_interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Demonstrates how to simultaneously service three GPIO interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image41|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+gpio_software_poll
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+GPIO output is set based on polled input
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image42|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+gpio_toggle_output
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+GPIO toggling an output pin
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image43|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+gpio_toggle_output_cpp
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+GPIO toggling output pins using C++
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image44|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+gpio_toggle_output_hiz
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+GPIO toggling an ouputput pin configured as Hi-Z
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image45|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.9 High-Speed ADC (HSADC)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+hsadc_conversion_continuous
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+HSADC continuous conversion example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image46|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+hsadc_conversion_software_trigger
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+HSADC conversion triggered by software
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image47|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+hsadc_dma_transfer
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+HSADC using DMA for data transfer
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image48|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+hsadc_interrupt
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+HSADC using interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image49|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+hsadc_ppb_data_processing
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+HSADC post-processing block data processing
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image50|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+hsadc_ppb_limit
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+HSADC post-processing block limit detection
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image51|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+hsadc_ppb_oversampling
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+HSADC post-processing block oversampling
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image52|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+hsadc_pre_emption
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+HSADC pre-emption example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image53|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+hsadc_results_fifo
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+HSADC results FIFO example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image54|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+hsadc_single_conversion
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+HSADC single conversion example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image55|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+hsadc_single_conversion_vref_external
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+HSADC single conversion with external reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image56|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+hsadc_single_conversion_vref_internal
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+HSADC single conversion with internal reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image57|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+hsadc_triggered_by_timer_event
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+HSADC conversion triggered by a timer event
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image58|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.10 Inter-Integrated Circuit (I2C)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+i2c_controller_rw_multibyte_fifo_interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+I2C Controller reading and writing multiple bytes using interrupts with FIFO
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image59|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+i2c_controller_rw_multibyte_fifo_poll
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+I2C Controller reading and writing multiple bytes polling FIFO
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image60|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+i2c_dma_transfer_controller
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+I2C Controller reading and writing multiple bytes using DMA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image61|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+i2c_dma_transfer_target
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+I2C Target reading and writing multiple bytes using DMA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image62|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+i2c_target_rw_multibyte_fifo_interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+I2C Target reading and writing multiple bytes using interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image63|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+i2c_target_rw_multibyte_fifo_interrupts_stop
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+I2C Target reading and writing multiple bytes using interrupts while in STOP mode
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image64|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+i2c_target_rw_multibyte_fifo_poll
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+I2C Target reading and writing multiple bytes polling FIFO
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image65|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.11 I2S
+^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+i2s_controller_write_multibyte_fifo_poll
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+I2S Controller write multibyte FIFO with polling
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image66|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+i2s_target_read_multibyte_fifo_poll
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+I2S Target read multibyte FIFO with polling
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image67|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.12 IWDT
+^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+iwdt_periodic_reset
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Periodic reset of the independent watchdog timer
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image68|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.13 Controller Area Network (MCAN)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+mcan_loopback
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+MCAN transmits and receives messages using loopback mode
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image69|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+mcan_message_rx
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Example configured to receive CAN and CAN-FD frames
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image70|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+mcan_multi_message_tx
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+CAN-FD transmits two messages with unique ID on GPIO interrupt
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image71|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+mcan_single_message_tx
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+CAN-FD transmits a single message on GPIO interrupt
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image72|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.14 Timer - Advanced (TIMA)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+tima_timer_mode_periodic_repeat_count
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TIMA timer in periodic mode with repeat count
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image73|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+tima_timer_mode_pwm_dead_band
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TIMA timer in PWM mode with dead band
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image74|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.15 Timer - General Purpose (TIMG)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timg_32bit_timer_mode_periodic_sleep
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TIMG 32-bit timer in periodic mode with sleep
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image75|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timg_32bit_timer_mode_pwm_edge_sleep
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TIMG 32-bit timer in PWM edge mode with sleep
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image76|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.16 Timer - Generic (TIMX)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timx_timer_mode_capture_duty_and_period
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TIMX timer in capture mode measuring duty cycle and period
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image77|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timx_timer_mode_capture_edge_capture
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TIMX timer in capture mode with edge capture
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image78|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timx_timer_mode_compare_edge_count
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TIMX timer in compare mode with edge count
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image79|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timx_timer_mode_one_shot_standby
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TIMX timer in one-shot mode with standby
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image80|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timx_timer_mode_periodic_sleep
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TIMX timer in periodic mode with sleep
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image81|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timx_timer_mode_periodic_standby
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TIMX timer in periodic mode with standby
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image82|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timx_timer_mode_periodic_stop
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TIMX timer in periodic mode with stop
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image83|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timx_timer_mode_pwm_center_stop
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TIMX timer in PWM center mode with stop
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image84|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timx_timer_mode_pwm_edge_sleep
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TIMX timer in PWM edge mode with sleep
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image85|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timx_timer_mode_pwm_edge_sleep_shadow
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TIMX timer in PWM edge mode with sleep and shadow
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image86|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timx_timer_mode_pwm_cross_trigger_stop_restore
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TIMX timer in PWM mode with cross trigger stop and restore
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image87|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.17 Real-Time Clock (RTC)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+rtc_a_tamper_timestamp_event
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Generates a time stamp event on RTC_A upon tamper detection
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image88|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+rtc_calendar_alarm_standby
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+RTC sets calendar alarm and toggles GPIO when alarm is triggered
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image89|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+rtc_offset_calibration_lfxt
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+RTC offset correction of crystal
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image90|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+rtc_periodic_alarm_lfosc_standby
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+RTC implementation of periodic alarm in STANDBY using LFOSC
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image91|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+rtc_periodic_alarm_lfxt_standby
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+RTC implementation of periodic alarm in STANDBY using LFXT
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image92|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+rtc_temperature_calibration_lfxt
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+RTC temperature calibration of crystal
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image93|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.18 Scratchpad
+^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+scratchpad_erase_on_tamper
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Scratchpad erase on tamper detection
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image94|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+scratchpad_retain_on_vdd_loss
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Scratchpad retain on VDD loss
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image95|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.19 SPI
+^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+spi_controller_command_data_control
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SPI controller command data control
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image96|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+spi_controller_fifo_dma_interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SPI controller using FIFO with DMA and interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image97|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+spi_controller_internal_loopback_poll
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SPI controller internal loopback with polling
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image98|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+spi_controller_multibyte_fifo_poll
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SPI controller multibyte FIFO with polling
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image99|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+spi_controller_register_format
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SPI controller register format
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image100|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+spi_controller_repeated_fifo_dma_interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SPI controller repeated FIFO with DMA and interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image101|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+spi_peripheral_command_data_control
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SPI peripheral command data control
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image102|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+spi_peripheral_fifo_dma_interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SPI peripheral using FIFO with DMA and interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image103|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+spi_peripheral_multibyte_fifo_poll
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SPI peripheral multibyte FIFO with polling
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image104|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+spi_peripheral_register_format
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SPI peripheral register format
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image105|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+spi_peripheral_repeated_fifo_dma_interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SPI peripheral repeated FIFO with DMA and interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image106|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.20 System Control (SYSCTL)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+sysctl_cpureset
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+System control CPU reset example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image107|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+sysctl_frequency_clock_counter
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+System control frequency clock counter example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image108|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+sysctl_hfxt_run
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+System control HFXT run example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image109|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+sysctl_lfxt_standby
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+System control LFXT standby example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image110|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+sysctl_mclk_syspll
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+System control MCLK SYSPLL example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image111|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+sysctl_power_policy_sleep_to_standby
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+System control power policy sleep to standby example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image112|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+sysctl_power_policy_sleep_to_stop
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+System control power policy sleep to stop example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image113|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+sysctl_shutdown
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+System control shutdown example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image114|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.21 SysTick
+^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+systick_periodic_timer
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SysTick periodic timer example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image115|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.22 TamperIO
+^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+tamperio_heartbeat
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TamperIO heartbeat example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image116|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.23 True Random Number Generator (TRNG)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+trng_sample
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TRNG sample generation example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image117|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+trng_sample_stop_restore
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TRNG sample with stop and restore example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image118|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.24 Universal Asynchronous Receiver Transmitter (UART)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_extend_irda_receive_packet
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART extend IrDA receive packet example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image119|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_extend_irda_send_packet
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART extend IrDA send packet example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image120|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_extend_manchester_echo
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART extend Manchester echo example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image121|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_extend_manchester_send_packet
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART extend Manchester send packet example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image122|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_internal_loopback_spgss0_uc1
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART internal loopback SPGSS0 UC1 example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image123|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_internal_loopback_standby_restore
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART internal loopback standby restore example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image124|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_internal_loopback_with_interrupt_spgss0_uc1
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART internal loopback with interrupt SPGSS0 UC1 example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image125|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_rx_console_multibyte_repeated_fifo_dma
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART RX console multibyte repeated FIFO DMA example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image126|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_rx_echo_interrupts_standby
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART RX echo interrupts standby example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image127|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_rx_external_data_receive
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART RX external data receive example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image128|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_rx_hw_flow_control
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART RX hardware flow control example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image129|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_rx_multibyte_fifo_dma_interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART RX multibyte FIFO DMA interrupts example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image130|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_rx_rw_multibyte_fifo_poll
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART RX read/write multibyte FIFO poll example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image131|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_tx_console_multibyte_repeated_fifo_dma
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART TX console multibyte repeated FIFO DMA example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image132|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_tx_echo_interrupts_standby
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART TX echo interrupts standby example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image133|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_tx_external_data_send
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART TX external data send example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image134|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_tx_hw_flow_control
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART TX hardware flow control example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image135|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_tx_multibyte_fifo_dma_interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART TX multibyte FIFO DMA interrupts example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image136|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_tx_rw_multibyte_fifo_poll
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART TX read/write multibyte FIFO poll example
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image137|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.26 Other
+^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+empty
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Empty start-up project using DriverLib
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image138|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.25 WWDT
+^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Project Name
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+Description
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM33C321A
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+wwdt_interval_timer_lfosc_standby
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+WWDT interval timer using LFOSC in STANDBY mode
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image139|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+wwdt_interval_timer_lfxt_standby
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+WWDT interval timer using LFXT in STANDBY mode
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image140|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+wwdt_window_mode_periodic_reset
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+WWDT window mode with periodic reset
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image141|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+.. |image0| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image1| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image2| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image3| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image4| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image5| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image6| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image7| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image8| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image9| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image10| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image11| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image12| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image13| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image14| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image15| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image16| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image17| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image18| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image19| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image20| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image21| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image22| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image23| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image24| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image25| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image26| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image27| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image28| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image29| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image30| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image31| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image32| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image33| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image34| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image35| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image36| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image37| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image38| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image39| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image40| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image41| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image42| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image43| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image44| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image45| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image46| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image47| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image48| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image49| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image50| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image51| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image52| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image53| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image54| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image55| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image56| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image57| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image58| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image59| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image60| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image61| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image62| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image63| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image64| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image65| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image66| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image67| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image68| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image69| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image70| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image71| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image72| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image73| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image74| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image75| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image76| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image77| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image78| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image79| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image80| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image81| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image82| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image83| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image84| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image85| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image86| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image87| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image88| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image89| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image90| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image91| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image92| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image93| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image94| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image95| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image96| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image97| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image98| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image99| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image100| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image101| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image102| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image103| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image104| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image105| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image106| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image107| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image108| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image109| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image110| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image111| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image112| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image113| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image114| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image115| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image116| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image117| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image118| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image119| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image120| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image121| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image122| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image123| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image124| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image125| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image126| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image127| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image128| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image129| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image130| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image131| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image132| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image133| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image134| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image135| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image136| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image137| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image138| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image139| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image140| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image141| image:: ./images/examples_guide/ex_sysconfig.png

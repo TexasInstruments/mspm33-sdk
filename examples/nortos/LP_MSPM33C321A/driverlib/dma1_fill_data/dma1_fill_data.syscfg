@@ -1,0 +1,50 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ */
+//@cliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)" --part "Default"
+//@v2CliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)"
+// @cliArgs --board /ti/boards/LP_MSPM33C321A --rtos nortos
+
+
+/**
+ * Import the modules used in this configuration.
+ */
+const DMA    = scripting.addModule("/ti/driverlib/DMA", {}, false);
+const DMA1   = DMA.addInstance();
+const GPIO   = scripting.addModule("/ti/driverlib/GPIO", {}, false);
+const GPIO1  = GPIO.addInstance();
+const SYSCTL = scripting.addModule("/ti/driverlib/SYSCTL");
+
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+DMA1.$name                                    = "DMA1";
+DMA1.associatedChannels.create(1);
+DMA1.associatedChannels[0].$name              = "CH0";
+DMA1.associatedChannels[0].transferMode       = "SINGLE_BLOCK";
+DMA1.associatedChannels[0].destIncrement      = "INCREMENT";
+DMA1.associatedChannels[0].addressMode        = "fill";
+DMA1.associatedChannels[0].fillIncAmount      = "BYTE";
+DMA1.associatedChannels[0].enableInterrupt    = true;
+DMA1.associatedChannels[0].peripheral.$assign = "DMA1_CH0";
+
+const Board = scripting.addModule("/ti/driverlib/Board", {}, false);
+
+GPIO1.$name                               = "GPIO_LEDS";
+GPIO1.associatedPins.create(2);
+GPIO1.associatedPins[0].$name             = "PASS_LED";
+GPIO1.associatedPins[0].launchPadShortcut = "LED2GreenEn";
+GPIO1.associatedPins[1].$name             = "FAIL_LED";
+GPIO1.associatedPins[1].launchPadShortcut = "LED2RedEn";
+
+SYSCTL.forceDefaultClkConfig = true;
+
+const ProjectConfig              = scripting.addModule("/ti/project_config/ProjectConfig", {}, false);
+ProjectConfig.migrationCondition = true;
+
+ProjectConfig.genLinker  = true;
+ProjectConfig.genStartup = true;
+ProjectConfig.genOpts    = true;
+ProjectConfig.genLibs    = true;

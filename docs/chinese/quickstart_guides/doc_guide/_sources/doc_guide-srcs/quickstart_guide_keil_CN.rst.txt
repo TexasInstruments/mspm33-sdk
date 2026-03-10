@@ -1,0 +1,149 @@
+适用于 Keil 的 MSPM33 SDK 快速入门指南
+======================================
+
+1. 引言
+-------
+
+本指南旨在帮助用户完成初始设置并展示运行其第一个示例应用。本指南说明了如何安装 MSPM33 SDK 和适用于 Keil 的 MSPM33 CMSIS-Pack，并列出了开始使用第一个应用所需的各种其他工具。
+
+2. 先决条件
+-----------
+
+用户应已下载以下各项：
+
+-  `MSPM33 SDK <https://www.ti.com/tool/MSPM33-SDK>`__
+
+-  `Keil MDK-Arm with uVision <https://www2.keil.com/mdk5>`__ v5.38a 或更高版本，带有 Arm Clang 编译器 v6.16 或更高版本。
+
+-  `SysConfig 1.26.0 <https://www.ti.com/tool/SYSCONFIG>`__
+
+3. 安装 MSPM33 CMSIS-Pack
+-------------------------
+
+1. 安装 `Keil MDK-Arm with uVision <#prerequisites>`__
+
+2. 在 uVision 中，依次选择 **Project → Manage → Pack Installer**
+
+   |image0|
+
+3. 在“Pack Installer”中，选择“Texas Instruments”器件，并选择相应的 MSPM33 系列。 然后在右侧，安装器件特定包以及可能需要的任何其他包。
+
+   |image1|
+
+4. 批准许可条款
+
+5. “Pack Installer”应显示支持 MSPM33 器件。
+
+   |image2|
+
+4. 安装 MSPM33 SDK
+------------------
+
+1. 下载并安装最新 `MSPM33 SDK <#prerequisites>`__\ 。请注意，SDK 安装程序有 Windows 版、Linux 版和 MacOS 版。以下步骤显示在 Windows 版中，但 Linux 或 MacOS 版也应遵循类似方法。
+
+2. 执行安装程序。点击 **Next**\ 。
+
+   |image3|
+
+3. 选择 **Installation Directory** 并点击 **Next**\ 。注意安装目录，默认情况下为 ``c:\ti``\ ，SDK 将安装在 ``C:\ti\mspm33_sdk_<version>\``\ 。此路径在以下部分中称为 ``<MSPM33_SDK_INSTALL_DIR>``\ 。
+
+   |image4|
+
+4. 点击 **Next**
+
+   |image5|
+
+5. 完成安装后，点击 **Finish**\ 。
+
+   |image6|
+
+5. 将 SysConfig 与 Keil IDE 配合使用
+------------------------------------
+
+此 SDK 包括 SysConfig 元数据的初步版本，可用于评估 MSPM33 SDK 的用户体验。
+
+有关安装 SysConfig 并将其与 MSPM33 配合使用的详细说明，请参阅在 SDK 工具指南中提供的\ `将 SysConfig 与 MSPM33 配合使用 <../../../tools/sysconfig_guide/doc_guide/doc_guide-srcs/sysconfig_guide_CN.html>`__\ 。
+
+6. 在 Keil uVision 中导入和编译 SDK 示例
+----------------------------------------
+
+1. 在 Keil uVision 中，依次选择 **Project → Open Project**
+
+   |image7|
+
+2. 在位于 ``<MSPM33_SDK_INSTALL_DIR>/examples/`` 的 SDK 示例中导航至 Keil 文件夹，并打开 .uvprojx 工程文件（\ **注意：** 对于 rtos 示例，请使用 .uvmpw 工作空间文件）。例如 ``<MSPM33_SDK_INSTALL_DIR>/examples/nortos/LP_MSPM33C321A/driverlib/gpio_toggle_output/keil/gpio_toggle_output.uvprojx``\ 。
+
+   |image8|
+
+   2.1. 工程已准备好进行编译和调试。
+
+   |image9|
+
+3. 要构建支持 FreeRTOS 的示例，请选择 **Project → Batch Setup**\ ，选择构建的所有项目目标。
+
+   |image10|
+
+   3.1. 选择 Batch Build，它将构建工作空间中的所有项目。
+
+   |image11|
+
+7. 使用 Keil 在 MSPM33 上进行下载和调试
+---------------------------------------
+
+Keil 支持多种调试器。此部分说明了如何在 CMSIS-DAP 模式下使用 XDS-110 调试工具。 XDS-110 集成在 MSPM0 LaunchPad 中。
+
+7.1 使用 CMSIS-DAP
+~~~~~~~~~~~~~~~~~~
+
+1. 右键点击工程文件夹，转至在先前步骤中导入的 Keil 工程的选项窗口
+
+|image12|
+
+2. 转至“Debug”选项卡并点击“Settings”按钮，确保设置与下图所示设置一致。
+
+|image13|
+
+3. 点击“Flash Download”选项卡，并确认相应说明与下图一致。 如果不一致，请点击“Add”按钮，并选择相应的 MSPM0 MAIN 选项。 器件类型为“On-chip flash”。
+
+|image14|
+
+4. 点击窗口底部的“Ok”关闭窗口，并应用对调试设置所做的所有更改
+
+|image15|
+
+5. 按下“Load”按钮使用工程刷写器件，如下所示
+
+|image16|
+
+6. 将鼠标悬停在主屏幕的“Debug”选项卡上，选择“Start/Stop Debug Session”
+
+|image17|
+
+7. 这将启动调试会话。
+
+|image18|
+
+8.已知问题和常见问题解答 （FAQ）
+--------------------------------
+
+请参阅 SDK 中的\ `已知问题和 FAQ <../../../../../known_issues_FAQ.html>`__\ 。
+
+.. |image0| image:: ./images/quickstart_guide_keil/keil_install_1.png
+.. |image1| image:: ./images/quickstart_guide_keil/keil_install_2.png
+.. |image2| image:: ./images/quickstart_guide_keil/keil_install_5.png
+.. |image3| image:: ./images/quickstart_guide_keil/sdk_install_1.png
+.. |image4| image:: ./images/quickstart_guide_keil/sdk_install_2.png
+.. |image5| image:: ./images/quickstart_guide_keil/sdk_install_3.png
+.. |image6| image:: ./images/quickstart_guide_keil/sdk_install_4.png
+.. |image7| image:: ./images/quickstart_guide_keil/keil_example_1.png
+.. |image8| image:: ./images/quickstart_guide_keil/keil_example_2.png
+.. |image9| image:: ./images/quickstart_guide_keil/keil_example_3.png
+.. |image10| image:: ./images/quickstart_guide_keil/Keil_Batch_Setup.png
+.. |image11| image:: ./images/quickstart_guide_keil/Keil_Batch_Build.png
+.. |image12| image:: ./images/quickstart_guide_keil/keil_CMSIS_example_1.png
+.. |image13| image:: ./images/quickstart_guide_keil/keil_CMSIS_example_4.png
+.. |image14| image:: ./images/quickstart_guide_keil/keil_CMSIS_example_3.png
+.. |image15| image:: ./images/quickstart_guide_keil/keil_CMSIS_example_5.png
+.. |image16| image:: ./images/quickstart_guide_keil/keil_CMSIS_example_8.png
+.. |image17| image:: ./images/quickstart_guide_keil/keil_CMSIS_example_6.png
+.. |image18| image:: ./images/quickstart_guide_keil/keil_CMSIS_example_7.png

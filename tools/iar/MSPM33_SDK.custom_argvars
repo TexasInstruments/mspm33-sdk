@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<iarUserArgVars>
+  <group active="true" name="MSPM33_SDK">
+    <variable>
+      <name>SYSCONFIG_ROOT</name>
+      <value>c:/ti/sysconfig_1.26.0</value>
+    </variable>
+    <variable>
+      <name>MSPM33_SDK_INSTALL_DIR</name>
+      <value>c:/ti/mspm33_sdk_1_02_00_00</value>
+    </variable>
+    <variable>
+      <name>MSP_SDK_INSTALL_DIR</name>
+      <value>c:/ti/mspm33_sdk_1_02_00_00</value>
+    </variable>
+    <variable>
+      <name>EXAMPLE_ROOT</name>
+      <value>c:/ti/mspm33_sdk_1_02_00_00/tools/iar</value>
+    </variable>
+  </group>
+</iarUserArgVars>

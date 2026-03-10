@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectSpec>
+    <applicability>
+        <when>
+            <context
+                deviceFamily="ARM"
+                deviceId="MSPM33C321A"
+            />
+        </when>
+    </applicability>
+    <import spec="../../empty_secure/ticlang/empty_secure_LP_MSPM33C321A_nortos_ticlang.projectspec" />
+
+    <project
+        title="empty_nonsecure"
+        name="empty_nonsecure_LP_MSPM33C321A_nortos_ticlang"
+        configurations="Debug"
+        toolChain="TICLANG"
+        connection="TIXDS110_Connection.xml"
+        device="MSPM33C321A"
+        ignoreDefaultDeviceSettings="true"
+        ignoreDefaultCCSSettings="true"
+        products="MSPM33-SDK;sysconfig"
+        hexBuildOptions="--ti_txt"
+        enableHexTool="true"
+        compilerBuildOptions="
+        -mcpu=cortex-m33 
+        -mfloat-abi=hard
+        -mfpu=fpv5-sp-d16 
+        -mlittle-endian 
+        -O2 
+        -I${INHERITED_INCLUDE_PATH} 
+        -I${COM_TI_MSPM33_SDK_INCLUDE_PATH} 
+        -I${SYSCONFIG_TOOL_INCLUDE_PATH} 
+        -I${PROJECT_ROOT} 
+        -I${PROJECT_ROOT}/${ConfigName} 
+        -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/third_party/CMSIS/Core/Include 
+        -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source 
+        -D${INHERITED_SYMBOLS} 
+        -D${COM_TI_MSPM33_SDK_SYMBOLS} 
+        -D${SYSCONFIG_TOOL_SYMBOLS} 
+        -D__MSPM33C321A__ 
+        -gdwarf-3 
+        "
+        
+        linkerBuildOptions="
+            -Wl,-mfloat-abi=hard
+            -Wl,-mfpu=fpv5-sp-d16
+            -Wl,-m${ProjName}.map 
+            -Wl,-i${INHERITED_LIBRARY_PATH} 
+            -Wl,-i${COM_TI_MSPM33_SDK_LIBRARY_PATH} 
+            -Wl,-i${SYSCONFIG_TOOL_LIBRARY_PATH} 
+            -Wl,-i${COM_TI_MSPM33_SDK_INSTALL_DIR}/source 
+            -Wl,-i${PROJECT_ROOT} 
+            -Wl,-i${PROJECT_BUILD_DIR}/syscfg 
+            -Wl,-i${CG_TOOL_ROOT}/lib 
+            -Wl,--diag_wrap=off 
+            -Wl,--display_error_number 
+            -Wl,--warn_sections 
+            -Wl,--xml_link_info=${ProjName}_linkInfo.xml 
+            -Wl,-l${CCS_WORKSPACE_DIR}/empty_secure_LP_MSPM33C321A_nortos_ticlang/Debug/implib.o 
+            -Wl,-l${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/ti/driverlib/lib/ticlang/m33/mspm33c321x/driverlib.a 
+            -Wl,-llibc.a
+        "
+        sysConfigBuildOptions="
+            -o . -s ${INHERITED_SYSCONFIG_MANIFESTS} -s ${COM_TI_MSPM33_SDK_SYSCONFIG_MANIFEST} -s ${SYSCONFIG_TOOL_SYSCONFIG_MANIFEST} 
+        "
+
+        postBuildStep="${NODE_TOOL} ${COM_TI_MSPM33_SDK_INSTALL_DIR}/tools/security/merge_secure_nonsecure.js ${CCS_WORKSPACE_DIR}/empty_secure_LP_MSPM33C321A_nortos_ticlang/Debug/empty_secure_LP_MSPM33C321A_nortos_ticlang.txt ${CCS_WORKSPACE_DIR}/empty_nonsecure_LP_MSPM33C321A_nortos_ticlang/Debug/empty_nonsecure_LP_MSPM33C321A_nortos_ticlang.txt"
+        
+        sourceLookupPath="${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/ti/driverlib"
+        description="Empty nonsecure example for a secure nonsecure empty example set"
+        references="empty_secure_LP_MSPM33C321A_nortos_ticlang">
+
+        <dependencies>
+            <dependency project="empty_secure_LP_MSPM33C321A_nortos_ticlang" />
+        </dependencies>
+
+        <property name="buildProfile" value="release"/>
+        <property name="isHybrid" value="true"/>
+        <file path="mspm33c321a_ns.cmd" openOnCreation="false" excludeFromBuild="false" action="copy" type="linkerCommandFile"></file>
+        <file path="startup_mspm33c321x_ticlang_ns.c" openOnCreation="false" excludeFromBuild="false" action="copy"></file>
+        <file path="../empty_ns.c" openOnCreation="false" excludeFromBuild="false" action="copy"></file>
+        <file path="../empty.syscfg" openOnCreation="true" excludeFromBuild="false" action="copy"></file>
+        <file path="../nsc_example.h" openOnCreation="false" excludeFromBuild="false" action="copy"></file>
+        <file path="../README.md" openOnCreation="false" excludeFromBuild="false" action="copy"></file>
+    </project>
+</projectSpec>
+

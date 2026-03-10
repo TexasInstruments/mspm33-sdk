@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectSpec>
+    <applicability>
+        <when>
+            <context
+                deviceFamily="ARM"
+                deviceId="MSPM33C321A"
+            />
+        </when>
+    </applicability>
+
+    <project
+        title="bsl_host_mcu_to_mspm33c321a_target_uart"
+        name="bsl_host_mcu_to_mspm33c321a_target_uart_LP_MSPM33C321A_nortos_ticlang"
+        configurations="Debug"
+        toolChain="TICLANG"
+        connection="TIXDS110_Connection.xml"
+        device="MSPM33C321A"
+        ignoreDefaultDeviceSettings="true"
+        ignoreDefaultCCSSettings="true"
+        products="MSPM33-SDK;sysconfig"
+        compilerBuildOptions="
+            -I${PROJECT_ROOT}
+            -I${PROJECT_ROOT}/${ConfigName}
+            -mfloat-abi=hard
+            -mfpu=fpv5-sp-d16
+            -DUART_Plugin
+            -g
+            @device.opt
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/third_party/CMSIS/Core/Include
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source
+            -gdwarf-3
+            -mcpu=cortex-m33
+            -Wall
+        "
+        linkerBuildOptions="
+            -mfloat-abi=hard
+            -mfpu=fpv5-sp-d16
+            -ldevice.cmd.genlibs
+            -L${COM_TI_MSPM33_SDK_INSTALL_DIR}/source
+            -L${PROJECT_ROOT}
+            -L${PROJECT_BUILD_DIR}/syscfg
+            -Wl,--rom_model
+            -Wl,--warn_sections
+            -L${CG_TOOL_ROOT}/lib
+            -llibc.a
+        "
+        sysConfigBuildOptions="
+            --output .
+            --product ${COM_TI_MSPM33_SDK_INSTALL_DIR}/.metadata/product.json
+            --compiler ticlang
+        "
+        sourceLookupPath="${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/ti/driverlib"
+        description="Demonstrate how to program a MSPM0 MCU using a LP-MSPM0G3507 as host by BSL UART interface.">
+
+        <property name="buildProfile" value="release"/>
+        <property name="isHybrid" value="true"/>
+        <file path="../application_image_uart.h" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../bsl_uart.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../bsl_uart.h" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../uart.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../uart.h" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../main.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../bsl_host_mcu_uart.syscfg" openOnCreation="true" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../README.md" openOnCreation="true" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../README.html" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+    </project>
+</projectSpec>

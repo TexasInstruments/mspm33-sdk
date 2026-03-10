@@ -1,0 +1,1189 @@
+[{
+    "name": "Release Notes",
+    "tags": [
+        "Release Notes",
+        "Documentation",
+        "MSPM33",
+        "Compatibility",
+        "Upgrade",
+        "Versioning"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../release_notes_mspm33_sdk_1_02_00_00.html",
+    "mainCategories": [
+        [
+            "Documents"
+        ]
+    ]
+},
+{
+    "name": "Documentation Overview",
+    "tags": [
+        "Documentation Overview",
+        "Documentation",
+        "MSPM33",
+        "SDK Overview",
+        "Components",
+        "Middleware",
+        "Security"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/english/MSPM33_SDK_Documentation_Overview.html",
+    "mainCategories": [
+        [
+            "Documents"
+        ]
+    ]
+},
+{
+    "name": "MSPM33 SDK User's Guide",
+    "tags": [
+        "MSPM33 SDK User's Guide",
+        "Documentation",
+        "SDK",
+        "Software Development Kit",
+        "Development",
+        "Examples",
+        "Example",
+        "Driver Library",
+        "TI Drivers",
+        "Quick Start",
+        "Documentation",
+        "MiddleWare",
+        "API Guide",
+        "API Guides",
+        "Application Programming Interface Guide",
+        "User Guide",
+        "Users Guide",
+        "User's Guide",
+        "User Guides",
+        "Software",
+        "RTOS",
+        "RTOS Kernel",
+        "FreeRTOS",
+        "Help"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/english/sdk_users_guide/MSPM33_SDK_User_Guide.html",
+    "mainCategories": [
+        [
+            "Documents"
+        ]
+    ]
+},
+{
+    "name": "Examples Guide",
+    "tags": [
+        "Examples Guide",
+        "Documentation",
+        "Examples List",
+        "SysConfig support",
+        "Example",
+        "Demos",
+        "Demo",
+        "Application",
+        "ADC",
+        "COMP",
+        "CRC",
+        "DMA",
+        "Flash",
+        "GPAMP",
+        "I2C",
+        "OPA",
+        "SPI",
+        "Timer",
+        "UART",
+        "VREF",
+        "WWDT",
+        "Middleware",
+        "Security"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/english/sdk_users_guide/doc_guide/doc_guide-srcs/examples_guide.html",
+    "mainCategories": [
+        [
+            "Documents"
+        ]
+    ]
+},
+{
+    "name": "Early Samples Migration Guide",
+    "tags": [
+        "Early Samples Migration Guide",
+        "Documentation",
+        "MSPM33 Migration Guide",
+        "early samples",
+        "early customer samples",
+        "production samples",
+        "DriverLib differences",
+        "SysConfig differences",
+        "code generation",
+        "Getting Started",
+        "compatibility breaks",
+        "help with migration"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/english/early_samples_migration_guide/MSPM33_Early_Samples_Migration_Guide.html",
+    "mainCategories": [
+        [
+            "Documents"
+        ]
+    ]
+},
+{
+    "name": "Known Issues and FAQ",
+    "tags": [
+        "Known Issues FAQ",
+        "MSPM33",
+        "Documentation",
+        "FAQ",
+        "Frequently Asked Questions",
+        "Troubleshooting",
+        "MSPM33",
+        "Recovery mechanisms",
+        "Preventive actions",
+        "Errors",
+        "Debugging",
+        "Support"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../known_issues_FAQ.html",
+    "mainCategories": [
+        [
+            "Documents"
+        ]
+    ]
+},
+{
+    "name": "Driverlib API Guide",
+    "tags": [
+        "Driverlib API Guide",
+        "Documentation",
+        "MSPM33 driverlib API Directory Reference Guide",
+        "API",
+        "ADC",
+        "COMP",
+        "CRC",
+        "DMA",
+        "Flash",
+        "GPAMP",
+        "I2C",
+        "OPA",
+        "SPI",
+        "Timer",
+        "UART",
+        "VREF",
+        "WWDT",
+        "Dependency",
+        "File Reference",
+        "Source code",
+        "Data Structure",
+        "Variables",
+        "Modules",
+        "Functions",
+        "CCS IAR Keil",
+        "Code Composer Studio",
+        "Register Level"
+    ],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/english/driverlib/Driverlib_Overview.html",
+    "mainCategories": [
+        [
+            "Documents"
+        ]
+    ],
+    "subCategories": [
+        "DriverLib"
+    ]
+},
+{
+    "name": "Tools Guide Overview",
+    "tags": [
+        "Tools Guide Overview",
+        "Documentation",
+        "Tools Guide",
+        "Code Composer Studio",
+        "CCS",
+        "IAR",
+        "Keil",
+        "IDE",
+        "Compiler",
+        "TI Arm Clang",
+        "GCC",
+        "SysConfig",
+        "Uniflash",
+        "XDS-110",
+        "Segger",
+        "PEmicro",
+        "Lauterbach",
+        "Ease of use",
+        "Debugging",
+        "Programming"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/english/tools/MSPM33_Tools_Guide.html",
+    "mainCategories": [
+        [
+            "Documents"
+        ]
+    ],
+    "subCategories": [
+        "Tools"
+    ]
+},
+{
+    "name": "Debugging and Programming Tools Overview",
+    "tags": [
+        "Debugging and Programming Tools Overview",
+        "UniFlash Guide",
+        "Documentation",
+        "Tools",
+        "MSPM33",
+        "UniFlash",
+        "Uni Flash",
+        "Load Image to Device",
+        "Flash Image",
+        "Production Flash",
+        "Bootloader",
+        "JTAG",
+        "Binary File",
+        "Hex File",
+        "Out File",
+        "Put Program on Device",
+        "XDS-110",
+        "XDS110",
+        "MSP-GANG",
+        "GANG",
+        "BSL Host",
+        "Elprotronic",
+        "Segger",
+        "PEmicro",
+        "Lauterbach",
+        "Debugger",
+        "programmer",
+        "debug probe"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/english/tools/doc_guide/doc_guide-srcs/debug_program.html",
+    "mainCategories": [
+        [
+            "Documents"
+        ]
+    ],
+    "subCategories": [
+        "Tools"
+    ]
+},
+{
+    "name": "Code Composer Studio (CCS) Theia IDE Guide",
+    "tags": [
+        "Code Composer Studio (CCS) Theia IDE Guide",
+        "Documentation",
+        "Tools",
+        "CCS Theia IDE Guide",
+        "Code Composer Studio Theia IDE Guide",
+        "CCS Theia",
+        "Visual Studio Code",
+        "VS Code",
+        "VSCode"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/english/tools/ccs_theia_ide_guide/Code_Composer_Studio_IDE_for_MSPM33_MCUs.html",
+    "mainCategories": [
+        [
+            "Documents"
+        ]
+    ],
+    "subCategories": [
+        "Tools"
+    ]
+},
+{
+    "name": "IAR IDE Guide",
+    "tags": [
+        "IAR IDE Guide",
+        "Documentation",
+        "Tools",
+        "IAR Embedded Workbench for Arm",
+        "EWARM",
+        "CSPY",
+        "C-SPY"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/english/tools/iar_ide_guide/IAR_Embedded_Workbench_IDE_for_MSPM33_MCUs_Documentation.html",
+    "mainCategories": [
+        [
+            "Documents"
+        ]
+    ],
+    "subCategories": [
+        "Tools"
+    ]
+},
+{
+    "name": "SysConfig Guide",
+    "tags": [
+        "SysConfig Guide",
+        "MSPM33",
+        "SysConfig",
+        "SysConfig Cloud",
+        "SysConfig Desktop",
+        "Standalone SysConfig",
+        "Importing SysConfig Example Projects",
+        "Clocktree",
+        "Clock Tree",
+        "Code Composer Studio",
+        "CCS",
+        "IAR",
+        "Keil",
+        "IDE",
+        "Automatic Code Generation",
+        "GUI",
+        "Graphical User Interface",
+        "System Configuration",
+        "Intuitive Graphical Configuration",
+        "Real-time code preview",
+        "PinMux",
+        "NONMAIN Configurator",
+        "Event Configuration",
+        "Documentation",
+        "Tools"
+        ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/english/tools/sysconfig_guide/SysConfig_Guide_for_MSPM33.html",
+    "mainCategories": [
+        [
+            "Documents"
+        ]
+    ],
+    "subCategories": [
+        "Tools"
+    ]
+},
+{
+    "name": "CMSIS DSP User's Guide",
+    "tags": [
+        "CMSIS DSP User's Guide",
+        "Documentation",
+        "Third Party"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/english/third_party/cmsis_dsp/CMSIS_DSP_Library_for_MSPM33.html",
+    "mainCategories": [
+        [
+            "Documents"
+        ]
+    ],
+    "subCategories": [
+        "Third Party",
+        "CMSIS DSP"
+    ]
+},
+{
+    "name": "Secure Booting User's Guide",
+    "tags": [
+        "Secure Booting User's Guide",
+        "Documentation",
+        "BIM"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/english/middleware/boot_manager/Secure_Booting_Users_Guide.html",
+    "mainCategories": [
+        [
+            "Documents"
+        ]
+    ],
+    "subCategories": [
+        "Middleware",
+        "Secure Booting"
+    ]
+},
+{
+    "name": "Security User's Guide",
+    "tags": [
+        "Security User's Guide",
+        "Documentation"        
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/english/security/security_userguide/Security_UserGuide_for_MSPM33.html",
+    "mainCategories": [
+        [
+            "Documents"
+        ]
+    ],
+    "subCategories": [        
+        "Security"
+    ]
+},
+{
+    "name": "Quick Start Guide Overview",
+    "tags": [
+        "Quick Start Guide Overview",
+        "Documentation",
+        "Tools",
+        "CCS Quick Start Guide",
+        "Code Composer Studio Quick Start Guide",
+        "Quick Start Guide",
+        "Quick Start",
+        "Code Composer Studio",
+        "CCS",
+        "IDE",
+        "Compiler",
+        "TI Arm Clang",
+        "GCC",
+        "SysConfig",
+        "Keil",
+        "Keil Quick Start Guide",
+        "Keil MDK-Arm",
+        "Keil MDK-Arm with uVision",
+        "IAR",
+        "IAR Quick Start Guide",
+        "IAR Embedded Workbench",
+        "IAR Embedded Workbench for Arm"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/english/quickstart_guides/MSPM33_SDK_Quick_Start_Guides.html",
+    "mainCategories": [
+        [
+            "Documents"
+        ]
+    ],
+    "subCategories": [
+        "Quick Start Guides"
+    ]
+},
+{
+    "name": "Code Composer Studio (CCS) Theia Quick Start Guide",
+    "tags": [
+        "Code Composer Studio (CCS) Theia Quick Start Guide",
+        "Documentation",
+        "Tools",
+        "CCS Quick Start Guide",
+        "CCS Theia Quick Start Guide",
+        "Code Composer Studio Theia Quick Start Guide",
+        "Visual Studio Code",
+        "VS Code",
+        "VSCode",
+        "quickstart",
+	    "quickstart guide",
+        "CCS Theia setup",
+        "Import project into Theia",
+        "Import SDK and sysconfig to Theia",
+        "Build example in Theia",
+        "Getting Started"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/english/quickstart_guides/doc_guide/doc_guide-srcs/quickstart_guide_ccs_theia.html",
+    "mainCategories": [
+        [
+            "Documents"
+        ]
+    ],
+    "subCategories": [
+        "Quick Start Guides"
+    ]
+},
+{
+    "name": "IAR Quick Start Guide",
+    "tags": [
+        "IAR Quick Start Guide",
+        "Documentation",
+        "Tools",
+        "Code Composer Studio",
+        "IAR",
+        "IAR Embedded Workbench",
+        "IAR Embedded Workbench for Arm",
+        "IDE",
+        "Compiler",
+        "MSPM33 IAR Quickstart Guide",
+        "quickstart guide",
+        "IAR setup",
+        "Import project into IAR",
+        "Import SDK and sysconfig to IAR",
+        "Build example in IAR",
+        "Install MSPM33 SDK",
+        "Getting Started"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/english/quickstart_guides/doc_guide/doc_guide-srcs/quickstart_guide_iar.html",
+    "mainCategories": [
+        [
+            "Documents"
+        ]
+    ],
+    "subCategories": [
+        "Quick Start Guides"
+    ]
+},
+{
+    "name": "版本说明",
+    "tags": [
+        "版本说明",
+        "Release Notes",
+        "Documentation",
+        "MSPM33",
+        "Compatibility",
+        "Upgrade",
+        "Versioning"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../release_notes_mspm33_sdk_1_02_00_00.html",
+    "mainCategories": [
+        [
+            "Documents - Chinese"
+        ]
+    ]
+},
+{
+    "name": "文档概述",
+    "tags": [
+        "文档概述",
+        "Documentation Overview",
+        "Documentation",
+        "MSPM33",
+        "SDK Overview",
+        "Components",
+        "Middleware",
+        "Security"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/chinese/MSPM33_SDK_Documentation_Overview_CN.html",
+    "mainCategories": [
+        [
+            "Documents - Chinese"
+        ]
+    ]
+},
+{
+    "name": "MSPM33 SDK 用户指南",
+    "tags": [
+        "MSPM33 SDK 用户指南",
+        "MSPM33 SDK User's Guide",
+        "Documentation",
+        "SDK",
+        "Software Development Kit",
+        "Development",
+        "Examples",
+        "Example",
+        "Driver Library",
+        "TI Drivers",
+        "Quick Start",
+        "Documentation",
+        "MiddleWare",
+        "Security",
+        "API Guide",
+        "API Guides",
+        "Application Programming Interface Guide",
+        "User Guide",
+        "Users Guide",
+        "User's Guide",
+        "User Guides",
+        "Software",
+        "RTOS",
+        "RTOS Kernel",
+        "FreeRTOS",
+        "Help"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/chinese/sdk_users_guide/MSPM33_SDK_User_Guide_CN.html",
+    "mainCategories": [
+        [
+            "Documents - Chinese"
+        ]
+    ]
+},
+{
+    "name": "样例指南",
+    "tags": [
+        "样例指南",
+        "Examples Guide",
+        "Documentation",
+        "Examples List",
+        "SysConfig support",
+        "Example",
+        "Demos",
+        "Demo",
+        "Application",
+        "ADC",
+        "COMP",
+        "CRC",
+        "DMA",
+        "Flash",
+        "GPAMP",
+        "I2C",
+        "OPA",
+        "SPI",
+        "Timer",
+        "UART",
+        "VREF",
+        "WWDT",
+        "Middleware"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/chinese/sdk_users_guide/doc_guide/doc_guide-srcs/examples_guide_CN.html",
+    "mainCategories": [
+        [
+            "Documents - Chinese"
+        ]
+    ]
+},
+{
+    "name": "早期版本芯片移植指南",
+    "tags": [
+        "早期版本芯片移植指南",
+        "Early Samples Migration Guide",
+        "Documentation",
+        "MSPM33 Migration Guide",
+        "early samples",
+        "early customer samples",
+        "production samples",
+        "DriverLib differences",
+        "SysConfig differences",
+        "code generation",
+        "Getting Started",
+        "compatibility breaks",
+        "help with migration"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/chinese/early_samples_migration_guide/MSPM33_Early_Samples_Migration_Guide_CN.html",
+    "mainCategories": [
+        [
+            "Documents - Chinese"
+        ]
+    ]
+},
+{
+    "name": "已知问题和常见问题解答",
+    "tags": [
+        "已知问题和常见问题解答",
+        "Known Issues and FAQ",
+        "MSPM33",
+        "Documentation",
+        "FAQ",
+        "Frequently Asked Questions",
+        "Troubleshooting",
+        "MSPM33",
+        "Recovery mechanisms",
+        "Preventive actions",
+        "Errors",
+        "Debugging",
+        "Support"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../known_issues_FAQ.html",
+    "mainCategories": [
+        [
+            "Documents - Chinese"
+        ]
+    ]
+},
+{
+    "name": "DriverLib API 指南",
+    "tags": [
+        "DriverLib API 指南",
+        "Driverlib API Guide",
+        "Documentation",
+        "MSPM33 driverlib API Directory Reference Guide",
+        "API",
+        "ADC",
+        "COMP",
+        "CRC",
+        "DMA",
+        "Flash",
+        "GPAMP",
+        "I2C",
+        "OPA",
+        "SPI",
+        "Timer",
+        "UART",
+        "VREF",
+        "WWDT",
+        "Dependency",
+        "File Reference",
+        "Source code",
+        "Data Structure",
+        "Variables",
+        "Modules",
+        "Functions",
+        "CCS IAR Keil",
+        "Code Composer Studio",
+        "Register Level"
+    ],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/chinese/driverlib/Driverlib_Overview_CN.html",
+    "mainCategories": [
+        [
+            "Documents - Chinese"
+        ]
+    ],
+    "subCategories": [
+        "DriverLib"
+    ]
+},
+{
+    "name": "工具指南概述",
+    "tags": [
+        "工具指南概述",
+        "Tools Guide Overview",
+        "Documentation",
+        "Tools Guide",
+        "Code Composer Studio",
+        "CCS",
+        "IAR",
+        "Keil",
+        "IDE",
+        "Compiler",
+        "TI Arm Clang",
+        "GCC",
+        "SysConfig",
+        "Uniflash",
+        "XDS-110",
+        "Segger",
+        "PEmicro",
+        "Lauterbach",
+        "Ease of use",
+        "Debugging",
+        "Programming"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/chinese/tools/MSPM33_Tools_Guide_CN.html",
+    "mainCategories": [
+        [
+            "Documents - Chinese"
+        ]
+    ],
+    "subCategories": [
+        "工具"
+    ]
+},
+{
+    "name": "调试和编程工具概述",
+    "tags": [
+        "调试和编程工具",
+        "Debugging and Programming Tools Overview",
+        "UniFlash Guide",
+        "Documentation",
+        "Tools",
+        "MSPM33",
+        "UniFlash",
+        "Uni Flash",
+        "Load Image to Device",
+        "Flash Image",
+        "Production Flash",
+        "Bootloader",
+        "JTAG",
+        "Binary File",
+        "Hex File",
+        "Out File",
+        "Put Program on Device",
+        "XDS-110",
+        "XDS110",
+        "MSP-GANG",
+        "GANG",
+        "BSL Host",
+        "Elprotronic",
+        "Segger",
+        "PEmicro",
+        "Lauterbach",
+        "Debugger",
+        "programmer",
+        "debug probe"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/chinese/tools/doc_guide/doc_guide-srcs/debug_program_CN.html",
+    "mainCategories": [
+        [
+            "Documents - Chinese"
+        ]
+    ],
+    "subCategories": [
+        "工具"
+    ]
+},
+{
+    "name": "Code Composer Studio (CCS) Theia IDE 指南",
+    "tags": [
+        "Code Composer Studio (CCS) Theia IDE 指南",
+        "Code Composer Studio (CCS) Theia IDE Guide",
+        "Documentation",
+        "Tools",
+        "CCS Theia IDE Guide",
+        "Code Composer Studio Theia IDE Guide",
+        "CCS Theia",
+        "Visual Studio Code",
+        "VS Code",
+        "VSCode"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/chinese/tools/ccs_theia_ide_guide/Code_Composer_Studio_IDE_for_MSPM33_MCUs_CN.html",
+    "mainCategories": [
+        [
+            "Documents - Chinese"
+        ]
+    ],
+    "subCategories": [
+        "工具"
+    ]
+},
+{
+    "name": "IAR IDE 指南",
+    "tags": [
+        "IAR IDE 指南",
+        "IAR IDE Guide",
+        "Documentation",
+        "Tools",
+        "IAR Embedded Workbench for Arm",
+        "EWARM",
+        "CSPY",
+        "C-SPY"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/chinese/tools/iar_ide_guide/IAR_Embedded_Workbench_IDE_for_MSPM33_MCUs_Documentation_CN.html",
+    "mainCategories": [
+        [
+            "Documents - Chinese"
+        ]
+    ],
+    "subCategories": [
+        "工具"
+    ]
+},
+{
+    "name": "SysConfig 指南",
+    "tags": [
+        "SysConfig 指南",
+        "SysConfig Guide",
+        "MSPM33",
+        "SysConfig",
+        "SysConfig Cloud",
+        "SysConfig Desktop",
+        "Standalone SysConfig",
+        "Importing SysConfig Example Projects",
+        "Clocktree",
+        "Clock Tree",
+        "Code Composer Studio",
+        "CCS",
+        "IAR",
+        "Keil",
+        "IDE",
+        "Automatic Code Generation",
+        "GUI",
+        "Graphical User Interface",
+        "System Configuration",
+        "Intuitive Graphical Configuration",
+        "Real-time code preview",
+        "PinMux",
+        "NONMAIN Configurator",
+        "Event Configuration",
+        "Documentation",
+        "Tools"
+        ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/chinese/tools/sysconfig_guide/SysConfig_Guide_for_MSPM33_CN.html",
+    "mainCategories": [
+        [
+            "Documents - Chinese"
+        ]
+    ],
+    "subCategories": [
+        "工具"
+    ]
+},
+{
+    "name": "CMSIS DSP 管理器指南",
+    "tags": [
+        "CMSIS DSP 管理器指南",
+        "CMSIS DSP User's Guide",
+        "Documentation",
+        "Third Party"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/chinese/third_party/cmsis_dsp/CMSIS_DSP_Library_for_MSPM33_CN.html",
+    "mainCategories": [
+        [
+            "Documents - Chinese"
+        ]
+    ],
+    "subCategories": [
+        "Third Party",
+        "CMSIS DSP"
+    ]
+},
+{
+    "name": "Secure Booting 指南",
+    "tags": [
+        "Secure Booting 指南",
+        "Secure Booting User's Guide",
+        "Documentation",
+        "BIM"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/chinese/middleware/boot_manager/Secure_Booting_Users_Guide_CN.html",
+    "mainCategories": [
+        [
+            "Documents - Chinese"
+        ]
+    ],
+    "subCategories": [
+        "Middleware 中间件",
+        "Secure Booting"
+    ]
+},
+{
+    "name": "Security User's Guide 安全用户指南",
+    "tags": [
+        "Security User's Guide",
+        "Documentation"        
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/english/security/security_userguide/Security_UserGuide_for_MSPM33.html",
+    "mainCategories": [
+        [
+            "Documents - Chinese"
+        ]
+    ],
+    "subCategories": [        
+        "Security"
+    ]
+},
+{
+    "name": "快速上手指南概述",
+    "tags": [
+        "快速上手指南概述",
+        "Quick Start Guide Overview",
+        "Documentation",
+        "Tools",
+        "CCS Quick Start Guide",
+        "Code Composer Studio Quick Start Guide",
+        "Quick Start Guide",
+        "Quick Start",
+        "Code Composer Studio",
+        "CCS",
+        "IDE",
+        "Compiler",
+        "TI Arm Clang",
+        "GCC",
+        "SysConfig",
+        "Keil",
+        "Keil Quick Start Guide",
+        "Keil MDK-Arm",
+        "Keil MDK-Arm with uVision",
+        "IAR",
+        "IAR Quick Start Guide",
+        "IAR Embedded Workbench",
+        "IAR Embedded Workbench for Arm"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/chinese/quickstart_guides/MSPM33_SDK_Quick_Start_Guides_CN.html",
+    "mainCategories": [
+        [
+            "Documents - Chinese"
+        ]
+    ],
+    "subCategories": [
+        "快速上手指南"
+    ]
+},
+{
+    "name": "Code Composer Studio (CCS) Theia 快速上手指南",
+    "tags": [
+        "Code Composer Studio (CCS) Theia 快速上手指南",
+        "Code Composer Studio (CCS) Theia Quick Start Guide",
+        "Documentation",
+        "Tools",
+        "CCS Quick Start Guide",
+        "CCS Theia Quick Start Guide",
+        "Code Composer Studio Theia Quick Start Guide",
+        "Visual Studio Code",
+        "VS Code",
+        "VSCode",
+        "quickstart",
+	    "quickstart guide",
+        "CCS Theia setup",
+        "Import project into Theia",
+        "Import SDK and sysconfig to Theia",
+        "Build example in Theia",
+        "Getting Started"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/chinese/quickstart_guides/doc_guide/doc_guide-srcs/quickstart_guide_ccs_theia_CN.html",
+    "mainCategories": [
+        [
+            "Documents - Chinese"
+        ]
+    ],
+    "subCategories": [
+        "快速上手指南"
+    ]
+},
+{
+    "name": "Code Composer Studio (CCS) 快速上手指南",
+    "tags": [
+        "Code Composer Studio (CCS) 快速上手指南",
+        "Code Composer Studio (CCS) Quick Start Guide",
+        "Documentation",
+        "Tools",
+        "CCS Quick Start Guide",
+        "Code Composer Studio Quick Start Guide",
+        "Code Composer Studio (CCS) Quick Start Guide",
+        "Eclipse",
+        "MSPM33 CCS Quickstart Guide",
+	    "quickstart guide",
+        "CCS Eclipse setup",
+        "Import project into CCS",
+        "Import SDK and sysconfig to CCS",
+        "Build example in CCS Eclipse",
+        "Getting Started"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/chinese/quickstart_guides/doc_guide/doc_guide-srcs/quickstart_guide_ccs_CN.html",
+    "mainCategories": [
+        [
+            "Documents - Chinese"
+        ]
+    ],
+    "subCategories": [
+        "快速上手指南"
+    ]
+},
+{
+    "name": "IAR 快速上手指南",
+    "tags": [
+        "IAR 快速上手指南",
+        "IAR Quick Start Guide",
+        "Documentation",
+        "Tools",
+        "Code Composer Studio",
+        "IAR",
+        "IAR Embedded Workbench",
+        "IAR Embedded Workbench for Arm",
+        "IDE",
+        "Compiler",
+        "MSPM33 IAR Quickstart Guide",
+        "quickstart guide",
+        "IAR setup",
+        "Import project into IAR",
+        "Import SDK and sysconfig to IAR",
+        "Build example in IAR",
+        "Install MSPM33 SDK",
+        "Getting Started"
+    ],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "file",
+    "resourceClass": ["document"],
+    "location": "../../docs/chinese/quickstart_guides/doc_guide/doc_guide-srcs/quickstart_guide_iar_CN.html",
+    "mainCategories": [
+        [
+            "Documents - Chinese"
+        ]
+    ],
+    "subCategories": [
+        "快速上手指南"
+    ]
+}
+]

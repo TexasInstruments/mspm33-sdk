@@ -1,0 +1,272 @@
+[
+  {
+    "name": "DriverLib",
+    "mainCategories": [
+      [
+        "Documents"
+      ],
+      [
+        "Examples",
+        "Development Tools"
+      ],
+      [
+        "Examples",
+        "Devices"
+      ]
+    ],
+    "subCategories": [],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "devices": ["$(MSPM33_all_devices)"],
+    "resourceType": "categoryInfo",
+    "resourceClass": ["document"],
+    "description": "<p>The Texas Instruments MSPM33 Driver Library (DriverLib) is a set of fully functional APIs used to configure, control, and manipulate the hardware peripherals of the MSPM33 platform. The DriverLib layer consists of comprehensive low-level drivers providing support for all device features with the highest optimization for performance and low memory footprint.</p>"
+  },
+  {
+    "name": "Security",
+    "mainCategories": [
+      [
+        "Documents"
+      ],
+      [
+        "Development Tools"
+      ]
+    ],
+    "subCategories": [],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "categoryInfo",
+    "resourceClass": ["document"],
+    "description": "The MSPM33 platform implements a comprehensive security architecture designed to meet PSA-L2 certification requirements and provide robust security features for embedded applications. This user guide provides an overview of the security features, capabilities, and usage models for developers and system integrators."
+  },
+  {
+    "name": "Middleware",
+    "mainCategories": [
+      [
+        "Documents"
+      ],
+      [
+        "Development Tools"
+      ]
+    ],
+    "subCategories": [],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "categoryInfo",
+    "resourceClass": ["document"],
+    "description": "A wide variety of Middleware is included with libraries and protocol stacks for different applications and sectors, including automotive, appliances, building and factory automation, etc. Middleware is developed using the driver layers to provide a consistent and compatible experience. For a list of supported middleware, see the MSPM33 SDK Document Overview."
+  },  
+  {
+    "name": "Secure Booting",
+    "mainCategories": [
+      [
+        "Documents"
+      ],
+      [
+        "Examples",
+        "Development Tools"
+      ]
+    ],
+    "subCategories": ["Middleware"],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "categoryInfo",
+    "resourceClass": ["document"],
+    "description": "The MSPM33 SDK includes two solutions for secure booting: the Boot Image Manager (BIM) and Customer Secure Code (CSC). BIM implements firmware validation and authentication in devices with one stage of flash memory but a more limited set of security options. CSC utilizes more advanced security features and multiple banks for image validation, authentication and firmware updates."
+  },
+  {
+    "name": "Middleware 中间件",
+    "mainCategories": [
+      [
+        "Documents"
+      ],
+      [
+        "Development Tools"
+      ]
+    ],
+    "subCategories": [],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "categoryInfo",
+    "resourceClass": ["document"],
+    "description": "A wide variety of Middleware is included with libraries and protocol stacks for different applications and sectors, including automotive, appliances, building and factory automation, etc. Middleware is developed using the driver layers to provide a consistent and compatible experience."
+  },
+  {
+    "name": "Tools",
+    "mainCategories": [
+      [
+        "Documents"
+      ],
+      [
+        "Examples",
+        "Development Tools"
+      ]
+    ],
+    "subCategories": [],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "categoryInfo",
+    "resourceClass": ["document"],
+    "description": "<p>The MSPM33 SDK supports a variety of hardware and software tools from Texas Instruments and from 3rd parties. For a list of supported tools, see the MSPM33 SDK Tools Overview.</p>"
+  },
+  {
+    "name": "工具",
+    "mainCategories": [
+      [
+        "Documents"
+      ],
+      [
+        "Examples",
+        "Development Tools"
+      ]
+    ],
+    "subCategories": [],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "categoryInfo",
+    "resourceClass": ["document"],
+    "description": "<p>The MSPM33 SDK supports a variety of hardware and software tools from Texas Instruments and from 3rd parties. For a list of supported tools, see the MSPM33 SDK Tools Overview.</p>"
+  },
+  {
+    "name": "Quick Start Guides",
+    "mainCategories": [
+      [
+        "Documents"
+      ],
+      [
+        "Examples",
+        "Development Tools"
+      ]
+    ],
+    "subCategories": [],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "categoryInfo",
+    "resourceClass": ["document"],
+    "description": "<p>The MSPM33 SDK provides step-by-step instructions to get started quickly using MSPM33 with CCS Theia and IAR.</p>"
+  },
+  {
+    "name": "快速上手指南",
+    "mainCategories": [
+      [
+        "Documents"
+      ],
+      [
+        "Examples",
+        "Development Tools"
+      ]
+    ],
+    "subCategories": [],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "categoryInfo",
+    "resourceClass": ["document"],
+    "description": "<p>The MSPM33 SDK provides detailed information on the setup and basic operation of the various supported IDEs, such as CCS Theia, IAR.</p>"
+  },
+  {
+    "name": "IDE Guides",
+    "mainCategories": [
+      [
+        "Documents"
+      ],
+      [
+        "Examples",
+        "Development Tools"
+      ]
+    ],
+    "subCategories": [],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "categoryInfo",
+    "resourceClass": ["document"],
+    "description": "<p>The MSPM33 SDK provides detailed information on the setup and basic operation of the various supported IDEs, such as CCS Theia, IAR.</p>"
+  },
+  {
+    "name": "Examples",
+    "mainCategories": [
+      []
+    ],
+    "subCategories": [],
+    "resourceType": "categoryInfo",
+    "resourceClass": ["example"],
+    "resourceSubClass": ["example.general"],
+    "description": "<p>The MSPM33 SDK includes an extensive list of code examples at all levels which can be used not only to demonstrate and test device functionality, but to provide a reference and starting point to accelerate application development. Code examples include corresponding files for supported IDEs and compilers. To learn more about the examples offered, consult the MSPM33 SDK Example Guide.</p>"
+  },
+  {
+    "name": "Documents",
+    "mainCategories": [
+      []
+    ],
+    "subCategories": [],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "categoryInfo",
+    "resourceClass": ["document"],
+    "description": "<p>The MSPM33 SDK includes comprehensive documentation for all the supported software libraries and tools, including quick start guides and user's guides. To get started, visit the MSPM33 SDK Document Overview.</p>"
+  },
+  {
+    "name": "Documents - Chinese",
+    "mainCategories": [
+      []
+    ],
+    "subCategories": [],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "categoryInfo",
+    "resourceClass": ["document"],
+    "description": "<p>The MSPM33 SDK includes comprehensive documentation for all the supported software libraries and tools, including quick start guides and user's guides. To get started, visit the MSPM33 SDK Document Overview.</p>"
+  },
+  {
+    "name": "Third Party",
+    "mainCategories": [
+      [
+        "Documents"
+      ],
+      [
+        "Examples",
+        "Development Tools"
+      ]
+    ],
+    "subCategories": ["Middleware"],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "categoryInfo",
+    "resourceClass": ["document"],
+    "description": "<p></p>"
+  },
+  {
+    "name": "Third Party 第三方",
+    "mainCategories": [
+      [
+        "Documents"
+      ],
+      [
+        "Examples",
+        "Development Tools"
+      ]
+    ],
+    "subCategories": ["Middleware"],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "categoryInfo",
+    "resourceClass": ["document"],
+    "description": "<p></p>"
+  },
+  {
+    "name": "CMSIS DSP",
+    "mainCategories": [
+      [
+        "Documents"
+      ],
+      [
+        "Examples",
+        "Development Tools"
+      ]
+    ],
+    "subCategories": ["Middleware"],
+    "devices": ["$(MSPM33_all_devices)"],
+    "devtools": ["$(MSPM33_all_devtools)"],
+    "resourceType": "categoryInfo",
+    "resourceClass": ["document"],
+    "description": "<p></p>"
+  }
+]

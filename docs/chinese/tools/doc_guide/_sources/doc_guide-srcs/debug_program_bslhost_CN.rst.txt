@@ -1,0 +1,4 @@
+.. toctree::
+   :maxdepth: 1
+
+   MSPM33 Bootloader User Guide <https://www.ti.com/lit/sluudi6>

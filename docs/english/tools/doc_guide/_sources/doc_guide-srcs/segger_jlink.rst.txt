@@ -1,0 +1,114 @@
+Using Segger programmers with MSPM33
+====================================
+
+1. Introduction
+---------------
+
+This guide describes how to use Segger programmers with MSPM33.
+
+This document is not intended to explain the use of Segger tools in detail. Please refer to the corresponding IDE or Segger documentation for more detailed documentation.
+
+2. Prerequisites
+----------------
+
+The user is expected to have downloaded the following:
+
+-  `J-Link Software Pack v7.88i or later <https://www.segger.com/downloads/jlink/>`__
+-  Optional:
+
+   -  Use your preferred IDE and compiler to build your application
+
+3. Installing J-Link Software Pack
+----------------------------------
+
+The J-Link Software pack v7.88i or later includes support for MSPM33.
+
+1. Download the installer from `Segger’s website <https://www.segger.com/downloads/jlink/>`__
+
+2. Follow the installer instructions
+
+   |image0|
+
+3. The installer will automatically request to update IAR or Keil if installed
+
+   |image1|
+
+4. Using Segger J-Link with CCS
+-------------------------------
+
+1. Update the Segger drivers as explained `here <https://www.segger.com/products/debug-probes/j-link/technology/ides/ti-code-composer/>`__ and shown below:
+
+   1.1 Click on Help → Install New Software
+
+   |image2|
+
+   1.2 Add the J-Link repository as explained `here <https://www.segger.com/products/debug-probes/j-link/technology/ides/ti-code-composer/>`__ or shown below:
+
+   |image3|
+
+   1.3 Select the appropriate plug-ins and follow the instructions to continue installation
+
+   **Note:** If the plug-ins are not visible, adjust your proxy settings in CCS.
+
+   |image4|
+
+   1.4 Make sure the plugin versions are correct. You may have to restart CCS for the plugin versions to be correctly updated.
+
+2. Select “SEGGER J-Link Emulator” as a Connection on your project:
+
+   **Note:** This option is not available if the plugin was not applied correctly.
+
+   |image5|
+
+3. Open the .ccxml file inside your project
+
+   |image6|
+
+4. Select the CORTEX_M33 core and “SWD” as the Target Interface
+
+   |image7|
+
+5. Program and debug the device.
+
+5. Using Segger J-Link with IAR
+-------------------------------
+
+1. The Segger drivers for IAR are updated when installing the latest Segger Software.
+
+2. Change the debugger settings to use J-Link:
+
+   |image8|
+
+3. Program and debug the device.
+
+6. Using Segger J-Link with Keil
+--------------------------------
+
+1. The Segger drivers for Keil are updated when installing the latest Segger Software.
+
+2. Change the debugger settings to use J-Link:
+
+   |image9|
+
+3. Select SWD interface
+
+   |image10|
+
+4. Program and debug the device.
+
+7. Using Segger J-Flash with CCS Hex Utility
+--------------------------------------------
+
+1. When using the CCS hex utility to generate output files for Segger’s J-Flash software, please follow the instructions described in the CCS IDE Guide section `How to Generate TI .TXT (and Other Format) Files <../../ccs_ide_guide/doc_guide/doc_guide-srcs/ccs_ide_guide.html#how-to-generate-ti-txt-and-other-format-files>`__.
+
+.. |image0| image:: ./images/segger_jlink/segger_install_1.png
+.. |image1| image:: ./images/segger_jlink/segger_install_2.png
+.. |image2| image:: ./images/segger_jlink/segger_ccs_1.png
+.. |image3| image:: ./images/segger_jlink/segger_ccs_2.png
+.. |image4| image:: ./images/segger_jlink/segger_ccs_3.png
+.. |image5| image:: ./images/segger_jlink/segger_ccs_4.png
+.. |image6| image:: ./images/segger_jlink/segger_ccs_5.png
+.. |image7| image:: ./images/segger_jlink/segger_ccs_6.png
+.. |image8| image:: ./images/segger_jlink/segger_iar_1.png
+.. |image9| image:: ./images/segger_jlink/segger_keil_1.png
+.. |image10| image:: ./images/segger_jlink/segger_keil_2.png

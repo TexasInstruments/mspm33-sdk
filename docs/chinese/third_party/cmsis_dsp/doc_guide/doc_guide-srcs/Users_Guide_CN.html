@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>适用于 MSPM0 MCU 的 CMSIS DSP 库 &mdash; CMSIS DSP Library for MSPM33 MCUs 1.02.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="CMSIS DSP Library for MSPM33 MCUs" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> CMSIS DSP Library for MSPM33 MCUs
+          </a>
+              <div class="version">
+                1.02.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">适用于 MSPM0 MCU 的 CMSIS DSP 库</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">1. 引言</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cmsis-dsp">2. CMSIS DSP 源和库</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cmsis-dsp-mspm0">3. 将 CMSIS DSP 与 MSPM0 配合使用</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">3.1 使用 CMSIS DSP 示例</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">3.2 向现有工程添加 CMSIS DSP</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CMSIS DSP Library for MSPM33 MCUs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>适用于 MSPM0 MCU 的 CMSIS DSP 库</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mspm0-mcu-cmsis-dsp">
+<h1>适用于 MSPM0 MCU 的 CMSIS DSP 库<a class="headerlink" href="#mspm0-mcu-cmsis-dsp" title="Permalink to this heading">¶</a></h1>
+<section id="id1">
+<h2>1. 引言<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<p>德州仪器 （TI）支持 ARM Cortex 微控制器软件接口标准 （CMSIS），这是 Cortex-M 处理器系列的标准化硬件抽象层。CMSIS 计划的目的是为分散的行业提供一个统一的出色硬件和软件微控制器架构。</p>
+<p>CMSIS DSP 库涵盖源代码和示例应用程序，并通过加入复数算术、矢量运算以及筛选和控制函数等常见 DSP 算法来节省时间。此库可以在 Arm Cortex-M 器件上使用，如 MCU 的 MSPM0 系列。</p>
+<p>本文档将使用 <a class="reference external" href="https://www.ti.com/tool/MSPM0-SDK">MSPM0-SDK</a> 来详细说明开始使用 CMSIS DSP 所需的步骤。 更多有关 CMSIS DSP 库的详细信息，请参阅 <a class="reference external" href="https://www.keil.com/pack/doc/CMSIS/DSP/html/index.html">CMSIS DSP 软件库用户手册</a>。</p>
+</section>
+<section id="cmsis-dsp">
+<h2>2. CMSIS DSP 源和库<a class="headerlink" href="#cmsis-dsp" title="Permalink to this heading">¶</a></h2>
+<p>MSPM0 SDK 在以下位置包括 CMSIS DSP 源和预编译库：</p>
+<ul class="simple">
+<li><p>源：<code class="docutils literal notranslate"><span class="pre">&lt;SDK&gt;\source\third_party\CMSIS\DSP</span></code></p></li>
+<li><p>库：<code class="docutils literal notranslate"><span class="pre">&lt;SDK&gt;\source\third_party\CMSIS\DSP\lib</span></code></p></li>
+</ul>
+<p>包括的预编译库用于以下编译器：</p>
+<ul class="simple">
+<li><p>TI Arm Clang</p></li>
+<li><p>Arm GCC</p></li>
+<li><p>IAR</p></li>
+<li><p>Keil</p></li>
+</ul>
+</section>
+<section id="cmsis-dsp-mspm0">
+<h2>3. 将 CMSIS DSP 与 MSPM0 配合使用<a class="headerlink" href="#cmsis-dsp-mspm0" title="Permalink to this heading">¶</a></h2>
+<section id="id2">
+<h3>3.1 使用 CMSIS DSP 示例<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
+<p>MSPM0 SDK 包括现成示例，这些示例可用于测试 CMSIS DSP 功能或 用作新工程的模板。</p>
+<p>这些示例位于 <code class="docutils literal notranslate"><span class="pre">&lt;SDK&gt;\examples\cmsis_dsp</span></code>，也可在 <a class="reference external" href="https://dev.ti.com/">TI 开发人员专区</a>和 <a class="reference external" href="https://dev.ti.com/tirex/explore/node?node=A__AOsBvwTJoOinHEWBZRPfQg__MSPM0-SDK__a3PaaoK__LATEST">TI Resource Explorer</a> 中找到。</p>
+<p>TI 建议使用 <code class="docutils literal notranslate"><span class="pre">cmsis_dsp_empty</span></code> 来轻松启动包括库和头文件的空工程。</p>
+</section>
+<section id="id3">
+<h3>3.2 向现有工程添加 CMSIS DSP<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
+<p>以下步骤说明了如何使用 TI Arm Clang 向 Code Composer Studio （CCS）工程添加 CMSIS DSP， 但类似步骤也适用于其他 IDE 和编译器。</p>
+<ol class="arabic">
+<li><p>添加 CMSIS DSP Include 目录：</p>
+<p>在 CCS 中，可在 <code class="docutils literal notranslate"><span class="pre">${COM_TI_MSPM0_SDK_INSTALL_DIR}/source/third_party/CMSIS/DSP/Include</span></code> 中访问此路径</p>
+<p><img alt="image0" src="../_images/cmsis_dsp_include.png" /></p>
+</li>
+<li><p>添加预编译库：</p>
+<p>在 CCS 中，TI Arm Clang 的库位于 <code class="docutils literal notranslate"><span class="pre">${COM_TI_MSPM0_SDK_INSTALL_DIR}/source/third_party/CMSIS/DSP/lib/ticlang/m0p/arm_cortexM0l_math.a</span></code></p>
+<p><img alt="image1" src="../_images/cmsis_dsp_addLib.png" /></p>
+</li>
+<li><p>将“arm_math.h”包括到源文件：</p>
+<p><img alt="image2" src="../_images/cmsis_dsp_source.png" /></p>
+</li>
+</ol>
+<p>4.使用 CMSIS DSP 和 MSPM0 开始开发！</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="CMSIS DSP Library for MSPM33 MCUs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">1995-2023, Texas Instruments Incorporated. All rights reserved</a>, Texas Instruments Incorporated. All rights reserved. <br/>
+      <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

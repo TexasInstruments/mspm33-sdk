@@ -1,0 +1,10 @@
+MSPM33 SDK Quick Start Guides
+=============================
+
+The following guides provide step-by-step instructions to get started quickly using MSPM33:
+
+.. toctree::
+   :maxdepth: 1
+
+   quickstart_guide_ccs_theia
+   quickstart_guide_iar

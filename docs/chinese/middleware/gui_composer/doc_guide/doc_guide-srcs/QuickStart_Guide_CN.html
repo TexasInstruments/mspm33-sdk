@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GUI Composer 快速入门指南 &mdash; GUI Composer Library Documentation 1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="GUI Composer 库用户指南" href="Users_Guide_CN.html" />
+    <link rel="prev" title="GUI Composer Library Documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> GUI Composer Library Documentation
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">GUI Composer 快速入门指南</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">1. 引言</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">2. 先决条件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">3. 运行您的第一个示例</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">3.1 导入、编译和下载代码示例</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gui">3.2 设置 GUI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">3.3 配置 GUI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">3.4 运行示例</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Users_Guide_CN.html">GUI Composer 库用户指南</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GUI Composer Library Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>GUI Composer 快速入门指南</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gui-composer">
+<h1>GUI Composer 快速入门指南<a class="headerlink" href="#gui-composer" title="Permalink to this heading">¶</a></h1>
+<section id="id1">
+<h2>1. 引言<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<p>GUI Composer 工程示例展示了 LaunchPad 与可在 PC 上运行的可自定义 GUI 应用程序之间基于 UART 的数据交换。这些 GUI 可以完全按照您的自定义来显示、处理数据并控制固件的执行。这些 GUI 也可以安装到 Code Composer Studio 中，以辅助基本调式功能，同时为非专业的手动测试人员提供简化的用户界面。</p>
+<p>本指南旨在帮助用户完成初始设置并展示如何运行其第一个示例应用程序。</p>
+</section>
+<section id="id2">
+<h2>2. 先决条件<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h2>
+<p>用户应安装好下列软件：</p>
+<ul class="simple">
+<li><p>支持的 <strong>MSPM0</strong> LaunchPad</p></li>
+<li><p>最新版本的 <strong>Chrome</strong> 网络浏览器</p></li>
+<li><p>用于访问 <a class="reference external" href="https://dev.ti.com/gc">GUI Composer</a> 的 <strong>myTI 帐户</strong></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/tool/download/CCSTUDIO">Code Composer Studio （CCS）</a></p></li>
+</ul>
+<p>有关 GUI Composer 的更多资源和信息，请查看 <a class="reference external" href="https://dev.ti.com/gc/v2/help/GC_UserGuide_v2/index.html">GUI Composer 用户指南</a>。</p>
+</section>
+<section id="id3">
+<h2>3. 运行您的第一个示例<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h2>
+<p>此部分将展示如何使用其中一个可用的 GUI 导入、编译和加载示例。</p>
+<section id="id4">
+<h3>3.1 导入、编译和下载代码示例<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h3>
+<p>1.打开您选择的 IDE，并从 MSPM0 SDK 中导入一个可用的 GUI Composer 代码示例。在 <code class="docutils literal notranslate"><span class="pre">&lt;MSPM0_SDK_INSTALL_DIR&gt;/examples/nortos/&lt;MSPM0_LAUNCHPAD&gt;/gui_composer</span></code> 中可以找到这些示例。 2.有关您使用的 LaunchPad 的特定配置，请查看代码示例 README。 3.编译代码示例并将其下载到 LaunchPad。</p>
+</section>
+<section id="gui">
+<h3>3.2 设置 GUI<a class="headerlink" href="#gui" title="Permalink to this heading">¶</a></h3>
+<p>点击下列 GUI 链接之一，可以从 TI Gallery 自动启动这些示例的 GUI。</p>
+<p><strong>请确保为您在 LaunchPad 上运行的代码示例选择对应的 GUI。代码示例 README 中指定了正确的 GUI。</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://dev.ti.com/gallery/view/TIMSPGC/MSPM0_SimpleGUI_JSON/">GC Simple JSON GUI</a></p></li>
+<li><p><a class="reference external" href="https://dev.ti.com/gallery/view/TIMSPGC/MSPM0_SimpleGUI_mpack">GC Simple MessagePack GUI</a></p></li>
+<li><p><a class="reference external" href="https://dev.ti.com/gallery/view/TIMSPGC/MSPM0_SimpleGUI_mpack_optimized/">GC Simple MessagePack GUI - 优化版</a></p></li>
+</ul>
+</section>
+<section id="id5">
+<h3>3.3 配置 GUI<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h3>
+<p>配置 GUI 设置，以选择正确的 <strong>COM 端口</strong>和<strong>波特率</strong>。修改这些设置，方法是点击左上角的菜单图标，然后选择 <strong>Options &gt; Serial Port</strong>。</p>
+<p><img alt="image0" src="../_images/qs_settings.png" /></p>
+<ul>
+<li><p>确定正确的 <strong>COM 端口</strong>，方法是打开 Device Manager，在“Ports”下查看哪个端口是 <strong>XDS110 Class Application/User UART</strong>。</p>
+<p><img alt="image1" src="../_images/qs_devicemanager.png" /></p>
+</li>
+<li><p>将<strong>波特率</strong>设置为 <strong>9600</strong>。这是示例中默认使用的波特率。</p></li>
+</ul>
+<p><img alt="image2" src="../_images/qs_comportbaudrate.png" /></p>
+</section>
+<section id="id6">
+<h3>3.4 运行示例<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h3>
+<p>开始在 LaunchPad 上运行示例。如果 LaunchPad 和 GUI 已正确配置，则 GUI 会开始自动更新数据。</p>
+<p>有关如何运行示例的特定说明，请参考特定于代码示例的 README。</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="GUI Composer Library Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Users_Guide_CN.html" class="btn btn-neutral float-right" title="GUI Composer 库用户指南" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">1995-2023, Texas Instruments Incorporated. All rights reserved</a>, Texas Instruments Incorporated. All rights reserved. <br/>
+      <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

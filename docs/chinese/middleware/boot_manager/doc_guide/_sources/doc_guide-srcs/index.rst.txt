@@ -1,0 +1,8 @@
+==========================================================
+Secure Booting User's Guide
+==========================================================
+
+.. toctree::
+   :maxdepth: 2
+
+   customer_secure_users_guide_CN

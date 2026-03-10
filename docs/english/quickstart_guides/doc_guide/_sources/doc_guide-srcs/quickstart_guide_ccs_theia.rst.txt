@@ -1,0 +1,95 @@
+MSPM33 SDK QuickStart Guide for Code Composer Studio
+====================================================
+
+1. Introduction
+---------------
+
+This guide is intended to assist users in the initial setup and demonstration of running their first MSPM33 application with Code Composer Studio.
+
+This guide is not intended to explain the functionality of Code Composer Studio. Please refer to the documentation available through the Help menu in Code Composer Studio or the `Code Composer Studio IDE Guide for MSPM33 MCUs <../../../tools/ccs_theia_ide_guide/doc_guide/doc_guide-srcs/ccs_theia_ide_guide.html>`__ included with the MSPM33 SDK documentation.
+
+2. Prerequisites
+----------------
+
+The user is expected to have downloaded and installed the following:
+
+-  `Code Composer Studio <https://www.ti.com/tool/CCSTUDIO/20.4.0>`__
+
+3. Start a MSPM33 project on Code Composer Studio
+-------------------------------------------------
+
+1.  Open Code Composer Studio. The Getting Started page will show up, or it can be opened by selecting **Help** → **Getting Started**.
+
+    Note that Code Composer Studio will automatically detect a MSPM33 LaunchPad if connected.
+
+    |image0|
+
+2.  Click on **Create a new project with Code Composer Studio IDE** to open the Project Wizard.
+
+3.  On the Project Wizard, select:
+
+    -  Device or Launchpad
+    -  Project to open, note that a brief description is provided and search filters can be used
+    -  Project name
+    -  Compiler, note that Code Composer Studio support TI Arm Clang and Arm GCC
+    -  RTOS or No-RTOS, if available for example
+
+    |image1|
+
+4.  Click on **Create**.
+
+5.  If the MSPM33 SDK hasn’t been installed, Code Composer Studio will request to install it. Any other dependencies such as compilers can also be installed.
+
+    |image2|
+
+6.  Close window once the SDK is installed.
+
+    .. raw:: html
+
+       <!-- ![](./images/quickstart_guide_ccs_theia/theia_qsg_projectwizard_installdone.png) -->
+
+7.  The project will be imported into the workspace.
+
+    |image3|
+
+8.  Optionally, open SysConfig.
+
+    Some examples in the MSPM33 SDK have SysConfig support. `SysConfig <https://www.ti.com/tool/SYSCONFIG>`__ is an intuitive and comprehensive collection of graphical utilities for configuring pins, peripherals, radios, subsystems, and other components. SysConfig helps you manage, expose, and resolve conflicts visually so that you have more time to create differentiated applications.
+
+    Simply double-click the ``.syscfg`` file in the project to open the SysConfig viewer and start exploring.
+
+    |image4|
+
+    For more information about using SysConfig with MSPM33, visit the `Using SysConfig with MSPM33 <../../../tools/sysconfig_guide/doc_guide/doc_guide-srcs/sysconfig_guide.html>`__ guide.
+
+9.  Right-click on the project and click on **Build Project(s)**.
+
+    |image5|
+
+10. Press **F5** or click on the Debug icon followed by **Start debugging** icon.
+
+    |image6|
+
+4. Using TI Resource Explorer
+-----------------------------
+
+TI Resource Explorer (TI-Rex) helps you find all the latest examples, libraries, demo applications, datasheets, and more for your chosen platform.
+
+This tool is available at https://dev.ti.com/tirex, but it’s also integrated into Code Composer Studio allowing for a more integrated user experience.
+
+.. raw:: html
+
+   <!-- ![](./images/quickstart_guide_ccs_theia/theia_qsg_tirex_project.png) -->
+
+5. Known Issues and Frequently Asked Questions (FAQs)
+-----------------------------------------------------
+
+Please refer to `Known Issues and FAQ <../../../../../known_issues_FAQ.html>`__ inside the SDK.
+
+.. |image0| image:: ./images/quickstart_guide_ccs_theia/theia_qsg_gettingstarted.png
+.. |image1| image:: ./images/quickstart_guide_ccs_theia/theia_qsg_projectwizard.png
+.. |image2| image:: ./images/quickstart_guide_ccs_theia/theia_qsg_projectwizard_install.png
+.. |image3| image:: ./images/quickstart_guide_ccs_theia/theia_qsg_project.png
+.. |image4| image:: ./images/quickstart_guide_ccs_theia/theia_qsg_sysconfig.png
+.. |image5| image:: ./images/quickstart_guide_ccs_theia/theia_qsg_projectbuild.png
+.. |image6| image:: ./images/quickstart_guide_ccs_theia/theia_qsg_projectdebug.png

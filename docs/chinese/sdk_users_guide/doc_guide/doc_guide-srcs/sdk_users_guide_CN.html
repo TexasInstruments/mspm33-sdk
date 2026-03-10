@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SDK 概述 &mdash; MSPM33 SDK User Guide 1.02.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="MSPM0 SDK 示例指南" href="examples_guide_CN.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> MSPM33 SDK User Guide
+          </a>
+              <div class="version">
+                1.02.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="examples_guide_CN.html">MSPM0 SDK 示例指南</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SDK 概述</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">1.SDK 组件和架构</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">1.1 <strong>驱动程序和支持文件</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtos">1.2 <strong>RTOS 支持</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">1.3 <strong>中间件</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">1.4 <strong>代码示例</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">1.5 <strong>软件开发工具</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">1.6 <strong>培训内容</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">2.SDK 结构</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">2.1.示例目录</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">2.2.源目录</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">3.使用入门</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MSPM33 SDK User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>SDK 概述</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sdk">
+<h1>SDK 概述<a class="headerlink" href="#sdk" title="Permalink to this heading">¶</a></h1>
+<p>MSPM0 SDK 提供了软件、工具和文档的精选集合，可以加快 MSPM0 MCU 平台应用程序的开发。该软件旨在实现卓越的性能和存储器利用率，通过单个软件包下的各种驱动程序、库和易于使用的示例提供协调一致的体验。</p>
+<section id="id1">
+<h2>1.SDK 组件和架构<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<body><script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script><p>SDK 的主要特性如下：</p>
+<section id="id2">
+<h3>1.1 <strong>驱动程序和支持文件</strong><a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
+<p>支持 Arm Cortex M0+ 核心和所有 MSPM0 器件，完全支持其相应的 EVM 和外设。</p>
+<p><strong>DriverLib</strong><em>层由综合低层驱动程序组成，为所有器件功能提供支持，并针对性能和低存储器占用空间进行更好的优化。</em> 随时可用的<strong>器件头文件</strong>。 * 在适用的情况下，<strong>TI-Drivers</strong> 提供更高层次的硬件运行和核心功能，降低代码复杂性，同时实现通用和差异化的 MCU 功能。TI-Drivers 可以选择使用 RTOS，并且与其他 TI 平台（例如 <a class="reference external" href="https://www.ti.com/wireless-connectivity/overview.html">SimpleLink</a>）之间的兼容性更出色。</p>
+</section>
+<section id="rtos">
+<h3>1.2 <strong>RTOS 支持</strong><a class="headerlink" href="#rtos" title="Permalink to this heading">¶</a></h3>
+<p>MSPM0 SDK 支持 FreeRTOS，包括驱动程序移植层 (DPL) 和 POSIX，从而可以更容易地在内核之间迁移。RTOS 的使用是可选的。</p>
+<ul class="simple">
+<li><p>与广受欢迎的 <strong>FreeRTOS</strong> 内核集成。</p></li>
+<li><p><strong>驱动程序移植层 (DPL)</strong> 将驱动程序分离出来，从而在不同的 RTOS 内核或非 RTOS 内核之间更轻松地迁移。</p></li>
+<li><p><strong>POSIX</strong> 层将 RTOS 功能分离出来，从而可以更轻松地迁移至新内核。</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>1.3 <strong>中间件</strong><a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
+<p>库和协议栈中包括了各种<strong>中间件</strong>，用于不同的应用和领域，如汽车、电器、建筑和工厂自动化等。使用驱动程序层来开发中间件，从而提供一致且兼容的体验。</p>
+<p>如需了解受支持的中间件列表，请参阅 <a class="reference external" href="../../../MSPM0_SDK_Documentation_Overview_CN.html">MSPM0 SDK 文档概述</a></p>
+</section>
+<section id="id4">
+<h3>1.4 <strong>代码示例</strong><a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h3>
+<p>MSPM0 SDK 丰富的<strong>代码示例</strong>涉及所有级别，不仅可用于演示和测试器件功能，还可以提供参考并作为起点，以加快应用程序开发。代码示例包括受支持的 IDE 和编译器的相应文件。要了解更多有关所提供示例的信息，请查阅 <a class="reference external" href="./examples_guide_CN.html">MSPM0 SDK 示例指南</a></p>
+<p>示例包括：</p>
+<ul class="simple">
+<li><p>DriverLib：简单易用的模块化示例，用于展示 MSPM0 功能</p></li>
+<li><p>指导手册：展示使用多个外设实现基本功能的示例</p></li>
+<li><p>中间件：展示多个中间件的示例</p></li>
+<li><p>演示：集成的即用型演示</p></li>
+<li><p>RTOS：使用内核功能的示例</p></li>
+<li><p>等等…</p></li>
+</ul>
+</section>
+<section id="id5">
+<h3>1.5 <strong>软件开发工具</strong><a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h3>
+<p>TI 和第三方的各种工具均支持 MSPM0。更多信息，请访问 <a class="reference external" href="../../../tools/MSPM0_Tools_Guide_CN.html">MSPM0 工具指南</a>。</p>
+<ul class="simple">
+<li><p><strong>SysConfig</strong> 是一个简单易用的工具，便于通过直观的图形界面来配置器件外设。它可简化任何 MSPM0 封装的 PinMux 输出，并自动生成用于开发的配置代码。要了解更多信息，请访问 <a class="reference external" href="../../../tools/sysconfig_guide/doc_guide/doc_guide-srcs/sysconfig_guide_CN.html">将 SysConfig 与 MSPM0 搭配使用</a>。</p></li>
+<li><p>Code Composer Studio (CCS)、Keil 或 IAR 等<strong>集成开发环境 (IDE)</strong> 让用户从示例或指导手册入手，使用 SDK 开发自己的自定义应用程序。</p></li>
+<li><p>支持多个<strong>编译器</strong>，包括但不限于 CCS 支持的 TI Arm Clang 和 Arm GCC。</p></li>
+<li><p>支持多个<strong>调试器和编程器</strong>，包括 XDS-110、IAR I-jet、Segger J-Link、Keil ULINK、MSP-GANG 等。</p></li>
+</ul>
+</section>
+<section id="id6">
+<h3>1.6 <strong>培训内容</strong><a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h3>
+<p>通过易于使用的教程和培训，比以往更快地入门。</p>
+<ul class="simple">
+<li><p><strong>MSP 学院</strong> 是所有开发人员了解 MSPM0 MCU 平台的一个绝佳切入点。MSP 学院提供易于使用的培训模块，涵盖 MSP MCU 产品系列中的各种主题。如需更多信息，请访问：<a class="reference external" href="https://dev.ti.com/tirex/global?id=MSPM0-ACADEMY">MSPM0 学院</a>。</p></li>
+<li><p><strong>TI 高精度实验室</strong>是面向模拟信号链和嵌入式处理设计人员的综合性在线课堂。从基础知识到高级概念，我们合乎逻辑、排列有序且全面的教学方法既直观又实用。如需更多信息，请访问: <a class="reference external" href="https://training.ti.com/ti-precision-labs-microcontrollers?context=1139747-1149158">TI 高精度实验室 - 微控制器</a>。</p></li>
+</ul>
+</section>
+</section>
+<section id="id7">
+<h2>2.SDK 结构<a class="headerlink" href="#id7" title="Permalink to this heading">¶</a></h2>
+<p>MSPM0 SDK 具有以下结构：</p>
+<p><img alt="image0" src="../_images/sdk-guide-overview.png" /></p>
+<section id="id8">
+<h3>2.1.示例目录<a class="headerlink" href="#id8" title="Permalink to this heading">¶</a></h3>
+<p>示例文件夹具有以下结构：</p>
+<p><img alt="image1" src="../_images/sdk-guide-example-file.png" /></p>
+<p>为不同的 MSPM0 EVM 提供了现成的代码示例。</p>
+<p>代码示例包括受支持 IDE（包括 <a class="reference external" href="https://www.ti.com/tool/CCSTUDIO">Code Composer Studio</a>、<a class="reference external" href="https://www.iar.com/ewarm">IAR Embedded Workbench for Arm</a> 和 <a class="reference external" href="https://www.keil.com/">Keil MDK</a>）和以下受支持编译器的相应文件：<a class="reference external" href="https://www.ti.com/tool/download/ARM-CGT-CLANG-1">TI Arm-Clang</a>、<a class="reference external" href="https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm">GNU Arm</a>、<a class="reference external" href="https://www2.keil.com/mdk5/compiler/6">Arm/Keil 编译器</a>和 <a class="reference external" href="https://www.iar.com/products/architectures/arm/iar-embedded-workbench-for-arm/">IAR Arm 编译器</a>。</p>
+<p>提供了完整的源代码，但一些中间件示例除外，由于许可限制，这些示例可能会作为预构建的二进制文件发布。更多信息，请查看 SDK 随附的 SDK 清单。</p>
+<p>有关如何使用所有示例的更多详细信息，请查阅相应的 MSP 学院和中间件文档。</p>
+</section>
+<section id="id9">
+<h3>2.2.源目录<a class="headerlink" href="#id9" title="Permalink to this heading">¶</a></h3>
+<p>源文件夹具有以下结构：</p>
+<p><img alt="image2" src="../_images/sdk-guide-source-file.png" /></p>
+<p>提供了完整的源代码并可根据需要进行自定义，但一些中间件和第三方软件除外，由于许可限制，这些示例可能会作为预构建的二进制文件发布。更多信息，请查看 SDK 随附的清单。</p>
+<p>更多信息，请查阅相应的中间件、第三方、MSP 学院和 SDK API 文档。</p>
+</section>
+</section>
+<section id="id10">
+<h2>3.使用入门<a class="headerlink" href="#id10" title="Permalink to this heading">¶</a></h2>
+<p>要开始使用，请查阅 <a class="reference external" href="../../../MSPM0_SDK_Documentation_Overview_CN.html">MSPM0 SDK 文档概述</a>和 <a class="reference external" href="../../../quickstart_guides/MSPM0_SDK_Quick_Start_Guides_CN.html">MSPM0 SDK 快速入门指南</a>。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="examples_guide_CN.html" class="btn btn-neutral float-left" title="MSPM0 SDK 示例指南" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">1995-2023, Texas Instruments Incorporated. All rights reserved</a>, Texas Instruments Incorporated. All rights reserved. <br/>
+      <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

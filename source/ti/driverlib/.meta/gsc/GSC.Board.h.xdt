@@ -1,0 +1,144 @@
+%%{
+/*
+ *  ======== GSC.Board.h.xdt ========
+ */
+
+    let GSC = args[0];
+    let content = args[1];
+    
+    /* get ti/drivers common utility functions */
+    let Common = system.getScript("/ti/driverlib/Common.js");
+
+    /* get the instances */
+    let instances = GSC.$instances;
+    if (instances.length == 0) return;
+    
+    /* get first GSC instance */
+    let inst = instances[0];
+
+    function generateSectorMask(bank, type, range) {
+        let mask = 0n;
+        const startSector = range * 32;
+        const endSector = startSector + 31;
+
+        for (let i = startSector; i <= endSector; i++) {
+            if (inst[`bank_${bank}_s${i}_${type}`] === true) {
+                const bitPosition = range === 0 ? i : (i - 32);
+                mask |= 1n << BigInt(bitPosition);
+            }
+        }
+
+        let hexStr = mask.toString(16).toUpperCase();
+        return `0x${hexStr}u`;
+    }
+
+    function generateNonMainFlashMask(type) {
+        let maskA = 0n;
+        let maskB = 0n;
+        for (let i = 0; i < 4; i++) {
+            if (inst[`nonmain_bank_a_s${i}_${type}`] === true) {
+                maskA |= 1n << BigInt(i);
+            }
+        }
+
+        for (let i = 0; i < 4; i++) {
+            if (inst[`nonmain_bank_b_s${i}_${type}`] === true) {
+                maskB |= 1n << BigInt(i);
+            }
+        }
+    
+        return {
+            bankA: `0x${maskA.toString(16).toUpperCase()}u`,
+            bankB: `0x${maskB.toString(16).toUpperCase()}u`
+        };
+    }
+
+    function generateDataFlashSectorMask(type) {
+        let mask = 0n;
+        for (let i = 0; i < 16; i++) {
+            if (inst[`data_flash_s${i}_${type}`] === true) {
+                mask |= 1n << BigInt(i);
+            }
+        }
+        let hexStr = mask.toString(16).toUpperCase();
+        return `0x${hexStr}u`;
+    }
+
+    switch(content) {
+        case "Define":
+            printDefine();
+            break;
+        case "Declare":
+            printDeclare();
+            break;
+        default:
+            return;
+    }
+%%}
+%
+% function printDefine() {
+/* GSC Configuration */
+
+% let wepMaskA0 = generateSectorMask('a', 'wep', 0);
+% let wepMaskA1 = generateSectorMask('a', 'wep', 1);
+% let secMaskA0 = generateSectorMask('a', 'sec', 0);
+% let secMaskA1 = generateSectorMask('a', 'sec', 1);
+% if (wepMaskA0 !== '0x0u' || wepMaskA1 !== '0x0u') {
+#define GSC_FLASH_BANK_A_WEP_MASK0    `wepMaskA0`
+#define GSC_FLASH_BANK_A_WEP_MASK1    `wepMaskA1`
+% }
+% if (secMaskA0 !== '0x0u' || secMaskA1 !== '0x0u') {
+#define GSC_FLASH_BANK_A_SEC_MASK0    `secMaskA0`
+#define GSC_FLASH_BANK_A_SEC_MASK1    `secMaskA1`
+% }
+
+% let wepMaskB0 = generateSectorMask('b', 'wep', 0);
+% let wepMaskB1 = generateSectorMask('b', 'wep', 1);
+% let secMaskB0 = generateSectorMask('b', 'sec', 0);
+% let secMaskB1 = generateSectorMask('b', 'sec', 1);
+% if (wepMaskB0 !== '0x0u' || wepMaskB1 !== '0x0u') {
+#define GSC_FLASH_BANK_B_WEP_MASK0    `wepMaskB0`
+#define GSC_FLASH_BANK_B_WEP_MASK1    `wepMaskB1`
+% }
+% if (secMaskB0 !== '0x0u' || secMaskB1 !== '0x0u') {
+#define GSC_FLASH_BANK_B_SEC_MASK0    `secMaskB0`
+#define GSC_FLASH_BANK_B_SEC_MASK1    `secMaskB1`
+% }
+
+/* Non-Main Flash Protection Configuration */
+% let nonMainWepMasks = generateNonMainFlashMask('wep');
+% let nonMainSecMasks = generateNonMainFlashMask('sec');
+% let nonMainPrivMasks = generateNonMainFlashMask('priv');
+% if (nonMainWepMasks.bankA !== '0x0u') {
+#define GSC_NONMAIN_FLASH_BANK_A_WEP_MASK     `nonMainWepMasks.bankA`
+% }
+% if (nonMainWepMasks.bankB !== '0x0u') {
+#define GSC_NONMAIN_FLASH_BANK_B_WEP_MASK     `nonMainWepMasks.bankB`
+% }
+% if (nonMainSecMasks.bankA !== '0x0u') {
+#define GSC_NONMAIN_FLASH_BANK_A_SEC_MASK     `nonMainSecMasks.bankA`
+% }
+% if (nonMainSecMasks.bankB !== '0x0u') {
+#define GSC_NONMAIN_FLASH_BANK_B_SEC_MASK     `nonMainSecMasks.bankB`
+% }
+% if (nonMainPrivMasks.bankA !== '0x0u') {
+#define GSC_NONMAIN_FLASH_BANK_A_PRIV_MASK    `nonMainPrivMasks.bankA`
+% }
+% if (nonMainPrivMasks.bankB !== '0x0u') {
+#define GSC_NONMAIN_FLASH_BANK_B_PRIV_MASK    `nonMainPrivMasks.bankB`
+% }
+
+/* Data Flash masks */
+% let dataFlashWepMask = generateDataFlashSectorMask('wep');
+% let dataFlashSecMask = generateDataFlashSectorMask('sec');
+% if (dataFlashWepMask !== '0x0u') {
+#define GSC_FLASH_DATA_WEP_MASK       `dataFlashWepMask`
+% }
+% if (dataFlashSecMask !== '0x0u') {
+#define GSC_FLASH_DATA_SEC_MASK       `dataFlashSecMask`
+% }
+% }
+%
+% function printDeclare() {
+void SYSCFG_DL_GSC_init(void);
+% }

@@ -1,0 +1,48 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ */
+//@cliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)" --part "Default"
+//@v2CliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)"
+// @cliArgs --board /ti/boards/LP_MSPM33C321A --rtos nortos
+
+/**
+ * Import the modules used in this configuration.
+ */
+const PWM           = scripting.addModule("/ti/driverlib/PWM", {}, false);
+const PWM1          = PWM.addInstance();
+const SYSCTL        = scripting.addModule("/ti/driverlib/SYSCTL");
+const ProjectConfig = scripting.addModule("/ti/project_config/ProjectConfig");
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+PWM1.$name                      = "PWM_0";
+PWM1.clockSource                = "LFCLK";
+PWM1.clockPrescale              = 3;
+PWM1.timerCount                 = 4000;
+PWM1.pwmMode                    = "CENTER_ALIGN";
+PWM1.peripheral.$assign         = "TIMG4_0";
+PWM1.peripheral.ccp0Pin.$assign = "PB10";
+PWM1.peripheral.ccp1Pin.$assign = "PB11";
+PWM1.PWM_CHANNEL_0.$name        = "ti_driverlib_pwm_PWMTimerCC0";
+PWM1.PWM_CHANNEL_0.dutyCycle    = 75;
+PWM1.PWM_CHANNEL_1.$name        = "ti_driverlib_pwm_PWMTimerCC1";
+PWM1.PWM_CHANNEL_1.dutyCycle    = 50;
+PWM1.ccp0PinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric0";
+PWM1.ccp1PinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric1";
+
+const Board                       = scripting.addModule("/ti/driverlib/Board", {}, false);
+Board.peripheral.$assign          = "DEBUGSS";
+Board.peripheral.swclkPin.$assign = "PA20";
+Board.peripheral.swdioPin.$assign = "PA19";
+
+SYSCTL.forceDefaultClkConfig = true;
+SYSCTL.powerPolicy           = "STOP";
+SYSCTL.peripheral.$assign    = "SYSCTL";
+
+ProjectConfig.migrationCondition = true;
+ProjectConfig.genLinker          = true;
+ProjectConfig.genStartup         = true;
+ProjectConfig.genOpts            = true;
+ProjectConfig.genLibs            = true;
