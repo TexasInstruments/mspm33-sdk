@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>适用于 MSPM33 MCU 的 Arm Keil MDK IDE 5.38+ 版 &mdash; Arm Keil MDK IDE for MSPM33 MCUs Documentation 1.02.00.00 documentation</title>
+  <title>适用于 MSPM33 MCU 的 Arm Keil MDK IDE 5.38+ 版 &mdash; Arm Keil MDK IDE for MSPM33 MCUs Documentation 1.03.00.01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
@@ -32,7 +32,7 @@
             <a href="index.html" class="icon icon-home"> Arm Keil MDK IDE for MSPM33 MCUs Documentation
           </a>
               <div class="version">
-                1.02.00.00
+                1.03.00.01
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -177,28 +177,40 @@
 <ol class="arabic simple">
 <li><p>在 SysConfig 中，启用器件视图并点击 <strong>SWITCH</strong></p></li>
 </ol>
-<p><img alt="image0" src="../_images/keil_ide_migrate_1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_migrate_1.png" />
+</figure>
 <ol class="arabic simple" start="2">
 <li><p>选择新 MSPM33 器件的相应选项，然后点击 <strong>CONFIRM</strong>。</p></li>
 </ol>
-<p><img alt="image1" src="../_images/keil_ide_migrate_2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_migrate_2.png" />
+</figure>
 <ol class="arabic simple" start="3">
 <li><p>请注意，SysConfig 将突出显示与迁移的任何冲突，例如不可用的引脚和外设。 根据需要修复任何冲突。</p></li>
 <li><p>在 Keil IDE 中，在工程选项中打开 <strong>Device</strong> 选项卡，然后选择新的 MSPM33 衍生产品。</p></li>
 </ol>
-<p><img alt="image2" src="../_images/keil_ide_migrate_3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_migrate_3.png" />
+</figure>
 <ol class="arabic simple" start="5">
 <li><p>依次选择 <strong>C/C++ (AC6)</strong> → <strong>Preprocessor Symbols</strong> → <strong>Define</strong>，更新器件定义。 根据所选器件添加器件定义。</p></li>
 </ol>
-<p><img alt="image3" src="../_images/keil_ide_migrate_4.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_migrate_4.png" />
+</figure>
 <ol class="arabic simple" start="6">
 <li><p>在 <strong>Linker</strong> → <strong>Scatter File</strong> 中更新链接器文件。 MSPM33 SDK 在 <code class="docutils literal notranslate"><span class="pre">&lt;sdk&gt;\source\ti\devices\msp\m33\linker_files\keil</span></code> 包含所有 MSPM33 衍生产品的默认文件。</p></li>
 </ol>
-<p><img alt="image4" src="../_images/keil_ide_migrate_5.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_migrate_5.png" />
+</figure>
 <ol class="arabic simple" start="7">
 <li><p>将新衍生产品的启动文件添加到工程，并删除现有启动文件。MSPM33 SDK 在 <code class="docutils literal notranslate"><span class="pre">&lt;sdk&gt;\source\ti\devices\msp\m33\startup_system_files\keil</span></code> 包含所有 MSPM33 衍生产品的默认文件。</p></li>
 </ol>
-<p><img alt="image5" src="../_images/keil_ide_migrate_6.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_migrate_6.png" />
+</figure>
 <ol class="arabic simple" start="8">
 <li><p>解析任何其他依赖项，例如不兼容的库和源代码。</p></li>
 </ol>
@@ -208,25 +220,39 @@
 <h3>2.6 将新生成的 SysConfig 文件添加至工程<a class="headerlink" href="#sysconfig" title="Permalink to this heading">¶</a></h3>
 <p>使用会生成除 <code class="docutils literal notranslate"><span class="pre">ti_msp_dl_config.h</span></code> 和 <code class="docutils literal notranslate"><span class="pre">ti_msp_dl_config.c</span></code> 以外的文件的 SysConfig 模块（如 NONMAIN 配置器）时，必须将新生成的文件手动添加至工程，因为 Keil 不会自动添加。要详细了解哪些模块会生成额外文件，请参阅<a class="reference external" href="../../../sysconfig_guide/doc_guide/doc_guide-srcs/sysconfig_guide_CN.html">将 SysConfig 与 MSPM33 配合使用</a>指南。</p>
 <p>以 NONMAIN 配置器为例，它将生成 2 个额外文件：<code class="docutils literal notranslate"><span class="pre">boot_config.h</span></code> 和 <code class="docutils literal notranslate"><span class="pre">boot_config.c</span></code>。</p>
-<p><img alt="image6" src="../_images/keil_ide_sysconfig_additional_generated_files.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_sysconfig_additional_generated_files.png" />
+</figure>
 <p>要将这些文件包括在编译工程中，请执行以下步骤：</p>
 <ol class="arabic simple">
 <li><p>添加 SysConfig 模块并保存所做更改后，导航回 Keil IDE 应显示一条消息，表明 .syscfg 文件已修改。点击 <strong>Yes</strong> 以重新加载文件。</p></li>
 </ol>
-<p><img alt="image7" src="../_images/keil_ide_reload_sysconfig_file.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_reload_sysconfig_file.png" />
+</figure>
 <ol class="arabic" start="2">
 <li><p>右键点击工程，并选择 <strong>Rebuild all target files</strong> 以重新编译工程。<strong>Build Output</strong> 窗口将显示 SysConfig 已生成这些文件。</p>
-<p><img alt="image8" src="../_images/keil_ide_rebuild_target.png" /></p>
-<p><img alt="image9" src="../_images/keil_ide_build_log.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_rebuild_target.png" />
+</figure>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_build_log.png" />
+</figure>
 </li>
 <li><p>要添加额外新生成的文件（在本例中为 <code class="docutils literal notranslate"><span class="pre">boot_config.h</span></code> 和 <code class="docutils literal notranslate"><span class="pre">boot_config.c</span></code>），右键点击 <strong>Source</strong> 目录并选择 <strong>Add Existing Files to Group ‘Source’</strong>。</p>
-<p><img alt="image10" src="../_images/keil_ide_add_files_to_source.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_add_files_to_source.png" />
+</figure>
 </li>
 <li><p>导航至示例工程根目录，选择需要添加的文件，然后点击 <strong>Add</strong>。</p>
-<p><img alt="image11" src="../_images/keil_ide_select_files_to_add.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_select_files_to_add.png" />
+</figure>
 </li>
 <li><p>重新编译工程。这些文件应显示在 IDE 的工程 <strong>Source</strong> 目录中。</p>
-<p><img alt="image12" src="../_images/keil_ide_updated_source_directory.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_updated_source_directory.png" />
+</figure>
 </li>
 </ol>
 </section>
@@ -246,7 +272,9 @@
 <ol class="arabic">
 <li><p>依次点击 <strong>Options</strong> → <strong>Debug</strong> → <strong>Settings</strong> → <strong>Flash Download</strong>。</p></li>
 <li><p>添加 NONMAIN 编程算法，然后点击“OK”。</p>
-<p><img alt="image13" src="../_images/keil_ide_add_nonmain.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_add_nonmain.png" />
+</figure>
 </li>
 </ol>
 </section>
@@ -254,9 +282,13 @@
 <h3>2.10 覆盖预编译库<a class="headerlink" href="#id10" title="Permalink to this heading">¶</a></h3>
 <p>工程可能包括预编译库，可简化开发和编译过程；不过， 开发人员无法轻松修改源代码。</p>
 <p>下面显示了此类库的一个示例 MSPM33 DriverLib。</p>
-<p><img alt="image14" src="../_images/keil_ide_driverlib_library.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_driverlib_library.png" />
+</figure>
 <p>覆盖库的一个选项是删除 <strong>driverlib.a</strong>，并直接向工程添加任何或所有源文件。 MSPM33 SDK 包括 <code class="docutils literal notranslate"><span class="pre">empty_driverlib_src</span></code> 示例，其中默认包括所有 DriverLib 源：</p>
-<p><img alt="image15" src="../_images/keil_ide_empty_driverlib_project.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_empty_driverlib_project.png" />
+</figure>
 </section>
 </section>
 <section id="id11">
@@ -266,8 +298,12 @@
 <p>TI 提供各种适用于基于 Arm 的器件的调试探针，包括与 MSPM33 LaunchPad 集成的 XDS110。</p>
 <p><strong>注意</strong>：TI XDS110 调试器在本地受支持或通过 CMSIS DAP 受支持。TI XDS 本地支持需要 在默认文件夹 <code class="docutils literal notranslate"><span class="pre">C:\ti\ccs-base</span></code> 中单独安装 TI 仿真包软件。</p>
 <p>要使用 XDS110 调试探针，右键点击活动工程，然后选择 <strong>Options for Target</strong>。 在“Target Options”窗口中，选择 <strong>Debug</strong> 窗格。在下拉菜单中，选择 CMSIS-DAP 调试器或 TI XDS 调试器。</p>
-<p><img alt="image16" src="../_images/keil_ide_select_xds110.png" /></p>
-<p><img alt="image17" src="../_images/keil_ide_xds110_settings.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_select_xds110.png" />
+</figure>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_xds110_settings.png" />
+</figure>
 <ul class="simple">
 <li><p>注意所选仿真器。以上示例在 CSMSIS-DAP 模式下使用集成在 LaunchPad 中的 XDS110。</p></li>
 <li><p>所选接口是 MSPM33 支持的 SWD。</p></li>
@@ -277,15 +313,23 @@
 <section id="segger-j-link">
 <h3>3.2 使用 Segger J-Link 调试探针<a class="headerlink" href="#segger-j-link" title="Permalink to this heading">¶</a></h3>
 <p>要使用 J-Link，右键点击活动工程，然后选择 <strong>Options for Target</strong>。 在“Target Options”窗口中，选择 <strong>Debug</strong> 窗格。从下拉菜单中，选择 J-Link 调试器选项。</p>
-<p><img alt="image18" src="../_images/keil_ide_select_jlink.png" /></p>
-<p><img alt="image19" src="../_images/keil_ide_jlink_settings.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_select_jlink.png" />
+</figure>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_jlink_settings.png" />
+</figure>
 <p>请参阅<a class="reference external" href="../../../../quickstart_guides/doc_guide/doc_guide-srcs/quickstart_guide_keil_CN.html">适用于 Keil 的 MSPM33 SDK 快速入门指南</a>，以详细了解如何使用 Segger J-Link。</p>
 </section>
 <section id="arm-ulink">
 <h3>3.3 使用 Arm ULINK 调试适配器<a class="headerlink" href="#arm-ulink" title="Permalink to this heading">¶</a></h3>
 <p>要使用 ULINK，右键点击活动工程，然后选择 <strong>Options for Target</strong>。 在“Target Options”窗口中，选择 <strong>Debug</strong> 窗格。从下拉菜单中，选择 ULINK 调试器选项。</p>
-<p><img alt="image20" src="../_images/keil_ide_select_ulink.png" /></p>
-<p><img alt="image21" src="../_images/keil_ide_ulink_settings.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_select_ulink.png" />
+</figure>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_ulink_settings.png" />
+</figure>
 <ul class="simple">
 <li><p>ULINK 工具使用闪存加载程序将代码下载到器件。在 <strong>Options</strong> → <strong>Debug</strong> → <strong>Settings</strong> → <strong>Flash Download</strong> 中确认使用。</p></li>
 </ul>
@@ -295,7 +339,9 @@
 <p>uVision 断点机制使用有限数量的片上调试资源（具体为 4 个硬件断点 和 2 个硬件观察点）。MSPM33 不支持软件断点。这意味着在 uVision 中最多可设置 4 个断点。</p>
 <p>重置程序和“运行至光标”操作临时需要1个断点。因此，只有 3 个断点 可处于活动状态。</p>
 <p>如果设置了断点最大数量，将显示以下警告。</p>
-<p><img alt="image22" src="../_images/keil_ide_max_breakpoints.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_max_breakpoints.png" />
+</figure>
 </section>
 </section>
 <section id="faq">

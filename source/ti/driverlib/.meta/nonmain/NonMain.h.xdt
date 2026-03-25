@@ -107,7 +107,7 @@
 
 /* Flash Bank Swap Configuration */
 #define BC_CFG_FLASH_BS_DIS                          (0xAABBU)
-#define BC_CFG_FLASH_BS_EN                           (0x5522U)
+#define BC_CFG_FLASH_BS_EN                           (0xFFFFU)
 
 /* NonMain Write Protection */
 #define BC_CFG_NONMAIN_WRITE_PROTECT_DIS            (0xAABBU)
@@ -248,7 +248,7 @@ typedef struct {
 
 typedef struct {
     /*! Predetermined Bootcode config signature ID */
-    uint32_t BCR_CONFIG_ID;                 
+    uint32_t BCR_CONFIG_ID;
 
     /*! Debug Access setting */
     uint16_t DEBUG_ACCESS;

@@ -68,11 +68,32 @@
 /******************************************************************************
 * COMP Registers
 ******************************************************************************/
-#define COMP_INT_EVENT_OFS                       ((uint32_t)0x00001020U)
+#define COMP_GEN_EVENT_OFS                       ((uint32_t)0x00001050U)
+#define COMP_CPU_INT_OFS                         ((uint32_t)0x00001020U)
 #define COMP_GPRCM_OFS                           ((uint32_t)0x00000800U)
 
 
-/** @addtogroup COMP_INT_EVENT
+/** @addtogroup COMP_GEN_EVENT
+  @{
+*/
+
+typedef struct {
+  __I  uint32_t IIDX;                              /* !< (@ 0x00001050) Interrupt index */
+       uint32_t RESERVED0;
+  __IO uint32_t IMASK;                             /* !< (@ 0x00001058) Interrupt mask */
+       uint32_t RESERVED1;
+  __I  uint32_t RIS;                               /* !< (@ 0x00001060) Raw interrupt status */
+       uint32_t RESERVED2;
+  __I  uint32_t MIS;                               /* !< (@ 0x00001068) Masked interrupt status */
+       uint32_t RESERVED3;
+  __O  uint32_t ISET;                              /* !< (@ 0x00001070) Interrupt set */
+       uint32_t RESERVED4;
+  __O  uint32_t ICLR;                              /* !< (@ 0x00001078) Interrupt clear */
+} COMP_GEN_EVENT_Regs;
+
+/*@}*/ /* end of group COMP_GEN_EVENT */
+
+/** @addtogroup COMP_CPU_INT
   @{
 */
 
@@ -88,10 +109,9 @@ typedef struct {
   __O  uint32_t ISET;                              /* !< (@ 0x00001040) Interrupt set */
        uint32_t RESERVED4;
   __O  uint32_t ICLR;                              /* !< (@ 0x00001048) Interrupt clear */
-       uint32_t RESERVED5;
-} COMP_INT_EVENT_Regs;
+} COMP_CPU_INT_Regs;
 
-/*@}*/ /* end of group COMP_INT_EVENT */
+/*@}*/ /* end of group COMP_CPU_INT */
 
 /** @addtogroup COMP_GPRCM
   @{
@@ -120,18 +140,20 @@ typedef struct {
        uint32_t RESERVED2[238];
   COMP_GPRCM_Regs  GPRCM;                             /* !< (@ 0x00000800) */
        uint32_t RESERVED3[514];
-  COMP_INT_EVENT_Regs  INT_EVENT[2];                   /* !< (@ 0x00001020) */
-       uint32_t RESERVED4[24];
+  COMP_CPU_INT_Regs  CPU_INT;                           /* !< (@ 0x00001020) */
+       uint32_t RESERVED4;
+  COMP_GEN_EVENT_Regs  GEN_EVENT;                         /* !< (@ 0x00001050) */
+       uint32_t RESERVED5[25];
   __IO uint32_t EVT_MODE;                          /* !< (@ 0x000010E0) Event Mode */
-       uint32_t RESERVED5[6];
+       uint32_t RESERVED6[6];
   __I  uint32_t DESC;                              /* !< (@ 0x000010FC) Module Description */
   __IO uint32_t CTL0;                              /* !< (@ 0x00001100) Control 0 */
   __IO uint32_t CTL1;                              /* !< (@ 0x00001104) Control 1 */
   __IO uint32_t CTL2;                              /* !< (@ 0x00001108) Control 2 */
   __IO uint32_t CTL3;                              /* !< (@ 0x0000110C) Control 3 */
-       uint32_t RESERVED6[4];
+       uint32_t RESERVED7[4];
   __I  uint32_t STAT;                              /* !< (@ 0x00001120) Status */
-       uint32_t RESERVED7[7];
+       uint32_t RESERVED8[7];
   __IO uint32_t ANACMPWKUPCTL;                     /* !< (@ 0x00001140) Analog comparison wakeup control register */
   __IO uint32_t ANACMPCTRCTL;                      /* !< (@ 0x00001144) Analog comparison counter control register */
   __IO uint32_t ANACMPDACCODE;                     /* !< (@ 0x00001148) Analog comparison DAC codes */
@@ -153,128 +175,252 @@ typedef struct {
 * COMP Register Control Bits
 ******************************************************************************/
 
-/* COMP_IIDX Bits */
-/* COMP_IIDX[STAT] Bits */
-#define COMP_IIDX_STAT_OFS                       (0)                             /* !< STAT Offset */
-#define COMP_IIDX_STAT_MASK                      ((uint32_t)0x00000003U)         /* !< Interrupt index status */
-#define COMP_IIDX_STAT_NO_INTR                   ((uint32_t)0x00000000U)         /* !< No pending interrupt */
-#define COMP_IIDX_STAT_COMPIFG                   ((uint32_t)0x00000002U)         /* !< Comparator output interrupt */
-#define COMP_IIDX_STAT_COMPINVIFG                ((uint32_t)0x00000003U)         /* !< Comparator output inverted
+/* COMP_GEN_EVENT_IIDX Bits */
+/* COMP_GEN_EVENT_IIDX[STAT] Bits */
+#define COMP_GEN_EVENT_IIDX_STAT_OFS             (0)                             /* !< STAT Offset */
+#define COMP_GEN_EVENT_IIDX_STAT_MASK            ((uint32_t)0x00000003U)         /* !< Interrupt index status */
+#define COMP_GEN_EVENT_IIDX_STAT_NO_INTR         ((uint32_t)0x00000000U)         /* !< No pending interrupt */
+#define COMP_GEN_EVENT_IIDX_STAT_COMPIFG         ((uint32_t)0x00000002U)         /* !< Comparator output interrupt */
+#define COMP_GEN_EVENT_IIDX_STAT_COMPINVIFG      ((uint32_t)0x00000003U)         /* !< Comparator output inverted
                                                                                     interrupt */
-#define COMP_IIDX_STAT_OUTRDYIFG                 ((uint32_t)0x00000004U)         /* !< Comparator output ready interrupt */
+#define COMP_GEN_EVENT_IIDX_STAT_OUTRDYIFG       ((uint32_t)0x00000004U)         /* !< Comparator output ready interrupt */
 
-/* COMP_IMASK Bits */
-/* COMP_IMASK[COMPIFG] Bits */
-#define COMP_IMASK_COMPIFG_OFS                   (1)                             /* !< COMPIFG Offset */
-#define COMP_IMASK_COMPIFG_MASK                  ((uint32_t)0x00000002U)         /* !< Masks COMPIFG */
-#define COMP_IMASK_COMPIFG_CLR                   ((uint32_t)0x00000000U)         /* !< Interrupt is masked out */
-#define COMP_IMASK_COMPIFG_SET                   ((uint32_t)0x00000002U)         /* !< Interrupt will request an interrupt
+/* COMP_GEN_EVENT_IMASK Bits */
+/* COMP_GEN_EVENT_IMASK[COMPIFG] Bits */
+#define COMP_GEN_EVENT_IMASK_COMPIFG_OFS         (1)                             /* !< COMPIFG Offset */
+#define COMP_GEN_EVENT_IMASK_COMPIFG_MASK        ((uint32_t)0x00000002U)         /* !< Masks COMPIFG */
+#define COMP_GEN_EVENT_IMASK_COMPIFG_CLR         ((uint32_t)0x00000000U)         /* !< Interrupt is masked out */
+#define COMP_GEN_EVENT_IMASK_COMPIFG_SET         ((uint32_t)0x00000002U)         /* !< Interrupt will request an interrupt
                                                                                     service routine and corresponding bit
                                                                                     in MIS will be set */
-/* COMP_IMASK[COMPINVIFG] Bits */
-#define COMP_IMASK_COMPINVIFG_OFS                (2)                             /* !< COMPINVIFG Offset */
-#define COMP_IMASK_COMPINVIFG_MASK               ((uint32_t)0x00000004U)         /* !< Masks COMPINVIFG */
-#define COMP_IMASK_COMPINVIFG_CLR                ((uint32_t)0x00000000U)         /* !< Interrupt is masked out */
-#define COMP_IMASK_COMPINVIFG_SET                ((uint32_t)0x00000004U)         /* !< Interrupt will request an interrupt
+/* COMP_GEN_EVENT_IMASK[COMPINVIFG] Bits */
+#define COMP_GEN_EVENT_IMASK_COMPINVIFG_OFS      (2)                             /* !< COMPINVIFG Offset */
+#define COMP_GEN_EVENT_IMASK_COMPINVIFG_MASK     ((uint32_t)0x00000004U)         /* !< Masks COMPINVIFG */
+#define COMP_GEN_EVENT_IMASK_COMPINVIFG_CLR      ((uint32_t)0x00000000U)         /* !< Interrupt is masked out */
+#define COMP_GEN_EVENT_IMASK_COMPINVIFG_SET      ((uint32_t)0x00000004U)         /* !< Interrupt will request an interrupt
                                                                                     service routine and corresponding bit
                                                                                     in MIS will be set */
-/* COMP_IMASK[OUTRDYIFG] Bits */
-#define COMP_IMASK_OUTRDYIFG_OFS                 (3)                             /* !< OUTRDYIFG Offset */
-#define COMP_IMASK_OUTRDYIFG_MASK                ((uint32_t)0x00000008U)         /* !< Masks OUTRDYIFG */
-#define COMP_IMASK_OUTRDYIFG_CLR                 ((uint32_t)0x00000000U)         /* !< Interrupt is masked out */
-#define COMP_IMASK_OUTRDYIFG_SET                 ((uint32_t)0x00000008U)         /* !< Interrupt will request an interrupt
+/* COMP_GEN_EVENT_IMASK[OUTRDYIFG] Bits */
+#define COMP_GEN_EVENT_IMASK_OUTRDYIFG_OFS       (3)                             /* !< OUTRDYIFG Offset */
+#define COMP_GEN_EVENT_IMASK_OUTRDYIFG_MASK      ((uint32_t)0x00000008U)         /* !< Masks OUTRDYIFG */
+#define COMP_GEN_EVENT_IMASK_OUTRDYIFG_CLR       ((uint32_t)0x00000000U)         /* !< Interrupt is masked out */
+#define COMP_GEN_EVENT_IMASK_OUTRDYIFG_SET       ((uint32_t)0x00000008U)         /* !< Interrupt will request an interrupt
                                                                                     service routine and corresponding bit
                                                                                     in MIS will be set */
 
-/* COMP_RIS Bits */
-/* COMP_RIS[COMPIFG] Bits */
-#define COMP_RIS_COMPIFG_OFS                     (1)                             /* !< COMPIFG Offset */
-#define COMP_RIS_COMPIFG_MASK                    ((uint32_t)0x00000002U)         /* !< Raw interrupt status for comparator
+/* COMP_GEN_EVENT_RIS Bits */
+/* COMP_GEN_EVENT_RIS[COMPIFG] Bits */
+#define COMP_GEN_EVENT_RIS_COMPIFG_OFS           (1)                             /* !< COMPIFG Offset */
+#define COMP_GEN_EVENT_RIS_COMPIFG_MASK          ((uint32_t)0x00000002U)         /* !< Raw interrupt status for comparator
                                                                                     output interrupt flag. The IES bit
                                                                                     defines the transition of the
                                                                                     comparator output setting this bit. */
-#define COMP_RIS_COMPIFG_CLR                     ((uint32_t)0x00000000U)         /* !< No interrupt pending */
-#define COMP_RIS_COMPIFG_SET                     ((uint32_t)0x00000002U)         /* !< Interrupt pending */
-/* COMP_RIS[COMPINVIFG] Bits */
-#define COMP_RIS_COMPINVIFG_OFS                  (2)                             /* !< COMPINVIFG Offset */
-#define COMP_RIS_COMPINVIFG_MASK                 ((uint32_t)0x00000004U)         /* !< Raw interrupt status for comparator
+#define COMP_GEN_EVENT_RIS_COMPIFG_CLR           ((uint32_t)0x00000000U)         /* !< No interrupt pending */
+#define COMP_GEN_EVENT_RIS_COMPIFG_SET           ((uint32_t)0x00000002U)         /* !< Interrupt pending */
+/* COMP_GEN_EVENT_RIS[COMPINVIFG] Bits */
+#define COMP_GEN_EVENT_RIS_COMPINVIFG_OFS        (2)                             /* !< COMPINVIFG Offset */
+#define COMP_GEN_EVENT_RIS_COMPINVIFG_MASK       ((uint32_t)0x00000004U)         /* !< Raw interrupt status for comparator
                                                                                     output inverted interrupt flag. The
                                                                                     IES bit defines the transition of the
                                                                                     comparator output setting this bit. */
-#define COMP_RIS_COMPINVIFG_CLR                  ((uint32_t)0x00000000U)         /* !< No interrupt pending */
-#define COMP_RIS_COMPINVIFG_SET                  ((uint32_t)0x00000004U)         /* !< Interrupt pending */
-/* COMP_RIS[OUTRDYIFG] Bits */
-#define COMP_RIS_OUTRDYIFG_OFS                   (3)                             /* !< OUTRDYIFG Offset */
-#define COMP_RIS_OUTRDYIFG_MASK                  ((uint32_t)0x00000008U)         /* !< Raw interrupt status for comparator
+#define COMP_GEN_EVENT_RIS_COMPINVIFG_CLR        ((uint32_t)0x00000000U)         /* !< No interrupt pending */
+#define COMP_GEN_EVENT_RIS_COMPINVIFG_SET        ((uint32_t)0x00000004U)         /* !< Interrupt pending */
+/* COMP_GEN_EVENT_RIS[OUTRDYIFG] Bits */
+#define COMP_GEN_EVENT_RIS_OUTRDYIFG_OFS         (3)                             /* !< OUTRDYIFG Offset */
+#define COMP_GEN_EVENT_RIS_OUTRDYIFG_MASK        ((uint32_t)0x00000008U)         /* !< Raw interrupt status for comparator
                                                                                     output ready interrupt flag. This bit
                                                                                     is set when the comparator output is
                                                                                     valid. */
-#define COMP_RIS_OUTRDYIFG_CLR                   ((uint32_t)0x00000000U)         /* !< No interrupt pending */
-#define COMP_RIS_OUTRDYIFG_SET                   ((uint32_t)0x00000008U)         /* !< Interrupt pending */
+#define COMP_GEN_EVENT_RIS_OUTRDYIFG_CLR         ((uint32_t)0x00000000U)         /* !< No interrupt pending */
+#define COMP_GEN_EVENT_RIS_OUTRDYIFG_SET         ((uint32_t)0x00000008U)         /* !< Interrupt pending */
 
-/* COMP_MIS Bits */
-/* COMP_MIS[COMPIFG] Bits */
-#define COMP_MIS_COMPIFG_OFS                     (1)                             /* !< COMPIFG Offset */
-#define COMP_MIS_COMPIFG_MASK                    ((uint32_t)0x00000002U)         /* !< Masked interrupt status for COMPIFG */
-#define COMP_MIS_COMPIFG_CLR                     ((uint32_t)0x00000000U)         /* !< COMPIFG does not request an
+/* COMP_GEN_EVENT_MIS Bits */
+/* COMP_GEN_EVENT_MIS[COMPIFG] Bits */
+#define COMP_GEN_EVENT_MIS_COMPIFG_OFS           (1)                             /* !< COMPIFG Offset */
+#define COMP_GEN_EVENT_MIS_COMPIFG_MASK          ((uint32_t)0x00000002U)         /* !< Masked interrupt status for COMPIFG */
+#define COMP_GEN_EVENT_MIS_COMPIFG_CLR           ((uint32_t)0x00000000U)         /* !< COMPIFG does not request an
                                                                                     interrupt service routine */
-#define COMP_MIS_COMPIFG_SET                     ((uint32_t)0x00000002U)         /* !< COMPIFG requests an interrupt
+#define COMP_GEN_EVENT_MIS_COMPIFG_SET           ((uint32_t)0x00000002U)         /* !< COMPIFG requests an interrupt
                                                                                     service routine */
-/* COMP_MIS[COMPINVIFG] Bits */
-#define COMP_MIS_COMPINVIFG_OFS                  (2)                             /* !< COMPINVIFG Offset */
-#define COMP_MIS_COMPINVIFG_MASK                 ((uint32_t)0x00000004U)         /* !< Masked interrupt status for
+/* COMP_GEN_EVENT_MIS[COMPINVIFG] Bits */
+#define COMP_GEN_EVENT_MIS_COMPINVIFG_OFS        (2)                             /* !< COMPINVIFG Offset */
+#define COMP_GEN_EVENT_MIS_COMPINVIFG_MASK       ((uint32_t)0x00000004U)         /* !< Masked interrupt status for
                                                                                     COMPINVIFG */
-#define COMP_MIS_COMPINVIFG_CLR                  ((uint32_t)0x00000000U)         /* !< COMPINVIFG does not request an
+#define COMP_GEN_EVENT_MIS_COMPINVIFG_CLR        ((uint32_t)0x00000000U)         /* !< COMPINVIFG does not request an
                                                                                     interrupt service routine */
-#define COMP_MIS_COMPINVIFG_SET                  ((uint32_t)0x00000004U)         /* !< COMPINVIFG requests an interrupt
+#define COMP_GEN_EVENT_MIS_COMPINVIFG_SET        ((uint32_t)0x00000004U)         /* !< COMPINVIFG requests an interrupt
                                                                                     service routine */
-/* COMP_MIS[OUTRDYIFG] Bits */
-#define COMP_MIS_OUTRDYIFG_OFS                   (3)                             /* !< OUTRDYIFG Offset */
-#define COMP_MIS_OUTRDYIFG_MASK                  ((uint32_t)0x00000008U)         /* !< Masked interrupt status for
+/* COMP_GEN_EVENT_MIS[OUTRDYIFG] Bits */
+#define COMP_GEN_EVENT_MIS_OUTRDYIFG_OFS         (3)                             /* !< OUTRDYIFG Offset */
+#define COMP_GEN_EVENT_MIS_OUTRDYIFG_MASK        ((uint32_t)0x00000008U)         /* !< Masked interrupt status for
                                                                                     OUTRDYIFG */
-#define COMP_MIS_OUTRDYIFG_CLR                   ((uint32_t)0x00000000U)         /* !< OUTRDYIFG does not request an
+#define COMP_GEN_EVENT_MIS_OUTRDYIFG_CLR         ((uint32_t)0x00000000U)         /* !< OUTRDYIFG does not request an
                                                                                     interrupt service routine */
-#define COMP_MIS_OUTRDYIFG_SET                   ((uint32_t)0x00000008U)         /* !< OUTRDYIFG requests an interrupt
+#define COMP_GEN_EVENT_MIS_OUTRDYIFG_SET         ((uint32_t)0x00000008U)         /* !< OUTRDYIFG requests an interrupt
                                                                                     service routine */
 
-/* COMP_ISET Bits */
-/* COMP_ISET[COMPIFG] Bits */
-#define COMP_ISET_COMPIFG_OFS                    (1)                             /* !< COMPIFG Offset */
-#define COMP_ISET_COMPIFG_MASK                   ((uint32_t)0x00000002U)         /* !< Sets COMPIFG in RIS register */
-#define COMP_ISET_COMPIFG_NO_EFFECT              ((uint32_t)0x00000000U)         /* !< Writing a 0 has no effect */
-#define COMP_ISET_COMPIFG_SET                    ((uint32_t)0x00000002U)         /* !< RIS bit corresponding to COMPIFG is
+/* COMP_GEN_EVENT_ISET Bits */
+/* COMP_GEN_EVENT_ISET[COMPIFG] Bits */
+#define COMP_GEN_EVENT_ISET_COMPIFG_OFS          (1)                             /* !< COMPIFG Offset */
+#define COMP_GEN_EVENT_ISET_COMPIFG_MASK         ((uint32_t)0x00000002U)         /* !< Sets COMPIFG in RIS register */
+#define COMP_GEN_EVENT_ISET_COMPIFG_NO_EFFECT    ((uint32_t)0x00000000U)         /* !< Writing a 0 has no effect */
+#define COMP_GEN_EVENT_ISET_COMPIFG_SET          ((uint32_t)0x00000002U)         /* !< RIS bit corresponding to COMPIFG is
                                                                                     set */
-/* COMP_ISET[COMPINVIFG] Bits */
-#define COMP_ISET_COMPINVIFG_OFS                 (2)                             /* !< COMPINVIFG Offset */
-#define COMP_ISET_COMPINVIFG_MASK                ((uint32_t)0x00000004U)         /* !< Sets COMPINVIFG in RIS register */
-#define COMP_ISET_COMPINVIFG_NO_EFFECT           ((uint32_t)0x00000000U)         /* !< Writing a 0 has no effect */
-#define COMP_ISET_COMPINVIFG_SET                 ((uint32_t)0x00000004U)         /* !< RIS bit corresponding to COMPINVIFG
+/* COMP_GEN_EVENT_ISET[COMPINVIFG] Bits */
+#define COMP_GEN_EVENT_ISET_COMPINVIFG_OFS       (2)                             /* !< COMPINVIFG Offset */
+#define COMP_GEN_EVENT_ISET_COMPINVIFG_MASK      ((uint32_t)0x00000004U)         /* !< Sets COMPINVIFG in RIS register */
+#define COMP_GEN_EVENT_ISET_COMPINVIFG_NO_EFFECT ((uint32_t)0x00000000U)         /* !< Writing a 0 has no effect */
+#define COMP_GEN_EVENT_ISET_COMPINVIFG_SET       ((uint32_t)0x00000004U)         /* !< RIS bit corresponding to COMPINVIFG
                                                                                     is set */
-/* COMP_ISET[OUTRDYIFG] Bits */
-#define COMP_ISET_OUTRDYIFG_OFS                  (3)                             /* !< OUTRDYIFG Offset */
-#define COMP_ISET_OUTRDYIFG_MASK                 ((uint32_t)0x00000008U)         /* !< Sets OUTRDYIFG in RIS register */
-#define COMP_ISET_OUTRDYIFG_NO_EFFECT            ((uint32_t)0x00000000U)         /* !< Writing a 0 has no effect */
-#define COMP_ISET_OUTRDYIFG_SET                  ((uint32_t)0x00000008U)         /* !< RIS bit corresponding to OUTRDYIFG
+/* COMP_GEN_EVENT_ISET[OUTRDYIFG] Bits */
+#define COMP_GEN_EVENT_ISET_OUTRDYIFG_OFS        (3)                             /* !< OUTRDYIFG Offset */
+#define COMP_GEN_EVENT_ISET_OUTRDYIFG_MASK       ((uint32_t)0x00000008U)         /* !< Sets OUTRDYIFG in RIS register */
+#define COMP_GEN_EVENT_ISET_OUTRDYIFG_NO_EFFECT  ((uint32_t)0x00000000U)         /* !< Writing a 0 has no effect */
+#define COMP_GEN_EVENT_ISET_OUTRDYIFG_SET        ((uint32_t)0x00000008U)         /* !< RIS bit corresponding to OUTRDYIFG
                                                                                     is set */
 
-/* COMP_ICLR Bits */
-/* COMP_ICLR[COMPIFG] Bits */
-#define COMP_ICLR_COMPIFG_OFS                    (1)                             /* !< COMPIFG Offset */
-#define COMP_ICLR_COMPIFG_MASK                   ((uint32_t)0x00000002U)         /* !< Clears COMPIFG in RIS register */
-#define COMP_ICLR_COMPIFG_NO_EFFECT              ((uint32_t)0x00000000U)         /* !< Writing a 0 has no effect */
-#define COMP_ICLR_COMPIFG_CLR                    ((uint32_t)0x00000002U)         /* !< RIS bit corresponding to COMPIFG is
+/* COMP_GEN_EVENT_ICLR Bits */
+/* COMP_GEN_EVENT_ICLR[COMPIFG] Bits */
+#define COMP_GEN_EVENT_ICLR_COMPIFG_OFS          (1)                             /* !< COMPIFG Offset */
+#define COMP_GEN_EVENT_ICLR_COMPIFG_MASK         ((uint32_t)0x00000002U)         /* !< Clears COMPIFG in RIS register */
+#define COMP_GEN_EVENT_ICLR_COMPIFG_NO_EFFECT    ((uint32_t)0x00000000U)         /* !< Writing a 0 has no effect */
+#define COMP_GEN_EVENT_ICLR_COMPIFG_CLR          ((uint32_t)0x00000002U)         /* !< RIS bit corresponding to COMPIFG is
                                                                                     cleared */
-/* COMP_ICLR[COMPINVIFG] Bits */
-#define COMP_ICLR_COMPINVIFG_OFS                 (2)                             /* !< COMPINVIFG Offset */
-#define COMP_ICLR_COMPINVIFG_MASK                ((uint32_t)0x00000004U)         /* !< Clears COMPINVIFG in RIS register */
-#define COMP_ICLR_COMPINVIFG_NO_EFFECT           ((uint32_t)0x00000000U)         /* !< Writing a 0 has no effect */
-#define COMP_ICLR_COMPINVIFG_CLR                 ((uint32_t)0x00000004U)         /* !< RIS bit corresponding to COMPINVIFG
+/* COMP_GEN_EVENT_ICLR[COMPINVIFG] Bits */
+#define COMP_GEN_EVENT_ICLR_COMPINVIFG_OFS       (2)                             /* !< COMPINVIFG Offset */
+#define COMP_GEN_EVENT_ICLR_COMPINVIFG_MASK      ((uint32_t)0x00000004U)         /* !< Clears COMPINVIFG in RIS register */
+#define COMP_GEN_EVENT_ICLR_COMPINVIFG_NO_EFFECT ((uint32_t)0x00000000U)         /* !< Writing a 0 has no effect */
+#define COMP_GEN_EVENT_ICLR_COMPINVIFG_CLR       ((uint32_t)0x00000004U)         /* !< RIS bit corresponding to COMPINVIFG
                                                                                     is cleared */
-/* COMP_ICLR[OUTRDYIFG] Bits */
-#define COMP_ICLR_OUTRDYIFG_OFS                  (3)                             /* !< OUTRDYIFG Offset */
-#define COMP_ICLR_OUTRDYIFG_MASK                 ((uint32_t)0x00000008U)         /* !< Clears OUTRDYIFG in RIS register */
-#define COMP_ICLR_OUTRDYIFG_NO_EFFECT            ((uint32_t)0x00000000U)         /* !< Writing a 0 has no effect */
-#define COMP_ICLR_OUTRDYIFG_CLR                  ((uint32_t)0x00000008U)         /* !< RIS bit corresponding to OUTRDYIFG
+/* COMP_GEN_EVENT_ICLR[OUTRDYIFG] Bits */
+#define COMP_GEN_EVENT_ICLR_OUTRDYIFG_OFS        (3)                             /* !< OUTRDYIFG Offset */
+#define COMP_GEN_EVENT_ICLR_OUTRDYIFG_MASK       ((uint32_t)0x00000008U)         /* !< Clears OUTRDYIFG in RIS register */
+#define COMP_GEN_EVENT_ICLR_OUTRDYIFG_NO_EFFECT  ((uint32_t)0x00000000U)         /* !< Writing a 0 has no effect */
+#define COMP_GEN_EVENT_ICLR_OUTRDYIFG_CLR        ((uint32_t)0x00000008U)         /* !< RIS bit corresponding to OUTRDYIFG
+                                                                                    is cleared */
+
+/* COMP_CPU_INT_IIDX Bits */
+/* COMP_CPU_INT_IIDX[STAT] Bits */
+#define COMP_CPU_INT_IIDX_STAT_OFS               (0)                             /* !< STAT Offset */
+#define COMP_CPU_INT_IIDX_STAT_MASK              ((uint32_t)0x00000003U)         /* !< Interrupt index status */
+#define COMP_CPU_INT_IIDX_STAT_NO_INTR           ((uint32_t)0x00000000U)         /* !< No pending interrupt */
+#define COMP_CPU_INT_IIDX_STAT_COMPIFG           ((uint32_t)0x00000001U)         /* !< Comparator output interrupt */
+#define COMP_CPU_INT_IIDX_STAT_COMPINVIFG        ((uint32_t)0x00000002U)         /* !< Comparator output inverted
+                                                                                    interrupt */
+#define COMP_CPU_INT_IIDX_STAT_OUTRDYIFG         ((uint32_t)0x00000003U)         /* !< Comparator output ready interrupt */
+
+/* COMP_CPU_INT_IMASK Bits */
+/* COMP_CPU_INT_IMASK[COMPIFG] Bits */
+#define COMP_CPU_INT_IMASK_COMPIFG_OFS           (1)                             /* !< COMPIFG Offset */
+#define COMP_CPU_INT_IMASK_COMPIFG_MASK          ((uint32_t)0x00000002U)         /* !< Masks COMPIFG */
+#define COMP_CPU_INT_IMASK_COMPIFG_CLR           ((uint32_t)0x00000000U)         /* !< Interrupt is masked out */
+#define COMP_CPU_INT_IMASK_COMPIFG_SET           ((uint32_t)0x00000002U)         /* !< Interrupt will request an interrupt
+                                                                                    service routine and corresponding bit
+                                                                                    in MIS will be set */
+/* COMP_CPU_INT_IMASK[COMPINVIFG] Bits */
+#define COMP_CPU_INT_IMASK_COMPINVIFG_OFS        (2)                             /* !< COMPINVIFG Offset */
+#define COMP_CPU_INT_IMASK_COMPINVIFG_MASK       ((uint32_t)0x00000004U)         /* !< Masks COMPINVIFG */
+#define COMP_CPU_INT_IMASK_COMPINVIFG_CLR        ((uint32_t)0x00000000U)         /* !< Interrupt is masked out */
+#define COMP_CPU_INT_IMASK_COMPINVIFG_SET        ((uint32_t)0x00000004U)         /* !< Interrupt will request an interrupt
+                                                                                    service routine and corresponding bit
+                                                                                    in MIS will be set */
+/* COMP_CPU_INT_IMASK[OUTRDYIFG] Bits */
+#define COMP_CPU_INT_IMASK_OUTRDYIFG_OFS         (3)                             /* !< OUTRDYIFG Offset */
+#define COMP_CPU_INT_IMASK_OUTRDYIFG_MASK        ((uint32_t)0x00000008U)         /* !< Masks OUTRDYIFG */
+#define COMP_CPU_INT_IMASK_OUTRDYIFG_CLR         ((uint32_t)0x00000000U)         /* !< Interrupt is masked out */
+#define COMP_CPU_INT_IMASK_OUTRDYIFG_SET         ((uint32_t)0x00000008U)         /* !< Interrupt will request an interrupt
+                                                                                    service routine and corresponding bit
+                                                                                    in MIS will be set */
+
+/* COMP_CPU_INT_RIS Bits */
+/* COMP_CPU_INT_RIS[COMPIFG] Bits */
+#define COMP_CPU_INT_RIS_COMPIFG_OFS             (1)                             /* !< COMPIFG Offset */
+#define COMP_CPU_INT_RIS_COMPIFG_MASK            ((uint32_t)0x00000002U)         /* !< Raw interrupt status for comparator
+                                                                                    output interrupt flag. The IES bit
+                                                                                    defines the transition of the
+                                                                                    comparator output setting this bit. */
+#define COMP_CPU_INT_RIS_COMPIFG_CLR             ((uint32_t)0x00000000U)         /* !< No interrupt pending */
+#define COMP_CPU_INT_RIS_COMPIFG_SET             ((uint32_t)0x00000002U)         /* !< Interrupt pending */
+/* COMP_CPU_INT_RIS[COMPINVIFG] Bits */
+#define COMP_CPU_INT_RIS_COMPINVIFG_OFS          (2)                             /* !< COMPINVIFG Offset */
+#define COMP_CPU_INT_RIS_COMPINVIFG_MASK         ((uint32_t)0x00000004U)         /* !< Raw interrupt status for comparator
+                                                                                    output inverted interrupt flag. The
+                                                                                    IES bit defines the transition of the
+                                                                                    comparator output setting this bit. */
+#define COMP_CPU_INT_RIS_COMPINVIFG_CLR          ((uint32_t)0x00000000U)         /* !< No interrupt pending */
+#define COMP_CPU_INT_RIS_COMPINVIFG_SET          ((uint32_t)0x00000004U)         /* !< Interrupt pending */
+/* COMP_CPU_INT_RIS[OUTRDYIFG] Bits */
+#define COMP_CPU_INT_RIS_OUTRDYIFG_OFS           (3)                             /* !< OUTRDYIFG Offset */
+#define COMP_CPU_INT_RIS_OUTRDYIFG_MASK          ((uint32_t)0x00000008U)         /* !< Raw interrupt status for comparator
+                                                                                    output ready interrupt flag. This bit
+                                                                                    is set when the comparator output is
+                                                                                    valid. */
+#define COMP_CPU_INT_RIS_OUTRDYIFG_CLR           ((uint32_t)0x00000000U)         /* !< No interrupt pending */
+#define COMP_CPU_INT_RIS_OUTRDYIFG_SET           ((uint32_t)0x00000008U)         /* !< Interrupt pending */
+
+/* COMP_CPU_INT_MIS Bits */
+/* COMP_CPU_INT_MIS[COMPIFG] Bits */
+#define COMP_CPU_INT_MIS_COMPIFG_OFS             (1)                             /* !< COMPIFG Offset */
+#define COMP_CPU_INT_MIS_COMPIFG_MASK            ((uint32_t)0x00000002U)         /* !< Masked interrupt status for COMPIFG */
+#define COMP_CPU_INT_MIS_COMPIFG_CLR             ((uint32_t)0x00000000U)         /* !< COMPIFG does not request an
+                                                                                    interrupt service routine */
+#define COMP_CPU_INT_MIS_COMPIFG_SET             ((uint32_t)0x00000002U)         /* !< COMPIFG requests an interrupt
+                                                                                    service routine */
+/* COMP_CPU_INT_MIS[COMPINVIFG] Bits */
+#define COMP_CPU_INT_MIS_COMPINVIFG_OFS          (2)                             /* !< COMPINVIFG Offset */
+#define COMP_CPU_INT_MIS_COMPINVIFG_MASK         ((uint32_t)0x00000004U)         /* !< Masked interrupt status for
+                                                                                    COMPINVIFG */
+#define COMP_CPU_INT_MIS_COMPINVIFG_CLR          ((uint32_t)0x00000000U)         /* !< COMPINVIFG does not request an
+                                                                                    interrupt service routine */
+#define COMP_CPU_INT_MIS_COMPINVIFG_SET          ((uint32_t)0x00000004U)         /* !< COMPINVIFG requests an interrupt
+                                                                                    service routine */
+/* COMP_CPU_INT_MIS[OUTRDYIFG] Bits */
+#define COMP_CPU_INT_MIS_OUTRDYIFG_OFS           (3)                             /* !< OUTRDYIFG Offset */
+#define COMP_CPU_INT_MIS_OUTRDYIFG_MASK          ((uint32_t)0x00000008U)         /* !< Masked interrupt status for
+                                                                                    OUTRDYIFG */
+#define COMP_CPU_INT_MIS_OUTRDYIFG_CLR           ((uint32_t)0x00000000U)         /* !< OUTRDYIFG does not request an
+                                                                                    interrupt service routine */
+#define COMP_CPU_INT_MIS_OUTRDYIFG_SET           ((uint32_t)0x00000008U)         /* !< OUTRDYIFG requests an interrupt
+                                                                                    service routine */
+
+/* COMP_CPU_INT_ISET Bits */
+/* COMP_CPU_INT_ISET[COMPIFG] Bits */
+#define COMP_CPU_INT_ISET_COMPIFG_OFS            (1)                             /* !< COMPIFG Offset */
+#define COMP_CPU_INT_ISET_COMPIFG_MASK           ((uint32_t)0x00000002U)         /* !< Sets COMPIFG in RIS register */
+#define COMP_CPU_INT_ISET_COMPIFG_NO_EFFECT      ((uint32_t)0x00000000U)         /* !< Writing a 0 has no effect */
+#define COMP_CPU_INT_ISET_COMPIFG_SET            ((uint32_t)0x00000002U)         /* !< RIS bit corresponding to COMPIFG is
+                                                                                    set */
+/* COMP_CPU_INT_ISET[COMPINVIFG] Bits */
+#define COMP_CPU_INT_ISET_COMPINVIFG_OFS         (2)                             /* !< COMPINVIFG Offset */
+#define COMP_CPU_INT_ISET_COMPINVIFG_MASK        ((uint32_t)0x00000004U)         /* !< Sets COMPINVIFG in RIS register */
+#define COMP_CPU_INT_ISET_COMPINVIFG_NO_EFFECT   ((uint32_t)0x00000000U)         /* !< Writing a 0 has no effect */
+#define COMP_CPU_INT_ISET_COMPINVIFG_SET         ((uint32_t)0x00000004U)         /* !< RIS bit corresponding to COMPINVIFG
+                                                                                    is set */
+/* COMP_CPU_INT_ISET[OUTRDYIFG] Bits */
+#define COMP_CPU_INT_ISET_OUTRDYIFG_OFS          (3)                             /* !< OUTRDYIFG Offset */
+#define COMP_CPU_INT_ISET_OUTRDYIFG_MASK         ((uint32_t)0x00000008U)         /* !< Sets OUTRDYIFG in RIS register */
+#define COMP_CPU_INT_ISET_OUTRDYIFG_NO_EFFECT    ((uint32_t)0x00000000U)         /* !< Writing a 0 has no effect */
+#define COMP_CPU_INT_ISET_OUTRDYIFG_SET          ((uint32_t)0x00000008U)         /* !< RIS bit corresponding to OUTRDYIFG
+                                                                                    is set */
+
+/* COMP_CPU_INT_ICLR Bits */
+/* COMP_CPU_INT_ICLR[COMPIFG] Bits */
+#define COMP_CPU_INT_ICLR_COMPIFG_OFS            (1)                             /* !< COMPIFG Offset */
+#define COMP_CPU_INT_ICLR_COMPIFG_MASK           ((uint32_t)0x00000002U)         /* !< Clears COMPIFG in RIS register */
+#define COMP_CPU_INT_ICLR_COMPIFG_NO_EFFECT      ((uint32_t)0x00000000U)         /* !< Writing a 0 has no effect */
+#define COMP_CPU_INT_ICLR_COMPIFG_CLR            ((uint32_t)0x00000002U)         /* !< RIS bit corresponding to COMPIFG is
+                                                                                    cleared */
+/* COMP_CPU_INT_ICLR[COMPINVIFG] Bits */
+#define COMP_CPU_INT_ICLR_COMPINVIFG_OFS         (2)                             /* !< COMPINVIFG Offset */
+#define COMP_CPU_INT_ICLR_COMPINVIFG_MASK        ((uint32_t)0x00000004U)         /* !< Clears COMPINVIFG in RIS register */
+#define COMP_CPU_INT_ICLR_COMPINVIFG_NO_EFFECT   ((uint32_t)0x00000000U)         /* !< Writing a 0 has no effect */
+#define COMP_CPU_INT_ICLR_COMPINVIFG_CLR         ((uint32_t)0x00000004U)         /* !< RIS bit corresponding to COMPINVIFG
+                                                                                    is cleared */
+/* COMP_CPU_INT_ICLR[OUTRDYIFG] Bits */
+#define COMP_CPU_INT_ICLR_OUTRDYIFG_OFS          (3)                             /* !< OUTRDYIFG Offset */
+#define COMP_CPU_INT_ICLR_OUTRDYIFG_MASK         ((uint32_t)0x00000008U)         /* !< Clears OUTRDYIFG in RIS register */
+#define COMP_CPU_INT_ICLR_OUTRDYIFG_NO_EFFECT    ((uint32_t)0x00000000U)         /* !< Writing a 0 has no effect */
+#define COMP_CPU_INT_ICLR_OUTRDYIFG_CLR          ((uint32_t)0x00000008U)         /* !< RIS bit corresponding to OUTRDYIFG
                                                                                     is cleared */
 
 /* COMP_PWREN Bits */

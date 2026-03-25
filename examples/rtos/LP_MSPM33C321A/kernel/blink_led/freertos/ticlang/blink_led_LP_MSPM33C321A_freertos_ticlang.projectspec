@@ -40,8 +40,6 @@
             -Wall
         "
         linkerBuildOptions="
-            -mfloat-abi=hard
-            -mfpu=fpv5-sp-d16
             -i${WORKSPACE_LOC}/freertos_builds_LP_MSPM33C321A_release_ticlang/Debug
             -lfreertos_builds_LP_MSPM33C321A_release_ticlang.lib
             -l${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/ti/driverlib/lib/ticlang/m33/mspm33c321x/driverlib.a

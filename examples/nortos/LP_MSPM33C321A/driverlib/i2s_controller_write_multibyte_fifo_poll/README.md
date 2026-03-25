@@ -26,9 +26,9 @@ Visit [LP_MSPM33C321A](https://www.ti.com/tool/LP-MSPM33C321A) for LaunchPad inf
 | --- | --- | --- | --- | --- |
 | PC26 | GPIOC | FAIL_LED | J8_72 | <ul><li>This pin can be reconfigured for general purpose as necessary</ul></ul> |
 | PC27 | GPIOC | PASS_LED | J8_71 | <ul><li>This pin can be reconfigured for general purpose as necessary</ul></ul>|
-| PB20 | I2S1 | AD0 | J8_43 | N/A |
-| PB23 | I2S1 | BCLK | J8_46 | N/A |
-| PB22 | I2S1 | WCLK | J8_45 | N/A |
+| PB20 | I2S1 | AD0 | J5_70 | N/A |
+| PB23 | I2S1 | BCLK | J5_68 | N/A |
+| PB22 | I2S1 | WCLK | J5_67 | N/A |
 | PA20 | DEBUGSS | SWCLK | N/A | <ul><li>PA20 is used by SWD during debugging<br><ul><li>`J101 15:16 ON` Connect to XDS-110 SWCLK while debugging<br><li>`J101 15:16 OFF` Disconnect from XDS-110 SWCLK if using pin in application</ul></ul> |
 | PA19 | DEBUGSS | SWDIO | N/A | <ul><li>PA19 is used by SWD during debugging<br><ul><li>`J101 13:14 ON` Connect to XDS-110 SWDIO while debugging<br><li>`J101 13:14 OFF` Disconnect from XDS-110 SWDIO if using pin in application</ul></ul> |
 

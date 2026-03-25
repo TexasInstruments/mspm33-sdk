@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>适用于 MSPM0 的 UniFlash 指南 &mdash; MSPM33 Tools Guide 1.02.00.00 documentation</title>
+  <title>适用于 MSPM0 的 UniFlash 指南 &mdash; MSPM33 Tools Guide 1.03.00.01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
@@ -33,7 +33,7 @@
             <a href="index.html" class="icon icon-home"> MSPM33 Tools Guide
           </a>
               <div class="version">
-                1.02.00.00
+                1.03.00.01
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -118,31 +118,39 @@
 <section id="uniflash-mspm0">
 <h2>3. 通过调试器将 UniFlash 与 MSPM0 配合使用<a class="headerlink" href="#uniflash-mspm0" title="Permalink to this heading">¶</a></h2>
 <p>UniFlash 可使用调试接口（如 XDS110）来编程器件。可选择器件（如下所示的片上版本）和将用于启动的特定接口。另外，UniFlash 还可以自动检测 MSPM0 LaunchPad（如果已连接）。LaunchPad 包括德州仪器（TI）XDS110 USB 调试探针。</p>
-<p><img alt="image0" src="../_images/uniflash_guide_jtag_start.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/uniflash_guide_jtag_start.png" />
+</figure>
 <section id="id3">
 <h3>3.1 加载映像。<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
 <ol class="arabic simple">
 <li><p>编译采用兼容格式的应用，例如 .out。<a class="reference external" href="https://software-dl.ti.com/ccs/esd/uniflash/docs/v7_1/uniflash_quick_start_guide.html">UniFlash 快速入门指南</a>中说明了所有可能的文件类型。</p></li>
-<li><p>如图所示上传闪存映像文件。 <img alt="image1" src="../_images/uniflash_guide_use_2.png" /></p></li>
+<li><p>如图所示上传闪存映像文件。 <img alt="image0" src="../_images/uniflash_guide_use_2.png" /></p></li>
 <li><p>根据需要调整擦除设置或其他信息。如果恢复出厂设置，请特别注意，因为 <strong>NONMAIN 将在这个过程中擦除</strong>。随后用户需负责重新编程 NONMAIN。在恢复出厂设置之前，建议确认此行为是否正确。</p></li>
 </ol>
 <p>此外，如果恢复出厂设置，可选择提供密码。有关详细信息，请参阅相应的器件 TRM。</p>
 <ol class="arabic" start="4">
 <li><p>点击 <strong>Load Image</strong>。映像应正确加载。</p>
-<p><img alt="image2" src="../_images/uniflash_guide_use_3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/uniflash_guide_use_3.png" />
+</figure>
 </li>
 </ol>
 </section>
 <section id="id4">
 <h3>3.2 从内存读取<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h3>
 <p>在“Memory”选项卡中，只需选择 <strong>Read Target Device</strong>，UniFlash 还可检测器件闪存。</p>
-<p><img alt="image3" src="../_images/uniflash_guide_jtag_read.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/uniflash_guide_jtag_read.png" />
+</figure>
 </section>
 </section>
 <section id="uniflash">
 <h2>4 通过引导加载程序编程器使用 UniFlash<a class="headerlink" href="#uniflash" title="Permalink to this heading">¶</a></h2>
 <p>引导加载程序编程器是通过器件的串行 UART 连接写入器件的另一种方法，不需要调试器。加载 UniFlash 时，所选器件可通过搜索器件名称并选择器件的引导加载程序选项来使用引导加载程序编程器，如下所示。</p>
-<p><img alt="image4" src="../_images/uniflash_guide_bootloader_start.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/uniflash_guide_bootloader_start.png" />
+</figure>
 <section id="id5">
 <h3>4.1 硬件注意事项<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h3>
 <p>下面提供了一些必要的器件硬件注意事项。请注意，用于 UART 的引脚是 <strong>BSLRX</strong> 和 <strong>BSLTX</strong>，可在器件特定数据表中找到。</p>
@@ -155,7 +163,9 @@
 <section id="nonmain">
 <h3>4.2 NONMAIN 注意事项<a class="headerlink" href="#nonmain" title="Permalink to this heading">¶</a></h3>
 <p><strong>警告！</strong>使用 UniFlash 时，可以从“Erase”设置中选择“Factory Reset”选项来擦除闪存的 NONMAIN 区域。NONMAIN 部分包含有关器件的重要信息，包括引导加载程序接口。<strong>如果已擦除，务必要在刷写周期内使用有效 NONMAIN 配置重新刷写器件。否则，器件不会按预期运行，并且可能不可恢复。</strong>MSPM0 SDK 包括 SysConfig NONMAIN 配置器，可用于轻松安全地配置 NONMAIN。</p>
-<p><img alt="image5" src="../_images/uniflash_guide_erase_setting.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/uniflash_guide_erase_setting.png" />
+</figure>
 <p>器件基于 NONMAIN 区域中的引导配置例程 （BCR）恢复出厂设置有三种情形：</p>
 <ol class="arabic simple">
 <li><p>如果不使用密码启用，可以恢复出厂设置。</p></li>
@@ -169,13 +179,17 @@
 <ol class="arabic">
 <li><p>将 UART 配置为与 NONMAIN 中 BSL 区域的设置匹配。默认配置为 9600 波特率、8 位数据宽度（含1 个停止位）和无奇偶校验（无更改）。COM 端口不会自动填充，并且需基于机器和操作系统更新。</p></li>
 <li><p>根据需要添加二进制映像。此文本文件将包括在开始时加载的位置。只有在未使用默认密码时，才需要密码。有关密码的详细信息，请参阅<a class="reference external" href="#using-passwords">使用密码</a>。</p>
-<p><img alt="image6" src="../_images/uniflash_guide_load_bootloader_image.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/uniflash_guide_load_bootloader_image.png" />
+</figure>
 </li>
 <li><p>根据需要在 <strong>Settings &amp; Utilities</strong> 部分中调整任何设置。这可包括不同的擦除机制和自定义 CRC 验证。如果修改擦除机制，请参阅 <a class="reference external" href="#nonmain-considerations">NONMAIN 注意事项</a>以确保器件不会变为不可恢复。</p></li>
 <li><p>在目标器件上调用 BSL</p></li>
 <li><p>在 10 秒内，点击“Available Actions”选项卡中的 <strong>Load Image</strong>。成功加载的程序应显示在控制台底部。</p></li>
 </ol>
-<p><img alt="image7" src="../_images/uniflash_guide_bootloader_loaded.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/uniflash_guide_bootloader_loaded.png" />
+</figure>
 <p><strong>注意</strong>，如果映像大小不超过 1KB，则在使用引导加载程序时将显示以下错误。有关详细信息，请参阅<a class="reference external" href="#known-issues-and-frequently-asked-questions-faq">已知问题</a>。</p>
 </section>
 <section id="id7">
@@ -189,14 +203,18 @@
 </pre></div>
 </div>
 <p>包含引导加载程序使用的自定义密码的文本文件可以置于所示文件。</p>
-<p><img alt="image8" src="../_images/uniflash_guide_bootloader_password_provided.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/uniflash_guide_bootloader_password_provided.png" />
+</figure>
 </section>
 <section id="id8">
 <h3>4.5 使用引导加载程序从器件读取<a class="headerlink" href="#id8" title="Permalink to this heading">¶</a></h3>
 <p>默认情况下未在 NONMAIN 中启用内存读取，不过可根据需要支持此功能。有关修改 NONMAIN 以更改 BSL 内存读取策略的信息，请参阅器件的技术参考手册。</p>
 <p>启用后，可在屏幕左上方的 UniFlash <strong>Settings &amp; Utilities</strong> 部分中执行从器件读取。</p>
 <p>要成功从器件读取，需提供引导加载程序解锁密码。默认密码为 32 个 0xFF 字节，在 UniFlash 中编写为 8 个 0xFFFFFFFF 字。</p>
-<p><img alt="image9" src="../_images/uniflash_guide_bootloader_read.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/uniflash_guide_bootloader_read.png" />
+</figure>
 </section>
 <section id="id9">
 <h3>4.6 使用引导加载程序的当前限制<a class="headerlink" href="#id9" title="Permalink to this heading">¶</a></h3>

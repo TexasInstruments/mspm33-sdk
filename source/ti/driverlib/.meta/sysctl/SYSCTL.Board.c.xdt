@@ -198,36 +198,36 @@ static const DL_SYSCTL_SYSPLLConfig gSYSPLLConfig = {
 SYSCONFIG_WEAK bool SYSCFG_DL_SYSCTL_SYSPLL_init(void)
 {
     bool fFCCRatioStatus = false;
-    uint32_t fFCCSysoscCount;
-    uint32_t fFCCPllCount;
+    uint32_t fFCCPllInputCount;
+    uint32_t fFCCPllOutputCount;
     uint32_t fFCCRatio;
 
     DL_SYSCTL_setFCCPeriods( DL_SYSCTL_FCC_TRIG_CNT_01 );
 
-    //Measuring PLL. Use ONLY this configuration. DO NOT EDIT
+    //Measuring PLL output. Use ONLY this configuration. DO NOT EDIT
     DL_SYSCTL_configFCC(DL_SYSCTL_FCC_TRIG_TYPE_RISE_RISE,
                         DL_SYSCTL_FCC_TRIG_SOURCE_LFCLK,
                         DL_SYSCTL_FCC_CLOCK_SOURCE_SYSPLLCLK0);
-    /* Get SYSPLL frequency using FCC */
+    /* Get SYSPLL output frequency using FCC */
     DL_SYSCTL_startFCC();
     while (DL_SYSCTL_isFCCDone() == 0);
 
     /* get measA= SYSPLL0 freq wrt LFOSC*/
-    fFCCPllCount = DL_SYSCTL_readFCC();
+    fFCCPllOutputCount = DL_SYSCTL_readFCC();
 
-    //Measuring SYSOSC. Use ONLY this configuration. DO NOT EDIT
+    //Measuring PLL input (`sourceSYSPLL`). Use ONLY this configuration. DO NOT EDIT
     DL_SYSCTL_configFCC(DL_SYSCTL_FCC_TRIG_TYPE_RISE_RISE,
                         DL_SYSCTL_FCC_TRIG_SOURCE_LFCLK,
                         DL_SYSCTL_FCC_CLOCK_SOURCE_`sourceSYSPLL`);
-    /* Get SYSPLL frequency using FCC */
+    /* Get SYSPLL input frequency using FCC */
     DL_SYSCTL_startFCC();
     while (DL_SYSCTL_isFCCDone() == 0 );//
 
-    /* get measB= SYSOSC freq wrt LFOSC*/
-    fFCCSysoscCount = DL_SYSCTL_readFCC();
+    /* get measB= `sourceSYSPLL` freq wrt LFOSC*/
+    fFCCPllInputCount = DL_SYSCTL_readFCC();
 
     /* Get ratio of both measurements*/
-    fFCCRatio = (fFCCPllCount * FLOAT_TO_INT_SCALE) / fFCCSysoscCount;
+    fFCCRatio = (fFCCPllOutputCount * FLOAT_TO_INT_SCALE) / fFCCPllInputCount;
     /* Check ratio is within bounds*/
     if ((FCC_LOWER_BOUND <  fFCCRatio) && (fFCCRatio < FCC_UPPER_BOUND))
     {
@@ -530,7 +530,7 @@ if(!stat.powerPolicy.match(/SLEEP/)) {
     `printMClkSource`
 %}
 % if(stat.CANCLKSource == "SYSPLLCLK0" || stat.CANCLKSource == "SYSPLLCLK2X"){
-    DL_SYSCTL_enableCANCLKDivider(SYSCTL_GENCLKEN_EXTDIVCAN_`stat.EXTDIVCAN`);
+    DL_SYSCTL_enableCANCLKDivider(SYSCTL_GENCLKEN_EXTDIVCAN_DIV`stat.EXTDIVCAN`);
 %}
 % if(stat.CANCLKSource == "HFCLK"){
 % }

@@ -165,46 +165,41 @@ SYSCONFIG_WEAK void SYSCFG_DL_`inst.$name`_init(void)
 %   }
 
 %   for (let i=1; i < (inst.enabledPPBs.length + 1); i++){
-%   for (let j=0; j < inst["ppb" + i + "EventEnable"].length; j++){
-%   if(inst["ppb" + i + "EventEnable"][j] == "ADC_EVT_TRIPHI"){
+%   let ppbnum = inst.enabledPPBs[i-1].replace("ADC_PPB_NUMBER", "");
+%   for (let j=0; j < inst["ppb" + ppbnum + "EventEnable"].length; j++){
+%   if(inst["ppb" + ppbnum + "EventEnable"][j] == "ADC_EVT_TRIPHI"){
     DL_HSADC_enablePPBTripHighEvent(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`);
 %   }
-%   if(inst["ppb" + i + "EventEnable"][j] == "ADC_EVT_TRIPLO"){
+%   if(inst["ppb" + ppbnum + "EventEnable"][j] == "ADC_EVT_TRIPLO"){
     DL_HSADC_enablePPBTripLowEvent(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`);
 %   }
-%   if(inst["ppb" + i + "EventEnable"][j] == "ADC_EVT_ZERO"){
-    DL_HSADC_enablePPBTripZeroEvent(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`);
-%   }
-%   if(inst["ppb" + i + "EventEnable"][j] == "ADC_EVT_INLIMIT"){
+%   if(inst["ppb" + ppbnum + "EventEnable"][j] == "ADC_EVT_INLIMIT"){
     DL_HSADC_enablePPBTripInLimitEvent(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`);
 %   }
 %   }
-%   if(inst["ppb" + i + "EventEnable"].length > 0){
-    DL_HSADC_setPPBTripHighLimit(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`, `inst["ppb" + i + "HighTripLimit"]`);
-    DL_HSADC_setPPBTripLowLimit(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`, `inst["ppb" + i + "LowTripLimit"]`);
+%   if(inst["ppb" + ppbnum + "EventEnable"].length > 0){
+    DL_HSADC_setPPBTripHighLimit(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`, `inst["ppb" + ppbnum + "HighTripLimit"]`);
+    DL_HSADC_setPPBTripLowLimit(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`, `inst["ppb" + ppbnum + "LowTripLimit"]`);
 %   }
-%   for (let j=0; j < inst["ppb" + i + "EventInterruptEnable"].length; j++){
-%   if(inst["ppb" + i + "EventInterruptEnable"][j] == "ADC_EVT_TRIPHI"){
+%   for (let j=0; j < inst["ppb" + ppbnum + "EventInterruptEnable"].length; j++){
+%   if(inst["ppb" + ppbnum + "EventInterruptEnable"][j] == "ADC_EVT_TRIPHI"){
     DL_HSADC_enablePPBTripHighInterrupt(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`);
 %   }
-%   if(inst["ppb" + i + "EventInterruptEnable"][j] == "ADC_EVT_TRIPLO"){
+%   if(inst["ppb" + ppbnum + "EventInterruptEnable"][j] == "ADC_EVT_TRIPLO"){
     DL_HSADC_enablePPBTripLowInterrupt(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`);
 %   }
-%   if(inst["ppb" + i + "EventInterruptEnable"][j] == "ADC_EVT_ZERO"){
-    DL_HSADC_enablePPBTripZeroInterrupt(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`);
-%   }
-%   if(inst["ppb" + i + "EventInterruptEnable"][j] == "ADC_EVT_INLIMIT"){
+%   if(inst["ppb" + ppbnum + "EventInterruptEnable"][j] == "ADC_EVT_INLIMIT"){
     DL_HSADC_enablePPBTripInLimitInterrupt(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`);
 %   }
 %   }
-%   if(inst["ppb" + i + "AccumulationLimit"] != "ADC_OversamplingLimit_Nil"){
-    DL_HSADC_setPPBOversamplingLimit(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`, DL_HS`inst["ppb" + i + "AccumulationLimit"]`);
+%   if(inst["ppb" + ppbnum + "AccumulationLimit"] != "ADC_OversamplingLimit_Nil"){
+    DL_HSADC_setPPBOversamplingLimit(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`, DL_HS`inst["ppb" + ppbnum + "AccumulationLimit"]`);
 %   }
-%   if(inst["ppb" + i + "CompSource"] == "ADC_PPB_COMPSOURCE_SUM"){
+%   if(inst["ppb" + ppbnum + "CompSource"] == "ADC_PPB_COMPSOURCE_SUM"){
     DL_HSADC_selectCompareSourceAsPPBSum(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`);
 %   }
-%   if(inst["ppb" + i + "Rightshift"] != "0"){
-    DL_HSADC_setPPBRightShift(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`, DL_HSADC_PPB_RIGHTSHIFT_`inst["ppb" + i + "Rightshift"]`);
+%   if(inst["ppb" + ppbnum + "Rightshift"] != "0"){
+    DL_HSADC_setPPBRightShift(`baseName`, DL_HS`inst.enabledPPBs[i-1].replace("_PPB", "_SEQ")`, DL_HSADC_PPB_RIGHTSHIFT_`inst["ppb" + ppbnum + "Rightshift"]`);
 %   }
 %   }
 

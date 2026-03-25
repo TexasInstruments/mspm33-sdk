@@ -44,9 +44,7 @@ CFLAGS += -I../.. \
     -mcpu=cortex-m33 \
     -Wall
 
-LFLAGS += -mfloat-abi=hard \
-    -mfpu=fpv5-sp-d16 \
-    -i${WORKSPACE_LOC}/freertos_builds_LP_MSPM33C321A_release_ticlang/Debug \
+LFLAGS += -i${WORKSPACE_LOC}/freertos_builds_LP_MSPM33C321A_release_ticlang/Debug \
     -lfreertos_builds_LP_MSPM33C321A_release_ticlang.lib \
     "-l$(MSPM33_SDK_INSTALL_DIR)/source/ti/driverlib/lib/ticlang/m33/mspm33c321x/driverlib.a" \
     "-L$(MSPM33_SDK_INSTALL_DIR)/source" \

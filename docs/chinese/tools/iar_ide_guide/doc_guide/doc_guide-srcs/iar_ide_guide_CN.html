@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>适用于 MSPM33 MCU 的 IAR Embedded Workbench IDE 9.50.1+ 版 &mdash; IAR Embedded Workbench IDE for MSPM33 MCUs Documentation 1.02.00.00 documentation</title>
+  <title>适用于 MSPM33 MCU 的 IAR Embedded Workbench IDE 9.50.1+ 版 &mdash; IAR Embedded Workbench IDE for MSPM33 MCUs Documentation 1.03.00.01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
@@ -32,7 +32,7 @@
             <a href="index.html" class="icon icon-home"> IAR Embedded Workbench IDE for MSPM33 MCUs Documentation
           </a>
               <div class="version">
-                1.02.00.00
+                1.03.00.01
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -206,20 +206,28 @@
 <ol class="arabic simple">
 <li><p>在 SysConfig 中，启用器件视图并点击 <strong>SWITCH</strong></p></li>
 </ol>
-<p><img alt="image0" src="../_images/iar_ide_migrate_1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_ide_migrate_1.png" />
+</figure>
 <ol class="arabic simple" start="2">
 <li><p>选择新 MSPM33 器件的相应选项，然后点击 <strong>CONFIRM</strong>。</p></li>
 </ol>
-<p><img alt="image1" src="../_images/iar_ide_migrate_2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_ide_migrate_2.png" />
+</figure>
 <ol class="arabic simple" start="3">
 <li><p>请注意，SysConfig 将突出显示与迁移的任何冲突，例如不可用的引脚和外设。 根据需要修复任何冲突。</p></li>
 <li><p>在工程选项中，依次选择 <strong>General Options</strong> → <strong>Target</strong> → <strong>Device</strong>。选择 MSPM33 器件。</p></li>
 </ol>
-<p><img alt="image2" src="../_images/iar_ide_migrate_3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_ide_migrate_3.png" />
+</figure>
 <ol class="arabic simple" start="5">
 <li><p>在工程选项中，依次选择 <strong>C/C++ Compiler</strong> → <strong>Preprocessor</strong> → <strong>Defined symbols</strong>。 根据所选器件添加器件定义。</p></li>
 </ol>
-<p><img alt="image3" src="../_images/iar_ide_migrate_4.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_ide_migrate_4.png" />
+</figure>
 <ol class="arabic simple" start="6">
 <li><p>更新链接器和启动文件。MSPM33 SDK 分别在 <code class="docutils literal notranslate"><span class="pre">&lt;sdk&gt;\source\ti\devices\msp\m33\linker_files\iar</span></code> 和 <code class="docutils literal notranslate"><span class="pre">&lt;sdk&gt;\source\ti\devices\msp\m33\startup_system_files\iar</span></code> 中包含所有 MSPM33 衍生产品的默认文件。</p></li>
 <li><p>解析任何其他依赖项，例如不兼容的库和源代码。</p></li>
@@ -242,10 +250,14 @@
 <ol class="arabic">
 <li><p>依次点击 <strong>Options</strong> → <strong>Debugger</strong> → <strong>Download</strong> → <strong>Override default .board file</strong> → <strong>Edit</strong>。</p></li>
 <li><p>选择第二个元素，然后点击“Okay”：</p>
-<p><img alt="image4" src="../_images/iar_ide_non_main.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_ide_non_main.png" />
+</figure>
 </li>
 <li><p>添加 <code class="docutils literal notranslate"><span class="pre">--non_main_erase</span></code> 作为额外参数：</p>
-<p><img alt="image5" src="../_images/iar_ide_non_main_2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_ide_non_main_2.png" />
+</figure>
 </li>
 </ol>
 </section>
@@ -253,9 +265,13 @@
 <h3>2.9 覆盖预编译库<a class="headerlink" href="#id10" title="Permalink to this heading">¶</a></h3>
 <p>工程可能包括预编译库，可简化开发和编译过程；不过， 开发人员无法轻松修改源代码。</p>
 <p>下面显示了此类库的一个示例 MSPM33 DriverLib。</p>
-<p><img alt="image6" src="../_images/iar_ide_lib.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_ide_lib.png" />
+</figure>
 <p>覆盖库的一个选项是直接向工程添加任何或所有源文件。 MSPM33 SDK 包括 <code class="docutils literal notranslate"><span class="pre">empty_driverlib_src</span></code> 示例，其中默认包括所有 DriverLib 源：</p>
-<p><img alt="image7" src="../_images/iar_ide_lib_source.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_ide_lib_source.png" />
+</figure>
 <p>请参阅<a class="reference external" href="#debugging-pre-built-libraries">调试预编译库</a>，了解 如何调试预编译库。</p>
 </section>
 </section>
@@ -267,9 +283,13 @@
 <p><strong>注意</strong>：TI XDS-110 调试探针通过 CMSIS-DAP 协议启用。不过， TI XDS 原生驱动程序目前性能更高。</p>
 <p>要将这些调试探针用于 EWARM，需要安装 XDS 仿真包。仿真包副本 位于 <code class="docutils literal notranslate"><span class="pre">\arm\drivers\ti-xds</span></code> 下的 EWARM 安装程序中。请参阅同样位于此文件夹中的 Readme.txt 文档。TI 建议在 <code class="docutils literal notranslate"><span class="pre">c:\ti\xds\ewarm_version</span></code> 中安装仿真包。请勿使用其他 EWARM 版本的 XDS 仿真包， 因为它们可能不兼容，可能在调试时导致出错。</p>
 <p>要使用 TI-XDS 调试探针，请依次选择 <strong>Options</strong> → <strong>Debugger</strong> → <strong>Driver</strong> → <strong>TI XDS</strong>：</p>
-<p><img alt="image8" src="../_images/iar_ide_xds110_select.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_ide_xds110_select.png" />
+</figure>
 <p>安装仿真包后，可在 <strong>Options</strong> → <strong>Debugger</strong> → <strong>TI XDS</strong> 中选择 XDS 调试探针：</p>
-<p><img alt="image9" src="../_images/iar_ide_xds110.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_ide_xds110.png" />
+</figure>
 <ul class="simple">
 <li><p>注意所选仿真器。LaunchPad 包括一个集成的 TI XDS110 仿真器。</p></li>
 <li><p>所选接口是 MSPM33 支持的 SWD。</p></li>
@@ -280,7 +300,9 @@
 <section id="segger-j-link">
 <h3>3.2 使用 Segger J-Link 调试探针<a class="headerlink" href="#segger-j-link" title="Permalink to this heading">¶</a></h3>
 <p>要使用 Segger J-Link 调试探针，请依次选择 <strong>Options</strong> → <strong>Debugger</strong> → <strong>Driver</strong> → <strong>J-Link/J-Trace</strong>：</p>
-<p><img alt="image10" src="../_images/iar_ide_jlink_select.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_ide_jlink_select.png" />
+</figure>
 <ul class="simple">
 <li><p>J-Link 工具使用闪存加载程序将代码下载到器件。在 <strong>Options</strong> → <strong>Debugger</strong> → <strong>Use flash loader(s)</strong> 中确认使用：</p></li>
 </ul>
@@ -288,7 +310,9 @@
 <section id="iar-i-jet">
 <h3>3.3 使用 IAR I-jet 调试探针<a class="headerlink" href="#iar-i-jet" title="Permalink to this heading">¶</a></h3>
 <p>要使用 IAR I-Jet 调试探针，请依次选择 <strong>Options</strong> → <strong>Debugger</strong> → <strong>Driver</strong> → <strong>I-jet</strong>：</p>
-<p><img alt="image11" src="../_images/iar_ide_ijet_select.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_ide_ijet_select.png" />
+</figure>
 <ul class="simple">
 <li><p>I-jet 工具使用闪存加载程序将代码下载到器件。在 <strong>Options</strong> → <strong>Debugger</strong> → <strong>Use flash loader(s)</strong> 中确认使用：</p></li>
 </ul>
@@ -298,17 +322,25 @@
 <p>C-SPY 断点机制使用有限数量的片上调试资源（具体为 4 个硬件断点 和 2 个硬件观察点）。MSPM33 不支持软件断点。这意味着在 C-SPY 中最多可设置 4 个断点。</p>
 <p>重置程序和“运行至光标”操作临时需要1个断点。因此，只有 3 个断点 可处于活动状态。如果使用 4 个断点，C-SPY 将自动禁用1个断点。</p>
 <p>如果设置了断点最大数量，将显示以下警告。</p>
-<p><img alt="image12" src="../_images/iar_ide_max_breakpoints.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_ide_max_breakpoints.png" />
+</figure>
 </section>
 <section id="id13">
 <h3>3.5 调试预编译库<a class="headerlink" href="#id13" title="Permalink to this heading">¶</a></h3>
 <p>工程可能包括预编译库，如果符号不可用，可能很难调试这些库。 此类库的一个示例是 MSPM33 DriverLib，它由多个 MSPM33 SDK 示例使用。</p>
 <p>在此类情况下，IAR 将显示以下消息：</p>
-<p><img alt="image13" src="../_images/iar_ide_debug_error.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_ide_debug_error.png" />
+</figure>
 <p>可通过选择包含源代码的文件夹来修复错误。在所示示例中，选择了 DriverLib 源代码：</p>
-<p><img alt="image14" src="../_images/iar_ide_debug_error_fix1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_ide_debug_error_fix1.png" />
+</figure>
 <p>或者，将源代码路径添加至 <strong>Options</strong> → <strong>Runtime Checking</strong> → <strong>C/C++ Compiler</strong>→<strong>Preprocessor</strong>。在所示示例中，添加了 DriverLib 源代码路径：</p>
-<p><img alt="image15" src="../_images/iar_ide_debug_error_fix2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_ide_debug_error_fix2.png" />
+</figure>
 <p>请参阅<a class="reference external" href="#overriding-pre-built-libraries">覆盖预编译库</a>，以了解 如何覆盖和修改库的源代码。</p>
 </section>
 </section>

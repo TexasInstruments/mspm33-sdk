@@ -116,18 +116,26 @@
 <p>具有 UART 扩展功能的 UART 外设支持 LIN 模式。 有关 UART 外设的特定于器件的详细信息，请参考器件数据表。</p>
 <p>用户可以使用 SysConfig 轻松为 LIN 配置其器件。 有关如何下载、安装和开始使用 SysConfig 的更多详细信息，请参考<a class="reference external" href="../../../../tools/sysconfig_guide/SysConfig_Guide_for_MSPM0_CN.html">将 SysConfig 与 MSPM0 配合使用</a>。</p>
 <p>要在 SysConfig 中将 LIN 添加到工程，如下所示添加 UART-LIN 模块。</p>
-<p><img alt="image0" src="../_images/lin_guide_add_syscfg_module.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/lin_guide_add_syscfg_module.png" />
+</figure>
 <p>除了允许用户为 UART 外设配置基本的 UART 属性外，UART-LIN 模块还允许用户配置以下 LIN 设置：</p>
-<p><img alt="image1" src="../_images/lin_guide_syscfg_configs.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/lin_guide_syscfg_configs.png" />
+</figure>
 <p>以下部分将详细介绍这些设置。</p>
 <section id="lin">
 <h3>启用 LIN 计数器<a class="headerlink" href="#lin" title="Permalink to this heading">¶</a></h3>
-<p><img alt="image2" src="../_images/lin_guide_enable_lin_counter.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/lin_guide_enable_lin_counter.png" />
+</figure>
 <p>这会启用 16 位 LIN 向上计数器 LINCNT。LIN 计数器仅在计数器启用后计数。</p>
 </section>
 <section id="id2">
 <h3>启用和配置 LIN 计数器比较匹配模式<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
-<p><img alt="image3" src="../_images/lin_guide_counter_compare_match_config.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/lin_guide_counter_compare_match_config.png" />
+</figure>
 <p><strong>Counter Compare Match mode</strong> 允许用户检测边沿事件之间的计时。方式是启用 LIN 计数器 LINCNT，以便与 16 位捕获寄存器 LINC0 中的设定值进行比较。此功能对于 LIN 中断检测很有用，当 RXD 在 9.5 个连续位中处于低电平时，可检测到有效中断。</p>
 <p>启用此模式时，SysConfig 提供一个 Tbit （传输一个位所需的标称时间）的计算值。Tbit 的计算方法为：</p>
 <ul class="simple">
@@ -140,40 +148,58 @@
 <p>用户可以提供以 Tbit 为单位的计数器比较值。例如，要将计数器比较值设置为 9.5 Tbit，用户应该将 <strong>Counter Compare Timing</strong> 值设置为“9.5”。</p>
 <p>以 Tbit 为单位设置要比较的值后，SysConfig 还提供以周期为单位的值（计数器比较寄存器 LINC0 设置为此值）。在此示例中，以周期为单位的 <strong>Counter Compare Value</strong> 为 15,833。</p>
 <p>可启用中断功能，以便在计数器比较匹配时触发中断。在 <strong>Interrupt Configuration</strong> 部分中选择 <strong>LINC0 match</strong> 中断，以便在与设置的计数器比较值匹配时触发中断。</p>
-<p><img alt="image4" src="../_images/lin_guide_linc0_match.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/lin_guide_linc0_match.png" />
+</figure>
 <p>启用 <strong>Counter Compare Match mode</strong> 时，会自动禁用 LINCNT 的另一种模式“Capture on RXD falling edge”。这两个选项是互斥的。</p>
 </section>
 <section id="rxd">
 <h3>启用在 RXD 下降沿捕获<a class="headerlink" href="#rxd" title="Permalink to this heading">¶</a></h3>
-<p><img alt="image5" src="../_images/lin_guide_capture_on_rxd_falling.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/lin_guide_capture_on_rxd_falling.png" />
+</figure>
 <p>“Capture on RXD Falling Edge”可使用户验证事件时序。方式是配置 16 位捕获寄存器 LINC0，使其在 RXD 下降沿捕获 LIN 计数器 LINCNT 的值。它可以与<strong>启用在 RXD 上升沿捕获</strong>特性联合使用，通过测量信号的位时序并使用 LINC0 和 LINC1 中的值验证捕获时序，以执行同步域验证。</p>
 <p>可启用中断功能，以便在 RXD 下降沿触发中断。在 <strong>Interrupt Configuration</strong> 部分中选择 <strong>LIN falling edge</strong> 中断，以便在 LINC0 计数器在每个 RXD 下降沿将值捕获到 LINC0 寄存器时触发中断。</p>
-<p><img alt="image6" src="../_images/lin_guide_lin_falling_edge_int.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/lin_guide_lin_falling_edge_int.png" />
+</figure>
 <p>启用 <strong>Capture on RXD Falling Edge</strong> 时，会自动禁用 LINCNT 的另一种模式 <strong>Counter Compare Match mode</strong>。这两个选项是互斥的。</p>
 </section>
 <section id="id3">
 <h3>启用在 RXD 下降沿计数器复位<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
-<p><img alt="image7" src="../_images/lin_guide_counter_reset.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/lin_guide_counter_reset.png" />
+</figure>
 <p>启用 <strong>Counter Reset on RXD Falling Edge</strong> 时，LIN 计数器 LINCNT 将在 检测到 RXD 的下降沿时重置为值 0。在重置该值后，LIN 计数器将立即继续计数。在同步域验证期间，这有助于持续计算每个新下降沿上的位时间。</p>
 </section>
 <section id="id4">
 <h3>启用在 RXD 低电平时计数<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h3>
-<p><img alt="image8" src="../_images/lin_guide_count_while_low.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/lin_guide_count_while_low.png" />
+</figure>
 <p>启用后，LIN 计数器 LINCNT 会在 RXD 上有低电平信号时计数。这有助于检测中断域，因此 LIN 计数器可以计算 RXD 低电平信号的长度，以确定它是否是中断域。 在计数前，必须首先启用 LIN 计数器。</p>
 </section>
 <section id="id5">
 <h3>启用在 RXD 上升沿捕获<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h3>
-<p><img alt="image9" src="../_images/lin_guide_capture_on_rxd_rising.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/lin_guide_capture_on_rxd_rising.png" />
+</figure>
 <p>启用后，16 位捕获寄存器 LINC1 将在每个 RXD 上升沿捕获 LIN 计数器 LINCNT 的值。它可以与<strong>启用在 RXD 下降沿捕获</strong>特性联合使用，通过测量信号的位时序并使用 LINC0 和 LINC1 中的值验证捕获时序，以执行同步域验证。</p>
 <p>可启用中断功能，以便在 RXD 上升沿触发中断。在 <strong>Interrupt Configuration</strong> 部分中选择 <strong>LIN rising edge</strong> 中断，以便在 LINC1 计数器在每个 RXD 上升沿将值捕获到 LINC0 寄存器时触发中断。</p>
-<p><img alt="image10" src="../_images/lin_guide_lin_rising_edge_int.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/lin_guide_lin_rising_edge_int.png" />
+</figure>
 </section>
 <section id="id6">
 <h3>快速配置文件<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h3>
 <p>UART-LIN 模块中提供了一个快速配置文件，就如何配置 LIN 设置给出了一些基本的建议。</p>
 <p>快速配置文件 <strong>LIN at 19220 baud with Break Detection</strong> 将 UART 外设配置为 19200 波特，并配置 LIN 设置以处理中断检测。</p>
-<p><img alt="image11" src="../_images/lin_guide_syscfg_profile.png" /></p>
-<p><img alt="image12" src="../_images/lin_guide_profile_settings.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/lin_guide_syscfg_profile.png" />
+</figure>
+<figure class="align-default">
+<img alt="" src="../_images/lin_guide_profile_settings.png" />
+</figure>
 <p>选择配置文件后，用户可以修改这些设置，以更加适合其应用。</p>
 <p>有关 UART LIN 配置的更多详细信息，请参考特定于器件的技术参考手册 （TRM）。</p>
 </section>

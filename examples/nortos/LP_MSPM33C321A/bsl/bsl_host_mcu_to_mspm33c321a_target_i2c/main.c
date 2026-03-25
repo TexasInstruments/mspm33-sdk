@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, Texas Instruments Incorporated
+ * Copyright (c) 2026, Texas Instruments Incorporated
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -42,19 +42,15 @@
 #include "bsl_uart.h"
 #include "uart.h"
 #endif
-#ifdef SPI_Plugin
-#include <application_image_spi.h>
-#include "bsl_spi.h"
-#include "spi.h"
-#endif
 
 void ToggleLeds(void);
 
 BSL_error_t bsl_err;
 uint8_t status;
-//=============================================================================
-// Here is password of the boot code for update. The last two bytes if the start address of the boot code.
-// const uint8_t BSL_PW_RESET[32] = {0x12, 0x34, 0x12, 0x34,0x12, 0x34,0x12, 0x34, 0x12, 0x34, 0x12, 0x34, 0x12, 0x34, 0x12, 0x34, 0x12, 0x34, 0x12, 0x34, 0x12, 0x34, 0x12, 0x34, 0x12, 0x34, 0x12, 0x34, 0x12, 0x34,0x12, 0x34};
+/*=============================================================================
+ * Password of the boot code for update. The last two bytes if the start address of the boot code.
+ * const uint8_t BSL_PW_RESET[32] = {0x12, 0x34, 0x12, 0x34,0x12, 0x34,0x12, 0x34, 0x12, 0x34, 0x12, 0x34, 0x12, 0x34, 0x12, 0x34, 0x12, 0x34, 0x12, 0x34, 0x12, 0x34, 0x12, 0x34, 0x12, 0x34, 0x12, 0x34, 0x12, 0x34,0x12, 0x34};
+ */
 const uint8_t BSL_PW_RESET[32] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
     0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
     0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
@@ -70,40 +66,12 @@ int main(void)
     SCB->VTOR = 0x30000001;
 
     SYSCFG_DL_init();
-    DL_CRCP_reset(CRC_Regs);
-    DL_CRCP_enablePower(CRC_Regs);
-    DL_CRCP_init(CRC_Regs, DL_CRCP_POLYNOMIAL_SIZE_32, DL_CRCP_BIT_REVERSED,
-        DL_CRCP_INPUT_ENDIANESS_LITTLE_ENDIAN,
-        DL_CRCP_OUTPUT_BYTESWAP_DISABLED);
-
-#ifdef CAN_Plugin
-    CAN_initialize();
-#endif
-
-    // delay_cycles(16000000);
-    ToggleLeds();  //TO show code start
+    ToggleLeds(); /* TO show code start */
 
     while (1) {
-//         if (!DL_GPIO_readPins(GPIO_Button_PORT, GPIO_Button_PIN_0_PIN)) {
-//             delay_cycles(2000);
-//             if (!DL_GPIO_readPins(GPIO_Button_PORT, GPIO_Button_PIN_0_PIN)) {
-//                 bsl_err = eBSL_success;
-//                 ToggleLeds();  // Show we are starting BSL
-// #ifdef Hardware_Invoke
-//                 Host_BSL_entry_sequence();  //PLACE TARGET INTO BSL MODE by hardware invoke
-//                 delay_cycles(500000);
-// #endif
-// #ifdef Software_Invoke
-//                 Host_BSL_software_trigger();  //PLACE TARGET INTO BSL MODE by hardware invoke
-//                 delay_cycles(20000000);  //wait for target go into BSL
-#ifdef CAN_Plugin
-        // delay_cycles(40000000);  //wait for target go into BSL
-#endif
-        // #endif
         bsl_err = Host_BSL_Connection();
         delay_cycles(1000);
         bsl_err = Host_BSL_GetID();
-        // #ifdef CAN_Plugin
         if (bsl_err == eBSL_success) {
             bsl_err = Host_BSL_loadPassword((uint8_t*) BSL_PW_RESET);
             if (bsl_err == eBSL_success) {
@@ -138,56 +106,6 @@ int main(void)
     }
 }
 
-// #else
-//                 status =
-//                     Status_check();  //Check the status of the target: BSL mode or application mode
-//                 if (status == 0x51)  //BSL mode 0x51; application mode 0x22
-//                 {
-//                     delay_cycles(50000);
-//                     bsl_err = Host_BSL_GetID();
-//                     if (BSL_MAX_BUFFER_SIZE >= MAX_PACKET_SIZE) {
-//                         bsl_err =
-//                             Host_BSL_loadPassword((uint8_t*) BSL_PW_RESET);
-//                         if (bsl_err == eBSL_success) {
-//                             bsl_err = Host_BSL_MassErase();
-//                             if (bsl_err == eBSL_success) {
-//                                 delay_cycles(50000);
-//                                 //WRITE THE ENTIRE PROGRAM MEMORY SECTION TO TARGET
-//                                 for (section = 0;
-//                                      section < (sizeof(App1_Addr) /
-//                                                    sizeof(App1_Addr[0]));
-//                                      section++) {
-//                                     bsl_err = Host_BSL_writeMemory(
-//                                         App1_Addr[section], App1_Ptr[section],
-//                                         App1_Size[section]);
-//                                     if (bsl_err != eBSL_success) {
-//                                         TurnOnErrorLED();  // Mass Erase failed error
-//                                         break;
-//                                     }
-//                                 }
-//                                 delay_cycles(
-//                                     50000);  //allow target deal with the packet send before new package
-//                                 //Start the application
-//                                 bsl_err = Host_BSL_StartApp();
-//                             } else {
-//                                 TurnOnErrorLED();  // Mass Erase failed error
-//                                                    // __BKPT(0);
-//                             }
-//                         } else {
-//                             TurnOnErrorLED();  // Password failed error
-//                         }
-
-//                     } else {
-//                         TurnOnErrorLED();  //Buffer less than MAX_PACKET_SIZE error
-//                     }
-//                 }
-// #endif
-//             }
-// delay_cycles(50000);
-//     }
-// }
-// }
-
 /*
  * Toggle the LEDs to show we are going to BSL the target
  */
@@ -195,7 +113,7 @@ void ToggleLeds(void)
 {
     DL_GPIO_clearPins(GPIO_LED_PA0_PORT, GPIO_LED_PA0_PIN);
     DL_GPIO_setPins(GPIO_LED_Error_PORT, GPIO_LED_Error_PIN);
-    // delay_cycles(16000000);
+    delay_cycles(1600000);
     DL_GPIO_setPins(GPIO_LED_PA0_PORT, GPIO_LED_PA0_PIN);
     DL_GPIO_clearPins(GPIO_LED_Error_PORT, GPIO_LED_Error_PIN);
 }

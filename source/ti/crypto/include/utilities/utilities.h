@@ -68,6 +68,7 @@
 #ifndef CRYPTO_UTILITIES_H_
 #define CRYPTO_UTILITIES_H_
 
+#include <stddef.h>
 #include <stdint.h>
 
 /**
@@ -258,5 +259,43 @@ extern void Crypto_delay(volatile uint32_t iterations);
  *              to indicate ordering.
  */
 extern uint8_t Crypto_memcmp(const uint8_t *x, const uint8_t *y, const uint32_t len);
+
+/**
+ *  @brief      Constant-time comparison of two 32-bit word-aligned buffers
+ *
+ *  @param[in]  buffer0           Pointer to first buffer (must be 4-byte aligned)
+ *  @param[in]  buffer1           Pointer to second buffer (must be 4-byte aligned)
+ *  @param[in]  bufferByteLength  Length of buffers in bytes (must be multiple of 4)
+ *
+ *  @return     1 if buffers match and are properly aligned, 0 otherwise
+ */
+extern uint32_t Crypto_memcmp32(
+    const volatile uint32_t* volatile buffer0,
+    const volatile uint32_t* volatile buffer1, uint32_t bufferByteLength);
+
+/**
+ *  @brief      Copies source to destination in reverse word order with byte-swapping
+ *              within each word, and zero-pads the final word if needed. This utility
+ *              supports data formatting for PKA (Public Key Accelerator) hardware.
+ *
+ *  @param[in]  source        Pointer to source buffer
+ *  @param[out] destination   Pointer to destination buffer (must have space for
+ *                            ceiling(sourceLength/4) 32-bit words)
+ *  @param[in]  sourceLength  Length of source buffer in bytes
+ *
+ *  @return     None
+ */
+extern void Crypto_copyReversePad(
+    const void* source, uint32_t* destination, uint32_t sourceLength);
+
+/**
+ * \brief       Reverses the byte order of a buffer in place
+ *
+ * @param[inout] buffer            Pointer to the buffer to reverse
+ * @param[in]    bufferByteLength  Length of the buffer in bytes
+ * 
+ * @return       None
+ */
+extern void Crypto_reverseInPlaceBytewise(void* buffer, size_t bufferByteLength);
 
 #endif /* CRYPTO_UTILITIES_H_ */

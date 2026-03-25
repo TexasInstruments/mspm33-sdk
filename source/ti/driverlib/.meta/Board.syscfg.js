@@ -129,9 +129,9 @@ else if (["MSPM0G151X"].includes(Common.getDeviceName())) {
 }
 else if (["MSPM33C321X"].includes(Common.getDeviceName())) {
     MasterOrder = [
-        "SYSCTL", "PWM", "QEI", "CAPTURE", "COMPARE", "TIMER", "I2C", "UART",
+        "SYSCTL", "PWM", "QEI", "CAPTURE", "COMPARE", "TIMER", "I2C", "UART", "uartLIN",
         "HSADC", "COMP", "VREF", "EVENT", "DMA",
-        "GPIO", "AESADV", "SHAW", "CRCP", "RTC", "RTCA", "TAMPERIO", "IWDT", "TRNG", "SYSTICK", "WWDT", "SPI", "MCAN", "GSC", "I2S", "PKA", "MCUBOOT"
+        "GPIO", "AESADV", "SHAW", "CRCP", "RTC", "RTCA", "TAMPERIO", "IWDT", "TRNG", "SYSTICK", "WWDT", "SPI", "MCAN", "GSC", "I2S", "PKA", "MCUBOOT", "QSPI"
     ];
 }
 

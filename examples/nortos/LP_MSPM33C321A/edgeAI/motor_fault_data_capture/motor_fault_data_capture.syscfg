@@ -1,0 +1,87 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --device "MSPM33C321X" --part "Default" --package "LQFP-100(PFA)" --product "mspm33_sdk@1.02.00.00"
+ * @v2CliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)" --product "mspm33_sdk@1.02.00.00"
+ * @versions {"tool":"1.26.0+4407"}
+ */
+// @cliArgs --board /ti/boards/LP_MSPM33C321A --rtos nortos
+
+/**
+ * Import the modules used in this configuration.
+ */
+const GPIO          = scripting.addModule("/ti/driverlib/GPIO", {}, false);
+const GPIO1         = GPIO.addInstance();
+const GPIO2         = GPIO.addInstance();
+const GPIO3         = GPIO.addInstance();
+const SPI           = scripting.addModule("/ti/driverlib/SPI", {}, false);
+const SPI1          = SPI.addInstance();
+const SYSCTL        = scripting.addModule("/ti/driverlib/SYSCTL");
+const UART          = scripting.addModule("/ti/driverlib/UART", {}, false);
+const UART1         = UART.addInstance();
+const ProjectConfig = scripting.addModule("/ti/project_config/ProjectConfig");
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+GPIO1.$name                         = "GPIO_LED";
+GPIO1.associatedPins.create(3);
+GPIO1.associatedPins[0].$name       = "RED";
+GPIO1.associatedPins[0].pin.$assign = "PC21";
+GPIO1.associatedPins[1].$name       = "GREEN";
+GPIO1.associatedPins[1].pin.$assign = "PC22";
+GPIO1.associatedPins[2].$name       = "BLUE";
+GPIO1.associatedPins[2].pin.$assign = "PB28";
+
+const Board = scripting.addModule("/ti/driverlib/Board", {}, false);
+
+GPIO2.$name                              = "SPI";
+GPIO2.associatedPins[0].$name            = "CS_0";
+GPIO2.associatedPins[0].initialValue     = "SET";
+GPIO2.associatedPins[0].internalResistor = "PULL_UP";
+GPIO2.associatedPins[0].pin.$assign      = "PA0";
+
+GPIO3.$name                         = "SENSOR";
+GPIO3.associatedPins[0].direction   = "INPUT";
+GPIO3.associatedPins[0].interruptEn = true;
+GPIO3.associatedPins[0].polarity    = "RISE";
+GPIO3.associatedPins[0].$name       = "RDY_1";
+GPIO3.associatedPins[0].pin.$assign = "PA1";
+
+SPI1.$name                      = "SPI_0";
+SPI1.targetBitRate              = 1000000;
+SPI1.phase                      = "1";
+SPI1.frameFormat                = "MOTO3";
+SPI1.sclkPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric0";
+SPI1.mosiPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric1";
+SPI1.misoPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric2";
+SPI1.peripheral.$assign         = "UC2";
+SPI1.peripheral.sclkPin.$assign = "PA8";
+SPI1.peripheral.mosiPin.$assign = "PA9";
+SPI1.peripheral.misoPin.$assign = "PB5";
+
+SYSCTL.SYSPLL_CLK0En      = true;
+SYSCTL.MCLKSource         = "HSCLK";
+SYSCTL.SYSPLL_Pdiv        = 1;
+SYSCTL.peripheral.$assign = "SYSCTL";
+
+UART1.$name                    = "UART_0";
+UART1.targetBaudRate           = 115200;
+UART1.enabledInterrupts        = ["RX","TX"];
+UART1.peripheral.$assign       = "UC12";
+UART1.peripheral.rxPin.$assign = "PA11";
+UART1.peripheral.txPin.$assign = "PA10";
+UART1.txPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric3";
+UART1.rxPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric4";
+
+ProjectConfig.genLibCMSIS        = true;
+ProjectConfig.migrationCondition = true;
+
+/**
+ * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
+ * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
+ * re-solve from scratch.
+ */
+Board.peripheral.$suggestSolution          = "DEBUGSS";
+Board.peripheral.swclkPin.$suggestSolution = "PA20";
+Board.peripheral.swdioPin.$suggestSolution = "PA19";

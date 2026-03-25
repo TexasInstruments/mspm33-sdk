@@ -57,6 +57,12 @@ let ADC_Channel = [
 	{ name: "ADC_CH_ADCIN_23", displayName: "ADCIN23 is converted" },
 	{ name: "ADC_CH_ADCIN_24", displayName: "ADCIN24 is converted" },
 	{ name: "ADC_CH_ADCIN_25", displayName: "ADCIN25 is converted" },
+	{ name: "ADC_CH_ADCIN_26", displayName: "ADCIN26 is converted" },
+	{ name: "ADC_CH_ADCIN_27", displayName: "ADCIN27 is converted" },
+	{ name: "ADC_CH_ADCIN_28", displayName: "ADCIN28 is converted" },
+	{ name: "ADC_CH_ADCIN_29", displayName: "ADCIN29 is converted" },
+	{ name: "ADC_CH_ADCIN_30", displayName: "ADCIN30 is converted" },
+	{ name: "ADC_CH_ADCIN_31", displayName: "ADCIN31 is converted" },
 ]
 let ADC_PulseMode = [
 	{ name: "ADC_PULSE_END_OF_ACQ_WIN", displayName: "Occurs at the end of the acquisition window" },
@@ -167,7 +173,6 @@ let ADC_RepInstance = [
 let ADC_EVT = [
 	{ name: "ADC_EVT_TRIPHI", displayName: "Trip High Event" },
 	{ name: "ADC_EVT_TRIPLO", displayName: "Trip Low Event" },
-	{ name: "ADC_EVT_ZERO", displayName: "Zero Crossing Event" },
 	{ name: "ADC_EVT_NLIMIT", displayName: "Within Trip limit Event" },
 ]
 let ADC_FORCE = [

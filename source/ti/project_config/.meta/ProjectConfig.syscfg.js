@@ -63,6 +63,7 @@ function _getPinResources(inst)
 function pinmuxRequirements(inst)
 {
 
+
 }
 
 function validate(inst, validation)
@@ -85,8 +86,8 @@ function validate(inst, validation)
         }else{
             validation.logInfo("Note: User must select a device after migration. "+compilerWarning,inst,"deviceSpin")
         }*/
-        if(!inst.genLinker | !inst.genStartup | !inst.genOpts| !inst.genLibs){
-            validation.logWarning("All four File Generation options must be enabled in order to guarantee Device Migration support. If an option is disabled, the user must manually configure that setting on its own file.",inst);
+        if(!inst.genLinker | !inst.genStartup | !inst.genSystem | !inst.genOpts| !inst.genLibs){
+            validation.logWarning("All File Generation options must be enabled in order to guarantee Device Migration support. If an option is disabled, the user must manually configure that setting on its own file.",inst);
         }
         if(inst.genLibs && !inst.genLibDL){
             validation.logWarning("Driverlib inclusion is required for most use cases. Disable with caution.",inst,"genLibDL");
@@ -110,9 +111,8 @@ let compilerConfig = {
     options: [
         {name: "Unknown"},
         {name: "ccs", displayName: "Using Stand-Alone Tool"},
-        {name: "ticlang", displayName: "TIClang"},
-        /* --- Temporarily Disabling GCC for M33 --- */
-        //{name: "gcc", displayName: "GCC"},
+        {name: "ticlang", displayName: "TIClang"},        
+        {name: "gcc", displayName: "GCC"},
         /* --- Temporarily Disabling IAR and KEIL options --- */
         {name: "iar", displayName: "IAR"},
         {name: "keil", displayName: "Keil"},
@@ -135,9 +135,8 @@ Currently only TI Arm Clang is supported.
         default: "ccs",
         options: [
             {name: "ccs", displayName: "All"},
-            {name: "ticlang", displayName: "TIClang"},
-            /* --- Temporarily Disabling GCC for M33 --- */
-            //{name: "gcc", displayName: "GCC"},
+            {name: "ticlang", displayName: "TIClang"},            
+            {name: "gcc", displayName: "GCC"},
             /* --- Temporarily Disabling IAR and KEIL options --- */
             // {name: "iar", displayName: "IAR"},
             // {name: "keil", displayName: "Keil"},
@@ -163,11 +162,13 @@ function onChangeDisable(inst,ui){
     if(inst.genDisable){
         inst.genLinker          = false;
         inst.genStartup         = false;
+        inst.genSystem          = false;
         inst.genOpts            = false;
         inst.genLibs            = false;
     }
     ui.genLinker.readOnly   = inst.genDisable;
     ui.genStartup.readOnly  = inst.genDisable;
+    ui.genSystem.readOnly   = inst.genDisable;
     ui.genOpts.readOnly     = inst.genDisable;
     ui.genLibs.readOnly     = inst.genDisable;
 }
@@ -227,6 +228,20 @@ This file is specific to the selected device family.
 `,
                 default: true,
                 hidden: false,
+            },
+            {
+                name: "genSystem",
+                displayName: "System File Reference",
+                longDescription: `
+System file includes early hardware initialization such as FPU coprocessor setup.
+This file will not be included on the SysConfig generated files section, but
+rather is referenced from the installed SDK into the existing project. Thus, in
+order to access the referenced file the user should open SysConfig through CCS.
+
+This file is specific to the selected device family.
+`,
+                default: true,
+                hidden: (system.compiler !== "gcc"),
             },
             {
                 name: "genOpts",
@@ -388,12 +403,19 @@ function modules(inst){
     var mods = []
     let linkerExtension = MigrationCommon.getLinkerExtension(inst.compiler);
     /* --- Temporarily Disabling IAR and KEIL options --- */
-    /* --- Temporarily Disabling GCC for M33 --- */
-    if(!["iar","keil","gcc"].includes(inst.compiler) && !(inst.genDisable)){
+    if(!["iar","keil"].includes(inst.compiler) && !(inst.genDisable)){
         if(inst.genStartup){
             let mod = {
                 name: "startup",
                 moduleName: "/ti/project_config/startup/startup.syscfg.js",
+            }
+            mods.push(mod);
+        }
+        // System file (with FPU coprocessor init) is only for GCC
+        if(inst.genSystem && inst.compiler === "gcc"){
+            let mod = {
+                name: "system",
+                moduleName: "/ti/project_config/system/system.syscfg.js",
             }
             mods.push(mod);
         }
@@ -413,13 +435,12 @@ function modules(inst){
                 name: "genLinkerFileModTICLANG",
                 moduleName: '/ti/project_config/linker/linker_cmd.syscfg.js',
             }
-            mods.push(mod);
-            /* --- Temporarily Disabling GCC for M33 --- */
-            // mod = {
-            //     name: "genLinkerFileModGCC",
-            //     moduleName: '/ti/project_config/linker/linker_lds.syscfg.js',
-            // }
-            // mods.push(mod);
+            mods.push(mod);            
+            mod = {
+                name: "genLinkerFileModGCC",
+                moduleName: '/ti/project_config/linker/linker_lds.syscfg.js',
+            }
+             mods.push(mod);
             /* --- Temporarily Disabling IAR and KEIL options --- */
             // mod = {
             //     name: "genLinkerFileModIAR",
@@ -437,13 +458,12 @@ function modules(inst){
                 name: "board_genlibs_cmd",
                 moduleName: "/ti/project_config/linker/board_genlibs_cmd.syscfg.js",
             }
-            mods.push(mod);
-            /* --- Temporarily Disabling GCC for M33 --- */
-            // mod = {
-            //     name: "board_genlibs_lds",
-            //     moduleName: "/ti/project_config/linker/board_genlibs_lds.syscfg.js",
-            // }
-            // mods.push(mod);
+            mods.push(mod);            
+            mod = {
+                name: "board_genlibs_lds",
+                moduleName: "/ti/project_config/linker/board_genlibs_lds.syscfg.js",
+            }
+             mods.push(mod);
             /* --- Temporarily Disabling IAR and KEIL options --- */
             // mod = {
             //     name: "board_genlibs_icf",
@@ -457,9 +477,8 @@ function modules(inst){
             // mods.push(mod);
         }
     }else{
-        /* --- Temporarily Disabling IAR and KEIL options --- */
-        /* --- Temporarily Disabling GCC for M33 --- */
-        if(!["iar","keil", "gcc"].includes(inst.compiler) && !(inst.genDisable)){
+        /* --- Temporarily Disabling IAR and KEIL options --- */        
+        if(!["iar","keil"].includes(inst.compiler) && !(inst.genDisable)){
             if(inst.genLinker){
                 let mod = {
                     name: "genLinkerFileMod",

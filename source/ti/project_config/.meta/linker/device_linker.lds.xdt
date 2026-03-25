@@ -44,7 +44,7 @@ SECTIONS
 {
     /* section for the interrupt vector area                                 */
     PROVIDE (_intvecs_base_address =
-        DEFINED(_intvecs_base_address) ? _intvecs_base_address : 0x00000000);
+        DEFINED(_intvecs_base_address) ? _intvecs_base_address : 0x10000000);
 
     .intvecs (_intvecs_base_address) : AT (_intvecs_base_address) {
         KEEP (*(.intvecs))
@@ -60,32 +60,32 @@ SECTIONS
    .text : {
         CREATE_OBJECT_SYMBOLS
         KEEP (*(.text))
-        . = ALIGN(0x8);
+        . = ALIGN(0x10);
         *(.text.*)
-        . = ALIGN(0x8);
+        . = ALIGN(0x10);
         KEEP (*(.ctors))
-        . = ALIGN(0x8);
+        . = ALIGN(0x10);
         KEEP (*(.dtors))
-        . = ALIGN(0x8);
+        . = ALIGN(0x10);
         KEEP (*(.init))
-        . = ALIGN(0x8);
+        . = ALIGN(0x10);
         KEEP (*(.fini*))
-        . = ALIGN(0x8);
+        . = ALIGN(0x10);
     } > REGION_TEXT AT> REGION_TEXT
 
     .ramfunc : {
         __ramfunct_load__ = LOADADDR (.ramfunc);
         __ramfunct_start__ = .;
        *(.ramfunc)
-       . = ALIGN(0x8);
+       . = ALIGN(0x10);
        __ramfunct_end__ = .;
     } > REGION_TEXT_RAM AT> REGION_TEXT
 
     .rodata : {
         *(.rodata)
-        . = ALIGN(0x8);
+        . = ALIGN(0x10);
         *(.rodata.*)
-        . = ALIGN(0x8);
+        . = ALIGN(0x10);
     } > REGION_TEXT AT> REGION_TEXT
 
     .preinit_array : {
@@ -95,7 +95,7 @@ SECTIONS
     } > REGION_PREINIT_ARRAY AT> REGION_TEXT
 
     .init_array : {
-        . = ALIGN(0x8);
+        . = ALIGN(0x10);
         PROVIDE_HIDDEN (__init_array_start = .);
         KEEP (*(SORT(.init_array.*)))
         KEEP (*(.init_array*))
@@ -103,12 +103,12 @@ SECTIONS
     } > REGION_INIT_ARRAY AT> REGION_TEXT
 
     .fini_array : {
-        . = ALIGN(0x8);
+        . = ALIGN(0x10);
         PROVIDE_HIDDEN (__fini_array_start = .);
         KEEP (*(SORT(.fini_array.*)))
         KEEP (*(.fini_array*))
         PROVIDE_HIDDEN (__fini_array_end = .);
-        . = ALIGN(0x8);
+        . = ALIGN(0x10);
     } > REGION_FINI_ARRAY AT> REGION_TEXT
 
     .ARM.exidx : {
@@ -118,9 +118,9 @@ SECTIONS
     } > REGION_ARM_EXIDX AT> REGION_ARM_EXIDX
 
     .ARM.extab : {
-        . = ALIGN(0x8);
+        . = ALIGN(0x10);
         KEEP (*(.ARM.extab* .gnu.linkonce.armextab.*))
-         . = ALIGN(0x8);
+         . = ALIGN(0x10);
     } > REGION_ARM_EXTAB AT> REGION_ARM_EXTAB
 
     __etext = .;
@@ -130,7 +130,7 @@ SECTIONS
         __data_start__ = .;
         KEEP (*(.data))
         KEEP (*(.data*))
-        . = ALIGN (8);
+        . = ALIGN (0x10);
         __data_end__ = .;
     } > REGION_DATA AT> REGION_TEXT
 
@@ -140,14 +140,14 @@ SECTIONS
         KEEP (*(.bss))
         *(.bss.*)
         *(COMMON)
-        . = ALIGN (8);
+        . = ALIGN (0x10);
         __bss_end__ = .;
     } > REGION_BSS AT> REGION_BSS
 
     .noinit : {
         /* place all symbols in input sections that start with .noinit */
         KEEP(*(*.noinit*))
-        . = ALIGN (8);
+        . = ALIGN (0x10);
     } > REGION_NOINIT AT> REGION_NOINIT
 
     .heap : {
@@ -160,7 +160,7 @@ SECTIONS
         __HeapLimit = __heap_end__;
     } > REGION_HEAP AT> REGION_HEAP
 
-    .stack (NOLOAD) : ALIGN(0x8) {
+    .stack (NOLOAD) : ALIGN(0x10) {
         _stack = .;
         KEEP(*(.stack))
     } > REGION_STACK AT> REGION_STACK

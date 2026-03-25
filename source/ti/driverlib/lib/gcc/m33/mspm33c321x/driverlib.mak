@@ -10,7 +10,7 @@ NAME = driverlib
 OBJ_DIR = ../../../../obj/gcc/m33/mspm33c321x/driverlib
 SRC_DIR = ../../../..
 
-CFLAGS = "-I$(GCC_ARMCOMPILER)/arm-none-eabi/include" "-I$(SDK_INSTALL_DIR)/source/third_party/CMSIS/Core/Include" "-I$(SDK_INSTALL_DIR)/source" -mcpu=cortex-m33 -march=armv8-m.main -mthumb -D__MSPM33C321A__ -Wall -ffunction-sections -fdata-sections -std=c99 -c
+CFLAGS = "-I$(GCC_ARMCOMPILER)/arm-none-eabi/include" "-I$(SDK_INSTALL_DIR)/source/third_party/CMSIS/Core/Include" "-I$(SDK_INSTALL_DIR)/source" -mcpu=cortex-m33 -march=armv8-m.main -mthumb -mfloat-abi=hard -mfpu=fpv5-sp-d16 -D__MSPM33C321A__ -Wall -ffunction-sections -fdata-sections -std=c99 -c
 AFLAGS = -cr --target=elf32-little
 ASMFLAGS = "-I$(GCC_ARMCOMPILER)/arm-none-eabi/include" 
 

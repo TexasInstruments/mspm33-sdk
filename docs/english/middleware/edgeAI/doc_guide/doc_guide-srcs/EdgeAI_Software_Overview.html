@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edge AI Software Solution for MSPM33 Devices &mdash; MSPM33 EdgeAI User Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Feature Extraction User Guide for EdgeAI Applications on MSPM33 Devices" href="EdgeAI_Feature_Extraction_Library.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> MSPM33 EdgeAI User Guide
+          </a>
+              <div class="version">
+                1.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="EdgeAI_Deployment_Guide_CLI.html">Deploying Machine Learning Models on TI MSPM33 Microcontrollers Using CLI Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EdgeAI_Deployment_Guide_EdgeAI_Studio.html">Deploying Machine Learning Models on TI MSP Microcontrollers Using EdgeAI Studio GUI Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EdgeAI_Feature_Extraction_Library.html">Feature Extraction User Guide for EdgeAI Applications on MSPM33 Devices</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Edge AI Software Solution for MSPM33 Devices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#software-components-in-sdk">Software Components in SDK</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#feature-extraction-library">1. Feature Extraction Library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#device-agent-protocol-dap">2. Device Agent Protocol (DAP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">3. Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#basic-examples">Basic Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#advanced-examples">Advanced Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mspm33-specific-examples">MSPM33-Specific Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#data-collection-and-visualization">Data Collection and Visualization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-support">Hardware Support</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mspm33-family-cortex-m33">MSPM33 Family (Cortex-M33)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#development-environment">Development Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#development-workflow">Development Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#performance-considerations">Performance Considerations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mspm33-specific-performance-benefits">MSPM33-Specific Performance Benefits</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#related-documentation">Related Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MSPM33 EdgeAI User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Edge AI Software Solution for MSPM33 Devices</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="edge-ai-software-solution-for-mspm33-devices">
+<h1>Edge AI Software Solution for MSPM33 Devices<a class="headerlink" href="#edge-ai-software-solution-for-mspm33-devices" title="Permalink to this heading">¶</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
+<p>The Edge AI Software solution for MSPM33 devices is a comprehensive framework designed to enable artificial intelligence capabilities on Texas Instruments’ MSPM33 microcontroller units. This solution empowers developers to implement machine learning models directly on resource-constrained MSPM33 devices, enabling real-time inference at the edge with minimal power consumption.</p>
+</section>
+<section id="software-components-in-sdk">
+<h2>Software Components in SDK<a class="headerlink" href="#software-components-in-sdk" title="Permalink to this heading">¶</a></h2>
+<p>The Edge AI software solution consists of the following key components:</p>
+<section id="feature-extraction-library">
+<h3>1. Feature Extraction Library<a class="headerlink" href="#feature-extraction-library" title="Permalink to this heading">¶</a></h3>
+<p>The Feature Extraction module provides capabilities to process raw sensor data and extract meaningful features that can be used as inputs to machine learning models. This component supports:</p>
+<ul class="simple">
+<li><p>Signal processing functions</p></li>
+<li><p>Time-domain feature extraction</p></li>
+<li><p>Frequency-domain transformations (FFT)</p></li>
+<li><p>Statistical feature calculations</p></li>
+<li><p>Windowing functions (Hann window with pre-computed coefficients)</p></li>
+</ul>
+<p>The feature extraction library leverages ARM CMSIS-DSP functions for efficient signal processing operations.</p>
+<p><strong>MSPM33-Specific Enhancements:</strong> - FPU-optimized floating-point FFT operations - Pre-computed Hann window coefficients for various FFT sizes (32, 64, 128, 256, 512, 1024, 2048, 4096) - Enhanced precision with native floating-point support - Optimized batch normalization for neural network inputs</p>
+</section>
+<section id="device-agent-protocol-dap">
+<h3>2. Device Agent Protocol (DAP)<a class="headerlink" href="#device-agent-protocol-dap" title="Permalink to this heading">¶</a></h3>
+<p>Communication interfaces for device management and data exchange between the MSP device and Model Composer GUI. This is needed for the data capture and live preview features of the Model Composer. The communication interface is implemented using UART and is configurable for different data formats and baud rates.</p>
+<p><strong>MSPM33-Specific DAP Features:</strong> - Enhanced DAP core implementation optimized for Cortex-M33 - Modular architecture with separate DAP Core, DAP Interface, and DAP Link layers - Support for high-speed UART communication - Improved data throughput for real-time visualization</p>
+</section>
+<section id="examples">
+<h3>3. Examples<a class="headerlink" href="#examples" title="Permalink to this heading">¶</a></h3>
+<p>The solution includes a variety of example applications demonstrating Edge AI capabilities:</p>
+<section id="basic-examples">
+<h4>Basic Examples<a class="headerlink" href="#basic-examples" title="Permalink to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Waveform Classifier AI</strong>: Classification of different waveform patterns</p></li>
+</ul>
+</section>
+<section id="advanced-examples">
+<h4>Advanced Examples<a class="headerlink" href="#advanced-examples" title="Permalink to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Character Recognition</strong>: Basic OCR capabilities (digit recognition using CNN)</p></li>
+<li><p><strong>Motor Fault AI</strong>: Detection of motor faults through vibration analysis</p></li>
+<li><p><strong>AC Arc Fault Detection</strong>: Safety-critical application for electrical systems</p></li>
+<li><p><strong>PIR Motion Detection</strong>: Passive infrared sensor-based motion detection</p></li>
+</ul>
+</section>
+<section id="mspm33-specific-examples">
+<h4>MSPM33-Specific Examples<a class="headerlink" href="#mspm33-specific-examples" title="Permalink to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Generic Time Series Classification</strong>: Configurable time series classification framework</p></li>
+<li><p><strong>Generic Time Series Anomaly Detection</strong>: Anomaly detection for various sensor inputs</p></li>
+<li><p><strong>Generic Time Series Forecasting</strong>: Predictive analytics for time series data</p></li>
+<li><p><strong>Generic Time Series Regression</strong>: Regression models for continuous output prediction</p></li>
+<li><p><strong>Arc Fault Detection</strong>: Optimized arc fault detection for MSPM33</p></li>
+<li><p><strong>Blower Imbalance Detection</strong>: HVAC system fault monitoring</p></li>
+<li><p><strong>Motor Fault with Live Preview</strong>: Real-time motor fault visualization</p></li>
+<li><p><strong>Torque Measurement</strong>: Torque sensing and measurement application</p></li>
+</ul>
+</section>
+<section id="data-collection-and-visualization">
+<h4>Data Collection and Visualization<a class="headerlink" href="#data-collection-and-visualization" title="Permalink to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>AC Arc Fault Data Capture</strong>: Tools for capturing arc fault data for training</p></li>
+<li><p><strong>Motor Fault AI Data Capture</strong>: Utilities for collecting motor vibration data</p></li>
+<li><p><strong>Motor Fault AI Live Preview</strong>: Real-time visualization of motor fault detection</p></li>
+<li><p><strong>Time Series Data Capture</strong>: General-purpose time series data collection</p></li>
+<li><p><strong>Time Series Live Preview</strong>: Visualization tools for time series analysis</p></li>
+<li><p><strong>PIR Detection Data Capture</strong>: PIR sensor data collection</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="hardware-support">
+<h2>Hardware Support<a class="headerlink" href="#hardware-support" title="Permalink to this heading">¶</a></h2>
+<p>The Edge AI software solution supports the following microcontroller families:</p>
+<section id="mspm33-family-cortex-m33">
+<h3>MSPM33 Family (Cortex-M33)<a class="headerlink" href="#mspm33-family-cortex-m33" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>MSPM33C321A</strong> LaunchPad development kit</p></li>
+<li><p>Arm Cortex-M33 core with TrustZone security</p></li>
+<li><p>Hardware FPU for optimized floating-point operations</p></li>
+<li><p>Enhanced memory and peripheral capabilities</p></li>
+</ul>
+</section>
+</section>
+<section id="development-environment">
+<h2>Development Environment<a class="headerlink" href="#development-environment" title="Permalink to this heading">¶</a></h2>
+<p>The solution is designed to be used with:</p>
+<ul class="simple">
+<li><p>Code Composer Studio (CCS Theia)</p></li>
+<li><p>TI MSPM33 SDK (for MSPM33 devices)</p></li>
+<li><p>ARM CMSIS-DSP library</p></li>
+<li><p>CLI Tools (Pytorch based framework to train and develop AI/ML Models)</p></li>
+<li><p>CCStudio™ Edge AI Studio (GUI which enables accelerated development by enabling data capture)</p></li>
+</ul>
+</section>
+<section id="development-workflow">
+<h2>Development Workflow<a class="headerlink" href="#development-workflow" title="Permalink to this heading">¶</a></h2>
+<p>The Edge AI software solution supports the following workflow:</p>
+<ol class="arabic simple">
+<li><p><strong>Data Collection</strong>: Use data capture examples to collect sensor data from your application</p></li>
+<li><p><strong>Model Training</strong>: Train models using collected data on a desktop environment</p></li>
+<li><p><strong>Model Deployment</strong>: Deploy trained models to MSP devices using the provided framework</p></li>
+<li><p><strong>Performance Optimization</strong>: Use NPU-accelerated variants for improved performance</p></li>
+<li><p><strong>Inference Visualization</strong>: Leverage live preview tools to visualize the inference results on the GUI in real time</p></li>
+</ol>
+</section>
+<section id="performance-considerations">
+<h2>Performance Considerations<a class="headerlink" href="#performance-considerations" title="Permalink to this heading">¶</a></h2>
+<p>When implementing Edge AI applications on MSP devices, consider:</p>
+<ol class="arabic simple">
+<li><p><strong>Memory Constraints</strong>: Optimize models to fit within the limited RAM and flash memory</p></li>
+<li><p><strong>Processing Power</strong>: Balance model complexity with real-time requirements</p></li>
+<li><p><strong>Energy Efficiency</strong>: Leverage low-power modes when inference is not needed</p></li>
+<li><p><strong>NPU Acceleration</strong>: Use NPU-optimized versions for computationally intensive models</p></li>
+<li><p><strong>Real-time Requirements</strong>: Consider sampling rates and processing latency for your application</p></li>
+</ol>
+<section id="mspm33-specific-performance-benefits">
+<h3>MSPM33-Specific Performance Benefits<a class="headerlink" href="#mspm33-specific-performance-benefits" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>FPU Acceleration</strong>: Native floating-point operations provide faster feature extraction</p></li>
+<li><p><strong>Enhanced Memory</strong>: Larger RAM and flash enables more complex models</p></li>
+<li><p><strong>TrustZone Security</strong>: Secure execution environment for sensitive AI applications</p></li>
+<li><p><strong>Higher Clock Speed</strong>: Improved inference throughput for real-time applications</p></li>
+</ul>
+</section>
+</section>
+<section id="related-documentation">
+<h2>Related Documentation<a class="headerlink" href="#related-documentation" title="Permalink to this heading">¶</a></h2>
+<p>For detailed deployment instructions, refer to the following guides:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="./EdgeAI_Deployment_Guide_CLI.md">Deploying Models Using CLI Tools</a> - Command-line interface workflow for model training and deployment</p></li>
+<li><p><a class="reference external" href="./EdgeAI_Deployment_Guide_EdgeAI_Studio.md">Deploying Models Using CCStudio™ Edge AI Studio GUI</a> - GUI-based workflow</p></li>
+<li><p><a class="reference external" href="./EdgeAI_Feature_Extraction_Library.md">Feature Extraction Library Guide</a> - Detailed documentation on the feature extraction module</p></li>
+</ul>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">¶</a></h2>
+<p>The Edge AI Software solution for MSP devices enables developers to bring machine learning capabilities to ultra-low-power edge devices. By leveraging efficient feature extraction, optimized inference engines, and optional NPU acceleration, developers can create intelligent embedded systems for a wide range of applications while maintaining the power efficiency expected from MSP microcontrollers.</p>
+<p>The comprehensive set of examples provides a foundation for rapid development and exploration of Edge AI capabilities, from basic waveform classification to advanced use cases like motor fault detection and character recognition, with dedicated tools for both standard CPU execution and NPU-accelerated performance.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="EdgeAI_Feature_Extraction_Library.html" class="btn btn-neutral float-left" title="Feature Extraction User Guide for EdgeAI Applications on MSPM33 Devices" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">1995-2023, Texas Instruments Incorporated. All rights reserved</a>, Texas Instruments Incorporated. All rights reserved. <br/>
+      <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

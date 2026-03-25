@@ -1,0 +1,217 @@
+%%{
+/*
+ * Copyright (c) 2023 Texas Instruments Incorporated - http://www.ti.com
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ */
+
+/*
+ *  ======== QSPI.Board.h.xdt ========
+ */
+
+    let QSPI = args[0]; /* passed by /ti/driverlib/templates/Board.c.xdt */
+    let content = args[1];
+
+    /* get ti/drivers common utility functions */
+    let Common = system.getScript("/ti/driverlib/Common.js");
+
+    let instances = QSPI.$instances;
+    let defs = Common.genBoardHeader(instances, QSPI);
+
+    switch(content) {
+        case "Define":
+            printDefine();
+            break;
+        case "Declare":
+            printDeclare();
+            break;
+        default:
+            /* do nothing */
+            return;
+    }
+
+%%}
+%
+% function printDefine() {
+%   for (let i in instances) {
+%       let inst = instances[i];
+%       let flavor = inst.peripheral.$solution.peripheralName;
+%       let nameStr = "#define "+inst.$name+"_INST";
+%       let intHandlerStr = nameStr + "_IRQHandler";
+%       let intHandlerStr2 = flavor + "_IRQHandler";
+%       let intNumberStr = nameStr + "_INT_IRQN";
+%       let intNumberStr2 = flavor + "_INT_IRQn";
+/* Defines for `inst.$name` */
+`nameStr.padEnd(40," ")+flavor.padStart(39," ")`
+`intHandlerStr.padEnd(40, " ") + intHandlerStr2.padStart(39, " ")`
+`intNumberStr.padEnd(40, " ") + intNumberStr2.padStart(39, " ")`
+%   let usePICO = false;
+%   let usePOCI = false;
+%   let useIO2 = false;
+%   let useIO3 = false;
+%   if(inst.direction == "PICO_POCI") {
+%       usePICO = true;
+%       usePOCI = true;
+%   }
+%   if(inst.direction == "PICO_POCI_IO2_IO3") {
+%       usePICO = true;
+%       usePOCI = true;
+%       useIO2 = true;
+%       useIO3 = true;
+%   }
+%
+%       let gpioStr = "GPIO_"+inst.$name;
+% if (usePICO) {
+%       let picoPinName = "pico"+"Pin";
+%       let picoPackagePin = inst.peripheral[picoPinName].$solution.packagePinName;
+%       let picoPinCM = Common.getPinCM(picoPackagePin,inst,'PICO');
+%       let picoGpioName = system.deviceData.devicePins[picoPackagePin].mux.muxSetting.find(item => item["mode"] === "1").peripheralPin.peripheralName;
+%       let picoPort    = Common.getGPIOPortMultiPad(picoPackagePin, inst, 'PICO');
+%       let picoGpioPin = Common.getGPIONumberMultiPad(picoPackagePin, inst, 'PICO');
+% let picoPortStr = "#define "+gpioStr+"_PICO_PORT";
+`picoPortStr.padEnd(40," ")+picoPort.padStart(39, " ")`
+% let picoPinStr = "#define "+gpioStr+"_PICO_PIN";
+% let picoPinStr2 = "DL_GPIO_PIN_"+picoGpioPin;
+`picoPinStr.padEnd(40," ")+picoPinStr2.padStart(39," ")`
+% let picoIOmuxStr = "#define "+gpioStr+"_IOMUX_PICO";
+% let picoIOmuxStr2 = "(IOMUX_PINCM"+picoPinCM.toString()+")";
+`picoIOmuxStr.padEnd(40," ")+picoIOmuxStr2.padStart(39," ")`
+% let picoFuncStr = "#define "+gpioStr+"_IOMUX_PICO_FUNC";
+% let picoFuncStr2 = "IOMUX_PINCM"+picoPinCM+"_PF_"+flavor+"_PICO";
+`picoFuncStr.padEnd(50, " ")+picoFuncStr2.padStart(29, " ")`
+%} //if (usePICO)
+% if (usePOCI) {
+%       let pociPinName = "poci"+"Pin";
+%       let pociPackagePin = inst.peripheral[pociPinName].$solution.packagePinName;
+%       let pociPinCM = Common.getPinCM(pociPackagePin,inst,'POCI');
+%       let pociGpioName = system.deviceData.devicePins[pociPackagePin].mux.muxSetting.find(item => item["mode"] === "1").peripheralPin.peripheralName;
+%       let pociPort    = Common.getGPIOPortMultiPad(pociPackagePin, inst, 'POCI');
+%       let pociGpioPin = Common.getGPIONumberMultiPad(pociPackagePin, inst, 'POCI');
+% let pociPortStr = "#define "+gpioStr+"_POCI_PORT";
+`pociPortStr.padEnd(40," ")+pociPort.padStart(39, " ")`
+% let pociPinStr = "#define "+gpioStr+"_POCI_PIN";
+% let pociPinStr2 = "DL_GPIO_PIN_"+pociGpioPin;
+`pociPinStr.padEnd(40," ")+pociPinStr2.padStart(39," ")`
+% let pociIOmuxStr = "#define "+gpioStr+"_IOMUX_POCI";
+% let pociIOmuxStr2 = "(IOMUX_PINCM"+pociPinCM.toString()+")";
+`pociIOmuxStr.padEnd(40," ")+pociIOmuxStr2.padStart(39," ")`
+% let pociFuncStr = "#define "+gpioStr+"_IOMUX_POCI_FUNC";
+% let pociFuncStr2 = "IOMUX_PINCM"+pociPinCM+"_PF_"+flavor+"_POCI";
+`pociFuncStr.padEnd(50, " ")+pociFuncStr2.padStart(29, " ")`
+%} //if (usePOCI)
+% if (useIO2) {
+%       let io2PinName = "io2"+"Pin";
+%       let io2PackagePin = inst.peripheral[io2PinName].$solution.packagePinName;
+%       let io2PinCM = Common.getPinCM(io2PackagePin,inst,'IO2');
+%       let io2GpioName = system.deviceData.devicePins[io2PackagePin].mux.muxSetting.find(item => item["mode"] === "1").peripheralPin.peripheralName;
+%       let io2Port    = Common.getGPIOPortMultiPad(io2PackagePin, inst, 'IO2');
+%       let io2GpioPin = Common.getGPIONumberMultiPad(io2PackagePin, inst, 'IO2');
+% let io2PortStr = "#define "+gpioStr+"_IO2_PORT";
+`io2PortStr.padEnd(40," ")+io2Port.padStart(39, " ")`
+% let io2PinStr = "#define "+gpioStr+"_IO2_PIN";
+% let io2PinStr2 = "DL_GPIO_PIN_"+io2GpioPin;
+`io2PinStr.padEnd(40," ")+io2PinStr2.padStart(39," ")`
+% let io2IOmuxStr = "#define "+gpioStr+"_IOMUX_IO2";
+% let io2IOmuxStr2 = "(IOMUX_PINCM"+io2PinCM.toString()+")";
+`io2IOmuxStr.padEnd(40," ")+io2IOmuxStr2.padStart(39," ")`
+% let io2FuncStr = "#define "+gpioStr+"_IOMUX_IO2_FUNC";
+% let io2FuncStr2 = "IOMUX_PINCM"+io2PinCM+"_PF_"+flavor+"_IO2";
+`io2FuncStr.padEnd(50, " ")+io2FuncStr2.padStart(29, " ")`
+%} //if (useIO2)
+% if (useIO3) {
+%       let io3PinName = "io3"+"Pin";
+%       let io3PackagePin = inst.peripheral[io3PinName].$solution.packagePinName;
+%       let io3PinCM = Common.getPinCM(io3PackagePin,inst,'IO3');
+%       let io3GpioName = system.deviceData.devicePins[io3PackagePin].mux.muxSetting.find(item => item["mode"] === "1").peripheralPin.peripheralName;
+%       let io3Port    = Common.getGPIOPortMultiPad(io3PackagePin, inst, 'IO3');
+%       let io3GpioPin = Common.getGPIONumberMultiPad(io3PackagePin, inst, 'IO3');
+% let io3PortStr = "#define "+gpioStr+"_IO3_PORT";
+`io3PortStr.padEnd(40," ")+io3Port.padStart(39, " ")`
+% let io3PinStr = "#define "+gpioStr+"_IO3_PIN";
+% let io3PinStr2 = "DL_GPIO_PIN_"+io3GpioPin;
+`io3PinStr.padEnd(40," ")+io3PinStr2.padStart(39," ")`
+% let io3IOmuxStr = "#define "+gpioStr+"_IOMUX_IO3";
+% let io3IOmuxStr2 = "(IOMUX_PINCM"+io3PinCM.toString()+")";
+`io3IOmuxStr.padEnd(40," ")+io3IOmuxStr2.padStart(39," ")`
+% let io3FuncStr = "#define "+gpioStr+"_IOMUX_IO3_FUNC";
+% let io3FuncStr2 = "IOMUX_PINCM"+io3PinCM+"_PF_"+flavor+"_IO3";
+`io3FuncStr.padEnd(50, " ")+io3FuncStr2.padStart(29, " ")`
+%} //if (useIO3)
+%       let sclkPinName = "sclk"+"Pin";
+%       let sclkPackagePin = inst.peripheral[sclkPinName].$solution.packagePinName;
+%       let sclkPinCM = Common.getPinCM(sclkPackagePin,inst,"SCLK")
+%       let sclkGpioName = system.deviceData.devicePins[sclkPackagePin].mux.muxSetting.find(item => item["mode"] === "1").peripheralPin.peripheralName;
+%       let sclkPort = Common.getGPIOPortMultiPad(sclkPackagePin,inst,"SCLK");
+%       let sclkGpioPin = Common.getGPIONumberMultiPad(sclkPackagePin,inst,"SCLK");
+%
+/* GPIO configuration for `inst.$name` */
+%
+% let sclkPortStr = "#define "+gpioStr+"_SCLK_PORT";
+`sclkPortStr.padEnd(40," ")+sclkPort.padStart(39, " ")`
+% let sclkPinStr = "#define "+gpioStr+"_SCLK_PIN";
+% let sclkPinStr2 = "DL_GPIO_PIN_"+sclkGpioPin;
+`sclkPinStr.padEnd(40," ")+sclkPinStr2.padStart(39," ")`
+% let sclkIOmuxStr = "#define "+gpioStr+"_IOMUX_SCLK";
+% let sclkIOmuxStr2 = "(IOMUX_PINCM"+sclkPinCM.toString()+")";
+`sclkIOmuxStr.padEnd(40," ")+sclkIOmuxStr2.padStart(39," ")`
+% let sclkFuncStr = "#define "+gpioStr+"_IOMUX_SCLK_FUNC";
+% let sclkFuncStr2 = "IOMUX_PINCM"+sclkPinCM+"_PF_"+flavor+"_SCLK";
+`sclkFuncStr.padEnd(50, " ")+sclkFuncStr2.padStart(29, " ")`
+%if (inst.frameFormat != "MOTO3"){
+%for (let csNum of inst.chipSelect) {
+%       let csPinName = "cs"+csNum+"Pin";
+%       let csPackagePin = inst.peripheral[csPinName].$solution.packagePinName;
+%       let csPinCM = Common.getPinCM(csPackagePin,inst,"CS"+csNum);
+%       let csGpioName = system.deviceData.devicePins[csPackagePin].mux.muxSetting.find(item => item["mode"] === "1").peripheralPin.peripheralName;
+%       let csPort = Common.getGPIOPortMultiPad(csPackagePin,inst,"CS"+csNum);
+%       let csGpioPin = Common.getGPIONumberMultiPad(csPackagePin,inst,"CS"+csNum);
+% let csPortStr = "#define "+gpioStr+"_CS"+csNum+"_PORT";
+`csPortStr.padEnd(40," ")+csPort.padStart(39, " ")`
+% let csPinStr = "#define "+gpioStr+"_CS"+csNum+"_PIN";
+% let csPinStr2 = "DL_GPIO_PIN_"+csGpioPin;
+`csPinStr.padEnd(40," ")+csPinStr2.padStart(39," ")`
+% let csIOmuxStr = "#define "+gpioStr+"_IOMUX_CS"+csNum;
+% let csIOmuxStr2 = "(IOMUX_PINCM"+csPinCM.toString()+")";
+`csIOmuxStr.padEnd(40," ")+csIOmuxStr2.padStart(39," ")`
+% let csFuncStr = "#define "+gpioStr+"_IOMUX_CS"+csNum+"_FUNC";
+% let csFuncStr2 = "IOMUX_PINCM"+csPinCM+"_PF_"+flavor+"_CS"+csNum;
+`csFuncStr.padEnd(40, " ")+csFuncStr2.padStart(39, " ")`
+%} //for (let cs of inst.chipSelect)
+%} //(inst.frameFormat != "MOTO3")
+%   } //for (let i in instances) {
+% } // function printDefine
+%
+% function printDeclare() {
+%   for (let i in instances) {
+%       let inst = instances[i];
+%       let name = inst.$name
+void SYSCFG_DL_`name`_init(void);
+%   }
+% } // function printDeclare

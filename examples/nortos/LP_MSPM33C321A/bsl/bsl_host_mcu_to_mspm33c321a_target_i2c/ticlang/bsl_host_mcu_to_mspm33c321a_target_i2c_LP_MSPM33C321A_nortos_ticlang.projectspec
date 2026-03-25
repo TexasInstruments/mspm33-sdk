@@ -26,6 +26,7 @@
             -mfpu=fpv5-sp-d16
             -DI2C_Plugin
             -g
+            -O2
             @device.opt
             -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/third_party/CMSIS/Core/Include
             -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source
@@ -34,8 +35,6 @@
             -Wall
         "
         linkerBuildOptions="
-            -mfloat-abi=hard
-            -mfpu=fpv5-sp-d16
             -ldevice.cmd.genlibs
             -L${COM_TI_MSPM33_SDK_INSTALL_DIR}/source
             -L${PROJECT_ROOT}
@@ -51,7 +50,7 @@
             --compiler ticlang
         "
         sourceLookupPath="${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/ti/driverlib"
-        description="Demonstrate how to program a MSPM0 MCU using a LP-MSPM0G3507 as host by BSL I2C  interface.">
+        description="Demonstrate how to program a MSPM33 MCU using a LP-MSPM33C321A as host by BSL I2C  interface.">
 
         <property name="buildProfile" value="release"/>
         <property name="isHybrid" value="true"/>

@@ -118,11 +118,12 @@ if (Common.hasTimerA()) {
 
 let commModulesList = [
     "/ti/driverlib/UART",
-    //"/ti/driverlib/uartLIN",
+    "/ti/driverlib/uartLIN",
     "/ti/driverlib/I2C",
     //"/ti/driverlib/i2cSMBUS",
     "/ti/driverlib/SPI",
     "/ti/driverlib/I2S",
+    "/ti/driverlib/QSPI",
 ];
 
 let analogModulesList = [

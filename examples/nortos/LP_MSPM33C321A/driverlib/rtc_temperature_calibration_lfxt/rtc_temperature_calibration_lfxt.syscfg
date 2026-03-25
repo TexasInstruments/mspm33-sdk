@@ -36,6 +36,7 @@ Board.peripheral.swclkPin.$assign = "PA20";
 Board.peripheral.swdioPin.$assign = "PA19";
 
 HSADC1.$name              = "HSADC0";
+HSADC1.disChan11          = true;
 HSADC1.adcClockPrescaler  = "DL_HSADC_CLOCK_DIVIDE_8_0";
 HSADC1.enabledSOCs        = ["ADC_SOC_NUMBER0"];
 HSADC1.soc0Channel        = "ADC_CH_ADCIN_11";

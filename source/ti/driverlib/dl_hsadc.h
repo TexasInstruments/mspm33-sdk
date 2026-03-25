@@ -339,12 +339,12 @@ typedef enum {
 /**
  * @brief Step size between ADCSEQ FIFO registers=
  */
-#define ADCPPBxSUM_STEP 8U
+#define ADCPPBxSUM_STEP 2U
 
 /**
  * @brief Step size between ADCPPB COUNT registers
  */
-#define ADCPPBxCOUNT_STEP 8U
+#define ADCPPBxCOUNT_STEP 4U
 
 /**
  * @brief Step size between ADCSEQ FIFO Result registers
@@ -876,7 +876,7 @@ __STATIC_INLINE void DL_HSADC_clearStartOfConversationOverflowStatus(hsadc_ADC_L
  */
 __STATIC_INLINE void DL_HSADC_SOCChannelSelect(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SOC_NUMBER soc, DL_HSADC_ADCIN adcin )
 {
-    uint32_t *ctlRegAddr;
+    volatile uint32_t *ctlRegAddr;
     ctlRegAddr = (uint32_t*)((uint32_t*)&adc->ADC_LITE_REGS.ADCSOC0CTL + soc * ADCSOCxCTL_STEP);
     *ctlRegAddr = (*ctlRegAddr & ~HSADC_ADCSOC0CTL_CHSEL_MASK) | (adcin << HSADC_ADCSOC0CTL_CHSEL_OFS);
 }
@@ -889,7 +889,7 @@ __STATIC_INLINE void DL_HSADC_SOCChannelSelect(hsadc_ADC_LITE_REGS_Regs *adc, DL
  */
 __STATIC_INLINE void DL_HSADC_enableSOCComparator(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SOC_NUMBER soc)
 {
-    uint32_t *ctlRegAddr;
+    volatile uint32_t *ctlRegAddr;
     ctlRegAddr = (uint32_t*)((uint32_t*)&adc->ADC_LITE_REGS.ADCSOC0CTL + soc * ADCSOCxCTL_STEP);
     *ctlRegAddr |= HSADC_ADCSOC0CTL_COMPEN_MASK;
 }
@@ -902,7 +902,7 @@ __STATIC_INLINE void DL_HSADC_enableSOCComparator(hsadc_ADC_LITE_REGS_Regs *adc,
  */
 __STATIC_INLINE void DL_HSADC_disableSOCComparator(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SOC_NUMBER soc)
 {
-    uint32_t *ctlRegAddr;
+    volatile uint32_t *ctlRegAddr;
     ctlRegAddr = (uint32_t*)((uint32_t*)&adc->ADC_LITE_REGS.ADCSOC0CTL + soc * ADCSOCxCTL_STEP);
     *ctlRegAddr &= ~HSADC_ADCSOC0CTL_COMPEN_MASK;
 }
@@ -929,18 +929,6 @@ __STATIC_INLINE bool DL_HSADC_getPPBTripHighStatus(hsadc_ADC_LITE_REGS_Regs *adc
 __STATIC_INLINE bool DL_HSADC_getPPBTripLowStatus(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SEQ_NUMBER ppbNumber)
 {
     return (((adc->ADC_LITE_REGS.ADCEVTSTAT >> ppbNumber * HSADC_ADCEVTSTAT_PPB2TRIPHI_OFS) & HSADC_ADCEVTSTAT_PPB1TRIPLO_MASK) == HSADC_ADCEVTSTAT_PPB1TRIPLO_MASK);
-}
-
-/**
- * @brief Returns PPB TRIP zero status. Flag is set, if the digital compare trip zero event has occurred  in PPB{#}. {#} is the ppb number
- * 
- * @param adc is the base address of the ADC module.
- * @param ppbNumber is the PPB number
- * @return true: if trip zero event occurred, false: if trip zero event not occurred 
- */
-__STATIC_INLINE bool DL_HSADC_getPPBTripZeroStatus(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SEQ_NUMBER ppbNumber)
-{
-    return (((adc->ADC_LITE_REGS.ADCEVTSTAT >> ppbNumber * HSADC_ADCEVTSTAT_PPB2TRIPHI_OFS) & HSADC_ADCEVTSTAT_PPB1ZERO_MASK) == HSADC_ADCEVTSTAT_PPB1ZERO_MASK);
 }
 
 /**
@@ -978,17 +966,6 @@ __STATIC_INLINE void DL_HSADC_clearPPBTripLowStatus(hsadc_ADC_LITE_REGS_Regs *ad
 }
 
 /**
- * @brief Clears the corresponding trip zero flag in the ADCEVTSTAT register.
- * 
- * @param adc is the base address of the ADC module.
- * @param ppbNumber is the PPB number
- */
-__STATIC_INLINE void DL_HSADC_clearPPBTripZeroStatus(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SEQ_NUMBER ppbNumber)
-{
-    adc->ADC_LITE_REGS.ADCEVTCLR |= (uint32_t)(HSADC_ADCEVTCLR_PPB1ZERO_MASK<<(ppbNumber * (HSADC_ADCEVTCLR_PPB2ZERO_OFS - HSADC_ADCEVTCLR_PPB1ZERO_OFS)));
-}
-
-/**
  * @brief Clears the corresponding trip limit flag in the ADCEVTSTAT register.
  * 
  * @param adc is the base address of the ADC module.
@@ -1019,17 +996,6 @@ __STATIC_INLINE void DL_HSADC_enablePPBTripHighEvent(hsadc_ADC_LITE_REGS_Regs *a
 __STATIC_INLINE void DL_HSADC_enablePPBTripLowEvent(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SEQ_NUMBER ppbNumber)
 {
     adc->ADC_LITE_REGS.ADCEVTSEL |= (uint32_t)(HSADC_ADCEVTSEL_PPB1TRIPLO_MASK<<(ppbNumber * (HSADC_ADCEVTSEL_PPB2TRIPLO_OFS - HSADC_ADCEVTSEL_PPB1TRIPLO_OFS)));
-}
-
-/**
- * @brief Allows the corresponding rising trip zero flag to activate the event signal to the PWM blocks. The flag must be cleared before it can produce additional events to the PWM blocks.
- * 
- * @param adc is the base address of the ADC module.
- * @param ppbNumber is the PPB number
- */
-__STATIC_INLINE void DL_HSADC_enablePPBTripZeroEvent(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SEQ_NUMBER ppbNumber)
-{
-    adc->ADC_LITE_REGS.ADCEVTSEL |= (uint32_t)(HSADC_ADCEVTSEL_PPB1ZERO_MASK<<(ppbNumber * (HSADC_ADCEVTSEL_PPB2ZERO_OFS - HSADC_ADCEVTSEL_PPB1ZERO_OFS)));
 }
 
 /**
@@ -1066,17 +1032,6 @@ __STATIC_INLINE void DL_HSADC_disablePPBTripLowEvent(hsadc_ADC_LITE_REGS_Regs *a
 }
 
 /**
- * @brief Clears the trip zero event. After this, it can produce additional events to the PWM blocks.
- * 
- * @param adc is the base address of the ADC module.
- * @param ppbNumber is the PPB number
- */
-__STATIC_INLINE void DL_HSADC_disablePPBTripZeroEvent(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SEQ_NUMBER ppbNumber)
-{
-    adc->ADC_LITE_REGS.ADCEVTSEL &= ~(uint32_t)(HSADC_ADCEVTSEL_PPB1ZERO_MASK<<(ppbNumber * (HSADC_ADCEVTSEL_PPB2ZERO_OFS- HSADC_ADCEVTSEL_PPB1ZERO_OFS)));
-}
-
-/**
  * @brief Clears the trip limit event. After this, it can produce additional events to the PWM blocks.
  * 
  * @param adc is the base address of the ADC module.
@@ -1110,17 +1065,6 @@ __STATIC_INLINE void DL_HSADC_enablePPBTripLowInterrupt(hsadc_ADC_LITE_REGS_Regs
 }
 
 /**
- * @brief Allows the corresponding rising trip zero flag to activate the event interrupt signal to the PIE. The flag must be cleared before it can produce additional interrupts to the PIE.
- * 
- * @param adc is the base address of the ADC module.
- * @param ppbNumber is the PPB number
- */
-__STATIC_INLINE void DL_HSADC_enablePPBTripZeroInterrupt(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SEQ_NUMBER ppbNumber)
-{
-    adc->ADC_LITE_REGS.ADCEVTINTSEL |= (uint32_t)(HSADC_ADCEVTINTSEL_PPB1ZERO_MASK<<(ppbNumber * (HSADC_ADCEVTINTSEL_PPB2ZERO_OFS- HSADC_ADCEVTINTSEL_PPB1ZERO_OFS)));
-}
-
-/**
  * @brief Allows the corresponding rising trip limit flag to activate the event interrupt signal to the PIE. The flag must be cleared before it can produce additional interrupts to the PIE.
  * 
  * @param adc is the base address of the ADC module.
@@ -1151,17 +1095,6 @@ __STATIC_INLINE void DL_HSADC_disablePPBTripHighInterrupt(hsadc_ADC_LITE_REGS_Re
 __STATIC_INLINE void DL_HSADC_disablePPBTripLowInterrupt(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SEQ_NUMBER ppbNumber)
 {
     adc->ADC_LITE_REGS.ADCEVTINTSEL &= ~(uint32_t)(HSADC_ADCEVTINTSEL_PPB1TRIPLO_MASK<<(ppbNumber * (HSADC_ADCEVTINTSEL_PPB2TRIPLO_OFS- HSADC_ADCEVTINTSEL_PPB1TRIPLO_OFS)));
-}
-
-/**
- * @brief Clears the trip zero event. After this, it can produce additional interrupts to the PIE.
- * 
- * @param adc is the base address of the ADC module.
- * @param ppbNumber is the PPB number
- */
-__STATIC_INLINE void DL_HSADC_disablePPBTripZeroInterrupt(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SEQ_NUMBER ppbNumber)
-{
-    adc->ADC_LITE_REGS.ADCEVTINTSEL &= ~(uint32_t)(HSADC_ADCEVTINTSEL_PPB1ZERO_MASK<<(ppbNumber * (HSADC_ADCEVTINTSEL_PPB2ZERO_OFS- HSADC_ADCEVTINTSEL_PPB1ZERO_OFS)));
 }
 
 /**
@@ -1216,7 +1149,7 @@ __STATIC_INLINE void DL_HSADC_setOffsetTrim(hsadc_ADC_LITE_REGS_Regs *adc, DL_HS
  */
 __STATIC_INLINE void DL_HSADC_enablePPBCycleByCycle(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SEQ_NUMBER ppbNumber)
 {
-    uint32_t* PPBConfigAddr;
+    volatile uint32_t* PPBConfigAddr;
     PPBConfigAddr = (uint32_t*)((uint32_t*)&adc->ADC_LITE_REGS.ADCPPB1CONFIG + ppbNumber * ADCPPBxCONFIG_STEP);
     *PPBConfigAddr |= HSADC_ADCPPB1CONFIG_CBCEN_MASK;
 }
@@ -1229,7 +1162,7 @@ __STATIC_INLINE void DL_HSADC_enablePPBCycleByCycle(hsadc_ADC_LITE_REGS_Regs *ad
  */
 __STATIC_INLINE void DL_HSADC_disablePPBCycleByCycle(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SEQ_NUMBER ppbNumber)
 {
-    uint32_t* PPBConfigAddr;
+    volatile uint32_t* PPBConfigAddr;
     PPBConfigAddr = (uint32_t*)((uint32_t*)&adc->ADC_LITE_REGS.ADCPPB1CONFIG + ppbNumber * ADCPPBxCONFIG_STEP);
     *PPBConfigAddr &= ~HSADC_ADCPPB1CONFIG_CBCEN_MASK;
 }
@@ -1244,7 +1177,7 @@ __STATIC_INLINE void DL_HSADC_disablePPBCycleByCycle(hsadc_ADC_LITE_REGS_Regs *a
  */
 __STATIC_INLINE void DL_HSADC_setPPBTripHighLimit(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SEQ_NUMBER ppbNumber, uint16_t highLimit)
 {
-    uint32_t* PPBConfigAddr;
+    volatile uint32_t* PPBConfigAddr;
     PPBConfigAddr = (uint32_t*)((uint32_t*)&adc->ADC_LITE_REGS.ADCPPB1TRIPHI + ppbNumber * ADCPPBxCONFIG_STEP);
     *PPBConfigAddr = (*PPBConfigAddr & ~(HSADC_ADCPPB1TRIPHI_LIMITHI_MASK)) | highLimit;
 }
@@ -1259,7 +1192,7 @@ __STATIC_INLINE void DL_HSADC_setPPBTripHighLimit(hsadc_ADC_LITE_REGS_Regs *adc,
  */
 __STATIC_INLINE void DL_HSADC_setPPBTripLowLimit(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SEQ_NUMBER ppbNumber, uint16_t lowLimit)
 {
-    uint32_t* PPBConfigAddr;
+    volatile uint32_t* PPBConfigAddr;
     PPBConfigAddr = (uint32_t*)((uint32_t*)&adc->ADC_LITE_REGS.ADCPPB1TRIPLO + ppbNumber * ADCPPBxCONFIG_STEP);
     *PPBConfigAddr = (*PPBConfigAddr & ~(HSADC_ADCPPB1TRIPLO_LIMITLO_MASK)) | lowLimit;
 }
@@ -1307,7 +1240,7 @@ __STATIC_INLINE uint32_t DL_HSADC_getADCWrapperRevision(hsadc_ADC_LITE_REGS_Regs
  */
 __STATIC_INLINE void DL_HSADC_setPPBOversamplingLimit(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SEQ_NUMBER ppbNumber, DL_HSADC_OVERSAMPLING_LIMIT limit)
 {
-    uint32_t* PPBLimitAddr;
+    volatile uint32_t* PPBLimitAddr;
     PPBLimitAddr = (uint32_t*)((uint32_t*)&adc->ADC_LITE_REGS.ADCPPB1LIMIT + ppbNumber * ADCPPBxLIMIT_STEP);
     *PPBLimitAddr = (*PPBLimitAddr & ~(HSADC_ADCPPB1LIMIT_LIMIT_MASK)) | limit;
 }
@@ -1324,7 +1257,7 @@ __STATIC_INLINE void DL_HSADC_setPPBOversamplingLimit(hsadc_ADC_LITE_REGS_Regs *
  */
 __STATIC_INLINE uint32_t DL_HSADC_readPPBPartialCount(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SEQ_NUMBER ppbNumber)
 {
-    uint32_t* PPBPcountAddr;
+    volatile uint32_t* PPBPcountAddr;
     PPBPcountAddr = (uint32_t*)((uint32_t*)&adc->ADC_LITE_REGS.ADCPPB1PCOUNT + ppbNumber * ADCPPBxPCOUNT_STEP);
     return (*PPBPcountAddr & HSADC_ADCPPB1PCOUNT_PCOUNT_MASK);
 }
@@ -1338,7 +1271,7 @@ __STATIC_INLINE uint32_t DL_HSADC_readPPBPartialCount(hsadc_ADC_LITE_REGS_Regs *
  */
 __STATIC_INLINE void DL_HSADC_setPPBRightShift(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SEQ_NUMBER ppbNumber, DL_HSADC_PPB_RIGHTSHIFT shift )
 {
-    uint32_t* PPBConfig2Addr;
+    volatile uint32_t* PPBConfig2Addr;
     PPBConfig2Addr = (uint32_t*)((uint32_t*)&adc->ADC_LITE_REGS.ADCPPB1CONFIG2 + ppbNumber * ADCPPBxCONFIG2_STEP);
     *PPBConfig2Addr = (*PPBConfig2Addr & ~(HSADC_ADCPPB1CONFIG2_SHIFT_MASK)) | shift;
 }
@@ -1351,7 +1284,7 @@ __STATIC_INLINE void DL_HSADC_setPPBRightShift(hsadc_ADC_LITE_REGS_Regs *adc, DL
  */
 __STATIC_INLINE void DL_HSADC_selectCompareSourceAsPPBSum(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SEQ_NUMBER ppbNumber)
 {
-    uint32_t* PPBConfig2Addr;
+    volatile uint32_t* PPBConfig2Addr;
     PPBConfig2Addr = (uint32_t*)((uint32_t*)&adc->ADC_LITE_REGS.ADCPPB1CONFIG2 + ppbNumber * ADCPPBxCONFIG2_STEP);
     *PPBConfig2Addr |= HSADC_ADCPPB1CONFIG2_COMPSEL_MASK;
 }
@@ -1364,7 +1297,7 @@ __STATIC_INLINE void DL_HSADC_selectCompareSourceAsPPBSum(hsadc_ADC_LITE_REGS_Re
  */
 __STATIC_INLINE void DL_HSADC_selectCompareSourceAsPPBResult(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SEQ_NUMBER ppbNumber)
 {
-    uint32_t* PPBConfig2Addr;
+    volatile uint32_t* PPBConfig2Addr;
     PPBConfig2Addr = (uint32_t*)((uint32_t*)&adc->ADC_LITE_REGS.ADCPPB1CONFIG2 + ppbNumber * ADCPPBxCONFIG2_STEP);
     *PPBConfig2Addr &= ~HSADC_ADCPPB1CONFIG2_COMPSEL_MASK;
 }
@@ -1380,7 +1313,7 @@ __STATIC_INLINE void DL_HSADC_selectCompareSourceAsPPBResult(hsadc_ADC_LITE_REGS
  */
 __STATIC_INLINE uint32_t DL_HSADC_getOversamplingPartialSum(hsadc_ADC_LITE_REGS_Regs *adc,  DL_HSADC_SEQ_NUMBER ppbNumber)
 {
-    uint32_t* PPBPsumAddr;
+    volatile uint32_t* PPBPsumAddr;
     PPBPsumAddr = (uint32_t*)((uint32_t*)&adc->ADC_LITE_REGS.ADCPPB1PSUM + ppbNumber * ADCPPBxCONFIG2_STEP);
     return (*PPBPsumAddr & HSADC_ADCPPB1PSUM_PSUM_MASK);
 }
@@ -1428,7 +1361,7 @@ __STATIC_INLINE void DL_HSADC_setupSequencer(hsadc_ADC_LITE_REGS_Regs *adc, DL_H
     ASSERT(sampleWindow >= minSampleWindow && sampleWindow <= maxSampleWindow);
     uint32_t ACQPS;
     uint32_t mask;
-    uint32_t* seqConfigAddr;
+    volatile uint32_t* seqConfigAddr;
     seqConfigAddr =  (uint32_t*)((uint32_t*)&adc->ADC_LITE_REGS.ADCSEQ1CONFIG + seqNumber * ADCSEQxCONFIG_STEP);
     mask = (HSADC_ADCSEQ1CONFIG_ACQPS_MASK | HSADC_ADCSEQ1CONFIG_SEQSTART_MASK | HSADC_ADCSEQ1CONFIG_TRIGSEL_MASK);
     
@@ -1455,7 +1388,7 @@ __STATIC_INLINE void DL_HSADC_setupSequencer(hsadc_ADC_LITE_REGS_Regs *adc, DL_H
  */
 __STATIC_INLINE void DL_HSADC_enableSequencer(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SEQ_NUMBER seqNumber)
 {
-    uint32_t* seqConfigAddr;
+    volatile uint32_t* seqConfigAddr;
     seqConfigAddr =  (uint32_t*)((uint32_t*)&adc->ADC_LITE_REGS.ADCSEQ1CONFIG + seqNumber * ADCSEQxCONFIG_STEP);
     *seqConfigAddr |= HSADC_ADCSEQ1CONFIG_SEQENABLE_MASK;
 }
@@ -1468,7 +1401,7 @@ __STATIC_INLINE void DL_HSADC_enableSequencer(hsadc_ADC_LITE_REGS_Regs *adc, DL_
  */
 __STATIC_INLINE void DL_HSADC_disableSequencer(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SEQ_NUMBER seqNumber)
 {
-    uint32_t* seqConfigAddr;
+    volatile uint32_t* seqConfigAddr;
     seqConfigAddr =  (uint32_t*)((uint32_t*)&adc->ADC_LITE_REGS.ADCSEQ1CONFIG + seqNumber * ADCSEQxCONFIG_STEP);
     *seqConfigAddr &= ~HSADC_ADCSEQ1CONFIG_SEQENABLE_MASK;
 }
@@ -1484,7 +1417,7 @@ __STATIC_INLINE void DL_HSADC_disableSequencer(hsadc_ADC_LITE_REGS_Regs *adc, DL
  */
 __STATIC_INLINE void DL_HSADC_setSampleCapReset(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SEQ_NUMBER seqNumber, DL_HSADC_SAMPCAPRESET sampleCapResetSelect)
 {
-    uint32_t* seqConfigAddr;
+    volatile uint32_t* seqConfigAddr;
     seqConfigAddr =  (uint32_t*)((uint32_t*)&adc->ADC_LITE_REGS.ADCSEQ1CONFIG + seqNumber * ADCSEQxCONFIG_STEP);
     *seqConfigAddr = (*seqConfigAddr & ~(HSADC_ADCSEQ1CONFIG_SAMPCAPRESETDISABLE_MASK | HSADC_ADCSEQ1CONFIG_SAMPCAPRESETSEL_MASK)) | ((uint32_t)sampleCapResetSelect << HSADC_ADCSEQ1CONFIG_SAMPCAPRESETSEL_OFS);
 }
@@ -1497,9 +1430,9 @@ __STATIC_INLINE void DL_HSADC_setSampleCapReset(hsadc_ADC_LITE_REGS_Regs *adc, D
  */
 __STATIC_INLINE void DL_HSADC_disableSampleCapReset(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SEQ_NUMBER seqNumber)
 {
-    uint32_t* seqConfigAddr;
+    volatile uint32_t* seqConfigAddr;
     seqConfigAddr =  (uint32_t*)((uint32_t*)&adc->ADC_LITE_REGS.ADCSEQ1CONFIG + seqNumber * ADCSEQxCONFIG_STEP);
-    *seqConfigAddr |= HSADC_ADCSEQ1CONFIG_SAMPCAPRESETDISABLE_MASK; 
+    *seqConfigAddr |= HSADC_ADCSEQ1CONFIG_SAMPCAPRESETDISABLE_MASK;
 }
 
 /**
@@ -1510,7 +1443,7 @@ __STATIC_INLINE void DL_HSADC_disableSampleCapReset(hsadc_ADC_LITE_REGS_Regs *ad
  */
 __STATIC_INLINE void DL_HSADC_triggerSequencerSoftwareForce(hsadc_ADC_LITE_REGS_Regs *adc, DL_HSADC_SEQ_NUMBER seqNumber)
 {
-    uint32_t* seqConfigAddr;
+    volatile uint32_t* seqConfigAddr;
     seqConfigAddr =  (uint32_t*)((uint32_t*)&adc->ADC_LITE_REGS.ADCSEQ1CONFIG + seqNumber * ADCSEQxCONFIG_STEP);
     *seqConfigAddr |= HSADC_ADCSEQ1CONFIG_SEQSWFRC_MASK; 
 }
@@ -1526,7 +1459,7 @@ __STATIC_INLINE void DL_HSADC_triggerSequencerSoftwareForce(hsadc_ADC_LITE_REGS_
  */
 __STATIC_INLINE uint16_t DL_HSADC_getResult(hsadc_ADC_LITE_RESULT_REGS_Regs *adcResult, DL_HSADC_SOC_NUMBER resultNumber)
 {
-    uint16_t* resultAddr;
+    volatile uint16_t* resultAddr;
     resultAddr =  ((uint16_t*)&adcResult->ADC_LITE_RESULT_REGS.ADCRESULT0 + resultNumber * ADCRESULTx_STEP);
     return ((*resultAddr) & HSADC_ADCRESULT0_RESULT_MASK);
 }
@@ -1542,7 +1475,7 @@ __STATIC_INLINE uint16_t DL_HSADC_getResult(hsadc_ADC_LITE_RESULT_REGS_Regs *adc
  */
 __STATIC_INLINE uint32_t DL_HSADC_getPPBResult(hsadc_ADC_LITE_RESULT_REGS_Regs *adcResult, DL_HSADC_SEQ_NUMBER ppbNumber)
 {
-    uint32_t* ppbResultAddr;
+    volatile uint32_t* ppbResultAddr;
     ppbResultAddr =  (uint32_t*)((uint32_t*)&adcResult->ADC_LITE_RESULT_REGS.ADCPPB1RESULT + ppbNumber * ADCPPBxRESULT_STEP);
     return (*ppbResultAddr & HSADC_ADCPPB1RESULT_PPBRESULT_MASK);
 }
@@ -1561,7 +1494,7 @@ __STATIC_INLINE uint32_t DL_HSADC_getPPBResult(hsadc_ADC_LITE_RESULT_REGS_Regs *
  */
 __STATIC_INLINE uint16_t DL_HSADC_getFinalSumResult(hsadc_ADC_LITE_RESULT_REGS_Regs *adcResult, DL_HSADC_SEQ_NUMBER ppbNumber)
 {
-    uint32_t* ppbSumAddr;
+    volatile uint32_t* ppbSumAddr;
     ppbSumAddr =  ((uint32_t*)&adcResult->ADC_LITE_RESULT_REGS.ADCPPB1SUM + ppbNumber * ADCPPBxSUM_STEP);
     return (uint16_t)(*ppbSumAddr & HSADC_ADCPPB1SUM_SUM_MASK);
 }
@@ -1576,7 +1509,7 @@ __STATIC_INLINE uint16_t DL_HSADC_getFinalSumResult(hsadc_ADC_LITE_RESULT_REGS_R
  */
 __STATIC_INLINE uint16_t DL_HSADC_getFinalCountResult(hsadc_ADC_LITE_RESULT_REGS_Regs *adcResult, DL_HSADC_SEQ_NUMBER ppbNumber)
 {
-    uint16_t* ppbCountAddr;
+    volatile uint16_t* ppbCountAddr;
     ppbCountAddr =  ((uint16_t*)&adcResult->ADC_LITE_RESULT_REGS.ADCPPB1COUNT + ppbNumber * ADCPPBxCOUNT_STEP);
     return ((*ppbCountAddr) & HSADC_ADCPPB1COUNT_COUNT_MASK);
 }
@@ -1597,7 +1530,7 @@ __STATIC_INLINE uint16_t DL_HSADC_getFinalCountResult(hsadc_ADC_LITE_RESULT_REGS
  */
 __STATIC_INLINE uint32_t DL_HSADC_getSeqFIFOResult32(hsadc_ADC_LITE_RESULT_REGS_Regs *adcResult, DL_HSADC_SEQ_NUMBER seqNumber)
 {
-    uint32_t* seqFIFOresult;
+    volatile uint32_t* seqFIFOresult;
     seqFIFOresult =  (uint32_t*)((uint32_t*)&adcResult->ADC_LITE_RESULT_REGS.ADCSEQ1FIFORESULT + seqNumber * ADCSEQxFIFORESULT_STEP);
     return (*seqFIFOresult & HSADC_ADCSEQ1FIFORESULT_SEQFIFORESULT_MASK);
 
@@ -1616,7 +1549,7 @@ __STATIC_INLINE uint32_t DL_HSADC_getSeqFIFOResult32(hsadc_ADC_LITE_RESULT_REGS_
  */
 __STATIC_INLINE void DL_HSADC_getSeqFIFOResultByReference(hsadc_ADC_LITE_RESULT_REGS_Regs *adcResult, DL_HSADC_SEQ_NUMBER seqNumber, uint16_t *resultFirst, uint16_t *resultSecond)
 {
-    uint32_t* seqFIFOresult;
+    volatile uint32_t* seqFIFOresult;
     seqFIFOresult =  (uint32_t*)((uint32_t*)&adcResult->ADC_LITE_RESULT_REGS.ADCSEQ1FIFORESULT + seqNumber * ADCSEQxFIFORESULT_STEP);
     *resultFirst = (uint16_t)((*seqFIFOresult & HSADC_ADCSEQ1FIFORESULT_SEQFIFORESULT_MASK) & 0xFFFF);
     *resultSecond = (uint16_t)((*seqFIFOresult & HSADC_ADCSEQ1FIFORESULT_SEQFIFORESULT_MASK) >> 16);
@@ -1631,7 +1564,7 @@ __STATIC_INLINE void DL_HSADC_getSeqFIFOResultByReference(hsadc_ADC_LITE_RESULT_
  */
 __STATIC_INLINE bool DL_HSADC_isSeqFIFOValid(hsadc_ADC_LITE_RESULT_REGS_Regs *adcResult, DL_HSADC_SEQ_NUMBER seqNumber)
 {
-    uint32_t* seqFIFOStatus;
+    volatile uint32_t* seqFIFOStatus;
     seqFIFOStatus =  (uint32_t*)((uint32_t*)&adcResult->ADC_LITE_RESULT_REGS.ADCSEQ1FIFOSTATUS + seqNumber * ADCSEQxFIFOSTATUS_STEP);
     return ((*seqFIFOStatus & HSADC_ADCSEQ1FIFOSTATUS_SEQFIFOVALID_MASK) == HSADC_ADCSEQ1FIFOSTATUS_SEQFIFOVALID_MASK);
 }
@@ -1650,7 +1583,7 @@ __STATIC_INLINE bool DL_HSADC_isSeqFIFOValid(hsadc_ADC_LITE_RESULT_REGS_Regs *ad
  */
 __STATIC_INLINE uint32_t DL_HSADC_getPendingReads(hsadc_ADC_LITE_RESULT_REGS_Regs *adcResult, DL_HSADC_SEQ_NUMBER seqNumber)
 {
-    uint32_t* seqFIFOStatus;
+    volatile uint32_t* seqFIFOStatus;
     seqFIFOStatus =  (uint32_t*)((uint32_t*)&adcResult->ADC_LITE_RESULT_REGS.ADCSEQ1FIFOSTATUS + seqNumber * ADCSEQxFIFOSTATUS_STEP);
     return ((*seqFIFOStatus & HSADC_ADCSEQ1FIFOSTATUS_SEQFIFOPENDREAD_MASK) >> HSADC_ADCSEQ1FIFOSTATUS_SEQFIFOPENDREAD_OFS);
 }

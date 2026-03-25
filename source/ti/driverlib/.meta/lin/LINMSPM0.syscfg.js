@@ -243,6 +243,9 @@ function getTbit(inst) {
 }
 
 function getCounterCompareValue(inst) {
+    if (!inst.enableLinCounterCompare) {
+        return 0;
+    }
 
     let ccVal = getTbit(inst) * inst.tbitVal;
 
@@ -447,6 +450,7 @@ For example, to set the counter compare value to "9.5 * Tbit", the user should e
                         name        : "setLinCounterCompare",
                         displayName : "Counter Compare Value (cycles)",
                         description : 'Set the value to be compared to the LIN counter',
+                        range       : [0, 0xFFFF],
                         longDescription :
 `
 Sets the counter compare value of LINC0 to be used to compare to the LIN counter.\n

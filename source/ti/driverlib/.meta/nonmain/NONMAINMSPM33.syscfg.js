@@ -120,7 +120,10 @@ if (Common.isDeviceM0C()) {
     `;
 }
 
+// Used for 128-bit passwords
 let sha256Note = "";
+// used for 256-bit passwords
+let sha256NoteAlt = "";
 if (deviceOptions.SUPPORT_PW_HASH == true) {
     sha256Note = `
 **Note**: Password fields for this device **require** the user to provide the SHA256
@@ -130,49 +133,113 @@ between 128-bit plaintext password and hash:
 1. Determine the 128-bit password to use. These steps will use the following
 example password:
 
-0x12345678\n
-0xCAFECAFE\n
-0xDEADBEEF\n
-0xCAFEBABE\n
+* 0x12345678\n
+* 0xCAFECAFE\n
+* 0xDEADBEEF\n
+* 0xCAFEBABE\n
 
 2. Reverse the password endianness. Combine it into one string.
-0x78563412\n
-0xFECAFECA\n
-0xEFBEADDE\n
-0xBEBAFECA\n
+* 0x78563412\n
+* 0xFECAFECA\n
+* 0xEFBEADDE\n
+* 0xBEBAFECA\n
 
-Combined String: 78563412FECAFECAEFBEADDEBEBAFECA
+\tCombined String: 78563412FECAFECAEFBEADDEBEBAFECA
 
 3. Calculate the SHA256 of the string. Break the output into 8 32-bit words.
 The user can use online tools like the one provided here:
 [SHA256 online tool](https://emn178.github.io/online-tools/sha256.html)
+**Important**: Make sure to select **Hex** as the input encoding in the tool.
 
-Output String: 2738a5682ad52550177227468dd2b55f552c34bd25560b9067b0a3f3d5c648f9
+\tOutput String: 2738a5682ad52550177227468dd2b55f552c34bd25560b9067b0a3f3d5c648f9
 
-Result:\n
-0x2738a568\n
-0x2ad52550\n
-0x17722746\n
-0x8dd2b55f\n
-0x552c34bd\n
-0x25560b90\n
-0x67b0a3f3\n
-0xd5c648f9\n
+\tResult:\n
+* 0x2738a568\n
+* 0x2ad52550\n
+* 0x17722746\n
+* 0x8dd2b55f\n
+* 0x552c34bd\n
+* 0x25560b90\n
+* 0x67b0a3f3\n
+* 0xd5c648f9\n
 
 4. Reverse endianness of the 32-bit words.
 
-Original   -> Converted\n
-0x2738a568 -> 0x68A53827\n
-0x2ad52550 -> 0x5025D52A\n
-0x17722746 -> 0x46277217\n
-0x8dd2b55f -> 0x5FB5D28D\n
-0x552c34bd -> 0xBD342C55\n
-0x25560b90 -> 0x900B5625\n
-0x67b0a3f3 -> 0xF3A3B067\n
-0xd5c648f9 -> 0xF948C6D5\n
+\tOriginal   -> Converted\n
+* 0x2738a568 -> 0x68A53827\n
+* 0x2ad52550 -> 0x5025D52A\n
+* 0x17722746 -> 0x46277217\n
+* 0x8dd2b55f -> 0x5FB5D28D\n
+* 0x552c34bd -> 0xBD342C55\n
+* 0x25560b90 -> 0x900B5625\n
+* 0x67b0a3f3 -> 0xF3A3B067\n
+* 0xd5c648f9 -> 0xF948C6D5\n
 
 5. Enter the converted password into the BCR (boot configuration routine) structure
 for the desired function e.g. mass erase, factory reset, or debug lock.
+`;
+
+    sha256NoteAlt = `
+**Note**: This password field **requires** the user to provide the SHA256
+hash of the 256-bit password.
+
+Refer to the following steps on correctly converting
+between a 256-bit plaintext password and hash for reference:
+
+1. Determine the 256-bit password to use. These steps will use the following
+example password:
+
+* 0x12345678\n
+* 0xCAFECAFE\n
+* 0xDEADBEEF\n
+* 0xCAFEBABE\n
+* 0xABCD1234\n
+* 0x5678EFAB\n
+* 0x9ABC0DEF\n
+* 0xFEDCBA98\n
+
+2. Reverse the password endianness. Combine it into one string.
+* 0x78563412\n
+* 0xFECAFECA\n
+* 0xEFBEADDE\n
+* 0xBEBAFECA\n
+* 0x3412CDAB\n
+* 0xABEF7856\n
+* 0xEF0DBC9A\n
+* 0x98BADCFE\n
+
+\tCombined String: 78563412FECAFECAEFBEADDEBEBAFECA3412CDABABEF7856EF0DBC9A98BADCFE
+
+3. Calculate the SHA256 of the string. Break the output into 8 32-bit words.
+The user can use online tools like the one provided here:
+[SHA256 online tool](https://emn178.github.io/online-tools/sha256.html)
+**Important**: Make sure to select **Hex** as the input encoding in the tool.
+
+\tOutput String: 1ebee0beac223aaa2a5ee3b5f8c4f0b7ce36b3e3cc943c1a5fbac0014a02ec7d
+
+\tResult:\n
+* 0x1ebee0be\n
+* 0xac223aaa\n
+* 0x2a5ee3b5\n
+* 0xf8c4f0b7\n
+* 0xce36b3e3\n
+* 0xcc943c1a\n
+* 0x5fbac001\n
+* 0x4a02ec7d\n
+
+4. Reverse endianness of the 32-bit words.
+
+\tOriginal   -> Converted\n
+* 0x1ebee0be -> 0xBEE0BE1E\n
+* 0xac223aaa -> 0xAA3A22AC\n
+* 0x2a5ee3b5 -> 0xB5E35E2A\n
+* 0xf8c4f0b7 -> 0xB7F0C4F8\n
+* 0xce36b3e3 -> 0xE3B336CE\n
+* 0xcc943c1a -> 0x1A3C94CC\n
+* 0x5fbac001 -> 0x01C0BA5F\n
+* 0x4a02ec7d -> 0x7DEC024A\n
+
+5. Enter the converted password into the BSL (bootstrap loader) configuration structure.
 `;
 }
 
@@ -215,8 +282,12 @@ const BANK0_SECTORS = (() => {
     }
 
     // Next 32 blocks (16KB each)
+    // Calculate base address for blocks after 32 2KB sectors
+    const BLOCKS_BASE = BANK0_BASE + (32 * 0x800);  // Start after 32 2KB sectors
+
     for (let i = 32; i < 64; i++) {
-        const startAddr = BANK0_BASE + (i * 0x4000);
+        const blockIndex = i - 32;  // Index from 0 for blocks
+        const startAddr = BLOCKS_BASE + (blockIndex * 0x4000);  // 0x4000 = 16KB
         const endAddr = startAddr + 0x3FFF;
         options.push({
             name: `block${i}`,
@@ -355,26 +426,13 @@ function validateBCR(inst, validation) {
         );
     }
 
-    /* MAIN flash static write protection validation */
-    if (inst.staticWriteProtectionMainLow || inst.staticWriteProtectionMainHigh) {
-        validation.logInfo(
-            "Mass erase and factory reset commands sent to the BCR via the " +
-            "DSSM will override the specified static write protection policy. " +
-            "If this behavior is not desired, configure the mass erase and " +
-            "factory reset commands to be enabled with password or disabled. " +
-            "Note that mass erase and factory reset commands sent to the BSL " +
-            "will respect the static write protection policy as the BSL has the " +
-            "same permissions as application code.",
-            inst, ["staticWriteProtectionMainLow", "staticWriteProtectionMainHigh"]
-        );
-    }
 
-    /* NONMAIN flash static write protection validation */
-    if (inst.staticWriteProtectionNonMain) {
+    /* NONMAIN flash write protection validation */
+    if (inst.nonMainWriteProtection === "enabled") {
         validation.logWarning(
             "This locks the configuration permanently unless BCR factory reset " +
             "is enabled with or without password.",
-            inst, "staticWriteProtectionNonMain"
+            inst, "nonMainWriteProtection"
         );
     }
 
@@ -1396,9 +1454,8 @@ To accommodate a variety of needs while keeping the configuration process
                 simple, MSPM0 devices support three generic security levels: no restrictions(level 0),
                     custom restrictions(level 1), and fully restricted(level 2).
 
-Refer to the Boot Configuration Routine(BCR) Security Policies section of the
-                [Cybersecurity Enablers in MSPM0 MCUs app note](https://www.ti.com/lit/slaae29)
-                    for more details on the security levels.
+Refer to the [MSPM33 Security User Guide](https://www.ti.com/lit/ug/sluudg7/sluudg7.pdf)
+for more details on the security levels.
 
                     The Quick Profile Options are:
                         * ** Security Level 0 **:
@@ -1470,13 +1527,12 @@ erase, factory reset, and TI failure analysis) are not accessible through SWD,
 fields are still used by the BSL to authorize mass erase or factory reset
 commands originating from the BSL interface.
 
-This is the ** fully restrictive ** state or ** SWD Security Level 2 **.
-                    Level 2 should be used for mass production when no further access to any SWD
+This is the ** fully restrictive ** state.
+This should be used for mass production when no further access to any SWD
 functions is required and a fully secure state is desired for the device.
 
-Refer to the Boot Configuration Routine(BCR) Security Policies section of the
-                [Cybersecurity Enablers in MSPM0 MCUs app note](https://www.ti.com/lit/slaae29)
-                    for more details on the security levels.
+Refer to the [MSPM33 Security User Guide](https://www.ti.com/lit/ug/sluudg7/sluudg7.pdf)
+for more details on the security levels.
 `,
                         hidden: false,
                         default: true,
@@ -1486,7 +1542,7 @@ Refer to the Boot Configuration Routine(BCR) Security Policies section of the
                     {
                         name: "apEnable",
                         displayName: "Enable Application Debug Access",
-                        description: "Selects if application debug access is enabled, disabled, or enabled with password.",
+                        description: "Selects the application debug access level: Level 0 (Full Access), Level 1, Level 2, or Disabled.",
                         longDescription: `
                     Application debug access includes:
 
@@ -1494,15 +1550,14 @@ Refer to the Boot Configuration Routine(BCR) Security Policies section of the
                             * Access to the device EnergyTrace + state information through the ET - AP
                                 * Access to the device power state controls for debug through the PWR - AP
 
-This field can be modified to implement ** SWD Security Level 1 **, which allows
-                for a customized security configuration.Level 1 is well suited for restricted
-prototyping / development scenarios and for mass production scenarios where the
-the desire is to retain certain SWD functions such as factory reset and TI
-failure analysis while disabling other functions(such as application debug).
+The available options are:
+* **Level 0 - Full Access**: No restrictions on application debug access.
+* **Level 1 - Secure Protected, Non-Secure Enabled**: Secure debug is protected, non-secure debug is enabled. Well suited for restricted prototyping / development scenarios and for mass production scenarios where the desire is to retain certain SWD functions such as factory reset and TI failure analysis while disabling other functions (such as application debug).
+* **Level 2 - Both Secure and Non-Secure Protected**: Both secure and non-secure debug access are protected.
+* **Disabled**: Application debug access is completely disabled.
 
-Refer to the Boot Configuration Routine(BCR) Security Policies section of the
-                [Cybersecurity Enablers in MSPM0 MCUs app note](https://www.ti.com/lit/slaae29)
-                    for more details on the security levels.
+Refer to the [MSPM33 Security User Guide](https://www.ti.com/lit/ug/sluudg7/sluudg7.pdf)
+for more details on the security levels.
 `,
                         hidden: false,
                         default: "enabled",
@@ -1516,11 +1571,7 @@ Refer to the Boot Configuration Routine(BCR) Security Policies section of the
                         name: "GROUP_DEBUG_LOCK",
                         displayName: "Secure Debug Password",
                         collapsed: false,
-                        longDescription: `
-                    User should provide the SHA-2 256 Hash of the Password.In order to calculate
-the hash value, user can use online tools like the one provided here:
-                [SHA256 online tool](https://emn178.github.io/online-tools/sha256.html)
-                    `,
+                        longDescription: sha256Note,
                         config: debuglockPWConfig,
                     },
                     {
@@ -1529,11 +1580,7 @@ the hash value, user can use online tools like the one provided here:
                         name: "GROUP_DEBUG_NS_LOCK",
                         displayName: "Non-secure Debug Password",
                         collapsed: false,
-                        longDescription: `
-User should provide the SHA - 2 256 Hash of the Password.In order to calculate
-the hash value, user can use online tools like the one provided here:
-                    [SHA256 online tool](https://emn178.github.io/online-tools/sha256.html)
-                        `,
+                        longDescription: sha256Note,
                         config: debugNSlockPWConfig,
                     },
                 ],
@@ -1576,11 +1623,7 @@ application code and data.
                         name: "GROUP_FACTORY_RESET_PW",
                         displayName: "Factory Reset Password",
                         collapsed: false,
-                        longDescription: `
-User should provide the SHA - 2 256 Hash of the Password.In order to calculate
-the hash value, user can use online tools like the one provided here:
-            [SHA256 online tool](https://emn178.github.io/online-tools/sha256.html)
-                `,
+                        longDescription: sha256Note,
                         config: frPWConfig,
                     },
                     {
@@ -1616,11 +1659,7 @@ and data while leaving the device configuration intact.
                         name: "GROUP_MASS_ERASE_PW",
                         displayName: "Mass Erase Password",
                         collapsed: false,
-                        longDescription: `
-User should provide the SHA - 2 256 Hash of the Password.In order to calculate
-the hash value, user can use online tools like the one provided here:
-            [SHA256 online tool](https://emn178.github.io/online-tools/sha256.html)
-                `,
+                        longDescription: sha256Note,
                         config: mePWConfig,
                     },
                 ],
@@ -3260,7 +3299,7 @@ nonMainConfig = nonMainConfig.concat(([
         description: "",
         longDescription: `
     The BSL provides a method to program and / or verify the device memory through a
-    standard serial interface(UART or I2C).
+    standard serial interface(UART, I2C, or MCAN).
     Key features of the BSL which are accessible through the serial interface include:
 
     * Programming and erase of flash memory
@@ -3271,7 +3310,7 @@ nonMainConfig = nonMainConfig.concat(([
     to verify programming
                 * Access is always protected with a 256 - bit password
                     * Configurable security alert handling for resisting brute force attacks
-                        * Support for MAIN flash plugins to enable additional interfaces beyond UART and I2C
+                        * Support for MAIN flash plugins to enable additional interfaces beyond UART, I2C, and MCAN
 
     For a complete description of the BSL features, see the BSL User's Guide.
 
@@ -3285,11 +3324,7 @@ nonMainConfig = nonMainConfig.concat(([
                 /* BSLPW[0-7] */
                 name: "GROUP_BSL_ACCESS_PW",
                 displayName: "BSL Access Password",
-                longDescription: `
-User should provide the SHA - 2 256 Hash of the Password.In order to calculate
-the hash value, user can use online tools like the one provided here:
-            [SHA256 online tool](https://emn178.github.io/online-tools/sha256.html)
-                `,
+                longDescription: sha256NoteAlt,
                 config: createPWConfig("bslPW", false, 8),
             },
             {

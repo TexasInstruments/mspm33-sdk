@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2019, Texas Instruments Incorporated - http://www.ti.com
+ * Copyright (c) 2026, Texas Instruments Incorporated - http://www.ti.com
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -70,29 +70,28 @@ function _getPinResources(inst)
  */
 let base = {
     displayName: "QSPI",
-    description: "Template QSPI Module for MSPM0",
+    description: "Template QSPI Module for MSPM33",
     longDescription: `
-The **QSPI module** provides an interface for quad serial peripheral interface
-communication with peripheral devices and other controllers.
+The **QSPI module** provides a standardized serial interface to transfer data 
+between MSP devices and other external devices with QSPI interfaces (such as flash memory or high-refresh 
+displays).
 
 Under *Basic Configuration* users can:
 - Enable and configure QSPI initialization parameters:
-    - Mode select (Controller/Peripheral)
+    - Mode select
     - Clock configuration
     - Frame configuration
     - Chip select
-    - QSPI-specific configuration (port mode, bus format, address mode)
 
 Under *Advanced Configuration* users can:
 - Enable/configure parity mode
 - Configure TX/RX FIFO thresholds
-- Enable command data mode and/or internal loopback
+- Enable internal loopback
 - Configure sampling parameters
-- Configure QSPI timing parameters
 
 QSPI Functional Block Diagram:
 
-![QSPI Block Diagram](../docs/english/sysconfig/images/qspiBlockDiag.png "QSPI Block Diagram")
+![QSPI Block Diagram](../docs/english/sysconfig/images/qspiBlockDiagM33.png "QSPI Block Diagram")
 
 Check the datasheet of your selected device for more detailed information.
     `,

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arm Keil MDK IDE Version 5.38+ for MSPM33 MCUs &mdash; Arm Keil MDK IDE for MSPM33 MCUs Documentation 1.02.00.00 documentation</title>
+  <title>Arm Keil MDK IDE Version 5.38+ for MSPM33 MCUs &mdash; Arm Keil MDK IDE for MSPM33 MCUs Documentation 1.03.00.01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
@@ -32,7 +32,7 @@
             <a href="index.html" class="icon icon-home"> Arm Keil MDK IDE for MSPM33 MCUs Documentation
           </a>
               <div class="version">
-                1.02.00.00
+                1.03.00.01
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -177,28 +177,40 @@
 <ol class="arabic simple">
 <li><p>In SysConfig, enable the Device View and click on <strong>SWITCH</strong></p></li>
 </ol>
-<p><img alt="image0" src="../_images/keil_ide_migrate_1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_migrate_1.png" />
+</figure>
 <ol class="arabic simple" start="2">
 <li><p>Select the corresponding options for the new MSPM33 device and click <strong>CONFIRM</strong>.</p></li>
 </ol>
-<p><img alt="image1" src="../_images/keil_ide_migrate_2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_migrate_2.png" />
+</figure>
 <ol class="arabic simple" start="3">
 <li><p>Note that SysConfig will highlight any conflicts with the migration, such as unavailable pins and peripherals. Fix any conflicts as needed.</p></li>
 <li><p>In the Keil IDE, open the <strong>Device</strong> tab in project options, and select the new MSPM33 derivative.</p></li>
 </ol>
-<p><img alt="image2" src="../_images/keil_ide_migrate_3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_migrate_3.png" />
+</figure>
 <ol class="arabic simple" start="5">
 <li><p>Update the device definition by selecting <strong>C/C++ (AC6)</strong> → <strong>Preprocessor Symbols</strong> → <strong>Define</strong>. Add the device definition as per the device selected.</p></li>
 </ol>
-<p><img alt="image3" src="../_images/keil_ide_migrate_4.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_migrate_4.png" />
+</figure>
 <ol class="arabic simple" start="6">
 <li><p>Update the linker file in <strong>Linker</strong> → <strong>Scatter File</strong>. The MSPM33 SDK includes default files for all MSPM33 derivatives at <code class="docutils literal notranslate"><span class="pre">&lt;sdk&gt;\source\ti\devices\msp\m33\linker_files\keil</span></code>.</p></li>
 </ol>
-<p><img alt="image4" src="../_images/keil_ide_migrate_5.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_migrate_5.png" />
+</figure>
 <ol class="arabic simple" start="7">
 <li><p>Add the startup file of the new derivative to the project and remove existing one. The MSPM33 SDK includes default files for all MSPM33 derivatives at <code class="docutils literal notranslate"><span class="pre">&lt;sdk&gt;\source\ti\devices\msp\m33\startup_system_files\keil</span></code>.</p></li>
 </ol>
-<p><img alt="image5" src="../_images/keil_ide_migrate_6.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_migrate_6.png" />
+</figure>
 <ol class="arabic simple" start="8">
 <li><p>Resolve any other dependencies such as incompatible libraries and source code.</p></li>
 </ol>
@@ -208,25 +220,39 @@
 <h3>2.6 Adding Newly Generated SysConfig Files to Projects<a class="headerlink" href="#adding-newly-generated-sysconfig-files-to-projects" title="Permalink to this heading">¶</a></h3>
 <p>When working with SysConfig modules such as the NONMAIN Configurator which generate files other than <code class="docutils literal notranslate"><span class="pre">ti_msp_dl_config.h</span></code> and <code class="docutils literal notranslate"><span class="pre">ti_msp_dl_config.c</span></code>, the newly generated files must be manually added to the project since Keil does not do this automatically. See the <a class="reference external" href="../../../sysconfig_guide/doc_guide/doc_guide-srcs/sysconfig_guide.html">Using SysConfig with MSPM33</a> guide for more details on which modules generate additional files.</p>
 <p>Consider the case of the NONMAIN Configurator, which generates 2 additional files: <code class="docutils literal notranslate"><span class="pre">boot_config.h</span></code> and <code class="docutils literal notranslate"><span class="pre">boot_config.c</span></code>.</p>
-<p><img alt="image6" src="../_images/keil_ide_sysconfig_additional_generated_files.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_sysconfig_additional_generated_files.png" />
+</figure>
 <p>To include these files in the built project, perform the following steps:</p>
 <ol class="arabic simple">
 <li><p>After adding the SysConfig module and saving the changes, navigating back to the Keil IDE should throw a message saying that the .syscfg file was modified. Click <strong>Yes</strong> to reload the file.</p></li>
 </ol>
-<p><img alt="image7" src="../_images/keil_ide_reload_sysconfig_file.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_reload_sysconfig_file.png" />
+</figure>
 <ol class="arabic" start="2">
 <li><p>Right-click on the project and select <strong>Rebuild all target files</strong> to rebuild the project. The <strong>Build Output</strong> window shows that SysConfig has generated those files.</p>
-<p><img alt="image8" src="../_images/keil_ide_rebuild_target.png" /></p>
-<p><img alt="image9" src="../_images/keil_ide_build_log.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_rebuild_target.png" />
+</figure>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_build_log.png" />
+</figure>
 </li>
 <li><p>To add the additional newly generated files (in this case, <code class="docutils literal notranslate"><span class="pre">boot_config.h</span></code> and <code class="docutils literal notranslate"><span class="pre">boot_config.c</span></code>), right-click on the <strong>Source</strong> directory and select <strong>Add Existing Files to Group ‘Source’</strong>.</p>
-<p><img alt="image10" src="../_images/keil_ide_add_files_to_source.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_add_files_to_source.png" />
+</figure>
 </li>
 <li><p>Navigate to the example project root, select the files that need to be added, and click <strong>Add</strong>.</p>
-<p><img alt="image11" src="../_images/keil_ide_select_files_to_add.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_select_files_to_add.png" />
+</figure>
 </li>
 <li><p>Rebuild the project. The files should be visible in the project <strong>Source</strong> directory in the IDE.</p>
-<p><img alt="image12" src="../_images/keil_ide_updated_source_directory.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_updated_source_directory.png" />
+</figure>
 </li>
 </ol>
 </section>
@@ -246,7 +272,9 @@
 <ol class="arabic">
 <li><p>Click <strong>Options</strong> → <strong>Debug</strong> → <strong>Settings</strong> → <strong>Flash Download</strong>.</p></li>
 <li><p>Add the NON-MAIN programming algorithm, and then click OK.</p>
-<p><img alt="image13" src="../_images/keil_ide_add_nonmain.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_add_nonmain.png" />
+</figure>
 </li>
 </ol>
 </section>
@@ -254,9 +282,13 @@
 <h3>2.10 Overriding Pre-built libraries<a class="headerlink" href="#overriding-pre-built-libraries" title="Permalink to this heading">¶</a></h3>
 <p>Projects might include pre-built libraries which simplify development and build time; however, they don’t allow developers to modify source code easily.</p>
 <p>An example of such libraries is the MSPM33 DriverLib which is shown below.</p>
-<p><img alt="image14" src="../_images/keil_ide_driverlib_library.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_driverlib_library.png" />
+</figure>
 <p>One option to override the library is to delete <strong>driverlib.a</strong> and simply add any or all source files to the project. The MSPM33 SDK includes the <code class="docutils literal notranslate"><span class="pre">empty_driverlib_src</span></code> example which includes all DriverLib source by default:</p>
-<p><img alt="image15" src="../_images/keil_ide_empty_driverlib_project.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_empty_driverlib_project.png" />
+</figure>
 </section>
 </section>
 <section id="debugging-the-application">
@@ -266,8 +298,12 @@
 <p>TI offers a range of debug probes for Arm-based devices, including the XDS110 which is integrated with MSPM33 LaunchPads.</p>
 <p><strong>Note</strong>: TI XDS110 debuggers are supported natively or through CMSIS DAP. TI XDS native support needs a separate installation of the TI emulation pack software in the default folder <code class="docutils literal notranslate"><span class="pre">C:\ti\ccs-base</span></code>.</p>
 <p>To use the XDS110 debug probe, right-click on the active project, then select <strong>Options for Target</strong>. In the Target Options window, select the <strong>Debug</strong> pane. From the pulldown menu, select either CMSIS-DAP Debugger or TI XDS Debugger.</p>
-<p><img alt="image16" src="../_images/keil_ide_select_xds110.png" /></p>
-<p><img alt="image17" src="../_images/keil_ide_xds110_settings.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_select_xds110.png" />
+</figure>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_xds110_settings.png" />
+</figure>
 <ul class="simple">
 <li><p>Note the selected Emulator. The example above uses the XDS110 integrated in LaunchPads in CSMSIS-DAP mode.</p></li>
 <li><p>The selected Interface is SWD which is supported by MSPM33.</p></li>
@@ -277,15 +313,23 @@
 <section id="using-segger-j-link-debug-probe">
 <h3>3.2 Using Segger J-Link Debug Probe<a class="headerlink" href="#using-segger-j-link-debug-probe" title="Permalink to this heading">¶</a></h3>
 <p>To use J-Link, right-click on the active project, then select <strong>Options for Target</strong>. In the Target Options window, select the <strong>Debug</strong> pane. From the pulldown menu, select the J-Link debugger option.</p>
-<p><img alt="image18" src="../_images/keil_ide_select_jlink.png" /></p>
-<p><img alt="image19" src="../_images/keil_ide_jlink_settings.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_select_jlink.png" />
+</figure>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_jlink_settings.png" />
+</figure>
 <p>Refer to the <a class="reference external" href="../../../../quickstart_guides/doc_guide/doc_guide-srcs/quickstart_guide_keil.html">MSPM33 SDK QuickStart Guide for Keil</a> for more details on using Segger J-Link.</p>
 </section>
 <section id="using-arm-ulink-debug-adapters">
 <h3>3.3 Using Arm ULINK Debug Adapters<a class="headerlink" href="#using-arm-ulink-debug-adapters" title="Permalink to this heading">¶</a></h3>
 <p>To use ULINK, right-click on the active project, then select <strong>Options for Target</strong>. In the Target Options window, select the <strong>Debug</strong> pane. From the pulldown menu, select a ULINK debugger option.</p>
-<p><img alt="image20" src="../_images/keil_ide_select_ulink.png" /></p>
-<p><img alt="image21" src="../_images/keil_ide_ulink_settings.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_select_ulink.png" />
+</figure>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_ulink_settings.png" />
+</figure>
 <ul class="simple">
 <li><p>The ULINK tools use a Flash Loader to download code to the device. Confirm usage in <strong>Options</strong> → <strong>Debug</strong> → <strong>Settings</strong> → <strong>Flash Download</strong>.</p></li>
 </ul>
@@ -295,7 +339,9 @@
 <p>The uVision breakpoint mechanism uses a limited number of on-chip debugging resources (specifically 4 hardware breakpoints and 2 hardware watchpoints). Software breakpoints are not supported on MSPM33. This means that a maximum of 4 breakpoints can be set within uVision.</p>
 <p>Resetting a program and the Run To Cursor operation temporarily require a breakpoint. As a result, only 3 breakpoints can be active.</p>
 <p>If the max number of breakpoints are set, the following warning will be displayed.</p>
-<p><img alt="image22" src="../_images/keil_ide_max_breakpoints.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_ide_max_breakpoints.png" />
+</figure>
 </section>
 </section>
 <section id="known-issues-and-frequently-asked-questions-faqs">

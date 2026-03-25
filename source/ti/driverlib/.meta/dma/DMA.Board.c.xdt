@@ -168,6 +168,11 @@ switch(content){
 %               srcIncrement = inst.srcIncDec;
 %               destIncrement = inst.dstIncDec;
 %               break;
+%            case "gather":
+%               extendedMode = "FULL_CH_GATHER";
+%               srcIncrement = inst.srcIncDec;
+%               destIncrement = inst.dstIncDec;
+%               break;
 %            case "fill":
 %               extendedMode = "FULL_CH_FILL";
 %               if(inst.fillIncrement !== "UNCHANGED"){

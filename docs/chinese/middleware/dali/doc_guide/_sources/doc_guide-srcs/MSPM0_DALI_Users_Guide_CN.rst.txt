@@ -6,7 +6,8 @@ MSPM0 DALI 用户指南
 
 `数字可寻址照明接口 （DALI） <https://www.dali-alliance.org/dali/>`__ 是一种数字照明控制串行协议，支持各种照明应用设备与控制器之间进行简单、高效的通信。
 
-|image0|
+.. figure:: ./images/DALI_logo.png
+   :alt: 
 
 **注意**\ ：“主”和“从”术语已过时，已分别替换为“控制器”和“设备”。
 
@@ -19,7 +20,7 @@ MSPM0 SDK 提供了一种使用 MSPM0 的通用异步接收器发送器 （UART�
 2.MSPM0 SDK 中的 DALI
 ---------------------
 
-MSPM0 SDK 中的 DALI 源代码原本应在 MSPM0 器件上运行。 此处的源代码实现侧重 DALI 的基本能力和功能，用于展示 MSPM0 器件通过 UART 处理 DALI 通信的能力。 此示例对常规类控制设备和 LED 模块类控制设备分别实施了 DALI 标准 IEC 62386-102 和 IEC 62386-207。 dali_target_commands.h/c 和 dali_target_led_commands.h/c 文件中包含对 IEC 62386-102/207 要求的大多数特性的支持，例外情况标记在\ `已知问题 <#known-issues>`__\ 部分以及源代码中。 此实现中排除了面向 IEC 62386-102/207 的可选特性。 源代码也可供修改和编辑，因此客户可以根据需要修改或自定义任何特性。
+MSPM0 SDK 中的 DALI 源代码原本应在 MSPM0 器件上运行。 此处的源代码实现侧重 DALI 的基本能力和功能，用于展示 MSPM0 器件通过 UART 处理 DALI 通信的能力。 此示例对常规类控制设备和 LED 模块类控制设备分别实施了 DALI 标准 IEC 62386-102 和 IEC 62386-207。 dali\_target\_commands.h/c 和 dali\_target\_led\_commands.h/c 文件中包含对 IEC 62386-102/207 要求的大多数特性的支持，例外情况标记在\ `已知问题 <#known-issues>`__\ 部分以及源代码中。 此实现中排除了面向 IEC 62386-102/207 的可选特性。 源代码也可供修改和编辑，因此客户可以根据需要修改或自定义任何特性。
 
 **注意**\ ：虽然源代码原本应在所有 MSPM0 器件上使用，但示例代码仅在 MSPM0L1306 上进行了测试和验证。
 
@@ -55,26 +56,31 @@ MSPM0 SDK 中的 DALI 源代码原本应在 MSPM0 器件上运行。 此处的�
 
 在 SysConfig 中，导航到“Communications”选项卡下的“UART”模块
 
-|image1|
+.. figure:: ./images/UART_under_communications.png
+   :alt: 
 
 在标记为“Basic Configuration”的部分中，将“Target Baud Rate”更改为 1200，将“Stop Bits”数更改为 2。
 
-|image2|
+.. figure:: ./images/UART_basic_config.png
+   :alt: 
 
 在标记为“Advanced Configuration”的部分中，选择“UART Mode”的下拉菜单，发现“DALI Mode”已禁用/不可选择。 导航到下面的“Extend Configuration”部分以及“Enable Extend Features”和“Enable Manchester Encoding”。 由于 DALI 模式是作为一种 UART 扩展特性提供的，而且 DALI 消息是按照 DALI 标准进行曼彻斯特编码的，所以需要选择以上两项。 选择这两个选项后，返回到“Advanced Configuration”部分，在“UART Mode”中选择“DALI Mode”。 对于“Address”和“Address Mask”，如果使用软件实现地址匹配，设置为 0。 启用两个 FIFO，将“RX FIFO Threshold”设置为“>= 2 Entries”，而将“TX FIFO Threshold”设置为“<= 1 entry”。 在“Advanced Configuration”部分中，最后一步是“Enable MSB first”。
 
-|image3|
+.. figure:: ./images/UART_advanced_config_extend_config.png
+   :alt: 
 
 DALI UART 配置
 ~~~~~~~~~~~~~~
 
 在“Interrupt Configuration”部分中，启用“9 bit mode address match”和“Receive interrupt”。 如果使用硬件实现 DALI 的地址匹配，启用“9 bit mode address match”。 否则，仅使用“Receive interrupt”。
 
-|image4|
+.. figure:: ./images/UART_interrupt_config.png
+   :alt: 
 
 最后需要的 UART 配置是“Pin Configuration”部分。 对于 TX 引脚，选择“Enable pin configuration”，在“Digital IOMUX Features”中，仅启用“Invert”特性。 对 RX 引脚执行相同的操作， 反转引脚是为了正确解释控制器发出的 DALI 命令；如不反转引脚，器件会将广播命令读取为单独的命令，反之亦然。 它也可以影响命令解释为 DAPC 命令还是常规 DALI 命令。
 
-|image5|
+.. figure:: ./images/UART_pin_config.png
+   :alt: 
 
 4.示例应用程序 - LED 演示
 -------------------------
@@ -83,16 +89,16 @@ DALI UART 配置
 
 -  `MSPM0L1306 LaunchPad(LP) <https://www.ti.com/product/MSPM0L1306>`__
 
-   -  |image6|
+   -  |image0|
 
 -  `Hasseb DALI 2 控制器/GUI <https://www.hasseb.fi/shop2/index.php?route=product/product&product_id=50>`__
 
-   -  |image7|
-   -  |image8|
+   -  |image1|
+   -  |image2|
 
 -  `DALI 2 Click <https://www.mikroe.com/dali-2-click>`__
 
-   -  |image9|
+   -  |image3|
 
 要导入 DALI 示例，请在 Code Composer Studio （CCS）中选择“Import Project”，导航到 SDK 中的“Examples”文件夹，选择“DALI”，选择“MSPM0L”文件夹，导航到 ticlang 目录。 导入后，可以将代码闪存到器件上。
 
@@ -139,13 +145,8 @@ MSPM0L 的 DALI 实现源代码是可以编辑的。 因此，客户和用户可
    -  因此，LED 函数尚未验证
    -  但是，如果用户想要修改 GUI 以添加对 LED 命令的支持，GitHub 上已经公布了 Hasseb GUI 代码
 
-.. |image0| image:: ./images/DALI_logo.png
-.. |image1| image:: ./images/UART_under_communications.png
-.. |image2| image:: ./images/UART_basic_config.png
-.. |image3| image:: ./images/UART_advanced_config_extend_config.png
-.. |image4| image:: ./images/UART_interrupt_config.png
-.. |image5| image:: ./images/UART_pin_config.png
-.. |image6| image:: ./images/MSPM0L1306.png
-.. |image7| image:: ./images/hasseb_DALI_controller.png
-.. |image8| image:: ./images/hasseb_DALI_2_controller_gui.png
-.. |image9| image:: ./images/DALI_2_click.png
+.. |image0| image:: ./images/MSPM0L1306.png
+.. |image1| image:: ./images/hasseb_DALI_controller.png
+.. |image2| image:: ./images/hasseb_DALI_2_controller_gui.png
+.. |image3| image:: ./images/DALI_2_click.png
+

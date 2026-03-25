@@ -41,6 +41,8 @@
 
     <linkerExtraOptions>
         <args>
+            <arg>--redirect</arg>
+            <arg>ScanfSmall=_ScanfSmall</arg>
             <arg>$MSPM33_SDK_INSTALL_DIR$/source/ti/driverlib/lib/iar/m33/mspm33c321x/driverlib.a</arg>
             <arg>-L$MSPM33_SDK_INSTALL_DIR$/source</arg>
             <arg>-L$PROJ_DIR$</arg>

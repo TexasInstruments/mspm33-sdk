@@ -1263,7 +1263,7 @@ const clkFreqSuperset = {
                     }
                     if(inst.CANCLKSource == "SYSPLLCLK2X")
                     {
-                        return inst.SYSPLL_Freq_CLK2x / parseInt(inst.EXTDIVCAN);
+                        return inst.SYSPLL_Freq_CLK2X / parseInt(inst.EXTDIVCAN);
                     }else if(inst.CANCLKSource == "HFCLK" && inst.useHFCLK_Manual){
                         return inst.HFCLK_Freq;
                     }else{

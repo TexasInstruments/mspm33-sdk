@@ -1,112 +1,102 @@
-/* Stucture for ADC Internal Connections with VREFLO*/
-// TODO: Verify if need to add individual package support
-let ADC_internalSignals = {
-    F28002x: {
-        A13: "VREFLO",
-        C12: "TempSensor",
-        C13: "VREFLO",
-    },
-    F28003x: {
-        A13: "VREFLO",
-        B13: "VREFLO",
-        C12: "TempSensor",
-        C13: "VREFLO",
-    },
-    F280013x: {
-        A13: "VREFLO",
-        C12: "TempSensor",
-        C13: "VREFLO",
-    },
-	F280015x: {
-        A13: "VREFLO",
-        C12: "TempSensor",
-        C13: "VREFLO",
-    },
-    F28004x: {
-        A13: "VREFLOA",
-        B13: "VREFLOB",
-        B14: "TempSensor",
-        C13: "VREFLOC",
-    },
-    F2838x: {
-        A8: "VREFLOA",
-        A9: "VREFLOA",
-        A13: "TempSensor",
-        B8: "VREFLOB",
-        B9: "VREFLOB",
-        C8: "VREFLOC",
-        C9: "VREFLOC",
-        D8: "VREFLOD",
-        D9: "VREFLOD",
-    }, 
-    F2837xD: {
-        A8: "VREFLOA",
-        A9: "VREFLOA",
-        A13: "TempSensor",
-        B8: "VREFLOB",
-        B9: "VREFLOB",
-        C8: "VREFLOC",
-        C9: "VREFLOC",
-        D8: "VREFLOD",
-        D9: "VREFLOD",
-    }, 
-    F2837xS: {
-        A8: "VREFLOA",
-        A9: "VREFLOA",
-        A13: "TempSensor",
-        B8: "VREFLOB",
-        B9: "VREFLOB",
-        C8: "VREFLOC",
-        C9: "VREFLOC",
-        D8: "VREFLOD",
-        D9: "VREFLOD",
-    },
-    F2807x: {
-        A8: "VREFLOA",
-        A9: "VREFLOA",
-        A13: "TempSensor",
-        B8: "VREFLOB",
-        B9: "VREFLOB",
-        D8: "VREFLOD",
-        D9: "VREFLOD",
-    },
-    F28P65x: {
-        A18: "VREFLOA",
-        C18: "VREFLOA",
-        A13: "TempSensor",
-        A19: "VREFLOB",
-        C19: "VREFLOB",
-        A20: "VREFLOC",
-        C20: "VREFLOC",
-    },
-    F28P55x: {
-        A13: "VREFLO",
-        B13: "VREFLO",
-        C12: "TempSensor",
-        C13: "VREFLO",
-        D13: "VREFLO",
-        E13: "VREFLO",
-        A21: "PGA1_OUT_INT",
-        B21: "PGA1_OUT_INT",
-        B22: "PGA2_OUT_INT",
-        C21: "PGA2_OUT_INT",
-        A22: "PGA3_OUT_INT",
-        C22: "PGA3_OUT_INT",
-    },
+let Common = system.getScript("/ti/driverlib/Common.js");
+let HSADC_internalSignals = {
     MSPM33C321X: {
         HSADC0: {
-            A13: "VREFLO",
-            A22: "TempSensor",
-            A25: "PGA1_OUT_INT",
+            CH11: "Temp Sense",
+            CH22: "sup_atb_buf_out_a",
+            CH23: "va_msp_vref_v2i_vout_1p35v",
+            CH24: "NC",
+            CH25: "NC",
+            CH26: "NC",
+            CH27: "NC",
+            CH28: "NC",
+            CH29: "NC",
+            CH30: "VBAT Supply Monitor",
+            CH31: "VDD Supply Monitor"
         },
         HSADC1: {
-            A13: "VREFLO",
-            A22: "TempSensor",
-            A25: "PGA1_OUT_INT",
+            CH15: "sup_atb_unbuf_out_a",
+            CH16: "va_msp_vref_v2i_vout_1p35v",
+            CH17: "NC",
+            CH18: "NC",
+            CH19: "NC",
+            CH20: "NC",
+            CH21: "NC",
+            CH22: "NC",
+            CH23: "NC",
+            CH24: "NC",
+            CH25: "NC",
+            CH26: "NC",
+            CH27: "NC",
+            CH28: "NC",
+            CH29: "NC",
+            CH30: "VBAT Supply Monitor",
+            CH31: "VDD Supply Monitor"
         }
     }
 }
 
+/*
+*  ======== isInternalChannel ========
+*  Check if a channel is internal for a specific HSADC instance
+*
+*  param hsadcInstance - "HSADC0" or "HSADC1"
+*  param channelNum    - channel number (0-31)
+*
+*  returns true if internal, false if external pin
+*/
+function isInternalChannel(hsadcInstance, channelNum) {
+    let deviceFamily = Common.getDeviceName();
+    let internalSignals = HSADC_internalSignals[deviceFamily];
+    if (!internalSignals || !internalSignals[hsadcInstance]) {
+        return false;
+    }
+    let channelKey = "CH" + channelNum;
+    return internalSignals[hsadcInstance].hasOwnProperty(channelKey);
+}
+
+/*
+*  ======== isNCChannel ========
+*  Check if a channel is Not Connected (NC) for a specific HSADC instance
+*
+*  param hsadcInstance - "HSADC0" or "HSADC1"
+*  param channelNum    - channel number (0-31)
+*
+*  returns true if NC, false otherwise
+*/
+function isNCChannel(hsadcInstance, channelNum) {
+    let deviceFamily = Common.getDeviceName();
+    let internalSignals = HSADC_internalSignals[deviceFamily];
+    if (!internalSignals || !internalSignals[hsadcInstance]) {
+        return false;
+    }
+    let channelKey = "CH" + channelNum;
+    let signal = internalSignals[hsadcInstance][channelKey];
+    return signal === "NC";
+}
+
+/*
+*  ======== getInternalSignalName ========
+*  Get the internal signal name for a channel
+*
+*  param hsadcInstance - "HSADC0" or "HSADC1"
+*  param channelNum    - channel number (0-31)
+*
+*  returns signal name string or null if not internal
+*/
+function getInternalSignalName(hsadcInstance, channelNum) {
+    let deviceFamily = Common.getDeviceName();
+    let internalSignals = HSADC_internalSignals[deviceFamily];
+    if (!internalSignals || !internalSignals[hsadcInstance]) {
+        return null;
+    }
+    let channelKey = "CH" + channelNum;
+    return internalSignals[hsadcInstance][channelKey] || null;
+}
+
 exports = {
-    ADC_internalSignals: ADC_internalSignals,
+    HSADC_internalSignals: HSADC_internalSignals,
+    isInternalChannel: isInternalChannel,
+    isNCChannel: isNCChannel,
+    getInternalSignalName: getInternalSignalName,    
 }

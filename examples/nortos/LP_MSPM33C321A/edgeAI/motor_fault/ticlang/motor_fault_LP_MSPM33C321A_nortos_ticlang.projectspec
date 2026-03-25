@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectSpec>
+    <applicability>
+        <when>
+            <context
+                deviceFamily="ARM"
+                deviceId="MSPM33C321A"
+            />
+        </when>
+    </applicability>
+
+    <project
+        title="motor_fault"
+        name="motor_fault_LP_MSPM33C321A_nortos_ticlang"
+        configurations="Debug"
+        toolChain="TICLANG"
+        connection="TIXDS110_Connection.xml"
+        device="MSPM33C321A"
+        ignoreDefaultDeviceSettings="true"
+        ignoreDefaultCCSSettings="true"
+        products="MSPM33-SDK;sysconfig"
+        compilerBuildOptions="
+            -I${PROJECT_ROOT}
+            -I${PROJECT_ROOT}/artifacts
+            -I${PROJECT_ROOT}/${ConfigName}
+            -O3
+            -fprofile-instr-generate
+            -fcoverage-mapping
+            @device.opt
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/third_party/CMSIS/Core/Include
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/third_party/CMSIS/DSP/Include
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source
+            -gdwarf-3
+            -DARM_MATH_CM33
+            -mcpu=cortex-m33
+            -march=thumbv6m
+            -mfpu=fpv5-sp-d16
+            -mlittle-endian
+            -mfloat-abi=hard
+        "
+        linkerBuildOptions="
+            --heap_size=0x800
+            -ldevice.cmd.genlibs
+            -L${COM_TI_MSPM33_SDK_INSTALL_DIR}/source
+            -L${PROJECT_ROOT}
+            -L${PROJECT_ROOT}/artifacts
+            -L${PROJECT_BUILD_DIR}/syscfg
+            -Wl,--rom_model
+            -Wl,--warn_sections
+            -L${CG_TOOL_ROOT}/lib
+            -llibc.a
+        "
+        sysConfigBuildOptions="
+            --output .
+            --product ${COM_TI_MSPM33_SDK_INSTALL_DIR}/.metadata/product.json
+            --compiler ticlang
+        "
+        sourceLookupPath="${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/ti/driverlib"
+        description="Motor Fault Detection">
+
+        <property name="buildProfile" value="release"/>
+        <property name="isHybrid" value="true"/>
+        <pathVariable name="AI_LIB" path=".." scope="project"/>
+        <file path="${AI_LIB}/README.md" openOnCreation="true" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="${AI_LIB}/README.html" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../motor_fault.syscfg" openOnCreation="true" excludeFromBuild="false" action="copy"></file>
+        <file path="${AI_LIB}/motor_fault.c" openOnCreation="false" excludeFromBuild="false" action="copy"></file>
+        <file path="${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/ti/edgeAI/m33/feature_extract" openOnCreation="false" excludeFromBuild="false" action="copy"></file>
+        <file path="${AI_LIB}/artifacts" openOnCreation="false" excludeFromBuild="false" action="copy"></file>
+        <file path="${AI_LIB}/user_input_config.h" openOnCreation="true" excludeFromBuild="false" action="copy"></file>
+        <file path="${AI_LIB}/test_vector.c" openOnCreation="true" excludeFromBuild="false" action="copy"></file>
+    </project>
+</projectSpec>

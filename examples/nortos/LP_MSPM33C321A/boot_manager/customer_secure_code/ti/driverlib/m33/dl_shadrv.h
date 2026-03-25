@@ -75,6 +75,8 @@
 #define DL_SHAW_IO_BUF_CTRL_GET_DIGEST       SHAW_EIP59_IO_BUF_CTRL_STAT_GET_DIGEST_MASK
 #define DL_SHAW_DATA_IN_ADDR(INST)           ((uint32_t)&(INST)->SHAW.SHAW_DATA_FIXED)
 
+#define DL_SHAW_MAX_DMA_SIZE_BYTES    (255U * 1024U)  /* 261120 bytes */
+
 /** @addtogroup DL_SHAW_INTERRUPTS
  *  @{
  */
@@ -436,6 +438,38 @@ __STATIC_INLINE DL_SHAW_STATUS DL_SHAW_signalLengthAvailable(SHAW_Regs *shaw) {
     shaw->SHAW.EIP59_IO_BUF_CTRL_STAT |= mask;
     return DL_SHAW_STATUS_SUCCESS;
 }
+
+/**
+   * @brief Signals to the SHA module that interim data is available for processing
+   * 
+   * This function should be used for all data blocks except the last one.
+   * It signals only DATA_IN_AV without PAD_MESSAGE or LENGTH_IN_AV.
+   *
+   * @param shaw Pointer to the SHA module registers
+   * @return DL_SHAW_STATUS_SUCCESS Operation successful
+   */
+  __STATIC_INLINE DL_SHAW_STATUS DL_SHAW_signalInterimDataAvailable(SHAW_Regs *shaw) {
+      shaw->SHAW.EIP59_IO_BUF_CTRL_STAT |= DL_SHAW_IO_BUF_CTRL_DATA_IN_AV;
+      return DL_SHAW_STATUS_SUCCESS;
+  }
+
+  /**
+   * @brief Signals to the SHA module that the last data block is available and should be finalized
+   * 
+   * This function should be used only for the last data block. It signals DATA_IN_AV,
+   * PAD_MESSAGE, and LENGTH_IN_AV to trigger hash finalization with proper padding.
+   *
+   * @param shaw Pointer to the SHA module registers
+   * @return DL_SHAW_STATUS_SUCCESS Operation successful
+   */
+  __STATIC_INLINE DL_SHAW_STATUS DL_SHAW_signalLastDataAvailable(SHAW_Regs *shaw) {
+      shaw->SHAW.EIP59_IO_BUF_CTRL_STAT |=
+          (DL_SHAW_IO_BUF_CTRL_DATA_IN_AV |
+           DL_SHAW_IO_BUF_CTRL_PAD_MESSAGE |
+           DL_SHAW_IO_BUF_CTRL_LENGTH_IN_AV);
+      return DL_SHAW_STATUS_SUCCESS;
+  }
+
 
 /**
  * @brief Signals to the SHA module that input data is available for processing

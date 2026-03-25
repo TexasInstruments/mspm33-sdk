@@ -88,7 +88,9 @@
 <section id="id1">
 <h2>1.引言<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
 <p><a class="reference external" href="https://www.dali-alliance.org/dali/">数字可寻址照明接口 （DALI）</a> 是一种数字照明控制串行协议，支持各种照明应用设备与控制器之间进行简单、高效的通信。</p>
-<p><img alt="image0" src="../_images/DALI_logo.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/DALI_logo.png" />
+</figure>
 <p><strong>注意</strong>：“主”和“从”术语已过时，已分别替换为“控制器”和“设备”。</p>
 <p>MSPM0 SDK 提供了一种使用 MSPM0 的通用异步接收器发送器 （UART）模块启动开发 DALI 应用程序的简单方法，并包含以下部分：</p>
 <ul class="simple">
@@ -134,18 +136,28 @@
 <section id="dali">
 <h3>启用 DALI 模式<a class="headerlink" href="#dali" title="Permalink to this heading">¶</a></h3>
 <p>在 SysConfig 中，导航到“Communications”选项卡下的“UART”模块</p>
-<p><img alt="image1" src="../_images/UART_under_communications.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/UART_under_communications.png" />
+</figure>
 <p>在标记为“Basic Configuration”的部分中，将“Target Baud Rate”更改为 1200，将“Stop Bits”数更改为 2。</p>
-<p><img alt="image2" src="../_images/UART_basic_config.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/UART_basic_config.png" />
+</figure>
 <p>在标记为“Advanced Configuration”的部分中，选择“UART Mode”的下拉菜单，发现“DALI Mode”已禁用/不可选择。 导航到下面的“Extend Configuration”部分以及“Enable Extend Features”和“Enable Manchester Encoding”。 由于 DALI 模式是作为一种 UART 扩展特性提供的，而且 DALI 消息是按照 DALI 标准进行曼彻斯特编码的，所以需要选择以上两项。 选择这两个选项后，返回到“Advanced Configuration”部分，在“UART Mode”中选择“DALI Mode”。 对于“Address”和“Address Mask”，如果使用软件实现地址匹配，设置为 0。 启用两个 FIFO，将“RX FIFO Threshold”设置为“&gt;= 2 Entries”，而将“TX FIFO Threshold”设置为“&lt;= 1 entry”。 在“Advanced Configuration”部分中，最后一步是“Enable MSB first”。</p>
-<p><img alt="image3" src="../_images/UART_advanced_config_extend_config.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/UART_advanced_config_extend_config.png" />
+</figure>
 </section>
 <section id="dali-uart">
 <h3>DALI UART 配置<a class="headerlink" href="#dali-uart" title="Permalink to this heading">¶</a></h3>
 <p>在“Interrupt Configuration”部分中，启用“9 bit mode address match”和“Receive interrupt”。 如果使用硬件实现 DALI 的地址匹配，启用“9 bit mode address match”。 否则，仅使用“Receive interrupt”。</p>
-<p><img alt="image4" src="../_images/UART_interrupt_config.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/UART_interrupt_config.png" />
+</figure>
 <p>最后需要的 UART 配置是“Pin Configuration”部分。 对于 TX 引脚，选择“Enable pin configuration”，在“Digital IOMUX Features”中，仅启用“Invert”特性。 对 RX 引脚执行相同的操作， 反转引脚是为了正确解释控制器发出的 DALI 命令；如不反转引脚，器件会将广播命令读取为单独的命令，反之亦然。 它也可以影响命令解释为 DAPC 命令还是常规 DALI 命令。</p>
-<p><img alt="image5" src="../_images/UART_pin_config.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/UART_pin_config.png" />
+</figure>
 </section>
 </section>
 <section id="led">
@@ -154,18 +166,18 @@
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.ti.com/product/MSPM0L1306">MSPM0L1306 LaunchPad(LP)</a></p>
 <ul>
-<li><p><img alt="image6" src="../_images/MSPM0L1306.png" /></p></li>
+<li><p><img alt="image0" src="../_images/MSPM0L1306.png" /></p></li>
 </ul>
 </li>
 <li><p><a class="reference external" href="https://www.hasseb.fi/shop2/index.php?route=product/product&amp;product_id=50">Hasseb DALI 2 控制器/GUI</a></p>
 <ul>
-<li><p><img alt="image7" src="../_images/hasseb_DALI_controller.png" /></p></li>
-<li><p><img alt="image8" src="../_images/hasseb_DALI_2_controller_gui.png" /></p></li>
+<li><p><img alt="image1" src="../_images/hasseb_DALI_controller.png" /></p></li>
+<li><p><img alt="image2" src="../_images/hasseb_DALI_2_controller_gui.png" /></p></li>
 </ul>
 </li>
 <li><p><a class="reference external" href="https://www.mikroe.com/dali-2-click">DALI 2 Click</a></p>
 <ul>
-<li><p><img alt="image9" src="../_images/DALI_2_click.png" /></p></li>
+<li><p><img alt="image3" src="../_images/DALI_2_click.png" /></p></li>
 </ul>
 </li>
 </ul>

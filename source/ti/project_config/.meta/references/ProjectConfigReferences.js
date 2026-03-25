@@ -12,6 +12,11 @@ var references = [
         path: "../source/ti/devices/msp/m33/startup_system_files/${COMPILER_NAME}/startup_${DEVICE_NAME}_${COMPILER_FILE_NAME}.${STARTUP_EXTENSION}",
         alwaysInclude: false,
     },
+    {
+        name: "system",
+        path: "../source/ti/devices/msp/m33/startup_system_files/system_${DEVICE_NAME}.c",
+        alwaysInclude: false,
+    },
 ]
 
 

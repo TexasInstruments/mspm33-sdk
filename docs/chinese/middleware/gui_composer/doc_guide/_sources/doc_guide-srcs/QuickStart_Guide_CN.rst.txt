@@ -46,15 +46,18 @@ GUI Composer 工程示例展示了 LaunchPad 与可在 PC 上运行的可自定�
 
 配置 GUI 设置，以选择正确的 **COM 端口**\ 和\ **波特率**\ 。修改这些设置，方法是点击左上角的菜单图标，然后选择 **Options > Serial Port**\ 。
 
-|image0|
+.. figure:: ./images/qs_settings.png
+   :alt: 
 
 -  确定正确的 **COM 端口**\ ，方法是打开 Device Manager，在“Ports”下查看哪个端口是 **XDS110 Class Application/User UART**\ 。
 
-   |image1|
+   .. figure:: ./images/qs_devicemanager.png
+      :alt: 
 
 -  将\ **波特率**\ 设置为 **9600**\ 。这是示例中默认使用的波特率。
 
-|image2|
+.. figure:: ./images/qs_comportbaudrate.png
+   :alt: 
 
 3.4 运行示例
 ~~~~~~~~~~~~
@@ -62,7 +65,3 @@ GUI Composer 工程示例展示了 LaunchPad 与可在 PC 上运行的可自定�
 开始在 LaunchPad 上运行示例。如果 LaunchPad 和 GUI 已正确配置，则 GUI 会开始自动更新数据。
 
 有关如何运行示例的特定说明，请参考特定于代码示例的 README。
-
-.. |image0| image:: ./images/qs_settings.png
-.. |image1| image:: ./images/qs_devicemanager.png
-.. |image2| image:: ./images/qs_comportbaudrate.png

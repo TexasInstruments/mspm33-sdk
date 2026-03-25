@@ -22,7 +22,8 @@
 
    请注意，CCS Theia 将自动检测 MSPM0 LaunchPad (如果已连接)。
 
-   |image0|
+   .. figure:: ./images/quickstart_guide_ccs_theia/theia_qsg_gettingstarted.png
+      :alt: 
 
 2 .单击 **Create a new project with Code Composer Studio IDE** 打开项目向导。
 
@@ -34,21 +35,24 @@
     -  编译器、请注意 CCS Theia 支持 TI Arm Clang 和 Arm GCC
     -  RTOS 或 No-RTOS (如果可用)
 
-    |image1|
+    .. figure:: ./images/quickstart_guide_ccs_theia/theia_qsg_projectwizard.png
+       :alt: 
 
 4.  单击 **Create**\ 。
-
 5.  如果尚未安装 MSPM0 SDK，CCS Theia 将请求安装该 SDK，也可能要求安装其他组件，比如编译器。
 
-    |image2|
+    .. figure:: ./images/quickstart_guide_ccs_theia/theia_qsg_projectwizard_install.png
+       :alt: 
 
 6.  安装 SDK 后关闭窗口。
 
-    |image3|
+    .. figure:: ./images/quickstart_guide_ccs_theia/theia_qsg_projectwizard_installdone.png
+       :alt: 
 
 7.  项目将导入到工作区中。
 
-    |image4|
+    .. figure:: ./images/quickstart_guide_ccs_theia/theia_qsg_project.png
+       :alt: 
 
 8.  (可选)打开 SysConfig。
 
@@ -56,17 +60,20 @@
 
     只需双击工程中的 ``.syscfg`` 文件、即可打开 SysConfig 查看器并开始浏览。
 
-    |image5|
+    .. figure:: ./images/quickstart_guide_ccs_theia/theia_qsg_sysconfig.png
+       :alt: 
 
     有关基于MSPM0使用 SysConfig的更多信息，请访问\ `Using SysConfig with MSPM0 <../../../tools/sysconfig_guide/doc_guide/doc_guide-srcs/sysconfig_guide_CN.html>`__\ 指南。
 
 9.  右键单击该项目，然后单击 **Build Project(s)**\ 。
 
-    |image6|
+    .. figure:: ./images/quickstart_guide_ccs_theia/theia_qsg_projectbuild.png
+       :alt: 
 
 10. 按 **F5** 或单击 Debug 图标，然后单击 **Start debugging** 图标。
 
-    |image7|
+    .. figure:: ./images/quickstart_guide_ccs_theia/theia_qsg_projectdebug.png
+       :alt: 
 
 4. 使用 TI Resource Explorer
 ----------------------------
@@ -75,19 +82,10 @@ TI Resource Explorer (TI-Rex)可帮助您查找适用于所选平台的所有最
 
 此工具可从 https://dev.ti.com/tirex 获取，但它也集成到 CCS Theia 中，从而提供更集成的用户体验。
 
-|image8|
+.. figure:: ./images/quickstart_guide_ccs_theia/theia_qsg_tirex_project.png
+   :alt: 
 
 5. 已知问题和常见问题解答(FAQ)
 ------------------------------
 
 请参阅 SDK 内部的 `Known Issues and FAQ <../../../../../known_issues_FAQ.html>`__\ 。
-
-.. |image0| image:: ./images/quickstart_guide_ccs_theia/theia_qsg_gettingstarted.png
-.. |image1| image:: ./images/quickstart_guide_ccs_theia/theia_qsg_projectwizard.png
-.. |image2| image:: ./images/quickstart_guide_ccs_theia/theia_qsg_projectwizard_install.png
-.. |image3| image:: ./images/quickstart_guide_ccs_theia/theia_qsg_projectwizard_installdone.png
-.. |image4| image:: ./images/quickstart_guide_ccs_theia/theia_qsg_project.png
-.. |image5| image:: ./images/quickstart_guide_ccs_theia/theia_qsg_sysconfig.png
-.. |image6| image:: ./images/quickstart_guide_ccs_theia/theia_qsg_projectbuild.png
-.. |image7| image:: ./images/quickstart_guide_ccs_theia/theia_qsg_projectdebug.png
-.. |image8| image:: ./images/quickstart_guide_ccs_theia/theia_qsg_tirex_project.png

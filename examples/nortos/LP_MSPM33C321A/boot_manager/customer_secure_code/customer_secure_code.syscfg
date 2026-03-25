@@ -15,6 +15,7 @@ const DMA1          = DMA.addInstance();
 const GPIO          = scripting.addModule("/ti/driverlib/GPIO", {}, false);
 const GPIO1         = GPIO.addInstance();
 const MCUBOOT       = scripting.addModule("/ti/driverlib/MCUBOOT");
+const NONMAIN       = scripting.addModule("/ti/driverlib/NONMAIN");
 const PKA           = scripting.addModule("/ti/driverlib/PKA");
 const SHAW          = scripting.addModule("/ti/driverlib/SHAW");
 const SYSCTL        = scripting.addModule("/ti/driverlib/SYSCTL");
@@ -39,14 +40,18 @@ GPIO1.associatedPins[1].launchPadShortcut = "LED2RedEn";
 GPIO1.associatedPins[1].$name             = "FAIL_LED";
 GPIO1.associatedPins[1].pin.$assign       = "PC26";
 
-MCUBOOT.enableHWSHA256 = true;
+MCUBOOT.enableHWSHA256       = true;
 MCUBOOT.enablebothECDSAMLDSA = true;
 MCUBOOT.enableMLDSA          = true;
-MCUBOOT.primaryBase1   = 0x00010000;
-MCUBOOT.secondaryBase1 = 0x00020000;
-MCUBOOT.primarySize1   = 0x000030C0;
-MCUBOOT.secondarySize1 = 0x000030C0;
-MCUBOOT.enableECDSA    = true;
+MCUBOOT.primaryBase1         = 0x00010000;
+MCUBOOT.primarySize1         = 0x000030C0;
+MCUBOOT.secondarySize1       = 0x000030C0;
+MCUBOOT.enableECDSA          = true;
+MCUBOOT.secondaryBase1       = 0x00090000;
+
+NONMAIN.nonmainWarning = true;
+NONMAIN.cscExists      = true;
+NONMAIN.flashBankSwap  = true;
 
 SHAW.algorithm                             = "DL_SHAW_ALGORITHM_SHA_256";
 SHAW.enabledDMAEvent1Triggers              = "DL_SHAW_TRIGGER";

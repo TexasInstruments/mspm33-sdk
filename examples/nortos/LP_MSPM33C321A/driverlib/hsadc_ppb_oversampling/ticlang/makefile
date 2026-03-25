@@ -20,7 +20,7 @@ ifeq ($(VERBOSE), 1)
   V :=
 endif
 
-OBJECTS = hsadc_ppb_oversampling.obj $(patsubst %.c,%.obj,$(notdir $(SYSCFG_C_FILES)))
+OBJECTS = hsadc_ppb_oversampling.obj uart_console.obj $(patsubst %.c,%.obj,$(notdir $(SYSCFG_C_FILES)))
 
 NAME = hsadc_ppb_oversampling
 
@@ -33,14 +33,13 @@ CFLAGS += -I.. \
     -mfpu=fpv5-sp-d16 \
     @device.opt \
     "-I$(MSPM33_SDK_INSTALL_DIR)/source/third_party/CMSIS/Core/Include" \
+    "-I$(MSPM33_SDK_INSTALL_DIR)/examples/driverlib/hsadc_ppb_oversampling/../../app_utils/" \
     "-I$(MSPM33_SDK_INSTALL_DIR)/source" \
     -gdwarf-3 \
     -mcpu=cortex-m33 \
     -Wall
 
-LFLAGS += -mfloat-abi=hard \
-    -mfpu=fpv5-sp-d16 \
-    -ldevice.cmd.genlibs \
+LFLAGS += -ldevice.cmd.genlibs \
     "-L$(MSPM33_SDK_INSTALL_DIR)/source" \
     -L.. \
     ../ticlang/device_linker.cmd \
@@ -82,6 +81,10 @@ endef
 $(foreach c_file,$(SYSCFG_C_FILES),$(eval $(call C_RULE,$(c_file))))
 
 hsadc_ppb_oversampling.obj: ../hsadc_ppb_oversampling.c $(SYSCFG_H_FILES)
+	@ echo Building $@
+	$(V) $(CC) $(CFLAGS) -c $< -o $@
+
+uart_console.obj: ../uart_console.c $(SYSCFG_H_FILES)
 	@ echo Building $@
 	$(V) $(CC) $(CFLAGS) -c $< -o $@
 

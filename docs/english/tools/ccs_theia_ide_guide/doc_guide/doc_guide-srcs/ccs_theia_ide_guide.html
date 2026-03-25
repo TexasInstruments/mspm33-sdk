@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Code Composer Studio IDE Version 20.4.0 for MSPM33 MCUs &mdash; Code Composer Studio IDE for MSPM33 MCUs 1.02.00.00 documentation</title>
+  <title>Code Composer Studio IDE Version 20.4.0 for MSPM33 MCUs &mdash; Code Composer Studio IDE for MSPM33 MCUs 1.03.00.01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
@@ -32,7 +32,7 @@
             <a href="index.html" class="icon icon-home"> Code Composer Studio IDE for MSPM33 MCUs
           </a>
               <div class="version">
-                1.02.00.00
+                1.03.00.01
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -202,11 +202,15 @@
 <h4>2.4.1 Using Arm Hex Utility<a class="headerlink" href="#using-arm-hex-utility" title="Permalink to this heading">¶</a></h4>
 <p>The following steps explain how to enable the TI TXT format using the Hex Utility which is integrated into CCS.</p>
 <p>Right-click on a project and select <strong>Properties</strong>. Select <strong>Build</strong> → <strong>Tools</strong> → <strong>Arm Hex Utility</strong> → <strong>Output Format Options</strong>. Then select the <strong>TI-TXT hex (–ti_txt)</strong> option.</p>
-<p><img alt="image2" src="../_images/ccstheia_outputtxt.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccstheia_outputtxt.png" />
+</figure>
 <p>This same process can be used to generate other formats; however, some formats might require other parameters.</p>
 <p>A common one is Intel HEX format which in addition to selecting the output format <strong>Intel hex (–intel, -i)</strong>, requires to specify the memory and ROM width as parameters.</p>
 <p>When using Intel HEX for MSPM33, select a memory and ROM width of 8 in <strong>Build</strong> → <strong>Tools</strong> → <strong>Arm Hex Utility</strong> → <strong>General Options</strong>.</p>
-<p><img alt="image3" src="../_images/ccstheia_outputhex.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccstheia_outputhex.png" />
+</figure>
 <p>For more information, visit <a class="reference external" href="https://software-dl.ti.com/ccs/esd/documents/ccs_hex-utility.html">Hex utility in CCS</a>.</p>
 </section>
 <section id="using-objcopy-utility">
@@ -216,15 +220,21 @@
 <ol class="arabic simple">
 <li><p>Right-click on a project and select <strong>Properties</strong>. Select <strong>Build</strong> → <strong>Tools</strong> → <strong>Arm ObjCopy Utility</strong> and select <strong>Enable Arm Objcopy Utility</strong>.</p></li>
 </ol>
-<p><img alt="image4" src="../_images/ccstheia_objcopy1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccstheia_objcopy1.png" />
+</figure>
 <ol class="arabic simple" start="2">
 <li><p>Specify the output file name using .hex extension.</p></li>
 </ol>
-<p><img alt="image5" src="../_images/ccstheia_objcopy2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccstheia_objcopy2.png" />
+</figure>
 <ol class="arabic simple" start="3">
 <li><p>Specify the <code class="docutils literal notranslate"><span class="pre">ihex</span></code> output format.</p></li>
 </ol>
-<p><img alt="image6" src="../_images/ccstheia_objcopy3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccstheia_objcopy3.png" />
+</figure>
 <p>For more information about Objcopy, visit this <a class="reference external" href="https://llvm.org/docs/CommandGuide/llvm-objcopy.html">Objcopy guide</a>.</p>
 </section>
 </section>
@@ -238,17 +248,21 @@
 <ol class="arabic simple">
 <li><p>Open the linker .cmd file and modify it to use SRAM as shown below:</p></li>
 </ol>
-<p><img alt="image7" src="../_images/ccstheia_runFromRAM_1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccstheia_runFromRAM_1.png" />
+</figure>
 <ol class="arabic" start="2">
 <li><p>Disable the System Reset which is executed by default in CCS.</p>
 <p>CCS includes .gel files which execute certain functions on the device. These files are included inside the CCS installation folder at <code class="docutils literal notranslate"><span class="pre">&lt;ccs&gt;\ccs_base\emulation\gel&gt;</span></code>. Make sure to set the highlighted address in <code class="docutils literal notranslate"><span class="pre">OnTargetConnect</span></code> function to be the same as the <code class="docutils literal notranslate"><span class="pre">.intvecs</span></code> address defined in linker file. The screenshot below shows the modification necessary for MSPM33C321A:</p>
 </li>
 </ol>
-<p><img alt="image8" src="../_images/ccstheia_runFromRAM_2.png" /> <img alt="image9" src="../_images/ccstheia_runFromRAM_4.png" /></p>
+<p><img alt="image2" src="../_images/ccstheia_runFromRAM_2.png" /> <img alt="image3" src="../_images/ccstheia_runFromRAM_4.png" /></p>
 <ol class="arabic simple" start="3">
 <li><p>Download code and note that the device will execute from SRAM.</p></li>
 </ol>
-<p><img alt="image10" src="../_images/ccstheia_runFromRAM_3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccstheia_runFromRAM_3.png" />
+</figure>
 </section>
 <section id="running-a-function-from-sram">
 <h4>2.5.2 Running a function from SRAM<a class="headerlink" href="#running-a-function-from-sram" title="Permalink to this heading">¶</a></h4>
@@ -256,15 +270,21 @@
 <ol class="arabic simple">
 <li><p>Move the function to the <code class="docutils literal notranslate"><span class="pre">.TI.ramfunc</span></code> section. This can be accomplished by declaring the function with the attributes <code class="docutils literal notranslate"><span class="pre">__attribute__((section(&quot;.TI.ramfunc&quot;)))</span> <span class="pre">__attribute__((noinline))</span></code> as observed below:</p></li>
 </ol>
-<p><img alt="image11" src="../_images/ccstheia_runFunctionFromRAM_1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccstheia_runFunctionFromRAM_1.png" />
+</figure>
 <ol class="arabic simple" start="2">
 <li><p>The linker file should include a placement of <code class="docutils literal notranslate"><span class="pre">.TI.ramfunc</span></code>. Note that the linker files included in MSPM33-SDK already include this placement but it will only be applicable if any functions are placed in <code class="docutils literal notranslate"><span class="pre">.TI.ramfunc</span></code>.</p></li>
 </ol>
-<p><img alt="image12" src="../_images/ccstheia_runFunctionFromRAM_2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccstheia_runFunctionFromRAM_2.png" />
+</figure>
 <ol class="arabic simple" start="3">
 <li><p>Download code and note that the device will execute the function from SRAM.</p></li>
 </ol>
-<p><img alt="image13" src="../_images/ccstheia_runFunctionFromRAM_3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccstheia_runFunctionFromRAM_3.png" />
+</figure>
 </section>
 </section>
 </section>
@@ -278,12 +298,16 @@
 <h3>3.1 Using TI XDS Tools<a class="headerlink" href="#using-ti-xds-tools" title="Permalink to this heading">¶</a></h3>
 <p>TI offers a range of debug probes for Arm-based devices, including the XDS-110 which is integrated with MSPM0 LaunchPads.</p>
 <p>To use the TI-XDS debug probes, open the project options, click on <strong>General</strong> → <strong>Connection</strong> and select <strong>Texas Instruments XDS110 USB Debug Probe</strong>.</p>
-<p><img alt="image14" src="../_images/ccstheia_debug_connection_xds.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccstheia_debug_connection_xds.png" />
+</figure>
 <section id="flash-loader">
 <h4>3.1.1 Flash Loader<a class="headerlink" href="#flash-loader" title="Permalink to this heading">¶</a></h4>
 <p>The Flash Loader settings allow to configure some settings when programming and erasing the device.</p>
 <p>To view and modify these settings, open the project properties and select <strong>Debug</strong> → <strong>Category:MSPM33 Flash Settings</strong>.</p>
-<p><img alt="image15" src="../_images/ccstheia_flash_settings.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccstheia_flash_settings.png" />
+</figure>
 <p>The Flash Loader has the following options:</p>
 <ul class="simple">
 <li><p><strong>Reset Configuration</strong>: allows to perform soft or hard reset before and after programming.</p></li>
@@ -314,7 +338,9 @@
 <h3>3.2 Breakpoint Types<a class="headerlink" href="#breakpoint-types" title="Permalink to this heading">¶</a></h3>
 <p>The CCS Theia debugger uses a limited number of on-chip debugging resources (specifically 4 hardware breakpoints and 2 hardware watchpoints). Software breakpoints in Flash are not supported on MSPM33. This means that a maximum of 4 hardware breakpoints can be set within CCS Theia.</p>
 <p>CCS Theia can use a breakpoint to stop at main or halt the device at exit. These settings can be updated in the project properties by selecting <strong>Debug</strong> → <strong>Category:Program/Memory Load Options</strong>.</p>
-<p><img alt="image16" src="../_images/ccstheia_breakpoint.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccstheia_breakpoint.png" />
+</figure>
 </section>
 <section id="dssm-commands">
 <h3>3.3 DSSM Commands<a class="headerlink" href="#dssm-commands" title="Permalink to this heading">¶</a></h3>
@@ -331,10 +357,14 @@
 <p>To execute a DSSM Mass Erase or DSSM Factory Reset, follow the next steps:</p>
 <ol class="arabic">
 <li><p>Go to an active project and open the <strong>targetConfigs</strong> folder.</p>
-<p><img alt="image17" src="../_images/ccstheia_dssm1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccstheia_dssm1.png" />
+</figure>
 </li>
 <li><p>Right-click the .ccxml file and select <strong>Start Project-less Debug</strong>.</p>
-<p><img alt="image18" src="../_images/ccstheia_dssm2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccstheia_dssm2.png" />
+</figure>
 </li>
 <li><p>On the debugger window menu, select <strong>Scripts</strong> → <strong>MSPM33xxxx_Commands</strong> (where MSPM33xxxx depends on the current MSPM33 device), and select one of the following options:</p>
 <ul class="simple">
@@ -343,7 +373,9 @@
 <li><p><strong>MSPM33_MailboxFactoryReset_Manual</strong>: A factory reset will be performed asking the user to press the reset button.</p></li>
 <li><p><strong>MSPM33_MailboxFactoryReset_Auto</strong>: A factory reset will be performed forcing reset using the XDS110 reset line.</p></li>
 </ul>
-<p><img alt="image19" src="../_images/ccstheia_dssm3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccstheia_dssm3.png" />
+</figure>
 </li>
 </ol>
 <section id="dssm-after-power-up">

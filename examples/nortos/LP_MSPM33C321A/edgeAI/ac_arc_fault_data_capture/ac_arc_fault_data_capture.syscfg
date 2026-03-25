@@ -1,0 +1,81 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --device "MSPM33C321X" --part "Default" --package "LQFP-100(PFA)" --product "mspm33_sdk@1.02.00.00"
+ * @v2CliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)" --product "mspm33_sdk@1.02.00.00"
+ * @versions {"tool":"1.26.0+4407"}
+ */
+// @cliArgs --board /ti/boards/LP_MSPM33C321A --rtos nortos
+
+/**
+ * Import the modules used in this configuration.
+ */
+const HSADC         = scripting.addModule("/ti/driverlib/HSADC", {}, false);
+const HSADC1        = HSADC.addInstance();
+const SYSCTL        = scripting.addModule("/ti/driverlib/SYSCTL");
+const TIMER         = scripting.addModule("/ti/driverlib/TIMER", {}, false);
+const TIMER1        = TIMER.addInstance();
+const UART          = scripting.addModule("/ti/driverlib/UART", {}, false);
+const UART1         = UART.addInstance();
+const ProjectConfig = scripting.addModule("/ti/project_config/ProjectConfig");
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+HSADC1.$name                          = "HSADC0";
+HSADC1.enabledSEQs                    = ["ADC_SEQ_NUMBER1"];
+HSADC1.seq1TriggerSel                 = "ADC_TRIGGER_GEN_SUB_0";
+HSADC1.seq1Enable                     = true;
+HSADC1.ADCsubscriber1Channel          = 1;
+HSADC1.enabledInts                    = ["ADC_INT_NUMBER_1"];
+HSADC1.interruptPulseMode             = "ADC_PULSE_END_OF_CONV";
+HSADC1.seqEndSOC                      = "ADC_SOC_NUMBER1";
+HSADC1.enabledSOCs                    = ["ADC_SOC_NUMBER0","ADC_SOC_NUMBER1"];
+HSADC1.enableInterrupt1               = true;
+HSADC1.enableInterrupt1ContinuousMode = true;
+HSADC1.interrupt1SOCSource            = "ADC_SOC_NUMBER1";
+HSADC1.soc1Channel                    = "ADC_CH_ADCIN_1";
+HSADC1.soc0Channel                    = "ADC_CH_ADCIN_9";
+HSADC1.seq1SampleWindow               = 1;
+HSADC1.peripheral.$assign             = "ADC1";
+HSADC1.peripheral.adcPin9.$assign     = "PA22";
+HSADC1.peripheral.adcPin1.$assign     = "PA16";
+
+const Board = scripting.addModule("/ti/driverlib/Board", {}, false);
+
+SYSCTL.MCLKSource    = "HSCLK";
+SYSCTL.SYSPLL_CLK0En = true;
+SYSCTL.SYSPLL_Pdiv   = 1;
+
+TIMER1.$name                       = "TIMER_0";
+TIMER1.event1PublisherChannel      = 1;
+TIMER1.timerMode                   = "PERIODIC";
+TIMER1.event1ControllerInterruptEn = ["ZERO_EVENT"];
+TIMER1.timerPeriod                 = "50 us";
+TIMER1.timerClkDiv                 = 3;
+
+UART1.$name                    = "UART_0";
+UART1.enabledInterrupts        = ["RX","TX"];
+UART1.enableFIFO               = true;
+UART1.rxFifoThreshold          = "DL_UART_RX_FIFO_LEVEL_ONE_ENTRY";
+UART1.txFifoThreshold          = "DL_UART_TX_FIFO_LEVEL_EMPTY";
+UART1.targetBaudRate           = 115200;
+UART1.ovsRate                  = "8";
+UART1.peripheral.$assign       = "UC12";
+UART1.peripheral.rxPin.$assign = "PA11";
+UART1.peripheral.txPin.$assign = "PA10";
+UART1.txPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric0";
+UART1.rxPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric1";
+
+ProjectConfig.genLibCMSIS = true;
+
+/**
+ * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
+ * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
+ * re-solve from scratch.
+ */
+Board.peripheral.$suggestSolution          = "DEBUGSS";
+Board.peripheral.swclkPin.$suggestSolution = "PA20";
+Board.peripheral.swdioPin.$suggestSolution = "PA19";
+SYSCTL.peripheral.$suggestSolution         = "SYSCTL";
+TIMER1.peripheral.$suggestSolution         = "TIMA0_0";

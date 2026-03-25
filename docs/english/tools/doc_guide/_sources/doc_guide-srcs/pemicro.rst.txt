@@ -4,7 +4,7 @@ Using PEmicro interfaces with MSPM33
 1. Introduction
 ---------------
 
-These steps will walk the user through how to use PEmicro’s programming tools with TI’s MSPM33 devices.
+These steps will walk the user through how to use PEmicro's programming tools with TI's MSPM33 devices.
 
 2. Prerequisites
 ----------------
@@ -13,27 +13,30 @@ Before proceeding, the user should be sure they are using the latest PEmicro dri
 
 -  `PEmicro Hardware Interface Drivers <https://www.pemicro.com/downloads/download_file.cfm?download_id=53>`__
 
-3. Configuring TI’s Code Composer Studio (CCS) IDE
+3. Configuring TI's Code Composer Studio (CCS) IDE
 --------------------------------------------------
 
-3.1. Installing PEmicro’s Plug-In
+3.1. Installing PEmicro's Plug-In
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. Download the `PEmicro GDB Server Plug-in <https://www.pemicro.com/downloads/download_file.cfm?download_id=412>`__.
 
 2. In the CCS Menu bar, click on Help → Install New Software.
 
-   |image0|
+   .. figure:: ./images/pemicro/pemicro_ccs_1.png
+      :alt: 
 
 3. Add the PEmicro repository as demonstrated below. Click the Add button to open the Add Repository dialog.
 
 4. Then click Archive to navigate to the downloaded plug-in file and select it.
 
-   |image1|
+   .. figure:: ./images/pemicro/pemicro_ccs_2.png
+      :alt: 
 
 5. The user can name the repository whatever they wish. The options will then appear in the Available Software window.
 
-   |image2|
+   .. figure:: ./images/pemicro/pemicro_ccs_3.png
+      :alt: 
 
 6. Select the appropriate plug-ins and follow the instructions to continue installation
 
@@ -46,22 +49,25 @@ Before proceeding, the user should be sure they are using the latest PEmicro dri
 
 1. Right-click on the project name (“Test” for this example) in the Project Explorer to bring up the dialog shown below:
 
-   |image3|
+   .. figure:: ./images/pemicro/pemicro_ccs_4.png
+      :alt: 
 
 2. Then select Debug Configurations to open that window.
 
-   |image4|
+   .. figure:: ./images/pemicro/pemicro_ccs_5.png
+      :alt: 
 
 3. Double click on “GDB PEmicro Interface Debugging” to create a debug instance of “Test” project.
 
-   |image5|
+   .. figure:: ./images/pemicro/pemicro_ccs_6.png
+      :alt: 
 
 4. Program and debug the device
 
 3.3. Setup and Physical Connection
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. In order to use PEmicro’s Multilink or Cyclone as a debug interface, the user must make sure the TI MSPM33 target board is configured to use this option instead of the internal XDS110-ET debug probe. The procedure involves removing any jumpers from the J101 isolation block, then attaching an Arm debug probe such as PEmicro’s Multilink to the J103 header. There is also a jumper that affects power considerations. We recommend that the user carefully follow TI’s explicit instructions, which can be found in TI’s MSPM33 Launchpad User Guides in the section “Using an External Debug Probe Instead of the Onboard XDS110-ET.”
+1. In order to use PEmicro's Multilink or Cyclone as a debug interface, the user must make sure the TI MSPM33 target board is configured to use this option instead of the internal XDS110-ET debug probe. The procedure involves removing any jumpers from the J101 isolation block, then attaching an Arm debug probe such as PEmicro's Multilink to the J103 header. There is also a jumper that affects power considerations. We recommend that the user carefully follow TI's explicit instructions, which can be found in TI's MSPM33 Launchpad User Guides in the section "Using an External Debug Probe Instead of the Onboard XDS110-ET."
 
 2. The PC connects to the Multilink or Cyclone (typically via USB cable), and then the 10-pin mini Arm header on the Multilink or Cyclone is connected to the J103 header on the TI board via a ribbon cable. A bare Multilink is shown below connected to the TI MSPM33 target board:
 
@@ -70,25 +76,18 @@ Before proceeding, the user should be sure they are using the latest PEmicro dri
 
       Bare Multilink connected via ribbon cable to the J103 header on a TI MSPM33 board
 
-4. Using PEmicro Tools with TI’s MSPM33 on Keil’s uVision IDE
+4. Using PEmicro Tools with TI's MSPM33 on Keil's uVision IDE
 -------------------------------------------------------------
 
 1. The dropdown box in Options for Target -> Use allows the user to select the “Pemicro Debugger”, as seen below:
 
-   |image6|
+   .. figure:: ./images/pemicro/pemicro_keil_1.png
+      :alt: 
 
-5. Using PEmicro Tools with TI’s MSPM33 on IAR’s Workbench for Arm IDE
+5. Using PEmicro Tools with TI's MSPM33 on IAR's Workbench for Arm IDE
 ----------------------------------------------------------------------
 
-1. Under Options for Node MSPM33x_security, in the Debugger category, the user should select “PE micro” from the Driver drop down box, as shown below:
+1. Under Options for Node MSPM33x\_security, in the Debugger category, the user should select "PE micro" from the Driver drop down box, as shown below:
 
-   |image7|
-
-.. |image0| image:: ./images/pemicro/pemicro_ccs_1.png
-.. |image1| image:: ./images/pemicro/pemicro_ccs_2.png
-.. |image2| image:: ./images/pemicro/pemicro_ccs_3.png
-.. |image3| image:: ./images/pemicro/pemicro_ccs_4.png
-.. |image4| image:: ./images/pemicro/pemicro_ccs_5.png
-.. |image5| image:: ./images/pemicro/pemicro_ccs_6.png
-.. |image6| image:: ./images/pemicro/pemicro_keil_1.png
-.. |image7| image:: ./images/pemicro/pemicro_iar_1.png
+   .. figure:: ./images/pemicro/pemicro_iar_1.png
+      :alt: 

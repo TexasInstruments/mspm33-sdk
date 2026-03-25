@@ -1,7 +1,7 @@
 {
     "name": "mspm33_sdk",
     "displayName": "MSPM33 SDK",
-    "version": "1.02.00.00",
+    "version": "1.03.00.01",
     "documentationPath": "../docs",
     "includePaths": [
         "../source",

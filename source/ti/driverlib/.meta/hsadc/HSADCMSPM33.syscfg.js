@@ -46,7 +46,8 @@ var ESTIMATED_CP = 10.00001;
 var ADC_SysClk_MHz = 160;
 var ADC_SampleTime_SysClk_ns = 1000/ADC_SysClk_MHz;
 let InternalConnections = system.getScript("/ti/driverlib/hsadc/HSADC_internalConnections.js");
-
+/* SOC range varies per device family */
+const hsadcSOCRange = (Common.isDeviceM33x321x()) ? 16:11;
 const NO_DEVICE_PIN_FOUND = "No device pin found";
 
 const longDescriptionSocTriggers = "SOC Trigger Configuration";
@@ -61,21 +62,34 @@ var DO_NOT_COPY_configNames = [
     "copyPerform",
     "recalculateSampleTimes"
 ];
-// Define missing functions
+
 function calculateDevicePinName(inst, sociX) {
-    var pinInfo = Pinmux.calculateADCPinInfo(inst,sociX)
-    if(pinInfo.adcPinInfosDescriptions == Pinmux.NO_DEVICE_PIN_FOUND){
-        var internalSignals = InternalConnections.ADC_internalSignals[Common.getDeviceName()][pinInfo.adcInputs]
-        if(internalSignals){
-            return internalSignals;
-        }
-        else{
-            return pinInfo.adcPinInfosDescriptions;
+    let pinInfo = "";
+    if (inst.peripheral && inst.peripheral.$solution) {
+        let baseName = inst.peripheral.$solution.peripheralName;
+        let hsadcName = "HS" + baseName;  // HSADC0 or HSADC1
+        let sociChannel = inst["soc" + sociX.toString() + "Channel"].replace("ADC_CH_ADCIN_", "");
+        let channelNum = parseInt(sociChannel);
+        let peripheral = system.deviceData.peripherals[baseName];
+        if (peripheral) {
+            // First check if this is an internal channel for this specific HSADC instance
+            let internalSignal = InternalConnections.getInternalSignalName(hsadcName, channelNum);
+            if (internalSignal) {
+                // This is an internal signal
+                pinInfo = internalSignal;
+            } else {
+                // Try to get external pin info
+                let peripheralPins = system.deviceData.peripherals[baseName].peripheralPins[baseName + "." + sociChannel];
+                if (peripheralPins) {
+                    let pinMappings = peripheralPins.pinMappings["0"];
+                    if (pinMappings) {
+                    pinInfo = pinMappings.designSignalName;
+                    }
+                }
+            }
         }
     }
-    else{
-        return pinInfo.adcPinInfosDescriptions;
-    }
+    return pinInfo;
 }
 
 function calculateSampleTime(inst, sociX) {
@@ -173,57 +187,207 @@ let Pinmux = {
 var device_adc_Ron = device_adc_char.Ron[Common.getDeviceName()]
 var device_adc_Cp = device_adc_char.Cp[Common.getDeviceName()]
 var device_adc_Ch = device_adc_char.Ch[Common.getDeviceName()]
-/*
- *  ======== _getPinResources ========
- */
-function _getPinResources(inst)
-{
-
-}
 
 /*
- *  ======== validatePinmux ========
- *  Validation run after solution
- *
- *  param inst       - module instance to be validated
- *  param validation - object to hold detected validation issues
- */
+*  ======== validatePinmux ========
+*  param inst       - module instance to be validated
+*  param validation - object to hold detected validation issues
+*/
+
 function validatePinmux(inst, validation) {
-//TBD
+    let baseName = inst.peripheral.$solution.peripheralName;
+    let hsadcName = "HS" + baseName;  // HSADC0 or HSADC1
+    if (inst.enabledSOCs && inst.enabledSOCs.length > 0) {
+        for (let i = 0; i < hsadcSOCRange; i++) {
+            let socName = "ADC_SOC_NUMBER" + i;
+            if (!inst.enabledSOCs.includes(socName)) {
+                continue;
+            }
+            let channelConfigName = "soc" + i + "Channel";
+            if (!inst[channelConfigName]) {
+                continue;
+            }
+            let sociChannel = inst[channelConfigName].replace("ADC_CH_ADCIN_", "");
+            let channelNum = parseInt(sociChannel);
+            // Check for NC (Not Connected) channels
+            if (InternalConnections.isNCChannel(hsadcName, channelNum)) {
+                validation.logError(
+                    "Channel " + channelNum + " is not connected (NC) on " + hsadcName + ". " +
+                    "This channel cannot be used for ADC conversion.",
+                    inst,
+                    channelConfigName
+                );
+            }
+            // Check for internal channel usage and provide info
+            if (InternalConnections.isInternalChannel(hsadcName, channelNum)) {
+                let signalName = InternalConnections.getInternalSignalName(hsadcName, channelNum);
+                if (inst.peripheral.$solution.peripheralName == "ADC0"){
+                    // Special case: disChan11 Error for HSADC0 instance channel 11
+                    if (signalName && signalName === "Temp Sense" && channelNum === 11) {
+                        if (!inst.disChan11) {
+                            validation.logError(
+                                "Channel 11 on " + hsadcName + " is connected to " + signalName + ". " +
+                                "Enable 'Disable Channel 11 External Pin Connection' to use Internal Connection.",
+                                inst,
+                                "disChan11"
+                            );
+                        }
+                    } 
+                }
+                else {
+                    // Special case: disChan11 Error for HSADC1 instance channel 15
+                    if (signalName && signalName === "sup_atb_unbuf_out_a" && channelNum === 15) {
+                        if (!inst.disChan15) {
+                            validation.logError(
+                            "Channel 15 on " + hsadcName + " is connected to " + signalName + ". " +
+                            "Enable 'Disable Channel 15 External Pin Connection' to use Internal Connection.",
+                            inst,
+                            "disChan15"
+                            );
+                        }
+                    }    
+                    if (signalName && signalName === "va_msp_vref_v2i_vout_1p35v" && channelNum === 16) {
+                        if (!inst.disChan16) {
+                            validation.logError(
+                            "Channel 16 on " + hsadcName + " is connected to " + signalName + ". " +
+                            "Enable 'Disable Channel 16 External Pin Connection' to use Internal Connection.",
+                            inst,
+                            "disChan16"
+                            );
+                        } 
+                    }
+                }
+                }
+            else{ 
+                if(inst.peripheral.$solution.peripheralName == "ADC1"){
+                    if (inst.disChan11 && channelNum === 11) {
+                        validation.logError(
+                            "Channel 11 on " + hsadcName + " is connected to External Pin. " +
+                            "Disable 'Disable Channel 11 External Pin Connection' to use External Pin Connection.",
+                            inst,
+                            "disChan11"
+                        );
+                    }
+                }
+                else {
+                    if (inst.disChan15 && channelNum === 15) {
+                        validation.logError(
+                            "Channel 15 on " + hsadcName + " is connected to External Pin. " +
+                            "Disable 'Disable Channel 15 External Pin Connection' to use External Pin Connection.",
+                            inst,
+                            "disChan15"
+                        );
+                    }
+                    if (inst.disChan16 && channelNum === 16) {
+                        validation.logError(
+                            "Channel 16 on " + hsadcName + " is connected to External Pin. " +
+                            "Disable 'Disable Channel 16 External Pin Connection' to use External Pin Connection.",
+                            inst,
+                            "disChan16"
+                        );
+                    }
+                }
+            }
+        }
+    }
 }
 
-/*
- *  ======== validate ========
- *  Validate this inst's configuration
- *
- *  param inst       - module instance to be validated
- *  param validation - object to hold detected validation issues
- */
-function validate(inst, validation)
-{
- //TBD
 
-}
+
 
 
 /*  ======== pinmuxRequirements ========
- *  Returns peripheral pin requirements of the specified instance
- *
- *  param inst    - a fully configured module instance
- *
- *  returns req[] - an array of pin requirements needed by inst
- */
-function pinmuxRequirements(inst)
-{
+*  Returns peripheral pin requirements of the specified instance
+*
+*  param inst    - a fully configured module instance
+*
+*  returns req[] - an array of pin requirements needed by inst
+*/
+
+function pinmuxRequirements(inst){
+    let hsadcName = inst.adcBase.replace("_BASE", "");//HSADC0
+    let resources = [];
+    let addedChannels = [];
+    if (inst.enabledSOCs && inst.enabledSOCs.length > 0) {
+        for (let i = 0; i < hsadcSOCRange; i++) {
+            let socName = "ADC_SOC_NUMBER" + i;
+            if (!inst.enabledSOCs.includes(socName)) {
+                continue;
+            }
+            let channelConfigName = "soc" + i + "Channel";
+            if (!inst[channelConfigName]) {
+                continue;
+            }
+            let sociChannel = inst[channelConfigName].replace("ADC_CH_ADCIN_", "");
+            let channelNum = parseInt(sociChannel);
+            if (addedChannels.includes(channelNum)) {
+                continue;
+            }
+            // Check if this channel is an internal signal 
+            if (InternalConnections.isInternalChannel(hsadcName, channelNum)) {
+                let signalName = InternalConnections.getInternalSignalName(hsadcName, channelNum);
+                // Special case: Channel 11 on HSADC0 (Internal Connection)
+                if (channelNum == 11 && !inst.disChan11 && signalName == "Temp Sense" ) {
+                    addedChannels.push(channelNum);
+                    // User Enabled External Pin Connection ,add pin resource
+                    } 
+                else {
+                    // User Disabled External Pin Connection , skip pinmux but mark as added
+                    addedChannels.push(channelNum);
+                    continue;
+                }
+            }
+            if(channelNum == 15){// Special case: Channel 15 on HSADC1 (Internal Connection)
+                if (!inst.disChan15 ) {
+                    addedChannels.push(channelNum);
+                    // User Enabled External Pin Connection ,add pin resource
+                } 
+                else {
+                    // User Disabled External Pin Connection , skip pinmux but mark as added
+                    addedChannels.push(channelNum);
+                    continue;
+                }
+            }
+            if(channelNum == 16){// Special case: Channel 15 on HSADC1 (Internal Connection)
+                if (!inst.disChan16 ) {
+                    addedChannels.push(channelNum);
+                    // User Enabled External Pin Connection ,add pin resource
+                }    
+                else {
+                    // User Disabled External Pin Connection , skip pinmux but mark as added
+                    addedChannels.push(channelNum);
+                    continue;
+                }
+            }    
+            // Check if channel is NC (Not Connected) - add pin resource
+            if (InternalConnections.isNCChannel(hsadcName, channelNum)) {
+                addedChannels.push(channelNum);
+            }
+            // Add resource for external pin channels
+            resources.push({
+                name: "adcPin" + channelNum,
+                displayName: "HSADC Channel " + channelNum + " Pin",
+                interfaceNames: [sociChannel]
+            });
+            addedChannels.push(channelNum);
+        }
+    }
 
     let hsadc = {
-        name          : "peripheral",
-        displayName   : "HSADC Peripheral",
-        interfaceName : "ADC",
-        resources     : [],
-        signalTypes   : {
-
-        }
+        name: "peripheral",
+        displayName: "HSADC Peripheral",
+        interfaceName: "ADC",
+        resources: resources,
+        signalTypes: {
+            adcPin0: ["0"], adcPin1: ["1"], adcPin2: ["2"], adcPin3: ["3"],
+            adcPin4: ["4"], adcPin5: ["5"], adcPin6: ["6"], adcPin7: ["7"],
+            adcPin8: ["8"], adcPin9: ["9"], adcPin10: ["10"], adcPin11: ["11"],
+            adcPin12: ["12"], adcPin13: ["13"], adcPin14: ["14"], adcPin15: ["15"],
+            adcPin16: ["16"], adcPin17: ["17"], adcPin18: ["18"], adcPin19: ["19"],
+            adcPin20: ["20"], adcPin21: ["21"], adcPin22: ["22"], adcPin23: ["23"],
+            adcPin24: ["24"], adcPin25: ["25"], adcPin26: ["26"], adcPin27: ["27"],
+            adcPin28: ["28"], adcPin29: ["29"], adcPin30: ["30"], adcPin31: ["31"]
+        },        
     };
     return [hsadc];
 }
@@ -726,7 +890,7 @@ function addSOCGroup(soci){
             displayName : "SOC" + soci.toString() + " Independent Name Mode",
             description : 'Select the application name of the channel for this SOC and do not append the ADC instance name.',
             longDescription : 'When this option is checked, the #define generated for this SOC name will not include the ADC instance name prepend. Instead it will be a unique name. ' +
-                              'Also it will trigger the generation of a new #define for the BASE of this SOC following the format "SOCx Name"_BASE ',
+                            'Also it will trigger the generation of a new #define for the BASE of this SOC following the format "SOCx Name"_BASE ',
             hidden      : true,
             default     : false,
         },
@@ -739,16 +903,6 @@ function addSOCGroup(soci){
             options     : device_driverlib_peripheral.ADC_Channel,
             // TODO: decide if total or partial removal of onChangeADC
             // onChange    : onChangeADC,
-        },
-
-        {
-            name: "soc" + soci.toString() + "ModuleChannelName",
-            displayName : "SOC" + soci.toString() + " Module Channel Name",
-            description : 'The ADC module\'s channel name',
-            hidden      : true,
-            //getValue    : calculateModuleChannelName,
-            getValue    : (inst) => calculateModuleChannelName(inst, soci),
-            default     : "A0"
         },
         {
             name: "soc" + soci.toString() + "DevicePinName",
@@ -959,12 +1113,13 @@ var DEVICES_ADC_INSTANCES = {
 }
 var ADC_INSTANCE = DEVICES_ADC_INSTANCES[Common.getDeviceName()]
 var maxInstances = ADC_INSTANCE.length
+
 let config = [
     {
 
             name        : "adcBase",
-            displayName : "ADC Instance",
-            description : 'Instance of the ADC used.',
+            displayName : "HSADC Instance",
+            description : 'Instance of the HSADC used.',
             hidden      : true,
             default     : ADC_INSTANCE[0].name,
             options     :  ADC_INSTANCE,
@@ -1388,13 +1543,11 @@ ppb_configs = ppb_configs.concat([
 let ppbEvents = [
     {name: "ADC_EVT_TRIPHI", displayName: "ADC Event TRIP HIGH"},
     {name: "ADC_EVT_TRIPLO", displayName: "ADC Event TRIP LOW"},
-    {name: "ADC_EVT_ZERO", displayName: "ADC Event ZERO CROSSING"},
 ]
 if (["MSPM33C321X"].includes(Common.getDeviceName())){
     ppbEvents = [
         {name: "ADC_EVT_TRIPHI", displayName: "ADC Event TRIP HIGH"},
         {name: "ADC_EVT_TRIPLO", displayName: "ADC Event TRIP LOW"},
-        {name: "ADC_EVT_ZERO", displayName: "ADC Event ZERO CROSSING"},
         {name: "ADC_EVT_INLIMIT", displayName: "ADC Event Within Trip Limit"},
     ]
 }
@@ -1695,6 +1848,33 @@ config = config.concat([
     }
 ])
 
+config = config.concat([
+    {
+        name        : "disChan11",
+        displayName : "Disable Channel 11 External Pin Connection",
+        description : 'Disable the External Pin connection on Channel 11 to use Internal Temperature Sensor.',
+        longDescription : `On HSADC0, Channel 11 is internally connected to the Temperature Sensor. If you need to use Channel 11 as an Internal Connection, enable this option to disconnect the external pin connection and allow  internal Temperature Sensor`,
+        hidden      : false,  
+        default     : false,
+    },
+    {
+        name        : "disChan15",
+        displayName : "Disable Channel 15 External Pin Connection",
+        description : 'Disable the External Pin connection on Channel 15 to use Internal Connection "sup_atb_unbuf_out_a".',
+        longDescription : `On HSADC1, Channel 15 is internally connected to the "sup_atb_unbuf_out_a". If you need to use Channel 15 as an Internal Connection, enable this option to disconnect the external pin connection and allow  internal Connection "sup_atb_unbuf_out_a"`,
+        hidden      : false,  
+        default     : false,
+    },
+    {
+        name        : "disChan16",
+        displayName : "Disable Channel 16 External Pin Connection",
+        description : 'Disable the External Pin connection on Channel 16 to use Internal Connection "va_msp_vref_v2i_vout_1p35v".',
+        longDescription : `On HSADC1, Channel 16 is internally connected to the "va_msp_vref_v2i_vout_1p35v". If you need to use Channel 16 as an Internal Connection, enable this option to disconnect the external pin connection and allow  internal Connection "va_msp_vref_v2i_vout_1p35v"`,
+        hidden      : false,  
+        default     : false,
+    },
+])
+
 /*
  *  ======== devSpecific ========
  *  Device-specific extensions to be added to base module configuration
@@ -1702,11 +1882,9 @@ config = config.concat([
 let devSpecific = {
     config: config,
     maxInstances: maxInstances,
-
     validatePinmux: validatePinmux,
     pinmuxRequirements: pinmuxRequirements,
     modules: setRequiredModules,
-    _getPinResources: _getPinResources
 };
 
 function setRequiredModules(inst){

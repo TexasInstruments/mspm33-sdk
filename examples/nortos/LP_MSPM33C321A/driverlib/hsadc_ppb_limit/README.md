@@ -1,6 +1,6 @@
 ## Example Summary
 
-The following example uses ppb limit in adc. The example showcases use of trip high, trip low, trip zero and trip limit features in ppb. A single sequencer with a single SOC is used, where the trip high and trip low limit are set; and trip high, trip low, trip zero and trip limit features are enabled. The flags gPPBtripLow, gPPBtripHigh, gPPBinLimit and gPPBzero indicate which of these events have been set by the input voltage.
+The following example uses ppb limit in adc. The example showcases use of trip high, trip low and trip in-limit features in ppb. A single sequencer with a single SOC is used, where the trip high and trip low limit are set; and trip high, trip low and trip in-limit features are enabled. The flags gPPBtripLow, gPPBtripHigh and gPPBinLimit indicate which of these events have been set by the input voltage.
 
 ## Peripherals & Pin Assignments
 

@@ -1,0 +1,97 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --device "MSPM33C321X" --part "Default" --package "LQFP-100(PFA)" --product "mspm33_sdk@1.02.00.00"
+ * @v2CliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)" --product "mspm33_sdk@1.02.00.00"
+ * @versions {"tool":"1.26.0+4407"}
+ */
+// @cliArgs --board /ti/boards/LP_MSPM33C321A --rtos nortos
+
+/**
+ * Import the modules used in this configuration.
+ */
+const Board  = scripting.addModule("/ti/driverlib/Board");
+const GPIO   = scripting.addModule("/ti/driverlib/GPIO", {}, false);
+const GPIO1  = GPIO.addInstance();
+const HSADC  = scripting.addModule("/ti/driverlib/HSADC", {}, false);
+const HSADC1 = HSADC.addInstance();
+const SYSCTL = scripting.addModule("/ti/driverlib/SYSCTL");
+const TIMER  = scripting.addModule("/ti/driverlib/TIMER", {}, false);
+const TIMER1 = TIMER.addInstance();
+const UART   = scripting.addModule("/ti/driverlib/UART", {}, false);
+const UART1  = UART.addInstance();
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+Board.genPeriphPinFile            = true;
+Board.peripheral.$assign          = "DEBUGSS";
+Board.peripheral.swclkPin.$assign = "PA20";
+Board.peripheral.swdioPin.$assign = "PA19";
+Board.genFileMod.$name            = "ti_driverlib_BoardPins0";
+
+GPIO1.$name                               = "LED";
+GPIO1.associatedPins.create(3);
+GPIO1.associatedPins[0].$name             = "RED";
+GPIO1.associatedPins[0].launchPadShortcut = "LED2RedEn";
+GPIO1.associatedPins[0].pin.$assign       = "PC26";
+GPIO1.associatedPins[1].$name             = "BLUE";
+GPIO1.associatedPins[1].launchPadShortcut = "LED2BlueEn";
+GPIO1.associatedPins[1].pin.$assign       = "PA2";
+GPIO1.associatedPins[2].$name             = "GREEN";
+GPIO1.associatedPins[2].launchPadShortcut = "LED2GreenEn";
+GPIO1.associatedPins[2].pin.$assign       = "PC27";
+
+HSADC1.$name                             = "HSADC0";
+HSADC1.enabledSOCs                       = ["ADC_SOC_NUMBER0"];
+HSADC1.interruptPulseMode                = "ADC_PULSE_END_OF_CONV";
+HSADC1.seq1Enable                        = true;
+HSADC1.enableDMAInterrupt1               = true;
+HSADC1.enableDMAInterrupt1ContinuousMode = true;
+HSADC1.enabledInts                       = ["ADC_INT_NUMBER_1"];
+HSADC1.enableInterrupt1                  = true;
+HSADC1.enableInterrupt1ContinuousMode    = true;
+HSADC1.enabledSEQs                       = ["ADC_SEQ_NUMBER1"];
+HSADC1.seq1DisableSampleCAPReset         = true;
+HSADC1.ADCsubscriber1Channel             = 1;
+HSADC1.seq1TriggerSel                    = "ADC_TRIGGER_GEN_SUB_0";
+HSADC1.soc0Channel                       = "ADC_CH_ADCIN_10";
+HSADC1.peripheral.$assign                = "ADC0";
+
+SYSCTL.forceDefaultClkConfig = true;
+SYSCTL.SYSPLL_CLK2XDiv       = 1;
+SYSCTL.SYSPLL_CLK0En         = true;
+SYSCTL.SYSPLL_Pdiv           = 1;
+SYSCTL.MCLKSource            = "HSCLK";
+SYSCTL.peripheral.$assign    = "SYSCTL";
+
+TIMER1.$name                       = "TIMER_0";
+TIMER1.timerClkPrescale            = 256;
+TIMER1.timerMode                   = "PERIODIC";
+TIMER1.timerClkDiv                 = 8;
+TIMER1.event1PublisherChannel      = 1;
+TIMER1.event1ControllerInterruptEn = ["ZERO_EVENT"];
+TIMER1.timerPeriod                 = "20 ms";
+
+UART1.$name                    = "UART_0";
+UART1.targetBaudRate           = 115200;
+UART1.enableFIFO               = true;
+UART1.rxFifoThreshold          = "DL_UART_RX_FIFO_LEVEL_ONE_ENTRY";
+UART1.txFifoThreshold          = "DL_UART_TX_FIFO_LEVEL_EMPTY";
+UART1.peripheral.$assign       = "UC12";
+UART1.peripheral.rxPin.$assign = "PA11";
+UART1.peripheral.txPin.$assign = "PA10";
+UART1.txPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric0";
+UART1.rxPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric1";
+
+const ProjectConfig              = scripting.addModule("/ti/project_config/ProjectConfig", {}, false);
+ProjectConfig.migrationCondition = true;
+ProjectConfig.genLibCMSIS        = true;
+scripting.suppress("Read only value changed\\. This is likely caused by an incorrect text edit of the script, a backwards compatibility discrepancy, and/or by a unsaved change that temporarily made this value writable\\.", ProjectConfig, "genLibCMSIS");
+
+/**
+ * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
+ * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
+ * re-solve from scratch.
+ */
+TIMER1.peripheral.$suggestSolution = "TIMA0_0";

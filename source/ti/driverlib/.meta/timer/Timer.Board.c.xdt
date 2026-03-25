@@ -161,11 +161,25 @@
 %       }
 %
 
+%       /* Calculate the timer clock source frequency based on selected clock source */
+%       let timerClkSrcFreq;
+%       switch (inst.timerClkSrc) {
+%           case "BUSCLK":
+%               timerClkSrcFreq = Common.getBUSCLKFreq(inst, "GPTIMER");
+%               break;
+%           case "LFCLK":
+%               timerClkSrcFreq = system.modules["/ti/driverlib/SYSCTL"].$static.LFCLK_Freq;
+%               break;
+%           case "MFCLK":
+%               timerClkSrcFreq = system.modules["/ti/driverlib/SYSCTL"].$static.MFCLK_Freq;
+%               break;
+%       }
+
 /*
- * Timer clock configuration to be sourced by `inst.timerClkSrc` / `inst.clockDivider` (`inst.timerClockSourceCalculated` Hz)
+ * Timer clock configuration to be sourced by `inst.timerClkSrc` (`timerClkSrcFreq` Hz)
  * timerClkFreq = (timerClkSrc / (timerClkDivRatio * (timerClkPrescale + 1)))
- *   `inst.timerClockFreqNum` Hz = `inst.timerClockSourceCalculated` Hz / (`inst.timerClkDiv` * (`inst.timerClkPrescale-1` + 1))
- */
+ *   `inst.timerClockFreqNum` Hz = `timerClkSrcFreq` Hz / (`inst.timerClkDiv` * (`inst.timerClkPrescale - 1` + 1))
+*/
 static const DL_`flavorCat`_ClockConfig g`inst.$name`ClockConfig = {
     .clockSel    = DL_TIMER_CLOCK_`inst.timerClkSrc`,
     .divideRatio = DL_TIMER_CLOCK_DIVIDE_`inst.timerClkDiv`,

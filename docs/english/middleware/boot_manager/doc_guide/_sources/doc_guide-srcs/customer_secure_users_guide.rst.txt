@@ -1,4 +1,4 @@
-MSPM33 Customer Secure Code and Bootloader (CSC) User’s Guide
+MSPM33 Customer Secure Code and Bootloader (CSC) User's Guide
 =============================================================
 
 1. Introduction
@@ -22,9 +22,9 @@ The Customer Secure Code rigorously defined has the following features:
 
 -  Provide easy feature configuration through the SysConfig tool, such that users can quickly build a CSC tailored to their needs
 
-Some things the current CSC (rigorously defined) doesn’t do:
+Some things the current CSC (rigorously defined) doesn't do:
 
--  It does not load application images onto a device (doesn’t replace the bootloader)
+-  It does not load application images onto a device (doesn't replace the bootloader)
 
 -  It does not guarantee a full secure boot implementation on a HS-FS device, as the user can choose to boot into application without any authentication. But in case of HE-SE device, full secure boot implementation can be done.
 
@@ -42,8 +42,8 @@ To run the initial setup, make sure Python 3.11 or newer is installed with the l
 
 ::
 
-   python -m pip install --user -r source/third_party/mcuboot/scripts/requirements.txt
-   pip install dilithium_py
+    python -m pip install --user -r source/third_party/mcuboot/scripts/requirements.txt
+    pip install dilithium_py
 
 2.0.1 Python Versioning in OSX or Linux
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -76,9 +76,10 @@ The elements of the built image binary name are as follows:
 
 Build ``customer_secure_code`` example. Before flashing the device, proceed to **Properties → Debug** and select the MSPM33 Flash Settings from the list on the left hand side of the Debug page. Then configure the Erase method to Erase Main and Nonmain memory (shown below), and Configure reset type to Hard Reset (if available).
 
-|image0|
+.. figure:: ./images/main_nonmain_erase.png
+   :alt: 
 
-After this, begin to Debug the project. The main function should now be entered. There shouldn’t be any valid images present on the device now, so running the example should result in a flashing red LED.
+After this, begin to Debug the project. The main function should now be entered. There shouldn't be any valid images present on the device now, so running the example should result in a flashing red LED.
 
 2.3 Loading the Binary Images
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -87,22 +88,23 @@ To load the binary images onto the device, follow these steps once the boot appl
 
 1. Before flashing the ``customer_secure_code_sample_image`` image ensure the erase configuration is set to Do not erase Flash memory.
 
-   |image1|
+   .. figure:: ./images/donot_erase_flash.png
+      :alt: 
 
-2. Add post build steps to this application example and re-build project to create customer_secure_sample_image_LP_MSPM33C321A_nortos_ticlang_signed.bin file
+2. Add post build steps to this application example and re-build project to create customer\_secure\_sample\_image\_LP\_MSPM33C321A\_nortos\_ticlang\_signed.bin file
 
 ::
 
-   ${CG_TOOL_OBJCOPY} -O binary ${PROJECT_BUILD_DIR}/${ProjName}.out ${PROJECT_BUILD_DIR}/${ProjName}.bin
-   pip install click cryptography intelhex cbor>=1.0.0
-   pip install -r ${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/third_party/mcuboot/scripts/requirements.txt
-   python ${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/third_party/mcuboot/scripts/imgtool.py sign --key ${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/third_party/mcuboot/ecdsa-p256.pem --second-key ${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/third_party/mcuboot/mldsa_key.pem --header-size 0x80 --pad-header -v 2 --slot-size 0x3000 --load-addr 0x10000 --align 8 --pad ${PROJECT_BUILD_DIR}/${ProjName}.bin ${PROJECT_BUILD_DIR}/${ProjName}_signed.bin
+    ${CG_TOOL_OBJCOPY} -O binary ${PROJECT_BUILD_DIR}/${ProjName}.out ${PROJECT_BUILD_DIR}/${ProjName}.bin
+    pip install click cryptography intelhex cbor>=1.0.0
+    pip install -r ${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/third_party/mcuboot/scripts/requirements.txt
+    python ${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/third_party/mcuboot/scripts/imgtool.py sign --key ${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/third_party/mcuboot/ecdsa-p256.pem --second-key ${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/third_party/mcuboot/mldsa_key.pem --header-size 0x80 --pad-header -v 2 --slot-size 0x3000 --load-addr 0x10000 --align 8 --pad ${PROJECT_BUILD_DIR}/${ProjName}.bin ${PROJECT_BUILD_DIR}/${ProjName}_signed.bin
 
 3. Open the Memory browser for the device, which can be found by navigating to **View → Memory Browser**. To load the binary image, pause the running of the device select **Load Memory**
 
-   |image2| |image3|
+   |image0| |image1|
 
-Now, since the CSC example .out is loaded and customer_secure_sample_image signed bin is loaded at 0x10000, now on performing a boot reset, the CSC example should correctly authenticate the customer_secure_sample_image signed image using the keys present in boot_keys.c and on successful verification, should jump to this application where a blue LED is being set. On successful flashing and running of example, user can see a blue LED ON.
+Now, since the CSC example .out is loaded and customer\_secure\_sample\_image signed bin is loaded at 0x10000, now on performing a boot reset, the CSC example should correctly authenticate the customer\_secure\_sample\_image signed image using the keys present in boot\_keys.c and on successful verification, should jump to this application where a blue LED is being set. On successful flashing and running of example, user can see a blue LED ON.
 
 4. If the user wants to sign using custom keys and build their own signed application follow the steps as mentioned in next section. It is recommended to load the image after following the signing steps. First refer the next section that has step-by-step instruction to sign the sample application image. After signed image is generated, load it via load memory. Select the binary file type from the drop down list. Click **Next** at the bottom.
 
@@ -124,21 +126,21 @@ In order to generate a new key, the user can enter the following command creatin
 
 ::
 
-   cd source/third_party/mcuboot/
+    cd source/third_party/mcuboot/
 
-   #ECDSA Key Gen
-   scripts/imgtool.py keygen -k newkey.pem -t ecdsa-p256
+    #ECDSA Key Gen
+    scripts/imgtool.py keygen -k newkey.pem -t ecdsa-p256
 
-   #MLDSA Key Gen
-   scripts/imgtool.py keygen --type mldsa-87 --key mldsa_key.pem
+    #MLDSA Key Gen
+    scripts/imgtool.py keygen --type mldsa-87 --key mldsa_key.pem
 
 The public key is then derived from the .pem file, encoded in the DER format. It is autogenerated from the following instruction.
 
 .. code:: bash
 
-   scripts/imgtool.py getpub -k newkey.pem
+    scripts/imgtool.py getpub -k newkey.pem
 
-this will output to the console the public key information (encoded in DER format), which is then copied and pasted into ``boot_keys.c`` in the EC256 section (specifying the supported algorithm). For MLDSA copy MLDSA keys from mldsa_key_pub.h to boot_keys.c to MLDSA section in ``boot_keys.c``
+this will output to the console the public key information (encoded in DER format), which is then copied and pasted into ``boot_keys.c`` in the EC256 section (specifying the supported algorithm). For MLDSA copy MLDSA keys from mldsa\_key\_pub.h to boot\_keys.c to MLDSA section in ``boot_keys.c``
 
 **IMPORTANT**: for final deployment, it is very important to keep the private key secure and managed such that it is not easily accessible to sign images. Keeping the key on a local share drive is not a secure location! TI does not currently provision/store keys on behalf of other entities.
 
@@ -174,9 +176,9 @@ After compiling and creating the image, the output should be converted to binary
 
 ::
 
-   ${CG_TOOL_ROOT}/bin/tiarmobjcopy ${ProjName}.out --output-target binary ${ProjName}-unsigned.bin
+    ${CG_TOOL_ROOT}/bin/tiarmobjcopy ${ProjName}.out --output-target binary ${ProjName}-unsigned.bin
 
-It is recommended to name the output file with the suffix “unsigned” as to avoid confusion. This can be automated by adding it to the post-build steps of the project for your IDE.
+It is recommended to name the output file with the suffix "unsigned" as to avoid confusion. This can be automated by adding it to the post-build steps of the project for your IDE.
 
 3.2.2 Signing the Image
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -185,14 +187,14 @@ The imgtool provided by mcuboot can then sign this image and provide the appropr
 
 ::
 
-   #ECDSA Signing
-   ./scripts/imgtool.py sign --key ecdsa-p256.pem --header-size 0x80 --pad-header -v 2 --slot-size 0x3000 --load-addr 0x10000 --align 8 --pad ${PROJECT_BUILD_DIR}/${ProjName}.bin ${PROJECT_BUILD_DIR}/${ProjName}_signed.bin
+    #ECDSA Signing
+    ./scripts/imgtool.py sign --key ecdsa-p256.pem --header-size 0x80 --pad-header -v 2 --slot-size 0x3000 --load-addr 0x10000 --align 8 --pad ${PROJECT_BUILD_DIR}/${ProjName}.bin ${PROJECT_BUILD_DIR}/${ProjName}_signed.bin
 
-   #MLDSA Signing
-   ./scripts/imgtool.py sign --key mldsa_key.pem --header-size 0x80 --pad-header -v 2 --slot-size 0x3000 --load-addr 0x10000 --align 8 --pad ${PROJECT_BUILD_DIR}/${ProjName}.bin ${PROJECT_BUILD_DIR}/${ProjName}_signed.bin
+    #MLDSA Signing
+    ./scripts/imgtool.py sign --key mldsa_key.pem --header-size 0x80 --pad-header -v 2 --slot-size 0x3000 --load-addr 0x10000 --align 8 --pad ${PROJECT_BUILD_DIR}/${ProjName}.bin ${PROJECT_BUILD_DIR}/${ProjName}_signed.bin
 
-   #Dual Signing
-   ./scripts/imgtool.py sign --key ecdsa-p256.pem --second-key mldsa_key.pem --align 8 -v 2 --header-size 0x80 --pad-header --slot-size 0x3000 --load-addr 0x10000 --pad ${PROJECT_BUILD_DIR}/${ProjName}.bin ${PROJECT_BUILD_DIR}/${ProjName}_signed.bin
+    #Dual Signing
+    ./scripts/imgtool.py sign --key ecdsa-p256.pem --second-key mldsa_key.pem --align 8 -v 2 --header-size 0x80 --pad-header --slot-size 0x3000 --load-addr 0x10000 --pad ${PROJECT_BUILD_DIR}/${ProjName}.bin ${PROJECT_BUILD_DIR}/${ProjName}_signed.bin
 
 The information that the developer may need to edit are as follows:
 
@@ -210,9 +212,9 @@ Image encryption in Flash is currently not supported. Image encryption over the 
 4 Modifying the CSC
 -------------------
 
-The CSC has increase modularity via the configurable file ``customer_secure_config.h``. This is native to the customer_secure_code example but is inherited by sample image examples. It is controlled by the **MCUBoot** tab in SysConfig and can be used as a reference.
+The CSC has increase modularity via the configurable file ``customer_secure_config.h``. This is native to the customer\_secure\_code example but is inherited by sample image examples. It is controlled by the **MCUBoot** tab in SysConfig and can be used as a reference.
 
-**Important** This section is still under development so there are more elements and features being supported continuously. If one is not supported yet, it’s in the roadmap. Please contact TI for more information
+**Important** This section is still under development so there are more elements and features being supported continuously. If one is not supported yet, it's in the roadmap. Please contact TI for more information
 
 4.1 Other Image Management Techniques
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -258,14 +260,38 @@ With the write protection enabled on NONMAIN, it is still possible for a factory
 
 One of the security features mcuboot provides is rollback protection: where a user can set a security version that new images must match or exceed in order to be accepted by the boot image manger. This prevents an attacker from installing a previous image which may contain a vulnerability that is fixed in later versions.
 
-6 Features under development
+6 Bank Swap Policy
+------------------
+
+The bank swap mechanism in CSC is implemented using the DL\_SYSCTL\_executeFromUpperFlashBank() and DL\_SYSCTL\_executeFromLowerFlashBank() functions, which are called based on the necessity. In bank swap method, the actual firmware doesn't move between physical locations - instead, the hardware is configured to execute from the appropriate bank.
+
+-  PB = Physical bank. There is a physical bank 0 (PB0) and physical bank 1 (PB1). These banks can switch addresses depending on the bank swap configuration.
+-  LB = Logical bank. These are the two logical banks that map to either physical bank 0 or physical bank 1. Pre INITDONE Logical Bank 0 always maps to address PB0, and Logical Bank 1 maps to PB1. However, depending on the bank swap execution, post INITDONE LB0 could map to either PB0 or PB1. Logical Bank 0 post initdone will be the execute bank, and Logical Bank 1 will be the data bank.
+
+    **Note1**: Since code will only ever execute from logical bank 0, all code should be compiled such that it runs from logical bank 0. Thus, if the CSC is mapped from 0x0000 - 0x47FF and a single application image mapped from 0x4800 onward, then each application image should be compiled with respect to 0x4900 (0x100 trailer, then intvecs placed at 0x4800 + 0x100 = 0x4900), even if the application image is written to logical bank 1 at effective hw address.
+
+    **Note2**: If Bank Swap is performed, it is necessary to program Nonmain Configuration to both bank0 nonmain region and bank1 nonmain region. If the Nonmain gets erased in bank0 after bank swap occurs, on re-powering the board, due to missing non-main configuration, device may go into fault and cannot be recovered. Hence follow the below steps to program non-main into both bank0 and bank1 to avoid this scenario.
+
+    **Step 1** - Add boot\_config\_PB1.c/h as attached. The content of these files is the same as the generated boot\_config.c/h from sysconfig. But these files have updated name for define .BCRConfig\_PB1 and .BSLConfig\_PB1
+
+    **Step 2** – New sections are added for boot\_config\_PB1. Add the following configurations in .cmd file:
+
+    ::
+
+        BCR_CONFIG_PB1      (R)   : origin = 0x80103800, length = 0x00000400,
+        BSL_CONFIG_PB1      (R)   : origin = 0x80103C00, length = 0x00000400,
+
+        .BCRConfig_PB1  : {} > BCR_CONFIG_PB1
+        .BSLConfig_PB1  : {} > BSL_CONFIG_PB1
+
+    **Step 3** – Follow the guide to program CSC and APP image. Now, config can be found in 0x80101800 and 0x80103800.
+
+7 Features under development
 ----------------------------
 
 -  MCUBoot Upgrade mechanism (Overwrite, Swap, XIP, etc)
--  HW Bank Swapping feature.
 -  Trust Zone specific secure, non-secure applications support in CSC.
 
-.. |image0| image:: ./images/main_nonmain_erase.png
-.. |image1| image:: ./images/donot_erase_flash.png
-.. |image2| image:: ./images/load_mem1.png
-.. |image3| image:: ./images/load_mem2.png
+.. |image0| image:: ./images/load_mem1.png
+.. |image1| image:: ./images/load_mem2.png
+

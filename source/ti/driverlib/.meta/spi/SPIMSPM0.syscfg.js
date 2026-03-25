@@ -694,6 +694,10 @@ function validate(inst, validation)
                 maxFrequency = 24000000;
             }
         }
+        if(Common.isDeviceM33x321x())
+        {
+            maxFrequency = 30000000;
+        }
         /* Check frame size is valid */
         if ((inst.dataSize < 4) || (inst.dataSize > 16)) {
             let str = "The frame size must be between 4-16 bits for Controller mode";
@@ -913,7 +917,7 @@ The bit rates are supported up to the input clock divided by 2.
 The input clock selection depends on the specific device.`,
                         hidden      : false,
                         default     : 8000000,
-                        range       : (Common.isDeviceM0G() ? [0, 32000000] : [0, 16000000]),
+                        range       : (Common.isDeviceM0G() ? [0, 32000000] : Common.isDeviceM33x321x() ? [0, 30000000] : [0, 16000000]),
                         onChange    : onChangeBasicBitRateCalc
                     },
                     {

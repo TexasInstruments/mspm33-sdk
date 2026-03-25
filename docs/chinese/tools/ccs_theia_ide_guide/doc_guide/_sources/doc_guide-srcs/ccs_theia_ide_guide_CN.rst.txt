@@ -70,7 +70,7 @@ Code Composer Studio (CCS) Theia 是一种集成开发环境(IDE)，支持 TI �
 
 本指南仅介绍了使用 MSPM33的 Code Composer Studio Theia IDE 的一些特性和功能。
 
-有关 CCS Theia 的更多文档、请访问 `TI.com <https://www.ti.com/tool/CCSTUDIO#tech-docs>`__ 或 IDE 中包含的“Help”菜单。
+有关 CCS Theia 的更多文档、请访问 `TI.com <https://www.ti.com/tool/CCSTUDIO#tech-docs>`__ 或 IDE 中包含的"Help"菜单。
 
 2.2 使用项目向导创建新项目
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -92,25 +92,27 @@ TI Resource Explorer (TI-Rex)可帮助您查找适用于所选平台的所有最
 
 1. 选择 **Help** → **Getting Started**\ 。 请注意、CCS Theia 可以自动检测您的 LaunchPad、以便于导航。
 
-   |image1|
+   .. figure:: ./images/theia_ide_guide/ccstheia_gettingstarted.png
+      :alt: 
 
 2. 单击 **Browse software and examples with Resource Explorer** 浏览软件和示例
-
 3. 导航面板可用于查看不同的 TI 产品、文档、软件等
-
 4. TI Resource Explorer 还允许通过单击产品旁边的并选择 **Manage Versions** 来选择特定的 SDK 版本。 请注意、已安装的产品也会显示绿色复选标记。
 
-   |image2|
+   .. figure:: ./images/theia_ide_guide/ccstheia_tirex_sdk.png
+      :alt: 
 
 5. 使用集成的搜索功能按器件(即 MSPM33C)、中间件(即 DriverLib)或解决方案(即 LIN)进行筛选。
 
-   |image3|
+   .. figure:: ./images/theia_ide_guide/ccstheia_tirex.png
+      :alt: 
 
-6. 选择一个示例将显示一个自述文件，其中包含该示例的说明、外设和引脚用法以及如何运行该示例。 |image4|
+6. 选择一个示例将显示一个自述文件，其中包含该示例的说明、外设和引脚用法以及如何运行该示例。 |image1|
 
 7. 为示例选择一个 CCS 工程、然后点击 Import 将其添加到您的工作区中。
 
-   |image5|
+   .. figure:: ./images/theia_ide_guide/ccstheia_tirex_projectimport.png
+      :alt: 
 
 请注意、CCS Theia 将自动检测需要的安装包、包括 SDK 和编译器、 如果需要、它将请求安装。
 
@@ -121,7 +123,7 @@ MSPM33 SDK 中的一些示例支持 SysConfig 。 `SysConfig <https://www.ti.com
 
 SysConfig 工具可作为独立安装程序提供、也可在\ `dev.ti.com <https://dev.ti.com/sysconfig>`__ 的云上使用、或是集成到 CCS Theia 中以获得更好、更轻松的体验。
 
-在 CCS Theia 中导入 MSPM33项目后、只需双击 ``.syscfg`` 文件即可打开 SysConfig。 |image6|
+在 CCS Theia 中导入 MSPM33项目后、只需双击 ``.syscfg`` 文件即可打开 SysConfig。 |image2|
 
 有关将 SysConfig 与 MSPM33一起使用的更多信息、请访问 `Using SysConfig with MSPM33 <../../../sysconfig_guide/doc_guide/doc_guide-srcs/sysconfig_guide_CN.html>`__ 指南。
 
@@ -132,27 +134,32 @@ SysConfig 允许在 MSPM33衍生产品之间更轻松地进行移植；但需要
 
 1. 在 SysConfig 中，启用设备视图并单击 **SWITCH**
 
-|image7|
+.. figure:: ./images/theia_ide_guide/ccstheia_migrate1.png
+   :alt: 
 
 2. 为新的 MSPM33设备选择相应的选项，然后单击 **CONFIRM**\ 。
 
-|image8|
+.. figure:: ./images/theia_ide_guide/ccstheia_migrate2.png
+   :alt: 
 
 3. 请注意、SysConfig 将突出显示与移植发生的任何冲突、例如不可用的引脚和外设。 根据需要修复任何冲突。
 
 4. CCS Theia 将自动完成移植并添加相应的.ccxml 文件。
 
-|image9|
+.. figure:: ./images/theia_ide_guide/ccstheia_migrate3.png
+   :alt: 
 
 5. 在项目属性中，选择 **Build** → **Arm Compiler** → **Predefined Symbols**\ 。 选择器件定义并更新它。
 
-|image10|
+.. figure:: ./images/theia_ide_guide/ccstheia_migrate4.png
+   :alt: 
 
 6. 更新链接器和启动文件。 MSPM33 SDK 包含所有 MSPM33衍生产品的默认文件、分别位于 ``<sdk>\source\ti\devices\msp\m33\linker_files\ticlang`` 和 ``<sdk>\source\ti\devices\msp\m33\startup_system_files\ticlang``\ 。
 
 请注意、应从工程中排除或删除以前的文件。
 
-|image11|
+.. figure:: ./images/theia_ide_guide/ccstheia_migrate5.png
+   :alt: 
 
 7. 解决任何其他问题，例如不兼容的库和源代码。
 
@@ -166,7 +173,7 @@ SysConfig 允许在 MSPM33衍生产品之间更轻松地进行移植；但需要
 2.6.1 使用 TI Arm Clang 编译器配置堆栈
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-右键单击某个项目，然后选择 **Properties**\ 。 选择 **Build Tools** → **Arm Linker** → **Basic Options** 并相应地设置堆栈。 |image12|
+右键单击某个项目，然后选择 **Properties**\ 。 选择 **Build Tools** → **Arm Linker** → **Basic Options** 并相应地设置堆栈。 |image3|
 
 也可以通过添加或编辑 ``--stack_size=xx`` 或 ``--heap_size=xx`` 直接在链接器.cmd 文件上修改堆栈。
 
@@ -185,17 +192,19 @@ CCS 包含可用于以多个方式生成输出对象的实用程序 与 [MSP-GAN
 
 以下步骤说明了如何使用十六进制启用 TI TXT 格式 集成到 CCS 中的实用程序。
 
-右键单击某个项目，然后选择 **Properties**\ 。 选择 **Build Tools** → **Arm Hex Utility** → **Output Format Options**\ 。 然后选择 **TI-TXT hex (–ti_txt)** 选项。
+右键单击某个项目，然后选择 **Properties**\ 。 选择 **Build Tools** → **Arm Hex Utility** → **Output Format Options**\ 。 然后选择 **TI-TXT hex (--ti\_txt)** 选项。
 
-|image13|
+.. figure:: ./images/theia_ide_guide/ccstheia_outputtxt.png
+   :alt: 
 
 同样的过程可用于生成其他格式；但是、某些格式可能需要其他参数。
 
-一种常见的是英特尔十六进制格式，除选择输出格式 **Intel hex (–intel, -i)** 外，还需要使用该格式 将存储器和 ROM 宽度指定为参数。
+一种常见的是英特尔十六进制格式，除选择输出格式 **Intel hex (--intel, -i)** 外，还需要使用该格式 将存储器和 ROM 宽度指定为参数。
 
 当对 MSPM33使用 Intel hex 时，请在 **Build Tools** → **Arm Hex Utility** → **General Options** 中选择8的内存和 ROM 宽度。
 
-|image14|
+.. figure:: ./images/theia_ide_guide/ccstheia_outputhex.png
+   :alt: 
 
 如需更多信息、请访问 `Hex utility in CCS <https://software-dl.ti.com/ccs/esd/documents/ccs_hex-utility.html>`__\ 。
 
@@ -206,17 +215,20 @@ CCS 包括 Arm objcopy 实用程序、这是一个基于 LLVM 的工具、可用
 
 以下步骤说明了如何使用 objcopy 启用 Intel Hex 格式。
 
-1. 右键单击一个项目，然后选择\ **属性**\ 。 选择\ **构建**\ →*\* Arm objcopy 实用程序\ **并选择**\ 启用 Arm objcopy 实用程序**。
+1. 右键单击一个项目，然后选择\ **属性**\ 。 选择\ **构建**\ →\*\* Arm objcopy 实用程序\ **并选择**\ 启用 Arm objcopy 实用程序\*\*。
 
-|image15|
+.. figure:: ./images/theia_ide_guide/ccstheia_objcopy1.png
+   :alt: 
 
 2. 使用.hex 扩展名指定输出文件名。
 
-|image16|
+.. figure:: ./images/theia_ide_guide/ccstheia_objcopy2.png
+   :alt: 
 
 3. 指定\ ``ihex``\ 输出格式。
 
-|image17|
+.. figure:: ./images/theia_ide_guide/ccstheia_objcopy3.png
+   :alt: 
 
 有关 objcopy 的更多信息、请访问此 `objcopy guide <https://llvm.org/docs/CommandGuide/llvm-objcopy.html>`__\ 。
 
@@ -227,11 +239,13 @@ CCS 包括 Arm objcopy 实用程序、这是一个基于 LLVM 的工具、可用
 
 此类库的一个示例是 MSPM33 DriverLib、如下所示。
 
-|image18|
+.. figure:: ./images/theia_ide_guide/ccstheia_lib.png
+   :alt: 
 
 覆盖库的一个选项是只需将任何或所有源文件添加到工程中。 MSPM33 SDK 包括 ``empty_driverlib_src`` 示例、其中包括所有 DriverLib 源 默认情况下：
 
-|image19|
+.. figure:: ./images/theia_ide_guide/ccstheia_lib_src.png
+   :alt: 
 
 2.9 从 SRAM 运行
 ~~~~~~~~~~~~~~~~
@@ -243,21 +257,24 @@ MSPM33-SDK 中包含的示例通常包含链接器文件 创建可从内部闪�
 2.9.1 从 SRAM 运行完整的应用程序
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-以下步骤显示了如何修改基本 gpio_toggle_output 示例从而支持在 LP_MSPM33C321A上从 SRAM 运行程序。 类似的步骤适用于其他示例和器件。
+以下步骤显示了如何修改基本 gpio\_toggle\_output 示例从而支持在 LP\_MSPM33C321A上从 SRAM 运行程序。 类似的步骤适用于其他示例和器件。
 
 1. 打开链接器.cmd 文件并将其修改为使用 SRAM、如下所示：
 
-|image20|
+.. figure:: ./images/theia_ide_guide/ccstheia_runFromRAM_1.png
+   :alt: 
 
 2. 禁用 CCS 中默认执行的系统复位。
 
    CCS 包含在器件上执行某些函数的.gel 文件。 这些 文件包含在 CCS 安装文件夹中、位于 ``<ccs>\ccs_base\emulation\gel>``\ 。 下面的屏幕截图 显示了 MSPM33C321A所需的修改：
 
-|image21|
+.. figure:: ./images/theia_ide_guide/ccstheia_runFromRAM_2.png
+   :alt: 
 
 3. 下载代码并注意该器件将从 SRAM 执行。
 
-|image22|
+.. figure:: ./images/theia_ide_guide/ccstheia_runFromRAM_3.png
+   :alt: 
 
 2.9.2 从 SRAM 运行函数
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -266,15 +283,18 @@ MSPM33-SDK 中包含的示例通常包含链接器文件 创建可从内部闪�
 
 1. 将函数移动到\ ``.TI.ramfunc``\ 段。 这可以通过实现 使用属性声明函数 ``__attribute__((section(".TI.ramfunc")))__attribute__((noinline))``\ 如下所示：
 
-|image23|
+.. figure:: ./images/theia_ide_guide/ccstheia_runFunctionFromRAM_1.png
+   :alt: 
 
 2. 链接器文件应包含\ ``.TI.ramfunc``\ 的位置。 请注意链接器 MSPM33-SDK 中包含的文件已包含此位置、但仅包含此位置 ``在``.TI.ramfunc 中放置了任何函数、则适用。
 
-|image24|
+.. figure:: ./images/theia_ide_guide/ccstheia_runFunctionFromRAM_2.png
+   :alt: 
 
 3. 下载代码并注意设备将从 SRAM 执行该功能。
 
-|image25|
+.. figure:: ./images/theia_ide_guide/ccstheia_runFunctionFromRAM_3.png
+   :alt: 
 
 3. 调试应用程序
 ---------------
@@ -290,7 +310,8 @@ TI 为基于 Arm 的器件提供了一系列调试器、包括与 MSPM33 LaunchP
 
 要使用 TI-XDS 调试器，请打开项目选项，单击 **General** → **Connection** 然后选择 **Texas Instruments XDS110 USB Debug Probe**\ 。
 
-|image26|
+.. figure:: ./images/theia_ide_guide/ccstheia_debug_connection_xds.png
+   :alt: 
 
 3.1.1 闪存加载程序
 ^^^^^^^^^^^^^^^^^^
@@ -299,7 +320,8 @@ TI 为基于 Arm 的器件提供了一系列调试器、包括与 MSPM33 LaunchP
 
 要查看和修改这些设置，请打开项目属性并选择 **Debug** → **Category:MSPM33 Flash Settings**\ 。
 
-|image27|
+.. figure:: ./images/theia_ide_guide/ccstheia_flash_settings.png
+   :alt: 
 
 闪存加载程序具有以下选项：
 
@@ -310,7 +332,7 @@ TI 为基于 Arm 的器件提供了一系列调试器、包括与 MSPM33 LaunchP
    -  **Erase MAIN memory only**: 只擦除MAIN memory.如果尝试写NONMAIN会产生一个错误信息。
    -  **Erase MAIN and NONMAIN memory**: MAIN 和 NONMAIN memory 都会被擦除， 想了解有关NONMAIN的更多信息请参考 `Erasing and Updating NONMAIN Memory <#erasing-and-updating-nonmain-memory>`__\ 。
    -  **Erase MAIN and NONMAIN necessary sectors only**: 只擦除将要被更新的扇区，包含MAIN和NONMAIN区域。关于flash扇区的大小请参考具体器件的数据手册, 想了解有关NONMAIN的更多信息请参考 `Erasing and Updating NONMAIN Memory <#erasing-and-updating-nonmain-memory>`__.
-   -  **Erase MAIN memory sectors by range**: 只擦除 **Sector Erase Start Address** 和 **Sector Erase End Address** 之间的扇区。关于Memory扇区大小和地址信息请参考相关数据手册。 比如说，在每个扇区为1KB大小的 MSPM33 器件上设置起始地址 0x0000_0100 到结束地址0x0000_0400 的区域，将会擦除扇区0x0000_0000-0x0000_03FF 和 0x0000_0400-0x0000_07FF。 请注意，只有MAIN memory 会被擦除，如果试图写NONMAIN会产生一个错误信息。
+   -  **Erase MAIN memory sectors by range**: 只擦除 **Sector Erase Start Address** 和 **Sector Erase End Address** 之间的扇区。关于Memory扇区大小和地址信息请参考相关数据手册。 比如说，在每个扇区为1KB大小的 MSPM33 器件上设置起始地址 0x0000\_0100 到结束地址0x0000\_0400 的区域，将会擦除扇区0x0000\_0000-0x0000\_03FF 和 0x0000\_0400-0x0000\_07FF。 请注意，只有MAIN memory 会被擦除，如果试图写NONMAIN会产生一个错误信息。
    -  **Do not erase Flash memory**: 不擦除Flash。如果不擦除就尝试写NONMAIN会产生一个错误信息。
 
 -  **Advanced Configuration**\ ：禁用验证设备 ID。 用于调试目的、不建议禁用。
@@ -336,18 +358,20 @@ CCS Theia 调试器使用有限数量的片上调试资源(特别是4个硬件�
 
 CCS Theia 可以使用断点在 main 停止或在 exit 停止器件。 通过选择 **Debug** → **Category:Program/Memory Load Options**\ ，可以在项目属性中更新这些设置。
 
-|image28|
+.. figure:: ./images/theia_ide_guide/ccstheia_breakpoint.png
+   :alt: 
 
 如果设置了最大断点数、将显示以下警告。
 
-|image29|
+.. figure:: ./images/theia_ide_guide/ccstheia_debug_breakpoint.png
+   :alt: 
 
 3.3 连接到一个不正确的设备
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 如果连接了不受支持的设备，CCS 将显示警告，如下所示：
 
-|image30| |image31|
+|image4| |image5|
 
 不建议对不正确的设备进行写入，这可能会导致意外和不可恢复。
 
@@ -357,34 +381,9 @@ CCS Theia 可以使用断点在 main 停止或在 exit 停止器件。 通过选
 请参阅 SDK 内部的 `Known Issues and FAQ <../../../../../../known_issues_FAQ.html>`__\ 。
 
 .. |image0| image:: ./images/theia_ide_guide/ccstheia_projectwizard.png
-.. |image1| image:: ./images/theia_ide_guide/ccstheia_gettingstarted.png
-.. |image2| image:: ./images/theia_ide_guide/ccstheia_tirex_sdk.png
-.. |image3| image:: ./images/theia_ide_guide/ccstheia_tirex.png
-.. |image4| image:: ./images/theia_ide_guide/ccstheia_tirex_project.png
-.. |image5| image:: ./images/theia_ide_guide/ccstheia_tirex_projectimport.png
-.. |image6| image:: ./images/theia_ide_guide/ccstheia_sysconfig.png
-.. |image7| image:: ./images/theia_ide_guide/ccstheia_migrate1.png
-.. |image8| image:: ./images/theia_ide_guide/ccstheia_migrate2.png
-.. |image9| image:: ./images/theia_ide_guide/ccstheia_migrate3.png
-.. |image10| image:: ./images/theia_ide_guide/ccstheia_migrate4.png
-.. |image11| image:: ./images/theia_ide_guide/ccstheia_migrate5.png
-.. |image12| image:: ./images/theia_ide_guide/ccstheia_stack.png
-.. |image13| image:: ./images/theia_ide_guide/ccstheia_outputtxt.png
-.. |image14| image:: ./images/theia_ide_guide/ccstheia_outputhex.png
-.. |image15| image:: ./images/theia_ide_guide/ccstheia_objcopy1.png
-.. |image16| image:: ./images/theia_ide_guide/ccstheia_objcopy2.png
-.. |image17| image:: ./images/theia_ide_guide/ccstheia_objcopy3.png
-.. |image18| image:: ./images/theia_ide_guide/ccstheia_lib.png
-.. |image19| image:: ./images/theia_ide_guide/ccstheia_lib_src.png
-.. |image20| image:: ./images/theia_ide_guide/ccstheia_runFromRAM_1.png
-.. |image21| image:: ./images/theia_ide_guide/ccstheia_runFromRAM_2.png
-.. |image22| image:: ./images/theia_ide_guide/ccstheia_runFromRAM_3.png
-.. |image23| image:: ./images/theia_ide_guide/ccstheia_runFunctionFromRAM_1.png
-.. |image24| image:: ./images/theia_ide_guide/ccstheia_runFunctionFromRAM_2.png
-.. |image25| image:: ./images/theia_ide_guide/ccstheia_runFunctionFromRAM_3.png
-.. |image26| image:: ./images/theia_ide_guide/ccstheia_debug_connection_xds.png
-.. |image27| image:: ./images/theia_ide_guide/ccstheia_flash_settings.png
-.. |image28| image:: ./images/theia_ide_guide/ccstheia_breakpoint.png
-.. |image29| image:: ./images/theia_ide_guide/ccstheia_debug_breakpoint.png
-.. |image30| image:: ./images/theia_ide_guide/ccstheia_connectionerror1.png
-.. |image31| image:: ./images/theia_ide_guide/ccstheia_connectionerror2.png
+.. |image1| image:: ./images/theia_ide_guide/ccstheia_tirex_project.png
+.. |image2| image:: ./images/theia_ide_guide/ccstheia_sysconfig.png
+.. |image3| image:: ./images/theia_ide_guide/ccstheia_stack.png
+.. |image4| image:: ./images/theia_ide_guide/ccstheia_connectionerror1.png
+.. |image5| image:: ./images/theia_ide_guide/ccstheia_connectionerror2.png
+

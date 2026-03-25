@@ -33,8 +33,6 @@
             -Wall
         "
         linkerBuildOptions="
-            -mfloat-abi=hard
-            -mfpu=fpv5-sp-d16
             -ldevice.cmd.genlibs
             -L${COM_TI_MSPM33_SDK_INSTALL_DIR}/source
             -L${PROJECT_ROOT}

@@ -27,11 +27,13 @@ J-Link 软件包 v7.88i 或更高版本支持 MSPM0。
 
 2. 按照安装程序说明操作
 
-   |image0|
+   .. figure:: ./images/segger_jlink/segger_install_1.png
+      :alt: 
 
 3. 安装程序将自动请求更新 IAR 或 Keil（如果已安装）
 
-   |image1|
+   .. figure:: ./images/segger_jlink/segger_install_2.png
+      :alt: 
 
 4. 将 Segger J-Link 与 CCS 配合使用
 -----------------------------------
@@ -40,17 +42,20 @@ J-Link 软件包 v7.88i 或更高版本支持 MSPM0。
 
    1.1. 依次点击“Help → Install New Software”
 
-   |image2|
+   .. figure:: ./images/segger_jlink/segger_ccs_1.png
+      :alt: 
 
    1.2. 按照\ `此处 <https://www.segger.com/products/debug-probes/j-link/technology/ides/ti-code-composer/>`__\ 说明或如下所示添加 J-Link 存储库：
 
-   |image3|
+   .. figure:: ./images/segger_jlink/segger_ccs_2.png
+      :alt: 
 
    1.3. 选择适当插件，并按照说明继续安装
 
    **注意：**\ 如果插件不可见，请在 CCS 中调整代理设置。
 
-   |image4|
+   .. figure:: ./images/segger_jlink/segger_ccs_3.png
+      :alt: 
 
    1.4. 确保插件版本正确。可能需要重新启动 CCS 才能正确更新插件版本。
 
@@ -58,15 +63,18 @@ J-Link 软件包 v7.88i 或更高版本支持 MSPM0。
 
    **注意：**\ 如果未正确应用插件，则此选项不可用。
 
-   |image5|
+   .. figure:: ./images/segger_jlink/segger_ccs_4.png
+      :alt: 
 
 3. 打开工程内的 .ccxml 文件
 
-   |image6|
+   .. figure:: ./images/segger_jlink/segger_ccs_5.png
+      :alt: 
 
-4. 选择“CORTEX_M0P”内核，并在“Target Interface”中选择“SWD”
+4. 选择“CORTEX\_M0P”内核，并在“Target Interface”中选择“SWD”
 
-   |image7|
+   .. figure:: ./images/segger_jlink/segger_ccs_6.png
+      :alt: 
 
 5. 对器件进行编程和调试。
 
@@ -77,7 +85,8 @@ J-Link 软件包 v7.88i 或更高版本支持 MSPM0。
 
 2. 更改调试器设置以使用 J-Link：
 
-   |image8|
+   .. figure:: ./images/segger_jlink/segger_iar_1.png
+      :alt: 
 
 3. 对器件进行编程和调试。
 
@@ -88,11 +97,13 @@ J-Link 软件包 v7.88i 或更高版本支持 MSPM0。
 
 2. 更改调试器设置以使用 J-Link：
 
-   |image9|
+   .. figure:: ./images/segger_jlink/segger_keil_1.png
+      :alt: 
 
 3. 选择 SWD 接口
 
-   |image10|
+   .. figure:: ./images/segger_jlink/segger_keil_2.png
+      :alt: 
 
 4. 对器件进行编程和调试。
 
@@ -100,15 +111,3 @@ J-Link 软件包 v7.88i 或更高版本支持 MSPM0。
 ----------------------------------------------------
 
 1. 使用 CCS 十六进制实用程序为 Segger J-Flash 软件生成输出文件时，请遵循 CCS IDE 指南中\ `如何生成 TI .TXT（及其他格式）文件 <../../ccs_ide_guide/doc_guide/doc_guide-srcs/ccs_ide_guide_CN.html#how-to-generate-ti-txt-and-other-format-files>`__\ 部分的说明。
-
-.. |image0| image:: ./images/segger_jlink/segger_install_1.png
-.. |image1| image:: ./images/segger_jlink/segger_install_2.png
-.. |image2| image:: ./images/segger_jlink/segger_ccs_1.png
-.. |image3| image:: ./images/segger_jlink/segger_ccs_2.png
-.. |image4| image:: ./images/segger_jlink/segger_ccs_3.png
-.. |image5| image:: ./images/segger_jlink/segger_ccs_4.png
-.. |image6| image:: ./images/segger_jlink/segger_ccs_5.png
-.. |image7| image:: ./images/segger_jlink/segger_ccs_6.png
-.. |image8| image:: ./images/segger_jlink/segger_iar_1.png
-.. |image9| image:: ./images/segger_jlink/segger_keil_1.png
-.. |image10| image:: ./images/segger_jlink/segger_keil_2.png

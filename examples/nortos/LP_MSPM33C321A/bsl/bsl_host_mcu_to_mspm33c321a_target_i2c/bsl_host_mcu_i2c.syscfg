@@ -10,6 +10,7 @@
  * Import the modules used in this configuration.
  */
 const Board         = scripting.addModule("/ti/driverlib/Board");
+const CRCP          = scripting.addModule("/ti/driverlib/CRCP");
 const GPIO          = scripting.addModule("/ti/driverlib/GPIO", {}, false);
 const GPIO1         = GPIO.addInstance();
 const GPIO2         = GPIO.addInstance();
@@ -26,6 +27,8 @@ const ProjectConfig = scripting.addModule("/ti/project_config/ProjectConfig");
 Board.peripheral.$assign          = "DEBUGSS";
 Board.peripheral.swclkPin.$assign = "PA20";
 Board.peripheral.swdioPin.$assign = "PA19";
+
+CRCP.profile = "CONFIG_PROFILE_2";
 
 GPIO1.port                                  = "PORTB";
 GPIO1.$name                                 = "GPIO_Button";

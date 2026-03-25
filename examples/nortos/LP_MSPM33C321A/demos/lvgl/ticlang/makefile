@@ -27,9 +27,7 @@ CFLAGS += -I.. \
     -mcpu=cortex-m33 \
     -Wall
 
-LFLAGS += -mfloat-abi=hard \
-    -mfpu=fpv5-sp-d16 \
-    "-l$(MSPM33_SDK_INSTALL_DIR)/source/ti/driverlib/lib/ticlang/m33/mspm33c321x/driverlib.a" \
+LFLAGS += "-l$(MSPM33_SDK_INSTALL_DIR)/source/ti/driverlib/lib/ticlang/m33/mspm33c321x/driverlib.a" \
     "-L$(MSPM33_SDK_INSTALL_DIR)/source" \
     -L.. \
     ../ticlang/mspm33c321a.cmd \

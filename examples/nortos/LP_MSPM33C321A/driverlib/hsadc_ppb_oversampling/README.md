@@ -1,13 +1,13 @@
 ## Example Summary
 
-The following example oversamples HSADC0 by 8 (2^3) using ppb to get 12-bit + 3 = 15-bit result. One sequencer is configured to oversample 8 times and the sum is stored in the result.  The macro ADC_OVERSAMPLE_COUNT represents the number of oversamples. This can be adjusted as per configuration.
+The following example showcases two scenarios to use the oversampling feature. Three sequencers are configured to run a single SOC each. The first sequencer is not configured to use the oversampling feature. The second sequencer is configured to oversample 8 times, thus resulting in a 15-bit result, to improve accuracy. The third sequencer is configured to oversample 8 times and then right shift the result by 3. This results in a 12-bit result whose error is minimised in case of irregular voltage input to the ADC.
+
+The results of all three scenarios in terms of voltages read will be printed on the uart console.
 
 ## Peripherals & Pin Assignments
 
 | Peripheral | Pin | Function |
 | --- | --- | --- |
-| GPIOC | PC27 | Standard Output (Green LED) |
-| GPIOC | PC26 | Standard Output (Red LED) |
 | SYSCTL |  |  |
 | HSADC0 | PA27 | HSADC_0 Channel 0 Pin |
 | EVENT |  |  |
@@ -38,3 +38,9 @@ Compile, load and run the example. The debugger will stop at a SW breakpoint, an
 On powerup, the ADC pin(s) used in this example are by default set to
 the correct analog mode. Therefore, calls to
 DL_GPIO_initPeripheralAnalogFunction for pinmuxing those pins are not needed.
+
+Sample Output :
+Sequencer 1 (without oversampling - 12 bit result) : 4091, 3296 mV
+Sequencer 2 (with oversampling - 15 bit result) : 4091, 3296 mV
+Sequencer 3 (with oversampling and right shift by 3 - 12 bit result) : 4092, 3296 mV
+

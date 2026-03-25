@@ -1,0 +1,200 @@
+/*****************************************************************************
+
+  Copyright (C) 2025 Texas Instruments Incorporated - http://www.ti.com/
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+   Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+
+   Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the
+   distribution.
+
+   Neither the name of Texas Instruments Incorporated nor the names of
+   its contributors may be used to endorse or promote products derived
+   from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+*****************************************************************************/
+
+/*
+ * GCC Linker Script for MSPM33C321A - Secure Side
+ *
+ * Memory layout for TrustZone secure application:
+ *   FLASH:     0x10000000 - 0x1000F7FF  (62KB Secure APP)
+ *   NSC_FLASH: 0x1000F800 - 0x1000FFFF  (2KB  NSC Region)
+ *   SRAM:      0x30000000 - 0x3000FFFF  (64KB Secure SRAM)
+ */
+
+/* Generate a link error if heap and stack don't fit into RAM */
+_Min_Heap_Size  = 0;        /* required amount of heap  */
+_Min_Stack_Size = 0x100;    /* required amount of stack */
+
+/* Specify the memory areas */
+MEMORY
+{
+    FLASH           (RX)  : ORIGIN = 0x10000000, LENGTH = 0x0000F800   /* 62KB Secure APP */
+    NSC_FLASH       (RX)  : ORIGIN = 0x1000F800, LENGTH = 0x00000800   /* 2KB for NSC Region */
+    SRAM            (RWX) : ORIGIN = 0x30000000, LENGTH = 0x00010000   /* 64KB Secure SRAM */
+    DATA            (R)   : ORIGIN = 0x80000000, LENGTH = 0x00008000
+    BCR_CONFIG      (R)   : ORIGIN = 0x80101800, LENGTH = 0x00000400
+    BSL_CONFIG      (R)   : ORIGIN = 0x80101C00, LENGTH = 0x00000400
+}
+
+REGION_ALIAS("REGION_TEXT", FLASH);
+REGION_ALIAS("REGION_BSS", SRAM);
+REGION_ALIAS("REGION_DATA", SRAM);
+REGION_ALIAS("REGION_STACK", SRAM);
+REGION_ALIAS("REGION_HEAP", SRAM);
+REGION_ALIAS("REGION_TEXT_RAM", SRAM);
+REGION_ALIAS("REGION_ARM_EXIDX", FLASH);
+REGION_ALIAS("REGION_ARM_EXTAB", FLASH);
+
+/* Define output sections */
+SECTIONS
+{
+    /* section for the interrupt vector area                                 */
+    PROVIDE (_intvecs_base_address =
+        DEFINED(_intvecs_base_address) ? _intvecs_base_address : 0x10000000);
+
+    .intvecs (_intvecs_base_address) : AT (_intvecs_base_address) {
+        KEEP (*(.intvecs))
+        . = ALIGN(0x10);
+    } > REGION_TEXT
+
+    PROVIDE (_vtable_base_address =
+        DEFINED(_vtable_base_address) ? _vtable_base_address : 0x10000000);
+
+    .vtable (_vtable_base_address) : AT (_vtable_base_address) {
+        KEEP (*(.vtable))
+    } > REGION_DATA
+
+   .text : {
+        CREATE_OBJECT_SYMBOLS
+        KEEP (*(.text))
+        . = ALIGN(0x10);
+        *(.text.*)
+        . = ALIGN(0x10);
+        KEEP (*(.ctors))
+        . = ALIGN(0x10);
+        KEEP (*(.dtors))
+        . = ALIGN(0x10);
+        __init_array_start = .;
+        KEEP (*(.init_array*))
+        . = ALIGN(0x10);
+        __init_array_end = .;
+        KEEP (*(.init))
+        . = ALIGN(0x10);
+        KEEP (*(.fini*))
+        . = ALIGN(0x10);
+    } > REGION_TEXT AT> REGION_TEXT
+
+    .ramfunc : {
+        __ramfunct_load__ = LOADADDR (.ramfunc);
+        __ramfunct_start__ = .;
+       *(.ramfunc)
+       . = ALIGN(0x10);
+       __ramfunct_end__ = .;
+    } > REGION_TEXT_RAM AT> REGION_TEXT
+
+    .rodata : {
+        *(.rodata)
+        . = ALIGN(0x10);
+        *(.rodata.*)
+        . = ALIGN(0x10);
+    } > REGION_TEXT AT> REGION_TEXT
+
+    .ARM.exidx : {
+        __exidx_start = .;
+        *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+        __exidx_end = .;
+    } > REGION_ARM_EXIDX AT> REGION_ARM_EXIDX
+
+    .ARM.extab : {
+        KEEP (*(.ARM.extab* .gnu.linkonce.armextab.*))
+         . = ALIGN(0x10);
+    } > REGION_ARM_EXTAB AT> REGION_ARM_EXTAB
+
+    /*
+     * GCC CMSE secure gateway veneers section.
+     * This is the GCC equivalent of TI Clang's "Veneer$$CMSE" section.
+     * The --cmse-implib linker flag causes GCC to generate secure gateway
+     * veneers and place them in this section. The non-secure application
+     * links against the import library (--out-implib) to resolve these.
+     */
+    .gnu.sgstubs :
+    {
+        . = ALIGN(32);
+        *(.gnu.sgstubs*)
+    } > NSC_FLASH
+
+    __etext = .;
+
+    .data : {
+        __data_load__ = LOADADDR (.data);
+        __data_start__ = .;
+        KEEP (*(.data))
+        KEEP (*(.data*))
+        . = ALIGN(0x10);
+        __data_end__ = .;
+    } > REGION_DATA AT> REGION_TEXT
+
+    .bss : {
+        __bss_start__ = .;
+        *(.shbss)
+        KEEP (*(.bss))
+        *(.bss.*)
+        *(COMMON)
+        . = ALIGN (16);
+        __bss_end__ = .;
+    } > REGION_BSS AT> REGION_BSS
+
+    .heap : {
+        __heap_start__ = .;
+        end = __heap_start__;
+        _end = end;
+        __end = end;
+        KEEP (*(.heap))
+        __heap_end__ = .;
+        __HeapLimit = __heap_end__;
+    } > REGION_HEAP AT> REGION_HEAP
+
+    .stack (NOLOAD) : ALIGN(0x10) {
+        _stack = .;
+        KEEP(*(.stack))
+    } > REGION_STACK AT> REGION_STACK
+
+    .BCRConfig :
+    {
+        KEEP(*(.BCRConfig))
+    } > BCR_CONFIG
+
+    .BSLConfig :
+    {
+        KEEP(*(.BSLConfig))
+    } > BSL_CONFIG
+
+    .DataBank :
+    {
+        *(.DataBank)
+        . = ALIGN(0x10);
+    } > DATA
+
+    __StackTop = ORIGIN(REGION_STACK) + LENGTH(REGION_STACK);
+    PROVIDE(__stack = __StackTop);
+}

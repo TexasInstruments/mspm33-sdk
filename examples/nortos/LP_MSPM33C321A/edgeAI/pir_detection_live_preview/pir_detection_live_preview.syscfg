@@ -1,0 +1,103 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --device "MSPM33C321X" --part "Default" --package "LQFP-100(PFA)" --product "mspm33_sdk@1.02.00.00"
+ * @v2CliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)" --product "mspm33_sdk@1.02.00.00"
+ * @versions {"tool":"1.26.0+4407"}
+ */
+// @cliArgs --board /ti/boards/LP_MSPM33C321A --rtos nortos
+
+/**
+ * Import the modules used in this configuration.
+ */
+const GPIO          = scripting.addModule("/ti/driverlib/GPIO", {}, false);
+const GPIO1         = GPIO.addInstance();
+const GPIO2         = GPIO.addInstance();
+const GPIO3         = GPIO.addInstance();
+const HSADC         = scripting.addModule("/ti/driverlib/HSADC", {}, false);
+const HSADC1        = HSADC.addInstance();
+const SYSCTL        = scripting.addModule("/ti/driverlib/SYSCTL");
+const TIMER         = scripting.addModule("/ti/driverlib/TIMER", {}, false);
+const TIMER1        = TIMER.addInstance();
+const UART          = scripting.addModule("/ti/driverlib/UART", {}, false);
+const UART1         = UART.addInstance();
+const VREF          = scripting.addModule("/ti/driverlib/VREF");
+const ProjectConfig = scripting.addModule("/ti/project_config/ProjectConfig");
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+GPIO1.$name                         = "LED_BLUE";
+GPIO1.associatedPins[0].$name       = "LED_BLUE_PIN";
+GPIO1.associatedPins[0].pin.$assign = "PB28";
+
+const Board = scripting.addModule("/ti/driverlib/Board", {}, false);
+
+GPIO2.$name                         = "LED_GREEN";
+GPIO2.associatedPins[0].$name       = "LED_GREEN_PIN";
+GPIO2.associatedPins[0].pin.$assign = "PC22";
+
+GPIO3.$name                         = "LED_RED";
+GPIO3.associatedPins[0].$name       = "LED_RED_PIN";
+GPIO3.associatedPins[0].pin.$assign = "PC21";
+
+HSADC1.$name                          = "HSADC0";
+HSADC1.enabledSOCs                    = ["ADC_SOC_NUMBER0"];
+HSADC1.enabledInts                    = ["ADC_INT_NUMBER_1"];
+HSADC1.enableInterrupt1               = true;
+HSADC1.enableInterrupt1ContinuousMode = true;
+HSADC1.interruptPulseMode             = "ADC_PULSE_END_OF_CONV";
+HSADC1.soc0Channel                    = "ADC_CH_ADCIN_10";
+HSADC1.enabledSEQs                    = ["ADC_SEQ_NUMBER1"];
+HSADC1.ADCsubscriber1Channel          = 1;
+HSADC1.seq1TriggerSel                 = "ADC_TRIGGER_GEN_SUB_0";
+HSADC1.seq1sampleCAPResetSelect       = "ADC_CAP_RESET_VREFHIBY2";
+HSADC1.seq1SampleWindow               = 1;
+HSADC1.seq1Enable                     = true;
+HSADC1.peripheral.$assign             = "ADC0";
+
+SYSCTL.MCLKSource    = "HSCLK";
+SYSCTL.SYSPLL_CLK0En = true;
+SYSCTL.SYSPLL_Pdiv   = 1;
+
+TIMER1.$name                       = "TIMER_0";
+TIMER1.timerMode                   = "PERIODIC_UP";
+TIMER1.timerClkDiv                 = 8;
+TIMER1.timerClkPrescale            = 100;
+TIMER1.event1PublisherChannel      = 1;
+TIMER1.event1ControllerInterruptEn = ["LOAD_EVENT"];
+TIMER1.timerPeriod                 = "30.3 ms";
+
+UART1.$name                    = "UART_0";
+UART1.targetBaudRate           = 115200;
+UART1.enabledInterrupts        = ["RX","TX"];
+UART1.enableFIFO               = true;
+UART1.peripheral.$assign       = "UC12";
+UART1.peripheral.rxPin.$assign = "PA11";
+UART1.peripheral.txPin.$assign = "PA10";
+UART1.txPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric0";
+UART1.rxPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric1";
+
+VREF.basicMode              = "DL_VREF_ENABLE_DISABLE";
+VREF.basicVrefPins          = "VREF+-";
+VREF.basicExtVolt           = 3.3;
+VREF.checkVREFReady         = true;
+VREF.vrefPosPinConfig.$name = "ti_driverlib_gpio_GPIOPinGeneric2";
+VREF.vrefNegPinConfig.$name = "ti_driverlib_gpio_GPIOPinGeneric3";
+
+ProjectConfig.genLibCMSIS        = true;
+ProjectConfig.migrationCondition = true;
+
+/**
+ * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
+ * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
+ * re-solve from scratch.
+ */
+Board.peripheral.$suggestSolution           = "DEBUGSS";
+Board.peripheral.swclkPin.$suggestSolution  = "PA20";
+Board.peripheral.swdioPin.$suggestSolution  = "PA19";
+SYSCTL.peripheral.$suggestSolution          = "SYSCTL";
+TIMER1.peripheral.$suggestSolution          = "TIMA0_0";
+VREF.peripheral.$suggestSolution            = "VREF";
+VREF.peripheral.vrefPosPin.$suggestSolution = "PA23";
+VREF.peripheral.vrefNegPin.$suggestSolution = "PA21";

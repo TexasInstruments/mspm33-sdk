@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>适用于 Keil 的 MSPM33 SDK 快速入门指南 &mdash; MSPM33 SDK Quick Start Guides 1.02.00.00 documentation</title>
+  <title>适用于 Keil 的 MSPM33 SDK 快速入门指南 &mdash; MSPM33 SDK Quick Start Guides 1.03.00.01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
@@ -32,7 +32,7 @@
             <a href="index.html" class="icon icon-home"> MSPM33 SDK Quick Start Guides
           </a>
               <div class="version">
-                1.02.00.00
+                1.03.00.01
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -105,14 +105,20 @@
 <ol class="arabic">
 <li><p>安装 <a class="reference external" href="#prerequisites">Keil MDK-Arm with uVision</a></p></li>
 <li><p>在 uVision 中，依次选择 <strong>Project → Manage → Pack Installer</strong></p>
-<p><img alt="image0" src="../_images/keil_install_1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_install_1.png" />
+</figure>
 </li>
-<li><p>在“Pack Installer”中，选择“Texas Instruments”器件，并选择相应的 MSPM33 系列。 然后在右侧，安装器件特定包以及可能需要的任何其他包。</p>
-<p><img alt="image1" src="../_images/keil_install_2.png" /></p>
+<li><p>在”Pack Installer”中，选择”Texas Instruments”器件，并选择相应的 MSPM33 系列。 然后在右侧，安装器件特定包以及可能需要的任何其他包。</p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_install_2.png" />
+</figure>
 </li>
 <li><p>批准许可条款</p></li>
 <li><p>“Pack Installer”应显示支持 MSPM33 器件。</p>
-<p><img alt="image2" src="../_images/keil_install_5.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_install_5.png" />
+</figure>
 </li>
 </ol>
 </section>
@@ -121,16 +127,24 @@
 <ol class="arabic">
 <li><p>下载并安装最新 <a class="reference external" href="#prerequisites">MSPM33 SDK</a>。请注意，SDK 安装程序有 Windows 版、Linux 版和 MacOS 版。以下步骤显示在 Windows 版中，但 Linux 或 MacOS 版也应遵循类似方法。</p></li>
 <li><p>执行安装程序。点击 <strong>Next</strong>。</p>
-<p><img alt="image3" src="../_images/sdk_install_11.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/sdk_install_11.png" />
+</figure>
 </li>
 <li><p>选择 <strong>Installation Directory</strong> 并点击 <strong>Next</strong>。注意安装目录，默认情况下为 <code class="docutils literal notranslate"><span class="pre">c:\ti</span></code>，SDK 将安装在 <code class="docutils literal notranslate"><span class="pre">C:\ti\mspm33_sdk_&lt;version&gt;\</span></code>。此路径在以下部分中称为 <code class="docutils literal notranslate"><span class="pre">&lt;MSPM33_SDK_INSTALL_DIR&gt;</span></code>。</p>
-<p><img alt="image4" src="../_images/sdk_install_21.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/sdk_install_21.png" />
+</figure>
 </li>
 <li><p>点击 <strong>Next</strong></p>
-<p><img alt="image5" src="../_images/sdk_install_31.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/sdk_install_31.png" />
+</figure>
 </li>
 <li><p>完成安装后，点击 <strong>Finish</strong>。</p>
-<p><img alt="image6" src="../_images/sdk_install_41.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/sdk_install_41.png" />
+</figure>
 </li>
 </ol>
 </section>
@@ -143,17 +157,27 @@
 <h2>6. 在 Keil uVision 中导入和编译 SDK 示例<a class="headerlink" href="#keil-uvision-sdk" title="Permalink to this heading">¶</a></h2>
 <ol class="arabic">
 <li><p>在 Keil uVision 中，依次选择 <strong>Project → Open Project</strong></p>
-<p><img alt="image7" src="../_images/keil_example_1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_example_1.png" />
+</figure>
 </li>
 <li><p>在位于 <code class="docutils literal notranslate"><span class="pre">&lt;MSPM33_SDK_INSTALL_DIR&gt;/examples/</span></code> 的 SDK 示例中导航至 Keil 文件夹，并打开 .uvprojx 工程文件（<strong>注意：</strong> 对于 rtos 示例，请使用 .uvmpw 工作空间文件）。例如 <code class="docutils literal notranslate"><span class="pre">&lt;MSPM33_SDK_INSTALL_DIR&gt;/examples/nortos/LP_MSPM33C321A/driverlib/gpio_toggle_output/keil/gpio_toggle_output.uvprojx</span></code>。</p>
-<p><img alt="image8" src="../_images/keil_example_2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_example_2.png" />
+</figure>
 <p>2.1. 工程已准备好进行编译和调试。</p>
-<p><img alt="image9" src="../_images/keil_example_3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_example_3.png" />
+</figure>
 </li>
 <li><p>要构建支持 FreeRTOS 的示例，请选择 <strong>Project → Batch Setup</strong>，选择构建的所有项目目标。</p>
-<p><img alt="image10" src="doc_guide-srcs/images/quickstart_guide_keil/Keil_Batch_Setup.png" /></p>
+<figure class="align-default">
+<img alt="" src="doc_guide-srcs/images/quickstart_guide_keil/Keil_Batch_Setup.png" />
+</figure>
 <p>3.1. 选择 Batch Build，它将构建工作空间中的所有项目。</p>
-<p><img alt="image11" src="doc_guide-srcs/images/quickstart_guide_keil/Keil_Batch_Build.png" /></p>
+<figure class="align-default">
+<img alt="" src="doc_guide-srcs/images/quickstart_guide_keil/Keil_Batch_Build.png" />
+</figure>
 </li>
 </ol>
 </section>
@@ -165,31 +189,45 @@
 <ol class="arabic simple">
 <li><p>右键点击工程文件夹，转至在先前步骤中导入的 Keil 工程的选项窗口</p></li>
 </ol>
-<p><img alt="image12" src="../_images/keil_CMSIS_example_1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_CMSIS_example_1.png" />
+</figure>
 <ol class="arabic simple" start="2">
-<li><p>转至“Debug”选项卡并点击“Settings”按钮，确保设置与下图所示设置一致。</p></li>
+<li><p>转至”Debug”选项卡并点击”Settings”按钮，确保设置与下图所示设置一致。</p></li>
 </ol>
-<p><img alt="image13" src="../_images/keil_CMSIS_example_4.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_CMSIS_example_4.png" />
+</figure>
 <ol class="arabic simple" start="3">
-<li><p>点击“Flash Download”选项卡，并确认相应说明与下图一致。 如果不一致，请点击“Add”按钮，并选择相应的 MSPM0 MAIN 选项。 器件类型为“On-chip flash”。</p></li>
+<li><p>点击”Flash Download”选项卡，并确认相应说明与下图一致。 如果不一致，请点击”Add”按钮，并选择相应的 MSPM0 MAIN 选项。 器件类型为”On-chip flash”。</p></li>
 </ol>
-<p><img alt="image14" src="../_images/keil_CMSIS_example_3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_CMSIS_example_3.png" />
+</figure>
 <ol class="arabic simple" start="4">
-<li><p>点击窗口底部的“Ok”关闭窗口，并应用对调试设置所做的所有更改</p></li>
+<li><p>点击窗口底部的”Ok”关闭窗口，并应用对调试设置所做的所有更改</p></li>
 </ol>
-<p><img alt="image15" src="../_images/keil_CMSIS_example_5.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_CMSIS_example_5.png" />
+</figure>
 <ol class="arabic simple" start="5">
-<li><p>按下“Load”按钮使用工程刷写器件，如下所示</p></li>
+<li><p>按下”Load”按钮使用工程刷写器件，如下所示</p></li>
 </ol>
-<p><img alt="image16" src="../_images/keil_CMSIS_example_8.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_CMSIS_example_8.png" />
+</figure>
 <ol class="arabic simple" start="6">
-<li><p>将鼠标悬停在主屏幕的“Debug”选项卡上，选择“Start/Stop Debug Session”</p></li>
+<li><p>将鼠标悬停在主屏幕的”Debug”选项卡上，选择”Start/Stop Debug Session”</p></li>
 </ol>
-<p><img alt="image17" src="../_images/keil_CMSIS_example_6.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_CMSIS_example_6.png" />
+</figure>
 <ol class="arabic simple" start="7">
 <li><p>这将启动调试会话。</p></li>
 </ol>
-<p><img alt="image18" src="../_images/keil_CMSIS_example_7.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/keil_CMSIS_example_7.png" />
+</figure>
 </section>
 </section>
 <section id="faq">

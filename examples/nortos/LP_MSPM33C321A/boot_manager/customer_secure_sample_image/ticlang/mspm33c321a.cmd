@@ -50,14 +50,14 @@
 
 MEMORY
 {
-  FLASH 			  (RX)  : origin = 0x00010080, length = FLASH_SIZE, fill = 0xFF,
+  FLASH 			  (RX)  : origin = 0x00010200, length = FLASH_SIZE, fill = 0xFF,
 	SRAM            (RWX) : origin = 0x30000000, length = 0x0000FFFF
 
 }
 
 SECTIONS
 {
-    .intvecs:  > 0x00010080
+    .intvecs:  > 0x00010200
     .text   : palign(16) {} > FLASH
     .const  : palign(16) {} > FLASH
     .cinit  : palign(16) {} > FLASH

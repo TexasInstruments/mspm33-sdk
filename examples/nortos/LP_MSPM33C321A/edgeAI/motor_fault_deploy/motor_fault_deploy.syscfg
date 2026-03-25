@@ -1,0 +1,73 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --board "/ti/boards/LP_MSPM33C321A" --product "mspm33_sdk@1.02.00.01"
+ * @v2CliArgs --board "/ti/boards/LP_MSPM33C321A" --product "mspm33_sdk@1.02.00.01"
+ * @versions {"tool":"1.26.0+4407"}
+ */
+// @cliArgs --board /ti/boards/LP_MSPM33C321A --rtos nortos
+
+/**
+ * Import the modules used in this configuration.
+ */
+const GPIO          = scripting.addModule("/ti/driverlib/GPIO", {}, false);
+const GPIO1         = GPIO.addInstance();
+const GPIO2         = GPIO.addInstance();
+const GPIO3         = GPIO.addInstance();
+const SPI           = scripting.addModule("/ti/driverlib/SPI", {}, false);
+const SPI1          = SPI.addInstance();
+const SYSCTL        = scripting.addModule("/ti/driverlib/SYSCTL");
+const ProjectConfig = scripting.addModule("/ti/project_config/ProjectConfig");
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+GPIO1.$name                         = "GPIO_LED";
+GPIO1.associatedPins.create(3);
+GPIO1.associatedPins[0].$name       = "RED";
+GPIO1.associatedPins[0].pin.$assign = "boosterpack.32";
+GPIO1.associatedPins[1].$name       = "GREEN";
+GPIO1.associatedPins[1].pin.$assign = "boosterpack.31";
+GPIO1.associatedPins[2].$name       = "BLUE";
+GPIO1.associatedPins[2].pin.$assign = "boosterpack.13";
+
+const Board                       = scripting.addModule("/ti/driverlib/Board", {}, false);
+Board.peripheral.$assign          = "DEBUGSS";
+Board.peripheral.swclkPin.$assign = "j25_expansion.16";
+Board.peripheral.swdioPin.$assign = "j25_expansion.14";
+
+GPIO2.$name                              = "SPI";
+GPIO2.associatedPins[0].$name            = "CS_0";
+GPIO2.associatedPins[0].initialValue     = "SET";
+GPIO2.associatedPins[0].internalResistor = "PULL_UP";
+GPIO2.associatedPins[0].pin.$assign      = "boosterpack.10";
+
+GPIO3.$name                         = "SENSOR";
+GPIO3.associatedPins[0].direction   = "INPUT";
+GPIO3.associatedPins[0].interruptEn = true;
+GPIO3.associatedPins[0].polarity    = "RISE";
+GPIO3.associatedPins[0].$name       = "RDY_1";
+GPIO3.associatedPins[0].pin.$assign = "boosterpack.9";
+
+SYSCTL.forceDefaultClkConfig = true;
+SYSCTL.SYSPLL_CLK2XDiv       = 1;
+SYSCTL.SYSPLL_CLK0En         = true;
+SYSCTL.SYSPLL_Pdiv           = 1;
+SYSCTL.MCLKSource            = "HSCLK";
+
+SPI1.$name                      = "SPI_0";
+SPI1.frameFormat                = "MOTO3";
+SPI1.targetBitRate              = 1000000;
+SPI1.phase                      = "1";
+SPI1.sclkPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric0";
+SPI1.mosiPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric1";
+SPI1.misoPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric2";
+SPI1.peripheral.$assign         = "UC2";
+SPI1.peripheral.sclkPin.$assign = "boosterpack.39";
+SPI1.peripheral.mosiPin.$assign = "boosterpack.40";
+SPI1.peripheral.misoPin.$assign = "boosterpack.38";
+
+SYSCTL.peripheral.$assign = "SYSCTL";
+
+ProjectConfig.genLibCMSIS        = true;
+ProjectConfig.migrationCondition = true;

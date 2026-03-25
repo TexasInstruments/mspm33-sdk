@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>适用于 MSPM33 MCU 的 Code Composer Studio IDE 版本20.4.0+ &mdash; Code Composer Studio IDE for MSPM33 MCUs 1.02.00.00 documentation</title>
+  <title>适用于 MSPM33 MCU 的 Code Composer Studio IDE 版本20.4.0+ &mdash; Code Composer Studio IDE for MSPM33 MCUs 1.03.00.01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
@@ -32,7 +32,7 @@
             <a href="index.html" class="icon icon-home"> Code Composer Studio IDE for MSPM33 MCUs
           </a>
               <div class="version">
-                1.02.00.00
+                1.03.00.01
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -188,7 +188,7 @@
 <h3>2.1 概览<a class="headerlink" href="#id8" title="Permalink to this heading">¶</a></h3>
 <p>Code Composer Studio (CCS)是一种集成开发环境(IDE)，支持 TI 的微控制器和嵌入式处理器产品系列。 CCS 包含一整套用于开发和调试嵌入式应用的工具。</p>
 <p>本指南仅介绍了使用 MSPM33的 CCS IDE 的一些特性和功能。</p>
-<p>有关 CCS 的更多文档、请访问 <a class="reference external" href="https://www.ti.com/tool/CCSTUDIO#tech-docs">TI.com</a> 或 IDE 中包含的“帮助”菜单。</p>
+<p>有关 CCS 的更多文档、请访问 <a class="reference external" href="https://www.ti.com/tool/CCSTUDIO#tech-docs">TI.com</a> 或 IDE 中包含的”帮助”菜单。</p>
 <section id="id9">
 <h4>2.2 从头开始创建项目<a class="headerlink" href="#id9" title="Permalink to this heading">¶</a></h4>
 <p><strong>注</strong>：不建议 <strong>从头开始创建项目</strong>，因为从头开始创建项目并不能添加所有必需的项目 默认情况下为器件支持文件。 要从空白项目开始、TI 建议导入空 Driverlib 示例 SDK 中的项目。</p>
@@ -200,21 +200,31 @@
 <p>此工具可从 <a class="reference external" href="https://dev.ti.com/tirex">https://dev.ti.com/tirex</a> 获取、但它也集成到 CCS 中、从而实现更集成的用户体验。</p>
 <ol class="arabic">
 <li><p>选择 <strong>Help</strong> → <strong>Getting Started</strong>。</p>
-<p><img alt="image0" src="../_images/ccs_gettingstarted.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_gettingstarted.png" />
+</figure>
 </li>
 <li><p>单击 <strong>Resource Explorer</strong></p></li>
 <li><p>导航面板可用于查看不同的 TI 产品、文档、软件等</p></li>
 <li><p>TI Resource Explorer 还允许通过单击产品旁边的并选择 <strong>Manage Versions</strong> 来选择特定的 SDK 版本。 请注意、已安装的产品也会显示绿色复选标记。</p>
-<p><img alt="image1" src="../_images/ccs_tirex_sdk.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_tirex_sdk.png" />
+</figure>
 </li>
 <li><p>使用集成的搜索功能按 LaunchPad (例如 LP-MSPM33C)器件(例如 MSPM33C)、中间件(例如 DriverLib)或解决方案(例如LIN)进行筛选。 请注意、TI-Rex 将自动检测连接的 LaunchPad。</p>
-<p><img alt="image2" src="../_images/ccs_tirex.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_tirex.png" />
+</figure>
 </li>
 <li><p>选择一个示例将显示一个自述文件，其中包含该示例的说明、外设和引脚用法以及如何运行该示例。</p>
-<p><img alt="image3" src="../_images/ccs_tirex_project.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_tirex_project.png" />
+</figure>
 </li>
 <li><p>为示例选择一个 CCS 工程，然后点击 Import 将其添加到您的工作区中。</p>
-<p><img alt="image4" src="../_images/ccs_tirex_projectimport.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_tirex_projectimport.png" />
+</figure>
 </li>
 </ol>
 <p>请注意、CCS 将自动检测相关的安装包、包括 SDK 和编译器、 如果需要、它将请求安装。</p>
@@ -224,7 +234,9 @@
 <p>MSPM33 SDK 中的一些示例支持 SysConfig 功能。<a class="reference external" href="https://www.ti.com/tool/SYSCONFIG">SysConfig</a> 是一个直观而全面的图形实用程序集合、用于配置引脚、外设、子系统等 组件。 SysConfig 可帮助您直观地管理、暴露和解决配置冲突、以便您有更多时间去处理 创建差异化的应用程序。</p>
 <p>SysConfig 工具作为独立安装程序提供、可在 <a class="reference external" href="https://dev.ti.com/sysconfig">dev.ti.com</a> 的云上使用、也可集成到 CCS 中以获得更好、更轻松的体验。</p>
 <p>在 CCS 中导入 MSPM33项目后、只需双击 <code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> 文件、即可打开 SysConfig。</p>
-<p><img alt="image5" src="../_images/ccs_sysconfig.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_sysconfig.png" />
+</figure>
 <p>有关将 SysConfig 与 MSPM33一起使用的更多信息、请访问 <a class="reference external" href="../../../sysconfig_guide/doc_guide/doc_guide-srcs/sysconfig_guide_CN.html">Using SysConfig with MSPM33</a> 指南。</p>
 </section>
 <section id="mspm33">
@@ -233,25 +245,35 @@
 <ol class="arabic simple">
 <li><p>在 SysConfig 中，启用设备视图并单击 <strong>SWITCH</strong></p></li>
 </ol>
-<p><img alt="image6" src="../_images/ccs_migrate1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_migrate1.png" />
+</figure>
 <ol class="arabic simple" start="2">
 <li><p>为新的 MSPM33设备选择相应的选项，然后单击 <strong>CONFIRM</strong>。</p></li>
 </ol>
-<p><img alt="image7" src="../_images/ccs_migrate2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_migrate2.png" />
+</figure>
 <ol class="arabic simple" start="3">
 <li><p>请注意、SysConfig 将突出显示与迁移发生的任何冲突、例如不可用的引脚和外设。 根据需要修复任何冲突。</p></li>
 <li><p>CCS 将自动移植器件并添加相应的.ccxml 文件。</p></li>
 </ol>
-<p><img alt="image8" src="../_images/ccs_migrate3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_migrate3.png" />
+</figure>
 <ol class="arabic simple" start="5">
 <li><p>在项目属性中，选择 <strong>Build</strong> → <strong>Arm Compiler</strong> → <strong>Predefined Symbols</strong>。 选择器件定义并更新它。</p></li>
 </ol>
-<p><img alt="image9" src="../_images/ccs_migrate4.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_migrate4.png" />
+</figure>
 <ol class="arabic simple" start="6">
 <li><p>更新链接器和启动文件。 MSPM33 SDK 包含所有 MSPM33衍生产品的默认文件、分别位于 <code class="docutils literal notranslate"><span class="pre">&lt;sdk&gt;\source\ti\devices\msp\m33\linker_files\ticlang</span></code> 和 <code class="docutils literal notranslate"><span class="pre">&lt;sdk&gt;\source\ti\devices\msp\m33\startup_system_files\ticlang</span></code>。</p></li>
 </ol>
 <p>请注意、应从工程中排除或删除以前的文件。</p>
-<p><img alt="image10" src="../_images/ccs_migrate5.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_migrate5.png" />
+</figure>
 <ol class="arabic simple" start="7">
 <li><p>解决所有其他问题项，例如不兼容的库和源代码。</p></li>
 </ol>
@@ -263,7 +285,9 @@
 <section id="ti-arm-clang">
 <h4>2.6.1 使用 TI Arm Clang 编译器配置堆栈<a class="headerlink" href="#ti-arm-clang" title="Permalink to this heading">¶</a></h4>
 <p>右键单击某个项目，然后选择 <strong>Properties</strong>。 选择 <strong>Build</strong> → <strong>Arm Linker</strong> → <strong>Basic Options</strong> 并相应地设置堆栈。</p>
-<p><img alt="image11" src="../_images/ccs_stack.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_stack.png" />
+</figure>
 <p>也可以通过添加或编辑 <code class="docutils literal notranslate"><span class="pre">--stack_size=xx</span></code> 或 <code class="docutils literal notranslate"><span class="pre">-heap_size=xx</span></code> 直接在链接器.cmd 文件上修改堆栈。</p>
 </section>
 <section id="arm-gcc">
@@ -280,15 +304,21 @@
 <ol class="arabic simple">
 <li><p>右键单击一个项目，然后选择 <strong>Properties</strong>。 选择 <strong>Build</strong> → <strong>Arm Hex Utility</strong> 并选择 <strong>Enable Arm Hex Utility</strong>。</p></li>
 </ol>
-<p><img alt="image12" src="../_images/ccs_outputtxt.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_outputtxt.png" />
+</figure>
 <ol class="arabic simple" start="2">
 <li><p>选择 <strong>Output Format Options</strong>。 然后选择 <strong>TI-TXT hex (–ti_txt)</strong> 选项。</p></li>
 </ol>
-<p><img alt="image13" src="../_images/ccs_outputtxt2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_outputtxt2.png" />
+</figure>
 <p>同样的过程可用于生成其他格式；但是、某些格式可能需要其他参数。</p>
 <p>一种常见的是intel十六进制格式，除选择输出格式 <strong>Intel hex (–intel, -i)</strong> 外，还需要指定使用该格式 的存储器和 ROM 宽度。</p>
 <p>当对 MSPM33使用 Intel hex 时，请在 <strong>Build</strong> → <strong>Arm Hex Utility</strong> → <strong>General Options</strong> 中选择8的内存和 ROM 宽度。</p>
-<p><img alt="image14" src="../_images/ccs_outputhex.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_outputhex.png" />
+</figure>
 <p>如需更多信息、请访问 <a class="reference external" href="https://software-dl.ti.com/ccs/esd/documents/ccs_hex-utility.html">Hex utility in CCS</a>。</p>
 </section>
 <section id="objcopy">
@@ -298,11 +328,15 @@
 <ol class="arabic simple">
 <li><p>右键单击一个项目，然后选择<strong>属性</strong>。 选择<strong>构建</strong>→** Arm objcopy 实用程序<strong>并选择</strong>启用 Arm objcopy 实用程序**。</p></li>
 </ol>
-<p><img alt="image15" src="../_images/ccs_objcopy1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_objcopy1.png" />
+</figure>
 <ol class="arabic simple" start="2">
 <li><p>使用.hex 扩展名指定输出文件名。</p></li>
 </ol>
-<p><img alt="image16" src="../_images/ccs_objcopy2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_objcopy2.png" />
+</figure>
 <p>有关 objcopy 的更多信息、请访问此 <a class="reference external" href="https://llvm.org/docs/CommandGuide/llvm-objcopy.html">objcopy guide</a>。</p>
 </section>
 </section>
@@ -310,9 +344,13 @@
 <h3>2.8 覆盖预编译库<a class="headerlink" href="#id11" title="Permalink to this heading">¶</a></h3>
 <p>项目可能包括预编译的库、可简化开发和编译时间；但是、 它们不允许开发人员轻易修改源代码。</p>
 <p>此类库的一个示例是 MSPM33 DriverLib、如下所示。</p>
-<p><img alt="image17" src="../_images/ccs_lib.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_lib.png" />
+</figure>
 <p>覆盖库的一个选项是只需将任何或所有源文件添加到工程中。 MSPM33 SDK 包括 <code class="docutils literal notranslate"><span class="pre">empty_driverlib_src</span></code> 示例、其中包括所有 DriverLib 源 默认情况下：</p>
-<p><img alt="image18" src="../_images/ccs_lib_src.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_lib_src.png" />
+</figure>
 <p>有关的信息、请参阅 <a class="reference external" href="#section-15">调试预编译库</a> 如何调试预编译库。</p>
 </section>
 <section id="sram">
@@ -325,17 +363,23 @@
 <ol class="arabic simple">
 <li><p>打开链接器.cmd 文件并将其修改为使用 SRAM、如下所示：</p></li>
 </ol>
-<p><img alt="image19" src="../_images/ccs_runFromRAM_1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_runFromRAM_1.png" />
+</figure>
 <ol class="arabic" start="2">
 <li><p>禁用 CCS 中默认执行的系统复位。</p>
 <p>CCS 包含在器件上执行某些函数的.gel 文件。 这些 文件包含在 CCS 安装文件夹中、位于 <code class="docutils literal notranslate"><span class="pre">&lt;ccs&gt;\ccs_base\emulation\gel&gt;</span></code>。 下面的屏幕截图 显示了 MSPM33C321A所需的修改：</p>
 </li>
 </ol>
-<p><img alt="image20" src="../_images/ccs_runFromRAM_2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_runFromRAM_2.png" />
+</figure>
 <ol class="arabic simple" start="3">
 <li><p>下载代码并注意该器件将从 SRAM 执行。</p></li>
 </ol>
-<p><img alt="image21" src="../_images/ccs_runFromRAM_3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_runFromRAM_3.png" />
+</figure>
 </section>
 <section id="id13">
 <h4>2.9.2 从 SRAM 运行函数<a class="headerlink" href="#id13" title="Permalink to this heading">¶</a></h4>
@@ -343,15 +387,21 @@
 <ol class="arabic simple">
 <li><p>将函数移动到<code class="docutils literal notranslate"><span class="pre">.TI.ramfunc</span></code>段。 这可以通过实现 使用属性声明函数 <code class="docutils literal notranslate"><span class="pre">__attribute__((section(&quot;.TI.ramfunc&quot;)))__attribute__((noinline))</span></code>如下所示：</p></li>
 </ol>
-<p><img alt="image22" src="../_images/ccs_runFunctionFromRAM_1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_runFunctionFromRAM_1.png" />
+</figure>
 <ol class="arabic simple" start="2">
 <li><p>链接器文件应包含<code class="docutils literal notranslate"><span class="pre">.TI.ramfunc</span></code>的位置。 请注意链接器 MSPM33-SDK 中包含的文件已包含此位置、但仅包含此位置 <code class="docutils literal notranslate"><span class="pre">在</span></code>.TI.ramfunc 中放置了任何函数、则适用。</p></li>
 </ol>
-<p><img alt="image23" src="../_images/ccs_runFunctionFromRAM_2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_runFunctionFromRAM_2.png" />
+</figure>
 <ol class="arabic simple" start="3">
 <li><p>下载代码并注意设备将从 SRAM 执行该功能。</p></li>
 </ol>
-<p><img alt="image24" src="../_images/ccs_runFunctionFromRAM_3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_runFunctionFromRAM_3.png" />
+</figure>
 </section>
 </section>
 </section>
@@ -366,12 +416,16 @@
 <h3>3.1 使用 TI XDS 工具<a class="headerlink" href="#ti-xds" title="Permalink to this heading">¶</a></h3>
 <p>TI 为基于 Arm 的器件提供了一系列调试器、包括与 MSPM33 LaunchPad 集成的 XDS-110。</p>
 <p>要使用 TI-XDS 调试器，请打开项目选项，单击 <strong>General</strong> → <strong>Connection</strong> <strong>Texas Instruments XDS110 USB Debug Probe</strong>。</p>
-<p><img alt="image25" src="../_images/ccs_debug_connection_xds.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_debug_connection_xds.png" />
+</figure>
 <section id="id15">
 <h4>3.1.1 闪存加载程序<a class="headerlink" href="#id15" title="Permalink to this heading">¶</a></h4>
 <p>闪存加载程序设置允许在对器件进行写入和擦除时配置一些设置。</p>
 <p>要查看和修改这些设置，请打开项目属性并选择 <strong>Debug</strong> → <strong>Category:MSPM33 Flash Settings</strong>。</p>
-<p><img alt="image26" src="../_images/ccs_flash_settings.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_flash_settings.png" />
+</figure>
 <p>闪存加载程序具有以下选项：</p>
 <ul class="simple">
 <li><p><strong>Reset Configuration</strong>：允许在写入前后执行软或硬复位。</p></li>
@@ -401,22 +455,30 @@
 <section id="segger-j-link">
 <h3>3.2 使用 Segger J-Link<a class="headerlink" href="#segger-j-link" title="Permalink to this heading">¶</a></h3>
 <p>要使用 Segger J-Link 调试器，请打开项目选项，单击 <strong>General</strong> → <strong>Connection</strong> 然后选择 <strong>SEGGER J-Link Emulator</strong>。</p>
-<p><img alt="image27" src="../_images/ccs_debug_connection_segger.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_debug_connection_segger.png" />
+</figure>
 <p>注意：可能需要更新 Segger 驱动程序。 按照有关如何在 CCS 中使用 J-Link 的说明 <a class="reference external" href="https://www.segger.com/products/debug-probes/j-link/technology/ides/ti-code-composer/">此处</a>。</p>
 </section>
 <section id="id16">
 <h3>3.3 断点类型<a class="headerlink" href="#id16" title="Permalink to this heading">¶</a></h3>
 <p>CCS 调试器使用有限数量的片上调试资源(特别是4个硬件断点和2个硬件观察点)。 MSPM33不支持闪存中的软件断点。 这意味着 CCS 内最多可以设置4个硬件断点。</p>
 <p>CCS 可以使用断点在 main 停止或在 exit 停止器件。 通过选择 <strong>Debug</strong> → <strong>Program/Memory Load Options</strong>，可以在项目属性中更新这些设置。</p>
-<p><img alt="image28" src="../_images/ccs_breakpoint.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_breakpoint.png" />
+</figure>
 <p>如果设置了最大断点数、将显示以下警告。</p>
-<p><img alt="image29" src="../_images/ccs_debug_breakpoint.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_debug_breakpoint.png" />
+</figure>
 </section>
 <section id="id17">
 <h3>3.4 调试预编译库<a class="headerlink" href="#id17" title="Permalink to this heading">¶</a></h3>
 <p>工程可能包含预编译的库、如果符号不可用、则很难进行调试。 此类库的一个示例是 MSPM33 DriverLib、许多 MSPM33 SDK 示例使用该函数。 可以通过将源代码添加到查找路径来解决此问题。</p>
 <p>在项目属性中，选择 <strong>Debug</strong> → <strong>Source Lookup Path</strong>，然后添加的源路径 预编译库。</p>
-<p><img alt="image30" src="../_images/ccs_lib_debug_error.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_lib_debug_error.png" />
+</figure>
 <p>有关的信息、请参阅 <a class="reference external" href="#section-11">覆盖预编译库</a> 如何覆盖和修改库中的源代码。</p>
 </section>
 <section id="dssm">
@@ -437,7 +499,9 @@
 <ol class="arabic">
 <li><p>在 CCS 菜单上，选择 <strong>View</strong> → <strong>Target Configurations</strong>。</p></li>
 <li><p>在 <strong>Target Configurations</strong> 窗口中，右键单击活动的 .ccxml 项目并选择 <strong>Launch Selected Configuration</strong>。</p>
-<p><img alt="image31" src="../_images/ccs_dssm1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_dssm1.png" />
+</figure>
 </li>
 <li><p>在调试器窗口菜单上，选择 <strong>Scripts</strong> → <strong>MSPM33xxxx_Commands</strong> （其中 MSPM33xxxx 取决于当前的 MSPM33 设备），然后选择其中一个 以下选项：</p>
 <ul class="simple">
@@ -445,10 +509,12 @@
 <li><p><strong>MSPM33_MailboxMassErase_Auto</strong>：将执行批量擦除 使用 XDS110 复位线强制复位。</p></li>
 <li><p><strong>MSPM33_MailboxFactoryReset_Manual</strong>：将执行出厂重置 要求用户按下复位按钮。</p></li>
 <li><p><strong>MSPM33_MailboxFactoryReset_Auto</strong>：将执行出厂重置 使用 XDS110 复位线强制复位。</p></li>
-<li><p><strong>MSPM33_MailboxWaitForDebug_Auto</strong>: 等待调试将被执行 要求用户单击“清除重置”按钮。</p></li>
+<li><p><strong>MSPM33_MailboxWaitForDebug_Auto</strong>: 等待调试将被执行 要求用户单击”清除重置”按钮。</p></li>
 <li><p><strong>MSPM33_MailboxSetResetMode</strong>: 将执行复位命令来让 设备保持在复位状态，直到下一个调试会话。</p></li>
 </ul>
-<p><img alt="image32" src="../_images/ccs_dssm2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_dssm2.png" />
+</figure>
 </li>
 </ol>
 </section>
@@ -457,24 +523,38 @@
 <p>*<strong>注意</strong>:要成功执行DSSM命令，设备必须有一个复位pin。</p>
 <p>要正确放入设备，必须执行以下步骤 按照第3.5.1节中所述的步骤重置模式<strong>之后</strong>。</p>
 <p>1允许DSSM命令完全执行。</p>
-<p><img alt="image33" src="../_images/ccs_dssm3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_dssm3.png" />
+</figure>
 <p>2命令完成后，设备将处于重置状态。 之后，任何 尝试刷新设备将抛出预期的错误消息，指出设备正在重置。</p>
-<p><img alt="image34" src="../_images/ccs_dssm4.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_dssm4.png" />
+</figure>
 <p>3在中选择了<strong>清除等待</strong>后，设备将退出重置状态 错误窗口。 允许将新应用程序闪存至设备。</p>
-<p><img alt="image35" src="../_images/ccs_dssm5.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_dssm5.png" />
+</figure>
 </section>
 <section id="id19">
 <h4>3.5.1.2 DSSM等待调试后执行步骤<a class="headerlink" href="#id19" title="Permalink to this heading">¶</a></h4>
 <p>*<strong>注意</strong>:要成功执行DSSM命令，设备必须有一个复位pin。</p>
 <p>要正确放入设备，必须执行以下步骤 按照第3.5.1节中所述的步骤等待调试<strong>之后</strong>。</p>
 <p>1允许DSSM命令完全执行。</p>
-<p><img alt="image36" src="../_images/ccs_dssm3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_dssm3.png" />
+</figure>
 <p>2命令完成后，设备将处于重置状态。 然后，连接 将自动尝试，导致出现预期的错误消息，指出设备正在重置。</p>
-<p><img alt="image37" src="../_images/ccs_dssm4.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_dssm4.png" />
+</figure>
 <p>3在中选择了<strong>清除等待</strong>后，设备将退出重置状态 错误窗口</p>
-<p><img alt="image38" src="../_images/ccs_dssm5.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_dssm5.png" />
+</figure>
 <p>4现在设备应该在重置处理程序中。 这允许用户访问以前下载的 代码，或将新应用程序加载到设备上。</p>
-<p><img alt="image39" src="../_images/ccs_dssm6.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_dssm6.png" />
+</figure>
 </section>
 <section id="dssm-swd-password-mechanism">
 <h4>3.5.2 DSSM SWD Password Mechanism 密码机制<a class="headerlink" href="#dssm-swd-password-mechanism" title="Permalink to this heading">¶</a></h4>
@@ -483,21 +563,31 @@
 <p>可以按照以下步骤使用 DSSM 密码机制解锁设备。</p>
 <ol class="arabic">
 <li><p>假设在 NONMAIN 配置器中配置了以下密码：</p>
-<p><img alt="image40" src="../_images/ccs_dssm_password1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_dssm_password1.png" />
+</figure>
 </li>
 <li><p>配置密码后尝试对设备进行编程将显示 以下错误：</p>
-<p><img alt="image41" src="../_images/ccs_dssm_password2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_dssm_password2.png" />
+</figure>
 </li>
 <li><p>要配置密码，双击CCS项目中的.ccxml，转到<strong>高级</strong>选项卡并选择 MSPM33 设备：</p>
-<p><img alt="image42" src="../_images/ccs_dssm_password3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_dssm_password3.png" />
+</figure>
 </li>
 <li><p>写密码</p>
-<p><img alt="image43" src="../_images/ccs_dssm_password4.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_dssm_password4.png" />
+</figure>
 </li>
 <li><p>在 CCS 菜单上，选择 <strong>View</strong> → <strong>Target Configurations</strong>。</p></li>
 <li><p>在 <strong>Target Configurations</strong> 窗口中，右键单击活动的 .ccxml 项目并选择 <strong>Launch Selected Configuration</strong>。</p></li>
 <li><p>在调试器窗口菜单上，选择 <strong>Scripts</strong> → <strong>MSPM33xxxx_Commands</strong> （其中 MSPM33xxxx 取决于当前的 MSPM33 设备），然后选择 <strong>MSPM33_MailboxPasswordAuthentication_Auto</strong>。</p>
-<p><img alt="image44" src="../_images/ccs_dssm_password5.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_dssm_password5.png" />
+</figure>
 </li>
 <li><p>CCS 应该能够连接到设备。 此时，设备可以 重新写入，但请注意此操作不会删除 NONMAIN，因此除非 NONMAIN 被修改，密码会仍旧有效。</p></li>
 </ol>
@@ -507,7 +597,7 @@
 <section id="id20">
 <h3>3.6 连接到一个不正确的设备<a class="headerlink" href="#id20" title="Permalink to this heading">¶</a></h3>
 <p>如果连接了不受支持的设备，CCS 将显示警告，如下所示：</p>
-<p><img alt="image45" src="../_images/ccs_connectionerror1.png" /> <img alt="image46" src="../_images/ccs_connectionerror2.png" /></p>
+<p><img alt="image0" src="../_images/ccs_connectionerror1.png" /> <img alt="image1" src="../_images/ccs_connectionerror2.png" /></p>
 <p>不建议对不正确的设备进行写入，这可能会导致意外和不可恢复。</p>
 </section>
 </section>
@@ -515,11 +605,17 @@
 <h2>4. 安装 Arm GCC<a class="headerlink" href="#id21" title="Permalink to this heading">¶</a></h2>
 <p>MSPM33 SDK 包括同时支持 TI Arm Clang 和 GCC 的示例；但是、 默认情况下、TI Arm Clang 安装在 CCS 中、而 GCC 则不安装。</p>
 <p>可以通过选择<strong>Help→Install GCC ARM Compiler Tools</strong>来安装 GCC：</p>
-<p><img alt="image47" src="../_images/ccs_gcc_install1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_gcc_install1.png" />
+</figure>
 <p>选择要安装的版本。 CCS 和 MSPM33-SDK 仅包含和支持某些版本的工具链。 有关信息、请参阅已安装 MSPM33-SDK 版本的发行说明 支持的 GCC 版本。</p>
-<p><img alt="image48" src="../_images/ccs_gcc_install2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_gcc_install2.png" />
+</figure>
 <p>如果安装成功，请单击<strong>Window→Preferences</strong>， 然后是** Code Composer Studio→Build→Compiler**以查看编译器列表 安装在 CCS 中。</p>
-<p><img alt="image49" src="../_images/ccs_gcc_install3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/ccs_gcc_install3.png" />
+</figure>
 </section>
 <section id="faq">
 <h2>5. 已知问题和常见问题解答(FAQ)<a class="headerlink" href="#faq" title="Permalink to this heading">¶</a></h2>

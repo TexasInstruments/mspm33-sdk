@@ -21,7 +21,7 @@ ifeq ($(VERBOSE), 1)
   V :=
 endif
 
-OBJECTS = hsadc_ppb_oversampling.obj iar_startup_mspm33c321x_iar.obj $(patsubst %.c,%.obj,$(notdir $(SYSCFG_C_FILES)))
+OBJECTS = hsadc_ppb_oversampling.obj uart_console.obj iar_startup_mspm33c321x_iar.obj $(patsubst %.c,%.obj,$(notdir $(SYSCFG_C_FILES)))
 SYSCFG_ASM_FILES = $(filter %.s,$(SYSCFG_FILES))
 OBJECTS += $(patsubst %.s,%.obj,$(notdir $(SYSCFG_ASM_FILES)))
 
@@ -42,6 +42,7 @@ CFLAGS += -I.. \
     -D__MSPM33C321A__ \
     -Om \
     "-I$(MSPM33_SDK_INSTALL_DIR)/source/third_party/CMSIS/Core/Include" \
+    "-I$(MSPM33_SDK_INSTALL_DIR)/examples/driverlib/hsadc_ppb_oversampling/../../app_utils/" \
     "-I$(MSPM33_SDK_INSTALL_DIR)/source" \
     --debug \
     --silent \
@@ -53,7 +54,9 @@ CFLAGS += -I.. \
     --fpu none \
     --vla
 
-LFLAGS += "$(MSPM33_SDK_INSTALL_DIR)/source/ti/driverlib/lib/iar/m33/mspm33c321x/driverlib.a" \
+LFLAGS += --redirect \
+    ScanfSmall=_ScanfSmall \
+    "$(MSPM33_SDK_INSTALL_DIR)/source/ti/driverlib/lib/iar/m33/mspm33c321x/driverlib.a" \
     "-L$(MSPM33_SDK_INSTALL_DIR)/source" \
     -L.. \
     --config ../iar/mspm33c321a.icf \
@@ -102,6 +105,10 @@ endef
 $(foreach c_file,$(SYSCFG_C_FILES),$(eval $(call C_RULE,$(c_file))))
 
 hsadc_ppb_oversampling.obj: ../hsadc_ppb_oversampling.c $(SYSCFG_H_FILES)
+	@ echo Building $@
+	$(V) $(CC) $(CFLAGS) $< -o $@
+
+uart_console.obj: ../uart_console.c $(SYSCFG_H_FILES)
 	@ echo Building $@
 	$(V) $(CC) $(CFLAGS) $< -o $@
 

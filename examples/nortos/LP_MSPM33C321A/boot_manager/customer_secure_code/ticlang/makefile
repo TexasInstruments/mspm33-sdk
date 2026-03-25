@@ -20,7 +20,7 @@ ifeq ($(VERBOSE), 1)
   V :=
 endif
 
-OBJECTS = flash_map_backend_flash_map_backend.obj mcuboot_config_trace.obj customer_secure_code.obj boot_config.obj boot_keys.obj lockable_storage_private.obj hash_verify.obj secret.obj keystore.obj rollback.obj third_party_mcuboot_boot_bootutil_src_boot_record.obj third_party_mcuboot_boot_bootutil_src_bootutil_misc.obj third_party_mcuboot_boot_bootutil_src_bootutil_public.obj third_party_mcuboot_boot_bootutil_src_caps.obj third_party_mcuboot_boot_bootutil_src_encrypted.obj third_party_mcuboot_boot_bootutil_src_fault_injection_hardening.obj third_party_mcuboot_boot_bootutil_src_fault_injection_hardening_delay_rng_mbedtls.obj third_party_mcuboot_boot_bootutil_src_image_ec.obj third_party_mcuboot_boot_bootutil_src_image_ec256.obj third_party_mcuboot_boot_bootutil_src_image_ed25519.obj third_party_mcuboot_boot_bootutil_src_image_mldsa87.obj third_party_mcuboot_boot_bootutil_src_image_rsa.obj third_party_mcuboot_boot_bootutil_src_image_validate.obj third_party_mcuboot_boot_bootutil_src_loader.obj third_party_mcuboot_boot_bootutil_src_swap_misc.obj third_party_mcuboot_boot_bootutil_src_swap_move.obj third_party_mcuboot_boot_bootutil_src_swap_scratch.obj third_party_mcuboot_boot_bootutil_src_tlv.obj third_party_mcuboot_ext_mbedtls-asn1_src_asn1parse.obj third_party_mcuboot_ext_mbedtls-asn1_src_platform_util.obj third_party_mcuboot_ext_msp-crypto_msp_crypto.obj ti_driverlib_dl_flashctl.obj ti_driverlib_dl_aesadv.obj ti_driverlib_m33_dl_shadrv.obj ti_driverlib_dl_dma.obj ti_boot_manager_ecc_src_ECCSW.obj ti_boot_manager_ecc_src_lowlevelapi.obj ti_boot_manager_ecc_src_lowlevelapi2.obj ti_boot_manager_ecc_src_lowlevelapi_m3.obj ti_boot_manager_ecc_src_scalarMul.obj ticlang_startup_mspm33c321x_ticlang.obj $(patsubst %.c,%.obj,$(notdir $(SYSCFG_C_FILES)))
+OBJECTS = flash_map_backend_flash_map_backend.obj mcuboot_config_trace.obj customer_secure_code.obj boot_keys.obj lockable_storage_private.obj hash_verify.obj secret.obj keystore.obj rollback.obj third_party_mcuboot_boot_bootutil_src_boot_record.obj third_party_mcuboot_boot_bootutil_src_bootutil_misc.obj third_party_mcuboot_boot_bootutil_src_bootutil_public.obj third_party_mcuboot_boot_bootutil_src_caps.obj third_party_mcuboot_boot_bootutil_src_encrypted.obj third_party_mcuboot_boot_bootutil_src_fault_injection_hardening.obj third_party_mcuboot_boot_bootutil_src_fault_injection_hardening_delay_rng_mbedtls.obj third_party_mcuboot_boot_bootutil_src_image_ec.obj third_party_mcuboot_boot_bootutil_src_image_ec256.obj third_party_mcuboot_boot_bootutil_src_image_ed25519.obj third_party_mcuboot_boot_bootutil_src_image_mldsa87.obj third_party_mcuboot_boot_bootutil_src_image_rsa.obj third_party_mcuboot_boot_bootutil_src_image_validate.obj third_party_mcuboot_boot_bootutil_src_loader.obj third_party_mcuboot_boot_bootutil_src_swap_misc.obj third_party_mcuboot_boot_bootutil_src_swap_move.obj third_party_mcuboot_boot_bootutil_src_swap_scratch.obj third_party_mcuboot_boot_bootutil_src_tlv.obj third_party_mcuboot_ext_mbedtls-asn1_src_asn1parse.obj third_party_mcuboot_ext_mbedtls-asn1_src_platform_util.obj third_party_mcuboot_ext_msp-crypto_msp_crypto.obj ti_driverlib_dl_flashctl.obj ti_driverlib_dl_aesadv.obj ti_driverlib_m33_dl_shadrv.obj ti_driverlib_dl_dma.obj ti_boot_manager_ecc_src_ECCSW.obj ti_boot_manager_ecc_src_lowlevelapi.obj ti_boot_manager_ecc_src_lowlevelapi2.obj ti_boot_manager_ecc_src_lowlevelapi_m3.obj ti_boot_manager_ecc_src_scalarMul.obj ticlang_startup_mspm33c321x_ticlang.obj $(patsubst %.c,%.obj,$(notdir $(SYSCFG_C_FILES)))
 
 NAME = customer_secure_code
 
@@ -98,10 +98,6 @@ mcuboot_config_trace.obj: ../mcuboot_config/trace.c $(SYSCFG_H_FILES)
 	$(V) $(CC) $(CFLAGS) -c $< -o $@
 
 customer_secure_code.obj: ../customer_secure_code.c $(SYSCFG_H_FILES)
-	@ echo Building $@
-	$(V) $(CC) $(CFLAGS) -c $< -o $@
-
-boot_config.obj: ../boot_config.c $(SYSCFG_H_FILES)
 	@ echo Building $@
 	$(V) $(CC) $(CFLAGS) -c $< -o $@
 

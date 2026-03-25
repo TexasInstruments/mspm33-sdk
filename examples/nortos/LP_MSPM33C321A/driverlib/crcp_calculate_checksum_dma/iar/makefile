@@ -53,7 +53,9 @@ CFLAGS += -I.. \
     --fpu none \
     --vla
 
-LFLAGS += "$(MSPM33_SDK_INSTALL_DIR)/source/ti/driverlib/lib/iar/m33/mspm33c321x/driverlib.a" \
+LFLAGS += --redirect \
+    ScanfSmall=_ScanfSmall \
+    "$(MSPM33_SDK_INSTALL_DIR)/source/ti/driverlib/lib/iar/m33/mspm33c321x/driverlib.a" \
     "-L$(MSPM33_SDK_INSTALL_DIR)/source" \
     -L.. \
     --config ../iar/mspm33c321a.icf \

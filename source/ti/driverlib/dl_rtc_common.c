@@ -277,7 +277,9 @@ void DL_RTC_Common_disableCalendarAlarm2(RTC_Regs *rtc_common)
         DL_RTC_Common_disableAlarm2DayOfMonthBCD(rtc_common);
     }
 }
+#endif /* __MSP_HAS_RTC_A__ || __MSP_HAS_RTC_B__ || defined __MSP_HAS_RTC__ */
 
+#if defined __MSP_HAS_RTC_A__
 DL_RTC_Common_Calendar DL_RTC_Common_getTimeStampCalendar(
     const RTC_Regs *rtc_common)
 {
@@ -314,5 +316,5 @@ DL_RTC_Common_Calendar DL_RTC_Common_getTimeStampCalendar(
 
     return calendarTime;
 }
+#endif /* __MSP_HAS_RTC_A__ */
 
-#endif /* __MSP_HAS_RTC_A__ || __MSP_HAS_RTC_B__ || defined __MSP_HAS_RTC__ */

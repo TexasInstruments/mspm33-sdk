@@ -143,7 +143,7 @@ function formatProtectionValue(value) {
 PLACE_IN_MEMORY(".BCRConfig")
 const BCR_Config BCRConfig =
 {
-    .BCR_CONFIG_ID = 0x05000000,  
+    .BCR_CONFIG_ID = 0x05000000,
     .DEBUG_ACCESS = `debugAccessStr`,
     .SWDP_MODE = `inst.swdEnable ? "BC_CFG_SW_DP_EN" : "BC_CFG_SW_DP_DIS"`,
     .BSL_PIN_INVOKE = `inst.bslInvokePinCheck ? "BC_CFG_BSL_PIN_INVOKE_EN" : "BC_CFG_BSL_PIN_INVOKE_DIS"`,
@@ -151,34 +151,34 @@ const BCR_Config BCRConfig =
     .CSC_EXISTS = `inst.cscExists !== undefined ? (inst.cscExists ? "BC_CFG_CSC_EXIST" : "BC_CFG_CSC_NOT_EXIST") : "BC_CFG_CSC_NOT_EXIST"`,
     .FLASH_BANK_SWAP_POLICY = `inst.flashBankSwap !== undefined ? (inst.flashBankSwap ? "BC_CFG_FLASH_BS_EN" : "BC_CFG_FLASH_BS_DIS") : "BC_CFG_FLASH_BS_DIS"`,
     .FAST_BOOT_MODE = `inst.fastBootMode ? "BC_CFG_FAST_BOOT_EN" : "BC_CFG_FAST_BOOT_DIS"`,
-    
+
     .SERVICES = {
         .BOOTLOADER_MODE = `inst.bslMode ? "BC_CFG_BOOTLOADER_MODE_EN" : "BC_CFG_BOOTLOADER_MODE_DIS"`,
         .MASS_ERASE_MODE = `massEraseStr`,
         .FACTORY_RESET_MODE = `factoryResetStr`,
     },
-    
+
     .PASSWORDS = {
         .MASS_ERASE = {
             `createHexStr(inst.mePW0)`, `createHexStr(inst.mePW1)`, `createHexStr(inst.mePW2)`, `createHexStr(inst.mePW3)`,
-            `createHexStr(inst.mePW4)`,`createHexStr(inst.mePW5)`, `createHexStr(inst.mePW6)`, `createHexStr(inst.mePW7)`, 
+            `createHexStr(inst.mePW4)`,`createHexStr(inst.mePW5)`, `createHexStr(inst.mePW6)`, `createHexStr(inst.mePW7)`,
         },
         .FACTORY_RESET = {
             `createHexStr(inst.frPW0)`, `createHexStr(inst.frPW1)`, `createHexStr(inst.frPW2)`, `createHexStr(inst.frPW3)`,
-            `createHexStr(inst.frPW4)`,`createHexStr(inst.frPW5)`, `createHexStr(inst.frPW6)`, `createHexStr(inst.frPW7)`, 
+            `createHexStr(inst.frPW4)`,`createHexStr(inst.frPW5)`, `createHexStr(inst.frPW6)`, `createHexStr(inst.frPW7)`,
         },
         .DEBUG_LOCK = {
             `createHexStr(inst.dbglockPW0)`, `createHexStr(inst.dbglockPW1)`, `createHexStr(inst.dbglockPW2)`, `createHexStr(inst.dbglockPW3)`,
-            `createHexStr(inst.dbglockPW4)`,`createHexStr(inst.dbglockPW5)`, `createHexStr(inst.dbglockPW6)`, `createHexStr(inst.dbglockPW7)`, 
+            `createHexStr(inst.dbglockPW4)`,`createHexStr(inst.dbglockPW5)`, `createHexStr(inst.dbglockPW6)`, `createHexStr(inst.dbglockPW7)`,
         },
         .DEBUG_NS_LOCK = {
             `createHexStr(inst.dbgnslockPW0)`, `createHexStr(inst.dbgnslockPW1)`, `createHexStr(inst.dbgnslockPW2)`, `createHexStr(inst.dbgnslockPW3)`,
-            `createHexStr(inst.dbgnslockPW4)`,`createHexStr(inst.dbgnslockPW5)`, `createHexStr(inst.dbgnslockPW6)`, `createHexStr(inst.dbgnslockPW7)`, 
+            `createHexStr(inst.dbgnslockPW4)`,`createHexStr(inst.dbgnslockPW5)`, `createHexStr(inst.dbgnslockPW6)`, `createHexStr(inst.dbgnslockPW7)`,
         },
         .RSVD_PSWD = {
-            `createHexStr(inst.badConvPW0)`, `createHexStr(inst.badConvPW1)`, 
+            `createHexStr(inst.badConvPW0)`, `createHexStr(inst.badConvPW1)`,
             `createHexStr(inst.badConvPW2)`, `createHexStr(inst.badConvPW3)`,
-            `createHexStr(inst.badConvPW4)`, `createHexStr(inst.badConvPW5)`, 
+            `createHexStr(inst.badConvPW4)`, `createHexStr(inst.badConvPW5)`,
             `createHexStr(inst.badConvPW6)`, `createHexStr(inst.badConvPW7)`
         },
     },
@@ -188,12 +188,12 @@ const BCR_Config BCRConfig =
     .USER_SECURE_APP_START_ADDR = CFG_DEFAULT_VALUE,
     .USER_SECURE_APP_LENGTH = CFG_DEFAULT_VALUE,
     .USER_SECURE_APP_HASH = {
-        `inst.secureBootMode === "hashCheck" ? 
+        `inst.secureBootMode === "hashCheck" ?
         "0x" + inst.appAuthHashValue0.toString(16) + ", " + "0x" + inst.appAuthHashValue1.toString(16) + ", " +
         "0x" + inst.appAuthHashValue2.toString(16) + ", " + "0x" + inst.appAuthHashValue3.toString(16) + ", " +
         "0x" + inst.appAuthHashValue4.toString(16) + ", " + "0x" + inst.appAuthHashValue5.toString(16) + ", " +
         "0x" + inst.appAuthHashValue6.toString(16) + ", " + "0x" + inst.appAuthHashValue7.toString(16) :
-        inst.secureBootMode === "crcCheck" ? 
+        inst.secureBootMode === "crcCheck" ?
         "0x" + inst.appAuthCRCValue.toString(16) + ", 0x00000000, " +
         "0x00000000, 0x00000000, " +
         "0x00000000, 0x00000000, " +
@@ -205,7 +205,7 @@ const BCR_Config BCRConfig =
     },
 
     .GSC_CONFIGS = {
-        .BANK0_NM_USER_CONFIG = `inst.staticWriteProtectionNonMain ? "BC_CFG_NONMAIN_WRITE_PROTECT_EN" : "BC_CFG_NONMAIN_WRITE_PROTECT_DIS"`,
+        .BANK0_NM_USER_CONFIG = `(inst.nonMainWriteProtection === "enabled") ? "BC_CFG_NONMAIN_WRITE_PROTECT_EN" : "BC_CFG_NONMAIN_WRITE_PROTECT_DIS"`,
         .BC_RESERVED_1 = 0xFFFF,
         .BANK0 = {
             .WRITE_ERASE_PROTECTION_A = `formatProtectionValue(inst.bank0WriteEraseProtectionA)`,
@@ -254,12 +254,12 @@ const BCR_Config BCRConfig =
     .SYSPLL_SOURCE = `inst.syspllSource`,
     .SYSPLL_SETTLING_TIME = `createHexStr(inst.syspllSettlingTime)`,
     .HFXT_STARTUP_MONITOR_TIME = `createHexStr(inst.hfxtStartupMonitorTime)`,
-    
+
     .RESVD = {
         0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
         0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF
     },
-    
+
     .CRC = `inst.bootCRC !== undefined ? createHexStr(inst.bootCRC) : "CFG_DEFAULT_VALUE"`
 };
 
@@ -293,9 +293,9 @@ const BSL_Config BSLConfig =
         .I2C_SDA_PF_mux_sel = DEF_I2C_SDA_MUX,
         .I2C_SCL_pad_num = DEF_I2C_SCL_PAD,
         .I2C_SCL_PF_mux_sel = DEF_I2C_SCL_MUX,
-        .MCAN_RX_pad_num = DEF_MCAN_RXD_PAD,   
+        .MCAN_RX_pad_num = DEF_MCAN_RXD_PAD,
         .MCAN_RX_PF_mux_sel = DEF_MCAN_RXD_MUX,
-        .MCAN_TX_pad_num = DEF_MCAN_TXD_PAD,   
+        .MCAN_TX_pad_num = DEF_MCAN_TXD_PAD,
         .MCAN_TX_PF_mux_sel = DEF_MCAN_TXD_MUX
     },
     .BSLPIN_INVOKE = {
@@ -311,7 +311,7 @@ const BSL_Config BSLConfig =
         `createHexStr(inst.bslPW3)`,
         `createHexStr(inst.bslPW2)`,
         `createHexStr(inst.bslPW1)`,
-        `createHexStr(inst.bslPW0)` 
+        `createHexStr(inst.bslPW0)`
     },
     .APP_REV_POINTER = `"(uint32_t *) " + createHexStr(inst.bslAppVersion)`,
     .SECURITY_ALERT_LEVEL = `securityAlertStr`,

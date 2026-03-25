@@ -51,25 +51,17 @@ const uint8_t gGoldenData[AES_BLOCK_SIZE] = {0xf3, 0xee, 0xd1, 0xbd, 0xb5,
 
 volatile bool gCorrectResults                  = false;
 volatile DL_AESADV_STATUS gSuccessfulOperation = true;
+volatile bool inputReady       = false;
+volatile bool outputReady      = false;
 
 void AESADV_IRQHandler()
 {
     // Read interrupt status
-    uint32_t status = DL_AESADV_getRawInterruptStatus(
-        AESADV_INST, DL_AESADV_INTERRUPT_INPUT_CONTEXT_READY |
-                         DL_AESADV_INTERRUPT_INPUT_READY |
-                         DL_AESADV_INTERRUPT_OUTPUT_READY);
-
-    // Handle context ready interrupt
-    if (status & DL_AESADV_INTERRUPT_INPUT_CONTEXT_READY) {
-        DL_AESADV_clearInterruptStatus(
-            AESADV_INST, DL_AESADV_INTERRUPT_INPUT_CONTEXT_READY);
-        DL_AESADV_disableInterrupt(
-            AESADV_INST, DL_AESADV_INTERRUPT_INPUT_CONTEXT_READY);
-    }
+    uint32_t status = DL_AESADV_getPendingInterrupt(AESADV_INST);
 
     // Handle input ready interrupt
     if (status & DL_AESADV_INTERRUPT_INPUT_READY) {
+        inputReady = true;
         DL_AESADV_clearInterruptStatus(
             AESADV_INST, DL_AESADV_INTERRUPT_INPUT_READY);
         DL_AESADV_disableInterrupt(
@@ -78,6 +70,7 @@ void AESADV_IRQHandler()
 
     // Handle output ready interrupt
     if (status & DL_AESADV_INTERRUPT_OUTPUT_READY) {
+        outputReady = true;
         DL_AESADV_clearInterruptStatus(
             AESADV_INST, DL_AESADV_INTERRUPT_OUTPUT_READY);
         DL_AESADV_disableInterrupt(
@@ -103,8 +96,8 @@ int main(void)
     /* Write the rest of the AES context */
     SYSCFG_DL_AESADV_init();
 
-    while (!DL_AESADV_isInputReady(AESADV)) {
-        ;
+    while (!inputReady) {
+        __WFE();
     }
 
     /* Load plaintext into engine */
@@ -112,14 +105,14 @@ int main(void)
         DL_AESADV_loadInputData(AESADV_INST, &gPlaintext[0]);
 
     /* Wait for engine to complete operation */
-    while (!DL_AESADV_isOutputReady(AESADV)) {
-        ;
+    while (!outputReady) {
+        __WFE();
     }
 
     /* Get encrypted result */
     gSuccessfulOperation &=
         DL_AESADV_readOutputData(AESADV_INST, &gCiphertext[0]);
-
+    
     /* Compare ciphertext to golden data */
     gCorrectResults = true;
     for (i = 0; i < AES_BLOCK_SIZE; i++) {

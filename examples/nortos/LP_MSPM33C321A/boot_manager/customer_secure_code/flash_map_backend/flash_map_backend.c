@@ -217,11 +217,11 @@ int flash_area_write(
 
     if (fa->fa_device_id == FLASH_DEVICE_INTERNAL_FLASH) {
         uint8_t flashStat;
-
+        DL_GSC_acquireFlashSemaphore(GSC);
         flashStat = DL_FlashCTL_programMemoryBlocking(FLASHCTL,
             write_start_addr, (uint32_t *) src, write_length,
             DL_FLASHCTL_REGION_SELECT_MAIN);
-
+        DL_GSC_clearFlashSemaphore(GSC);
         /* 0 is a failure, therefore nonzero is a pass, rc set to 0 (success) */
         if (flashStat) {
             rc = 0;
@@ -253,7 +253,7 @@ int flash_area_erase(const struct flash_area *fa, uint32_t off, uint32_t len)
         uint32_t sectorSize = FLASH_SECTOR_SIZE;  // sector size returned in KB
 
         assert(erase_start_addr % sectorSize);
-
+        DL_GSC_acquireFlashSemaphore(GSC);
         for (pageAddr = erase_start_addr; pageAddr < erase_start_addr + len;
              pageAddr += sectorSize) {
             DL_FlashCTL_unprotectSector(
@@ -262,7 +262,7 @@ int flash_area_erase(const struct flash_area *fa, uint32_t off, uint32_t len)
                 FLASHCTL, pageAddr, DL_FLASHCTL_COMMAND_SIZE_SECTOR);
             flashStat = DL_FlashCTL_waitForCmdDone(FLASHCTL);
         }
-
+        DL_GSC_clearFlashSemaphore(GSC);
         /* Non-zero is considered a success */
         if (flashStat) {
             rc = 0;

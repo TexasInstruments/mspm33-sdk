@@ -33,17 +33,17 @@ Related Documentation From Texas Instruments
 
 MSPM33 development tools documentation:
 
--  `XDS110 Debug Probe User’s Guide <https://www.ti.com/lit/sprui94>`__
+-  `XDS110 Debug Probe User's Guide <https://www.ti.com/lit/sprui94>`__
 
 MSPM33 device documentation:
 
--  `LP-MSPM33C321A User’s Guide <https://www.ti.com/lit/slau869>`__
+-  `LP-MSPM33C321A User's Guide <https://www.ti.com/lit/slau869>`__
 -  `MSPM33 C-Series Technical Reference Manual <https://www.ti.com/lit/slau847>`__
 
 Code Composer documentation:
 
 -  `Code Composer Studio Documentation <https://www.ti.com/tool/CCSTUDIO#tech-docs>`__
--  `Code Composer Studio User’s Guide <https://software-dl.ti.com/ccs/esd/documents/users_guide/index.html>`__
+-  `Code Composer Studio User's Guide <https://software-dl.ti.com/ccs/esd/documents/users_guide/index.html>`__
 
 If You Need Assistance
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -61,7 +61,7 @@ Code Composer Studio (CCS) IDE is available from `TI.com <https://www.ti.com/too
 
 `TI Arm Clang <https://www.ti.com/tool/ARM-CGT>`__ is the recommended compiler for CCS and it will be installed by default when MSPM33 is selected during installation.
 
-Arm GCC is also available for use inside CCS; however, it’s not installed by default. Section `Installing Arm GCC <#installing-arm-gcc>`__ explains how to install GCC for CCS.
+Arm GCC is also available for use inside CCS; however, it's not installed by default. Section `Installing Arm GCC <#installing-arm-gcc>`__ explains how to install GCC for CCS.
 
 2. Development Flow
 -------------------
@@ -80,38 +80,41 @@ More documentation for CCS is available at `TI.com <https://www.ti.com/tool/CCST
 2.2 Creating a Project From Scratch
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Note**: Creating a project from scratch is **not recommended** since creating the project from scratch doesn’t add all of the necessary device support files by default. To start from a blank project, TI recommends importing the Empty Driverlib example project from the MSPM33 SDK.
+**Note**: Creating a project from scratch is **not recommended** since creating the project from scratch doesn't add all of the necessary device support files by default. To start from a blank project, TI recommends importing the Empty Driverlib example project from the MSPM33 SDK.
 
 2.3 Using TI Resource Explorer in CCS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TI Resource Explorer (TI-Rex) helps you find all the latest examples, libraries, demo applications, datasheets, and more for your chosen platform.
 
-This tool is available at https://dev.ti.com/tirex, but it’s also integrated into CCS allowing for a more integrated user experience.
+This tool is available at https://dev.ti.com/tirex, but it's also integrated into CCS allowing for a more integrated user experience.
 
 1. Select **Help** → **Getting Started**.
 
-   |image0|
+   .. figure:: ./images/ccs_ide_guide/ccs_gettingstarted.png
+      :alt: 
 
 2. Click on **Resource Explorer**
-
 3. The navigation panel can be used to view different TI products, documentation, software, etc.
-
 4. TI Resource Explorer also allows to select a specific SDK version by clicking next to a product and selecting **Manage Versions**. Note that installed products are also shown with a green check mark.
 
-   |image1|
+   .. figure:: ./images/ccs_ide_guide/ccs_tirex_sdk.png
+      :alt: 
 
-5. Use the integrated search to filter by LaunchPad (i.e. LP-MSPM33C) device (i.e. MSPM33C), middleware (i.e. DriverLib), or solution (i.e. LIN). Note that TI-Rex will automatically detect a connected LaunchPad.
+5. Use the integrated search to filter by LaunchPad (i.e. LP-MSPM33C) device (i.e. MSPM33C), middleware (i.e. DriverLib), or solution (i.e. LIN). Note that TI-Rex will automatically detect a connected LaunchPad.
 
-   |image2|
+   .. figure:: ./images/ccs_ide_guide/ccs_tirex.png
+      :alt: 
 
 6. Selecting an example will show a useful Readme document with a description of the example, peripheral and pin usage and how to run it.
 
-   |image3|
+   .. figure:: ./images/ccs_ide_guide/ccs_tirex_project.png
+      :alt: 
 
 7. Select a CCS project for the example and click on Import to add it to your workspace.
 
-   |image4|
+   .. figure:: ./images/ccs_ide_guide/ccs_tirex_projectimport.png
+      :alt: 
 
 Note that CCS will automatically detect any dependencies, including SDKs and compilers, and it will request installation if needed.
 
@@ -120,18 +123,19 @@ Note that CCS will automatically detect any dependencies, including SDKs and com
 
 Some examples in the MSPM33 SDK have SysConfig support. `SysConfig <https://www.ti.com/tool/SYSCONFIG>`__ is an intuitive and comprehensive collection of graphical utilities for configuring pins, peripherals, radios, subsystems, and other components. SysConfig helps you manage, expose, and resolve conflicts visually so that you have more time to create differentiated applications.
 
-The SysConfig tool is delivered as a standalone installer, it can be used on the cloud at `dev.ti.com <https://dev.ti.com/sysconfig>`__, or it’s integrated into CCS for better and easier experience.
+The SysConfig tool is delivered as a standalone installer, it can be used on the cloud at `dev.ti.com <https://dev.ti.com/sysconfig>`__, or it's integrated into CCS for better and easier experience.
 
 After importing a MSPM33 project in CCS, simply double-click the ``.syscfg`` file and this will open SysConfig.
 
-|image5|
+.. figure:: ./images/ccs_ide_guide/ccs_sysconfig.png
+   :alt: 
 
 For more information about using SysConfig with MSPM33, visit the `Using SysConfig with MSPM33 <../../../sysconfig_guide/doc_guide/doc_guide-srcs/sysconfig_guide.html>`__ guide.
 
 2.5 Migrating Between MSPM33 Derivatives
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In order to migrate a project configuration to a new MSPM33 derivative (such as a new board, device, or package), the MSPM33 SDK supports several project migration processes. Project migration in this scope means updating relevant project configuration files and settings that are specific to the derivative, including linker files, startup files, and included libraries. The available options for migration depend on the project configuration, and the user should consult the desired project’s README for more information on which approach is supported. An overview of the available migration options and when they can be used are given below: - `SysConfig Project Migration <#251-sysconfig-project-migration>`__: This is the default approach for SysConfig compatible projects, in which all the configuration files can be handled by SysConfig. - `Non-SysConfig Compatible Project Migration <#252-non-sysconfig-compatible-project-migration>`__: This is the default approach for non-SysConfig
+In order to migrate a project configuration to a new MSPM33 derivative (such as a new board, device, or package), the MSPM33 SDK supports several project migration processes. Project migration in this scope means updating relevant project configuration files and settings that are specific to the derivative, including linker files, startup files, and included libraries. The available options for migration depend on the project configuration, and the user should consult the desired project's README for more information on which approach is supported. An overview of the available migration options and when they can be used are given below: - `SysConfig Project Migration <#251-sysconfig-project-migration>`__: This is the default approach for SysConfig compatible projects, in which all the configuration files can be handled by SysConfig. - `Non-SysConfig Compatible Project Migration <#252-non-sysconfig-compatible-project-migration>`__: This is the default approach for non-SysConfig
 compatible projects, where all the configuration files can be handled by the built-in device support package - `Manual Migration <#253-manual-migration>`__: For all other cases that require custom projectspecs or other incompatible configurations, the user can follow these steps for manual migration.
 
 2.5.1 SysConfig Project Migration
@@ -139,21 +143,25 @@ compatible projects, where all the configuration files can be handled by the bui
 
 In order to facilitate project migration, SysConfig will generate Project Configuration files by default, which can be controlled through the Project Configuration module. The steps below apply to TI Arm Clang and Arm GCC.
 
-|image6|
+.. figure:: ./images/ccs_ide_guide/ccs_migrate8.png
+   :alt: 
 
 For more details on generated Project Configuration files, visit the `Using SysConfig with MSPM33 <../../../sysconfig_guide/doc_guide/doc_guide-srcs/sysconfig_guide.html>`__ Guide.
 
 1. In SysConfig, enable the Device View and click on **SWITCH**
 
-|image7|
+.. figure:: ./images/ccs_ide_guide/ccs_migrate1.png
+   :alt: 
 
 2. Select the New Values for the **Device**, **Package**, and **CCS Launch Device** to migrate the project configuration to, and then click **CONFIRM**.
 
-|image8|
+.. figure:: ./images/ccs_ide_guide/ccs_migrate2.png
+   :alt: 
 
 3. After Confirming the new device values, SysConfig will highlight an error on the Project Configuration module. The user must choose the new device in the **Select Device** options. Make sure the device selection matches what was chosen for **CCS Launch Device** in the previous step.
 
-|image9|
+.. figure:: ./images/ccs_ide_guide/ccs_migrate6.png
+   :alt: 
 
 4. Note that SysConfig will highlight any conflicts with the migration, such as unavailable pins and peripherals. Fix any conflicts as needed, and save all the changes to the SysConfig configuration script.
 
@@ -161,11 +169,13 @@ CCS will automatically migrate the device variant and will add a corresponding .
 
 Migration is now complete and the user can build their project for the new target device.
 
-|image10|
+.. figure:: ./images/ccs_ide_guide/ccs_migrate3.png
+   :alt: 
 
 Note: If the user wants to manually modify any Project Configuration files, they should disable the option to generate that file from the Project Configuration module and then manually add their desired file to the project. Otherwise, changes that are made to any generated file will be overwritten by SysConfig when the project is built. Keep in mind that the steps above are intended to be followed when all the project configuration files are handled by SysConfig.
 
-|image11|
+.. figure:: ./images/ccs_ide_guide/ccs_migrate7.png
+   :alt: 
 
 2.5.2 Non-SysConfig Compatible Project Migration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -174,7 +184,8 @@ For non-SysConfig compatible projects, migration is handled seamlessly by the bu
 
 1. In CCS, open the example project Properties and choose a different MSPM33 device.
 
-|image12|
+.. figure:: ./images/ccs_ide_guide/ccs_migrate_non_sysconfig_properties.png
+   :alt: 
 
 2. Hitting **Apply and Close** will automatically make the following updates to the project, corresponding to the newly selected device:
 
@@ -185,7 +196,8 @@ For non-SysConfig compatible projects, migration is handled seamlessly by the bu
 
    **Important Note**: The CMSIS startup file and linker command file from the previous device are NOT removed. Instead they are simply excluded from the project build.
 
-|image13|
+.. figure:: ./images/ccs_ide_guide/ccs_migrate_non_sysconfig_updated_files.png
+   :alt: 
 
 Migration is now complete and the user can build their project for the new target device.
 
@@ -194,31 +206,36 @@ Migration is now complete and the user can build their project for the new targe
 
 SysConfig allows for an easier migration between MSPM33 derivatives; however for some projects manual modifications are required. The steps below apply to TI Arm Clang but similar steps apply to Arm GCC.
 
-Note: Steps 1-3 don’t apply when not using SysConfig, and step 4 needs to be done manually.
+Note: Steps 1-3 don't apply when not using SysConfig, and step 4 needs to be done manually.
 
 1. In SysConfig, enable the Device View and click on **SWITCH**
 
-|image14|
+.. figure:: ./images/ccs_ide_guide/ccs_migrate1.png
+   :alt: 
 
 2. Select the corresponding options for the new MSPM33 device and click **CONFIRM**.
 
-|image15|
+.. figure:: ./images/ccs_ide_guide/ccs_migrate2.png
+   :alt: 
 
 3. Note that SysConfig will highlight any conflicts with the migration, such as unavailable pins and peripherals. Fix any conflicts as needed.
 
 4. CCS will automatically migrate the device variant and will add a corresponding .ccxml file.
 
-|image16|
+.. figure:: ./images/ccs_ide_guide/ccs_migrate3.png
+   :alt: 
 
 5. In the project properties, select **Build** → **Arm Compiler** → **Predefined Symbols**. Select the device definition and update it.
 
-|image17|
+.. figure:: ./images/ccs_ide_guide/ccs_migrate4.png
+   :alt: 
 
 6. Update the linker and startup files. The MSPM33 SDK includes default files for all MSPM33 derivatives at ``<sdk>\source\ti\devices\msp\m33\linker_files\ticlang`` and ``<sdk>\source\ti\devices\msp\m33\startup_system_files\ticlang`` respectively.
 
 Note that previous files should be excluded or removed from the project.
 
-|image18|
+.. figure:: ./images/ccs_ide_guide/ccs_migrate5.png
+   :alt: 
 
 7. Resolve any other dependencies such as incompatible libraries and source code.
 
@@ -232,7 +249,8 @@ The reserved stack and heap size can be configured using project settings or in 
 
 Right-click on a project and select **Properties**. Select **Build** → **Arm Linker** → **Basic Options** and set the stack and heap accordingly.
 
-|image19|
+.. figure:: ./images/ccs_ide_guide/ccs_stack.png
+   :alt: 
 
 The stack and heap can also be modified directly on the linker .cmd file by adding or editing ``--stack_size=xx`` or ``--heap_size=xx``.
 
@@ -253,19 +271,22 @@ The following steps explain how to enable the TI TXT format using the Hex Utilit
 
 1. Right-click on a project and select **Properties**. Select **Build** → **Arm Hex Utility** and select **Enable Arm Hex Utility**.
 
-|image20|
+.. figure:: ./images/ccs_ide_guide/ccs_outputtxt.png
+   :alt: 
 
-2. Select **Output Format Options**. Then select the **TI-TXT hex (–ti_txt)** option.
+2. Select **Output Format Options**. Then select the **TI-TXT hex (--ti\_txt)** option.
 
-|image21|
+.. figure:: ./images/ccs_ide_guide/ccs_outputtxt2.png
+   :alt: 
 
 This same process can be used to generate other formats; however, some formats might require other parameters.
 
-A common one is Intel HEX format which in addition to selecting the output format **Intel hex (–intel, -i)**, requires to specify the memory and ROM width as parameters.
+A common one is Intel HEX format which in addition to selecting the output format **Intel hex (--intel, -i)**, requires to specify the memory and ROM width as parameters.
 
 When using Intel HEX for MSPM33, select a memory and ROM width of 8 in **Build** → **Arm Hex Utility** → **General Options**.
 
-|image22|
+.. figure:: ./images/ccs_ide_guide/ccs_outputhex.png
+   :alt: 
 
 For more information, visit `Hex utility in CCS <https://software-dl.ti.com/ccs/esd/documents/ccs_hex-utility.html>`__.
 
@@ -278,26 +299,30 @@ The following steps explain how to enable intel Hex format using ObjCopy.
 
 1. Right-click on a project and select **Properties**. Select **Build** → **Arm ObjCopy Utility** and select **Enable Arm Objcopy Utility**.
 
-|image23|
+.. figure:: ./images/ccs_ide_guide/ccs_objcopy1.png
+   :alt: 
 
 2. Specify the output file name using .hex extension.
 
-|image24|
+.. figure:: ./images/ccs_ide_guide/ccs_objcopy2.png
+   :alt: 
 
 For more information about Objcopy, visit this `Objcopy guide <https://llvm.org/docs/CommandGuide/llvm-objcopy.html>`__.
 
 2.8 Overriding Pre-built Libraries
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Projects might include pre-built libraries which simplify development and build time; however, they don’t allow developers to modify source code easily.
+Projects might include pre-built libraries which simplify development and build time; however, they don't allow developers to modify source code easily.
 
 An example of such libraries is the MSPM33 DriverLib which is shown below.
 
-|image25|
+.. figure:: ./images/ccs_ide_guide/ccs_lib.png
+   :alt: 
 
 One option to override the library is to simply add any or all source files to the project. The MSPM33 SDK includes the ``empty_driverlib_src`` example which includes all DriverLib source by default:
 
-|image26|
+.. figure:: ./images/ccs_ide_guide/ccs_lib_src.png
+   :alt: 
 
 See `Debugging Pre-built Libraries <#debugging-pre-built-libraries>`__ for information on how to debug pre-built libraries.
 
@@ -311,21 +336,24 @@ This section describes step-by-step instructions to execute some functions or co
 2.9.1 Running a complete application from SRAM
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The following steps show how to modify a basic gpio_toggle_output example for the LP_MSPM33C321A to run from SRAM. Similar steps apply to other examples and devices.
+The following steps show how to modify a basic gpio\_toggle\_output example for the LP\_MSPM33C321A to run from SRAM. Similar steps apply to other examples and devices.
 
 1. Open the linker .cmd file and modify it to use SRAM as shown below:
 
-|image27|
+.. figure:: ./images/ccs_ide_guide/ccs_runFromRAM_1.png
+   :alt: 
 
 2. Disable the System Reset which is executed by default in CCS.
 
    CCS includes .gel files which execute certain functions on the device. These files are included inside the CCS installation folder at ``<ccs>\ccs_base\emulation\gel>``. The screenshot below shows the modification necessary for MSPM33C321A:
 
-|image28|
+.. figure:: ./images/ccs_ide_guide/ccs_runFromRAM_2.png
+   :alt: 
 
 3. Download code and note that the device will execute from SRAM.
 
-|image29|
+.. figure:: ./images/ccs_ide_guide/ccs_runFromRAM_3.png
+   :alt: 
 
 2.9.2 Running a function from SRAM
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -334,15 +362,18 @@ The following steps show how to declare a function which is executed from SRAM.
 
 1. Move the function to the ``.TI.ramfunc`` section. This can be accomplished by declaring the function with the attributes ``__attribute__((section(".TI.ramfunc"))) __attribute__((noinline))`` as observed below:
 
-|image30|
+.. figure:: ./images/ccs_ide_guide/ccs_runFunctionFromRAM_1.png
+   :alt: 
 
 2. The linker file should include a placement of ``.TI.ramfunc``. Note that the linker files included in MSPM33-SDK already include this placement but it will only be applicable if any functions are placed in ``.TI.ramfunc``.
 
-|image31|
+.. figure:: ./images/ccs_ide_guide/ccs_runFunctionFromRAM_2.png
+   :alt: 
 
 3. Download code and note that the device will execute the function from SRAM.
 
-|image32|
+.. figure:: ./images/ccs_ide_guide/ccs_runFunctionFromRAM_3.png
+   :alt: 
 
 3. Debugging the Application
 ----------------------------
@@ -359,7 +390,8 @@ TI offers a range of debug probes for Arm-based devices, including the XDS110 wh
 
 To use the TI-XDS debug probes, open the project options, click on **General** → **Connection** and select **Texas Instruments XDS110 USB Debug Probe**.
 
-|image33|
+.. figure:: ./images/ccs_ide_guide/ccs_debug_connection_xds.png
+   :alt: 
 
 3.1.1 Flash Loader
 ^^^^^^^^^^^^^^^^^^
@@ -368,7 +400,8 @@ The Flash Loader settings allow to configure some settings when programming and 
 
 To view and modify these settings, open the project properties and select **Debug** → **Category:MSPM33 Flash Settings**.
 
-|image34|
+.. figure:: ./images/ccs_ide_guide/ccs_flash_settings.png
+   :alt: 
 
 The Flash Loader has the following options:
 
@@ -379,7 +412,7 @@ The Flash Loader has the following options:
    -  **Erase MAIN memory only**: Only MAIN memory will be mass erased. An error will be thrown when attempting to write NONMAIN.
    -  **Erase MAIN and NONMAIN memory**: Both MAIN and NONMAIN will be mass erased. See `Erasing and Updating NONMAIN Memory <#erasing-and-updating-nonmain-memory>`__ for information about NONMAIN usage.
    -  **Erase MAIN and NONMAIN necessary sectors only**: Only sectors being updated will be erased, including both MAIN and NONMAIN. Check the device datasheet for information on the size of flash sectors. See `Erasing and Updating NONMAIN Memory <#erasing-and-updating-nonmain-memory>`__ for information about NONMAIN usage.
-   -  **Erase MAIN memory sectors by range**: Only sectors defined between **Sector Erase Start Address** and **Sector Erase End Address** will be erased. Check the device datasheet for information on the size of flash sectors and note that the addresses are inclusive. For example, a region from 0x0000_0100 to 0x0000_0400 on a MSPM33 device with 1kB sectors will erase sectors 0x0000_0000-0x0000_03FF and 0x0000_0400-0x0000_07FF. Note that only sectors in MAIN will be erased. An error will be thrown when attempting to write NONMAIN.
+   -  **Erase MAIN memory sectors by range**: Only sectors defined between **Sector Erase Start Address** and **Sector Erase End Address** will be erased. Check the device datasheet for information on the size of flash sectors and note that the addresses are inclusive. For example, a region from 0x0000\_0100 to 0x0000\_0400 on a MSPM33 device with 1kB sectors will erase sectors 0x0000\_0000-0x0000\_03FF and 0x0000\_0400-0x0000\_07FF. Note that only sectors in MAIN will be erased. An error will be thrown when attempting to write NONMAIN.
    -  **Do not erase Flash memory**: Flash will not be erased. An error will be thrown when attempting to write NONMAIN without erasing.
 
 -  **Advanced Configuration**: disables validating the device ID. Used for debugging purposes and not recommended to disable.
@@ -403,7 +436,8 @@ Note that the Flash Loader will erase NONMAIN if any of these options are enable
 
 To use the Segger J-Link debug probe, open the project options, click on **General** → **Connection** and select **SEGGER J-Link Emulator**.
 
-|image35|
+.. figure:: ./images/ccs_ide_guide/ccs_debug_connection_segger.png
+   :alt: 
 
 Note: update of the Segger drivers might be necessary. Follow instructions on how to use J-Link with CCS `here <https://www.segger.com/products/debug-probes/j-link/technology/ides/ti-code-composer/>`__.
 
@@ -414,11 +448,13 @@ The CCS debugger uses a limited number of on-chip debugging resources (specifica
 
 CCS can use a breakpoint to stop at main or halt the device at exit. These settings can be updated in the project properties by selecting **Debug** → **Program/Memory Load Options**.
 
-|image36|
+.. figure:: ./images/ccs_ide_guide/ccs_breakpoint.png
+   :alt: 
 
 If the max number of breakpoints are set, the following warning will be displayed.
 
-|image37|
+.. figure:: ./images/ccs_ide_guide/ccs_debug_breakpoint.png
+   :alt: 
 
 3.4 Debugging Pre-built Libraries
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -427,7 +463,8 @@ Projects might include pre-built libraries which can be difficult to debug if sy
 
 In project properties, select **Debug** → **Source Lookup Path** and add the path of the source for the pre-built library.
 
-|image38|
+.. figure:: ./images/ccs_ide_guide/ccs_lib_debug_error.png
+   :alt: 
 
 See `Overriding Pre-built Libraries <#overriding-pre-built-libraries>`__ for information on how to override and modify source code from libraries.
 
@@ -458,21 +495,22 @@ The SWD mass erase, factory reset, wait for debug, and set reset mode DSSM comma
 To execute a DSSM Mass Erase, DSSM Factory Reset, DSSM Wait for Debug, or DSSM Set Reset Mode follow the next steps:
 
 1. On the CCS menu, select **View** → **Target Configurations**.
-
 2. On the **Target Configurations** window, right-click the .ccxml of an active project and select **Launch Selected Configuration**.
 
-   |image39|
+   .. figure:: ./images/ccs_ide_guide/ccs_dssm1.png
+      :alt: 
 
-3. On the debugger window menu, select **Scripts** → **MSPM33xxxx_Commands** (where MSPM33xxxx depends on the current MSPM33 device), and select one of the following options:
+3. On the debugger window menu, select **Scripts** → **MSPM33xxxx\_Commands** (where MSPM33xxxx depends on the current MSPM33 device), and select one of the following options:
 
-   -  **MSPM33_MailboxMassErase_Manual**: A mass erase will be performed asking the user to press the reset button.
-   -  **MSPM33_MailboxMassErase_Auto**: A mass erase will be performed forcing reset using the XDS110 reset line.
-   -  **MSPM33_MailboxFactoryReset_Manual**: A factory reset will be performed asking the user to press the reset button.
-   -  **MSPM33_MailboxFactoryReset_Auto**: A factory reset will be performed forcing reset using the XDS110 reset line.
-   -  **MSPM33_MailboxWaitForDebug_Auto**: Wait for debug will be performed using the XDS110 reset line and asking the user to click on “clear reset” button.
-   -  **MSPM33_MailboxSetResetMode**: Set in reset will be performed using the XDS110 reset line, putting the device in reset until the next debugging session.
+   -  **MSPM33\_MailboxMassErase\_Manual**: A mass erase will be performed asking the user to press the reset button.
+   -  **MSPM33\_MailboxMassErase\_Auto**: A mass erase will be performed forcing reset using the XDS110 reset line.
+   -  **MSPM33\_MailboxFactoryReset\_Manual**: A factory reset will be performed asking the user to press the reset button.
+   -  **MSPM33\_MailboxFactoryReset\_Auto**: A factory reset will be performed forcing reset using the XDS110 reset line.
+   -  **MSPM33\_MailboxWaitForDebug\_Auto**: Wait for debug will be performed using the XDS110 reset line and asking the user to click on "clear reset" button.
+   -  **MSPM33\_MailboxSetResetMode**: Set in reset will be performed using the XDS110 reset line, putting the device in reset until the next debugging session.
 
-   |image40|
+   .. figure:: ./images/ccs_ide_guide/ccs_dssm2.png
+      :alt: 
 
 3.5.1.1 DSSM Set Reset Mode Post-Execution Steps
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -483,15 +521,18 @@ The following steps must be followed for a DSSM Set Reset Mode command to proper
 
 1. Allow the DSSM command to fully execute.
 
-   |image41|
+   .. figure:: ./images/ccs_ide_guide/ccs_dssm3.png
+      :alt: 
 
 2. Once the command is finished, the device will now be in a reset state. Afterwards, any attempt to flash the device will throw an expected error message stating the device is in reset.
 
-   |image42|
+   .. figure:: ./images/ccs_ide_guide/ccs_dssm4.png
+      :alt: 
 
 3. The device will exit from the reset state once **Clear wait** has been selected in the error window. This allows the new application to be flashed on to the device.
 
-   |image43|
+   .. figure:: ./images/ccs_ide_guide/ccs_dssm5.png
+      :alt: 
 
 3.5.1.2 DSSM Wait for Debug Post-Execution Steps
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -502,19 +543,23 @@ The following steps must be for a DSSM Wait for Debug command to properly put th
 
 1. Allow the DSSM command to fully execute.
 
-   |image44|
+   .. figure:: ./images/ccs_ide_guide/ccs_dssm3.png
+      :alt: 
 
 2. Once the command is finished, the device will now be in a reset state. Afterwards, a connection will be automatically attempted, causing an expected error message stating the device is in reset.
 
-   |image45|
+   .. figure:: ./images/ccs_ide_guide/ccs_dssm4.png
+      :alt: 
 
 3. The device will exit from the reset state once **Clear wait** has been selected in the error window
 
-   |image46|
+   .. figure:: ./images/ccs_ide_guide/ccs_dssm5.png
+      :alt: 
 
 4. Now the device should be in the reset handler. This allows the user to access their previously downloaded code before it has reached main, or load a new application on to the device.
 
-   |image47|
+   .. figure:: ./images/ccs_ide_guide/ccs_dssm6.png
+      :alt: 
 
 3.5.1.3 DSSM after Power-up
 '''''''''''''''''''''''''''
@@ -538,29 +583,34 @@ The following steps can be followed to unlock a device using DSSM Password mecha
 
 1. Assume the following password configured in NONMAIN configurator:
 
-   |image48|
+   .. figure:: ./images/ccs_ide_guide/ccs_dssm_password1.png
+      :alt: 
 
 2. Attempting to program the device after configuring the password will show the following error:
 
-   |image49|
+   .. figure:: ./images/ccs_ide_guide/ccs_dssm_password2.png
+      :alt: 
 
 3. To configure the password, double-click the .ccxml inside the CCS project, go to the **Advanced** tab and select the MSPM33 device:
 
-   |image50|
+   .. figure:: ./images/ccs_ide_guide/ccs_dssm_password3.png
+      :alt: 
 
 4. Write the password
 
-   |image51|
+   .. figure:: ./images/ccs_ide_guide/ccs_dssm_password4.png
+      :alt: 
 
 5. On the CCS menu, select **View** → **Target Configurations**.
 
 6. On the **Target Configurations** window, right-click the .ccxml of an active project and select **Launch Selected Configuration**.
 
-7. On the debugger window menu, select **Scripts** → **MSPM33xxxx_Commands** (where MSPM33xxxx depends on the current MSPM33 device), and select **MSPM33_MailboxPasswordAuthentication_Auto**.
+7. On the debugger window menu, select **Scripts** → **MSPM33xxxx\_Commands** (where MSPM33xxxx depends on the current MSPM33 device), and select **MSPM33\_MailboxPasswordAuthentication\_Auto**.
 
-   |image52|
+   .. figure:: ./images/ccs_ide_guide/ccs_dssm_password5.png
+      :alt: 
 
-8. CCS should be able to connect to the device. At this point, the device can be reprogrammed but note that this action doesn’t erase NONMAIN, so the password will remain active unless NONMAIN is modified.
+8. CCS should be able to connect to the device. At this point, the device can be reprogrammed but note that this action doesn't erase NONMAIN, so the password will remain active unless NONMAIN is modified.
 
 Note: this mechanism is expected to be automated in future versions of the CCS support package.
 
@@ -569,7 +619,7 @@ Note: this mechanism is expected to be automated in future versions of the CCS s
 
 CCS will show a warning if an unsupported device is connected as shown below:
 
-|image53| |image54|
+|image0| |image1|
 
 Programming an incorrect device is not recommended and can lead to unexpected and unrecoverable behavior.
 
@@ -580,76 +630,24 @@ The MSPM33 SDK includes examples supporting both TI Arm Clang and GCC; however, 
 
 GCC can be installed by selecting **Help→Install GCC ARM Compiler Tools**:
 
-|image55|
+.. figure:: ./images/ccs_ide_guide/ccs_gcc_install1.png
+   :alt: 
 
 Select the version to install. CCS and the MSPM33-SDK only include and support some versions of the toolchain. Refer to release notes of your installed MSPM33-SDK version for information about the supported GCC version(s).
 
-|image56|
+.. figure:: ./images/ccs_ide_guide/ccs_gcc_install2.png
+   :alt: 
 
 If the installation was successful, click on **Window→Preferences**, then **Code Composer Studio→Build→Compilers** to see a list of the compilers installed in CCS.
 
-|image57|
+.. figure:: ./images/ccs_ide_guide/ccs_gcc_install3.png
+   :alt: 
 
 5. Known Issues and Frequently Asked Questions (FAQs)
 -----------------------------------------------------
 
 Please refer to `Known Issues and FAQ <../../../../../../known_issues_FAQ.html>`__ inside the SDK.
 
-.. |image0| image:: ./images/ccs_ide_guide/ccs_gettingstarted.png
-.. |image1| image:: ./images/ccs_ide_guide/ccs_tirex_sdk.png
-.. |image2| image:: ./images/ccs_ide_guide/ccs_tirex.png
-.. |image3| image:: ./images/ccs_ide_guide/ccs_tirex_project.png
-.. |image4| image:: ./images/ccs_ide_guide/ccs_tirex_projectimport.png
-.. |image5| image:: ./images/ccs_ide_guide/ccs_sysconfig.png
-.. |image6| image:: ./images/ccs_ide_guide/ccs_migrate8.png
-.. |image7| image:: ./images/ccs_ide_guide/ccs_migrate1.png
-.. |image8| image:: ./images/ccs_ide_guide/ccs_migrate2.png
-.. |image9| image:: ./images/ccs_ide_guide/ccs_migrate6.png
-.. |image10| image:: ./images/ccs_ide_guide/ccs_migrate3.png
-.. |image11| image:: ./images/ccs_ide_guide/ccs_migrate7.png
-.. |image12| image:: ./images/ccs_ide_guide/ccs_migrate_non_sysconfig_properties.png
-.. |image13| image:: ./images/ccs_ide_guide/ccs_migrate_non_sysconfig_updated_files.png
-.. |image14| image:: ./images/ccs_ide_guide/ccs_migrate1.png
-.. |image15| image:: ./images/ccs_ide_guide/ccs_migrate2.png
-.. |image16| image:: ./images/ccs_ide_guide/ccs_migrate3.png
-.. |image17| image:: ./images/ccs_ide_guide/ccs_migrate4.png
-.. |image18| image:: ./images/ccs_ide_guide/ccs_migrate5.png
-.. |image19| image:: ./images/ccs_ide_guide/ccs_stack.png
-.. |image20| image:: ./images/ccs_ide_guide/ccs_outputtxt.png
-.. |image21| image:: ./images/ccs_ide_guide/ccs_outputtxt2.png
-.. |image22| image:: ./images/ccs_ide_guide/ccs_outputhex.png
-.. |image23| image:: ./images/ccs_ide_guide/ccs_objcopy1.png
-.. |image24| image:: ./images/ccs_ide_guide/ccs_objcopy2.png
-.. |image25| image:: ./images/ccs_ide_guide/ccs_lib.png
-.. |image26| image:: ./images/ccs_ide_guide/ccs_lib_src.png
-.. |image27| image:: ./images/ccs_ide_guide/ccs_runFromRAM_1.png
-.. |image28| image:: ./images/ccs_ide_guide/ccs_runFromRAM_2.png
-.. |image29| image:: ./images/ccs_ide_guide/ccs_runFromRAM_3.png
-.. |image30| image:: ./images/ccs_ide_guide/ccs_runFunctionFromRAM_1.png
-.. |image31| image:: ./images/ccs_ide_guide/ccs_runFunctionFromRAM_2.png
-.. |image32| image:: ./images/ccs_ide_guide/ccs_runFunctionFromRAM_3.png
-.. |image33| image:: ./images/ccs_ide_guide/ccs_debug_connection_xds.png
-.. |image34| image:: ./images/ccs_ide_guide/ccs_flash_settings.png
-.. |image35| image:: ./images/ccs_ide_guide/ccs_debug_connection_segger.png
-.. |image36| image:: ./images/ccs_ide_guide/ccs_breakpoint.png
-.. |image37| image:: ./images/ccs_ide_guide/ccs_debug_breakpoint.png
-.. |image38| image:: ./images/ccs_ide_guide/ccs_lib_debug_error.png
-.. |image39| image:: ./images/ccs_ide_guide/ccs_dssm1.png
-.. |image40| image:: ./images/ccs_ide_guide/ccs_dssm2.png
-.. |image41| image:: ./images/ccs_ide_guide/ccs_dssm3.png
-.. |image42| image:: ./images/ccs_ide_guide/ccs_dssm4.png
-.. |image43| image:: ./images/ccs_ide_guide/ccs_dssm5.png
-.. |image44| image:: ./images/ccs_ide_guide/ccs_dssm3.png
-.. |image45| image:: ./images/ccs_ide_guide/ccs_dssm4.png
-.. |image46| image:: ./images/ccs_ide_guide/ccs_dssm5.png
-.. |image47| image:: ./images/ccs_ide_guide/ccs_dssm6.png
-.. |image48| image:: ./images/ccs_ide_guide/ccs_dssm_password1.png
-.. |image49| image:: ./images/ccs_ide_guide/ccs_dssm_password2.png
-.. |image50| image:: ./images/ccs_ide_guide/ccs_dssm_password3.png
-.. |image51| image:: ./images/ccs_ide_guide/ccs_dssm_password4.png
-.. |image52| image:: ./images/ccs_ide_guide/ccs_dssm_password5.png
-.. |image53| image:: ./images/ccs_ide_guide/ccs_connectionerror1.png
-.. |image54| image:: ./images/ccs_ide_guide/ccs_connectionerror2.png
-.. |image55| image:: ./images/ccs_ide_guide/ccs_gcc_install1.png
-.. |image56| image:: ./images/ccs_ide_guide/ccs_gcc_install2.png
-.. |image57| image:: ./images/ccs_ide_guide/ccs_gcc_install3.png
+.. |image0| image:: ./images/ccs_ide_guide/ccs_connectionerror1.png
+.. |image1| image:: ./images/ccs_ide_guide/ccs_connectionerror2.png
+

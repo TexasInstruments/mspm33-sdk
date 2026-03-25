@@ -9,16 +9,20 @@
 /**
  * Import the modules used in this configuration.
  */
-const GPIO          = scripting.addModule("/ti/driverlib/GPIO", {}, false);
-const GPIO1         = GPIO.addInstance();
-const HSADC         = scripting.addModule("/ti/driverlib/HSADC", {}, false);
-const HSADC1        = HSADC.addInstance();
-const SYSCTL        = scripting.addModule("/ti/driverlib/SYSCTL");
-const ProjectConfig = scripting.addModule("/ti/project_config/ProjectConfig");
+const Board  = scripting.addModule("/ti/driverlib/Board");
+const GPIO   = scripting.addModule("/ti/driverlib/GPIO", {}, false);
+const GPIO1  = GPIO.addInstance();
+const HSADC  = scripting.addModule("/ti/driverlib/HSADC", {}, false);
+const HSADC1 = HSADC.addInstance();
+const SYSCTL = scripting.addModule("/ti/driverlib/SYSCTL");
 
 /**
  * Write custom configuration values to the imported modules.
  */
+Board.peripheral.$assign          = "DEBUGSS";
+Board.peripheral.swclkPin.$assign = "PA20";
+Board.peripheral.swdioPin.$assign = "PA19";
+
 GPIO1.$name                               = "GPIO_LEDS";
 GPIO1.associatedPins.create(2);
 GPIO1.associatedPins[0].$name             = "PASS_LED";
@@ -28,28 +32,18 @@ GPIO1.associatedPins[1].$name             = "FAIL_LED";
 GPIO1.associatedPins[1].launchPadShortcut = "LED2RedEn";
 GPIO1.associatedPins[1].pin.$assign       = "PC26";
 
-const Board                       = scripting.addModule("/ti/driverlib/Board", {}, false);
-Board.peripheral.$assign          = "DEBUGSS";
-Board.peripheral.swclkPin.$assign = "PA20";
-Board.peripheral.swdioPin.$assign = "PA19";
-
-HSADC1.$name                = "HSADC0";
-HSADC1.enabledSOCs          = ["ADC_SOC_NUMBER0"];
-HSADC1.soc0enableComparator = true;
-HSADC1.enabledSEQs          = ["ADC_SEQ_NUMBER1"];
-HSADC1.seq1Enable           = true;
-HSADC1.enabledInts          = ["ADC_INT_NUMBER_1"];
-HSADC1.enableInterrupt1     = true;
-HSADC1.enabledPPBs          = ["ADC_PPB_NUMBER1"];
-HSADC1.ppb1EventEnable      = ["ADC_EVT_INLIMIT","ADC_EVT_TRIPHI","ADC_EVT_TRIPLO","ADC_EVT_ZERO"];
-HSADC1.ppb1HighTripLimit    = 256;
-HSADC1.ppb1LowTripLimit     = 2;
-HSADC1.peripheral.$assign   = "ADC0";
+HSADC1.$name                      = "HSADC0";
+HSADC1.enabledSOCs                = ["ADC_SOC_NUMBER0"];
+HSADC1.soc0enableComparator       = true;
+HSADC1.enabledSEQs                = ["ADC_SEQ_NUMBER1"];
+HSADC1.seq1Enable                 = true;
+HSADC1.enabledInts                = ["ADC_INT_NUMBER_1"];
+HSADC1.enableInterrupt1           = true;
+HSADC1.enabledPPBs                = ["ADC_PPB_NUMBER1"];
+HSADC1.ppb1EventEnable            = ["ADC_EVT_INLIMIT","ADC_EVT_TRIPHI","ADC_EVT_TRIPLO"];
+HSADC1.ppb1HighTripLimit          = 256;
+HSADC1.ppb1LowTripLimit           = 2;
+HSADC1.peripheral.$assign         = "ADC0";
+HSADC1.peripheral.adcPin0.$assign = "PA27";
 
 SYSCTL.peripheral.$assign = "SYSCTL";
-
-ProjectConfig.genLinker          = true;
-ProjectConfig.genStartup         = true;
-ProjectConfig.genOpts            = true;
-ProjectConfig.genLibs            = true;
-ProjectConfig.migrationCondition = true;

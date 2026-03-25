@@ -56,6 +56,8 @@ CFLAGS += -I.. \
     --vla
 
 LFLAGS += "$(MSPM33_SDK_INSTALL_DIR)/source/third_party/CMSIS/DSP/lib/iar/m33/arm_cortexM33_math.a" \
+    --redirect \
+    ScanfSmall=_ScanfSmall \
     "$(MSPM33_SDK_INSTALL_DIR)/source/ti/driverlib/lib/iar/m33/mspm33c321x/driverlib.a" \
     "-L$(MSPM33_SDK_INSTALL_DIR)/source" \
     -L.. \

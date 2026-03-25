@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CMSIS DSP Library for MSPM33 MCUs &mdash; CMSIS DSP Library for MSPM33 MCUs 1.02.00.00 documentation</title>
+  <title>CMSIS DSP Library for MSPM33 MCUs &mdash; CMSIS DSP Library for MSPM33 MCUs 1.03.00.01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
@@ -32,7 +32,7 @@
             <a href="index.html" class="icon icon-home"> CMSIS DSP Library for MSPM33 MCUs
           </a>
               <div class="version">
-                1.02.00.00
+                1.03.00.01
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -83,7 +83,7 @@
 <section id="introduction">
 <h2>1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h2>
 <p>Texas Instruments supports ARM’s Cortex Microcontroller Software Interface Standard (CMSIS), a standardized hardware abstraction layer for the Cortex-M processor series. The purpose of the CMSIS initiative is to standardize a fragmented industry on one superior hardware and software microcontroller architecture.</p>
-<p>The CMSIS DSP library includes source code and example applications, and saves time by including common DSP algorithms such as complex arithmetic, vector operations, filter and control functions. This library can be used on Arm Cortex-M devices, such as the MSPM33 family of MCUs.</p>
+<p>The CMSIS DSP library (v1.16) includes source code and example applications, and saves time by including common DSP algorithms such as complex arithmetic, vector operations, filter and control functions. This library can be used on Arm Cortex-M devices, such as the MSPM33 family of MCUs.</p>
 <p>This document details the steps necessary to get started with CMSIS DSP using the <a class="reference external" href="https://www.ti.com/tool/MSPM33-SDK">MSPM33-SDK</a>. More details of CMSIS DSP library are available in the <a class="reference external" href="https://www.keil.com/pack/doc/CMSIS/DSP/html/index.html">CMSIS DSP Software Library User Manual</a>.</p>
 </section>
 <section id="cmsis-dsp-source-and-library">
@@ -96,6 +96,7 @@
 <p>Pre-built Libraries are included for the following compilers:</p>
 <ul class="simple">
 <li><p>TI Arm Clang</p></li>
+<li><p>Arm GCC</p></li>
 <li><p>IAR</p></li>
 </ul>
 </section>
@@ -113,14 +114,20 @@
 <ol class="arabic">
 <li><p>Add the CMSIS DSP Include directory:</p>
 <p>In CCS, this path can be accessed at <code class="docutils literal notranslate"><span class="pre">${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/third_party/CMSIS/DSP/Include</span></code></p>
-<p><img alt="image0" src="../_images/cmsis_dsp_include.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/cmsis_dsp_include.png" />
+</figure>
 </li>
 <li><p>Add the pre-built library:</p>
 <p>In CCS, the library for TI Arm Clang is available at <code class="docutils literal notranslate"><span class="pre">${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/third_party/CMSIS/DSP/lib/ticlang/m33/arm_cortexM33_math.a</span></code></p>
-<p><img alt="image1" src="../_images/cmsis_dsp_addLib.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/cmsis_dsp_addLib.png" />
+</figure>
 </li>
 <li><p>Include “arm_math.h” into your source file:</p>
-<p><img alt="image2" src="../_images/cmsis_dsp_source.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/cmsis_dsp_source.png" />
+</figure>
 </li>
 <li><p>Start developing with CMSIS DSP and MSPM33!</p></li>
 </ol>

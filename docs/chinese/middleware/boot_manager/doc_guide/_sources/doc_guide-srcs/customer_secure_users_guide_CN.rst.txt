@@ -42,8 +42,8 @@ MSPM33 客户安全代码和引导加载程序 (CSC) 用户指南
 
 ::
 
-   python -m pip install --user -r source/third_party/mcuboot/scripts/requirements.txt
-   pip install dilithium_py
+    python -m pip install --user -r source/third_party/mcuboot/scripts/requirements.txt
+    pip install dilithium_py
 
 2.0.1 OSX 或 Linux 中的 Python 版本控制
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -76,7 +76,8 @@ MSPM33 客户安全代码和引导加载程序 (CSC) 用户指南
 
 构建两个示例。在刷写设备之前，转到\ **属性 → 调试**\ ，并从调试页面左侧的列表中选择 MSPM33 Flash 设置。然后将擦除方法配置为擦除主存储器和非主存储器（如下所示），并将重置类型配置为硬重置（如果可用）。
 
-|image0|
+.. figure:: ./images/main_nonmain_erase.png
+   :alt: 
 
 之后，开始调试项目。现在应该进入主函数。现在设备上不应该有任何有效的镜像，因此运行示例应该会导致红色 LED 闪烁。
 
@@ -87,11 +88,12 @@ MSPM33 客户安全代码和引导加载程序 (CSC) 用户指南
 
 1. 在刷写 CSC 镜像之前，确保将擦除配置设置为不擦除 Flash 存储器。
 
-   |image1|
+   .. figure:: ./images/donot_erase_flash.png
+      :alt: 
 
 2. 打开设备的内存浏览器，可以通过导航到\ **查看 → 内存浏览器**\ 找到。要加载二进制镜像，暂停设备运行，选择\ **加载内存**
 
-   |image2| |image3|
+   |image0| |image1|
 
 3. 指向在\ `构建应用程序镜像 <#应用程序镜像示例构建>`__\ 中构建的特定示例镜像。建议在按照签名步骤后加载镜像。首先参考有关如何签名示例应用程序镜像的分步说明部分。生成签名镜像后，通过加载内存加载它。从下拉列表中选择二进制文件类型，如下所示。点击底部的\ **下一步**\ 。
 
@@ -111,11 +113,13 @@ ECDSA 和 MLDSA 目前是 CSC 支持的认证方法。 公钥将存储在设备�
 
 为了生成新密钥，用户可以输入以下命令创建一个名为 newkey.pem 的密钥（或任何合适的名称）：
 
-\``\` cd source/third_party/mcuboot/
+\`\`\` cd source/third\_party/mcuboot/
 
-#ECDSA 密钥生成 scripts/imgtool.py keygen -k newkey.pem
+ECDSA 密钥生成
+==============
 
-.. |image0| image:: ./images/main_nonmain_erase.png
-.. |image1| image:: ./images/donot_erase_flash.png
-.. |image2| image:: ./images/load_mem1.png
-.. |image3| image:: ./images/load_mem2.png
+scripts/imgtool.py keygen -k newkey.pem
+
+.. |image0| image:: ./images/load_mem1.png
+.. |image1| image:: ./images/load_mem2.png
+

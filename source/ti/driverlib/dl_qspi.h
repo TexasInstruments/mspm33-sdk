@@ -184,8 +184,8 @@ typedef enum {
     DL_QSPI_PARITY_EVEN =
         (QSPI_CTL1_PES_ENABLE | QSPI_CTL1_PREN_ENABLE | QSPI_CTL1_PTEN_ENABLE),
     /*! Use odd parity, enable transmit and receive parity  */
-    DL_QSPI_PARITY_ODD =
-        (QSPI_CTL1_PES_DISABLE | QSPI_CTL1_PREN_ENABLE | QSPI_CTL1_PTEN_ENABLE),
+    DL_QSPI_PARITY_ODD = (QSPI_CTL1_PES_DISABLE | QSPI_CTL1_PREN_ENABLE |
+                          QSPI_CTL1_PTEN_ENABLE),
     /*! Disable receive and transmit parity */
     DL_QSPI_PARITY_NONE = (QSPI_CTL1_PREN_DISABLE | QSPI_CTL1_PTEN_DISABLE)
 } DL_QSPI_PARITY;
@@ -194,26 +194,32 @@ typedef enum {
 typedef enum {
     /*! Motorola 3 Wire with Polarity 0, Phase 0 */
     DL_QSPI_FRAME_FORMAT_MOTO3_POL0_PHA0 =
-        (QSPI_CTL0_SPO_LOW | QSPI_CTL0_SPH_FIRST | QSPI_CTL0_FRF_MOTOROLA_3WIRE),
+        (QSPI_CTL0_SPO_LOW | QSPI_CTL0_SPH_FIRST |
+            QSPI_CTL0_FRF_MOTOROLA_3WIRE),
     /*! Motorola 3 Wire with Polarity 0, Phase 1 */
     DL_QSPI_FRAME_FORMAT_MOTO3_POL0_PHA1 =
-        (QSPI_CTL0_SPO_LOW | QSPI_CTL0_SPH_SECOND | QSPI_CTL0_FRF_MOTOROLA_3WIRE),
+        (QSPI_CTL0_SPO_LOW | QSPI_CTL0_SPH_SECOND |
+            QSPI_CTL0_FRF_MOTOROLA_3WIRE),
     /*! Motorola 3 Wire with Polarity 1, Phase 0 */
     DL_QSPI_FRAME_FORMAT_MOTO3_POL1_PHA0 =
-        (QSPI_CTL0_SPO_HIGH | QSPI_CTL0_SPH_FIRST | QSPI_CTL0_FRF_MOTOROLA_3WIRE),
+        (QSPI_CTL0_SPO_HIGH | QSPI_CTL0_SPH_FIRST |
+            QSPI_CTL0_FRF_MOTOROLA_3WIRE),
     /*! Motorola 3 Wire with Polarity 1, Phase 1 */
     DL_QSPI_FRAME_FORMAT_MOTO3_POL1_PHA1 =
         (QSPI_CTL0_SPO_HIGH | QSPI_CTL0_SPH_SECOND |
             QSPI_CTL0_FRF_MOTOROLA_3WIRE),
     /*! Motorola 4 Wire with Polarity 0, Phase 0 */
     DL_QSPI_FRAME_FORMAT_MOTO4_POL0_PHA0 =
-        (QSPI_CTL0_SPO_LOW | QSPI_CTL0_SPH_FIRST | QSPI_CTL0_FRF_MOTOROLA_4WIRE),
+        (QSPI_CTL0_SPO_LOW | QSPI_CTL0_SPH_FIRST |
+            QSPI_CTL0_FRF_MOTOROLA_4WIRE),
     /*! Motorola 4 Wire with Polarity 0, Phase 1 */
     DL_QSPI_FRAME_FORMAT_MOTO4_POL0_PHA1 =
-        (QSPI_CTL0_SPO_LOW | QSPI_CTL0_SPH_SECOND | QSPI_CTL0_FRF_MOTOROLA_4WIRE),
+        (QSPI_CTL0_SPO_LOW | QSPI_CTL0_SPH_SECOND |
+            QSPI_CTL0_FRF_MOTOROLA_4WIRE),
     /*! Motorola 4 Wire with Polarity 1, Phase 0 */
     DL_QSPI_FRAME_FORMAT_MOTO4_POL1_PHA0 =
-        (QSPI_CTL0_SPO_HIGH | QSPI_CTL0_SPH_FIRST | QSPI_CTL0_FRF_MOTOROLA_4WIRE),
+        (QSPI_CTL0_SPO_HIGH | QSPI_CTL0_SPH_FIRST |
+            QSPI_CTL0_FRF_MOTOROLA_4WIRE),
     /*! Motorola 4 Wire with Polarity 1, Phase 1 */
     DL_QSPI_FRAME_FORMAT_MOTO4_POL1_PHA1 =
         (QSPI_CTL0_SPO_HIGH | QSPI_CTL0_SPH_SECOND |
@@ -245,8 +251,10 @@ typedef enum {
 } DL_QSPI_ADDRESS_MODE;
 
 typedef enum {
-    DL_QSPI_BUS_FORMAT_SPI_FULL_DUPLEX = (QSPI_QSPICTL0_QSPIFORMAT_LEGACY_SPI_FULLDUPLEX),
-    DL_QSPI_BUS_FORMAT_SPI_HALF_DUPLEX = (QSPI_QSPICTL0_QSPIFORMAT_SPI_HALFDUPLEX),
+    DL_QSPI_BUS_FORMAT_SPI_HALF_DUPLEX =
+        (QSPI_QSPICTL0_QSPIFORMAT_SPI_HALFDUPLEX),
+    DL_QSPI_BUS_FORMAT_QPI_HALF_DUPLEX =
+        (QSPI_QSPICTL0_QSPIFORMAT_QPI_HALF_DUPLEX),
     DL_QSPI_BUS_FORMAT_SSS_MODE = (QSPI_QSPICTL0_QSPIFORMAT_SSS_MODE),
     DL_QSPI_BUS_FORMAT_SSD_MODE = (QSPI_QSPICTL0_QSPIFORMAT_SSD_MODE),
     DL_QSPI_BUS_FORMAT_SDD_MODE = (QSPI_QSPICTL0_QSPIFORMAT_SDD_MODE),
@@ -256,9 +264,8 @@ typedef enum {
 } DL_QSPI_BUS_FORMAT;
 
 typedef enum {
-    DL_QSPI_WORD_SIZE_8 = (QSPI_QSPICTL0_QSPIDSIZE__8BITDSIZE),
+    DL_QSPI_WORD_SIZE_8  = (QSPI_QSPICTL0_QSPIDSIZE__8BITDSIZE),
     DL_QSPI_WORD_SIZE_16 = (QSPI_QSPICTL0_QSPIDSIZE__16BITDSIZE),
-    DL_QSPI_WORD_SIZE_32 = (QSPI_QSPICTL0_QSPIDSIZE__32BITDSIZE)
 } DL_QSPI_WORD_SIZE;
 
 typedef enum {
@@ -267,13 +274,17 @@ typedef enum {
 } DL_QSPI_DATA_SAMPLE_DELAY;
 
 typedef enum {
-    DL_QSPI_CHIP_SELECT_ASSERT_DELAY_0P5 = (QSPI_QSPITIMING_CSASSERTDLY__0P5SCLKDELAY),
-    DL_QSPI_CHIP_SELECT_ASSERT_DELAY_1P5 = (QSPI_QSPITIMING_CSASSERTDLY__1P5SCLKDELAY)
+    DL_QSPI_CHIP_SELECT_ASSERT_DELAY_0P5 =
+        (QSPI_QSPITIMING_CSASSERTDLY__0P5SCLKDELAY),
+    DL_QSPI_CHIP_SELECT_ASSERT_DELAY_1P5 =
+        (QSPI_QSPITIMING_CSASSERTDLY__1P5SCLKDELAY)
 } DL_QSPI_CHIP_SELECT_ASSERT_DELAY;
 
 typedef enum {
-    DL_QSPI_CHIP_SELECT_DEASSERT_DELAY_0P5 = (QSPI_QSPITIMING_CSDEASSERTDLY__0P5SCLKDELAY),
-    DL_QSPI_CHIP_SELECT_DEASSERT_DELAY_1P5 = (QSPI_QSPITIMING_CSDEASSERTDLY__1P5SCLKDELAY)
+    DL_QSPI_CHIP_SELECT_DEASSERT_DELAY_0P5 =
+        (QSPI_QSPITIMING_CSDEASSERTDLY__0P5SCLKDELAY),
+    DL_QSPI_CHIP_SELECT_DEASSERT_DELAY_1P5 =
+        (QSPI_QSPITIMING_CSDEASSERTDLY__1P5SCLKDELAY)
 } DL_QSPI_CHIP_SELECT_DEASSERT_DELAY;
 
 /*! @enum DL_QSPI_BIT_ORDER */
@@ -340,9 +351,9 @@ typedef enum {
     DL_QSPI_TX_FIFO_LEVEL_EMPTY = QSPI_IFLS_TXIFLSEL_LVL_EMPTY,
     /*! Interrupt triggers when TX FIFO has >= 1 frame free. Should be used with DMA */
     DL_QSPI_TX_FIFO_LEVEL_ONE_FRAME = QSPI_IFLS_TXIFLSEL_LEVEL_1,
-    DL_QSPI_TX_FIFO_LEVEL_RES4 = QSPI_IFLS_TXIFLSEL_LVL_RES4,
-    DL_QSPI_TX_FIFO_LEVEL_RES6 = QSPI_IFLS_TXIFLSEL_LVL_RES6,
-    DL_QSPI_TX_FIFO_LEVEL_OFF = QSPI_IFLS_TXIFLSEL_LVL_OFF
+    DL_QSPI_TX_FIFO_LEVEL_RES4      = QSPI_IFLS_TXIFLSEL_LVL_RES4,
+    DL_QSPI_TX_FIFO_LEVEL_RES6      = QSPI_IFLS_TXIFLSEL_LVL_RES6,
+    DL_QSPI_TX_FIFO_LEVEL_OFF       = QSPI_IFLS_TXIFLSEL_LVL_OFF
 } DL_QSPI_TX_FIFO_LEVEL;
 
 /*! @enum DL_QSPI_RX_FIFO_LEVEL */
@@ -357,9 +368,9 @@ typedef enum {
     DL_QSPI_RX_FIFO_LEVEL_1_2_FULL = QSPI_IFLS_RXIFLSEL_LVL_1_2,
     /*! Interrupt triggers when RX FIFO >= 1/4 full */
     DL_QSPI_RX_FIFO_LEVEL_1_4_FULL = QSPI_IFLS_RXIFLSEL_LVL_1_4,
-    DL_QSPI_RX_FIFO_LEVEL_RES4 = QSPI_IFLS_RXIFLSEL_LVL_RES4,
-    DL_QSPI_RX_FIFO_LEVEL_RES6 = QSPI_IFLS_RXIFLSEL_LVL_RES6,
-    DL_QSPI_RX_FIFO_LEVEL_OFF = QSPI_IFLS_RXIFLSEL_LVL_OFF
+    DL_QSPI_RX_FIFO_LEVEL_RES4     = QSPI_IFLS_RXIFLSEL_LVL_RES4,
+    DL_QSPI_RX_FIFO_LEVEL_RES6     = QSPI_IFLS_RXIFLSEL_LVL_RES6,
+    DL_QSPI_RX_FIFO_LEVEL_OFF      = QSPI_IFLS_RXIFLSEL_LVL_OFF
 } DL_QSPI_RX_FIFO_LEVEL;
 
 /*! @enum DL_QSPI_IIDX */
@@ -560,8 +571,8 @@ __STATIC_INLINE void DL_QSPI_disablePower(QSPI_Regs *qspi)
  */
 __STATIC_INLINE bool DL_QSPI_isPowerEnabled(QSPI_Regs *qspi)
 {
-    return (
-        (qspi->GPRCM.PWREN & QSPI_PWREN_ENABLE_MASK) == QSPI_PWREN_ENABLE_ENABLE);
+    return ((qspi->GPRCM.PWREN & QSPI_PWREN_ENABLE_MASK) ==
+            QSPI_PWREN_ENABLE_ENABLE);
 }
 
 /**
@@ -757,7 +768,7 @@ __STATIC_INLINE void DL_QSPI_setParity(QSPI_Regs *qspi, DL_QSPI_PARITY parity)
 __STATIC_INLINE DL_QSPI_PARITY DL_QSPI_getParity(QSPI_Regs *qspi)
 {
     uint32_t parity = qspi->CTL1 & (QSPI_CTL1_PES_MASK | QSPI_CTL1_PREN_MASK |
-                                      QSPI_CTL1_PTEN_MASK);
+                                       QSPI_CTL1_PTEN_MASK);
 
     return (DL_QSPI_PARITY)(parity);
 }
@@ -882,8 +893,9 @@ __STATIC_INLINE void DL_QSPI_setFrameFormat(
  */
 __STATIC_INLINE DL_QSPI_FRAME_FORMAT DL_QSPI_getFrameFormat(QSPI_Regs *qspi)
 {
-    uint32_t frameFormat = qspi->CTL0 & (QSPI_CTL0_FRF_MASK | QSPI_CTL0_SPO_MASK |
-                                           QSPI_CTL0_SPH_MASK);
+    uint32_t frameFormat =
+        qspi->CTL0 &
+        (QSPI_CTL0_FRF_MASK | QSPI_CTL0_SPO_MASK | QSPI_CTL0_SPH_MASK);
 
     return (DL_QSPI_FRAME_FORMAT)(frameFormat);
 }
@@ -1230,7 +1242,8 @@ __STATIC_INLINE void DL_QSPI_setPeripheralReceiveTimeout(
  */
 __STATIC_INLINE uint32_t DL_QSPI_getPeripheralReceiveTimeout(QSPI_Regs *qspi)
 {
-    return ((qspi->CTL1 & QSPI_CTL1_RXTIMEOUT_MASK) >> QSPI_CTL1_RXTIMEOUT_OFS);
+    return (
+        (qspi->CTL1 & QSPI_CTL1_RXTIMEOUT_MASK) >> QSPI_CTL1_RXTIMEOUT_OFS);
 }
 
 /**
@@ -1318,9 +1331,11 @@ __STATIC_INLINE void DL_QSPI_disableControllerCommandDataMode(QSPI_Regs *qspi)
  *  @retval     true  Command/data mode is enabled
  *  @retval     false Command/data mode is disabled
  */
-__STATIC_INLINE bool DL_QSPI_isControllerCommandDataModeEnabled(QSPI_Regs *qspi)
+__STATIC_INLINE bool DL_QSPI_isControllerCommandDataModeEnabled(
+    QSPI_Regs *qspi)
 {
-    return ((qspi->CTL1 & QSPI_CTL1_CDENABLE_MASK) == QSPI_CTL1_CDENABLE_ENABLE);
+    return (
+        (qspi->CTL1 & QSPI_CTL1_CDENABLE_MASK) == QSPI_CTL1_CDENABLE_ENABLE);
 }
 
 /**
@@ -1383,7 +1398,8 @@ __STATIC_INLINE bool DL_QSPI_isPeripheralDataOutputEnabled(QSPI_Regs *qspi)
  *  @param[in]  delay   The number of QSPI clock cycles to delay sampling on
  *                      input pin. Value between 0-15.
  */
-__STATIC_INLINE void DL_QSPI_setDelayedSampling(QSPI_Regs *qspi, uint32_t delay)
+__STATIC_INLINE void DL_QSPI_setDelayedSampling(
+    QSPI_Regs *qspi, uint32_t delay)
 {
     DL_Common_updateReg(&qspi->CLKCTL, delay << QSPI_CLKCTL_DSAMPLE_OFS,
         QSPI_CLKCTL_DSAMPLE_MASK);
@@ -1406,7 +1422,8 @@ __STATIC_INLINE void DL_QSPI_setDelayedSampling(QSPI_Regs *qspi, uint32_t delay)
  */
 __STATIC_INLINE uint32_t DL_QSPI_getDelayedSampling(QSPI_Regs *qspi)
 {
-    return (qspi->CLKCTL & QSPI_CLKCTL_DSAMPLE_MASK >> QSPI_CLKCTL_DSAMPLE_OFS);
+    return (
+        qspi->CLKCTL & QSPI_CLKCTL_DSAMPLE_MASK >> QSPI_CLKCTL_DSAMPLE_OFS);
 }
 
 /**
@@ -1444,7 +1461,8 @@ __STATIC_INLINE void DL_QSPI_setFIFOThreshold(QSPI_Regs *qspi,
  *
  *  @retval     One of @ref DL_QSPI_TX_FIFO_LEVEL
  */
-__STATIC_INLINE DL_QSPI_TX_FIFO_LEVEL DL_QSPI_getTXFIFOThreshold(QSPI_Regs *qspi)
+__STATIC_INLINE DL_QSPI_TX_FIFO_LEVEL DL_QSPI_getTXFIFOThreshold(
+    QSPI_Regs *qspi)
 {
     uint32_t txThreshold = qspi->IFLS & QSPI_IFLS_TXIFLSEL_MASK;
 
@@ -1460,7 +1478,8 @@ __STATIC_INLINE DL_QSPI_TX_FIFO_LEVEL DL_QSPI_getTXFIFOThreshold(QSPI_Regs *qspi
  *
  *  @retval     One of @ref DL_QSPI_RX_FIFO_LEVEL
  */
-__STATIC_INLINE DL_QSPI_RX_FIFO_LEVEL DL_QSPI_getRXFIFOThreshold(QSPI_Regs *qspi)
+__STATIC_INLINE DL_QSPI_RX_FIFO_LEVEL DL_QSPI_getRXFIFOThreshold(
+    QSPI_Regs *qspi)
 {
     uint32_t rxThreshold = qspi->IFLS & QSPI_IFLS_RXIFLSEL_MASK;
 
@@ -2089,7 +2108,8 @@ uint32_t DL_QSPI_fillTXFIFO8(QSPI_Regs *qspi, uint8_t *buffer, uint32_t count);
  *
  *  @return     Number of halfwords written to the TX FIFO
  */
-uint32_t DL_QSPI_fillTXFIFO16(QSPI_Regs *qspi, uint16_t *buffer, uint32_t count);
+uint32_t DL_QSPI_fillTXFIFO16(
+    QSPI_Regs *qspi, uint16_t *buffer, uint32_t count);
 
 /**
  *  @brief      Fill the TX FIFO using 32 bit access
@@ -2110,7 +2130,8 @@ uint32_t DL_QSPI_fillTXFIFO16(QSPI_Regs *qspi, uint16_t *buffer, uint32_t count)
  *
  *  @sa         DL_QSPI_enablePacking
  */
-uint32_t DL_QSPI_fillTXFIFO32(QSPI_Regs *qspi, uint32_t *buffer, uint32_t count);
+uint32_t DL_QSPI_fillTXFIFO32(
+    QSPI_Regs *qspi, uint32_t *buffer, uint32_t count);
 
 /**
  *  @brief      Enable QSPI interrupt for triggering the DMA receive event
@@ -2273,7 +2294,8 @@ __STATIC_INLINE uint32_t DL_QSPI_getEnabledDMAReceiveEventStatus(
  *
  *  @sa         DL_QSPI_enableDMATransmitEvent
  */
-__STATIC_INLINE uint32_t DL_QSPI_getEnabledDMATransmitEventStatus(QSPI_Regs *qspi)
+__STATIC_INLINE uint32_t DL_QSPI_getEnabledDMATransmitEventStatus(
+    QSPI_Regs *qspi)
 {
     return (qspi->DMA_TRIG_TX.MIS & QSPI_DMA_TRIG_TX_MIS_TX_MASK);
 }
@@ -2435,7 +2457,6 @@ bool DL_QSPI_saveConfiguration(QSPI_Regs *qspi, DL_QSPI_backupConfig *ptr);
  */
 bool DL_QSPI_restoreConfiguration(QSPI_Regs *qspi, DL_QSPI_backupConfig *ptr);
 
-
 /**
  *  @brief      Selects which port is used for QSPI memory access
  *
@@ -2447,9 +2468,9 @@ bool DL_QSPI_restoreConfiguration(QSPI_Regs *qspi, DL_QSPI_backupConfig *ptr);
  */
 __STATIC_INLINE void DL_QSPI_setPort(QSPI_Regs *qspi, DL_QSPI_PORT port)
 {
-    DL_Common_updateReg(&qspi->IPSPECIFIC_QSPI.QSPICTL0, port, QSPI_QSPICTL0_QSPIMODE_MASK);
+    DL_Common_updateReg(
+        &qspi->IPSPECIFIC_QSPI.QSPICTL0, port, QSPI_QSPICTL0_QSPIMODE_MASK);
 }
-
 
 /**
  *  @brief      Enables the performance mode byte insertion
@@ -2463,7 +2484,6 @@ __STATIC_INLINE void DL_QSPI_enablePerformanceMode(QSPI_Regs *qspi)
 {
     qspi->IPSPECIFIC_QSPI.QSPICTL0 |= QSPI_QSPICTL0_QSPIPERFMODE_ENABLE;
 }
-
 
 /**
  *  @brief      Disables the performance mode byte insertion
@@ -2488,12 +2508,12 @@ __STATIC_INLINE void DL_QSPI_disablePerformanceMode(QSPI_Regs *qspi)
  *                            peripheral
  *  @param[in]  addressMode    Address mode. One of @ref DL_QSPI_ADDRESS_MODE
  */
-__STATIC_INLINE void DL_QSPI_setAddressMode(QSPI_Regs *qspi, DL_QSPI_ADDRESS_MODE addressMode)
+__STATIC_INLINE void DL_QSPI_setAddressMode(
+    QSPI_Regs *qspi, DL_QSPI_ADDRESS_MODE addressMode)
 {
-    DL_Common_updateReg(&qspi->IPSPECIFIC_QSPI.QSPICTL0, addressMode, QSPI_QSPICTL0_QSPIADDRMODE_MASK);
+    DL_Common_updateReg(&qspi->IPSPECIFIC_QSPI.QSPICTL0, addressMode,
+        QSPI_QSPICTL0_QSPIADDRMODE_MASK);
 }
-
-
 
 /**
  * @brief Set the bus format
@@ -2501,14 +2521,15 @@ __STATIC_INLINE void DL_QSPI_setAddressMode(QSPI_Regs *qspi, DL_QSPI_ADDRESS_MOD
  * This function sets the bus format used for QSPI communications.
  *
  * @param qspi    Pointer to the register overlay for the peripheral
- * @param busFormat  Bus format. One of @ref DL_QSPI_BUS_FORMAT
+ * @param format  Bus format. One of @ref DL_QSPI_BUS_FORMAT
  *
  */
-__STATIC_INLINE void DL_QSPI_setBusFormat(QSPI_Regs *qspi, DL_QSPI_BUS_FORMAT busFormat)
+__STATIC_INLINE void DL_QSPI_setBusFormat(
+    QSPI_Regs *qspi, DL_QSPI_BUS_FORMAT busFormat)
 {
-    DL_Common_updateReg(&qspi->IPSPECIFIC_QSPI.QSPICTL0, busFormat, QSPI_QSPICTL0_QSPIFORMAT_MASK);
+    DL_Common_updateReg(&qspi->IPSPECIFIC_QSPI.QSPICTL0, busFormat,
+        QSPI_QSPICTL0_QSPIFORMAT_MASK);
 }
-
 
 /**
  * @brief Provide the performance byte to be used during a flash read
@@ -2520,12 +2541,13 @@ __STATIC_INLINE void DL_QSPI_setBusFormat(QSPI_Regs *qspi, DL_QSPI_BUS_FORMAT bu
  *
  * @note The default value of the QSPIPERFBYTE field is 0.
  */
-__STATIC_INLINE void DL_QSPI_setPerformanceByte(QSPI_Regs *qspi, uint32_t performanceByte)
+__STATIC_INLINE void DL_QSPI_setPerformanceByte(
+    QSPI_Regs *qspi, uint32_t performanceByte)
 {
-    DL_Common_updateReg(&qspi->IPSPECIFIC_QSPI.QSPICTL0, performanceByte << QSPI_QSPICTL0_QSPIPERFBYTE_OFS
-    , QSPI_QSPICTL0_QSPIPERFBYTE_MASK);
+    DL_Common_updateReg(&qspi->IPSPECIFIC_QSPI.QSPICTL0,
+        performanceByte << QSPI_QSPICTL0_QSPIPERFBYTE_OFS,
+        QSPI_QSPICTL0_QSPIPERFBYTE_MASK);
 }
-
 
 /**
  * @brief Provides the instruction opcode to be used during a flash read
@@ -2538,10 +2560,12 @@ __STATIC_INLINE void DL_QSPI_setPerformanceByte(QSPI_Regs *qspi, uint32_t perfor
  *
  * @note The default value of the QSPICMDBYTE field is 0.
  */
-__STATIC_INLINE void DL_QSPI_setCommandByte(QSPI_Regs *qspi, uint32_t commandByte)
+__STATIC_INLINE void DL_QSPI_setCommandByte(
+    QSPI_Regs *qspi, uint32_t commandByte)
 {
-    DL_Common_updateReg(&qspi->IPSPECIFIC_QSPI.QSPICTL0, commandByte << QSPI_QSPICTL0_QSPICMDBYTE_OFS
-    , QSPI_QSPICTL0_QSPICMDBYTE_MASK);
+    DL_Common_updateReg(&qspi->IPSPECIFIC_QSPI.QSPICTL0,
+        commandByte << QSPI_QSPICTL0_QSPICMDBYTE_OFS,
+        QSPI_QSPICTL0_QSPICMDBYTE_MASK);
 }
 
 /**
@@ -2555,12 +2579,32 @@ __STATIC_INLINE void DL_QSPI_setCommandByte(QSPI_Regs *qspi, uint32_t commandByt
  *
  * @note The default value of the QSPIDSIZE field is QSPI_QSPICTL0_QSPIDSIZE__8BITDSIZE.
  */
-__STATIC_INLINE void DL_QSPI_setWordSize(QSPI_Regs *qspi, DL_QSPI_WORD_SIZE size)
+__STATIC_INLINE void DL_QSPI_setWordSize(
+    QSPI_Regs *qspi, DL_QSPI_WORD_SIZE size)
 {
-    DL_Common_updateReg(&qspi->IPSPECIFIC_QSPI.QSPICTL0, size, QSPI_QSPICTL0_QSPIDSIZE_MASK);
+    DL_Common_updateReg(
+        &qspi->IPSPECIFIC_QSPI.QSPICTL0, size, QSPI_QSPICTL0_QSPIDSIZE_MASK);
 }
 
-
+/**
+ * @brief Get the word size
+ *
+ * Get the size of the word used for communication with QSPI flash during a data read
+ *
+ * @param qspi  Pointer to the register overlay for the peripheral
+ *
+ * @return     The currently configured word size for transfers
+ *
+ * @retval     One of @ref DL_QSPI_WORD_SIZE
+ *
+ * @note The default value of the QSPIDSIZE field is QSPI_QSPICTL0_QSPIDSIZE__8BITDSIZE.
+ */
+__STATIC_INLINE DL_QSPI_WORD_SIZE DL_QSPI_getWordSize(QSPI_Regs *qspi)
+{
+    uint32_t wordSize =
+        (qspi->IPSPECIFIC_QSPI.QSPICTL0 & QSPI_QSPICTL0_QSPIDSIZE_MASK);
+    return (DL_QSPI_WORD_SIZE)(wordSize);
+}
 
 /**
  * @brief Set the number of dummy clock cycles
@@ -2568,16 +2612,17 @@ __STATIC_INLINE void DL_QSPI_setWordSize(QSPI_Regs *qspi, DL_QSPI_WORD_SIZE size
  * Set the number of dummy clock cycles to be used during a flash read.
  *
  * @param qspi          Pointer to the register overlay for the peripheral
- * @param numDummyClock Number of dummy clock cycles. 
+ * @param numDummyClock Number of dummy clock cycles.
  *
  * @note The default value of the QSPIDUMMYCLK field is 0.
  */
-__STATIC_INLINE void DL_QSPI_setDummyClock(QSPI_Regs *qspi, uint32_t numDummyClock)
+__STATIC_INLINE void DL_QSPI_setDummyClock(
+    QSPI_Regs *qspi, uint32_t numDummyClock)
 {
-    DL_Common_updateReg(&qspi->IPSPECIFIC_QSPI.QSPICTL0, numDummyClock << QSPI_QSPICTL0_QSPIDUMMYCLK_OFS
-    , QSPI_QSPICTL0_QSPIDUMMYCLK_MASK);
+    DL_Common_updateReg(&qspi->IPSPECIFIC_QSPI.QSPICTL0,
+        numDummyClock << QSPI_QSPICTL0_QSPIDUMMYCLK_OFS,
+        QSPI_QSPICTL0_QSPIDUMMYCLK_MASK);
 }
-
 
 /**
  * @brief Enable QSPI prefetch
@@ -2606,7 +2651,6 @@ __STATIC_INLINE void DL_QSPI_disablePreFetch(QSPI_Regs *qspi)
     qspi->IPSPECIFIC_QSPI.QSPICTL1 &= ~QSPI_QSPICTL1_QSPIPREFETCH_ENABLE;
 }
 
-
 /**
  * @brief Contains the number of receive bytes to write to the TXFIFO when QSPIPREFETCH is enabled
  *
@@ -2619,10 +2663,9 @@ __STATIC_INLINE void DL_QSPI_disablePreFetch(QSPI_Regs *qspi)
  */
 __STATIC_INLINE void DL_QSPI_setRXCount(QSPI_Regs *qspi, uint32_t RXByteCount)
 {
-    DL_Common_updateReg(&qspi->IPSPECIFIC_QSPI.QSPICTL1, RXByteCount << QSPI_QSPICTL1_RXCOUNT_OFS,
-        QSPI_QSPICTL1_RXCOUNT_MASK);
+    DL_Common_updateReg(&qspi->IPSPECIFIC_QSPI.QSPICTL1,
+        RXByteCount << QSPI_QSPICTL1_RXCOUNT_OFS, QSPI_QSPICTL1_RXCOUNT_MASK);
 }
-
 
 /**
  * @brief Controls the number of transmit bytes to send during a configuration or status frame.
@@ -2636,15 +2679,14 @@ __STATIC_INLINE void DL_QSPI_setRXCount(QSPI_Regs *qspi, uint32_t RXByteCount)
  */
 __STATIC_INLINE void DL_QSPI_setTXCount(QSPI_Regs *qspi, uint32_t TXByteCount)
 {
-    DL_Common_updateReg(&qspi->IPSPECIFIC_QSPI.QSPICTL1, TXByteCount << QSPI_QSPICTL1_TXCOUNT_OFS,
-        QSPI_QSPICTL1_TXCOUNT_MASK);
+    DL_Common_updateReg(&qspi->IPSPECIFIC_QSPI.QSPICTL1,
+        TXByteCount << QSPI_QSPICTL1_TXCOUNT_OFS, QSPI_QSPICTL1_TXCOUNT_MASK);
 }
-
 
 /**
  * @brief Set the number of bus clock cycles to hold the chip select high
  *
- * When in performance mode, the parameter provides the number of bus clocks for which the CS shall be 
+ * When in performance mode, the parameter provides the number of bus clocks for which the CS shall be
  * high when an address change is detected
  *
  * @param qspi          Pointer to the register overlay for the peripheral
@@ -2652,12 +2694,13 @@ __STATIC_INLINE void DL_QSPI_setTXCount(QSPI_Regs *qspi, uint32_t TXByteCount)
  *
  * @note The default value of the CSHIGHTIME field is 0.
  */
-__STATIC_INLINE void DL_QSPI_setChipSelectHighTime(QSPI_Regs *qspi, uint32_t numBusClock)
+__STATIC_INLINE void DL_QSPI_setChipSelectHighTime(
+    QSPI_Regs *qspi, uint32_t numBusClock)
 {
-    DL_Common_updateReg(&qspi->IPSPECIFIC_QSPI.QSPITIMING, numBusClock << QSPI_QSPITIMING_CSHIGHTIME_OFS,
+    DL_Common_updateReg(&qspi->IPSPECIFIC_QSPI.QSPITIMING,
+        numBusClock << QSPI_QSPITIMING_CSHIGHTIME_OFS,
         QSPI_QSPITIMING_CSHIGHTIME_MASK);
 }
-
 
 /**
  * @brief Controls the delay in internal SCLK to sample data.
@@ -2669,13 +2712,12 @@ __STATIC_INLINE void DL_QSPI_setChipSelectHighTime(QSPI_Regs *qspi, uint32_t num
  *
  * @note The default value of the DATASAMPLDLY field is DL_QSPI_DATA_SAMPLE_DELAY_0.
  */
-__STATIC_INLINE void DL_QSPI_setDataSampleDelay(QSPI_Regs *qspi, DL_QSPI_DATA_SAMPLE_DELAY delay)
+__STATIC_INLINE void DL_QSPI_setDataSampleDelay(
+    QSPI_Regs *qspi, DL_QSPI_DATA_SAMPLE_DELAY delay)
 {
     DL_Common_updateReg(&qspi->IPSPECIFIC_QSPI.QSPITIMING, delay,
         QSPI_QSPITIMING_DATASAMPLDLY_MASK);
 }
-
-
 
 /**
  * @brief Controls the number of serial clock edge after chip select is asserted to start the SCLK
@@ -2687,12 +2729,12 @@ __STATIC_INLINE void DL_QSPI_setDataSampleDelay(QSPI_Regs *qspi, DL_QSPI_DATA_SA
  *
  * @note The default value of the CSASSERTDLY field is DL_QSPI_CHIP_SELECT_ASSERT_DELAY_0P5.
  */
-__STATIC_INLINE void DL_QSPI_setChipSelectAssertDelay(QSPI_Regs *qspi, DL_QSPI_CHIP_SELECT_ASSERT_DELAY delay)
+__STATIC_INLINE void DL_QSPI_setChipSelectAssertDelay(
+    QSPI_Regs *qspi, DL_QSPI_CHIP_SELECT_ASSERT_DELAY delay)
 {
     DL_Common_updateReg(&qspi->IPSPECIFIC_QSPI.QSPITIMING, delay,
         QSPI_QSPITIMING_CSASSERTDLY_MASK);
 }
-
 
 /**
  * @brief Controls the number of serial clock edge after last SCLK to deassert the chip select
@@ -2704,12 +2746,12 @@ __STATIC_INLINE void DL_QSPI_setChipSelectAssertDelay(QSPI_Regs *qspi, DL_QSPI_C
  *
  * @note The default value of the CSDEASSERTDLY field is DL_QSPI_CHIP_SELECT_DEASSERT_DELAY_0P5.
  */
-__STATIC_INLINE void DL_QSPI_setChipSelectDeAssertDelay(QSPI_Regs *qspi, DL_QSPI_CHIP_SELECT_DEASSERT_DELAY delay)
+__STATIC_INLINE void DL_QSPI_setChipSelectDeAssertDelay(
+    QSPI_Regs *qspi, DL_QSPI_CHIP_SELECT_DEASSERT_DELAY delay)
 {
     DL_Common_updateReg(&qspi->IPSPECIFIC_QSPI.QSPITIMING, delay,
         QSPI_QSPITIMING_CSDEASSERTDLY_MASK);
 }
-
 
 /**
  * @brief Flushes the TX FIFO
@@ -2722,7 +2764,6 @@ __STATIC_INLINE void DL_QSPI_flushTXFIFO(QSPI_Regs *qspi)
 {
     qspi->IPSPECIFIC_QSPI.QSPIFIFOCTL |= QSPI_QSPIFIFOCTL_TXFIFOFLUSH_CLEAR;
 }
-
 
 /**
  * @brief Flushes the RX FIFO
@@ -2760,10 +2801,23 @@ __STATIC_INLINE void DL_QSPI_deAssertChipSelect(QSPI_Regs *qspi)
  */
 __STATIC_INLINE bool DL_QSPI_isChipSelectDeAsserted(QSPI_Regs *qspi)
 {
-    return ((qspi->IPSPECIFIC_QSPI.QSPICSCTL & QSPI_QSPICSCTL_CSHOLDCTL_MASK) == QSPI_QSPICSCTL_CSHOLDCTL_DEASSERT);
+    return (
+        (qspi->IPSPECIFIC_QSPI.QSPICSCTL & QSPI_QSPICSCTL_CSHOLDCTL_MASK) ==
+        QSPI_QSPICSCTL_CSHOLDCTL_DEASSERT);
 }
 
-
+/**
+ * @brief Release the chip select
+ *
+ * Releases the chip select for the subsequent transactions when QSPIFORMAT is not 0x0
+ *
+ * @param qspi    Pointer to the QSPI peripheral register overlay
+ *
+ */
+__STATIC_INLINE void DL_QSPI_releaseChipSelect(QSPI_Regs *qspi)
+{
+    qspi->IPSPECIFIC_QSPI.QSPICSCTL = (QSPI_QSPICSCTL_CSHOLDCTL_NOEFFECT);
+}
 
 /**
  * @brief Checks if the QSPI is in idle state
@@ -2779,10 +2833,10 @@ __STATIC_INLINE bool DL_QSPI_isChipSelectDeAsserted(QSPI_Regs *qspi)
  */
 __STATIC_INLINE bool DL_QSPI_isQSPIIdle(QSPI_Regs *qspi)
 {
-    return ((qspi->IPSPECIFIC_QSPI.QSPISTATUS & QSPI_QSPISTATUS_QSPIIDLE_MASK) == QSPI_QSPISTATUS_QSPIIDLE_QSPIIDLE_IDLE);
+    return (
+        (qspi->IPSPECIFIC_QSPI.QSPISTATUS & QSPI_QSPISTATUS_QSPIIDLE_MASK) ==
+        QSPI_QSPISTATUS_QSPIIDLE_QSPIIDLE_IDLE);
 }
-
-
 
 /**
  * @brief Checks if the QSPI is in stall state
@@ -2799,7 +2853,9 @@ __STATIC_INLINE bool DL_QSPI_isQSPIIdle(QSPI_Regs *qspi)
 
 __STATIC_INLINE bool DL_QSPI_isQSPIStalled(QSPI_Regs *qspi)
 {
-    return ((qspi->IPSPECIFIC_QSPI.QSPISTATUS & QSPI_QSPISTATUS_QSPISTALL_MASK) == QSPI_QSPISTATUS_QSPISTALL_QSPISTALL_STALL);
+    return (
+        (qspi->IPSPECIFIC_QSPI.QSPISTATUS & QSPI_QSPISTATUS_QSPISTALL_MASK) ==
+        QSPI_QSPISTATUS_QSPISTALL_QSPISTALL_STALL);
 }
 
 /**
@@ -2816,9 +2872,10 @@ __STATIC_INLINE bool DL_QSPI_isQSPIStalled(QSPI_Regs *qspi)
  */
 __STATIC_INLINE bool DL_QSPI_isQSPITXFIFOFull(QSPI_Regs *qspi)
 {
-    return ((qspi->IPSPECIFIC_QSPI.QSPISTATUS & QSPI_QSPISTATUS_TXFIFONF_MASK) == QSPI_QSPISTATUS_TXFIFONF_TXFIFONF_F);
+    return (
+        (qspi->IPSPECIFIC_QSPI.QSPISTATUS & QSPI_QSPISTATUS_TXFIFONF_MASK) ==
+        QSPI_QSPISTATUS_TXFIFONF_TXFIFONF_F);
 }
-
 
 /**
  * @brief Checks if the QSPI TX FIFO is empty
@@ -2834,10 +2891,10 @@ __STATIC_INLINE bool DL_QSPI_isQSPITXFIFOFull(QSPI_Regs *qspi)
  */
 __STATIC_INLINE bool DL_QSPI_isQSPITXFIFOEmpty(QSPI_Regs *qspi)
 {
-    return ((qspi->IPSPECIFIC_QSPI.QSPISTATUS & QSPI_QSPISTATUS_TXFIFOE_MASK) == QSPI_QSPISTATUS_TXFIFOE_TXFIFOE_E);
+    return (
+        (qspi->IPSPECIFIC_QSPI.QSPISTATUS & QSPI_QSPISTATUS_TXFIFOE_MASK) ==
+        QSPI_QSPISTATUS_TXFIFOE_TXFIFOE_E);
 }
-
-
 
 /**
  * @brief Checks if the QSPI RX FIFO is full
@@ -2853,9 +2910,10 @@ __STATIC_INLINE bool DL_QSPI_isQSPITXFIFOEmpty(QSPI_Regs *qspi)
  */
 __STATIC_INLINE bool DL_QSPI_isQSPIRXFIFOFull(QSPI_Regs *qspi)
 {
-    return ((qspi->IPSPECIFIC_QSPI.QSPISTATUS & QSPI_QSPISTATUS_RXFIFONF_MASK) == QSPI_QSPISTATUS_RXFIFONF_RXFIFONF_F);
+    return (
+        (qspi->IPSPECIFIC_QSPI.QSPISTATUS & QSPI_QSPISTATUS_RXFIFONF_MASK) ==
+        QSPI_QSPISTATUS_RXFIFONF_RXFIFONF_F);
 }
-
 
 /**
  * @brief Checks if the QSPI RX FIFO is empty
@@ -2872,10 +2930,10 @@ __STATIC_INLINE bool DL_QSPI_isQSPIRXFIFOFull(QSPI_Regs *qspi)
  */
 __STATIC_INLINE bool DL_QSPI_isQSPIRXFIFOEmpty(QSPI_Regs *qspi)
 {
-    return ((qspi->IPSPECIFIC_QSPI.QSPISTATUS & QSPI_QSPISTATUS_RXFIFOE_MASK) == QSPI_QSPISTATUS_RXFIFOE_RXFIFOE_E);
+    return (
+        (qspi->IPSPECIFIC_QSPI.QSPISTATUS & QSPI_QSPISTATUS_RXFIFOE_MASK) ==
+        QSPI_QSPISTATUS_RXFIFOE_RXFIFOE_E);
 }
-
-
 
 #ifdef __cplusplus
 }

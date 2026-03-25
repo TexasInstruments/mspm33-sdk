@@ -48,11 +48,8 @@ void configure_sau(void)
 
 void soc_configure(void)
 {
-    DL_GSC_SRAMSecurityConfig sramConfig;
+    DL_GSC_SRAMSecurityConfig sramConfig = {0};
     uint32_t page;
-
-    /* Initialize sramConfig to all zeros (non-secure) */
-    memset(&sramConfig, 0, sizeof(sramConfig));
 
     DL_GSC_setVTOR_NS(GSC, NON_SECURE_APP0_START);
     __TZ_set_MSP_NS(NON_SECURE_APP0_SRAM_START + NON_SECURE_APP0_SRAM_LEN);

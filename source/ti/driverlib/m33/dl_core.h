@@ -316,18 +316,30 @@ __STATIC_INLINE void DL_CORE_disableWS0_MODE(void)
     FRI->FLASH_CTRL_REGS.FRDCNTL_M33 = (FRI->FLASH_CTRL_REGS.FRDCNTL_M33) & (~FRI_FRDCNTL_M33_WS0_MODE_MASK);
 }
 
-/* Set waitstates for flash read/fetch. NOTE: Make sure to disable 'WS0_Mode' for this field to be effective */
+/* Set waitstates for flash read/fetch. NOTE: It will disable 'WS0_MODE' for non-zero waitstates. */
 __STATIC_INLINE void DL_CORE_setReadWaitStates(uint32_t states)
 {
-    FRI->FLASH_CTRL_REGS.FRDCNTL_M33 = (FRI->FLASH_CTRL_REGS.FRDCNTL_M33) & (~FRI_FRDCNTL_M33_RWAIT_MASK);
-    FRI->FLASH_CTRL_REGS.FRDCNTL_M33 = (FRI->FLASH_CTRL_REGS.FRDCNTL_M33) | ((states << FRI_FRDCNTL_M33_RWAIT_OFS) & FRI_FRDCNTL_M33_RWAIT_MASK);
+    if (states == 0U){
+        FRI->FLASH_CTRL_REGS.FRDCNTL_M33 = ((FRI->FLASH_CTRL_REGS.FRDCNTL_M33) | FRI_FRDCNTL_M33_WS0_MODE_MASK);
+    }
+    else {
+        uint32_t value = ((FRI->FLASH_CTRL_REGS.FRDCNTL_M33 & (~FRI_FRDCNTL_M33_RWAIT_MASK)) | ((states << FRI_FRDCNTL_M33_RWAIT_OFS) & FRI_FRDCNTL_M33_RWAIT_MASK));
+        value = value & (~FRI_FRDCNTL_M33_WS0_MODE_MASK);
+        FRI->FLASH_CTRL_REGS.FRDCNTL_M33 = value;
+    }
 }
 
-/* Set waitstates for flash read/fetch flash for TRIM/ENGR. NOTE: Make sure to disable 'WS0_Mode' for this field to be effective */
+/* Set waitstates for flash read/fetch flash for TRIM/ENGR. NOTE: It will disable 'WS0_MODE' for non-zero waitstates. */
 __STATIC_INLINE void DL_CORE_setReadWaitStatesTRIMENGR(uint32_t states)
 {
-    FRI->FLASH_CTRL_REGS.FRDCNTL_M33 = (FRI->FLASH_CTRL_REGS.FRDCNTL_M33 & (~FRI_FRDCNTL_M33_TRIMENGRRWAIT_MASK));
-    FRI->FLASH_CTRL_REGS.FRDCNTL_M33 = (FRI->FLASH_CTRL_REGS.FRDCNTL_M33 | ((states << FRI_FRDCNTL_M33_TRIMENGRRWAIT_OFS) & FRI_FRDCNTL_M33_TRIMENGRRWAIT_MASK));
+    if (states == 0U){
+        FRI->FLASH_CTRL_REGS.FRDCNTL_M33 = ((FRI->FLASH_CTRL_REGS.FRDCNTL_M33) | FRI_FRDCNTL_M33_WS0_MODE_MASK);
+    }
+    else {
+        uint32_t value = ((FRI->FLASH_CTRL_REGS.FRDCNTL_M33 & (~FRI_FRDCNTL_M33_TRIMENGRRWAIT_MASK)) | ((states << FRI_FRDCNTL_M33_TRIMENGRRWAIT_OFS) & FRI_FRDCNTL_M33_TRIMENGRRWAIT_MASK));
+        value = value & (~FRI_FRDCNTL_M33_WS0_MODE_MASK);
+        FRI->FLASH_CTRL_REGS.FRDCNTL_M33 = value;
+    }
 }
 
 /*enable SRAM ULL wait state configuration*/

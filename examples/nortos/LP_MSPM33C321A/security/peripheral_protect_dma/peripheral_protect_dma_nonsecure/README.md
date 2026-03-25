@@ -48,6 +48,8 @@ There are two methods to load TrustZone applications:
 
 #### **Method 1: Load Combined Image**
 
+> **Note:** This method currently works only for TIARMCLANG-based examples and is not supported for GCC examples.
+
 When you build the non-secure application, the secure application is automatically built and a combined `<example_name>_full.txt` file is generated.
 
 **Steps:**

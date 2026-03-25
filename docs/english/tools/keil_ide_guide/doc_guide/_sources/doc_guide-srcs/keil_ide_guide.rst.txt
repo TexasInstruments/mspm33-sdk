@@ -20,7 +20,7 @@ This guide describes only the setup and basic operation of the software developm
 
 This guide applies to the use of the `TI XDS-110 <https://www.ti.com/tool/TMDSEMU110-U>`__, `Arm ULINK <https://www2.keil.com/mdk5/ulink>`__, and `Segger J-Link <https://www.segger.com/products/debug-probes/j-link/>`__ development tools series.
 
-These tools contain the most up-to-date materials available at the time of packaging. For the latest materials (including data sheets, user’s guides, software, and application information), visit the `TI MSPM33 website <https://www.ti.com/mspm33>`__ or contact your local TI sales office.
+These tools contain the most up-to-date materials available at the time of packaging. For the latest materials (including data sheets, user's guides, software, and application information), visit the `TI MSPM33 website <https://www.ti.com/mspm33>`__ or contact your local TI sales office.
 
 Information About Cautions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -36,11 +36,11 @@ Related Documentation From Texas Instruments
 
 MSPM33 development tools documentation:
 
--  `XDS110 Debug Probe User’s Guide <https://www.ti.com/lit/sprui94>`__
+-  `XDS110 Debug Probe User's Guide <https://www.ti.com/lit/sprui94>`__
 
 MSPM33 device documentation:
 
--  `LP-MSPM33C321A User’s Guide <https://www.ti.com/lit/slau869>`__
+-  `LP-MSPM33C321A User's Guide <https://www.ti.com/lit/slau869>`__
 -  `MSPM33 C-Series Technical Reference Manual <https://www.ti.com/lit/slau847>`__
 
 If You Need Assistance
@@ -73,7 +73,7 @@ Please refer to the `MSPM33 SDK QuickStart Guide for Keil <../../../../quickstar
 2.3 Creating a Project From Scratch
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Note**: Creating a project from scratch is **not recommended** since creating the project from scratch doesn’t add all of the necessary device support files by default. To start from a blank project, TI recommends importing the Empty Driverlib example project from the SDK.
+**Note**: Creating a project from scratch is **not recommended** since creating the project from scratch doesn't add all of the necessary device support files by default. To start from a blank project, TI recommends importing the Empty Driverlib example project from the SDK.
 
 2.4 Using SysConfig with Keil
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -93,33 +93,39 @@ SysConfig allows for an easier migration between MSPM33 derivatives; however som
 
 1. In SysConfig, enable the Device View and click on **SWITCH**
 
-|image0|
+.. figure:: ./images/keil_ide_guide/keil_ide_migrate_1.png
+   :alt: 
 
 2. Select the corresponding options for the new MSPM33 device and click **CONFIRM**.
 
-|image1|
+.. figure:: ./images/keil_ide_guide/keil_ide_migrate_2.png
+   :alt: 
 
 3. Note that SysConfig will highlight any conflicts with the migration, such as unavailable pins and peripherals. Fix any conflicts as needed.
 
 4. In the Keil IDE, open the **Device** tab in project options, and select the new MSPM33 derivative.
 
-|image2|
+.. figure:: ./images/keil_ide_guide/keil_ide_migrate_3.png
+   :alt: 
 
 5. Update the device definition by selecting **C/C++ (AC6)** → **Preprocessor Symbols** → **Define**. Add the device definition as per the device selected.
 
-|image3|
+.. figure:: ./images/keil_ide_guide/keil_ide_migrate_4.png
+   :alt: 
 
 6. Update the linker file in **Linker** → **Scatter File**. The MSPM33 SDK includes default files for all MSPM33 derivatives at ``<sdk>\source\ti\devices\msp\m33\linker_files\keil``.
 
-|image4|
+.. figure:: ./images/keil_ide_guide/keil_ide_migrate_5.png
+   :alt: 
 
 7. Add the startup file of the new derivative to the project and remove existing one. The MSPM33 SDK includes default files for all MSPM33 derivatives at ``<sdk>\source\ti\devices\msp\m33\startup_system_files\keil``.
 
-|image5|
+.. figure:: ./images/keil_ide_guide/keil_ide_migrate_6.png
+   :alt: 
 
 8. Resolve any other dependencies such as incompatible libraries and source code.
 
-Note: Steps 1-3 don’t apply when not using SysConfig.
+Note: Steps 1-3 don't apply when not using SysConfig.
 
 2.6 Adding Newly Generated SysConfig Files to Projects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -128,31 +134,38 @@ When working with SysConfig modules such as the NONMAIN Configurator which gener
 
 Consider the case of the NONMAIN Configurator, which generates 2 additional files: ``boot_config.h`` and ``boot_config.c``.
 
-|image6|
+.. figure:: ./images/keil_ide_guide/keil_ide_sysconfig_additional_generated_files.png
+   :alt: 
 
 To include these files in the built project, perform the following steps:
 
 1. After adding the SysConfig module and saving the changes, navigating back to the Keil IDE should throw a message saying that the .syscfg file was modified. Click **Yes** to reload the file.
 
-|image7|
+.. figure:: ./images/keil_ide_guide/keil_ide_reload_sysconfig_file.png
+   :alt: 
 
 2. Right-click on the project and select **Rebuild all target files** to rebuild the project. The **Build Output** window shows that SysConfig has generated those files.
 
-   |image8|
+   .. figure:: ./images/keil_ide_guide/keil_ide_rebuild_target.png
+      :alt: 
 
-   |image9|
+   .. figure:: ./images/keil_ide_guide/keil_ide_build_log.png
+      :alt: 
 
-3. To add the additional newly generated files (in this case, ``boot_config.h`` and ``boot_config.c``), right-click on the **Source** directory and select **Add Existing Files to Group ‘Source’**.
+3. To add the additional newly generated files (in this case, ``boot_config.h`` and ``boot_config.c``), right-click on the **Source** directory and select **Add Existing Files to Group 'Source'**.
 
-   |image10|
+   .. figure:: ./images/keil_ide_guide/keil_ide_add_files_to_source.png
+      :alt: 
 
 4. Navigate to the example project root, select the files that need to be added, and click **Add**.
 
-   |image11|
+   .. figure:: ./images/keil_ide_guide/keil_ide_select_files_to_add.png
+      :alt: 
 
 5. Rebuild the project. The files should be visible in the project **Source** directory in the IDE.
 
-   |image12|
+   .. figure:: ./images/keil_ide_guide/keil_ide_updated_source_directory.png
+      :alt: 
 
 2.7 Stack and Heap Management and .s Files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -174,23 +187,25 @@ Click **Project** → **Options** → **Output** → **Create Hex File** → **O
 **Caution**: Extreme care should be taken when erasing and programming NONMAIN. If done incorrectly, the device will become **locked in a permanently unrecoverable state**.
 
 1. Click **Options** → **Debug** → **Settings** → **Flash Download**.
-
 2. Add the NON-MAIN programming algorithm, and then click OK.
 
-   |image13|
+   .. figure:: ./images/keil_ide_guide/keil_ide_add_nonmain.png
+      :alt: 
 
 2.10 Overriding Pre-built libraries
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Projects might include pre-built libraries which simplify development and build time; however, they don’t allow developers to modify source code easily.
+Projects might include pre-built libraries which simplify development and build time; however, they don't allow developers to modify source code easily.
 
 An example of such libraries is the MSPM33 DriverLib which is shown below.
 
-|image14|
+.. figure:: ./images/keil_ide_guide/keil_ide_driverlib_library.png
+   :alt: 
 
 One option to override the library is to delete **driverlib.a** and simply add any or all source files to the project. The MSPM33 SDK includes the ``empty_driverlib_src`` example which includes all DriverLib source by default:
 
-|image15|
+.. figure:: ./images/keil_ide_guide/keil_ide_empty_driverlib_project.png
+   :alt: 
 
 3. Debugging the Application
 ----------------------------
@@ -204,9 +219,11 @@ TI offers a range of debug probes for Arm-based devices, including the XDS110 wh
 
 To use the XDS110 debug probe, right-click on the active project, then select **Options for Target**. In the Target Options window, select the **Debug** pane. From the pulldown menu, select either CMSIS-DAP Debugger or TI XDS Debugger.
 
-|image16|
+.. figure:: ./images/keil_ide_guide/keil_ide_select_xds110.png
+   :alt: 
 
-|image17|
+.. figure:: ./images/keil_ide_guide/keil_ide_xds110_settings.png
+   :alt: 
 
 -  Note the selected Emulator. The example above uses the XDS110 integrated in LaunchPads in CSMSIS-DAP mode.
 -  The selected Interface is SWD which is supported by MSPM33.
@@ -217,9 +234,11 @@ To use the XDS110 debug probe, right-click on the active project, then select **
 
 To use J-Link, right-click on the active project, then select **Options for Target**. In the Target Options window, select the **Debug** pane. From the pulldown menu, select the J-Link debugger option.
 
-|image18|
+.. figure:: ./images/keil_ide_guide/keil_ide_select_jlink.png
+   :alt: 
 
-|image19|
+.. figure:: ./images/keil_ide_guide/keil_ide_jlink_settings.png
+   :alt: 
 
 Refer to the `MSPM33 SDK QuickStart Guide for Keil <../../../../quickstart_guides/doc_guide/doc_guide-srcs/quickstart_guide_keil.html>`__ for more details on using Segger J-Link.
 
@@ -228,9 +247,11 @@ Refer to the `MSPM33 SDK QuickStart Guide for Keil <../../../../quickstart_guide
 
 To use ULINK, right-click on the active project, then select **Options for Target**. In the Target Options window, select the **Debug** pane. From the pulldown menu, select a ULINK debugger option.
 
-|image20|
+.. figure:: ./images/keil_ide_guide/keil_ide_select_ulink.png
+   :alt: 
 
-|image21|
+.. figure:: ./images/keil_ide_guide/keil_ide_ulink_settings.png
+   :alt: 
 
 -  The ULINK tools use a Flash Loader to download code to the device. Confirm usage in **Options** → **Debug** → **Settings** → **Flash Download**.
 
@@ -243,33 +264,10 @@ Resetting a program and the Run To Cursor operation temporarily require a breakp
 
 If the max number of breakpoints are set, the following warning will be displayed.
 
-|image22|
+.. figure:: ./images/keil_ide_guide/keil_ide_max_breakpoints.png
+   :alt: 
 
 4. Known Issues and Frequently Asked Questions (FAQs)
 -----------------------------------------------------
 
 Please refer to `Known Issues and FAQ <../../../../../../known_issues_FAQ.html>`__ inside the SDK.
-
-.. |image0| image:: ./images/keil_ide_guide/keil_ide_migrate_1.png
-.. |image1| image:: ./images/keil_ide_guide/keil_ide_migrate_2.png
-.. |image2| image:: ./images/keil_ide_guide/keil_ide_migrate_3.png
-.. |image3| image:: ./images/keil_ide_guide/keil_ide_migrate_4.png
-.. |image4| image:: ./images/keil_ide_guide/keil_ide_migrate_5.png
-.. |image5| image:: ./images/keil_ide_guide/keil_ide_migrate_6.png
-.. |image6| image:: ./images/keil_ide_guide/keil_ide_sysconfig_additional_generated_files.png
-.. |image7| image:: ./images/keil_ide_guide/keil_ide_reload_sysconfig_file.png
-.. |image8| image:: ./images/keil_ide_guide/keil_ide_rebuild_target.png
-.. |image9| image:: ./images/keil_ide_guide/keil_ide_build_log.png
-.. |image10| image:: ./images/keil_ide_guide/keil_ide_add_files_to_source.png
-.. |image11| image:: ./images/keil_ide_guide/keil_ide_select_files_to_add.png
-.. |image12| image:: ./images/keil_ide_guide/keil_ide_updated_source_directory.png
-.. |image13| image:: ./images/keil_ide_guide/keil_ide_add_nonmain.png
-.. |image14| image:: ./images/keil_ide_guide/keil_ide_driverlib_library.png
-.. |image15| image:: ./images/keil_ide_guide/keil_ide_empty_driverlib_project.png
-.. |image16| image:: ./images/keil_ide_guide/keil_ide_select_xds110.png
-.. |image17| image:: ./images/keil_ide_guide/keil_ide_xds110_settings.png
-.. |image18| image:: ./images/keil_ide_guide/keil_ide_select_jlink.png
-.. |image19| image:: ./images/keil_ide_guide/keil_ide_jlink_settings.png
-.. |image20| image:: ./images/keil_ide_guide/keil_ide_select_ulink.png
-.. |image21| image:: ./images/keil_ide_guide/keil_ide_ulink_settings.png
-.. |image22| image:: ./images/keil_ide_guide/keil_ide_max_breakpoints.png

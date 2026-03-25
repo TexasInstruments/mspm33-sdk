@@ -8,15 +8,15 @@
     </variable>
     <variable>
       <name>MSPM33_SDK_INSTALL_DIR</name>
-      <value>c:/ti/mspm33_sdk_1_02_00_00</value>
+      <value>c:/ti/mspm33_sdk_1_03_00_01</value>
     </variable>
     <variable>
       <name>MSP_SDK_INSTALL_DIR</name>
-      <value>c:/ti/mspm33_sdk_1_02_00_00</value>
+      <value>c:/ti/mspm33_sdk_1_03_00_01</value>
     </variable>
     <variable>
       <name>EXAMPLE_ROOT</name>
-      <value>c:/ti/mspm33_sdk_1_02_00_00/tools/iar</value>
+      <value>c:/ti/mspm33_sdk_1_03_00_01/tools/iar</value>
     </variable>
   </group>
 </iarUserArgVars>

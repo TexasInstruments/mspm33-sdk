@@ -73,7 +73,7 @@ Code Composer Studio (CCS)是一种集成开发环境(IDE)，支持 TI 的微控
 
 本指南仅介绍了使用 MSPM33的 CCS IDE 的一些特性和功能。
 
-有关 CCS 的更多文档、请访问 `TI.com <https://www.ti.com/tool/CCSTUDIO#tech-docs>`__ 或 IDE 中包含的“帮助”菜单。
+有关 CCS 的更多文档、请访问 `TI.com <https://www.ti.com/tool/CCSTUDIO#tech-docs>`__ 或 IDE 中包含的"帮助"菜单。
 
 2.2 从头开始创建项目
 ^^^^^^^^^^^^^^^^^^^^
@@ -89,27 +89,30 @@ TI Resource Explorer (TI-Rex)可帮助您查找适用于所选平台的所有最
 
 1. 选择 **Help** → **Getting Started**\ 。
 
-   |image0|
+   .. figure:: ./images/ccs_ide_guide/ccs_gettingstarted.png
+      :alt: 
 
 2. 单击 **Resource Explorer**
-
 3. 导航面板可用于查看不同的 TI 产品、文档、软件等
-
 4. TI Resource Explorer 还允许通过单击产品旁边的并选择 **Manage Versions** 来选择特定的 SDK 版本。 请注意、已安装的产品也会显示绿色复选标记。
 
-   |image1|
+   .. figure:: ./images/ccs_ide_guide/ccs_tirex_sdk.png
+      :alt: 
 
 5. 使用集成的搜索功能按 LaunchPad (例如 LP-MSPM33C)器件(例如 MSPM33C)、中间件(例如 DriverLib)或解决方案(例如LIN)进行筛选。 请注意、TI-Rex 将自动检测连接的 LaunchPad。
 
-   |image2|
+   .. figure:: ./images/ccs_ide_guide/ccs_tirex.png
+      :alt: 
 
 6. 选择一个示例将显示一个自述文件，其中包含该示例的说明、外设和引脚用法以及如何运行该示例。
 
-   |image3|
+   .. figure:: ./images/ccs_ide_guide/ccs_tirex_project.png
+      :alt: 
 
 7. 为示例选择一个 CCS 工程，然后点击 Import 将其添加到您的工作区中。
 
-   |image4|
+   .. figure:: ./images/ccs_ide_guide/ccs_tirex_projectimport.png
+      :alt: 
 
 请注意、CCS 将自动检测相关的安装包、包括 SDK 和编译器、 如果需要、它将请求安装。
 
@@ -122,7 +125,8 @@ SysConfig 工具作为独立安装程序提供、可在 `dev.ti.com <https://dev
 
 在 CCS 中导入 MSPM33项目后、只需双击 ``.syscfg`` 文件、即可打开 SysConfig。
 
-|image5|
+.. figure:: ./images/ccs_ide_guide/ccs_sysconfig.png
+   :alt: 
 
 有关将 SysConfig 与 MSPM33一起使用的更多信息、请访问 `Using SysConfig with MSPM33 <../../../sysconfig_guide/doc_guide/doc_guide-srcs/sysconfig_guide_CN.html>`__ 指南。
 
@@ -133,27 +137,32 @@ SysConfig 允许在 MSPM33衍生产品之间更轻松地进行移植；但需要
 
 1. 在 SysConfig 中，启用设备视图并单击 **SWITCH**
 
-|image6|
+.. figure:: ./images/ccs_ide_guide/ccs_migrate1.png
+   :alt: 
 
 2. 为新的 MSPM33设备选择相应的选项，然后单击 **CONFIRM**\ 。
 
-|image7|
+.. figure:: ./images/ccs_ide_guide/ccs_migrate2.png
+   :alt: 
 
 3. 请注意、SysConfig 将突出显示与迁移发生的任何冲突、例如不可用的引脚和外设。 根据需要修复任何冲突。
 
 4. CCS 将自动移植器件并添加相应的.ccxml 文件。
 
-|image8|
+.. figure:: ./images/ccs_ide_guide/ccs_migrate3.png
+   :alt: 
 
 5. 在项目属性中，选择 **Build** → **Arm Compiler** → **Predefined Symbols**\ 。 选择器件定义并更新它。
 
-|image9|
+.. figure:: ./images/ccs_ide_guide/ccs_migrate4.png
+   :alt: 
 
 6. 更新链接器和启动文件。 MSPM33 SDK 包含所有 MSPM33衍生产品的默认文件、分别位于 ``<sdk>\source\ti\devices\msp\m33\linker_files\ticlang`` 和 ``<sdk>\source\ti\devices\msp\m33\startup_system_files\ticlang``\ 。
 
 请注意、应从工程中排除或删除以前的文件。
 
-|image10|
+.. figure:: ./images/ccs_ide_guide/ccs_migrate5.png
+   :alt: 
 
 7. 解决所有其他问题项，例如不兼容的库和源代码。
 
@@ -169,7 +178,8 @@ SysConfig 允许在 MSPM33衍生产品之间更轻松地进行移植；但需要
 
 右键单击某个项目，然后选择 **Properties**\ 。 选择 **Build** → **Arm Linker** → **Basic Options** 并相应地设置堆栈。
 
-|image11|
+.. figure:: ./images/ccs_ide_guide/ccs_stack.png
+   :alt: 
 
 也可以通过添加或编辑 ``--stack_size=xx`` 或 ``-heap_size=xx`` 直接在链接器.cmd 文件上修改堆栈。
 
@@ -190,19 +200,22 @@ CCS 包含可用于以多个方式生成输出对象的实用程序 与 [MSP-GAN
 
 1. 右键单击一个项目，然后选择 **Properties**\ 。 选择 **Build** → **Arm Hex Utility** 并选择 **Enable Arm Hex Utility**\ 。
 
-|image12|
+.. figure:: ./images/ccs_ide_guide/ccs_outputtxt.png
+   :alt: 
 
-2. 选择 **Output Format Options**\ 。 然后选择 **TI-TXT hex (–ti_txt)** 选项。
+2. 选择 **Output Format Options**\ 。 然后选择 **TI-TXT hex (--ti\_txt)** 选项。
 
-|image13|
+.. figure:: ./images/ccs_ide_guide/ccs_outputtxt2.png
+   :alt: 
 
 同样的过程可用于生成其他格式；但是、某些格式可能需要其他参数。
 
-一种常见的是intel十六进制格式，除选择输出格式 **Intel hex (–intel, -i)** 外，还需要指定使用该格式 的存储器和 ROM 宽度。
+一种常见的是intel十六进制格式，除选择输出格式 **Intel hex (--intel, -i)** 外，还需要指定使用该格式 的存储器和 ROM 宽度。
 
 当对 MSPM33使用 Intel hex 时，请在 **Build** → **Arm Hex Utility** → **General Options** 中选择8的内存和 ROM 宽度。
 
-|image14|
+.. figure:: ./images/ccs_ide_guide/ccs_outputhex.png
+   :alt: 
 
 如需更多信息、请访问 `Hex utility in CCS <https://software-dl.ti.com/ccs/esd/documents/ccs_hex-utility.html>`__\ 。
 
@@ -213,13 +226,15 @@ CCS 包括 Arm objcopy 实用程序、这是一个基于 LLVM 的工具、可用
 
 以下步骤说明了如何使用 objcopy 启用 Intel Hex 格式。
 
-1. 右键单击一个项目，然后选择\ **属性**\ 。 选择\ **构建**\ →*\* Arm objcopy 实用程序\ **并选择**\ 启用 Arm objcopy 实用程序**。
+1. 右键单击一个项目，然后选择\ **属性**\ 。 选择\ **构建**\ →\*\* Arm objcopy 实用程序\ **并选择**\ 启用 Arm objcopy 实用程序\*\*。
 
-|image15|
+.. figure:: ./images/ccs_ide_guide/ccs_objcopy1.png
+   :alt: 
 
 2. 使用.hex 扩展名指定输出文件名。
 
-|image16|
+.. figure:: ./images/ccs_ide_guide/ccs_objcopy2.png
+   :alt: 
 
 有关 objcopy 的更多信息、请访问此 `objcopy guide <https://llvm.org/docs/CommandGuide/llvm-objcopy.html>`__\ 。
 
@@ -230,11 +245,13 @@ CCS 包括 Arm objcopy 实用程序、这是一个基于 LLVM 的工具、可用
 
 此类库的一个示例是 MSPM33 DriverLib、如下所示。
 
-|image17|
+.. figure:: ./images/ccs_ide_guide/ccs_lib.png
+   :alt: 
 
 覆盖库的一个选项是只需将任何或所有源文件添加到工程中。 MSPM33 SDK 包括 ``empty_driverlib_src`` 示例、其中包括所有 DriverLib 源 默认情况下：
 
-|image18|
+.. figure:: ./images/ccs_ide_guide/ccs_lib_src.png
+   :alt: 
 
 有关的信息、请参阅 `调试预编译库 <#section-15>`__ 如何调试预编译库。
 
@@ -248,21 +265,24 @@ MSPM33-SDK 中包含的示例通常包含链接器文件 创建可从内部闪�
 2.9.1 从 SRAM 运行完整的应用程序
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-以下步骤显示了如何修改基本 gpio_toggle_output 示例从而支持在 LP_MSPM33C321A上从 SRAM 运行程序。 类似的步骤适用于其他示例和器件。
+以下步骤显示了如何修改基本 gpio\_toggle\_output 示例从而支持在 LP\_MSPM33C321A上从 SRAM 运行程序。 类似的步骤适用于其他示例和器件。
 
 1. 打开链接器.cmd 文件并将其修改为使用 SRAM、如下所示：
 
-|image19|
+.. figure:: ./images/ccs_ide_guide/ccs_runFromRAM_1.png
+   :alt: 
 
 2. 禁用 CCS 中默认执行的系统复位。
 
    CCS 包含在器件上执行某些函数的.gel 文件。 这些 文件包含在 CCS 安装文件夹中、位于 ``<ccs>\ccs_base\emulation\gel>``\ 。 下面的屏幕截图 显示了 MSPM33C321A所需的修改：
 
-|image20|
+.. figure:: ./images/ccs_ide_guide/ccs_runFromRAM_2.png
+   :alt: 
 
 3. 下载代码并注意该器件将从 SRAM 执行。
 
-|image21|
+.. figure:: ./images/ccs_ide_guide/ccs_runFromRAM_3.png
+   :alt: 
 
 2.9.2 从 SRAM 运行函数
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -271,15 +291,18 @@ MSPM33-SDK 中包含的示例通常包含链接器文件 创建可从内部闪�
 
 1. 将函数移动到\ ``.TI.ramfunc``\ 段。 这可以通过实现 使用属性声明函数 ``__attribute__((section(".TI.ramfunc")))__attribute__((noinline))``\ 如下所示：
 
-|image22|
+.. figure:: ./images/ccs_ide_guide/ccs_runFunctionFromRAM_1.png
+   :alt: 
 
 2. 链接器文件应包含\ ``.TI.ramfunc``\ 的位置。 请注意链接器 MSPM33-SDK 中包含的文件已包含此位置、但仅包含此位置 ``在``.TI.ramfunc 中放置了任何函数、则适用。
 
-|image23|
+.. figure:: ./images/ccs_ide_guide/ccs_runFunctionFromRAM_2.png
+   :alt: 
 
 3. 下载代码并注意设备将从 SRAM 执行该功能。
 
-|image24|
+.. figure:: ./images/ccs_ide_guide/ccs_runFunctionFromRAM_3.png
+   :alt: 
 
 3. 调试应用程序
 ---------------
@@ -296,7 +319,8 @@ TI 为基于 Arm 的器件提供了一系列调试器、包括与 MSPM33 LaunchP
 
 要使用 TI-XDS 调试器，请打开项目选项，单击 **General** → **Connection** **Texas Instruments XDS110 USB Debug Probe**\ 。
 
-|image25|
+.. figure:: ./images/ccs_ide_guide/ccs_debug_connection_xds.png
+   :alt: 
 
 3.1.1 闪存加载程序
 ^^^^^^^^^^^^^^^^^^
@@ -305,7 +329,8 @@ TI 为基于 Arm 的器件提供了一系列调试器、包括与 MSPM33 LaunchP
 
 要查看和修改这些设置，请打开项目属性并选择 **Debug** → **Category:MSPM33 Flash Settings**\ 。
 
-|image26|
+.. figure:: ./images/ccs_ide_guide/ccs_flash_settings.png
+   :alt: 
 
 闪存加载程序具有以下选项：
 
@@ -316,7 +341,7 @@ TI 为基于 Arm 的器件提供了一系列调试器、包括与 MSPM33 LaunchP
    -  **Erase MAIN memory only**: 只擦除MAIN memory.如果尝试写NONMAIN会产生一个错误信息。
    -  **Erase MAIN and NONMAIN memory**: MAIN 和 NONMAIN memory 都会被擦除， 想了解有关NONMAIN的更多信息请参考 `Erasing and Updating NONMAIN Memory <#erasing-and-updating-nonmain-memory>`__\ 。
    -  **Erase MAIN and NONMAIN necessary sectors only**: 只擦除将要被更新的扇区，包含MAIN和NONMAIN区域。关于flash扇区的大小请参考具体器件的数据手册, 想了解有关NONMAIN的更多信息请参考 `Erasing and Updating NONMAIN Memory <#erasing-and-updating-nonmain-memory>`__.
-   -  **Erase MAIN memory sectors by range**: 只擦除 **Sector Erase Start Address** 和 **Sector Erase End Address** 之间的扇区。关于Memory扇区大小和地址信息请参考相关数据手册。 比如说，在每个扇区为1KB大小的 MSPM33 器件上设置起始地址 0x0000_0100 到结束地址0x0000_0400 的区域，将会擦除扇区0x0000_0000-0x0000_03FF 和 0x0000_0400-0x0000_07FF。 请注意，只有MAIN memory 会被擦除，如果试图写NONMAIN会产生一个错误信息。
+   -  **Erase MAIN memory sectors by range**: 只擦除 **Sector Erase Start Address** 和 **Sector Erase End Address** 之间的扇区。关于Memory扇区大小和地址信息请参考相关数据手册。 比如说，在每个扇区为1KB大小的 MSPM33 器件上设置起始地址 0x0000\_0100 到结束地址0x0000\_0400 的区域，将会擦除扇区0x0000\_0000-0x0000\_03FF 和 0x0000\_0400-0x0000\_07FF。 请注意，只有MAIN memory 会被擦除，如果试图写NONMAIN会产生一个错误信息。
    -  **Do not erase Flash memory**: 不擦除Flash。如果不擦除就尝试写NONMAIN会产生一个错误信息。
 
 -  **Advanced Configuration**\ ：禁用验证设备 ID。 用于调试目的、不建议禁用。
@@ -340,7 +365,8 @@ NONMAIN 是flash memory里的一块特定区域，用来存储器件启动后的
 
 要使用 Segger J-Link 调试器，请打开项目选项，单击 **General** → **Connection** 然后选择 **SEGGER J-Link Emulator**\ 。
 
-|image27|
+.. figure:: ./images/ccs_ide_guide/ccs_debug_connection_segger.png
+   :alt: 
 
 注意：可能需要更新 Segger 驱动程序。 按照有关如何在 CCS 中使用 J-Link 的说明 `此处 <https://www.segger.com/products/debug-probes/j-link/technology/ides/ti-code-composer/>`__\ 。
 
@@ -351,11 +377,13 @@ CCS 调试器使用有限数量的片上调试资源(特别是4个硬件断点�
 
 CCS 可以使用断点在 main 停止或在 exit 停止器件。 通过选择 **Debug** → **Program/Memory Load Options**\ ，可以在项目属性中更新这些设置。
 
-|image28|
+.. figure:: ./images/ccs_ide_guide/ccs_breakpoint.png
+   :alt: 
 
 如果设置了最大断点数、将显示以下警告。
 
-|image29|
+.. figure:: ./images/ccs_ide_guide/ccs_debug_breakpoint.png
+   :alt: 
 
 3.4 调试预编译库
 ~~~~~~~~~~~~~~~~
@@ -364,7 +392,8 @@ CCS 可以使用断点在 main 停止或在 exit 停止器件。 通过选择 **
 
 在项目属性中，选择 **Debug** → **Source Lookup Path**\ ，然后添加的源路径 预编译库。
 
-|image30|
+.. figure:: ./images/ccs_ide_guide/ccs_lib_debug_error.png
+   :alt: 
 
 有关的信息、请参阅 `覆盖预编译库 <#section-11>`__ 如何覆盖和修改库中的源代码。
 
@@ -393,21 +422,22 @@ MSPM33 CCS 支持包中支持包括 GEL 文件，不仅可以执行芯片初始�
 要执行DSSM批量擦除，DSSM出厂重置，DSSM等待调试或DSSM设置重置模式，请执行以下步骤:
 
 1. 在 CCS 菜单上，选择 **View** → **Target Configurations**\ 。
-
 2. 在 **Target Configurations** 窗口中，右键单击活动的 .ccxml 项目并选择 **Launch Selected Configuration**\ 。
 
-   |image31|
+   .. figure:: ./images/ccs_ide_guide/ccs_dssm1.png
+      :alt: 
 
-3. 在调试器窗口菜单上，选择 **Scripts** → **MSPM33xxxx_Commands** （其中 MSPM33xxxx 取决于当前的 MSPM33 设备），然后选择其中一个 以下选项：
+3. 在调试器窗口菜单上，选择 **Scripts** → **MSPM33xxxx\_Commands** （其中 MSPM33xxxx 取决于当前的 MSPM33 设备），然后选择其中一个 以下选项：
 
-   -  **MSPM33_MailboxMassErase_Manual**\ ：将执行批量擦除 要求用户按下复位按钮。
-   -  **MSPM33_MailboxMassErase_Auto**\ ：将执行批量擦除 使用 XDS110 复位线强制复位。
-   -  **MSPM33_MailboxFactoryReset_Manual**\ ：将执行出厂重置 要求用户按下复位按钮。
-   -  **MSPM33_MailboxFactoryReset_Auto**\ ：将执行出厂重置 使用 XDS110 复位线强制复位。
-   -  **MSPM33_MailboxWaitForDebug_Auto**: 等待调试将被执行 要求用户单击“清除重置”按钮。
-   -  **MSPM33_MailboxSetResetMode**: 将执行复位命令来让 设备保持在复位状态，直到下一个调试会话。
+   -  **MSPM33\_MailboxMassErase\_Manual**\ ：将执行批量擦除 要求用户按下复位按钮。
+   -  **MSPM33\_MailboxMassErase\_Auto**\ ：将执行批量擦除 使用 XDS110 复位线强制复位。
+   -  **MSPM33\_MailboxFactoryReset\_Manual**\ ：将执行出厂重置 要求用户按下复位按钮。
+   -  **MSPM33\_MailboxFactoryReset\_Auto**\ ：将执行出厂重置 使用 XDS110 复位线强制复位。
+   -  **MSPM33\_MailboxWaitForDebug\_Auto**: 等待调试将被执行 要求用户单击"清除重置"按钮。
+   -  **MSPM33\_MailboxSetResetMode**: 将执行复位命令来让 设备保持在复位状态，直到下一个调试会话。
 
-   |image32|
+   .. figure:: ./images/ccs_ide_guide/ccs_dssm2.png
+      :alt: 
 
 3.5.1.1 DSSM设置重置模式执行后步骤
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -418,15 +448,18 @@ MSPM33 CCS 支持包中支持包括 GEL 文件，不仅可以执行芯片初始�
 
 1允许DSSM命令完全执行。
 
-|image33|
+.. figure:: ./images/ccs_ide_guide/ccs_dssm3.png
+   :alt: 
 
 2命令完成后，设备将处于重置状态。 之后，任何 尝试刷新设备将抛出预期的错误消息，指出设备正在重置。
 
-|image34|
+.. figure:: ./images/ccs_ide_guide/ccs_dssm4.png
+   :alt: 
 
 3在中选择了\ **清除等待**\ 后，设备将退出重置状态 错误窗口。 允许将新应用程序闪存至设备。
 
-|image35|
+.. figure:: ./images/ccs_ide_guide/ccs_dssm5.png
+   :alt: 
 
 3.5.1.2 DSSM等待调试后执行步骤
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -437,19 +470,23 @@ MSPM33 CCS 支持包中支持包括 GEL 文件，不仅可以执行芯片初始�
 
 1允许DSSM命令完全执行。
 
-|image36|
+.. figure:: ./images/ccs_ide_guide/ccs_dssm3.png
+   :alt: 
 
 2命令完成后，设备将处于重置状态。 然后，连接 将自动尝试，导致出现预期的错误消息，指出设备正在重置。
 
-|image37|
+.. figure:: ./images/ccs_ide_guide/ccs_dssm4.png
+   :alt: 
 
 3在中选择了\ **清除等待**\ 后，设备将退出重置状态 错误窗口
 
-|image38|
+.. figure:: ./images/ccs_ide_guide/ccs_dssm5.png
+   :alt: 
 
 4现在设备应该在重置处理程序中。 这允许用户访问以前下载的 代码，或将新应用程序加载到设备上。
 
-|image39|
+.. figure:: ./images/ccs_ide_guide/ccs_dssm6.png
+   :alt: 
 
 3.5.2 DSSM SWD Password Mechanism 密码机制
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -462,27 +499,32 @@ TI 建议在以下情况下使用 SysConfig 中的 NONMAIN 配置器 配置 NONM
 
 1. 假设在 NONMAIN 配置器中配置了以下密码：
 
-   |image40|
+   .. figure:: ./images/ccs_ide_guide/ccs_dssm_password1.png
+      :alt: 
 
 2. 配置密码后尝试对设备进行编程将显示 以下错误：
 
-   |image41|
+   .. figure:: ./images/ccs_ide_guide/ccs_dssm_password2.png
+      :alt: 
 
 3. 要配置密码，双击CCS项目中的.ccxml，转到\ **高级**\ 选项卡并选择 MSPM33 设备：
 
-   |image42|
+   .. figure:: ./images/ccs_ide_guide/ccs_dssm_password3.png
+      :alt: 
 
 4. 写密码
 
-   |image43|
+   .. figure:: ./images/ccs_ide_guide/ccs_dssm_password4.png
+      :alt: 
 
 5. 在 CCS 菜单上，选择 **View** → **Target Configurations**\ 。
 
 6. 在 **Target Configurations** 窗口中，右键单击活动的 .ccxml 项目并选择 **Launch Selected Configuration**\ 。
 
-7. 在调试器窗口菜单上，选择 **Scripts** → **MSPM33xxxx_Commands** （其中 MSPM33xxxx 取决于当前的 MSPM33 设备），然后选择 **MSPM33_MailboxPasswordAuthentication_Auto**\ 。
+7. 在调试器窗口菜单上，选择 **Scripts** → **MSPM33xxxx\_Commands** （其中 MSPM33xxxx 取决于当前的 MSPM33 设备），然后选择 **MSPM33\_MailboxPasswordAuthentication\_Auto**\ 。
 
-   |image44|
+   .. figure:: ./images/ccs_ide_guide/ccs_dssm_password5.png
+      :alt: 
 
 8. CCS 应该能够连接到设备。 此时，设备可以 重新写入，但请注意此操作不会删除 NONMAIN，因此除非 NONMAIN 被修改，密码会仍旧有效。
 
@@ -493,7 +535,7 @@ TI 建议在以下情况下使用 SysConfig 中的 NONMAIN 配置器 配置 NONM
 
 如果连接了不受支持的设备，CCS 将显示警告，如下所示：
 
-|image45| |image46|
+|image0| |image1|
 
 不建议对不正确的设备进行写入，这可能会导致意外和不可恢复。
 
@@ -504,68 +546,24 @@ MSPM33 SDK 包括同时支持 TI Arm Clang 和 GCC 的示例；但是、 默认�
 
 可以通过选择\ **Help→Install GCC ARM Compiler Tools**\ 来安装 GCC：
 
-|image47|
+.. figure:: ./images/ccs_ide_guide/ccs_gcc_install1.png
+   :alt: 
 
 选择要安装的版本。 CCS 和 MSPM33-SDK 仅包含和支持某些版本的工具链。 有关信息、请参阅已安装 MSPM33-SDK 版本的发行说明 支持的 GCC 版本。
 
-|image48|
+.. figure:: ./images/ccs_ide_guide/ccs_gcc_install2.png
+   :alt: 
 
-如果安装成功，请单击\ **Window→Preferences**\ ， 然后是*\* Code Composer Studio→Build→Compiler**以查看编译器列表 安装在 CCS 中。
+如果安装成功，请单击\ **Window→Preferences**\ ， 然后是\*\* Code Composer Studio→Build→Compiler\*\*以查看编译器列表 安装在 CCS 中。
 
-|image49|
+.. figure:: ./images/ccs_ide_guide/ccs_gcc_install3.png
+   :alt: 
 
 5. 已知问题和常见问题解答(FAQ)
 ------------------------------
 
 请参阅 SDK 内部的 `Known Issues and FAQ <../../../../../../known_issues_FAQ.html>`__\ 。
 
-.. |image0| image:: ./images/ccs_ide_guide/ccs_gettingstarted.png
-.. |image1| image:: ./images/ccs_ide_guide/ccs_tirex_sdk.png
-.. |image2| image:: ./images/ccs_ide_guide/ccs_tirex.png
-.. |image3| image:: ./images/ccs_ide_guide/ccs_tirex_project.png
-.. |image4| image:: ./images/ccs_ide_guide/ccs_tirex_projectimport.png
-.. |image5| image:: ./images/ccs_ide_guide/ccs_sysconfig.png
-.. |image6| image:: ./images/ccs_ide_guide/ccs_migrate1.png
-.. |image7| image:: ./images/ccs_ide_guide/ccs_migrate2.png
-.. |image8| image:: ./images/ccs_ide_guide/ccs_migrate3.png
-.. |image9| image:: ./images/ccs_ide_guide/ccs_migrate4.png
-.. |image10| image:: ./images/ccs_ide_guide/ccs_migrate5.png
-.. |image11| image:: ./images/ccs_ide_guide/ccs_stack.png
-.. |image12| image:: ./images/ccs_ide_guide/ccs_outputtxt.png
-.. |image13| image:: ./images/ccs_ide_guide/ccs_outputtxt2.png
-.. |image14| image:: ./images/ccs_ide_guide/ccs_outputhex.png
-.. |image15| image:: ./images/ccs_ide_guide/ccs_objcopy1.png
-.. |image16| image:: ./images/ccs_ide_guide/ccs_objcopy2.png
-.. |image17| image:: ./images/ccs_ide_guide/ccs_lib.png
-.. |image18| image:: ./images/ccs_ide_guide/ccs_lib_src.png
-.. |image19| image:: ./images/ccs_ide_guide/ccs_runFromRAM_1.png
-.. |image20| image:: ./images/ccs_ide_guide/ccs_runFromRAM_2.png
-.. |image21| image:: ./images/ccs_ide_guide/ccs_runFromRAM_3.png
-.. |image22| image:: ./images/ccs_ide_guide/ccs_runFunctionFromRAM_1.png
-.. |image23| image:: ./images/ccs_ide_guide/ccs_runFunctionFromRAM_2.png
-.. |image24| image:: ./images/ccs_ide_guide/ccs_runFunctionFromRAM_3.png
-.. |image25| image:: ./images/ccs_ide_guide/ccs_debug_connection_xds.png
-.. |image26| image:: ./images/ccs_ide_guide/ccs_flash_settings.png
-.. |image27| image:: ./images/ccs_ide_guide/ccs_debug_connection_segger.png
-.. |image28| image:: ./images/ccs_ide_guide/ccs_breakpoint.png
-.. |image29| image:: ./images/ccs_ide_guide/ccs_debug_breakpoint.png
-.. |image30| image:: ./images/ccs_ide_guide/ccs_lib_debug_error.png
-.. |image31| image:: ./images/ccs_ide_guide/ccs_dssm1.png
-.. |image32| image:: ./images/ccs_ide_guide/ccs_dssm2.png
-.. |image33| image:: ./images/ccs_ide_guide/ccs_dssm3.png
-.. |image34| image:: ./images/ccs_ide_guide/ccs_dssm4.png
-.. |image35| image:: ./images/ccs_ide_guide/ccs_dssm5.png
-.. |image36| image:: ./images/ccs_ide_guide/ccs_dssm3.png
-.. |image37| image:: ./images/ccs_ide_guide/ccs_dssm4.png
-.. |image38| image:: ./images/ccs_ide_guide/ccs_dssm5.png
-.. |image39| image:: ./images/ccs_ide_guide/ccs_dssm6.png
-.. |image40| image:: ./images/ccs_ide_guide/ccs_dssm_password1.png
-.. |image41| image:: ./images/ccs_ide_guide/ccs_dssm_password2.png
-.. |image42| image:: ./images/ccs_ide_guide/ccs_dssm_password3.png
-.. |image43| image:: ./images/ccs_ide_guide/ccs_dssm_password4.png
-.. |image44| image:: ./images/ccs_ide_guide/ccs_dssm_password5.png
-.. |image45| image:: ./images/ccs_ide_guide/ccs_connectionerror1.png
-.. |image46| image:: ./images/ccs_ide_guide/ccs_connectionerror2.png
-.. |image47| image:: ./images/ccs_ide_guide/ccs_gcc_install1.png
-.. |image48| image:: ./images/ccs_ide_guide/ccs_gcc_install2.png
-.. |image49| image:: ./images/ccs_ide_guide/ccs_gcc_install3.png
+.. |image0| image:: ./images/ccs_ide_guide/ccs_connectionerror1.png
+.. |image1| image:: ./images/ccs_ide_guide/ccs_connectionerror2.png
+

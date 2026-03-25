@@ -22,7 +22,8 @@ The user is expected to have downloaded and installed the following:
 
     Note that Code Composer Studio will automatically detect a MSPM33 LaunchPad if connected.
 
-    |image0|
+    .. figure:: ./images/quickstart_guide_ccs_theia/theia_qsg_gettingstarted.png
+       :alt: 
 
 2.  Click on **Create a new project with Code Composer Studio IDE** to open the Project Wizard.
 
@@ -34,13 +35,14 @@ The user is expected to have downloaded and installed the following:
     -  Compiler, note that Code Composer Studio support TI Arm Clang and Arm GCC
     -  RTOS or No-RTOS, if available for example
 
-    |image1|
+    .. figure:: ./images/quickstart_guide_ccs_theia/theia_qsg_projectwizard.png
+       :alt: 
 
 4.  Click on **Create**.
+5.  If the MSPM33 SDK hasn't been installed, Code Composer Studio will request to install it. Any other dependencies such as compilers can also be installed.
 
-5.  If the MSPM33 SDK hasn’t been installed, Code Composer Studio will request to install it. Any other dependencies such as compilers can also be installed.
-
-    |image2|
+    .. figure:: ./images/quickstart_guide_ccs_theia/theia_qsg_projectwizard_install.png
+       :alt: 
 
 6.  Close window once the SDK is installed.
 
@@ -50,7 +52,8 @@ The user is expected to have downloaded and installed the following:
 
 7.  The project will be imported into the workspace.
 
-    |image3|
+    .. figure:: ./images/quickstart_guide_ccs_theia/theia_qsg_project.png
+       :alt: 
 
 8.  Optionally, open SysConfig.
 
@@ -58,24 +61,27 @@ The user is expected to have downloaded and installed the following:
 
     Simply double-click the ``.syscfg`` file in the project to open the SysConfig viewer and start exploring.
 
-    |image4|
+    .. figure:: ./images/quickstart_guide_ccs_theia/theia_qsg_sysconfig.png
+       :alt: 
 
     For more information about using SysConfig with MSPM33, visit the `Using SysConfig with MSPM33 <../../../tools/sysconfig_guide/doc_guide/doc_guide-srcs/sysconfig_guide.html>`__ guide.
 
 9.  Right-click on the project and click on **Build Project(s)**.
 
-    |image5|
+    .. figure:: ./images/quickstart_guide_ccs_theia/theia_qsg_projectbuild.png
+       :alt: 
 
 10. Press **F5** or click on the Debug icon followed by **Start debugging** icon.
 
-    |image6|
+    .. figure:: ./images/quickstart_guide_ccs_theia/theia_qsg_projectdebug.png
+       :alt: 
 
 4. Using TI Resource Explorer
 -----------------------------
 
 TI Resource Explorer (TI-Rex) helps you find all the latest examples, libraries, demo applications, datasheets, and more for your chosen platform.
 
-This tool is available at https://dev.ti.com/tirex, but it’s also integrated into Code Composer Studio allowing for a more integrated user experience.
+This tool is available at https://dev.ti.com/tirex, but it's also integrated into Code Composer Studio allowing for a more integrated user experience.
 
 .. raw:: html
 
@@ -85,11 +91,3 @@ This tool is available at https://dev.ti.com/tirex, but it’s also integrated i
 -----------------------------------------------------
 
 Please refer to `Known Issues and FAQ <../../../../../known_issues_FAQ.html>`__ inside the SDK.
-
-.. |image0| image:: ./images/quickstart_guide_ccs_theia/theia_qsg_gettingstarted.png
-.. |image1| image:: ./images/quickstart_guide_ccs_theia/theia_qsg_projectwizard.png
-.. |image2| image:: ./images/quickstart_guide_ccs_theia/theia_qsg_projectwizard_install.png
-.. |image3| image:: ./images/quickstart_guide_ccs_theia/theia_qsg_project.png
-.. |image4| image:: ./images/quickstart_guide_ccs_theia/theia_qsg_sysconfig.png
-.. |image5| image:: ./images/quickstart_guide_ccs_theia/theia_qsg_projectbuild.png
-.. |image6| image:: ./images/quickstart_guide_ccs_theia/theia_qsg_projectdebug.png

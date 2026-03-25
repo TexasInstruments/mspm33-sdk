@@ -32,7 +32,7 @@
 
 #include "ti_msp_dl_config.h"
 
-volatile bool gCheckADC, gPPBtripLow, gPPBtripHigh, gPPBinLimit, gPPBzero;
+volatile bool gCheckADC, gPPBtripLow, gPPBtripHigh, gPPBinLimit;
 volatile uint16_t gADCResult;
 
 void HSADC0_INST_INT1_IRQHandler(void)
@@ -53,7 +53,6 @@ int main(void)
     gPPBtripLow  = false;
     gPPBtripHigh = false;
     gPPBinLimit  = false;
-    gPPBzero     = false;
 
     DL_HSADC_triggerSequencerSoftwareForce(HSADC0_INST, DL_HSADC_SEQ_NUMBER1);
 
@@ -70,11 +69,6 @@ int main(void)
         gPPBtripHigh = true;
     }
 
-    if (DL_HSADC_getPPBTripZeroStatus(HSADC0_INST, DL_HSADC_SEQ_NUMBER1)) {
-        /* adc result went to zero*/
-        gPPBzero = true;
-    }
-
     if (DL_HSADC_getPPBTripInLimitStatus(HSADC0_INST, DL_HSADC_SEQ_NUMBER1)) {
         /* adc result is between trip low and trip high*/
         gPPBinLimit = true;
@@ -82,7 +76,7 @@ int main(void)
 
     gADCResult = DL_HSADC_getResult(HSADC0_RESULT_INST, DL_HSADC_SOC_NUMBER0);
 
-    if (gPPBinLimit || gPPBtripHigh || gPPBtripLow || gPPBzero) {
+    if (gPPBinLimit || gPPBtripHigh || gPPBtripLow) {
         DL_GPIO_setPins(GPIO_LEDS_PORT, GPIO_LEDS_PASS_LED_PIN);
     } else {
         DL_GPIO_setPins(GPIO_LEDS_PORT, GPIO_LEDS_FAIL_LED_PIN);

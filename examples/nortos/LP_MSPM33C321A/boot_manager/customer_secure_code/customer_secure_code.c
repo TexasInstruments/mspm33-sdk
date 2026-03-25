@@ -63,7 +63,7 @@ static void do_boot(struct boot_rsp *rsp)
     MCUBOOT_LOG_INF("Starting Main Application");
     MCUBOOT_LOG_INF("  Image Start Offset: 0x%x", (int) rsp->br_image_off);
 
-    uint32_t vector_table = 0x0 + rsp->br_image_off + rsp->br_hdr->ih_hdr_size;
+    uint32_t vector_table = 0x0 + PRIMARY_SLOT_OFFSET + rsp->br_hdr->ih_hdr_size;
 
     MCUBOOT_LOG_INF("  Vector Table Start Address: 0x%x", (int) vector_table);
 
@@ -154,9 +154,16 @@ int main(void)
         } else {
             mcubootFail();
         }
-        DL_GPIO_setPins(GPIO_LEDS_PORT, GPIO_LEDS_PASS_LED_PIN);
+
+        if (bootRsp.br_image_off != PRIMARY_SLOT_OFFSET) {
+            DL_SYSCTL_executeFromUpperFlashBank();
+        } else {
+            DL_SYSCTL_executeFromLowerFlashBank();
+        }
 
         do_boot(&bootRsp);
+
+        DL_GPIO_setPins(GPIO_LEDS_PORT, GPIO_LEDS_PASS_LED_PIN);
 
         DL_SYSCTL_issueINITDONE();
     }

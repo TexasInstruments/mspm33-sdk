@@ -81,9 +81,15 @@ INPUT("ti/pmbus/lib/gcc/m0p/pmbus.a")
 % if(migration_inst.genLibSMBUS){
 INPUT("ti/smbus/lib/gcc/m0p/smbus.a")
 % }
-% if(migration_inst.genLibCMSIS){
-INPUT("third_party/CMSIS/DSP/lib/gcc/m0p/arm_cortexM0l_math.a")
+% if(migration_inst.genLibCMSIS  && !Common.isDeviceM33x321x()){
+INPUT()"third_party/CMSIS/DSP/lib/gcc/m0p/arm_cortexM0l_math.a")
 % }
-% if(migration_inst.genLibDL){
+% if(migration_inst.genLibCMSIS && Common.isDeviceM33x321x()){
+INPUT("third_party/CMSIS/DSP/lib/gcc/m33/arm_cortexM33_math.a")
+% }
+% if(migration_inst.genLibDL && !Common.isDeviceM33x321x()){
 INPUT("ti/driverlib/lib/gcc/m0p/`Common.getDeviceFamily().toLowerCase()`/driverlib.a")
+% }
+% if(migration_inst.genLibDL && Common.isDeviceM33x321x()){
+INPUT("ti/driverlib/lib/gcc/m33/`Common.getDeviceFamily().toLowerCase()`/driverlib.a")
 % }

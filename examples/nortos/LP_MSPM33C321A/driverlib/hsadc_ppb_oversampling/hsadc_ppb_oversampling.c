@@ -31,17 +31,38 @@
  */
 
 #include "ti_msp_dl_config.h"
+#include <stdio.h>
+#include "uart_console.h"
 
 #define ADC_OVERSAMPLE_COUNT 8U
+#define ADC_MAX_RESULT      0xFFFU
+#define ADC_VREF_VOLTAGE_mV 3300U
 
-volatile bool gCheckADC;
-volatile uint16_t gADCsum;
+volatile bool gCheckADC1, gCheckADC2, gCheckADC3;
+volatile uint16_t adcResult1, adcResult2, adcResult3;
+volatile uint16_t adcResult1mv, adcResult2mv, adcResult3mv;
 
 void HSADC0_INST_INT1_IRQHandler(void)
 {
     if (DL_HSADC_getInterruptResultReadyStatus(HSADC0_INST, DL_HSADC_INT_1)) {
         DL_HSADC_InterruptStatusClear(HSADC0_INST, DL_HSADC_INT_1);
-        gCheckADC = true;
+        gCheckADC1 = true;
+    }
+}
+
+void HSADC0_INST_INT2_IRQHandler(void)
+{
+    if (DL_HSADC_getInterruptResultReadyStatus(HSADC0_INST, DL_HSADC_INT_2)) {
+        DL_HSADC_InterruptStatusClear(HSADC0_INST, DL_HSADC_INT_2);
+        gCheckADC2 = true;
+    }
+}
+
+void HSADC0_INST_INT3_IRQHandler(void)
+{
+    if (DL_HSADC_getInterruptResultReadyStatus(HSADC0_INST, DL_HSADC_INT_3)) {
+        DL_HSADC_InterruptStatusClear(HSADC0_INST, DL_HSADC_INT_3);
+        gCheckADC3 = true;
     }
 }
 
@@ -50,27 +71,38 @@ int main(void)
     SYSCFG_DL_init();
 
     NVIC_EnableIRQ(HSADC0_INST_INT1_IRQN);
+    NVIC_EnableIRQ(HSADC0_INST_INT2_IRQN);
+    NVIC_EnableIRQ(HSADC0_INST_INT3_IRQN);
 
     /* trigger the sequencer*/
     DL_HSADC_triggerSequencerSoftwareForce(HSADC0_INST, DL_HSADC_SEQ_NUMBER1);
+    DL_HSADC_triggerSequencerSoftwareForce(HSADC0_INST, DL_HSADC_SEQ_NUMBER2);
+    DL_HSADC_triggerSequencerSoftwareForce(HSADC0_INST, DL_HSADC_SEQ_NUMBER3);
 
     /* wait till all samples are done*/
-    while (false == gCheckADC)
+    while ((false == gCheckADC1) || (false == gCheckADC2) || (false == gCheckADC3))
         ;
 
-    if (ADC_OVERSAMPLE_COUNT !=
-        DL_HSADC_getFinalCountResult(
-            HSADC0_RESULT_INST, DL_HSADC_SEQ_NUMBER1)) {
-        DL_GPIO_setPins(GPIO_LEDS_PORT, GPIO_LEDS_FAIL_LED_PIN);
-        __BKPT(0);
-    }
-
-    gADCsum =
+    adcResult1 =
         DL_HSADC_getFinalSumResult(HSADC0_RESULT_INST, DL_HSADC_SEQ_NUMBER1);
 
-    DL_HSADC_PowerDown(HSADC0_INST);
-    DL_HSADC_disablePower(HSADC0_INST);
+    adcResult1mv = 
+        (uint16_t)((adcResult1*ADC_VREF_VOLTAGE_mV)/ADC_MAX_RESULT);
 
-    DL_GPIO_setPins(GPIO_LEDS_PORT, GPIO_LEDS_PASS_LED_PIN);
+    adcResult2 =
+        DL_HSADC_getFinalSumResult(HSADC0_RESULT_INST, DL_HSADC_SEQ_NUMBER2) / ADC_OVERSAMPLE_COUNT;
+
+    adcResult2mv = 
+        (uint16_t)((adcResult2*ADC_VREF_VOLTAGE_mV)/ADC_MAX_RESULT);
+        
+    adcResult3 =
+        DL_HSADC_getFinalSumResult(HSADC0_RESULT_INST, DL_HSADC_SEQ_NUMBER3);
+
+    adcResult3mv = 
+        (uint16_t)((adcResult1*ADC_VREF_VOLTAGE_mV)/ADC_MAX_RESULT);
+
+    uart_printf(UART_0_INST,"Sequencer 1 (without oversampling - 12 bit result) : %d, %d mV \n", adcResult1, adcResult1mv);
+    uart_printf(UART_0_INST,"Sequencer 2 (with oversampling - 15 bit result) : %d, %d mV \n", adcResult2, adcResult2mv);
+    uart_printf(UART_0_INST,"Sequencer 3 (with oversampling and right shift by 3 - 12 bit result) : %d, %d mV \n", adcResult3, adcResult3mv);
     __BKPT(0);
 }

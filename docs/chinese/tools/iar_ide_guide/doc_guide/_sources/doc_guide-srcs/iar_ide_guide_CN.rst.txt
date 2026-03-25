@@ -69,16 +69,21 @@ MSPM33 器件文档：
 
 整个EWARM 目录树中的 PDF 文件包含最新信息。此外，EWARM 文档在线提供，可通过 IDE 中的“Help”选项卡查看。
 
-================== ================================
-工具               用户指南
-================== ================================
-IDE                EWARM_IDEGuide.ENU.pdf
-汇编器             EWARM_AssemblerReference.ENU.pdf
-编译器             EWARM_DevelopmentGuide.ENU.pdf
-C 库               EWARM_DevelopmentGuide.ENU.pdf
-链接器和库管理程序 EWARM_DevelopmentGuide.ENU.pdf
-调试               EWARM_DebuggingGuide.ENU.pdf
-================== ================================
++----------------------+-------------------------------------+
+| 工具                 | 用户指南                            |
++======================+=====================================+
+| IDE                  | EWARM\_IDEGuide.ENU.pdf             |
++----------------------+-------------------------------------+
+| 汇编器               | EWARM\_AssemblerReference.ENU.pdf   |
++----------------------+-------------------------------------+
+| 编译器               | EWARM\_DevelopmentGuide.ENU.pdf     |
++----------------------+-------------------------------------+
+| C 库                 | EWARM\_DevelopmentGuide.ENU.pdf     |
++----------------------+-------------------------------------+
+| 链接器和库管理程序   | EWARM\_DevelopmentGuide.ENU.pdf     |
++----------------------+-------------------------------------+
+| 调试                 | EWARM\_DebuggingGuide.ENU.pdf       |
++----------------------+-------------------------------------+
 
 2.2 从 MSPM33 SDK 创建 MSPM33 工程
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -108,21 +113,25 @@ SysConfig 工具作为独立安装程序交付，可手动集成到 IAR 中，�
 
 1. 在 SysConfig 中，启用器件视图并点击 **SWITCH**
 
-|image0|
+.. figure:: ./images/iar_ide_guide/iar_ide_migrate_1.png
+   :alt: 
 
 2. 选择新 MSPM33 器件的相应选项，然后点击 **CONFIRM**\ 。
 
-|image1|
+.. figure:: ./images/iar_ide_guide/iar_ide_migrate_2.png
+   :alt: 
 
 3. 请注意，SysConfig 将突出显示与迁移的任何冲突，例如不可用的引脚和外设。 根据需要修复任何冲突。
 
 4. 在工程选项中，依次选择 **General Options** → **Target** → **Device**\ 。选择 MSPM33 器件。
 
-|image2|
+.. figure:: ./images/iar_ide_guide/iar_ide_migrate_3.png
+   :alt: 
 
 5. 在工程选项中，依次选择 **C/C++ Compiler** → **Preprocessor** → **Defined symbols**\ 。 根据所选器件添加器件定义。
 
-|image3|
+.. figure:: ./images/iar_ide_guide/iar_ide_migrate_4.png
+   :alt: 
 
 6. 更新链接器和启动文件。MSPM33 SDK 分别在 ``<sdk>\source\ti\devices\msp\m33\linker_files\iar`` 和 ``<sdk>\source\ti\devices\msp\m33\startup_system_files\iar`` 中包含所有 MSPM33 衍生产品的默认文件。
 
@@ -150,14 +159,15 @@ SysConfig 工具作为独立安装程序交付，可手动集成到 IAR 中，�
 **注意**\ ：在擦除和编程 NONMAIN 时应特别小心。如果操作错误，器件将 **锁定在永久不可恢复的状态**\ 。
 
 1. 依次点击 **Options** → **Debugger** → **Download** → **Override default .board file** → **Edit**\ 。
-
 2. 选择第二个元素，然后点击“Okay”：
 
-   |image4|
+   .. figure:: ./images/iar_ide_guide/iar_ide_non_main.png
+      :alt: 
 
 3. 添加 ``--non_main_erase`` 作为额外参数：
 
-   |image5|
+   .. figure:: ./images/iar_ide_guide/iar_ide_non_main_2.png
+      :alt: 
 
 2.9 覆盖预编译库
 ~~~~~~~~~~~~~~~~
@@ -166,11 +176,13 @@ SysConfig 工具作为独立安装程序交付，可手动集成到 IAR 中，�
 
 下面显示了此类库的一个示例 MSPM33 DriverLib。
 
-|image6|
+.. figure:: ./images/iar_ide_guide/iar_ide_lib.png
+   :alt: 
 
 覆盖库的一个选项是直接向工程添加任何或所有源文件。 MSPM33 SDK 包括 ``empty_driverlib_src`` 示例，其中默认包括所有 DriverLib 源：
 
-|image7|
+.. figure:: ./images/iar_ide_guide/iar_ide_lib_source.png
+   :alt: 
 
 请参阅\ `调试预编译库 <#debugging-pre-built-libraries>`__\ ，了解 如何调试预编译库。
 
@@ -188,11 +200,13 @@ TI 提供各种适用于 Arm 器件的调试探针，包括与 MSPM33 LaunchPad 
 
 要使用 TI-XDS 调试探针，请依次选择 **Options** → **Debugger** → **Driver** → **TI XDS**\ ：
 
-|image8|
+.. figure:: ./images/iar_ide_guide/iar_ide_xds110_select.png
+   :alt: 
 
 安装仿真包后，可在 **Options** → **Debugger** → **TI XDS** 中选择 XDS 调试探针：
 
-|image9|
+.. figure:: ./images/iar_ide_guide/iar_ide_xds110.png
+   :alt: 
 
 -  注意所选仿真器。LaunchPad 包括一个集成的 TI XDS110 仿真器。
 -  所选接口是 MSPM33 支持的 SWD。
@@ -204,7 +218,8 @@ TI 提供各种适用于 Arm 器件的调试探针，包括与 MSPM33 LaunchPad 
 
 要使用 Segger J-Link 调试探针，请依次选择 **Options** → **Debugger** → **Driver** → **J-Link/J-Trace**\ ：
 
-|image10|
+.. figure:: ./images/iar_ide_guide/iar_ide_jlink_select.png
+   :alt: 
 
 -  J-Link 工具使用闪存加载程序将代码下载到器件。在 **Options** → **Debugger** → **Use flash loader(s)** 中确认使用：
 
@@ -213,7 +228,8 @@ TI 提供各种适用于 Arm 器件的调试探针，包括与 MSPM33 LaunchPad 
 
 要使用 IAR I-Jet 调试探针，请依次选择 **Options** → **Debugger** → **Driver** → **I-jet**\ ：
 
-|image11|
+.. figure:: ./images/iar_ide_guide/iar_ide_ijet_select.png
+   :alt: 
 
 -  I-jet 工具使用闪存加载程序将代码下载到器件。在 **Options** → **Debugger** → **Use flash loader(s)** 中确认使用：
 
@@ -226,7 +242,8 @@ C-SPY 断点机制使用有限数量的片上调试资源（具体为 4 个硬�
 
 如果设置了断点最大数量，将显示以下警告。
 
-|image12|
+.. figure:: ./images/iar_ide_guide/iar_ide_max_breakpoints.png
+   :alt: 
 
 3.5 调试预编译库
 ~~~~~~~~~~~~~~~~
@@ -235,15 +252,18 @@ C-SPY 断点机制使用有限数量的片上调试资源（具体为 4 个硬�
 
 在此类情况下，IAR 将显示以下消息：
 
-|image13|
+.. figure:: ./images/iar_ide_guide/iar_ide_debug_error.png
+   :alt: 
 
 可通过选择包含源代码的文件夹来修复错误。在所示示例中，选择了 DriverLib 源代码：
 
-|image14|
+.. figure:: ./images/iar_ide_guide/iar_ide_debug_error_fix1.png
+   :alt: 
 
 或者，将源代码路径添加至 **Options** → **Runtime Checking** → **C/C++ Compiler**\ →\ **Preprocessor**\ 。在所示示例中，添加了 DriverLib 源代码路径：
 
-|image15|
+.. figure:: ./images/iar_ide_guide/iar_ide_debug_error_fix2.png
+   :alt: 
 
 请参阅\ `覆盖预编译库 <#overriding-pre-built-libraries>`__\ ，以了解 如何覆盖和修改库的源代码。
 
@@ -251,20 +271,3 @@ C-SPY 断点机制使用有限数量的片上调试资源（具体为 4 个硬�
 ---------------------------------
 
 请参阅 SDK 中的\ `已知问题和 FAQ <../../../../../../known_issues_FAQ.html>`__\ 。
-
-.. |image0| image:: ./images/iar_ide_guide/iar_ide_migrate_1.png
-.. |image1| image:: ./images/iar_ide_guide/iar_ide_migrate_2.png
-.. |image2| image:: ./images/iar_ide_guide/iar_ide_migrate_3.png
-.. |image3| image:: ./images/iar_ide_guide/iar_ide_migrate_4.png
-.. |image4| image:: ./images/iar_ide_guide/iar_ide_non_main.png
-.. |image5| image:: ./images/iar_ide_guide/iar_ide_non_main_2.png
-.. |image6| image:: ./images/iar_ide_guide/iar_ide_lib.png
-.. |image7| image:: ./images/iar_ide_guide/iar_ide_lib_source.png
-.. |image8| image:: ./images/iar_ide_guide/iar_ide_xds110_select.png
-.. |image9| image:: ./images/iar_ide_guide/iar_ide_xds110.png
-.. |image10| image:: ./images/iar_ide_guide/iar_ide_jlink_select.png
-.. |image11| image:: ./images/iar_ide_guide/iar_ide_ijet_select.png
-.. |image12| image:: ./images/iar_ide_guide/iar_ide_max_breakpoints.png
-.. |image13| image:: ./images/iar_ide_guide/iar_ide_debug_error.png
-.. |image14| image:: ./images/iar_ide_guide/iar_ide_debug_error_fix1.png
-.. |image15| image:: ./images/iar_ide_guide/iar_ide_debug_error_fix2.png

@@ -139,54 +139,113 @@ bootutil_img_hash(struct enc_key_data *enc_state, int image_index,
 
 #ifdef CSC_ENABLE_HW_SHA
 
-    /* Initialize SHA hardware */
-    NVIC_EnableIRQ(SHAW_INT_IRQn);
-    NVIC_EnableIRQ(DMA0_INT_IRQn);
-    
-    /* Configure SHA hardware */
-    DL_SHAW_setModeConfig(SHAW_INST, 
-        DL_SHAW_ALGORITHM_SHA_256,
-        DL_SHAW_MODE_HASH);
-    DL_SHAW_enableOutputReadyInterrupt(SHAW_INST);
-    DL_SHAW_enableDMATriggerInterrupt(SHAW_INST);
-    
-    /* Set data length for the entire hash operation */
-    DL_SHAW_setDataLength(SHAW_INST, size, DL_SHAW_MODE_HASH);
-    
-    /* Signal mode and length available */
-    DL_SHAW_signalModeAndLengthAvailable(SHAW_INST);
-    
-    /* Configure DMA to read directly from flash memory */
-    DL_DMA_setSrcAddr(DMA0, DMA0_CH0_CHAN_ID, fap->fa_off);
-    DL_DMA_setDestAddr(DMA0, DMA0_CH0_CHAN_ID, DL_SHAW_DATA_IN_ADDR(SHAW_INST));
-    
-    /* Calculate number of words to transfer for the entire image (header + image + protected TLVs) */
-    uint32_t words_to_transfer = (size + 3) / 4;
-    DL_DMA_setTransferSize(DMA0, DMA0_CH0_CHAN_ID, words_to_transfer);
-    
-    /* Configure DMA transfer properties */
-    DL_DMA_setDestWidth(DMA0, DMA0_CH0_CHAN_ID, DL_DMA_WIDTH_WORD);
-    DL_DMA_setSrcWidth(DMA0, DMA0_CH0_CHAN_ID, DL_DMA_WIDTH_WORD);
-    DL_DMA_setSrcIncrement(DMA0, DMA0_CH0_CHAN_ID, DL_DMA_ADDR_INCREMENT);
-    DL_DMA_setDestIncrement(DMA0, DMA0_CH0_CHAN_ID, DL_DMA_ADDR_UNCHANGED);
-    
-    /* Set up DMA trigger and enable channel */
-    DL_DMA_setTrigger(DMA0, DMA0_CH0_CHAN_ID, SHAW_DMA_TRIGGER, DL_DMA_TRIGGER_TYPE_EXTERNAL);
-    DL_DMA_enableChannel(DMA0, DMA0_CH0_CHAN_ID);
-    
-    /* Start the DMA transfer */
-    DL_SHAW_startDMA(SHAW_INST);
-    
-    /* Wait for DMA completion */
-    while(!dmaDone) {
-        __WFE();  // Wait for interrupt
+    if(size < DL_SHAW_MAX_DMA_SIZE_BYTES){
+        /* Initialize SHA hardware */
+        NVIC_EnableIRQ(SHAW_INT_IRQn);
+        NVIC_EnableIRQ(DMA0_INT_IRQn);
+        
+        /* Configure SHA hardware */
+        DL_SHAW_setModeConfig(SHAW_INST, 
+            DL_SHAW_ALGORITHM_SHA_256,
+            DL_SHAW_MODE_HASH);
+        DL_SHAW_enableOutputReadyInterrupt(SHAW_INST);
+        DL_SHAW_enableDMATriggerInterrupt(SHAW_INST);
+        
+        /* Set data length for the entire hash operation */
+        DL_SHAW_setDataLength(SHAW_INST, size, DL_SHAW_MODE_HASH);
+        
+        /* Signal mode and length available */
+        DL_SHAW_signalModeAndLengthAvailable(SHAW_INST);
+        
+        /* Configure DMA to read directly from flash memory */
+        DL_DMA_setSrcAddr(DMA0, DMA0_CH0_CHAN_ID, fap->fa_off);
+        DL_DMA_setDestAddr(DMA0, DMA0_CH0_CHAN_ID, DL_SHAW_DATA_IN_ADDR(SHAW_INST));
+        
+        /* Calculate number of words to transfer for the entire image (header + image + protected TLVs) */
+        uint32_t words_to_transfer = (size + 3) / 4;
+        DL_DMA_setTransferSize(DMA0, DMA0_CH0_CHAN_ID, words_to_transfer);
+        
+        /* Configure DMA transfer properties */
+        DL_DMA_setDestWidth(DMA0, DMA0_CH0_CHAN_ID, DL_DMA_WIDTH_WORD);
+        DL_DMA_setSrcWidth(DMA0, DMA0_CH0_CHAN_ID, DL_DMA_WIDTH_WORD);
+        DL_DMA_setSrcIncrement(DMA0, DMA0_CH0_CHAN_ID, DL_DMA_ADDR_INCREMENT);
+        DL_DMA_setDestIncrement(DMA0, DMA0_CH0_CHAN_ID, DL_DMA_ADDR_UNCHANGED);
+        
+        /* Set up DMA trigger and enable channel */
+        DL_DMA_setTrigger(DMA0, DMA0_CH0_CHAN_ID, SHAW_DMA_TRIGGER, DL_DMA_TRIGGER_TYPE_EXTERNAL);
+        DL_DMA_enableChannel(DMA0, DMA0_CH0_CHAN_ID);
+        
+        /* Start the DMA transfer */
+        DL_SHAW_startDMA(SHAW_INST);
+        
+        /* Wait for DMA completion */
+        while(!dmaDone) {
+            __WFE();  // Wait for interrupt
+        }
+        
+        /* Wait for the digest to be ready */
+        while (!digestReady) {
+            __WFE();  // Wait for interrupt
+        }
     }
-    
-    /* Wait for the digest to be ready */
-    while (!digestReady) {
-        __WFE();  // Wait for interrupt
+
+    else{
+
+        DL_SHAW_setModeConfig(SHAW_INST,
+            DL_SHAW_ALGORITHM_SHA_256,
+            DL_SHAW_MODE_HASH
+        );
+
+        DL_SHAW_signalModeAvailable(SHAW_INST);
+
+        DL_SHAW_setDataLength(SHAW_INST, size, DL_SHAW_MODE_HASH);
+        
+        uint32_t *messagePtr = (uint32_t *)fap->fa_off;
+        /* Get block information */
+        DL_SHAW_BlockInfo blockInfo;
+        DL_SHAW_getBlockInfo((uint32_t *)messagePtr, size, &blockInfo);
+
+        /* Process full blocks if any */
+        if (blockInfo.numBlocks > 0) {
+            for (uint32_t i = 0; i < blockInfo.numBlocks; i++) {
+                /* Wait for input ready */
+                while (!DL_SHAW_isInputReady(SHAW_INST)) {
+                    /* Wait */
+                }
+
+                /* Write block */
+                DL_SHAW_writeDataBlock(SHAW_INST,
+                    messagePtr,
+                    DL_SHAW_BLOCK_SIZE_BYTES);
+
+                DL_SHAW_signalInterimDataAvailable(SHAW_INST);
+
+                messagePtr += DL_SHAW_BLOCK_SIZE_WORDS;
+            }
+        }
+
+        /* Process remaining partial block */
+        if (blockInfo.numExtraWords > 0 || blockInfo.numExtraBytes > 0) {
+            /* Wait for input ready */
+            while (!DL_SHAW_isInputReady(SHAW_INST)) {
+                /* Wait */
+            }
+
+            /* Write partial block */
+            DL_SHAW_writePartialBlock(SHAW_INST,
+                messagePtr,
+                blockInfo.numExtraWords,
+                blockInfo.numExtraBytes);
+        }
+
+        DL_SHAW_signalLastDataAvailable(SHAW_INST);
+
+        /* Wait for digest */
+        while (!DL_SHAW_isOutputReady(SHAW_INST)) {
+            /* Wait */
+        }
     }
-    
+
     /* Read the digest */
     DL_SHAW_readDigest(SHAW_INST, (uint32_t *)hash_result, DL_SHAW_DIGEST_SIZE_256_BYTES);
     
@@ -548,7 +607,6 @@ bootutil_img_validate(struct enc_key_data *enc_state, int image_index,
     struct image_tlv_iter it;
     uint8_t buf[SIG_BUF_SIZE];
 #ifdef MCUBOOT_SIGN_MLDSA87_STANDARD
-    uint8_t buf_msg[SIG_BUF_SIZE];
     uint32_t size;
 #endif
     uint8_t hash[32];
@@ -573,7 +631,6 @@ bootutil_img_validate(struct enc_key_data *enc_state, int image_index,
     #ifdef MCUBOOT_SIGN_MLDSA87_STANDARD
     size = hdr->ih_hdr_size + hdr->ih_img_size;
 
-    flash_area_read(fap, 0, buf_msg, size);
     #endif
 
     rc = bootutil_tlv_iter_begin(&it, hdr, fap, IMAGE_TLV_ANY, false);
@@ -687,7 +744,7 @@ bootutil_img_validate(struct enc_key_data *enc_state, int image_index,
             }
 
             #if defined(MCUBOOT_SIGN_MLDSA87_STANDARD) && !defined(MCUBOOT_VERIFY_HYBRID)
-            FIH_CALL(bootutil_verify_sig, valid_signature, buf_msg, size,
+            FIH_CALL(bootutil_verify_sig, valid_signature, (uint8_t *)fap->fa_off, size,
                                                            buf, len, key_id);
 
             #else
@@ -781,7 +838,7 @@ bootutil_img_validate(struct enc_key_data *enc_state, int image_index,
             }
             valid_signature = FIH_FAILURE;
             
-            FIH_CALL(bootutil_verify_mldsa_sig, valid_signature, buf_msg, size,
+            FIH_CALL(bootutil_verify_mldsa_sig, valid_signature, (uint8_t *)fap->fa_off, size,
                                                            buf, len, key_id);
             
             current_sig_type = SIG_TYPE_MLDSA;

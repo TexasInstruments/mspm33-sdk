@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MSPM33 Security User Guide &mdash; Security User Guide for MSPM33 MCUs 1.02.00.00 documentation</title>
+  <title>MSPM33 Security User Guide &mdash; Security User Guide for MSPM33 MCUs 1.03.00.01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
@@ -32,7 +32,7 @@
             <a href="index.html" class="icon icon-home"> Security User Guide for MSPM33 MCUs
           </a>
               <div class="version">
-                1.02.00.00
+                1.03.00.01
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -75,7 +75,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#security-architecture">Security Architecture</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#cpu-security">CPU Security</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#global-security-control-gsc">Global Security Control (GSC)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#memory-protection-1">Memory Protection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Memory Protection</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#sram-bank-security">SRAM Bank Security</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#flash-protection">Flash Protection</a></li>
 </ul>
@@ -199,13 +199,15 @@
 <section id="device-types-and-lifecycle-states">
 <h3>Device Types and Lifecycle States<a class="headerlink" href="#device-types-and-lifecycle-states" title="Permalink to this heading">¶</a></h3>
 <ol class="arabic simple">
-<li><p><strong>1ST-BDAY (First Birthday)</strong></p>
+<li><p><strong>1ST-BDAY (First Birthday)</strong></p></li>
+</ol>
 <ul class="simple">
 <li><p>Initial state for devices fresh out of fabrication</p></li>
 <li><p>Identified by specific bit patterns in flash memory</p></li>
 </ul>
-</li>
-<li><p><strong>High Security (HS) States</strong></p>
+<ol class="arabic simple" start="2">
+<li><p><strong>High Security (HS) States</strong></p></li>
+</ol>
 <ul class="simple">
 <li><p><strong>HS-FS (Field Securable)</strong> - Default shipping state, ready for key provisioning</p></li>
 <li><p><strong>HS-KP (Keys Provisioned)</strong> - State after customer keys are provisioned, ready for code provisioning</p></li>
@@ -213,8 +215,6 @@
 <li><p><strong>HS-FA (Failure Analysis)</strong> - State for devices returned to TI for analysis</p></li>
 <li><p><strong>DCOM (Decommissioned)</strong> - End-of-life state when device is no longer usable</p></li>
 </ul>
-</li>
-</ol>
 </section>
 <section id="lifecycle-state-transitions">
 <h3>Lifecycle State Transitions<a class="headerlink" href="#lifecycle-state-transitions" title="Permalink to this heading">¶</a></h3>
@@ -258,26 +258,17 @@
 <h3>PKA (Public Key Accelerator)<a class="headerlink" href="#pka-public-key-accelerator" title="Permalink to this heading">¶</a></h3>
 <p>The EIP-150 PKA supports:</p>
 <ul class="simple">
-<li><p><strong>Key Agreement Schemes</strong></p>
-<ul>
+<li><p><strong>Key Agreement Schemes</strong></p></li>
 <li><p>Elliptic Curve Diffie-Hellman (ECDH and ECDHE)</p></li>
 <li><p>Elliptic curve Password Authenticated Key Exchange by Juggling (ECJ-PAKE)</p></li>
-</ul>
-</li>
-<li><p><strong>Signature and Verification</strong></p>
-<ul>
+<li><p><strong>Signature and Verification</strong></p></li>
 <li><p>Elliptic curve Digital Signature Algorithm (ECDSA)</p></li>
 <li><p>Edwards-curve Digital Signature Algorithm (EdDSA)</p></li>
-<li><p>RSA-2048 (requires SDK software development)</p></li>
-</ul>
-</li>
-<li><p><strong>Curve Support</strong></p>
-<ul>
+<li><p>RSA-2048 signature verification (PSS and PKCS#1 v1.5 padding)</p></li>
+<li><p><strong>Curve Support</strong></p></li>
 <li><p>NIST curves: P224, P256, P384, P521</p></li>
 <li><p>Brainpool curves: 256R1, 384R1, 512R1</p></li>
 <li><p>Curve25519 and Ed25519</p></li>
-</ul>
-</li>
 </ul>
 </section>
 <section id="sha-secure-hash-algorithm">
@@ -291,7 +282,9 @@
 <li><p>DMA support for data transfer</p></li>
 </ul>
 <p>Performance for SHA-256 hash verification of 512KB flash, when core is running at 32 MHz:</p>
-<p><img alt="image0" src="../_images/SHA_perf.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/SHA_perf.png" />
+</figure>
 </section>
 <section id="aes-advanced-encryption-standard">
 <h3>AES (Advanced Encryption Standard)<a class="headerlink" href="#aes-advanced-encryption-standard" title="Permalink to this heading">¶</a></h3>
@@ -303,44 +296,44 @@
 <p><strong>Note</strong>: - Current crypto library is intented to be used just for evaluation purpose, not recommended to be used for production.</p>
 <section id="supported-modules">
 <h4>Supported Modules<a class="headerlink" href="#supported-modules" title="Permalink to this heading">¶</a></h4>
-<p>The crypto library includes the following cryptographic modules: * <strong>Elliptic Curve (EC)</strong>: ECDSA signature generation and verification</p>
+<p>The crypto library includes the following cryptographic modules: * <strong>Elliptic Curve (EC)</strong>: ECDSA signature generation and verification * <strong>RSA</strong>: RSA-2048 signature verification (PKCS#1 v1.5 and PSS padding)</p>
 </section>
 <section id="mspm33-support">
 <h4>MSPM33 Support<a class="headerlink" href="#mspm33-support" title="Permalink to this heading">¶</a></h4>
-<p>For the MSPM33C321x devices, the crypto library provides: * Hardware acceleration via PKA (Public Key Accelerator) for P-256 curve operations * Software-based implementations for P-384 and P-521 curves * Hardware acceleration via AES Advanced peripheral * Hardware TRNG (True Random Number Generator) support</p>
+<p>For the MSPM33C321x devices, the crypto library provides: * Hardware acceleration via PKA (Public Key Accelerator) for P-256 and P-384 curve operations * Software-based implementation for P-521 curves * Hardware acceleration via AES Advanced peripheral * Hardware TRNG (True Random Number Generator) support</p>
 </section>
 <section id="ecdsa-support-this-release">
 <h4>ECDSA Support (This Release)<a class="headerlink" href="#ecdsa-support-this-release" title="Permalink to this heading">¶</a></h4>
 <p>This release focuses on ECDSA (Elliptic Curve Digital Signature Algorithm) functionality for MSPM33 devices.</p>
 <p><strong>Available ECDSA Operations:</strong></p>
 <ol class="arabic simple">
-<li><p><strong>Digital Signature Generation</strong></p>
+<li><p><strong>Digital Signature Generation</strong></p></li>
+</ol>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Crypto_ECDSA_sign()</span></code> - Generic ECDSA signing for any supported curve</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Crypto_ECDSA_P256_sign()</span></code> - Optimized P-256 signing with reduced SRAM usage</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Crypto_ECDSA_P384_sign()</span></code> - Optimized P-384 signing with reduced SRAM usage</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Crypto_ECDSA_P521_sign()</span></code> - Optimized P-521 signing with reduced SRAM usage</p></li>
 </ul>
-</li>
-<li><p><strong>Digital Signature Verification</strong></p>
+<ol class="arabic simple" start="2">
+<li><p><strong>Digital Signature Verification</strong></p></li>
+</ol>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Crypto_ECDSA_verify()</span></code> - Generic ECDSA verification for any supported curve</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Crypto_ECDSA_P256_verify()</span></code> - Optimized P-256 verification with reduced SRAM usage</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Crypto_ECDSA_P384_verify()</span></code> - Optimized P-384 verification with reduced SRAM usage</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Crypto_ECDSA_P521_verify()</span></code> - Optimized P-521 verification with reduced SRAM usage</p></li>
 </ul>
-</li>
-</ol>
-<p><strong>Supported NIST Curves:</strong> * <strong>P-256</strong> (secp256r1): 256-bit prime field curve with hardware PKA acceleration * <strong>P-384</strong> (secp384r1): 384-bit prime field curve with software implementation * <strong>P-521</strong> (secp521r1): 521-bit prime field curve with software implementation</p>
-<p><strong>Key Features:</strong> * Hardware-accelerated PKA operations for P-256 curve * Software-based implementations for P-384 and P-521 curves * Curve-specific optimized APIs with reduced SRAM footprint * Support for pre-hashed message digests (SHA-256 compatible) * Comprehensive error checking and status reporting via <code class="docutils literal notranslate"><span class="pre">crypto_ec_stat_t</span></code> * NIST CAVP test vector validated implementations</p>
+<p><strong>Supported NIST Curves:</strong> * <strong>P-256</strong> (secp256r1): 256-bit prime field curve with hardware PKA acceleration * <strong>P-384</strong> (secp384r1): 384-bit prime field curve with hardware PKA acceleration * <strong>P-521</strong> (secp521r1): 521-bit prime field curve with software implementation</p>
+<p><strong>Key Features:</strong> * Hardware-accelerated PKA operations for P-256 and P-384 curves * Software-based implementation for P-521 curve * Curve-specific optimized APIs with reduced SRAM footprint * Support for pre-hashed message digests (SHA-256 compatible) * Comprehensive error checking and status reporting via <code class="docutils literal notranslate"><span class="pre">crypto_ec_stat_t</span></code> * NIST CAVP test vector validated implementations</p>
 <p><strong>Example Applications</strong></p>
 <p>The SDK includes working examples demonstrating ECDSA operations:</p>
 <p><strong>ECDSA Signature Generation Examples:</strong> * <code class="docutils literal notranslate"><span class="pre">ec_ecdsa_p256_sign</span></code> - P-256 signature generation * <code class="docutils literal notranslate"><span class="pre">ec_ecdsa_p384_sign</span></code> - P-384 signature generation * <code class="docutils literal notranslate"><span class="pre">ec_ecdsa_p521_sign</span></code> - P-521 signature generation</p>
 <p><strong>ECDSA Signature Verification Examples:</strong> * <code class="docutils literal notranslate"><span class="pre">ec_ecdsa_p256_sha256_verify</span></code> - P-256 signature verification with SHA-256 * <code class="docutils literal notranslate"><span class="pre">ec_ecdsa_p384_verify</span></code> - P-384 signature verification * <code class="docutils literal notranslate"><span class="pre">ec_ecdsa_p521_verify</span></code> - P-521 signature verification</p>
 <p><strong>Performance Considerations</strong></p>
 <ul class="simple">
-<li><p>P-256 curve benefits from hardware PKA acceleration for significantly improved performance</p></li>
-<li><p>P-384 and P-521 curves use software implementations</p></li>
+<li><p>P-256 and P-384 curves benefit from hardware PKA acceleration for significantly improved performance</p></li>
+<li><p>P-521 curve uses software implementation</p></li>
 <li><p>Curve-specific optimized APIs (P256/P384/P521) provide better SRAM efficiency compared to generic APIs</p></li>
 <li><p>Pre-hashing messages before signing/verification is recommended for large data</p></li>
 </ul>
@@ -367,8 +360,8 @@
 <li><p>Handles violation reporting and error logging</p></li>
 </ul>
 </section>
-<section id="memory-protection-1">
-<span id="id1"></span><h3>Memory Protection<a class="headerlink" href="#memory-protection-1" title="Permalink to this heading">¶</a></h3>
+<section id="id1">
+<h3>Memory Protection<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
 <section id="sram-bank-security">
 <h4>SRAM Bank Security<a class="headerlink" href="#sram-bank-security" title="Permalink to this heading">¶</a></h4>
 <ul class="simple">
@@ -406,8 +399,7 @@
 <section id="debug-level-definitions">
 <h4>Debug Level Definitions<a class="headerlink" href="#debug-level-definitions" title="Permalink to this heading">¶</a></h4>
 <ul class="simple">
-<li><p><strong>Level 0 (L0) - Full Debug Access</strong></p>
-<ul>
+<li><p><strong>Level 0 (L0) - Full Debug Access</strong></p></li>
 <li><p><strong>Debugger Access Scope</strong>: External debugger has complete visibility into both Secure and Non-Secure regions via DSSM</p></li>
 <li><p><strong>TrustZone Domains Visible to Debugger</strong>: Full access to Secure (S) and Non-Secure (NS) memory, peripherals, and CPU state</p></li>
 <li><p><strong>Debugger Capabilities</strong>:</p>
@@ -419,10 +411,7 @@
 <li><p>Debugger can view full CPU register state including secure stack pointers</p></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><p><strong>Level 1 (L1) - Non-Secure Debug Only</strong></p>
-<ul>
+<li><p><strong>Level 1 (L1) - Non-Secure Debug Only</strong></p></li>
 <li><p><strong>Debugger Access Scope</strong>: External debugger access restricted to Non-Secure regions only via DSSM</p></li>
 <li><p><strong>TrustZone Domains Visible to Debugger</strong>: Limited to Non-Secure (NS) memory and peripherals</p></li>
 <li><p><strong>Debugger Capabilities</strong>:</p>
@@ -434,16 +423,11 @@
 <li><p><strong>Blocked from Debugger</strong>: Secure memory regions, secure peripherals, SAU/IDAU configuration</p></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><p><strong>Level 2 (L2) - No Debug Access via DSSM</strong></p>
-<ul>
+<li><p><strong>Level 2 (L2) - No Debug Access via DSSM</strong></p></li>
 <li><p><strong>Debugger Access Scope</strong>: All debug access through DSSM disabled</p></li>
 <li><p><strong>TrustZone Domains Visible to Debugger</strong>: No access to any security domain via DSSM</p></li>
 <li><p><strong>Debugger Capabilities</strong>: No debug commands accepted through DSSM</p></li>
 <li><p><strong>Note</strong>: L2 restricts debug access through DSSM but does not physically disable the SWD port. The SWD port can be separately disabled via NONMAIN BCR configuration (<code class="docutils literal notranslate"><span class="pre">swdEnable</span></code> setting)</p></li>
-</ul>
-</li>
 </ul>
 </section>
 <section id="swd-port-control">
@@ -485,7 +469,9 @@
 <p>Trusted Firmware-M (TF-M) implements the Secure Processing Environment (SPE) for Armv8-M, Armv8.1-M architectures. It is the platform security architecture reference implementation aligning with PSA Certified guidelines, enabling chips, Real Time Operating Systems and devices to become PSA Certified.</p>
 <p>TF-M relies on an isolation boundary between the Non-secure Processing Environment (NSPE) and the Secure Processing Environment (SPE). It can but is not limited to using the Arm TrustZone technology on Armv8-M and Armv8.1-M architectures.</p>
 <p>TF-M consists of: * Secure Boot to authenticate NSPE and SPE images * TF-M Core for controlling the isolation, communication and execution within SPE and with NSPE * Crypto, Internal Trusted Storage (ITS), Protected Storage (PS), Firmware Update and Attestation secure services</p>
-<p><img alt="image1" src="../_images/design_for_TFM.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/design_for_TFM.png" />
+</figure>
 <p>Applications and Libraries in the Non-secure Processing Environment can utilize these secure services with a standardized set of PSA Functional APIs. Applications running on Cortex-M devices can leverage TF-M services to ensure secure connection with edge gateways and IoT cloud services. It also protects the critical security assets such as sensitive data, keys and certificates on the platform. TF-M is supported on several Cortex-M based Microcontrollers and Real Time Operating Systems (RTOS).</p>
 <p><strong>Note</strong>: - Support for TFM will be enabled in future releases.</p>
 </section>

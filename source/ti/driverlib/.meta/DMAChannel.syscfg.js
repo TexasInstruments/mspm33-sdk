@@ -183,6 +183,11 @@ function validatePinmux(inst, validation){
         if(["fill","table"].includes(inst.addressMode)){
             validation.logError("Selected Address Mode only available on Full DMA Channels.", inst, ["addressMode", "channelID"]);
         }
+
+        if(["gather"].includes(inst.addressMode) && hasGatherMode()){
+            validation.logError("Selected Address Mode only available on Full DMA Channels.", inst, ["addressMode", "channelID"]);
+        }
+
         if(inst.enableEarlyInterrupt){
             validation.logError("Early IRQ only available on Full DMA Channels.", inst, ["enableEarlyInterrupt", "channelID"]);
         }
@@ -358,6 +363,20 @@ function onChangeAddressMode(inst, ui) {
             ui.tableSize.hidden = false;
             ui.tableSrcAddressInc.hidden = false;
             break;
+        case "gather":
+            ui.transferMode.hidden = false;
+            ui.transferMode.readOnly = false;
+            ui.configureTransferSize.hidden = false;
+            ui.transferSize.hidden = !inst.configureTransferSize;
+            ui.srcLength.readOnly = false;
+            ui.srcIncDec.hidden = false;
+            ui.dstLength.readOnly = false;
+            ui.dstIncDec.hidden = true;
+            ui.fillIncrement.hidden = true;
+            ui.fillIncAmount.hidden = true;
+            ui.tableSize.hidden = true;
+            ui.tableSrcAddressInc.hidden = true;
+            ui.destIncrement.readOnly = true;
         default:
             //throw 'onChangeAddressMode given incorrect inst';
             break;
@@ -437,6 +456,30 @@ function triggerMapNumber(inst) {
     return options;
 }
 */
+
+function getAddressModeOptions() {
+    let options = [
+        {name: "f2f", displayName: "Fixed addr. to Fixed addr."},
+        {name: "f2b", displayName: "Fixed addr. to Block addr."},
+        {name: "b2f", displayName: "Block addr. to Fixed addr."},
+        {name: "b2b", displayName: "Block addr. to Block addr."},
+        {name: "fill", displayName: "Fill Data Extended Mode"},
+        {name: "table", displayName: "Data Table Extended Mode"}
+    ];
+    if(hasGatherMode()) {
+        options.push(
+            {name: "gather", displayName: "Gather Data Extended Mode"}
+        );
+    }
+    return options;
+}
+
+function hasGatherMode() {
+    if( Common.isDeviceFamily_PARENT_MSPM33C321X()) {
+        return true;
+    }
+    return false;
+}
 
 const eventOptions = [
     // DL_DMA_[...]
@@ -595,14 +638,7 @@ of addresses and data and uses the DMA to efficiently program that data to their
 addresses without CPU intervention
         `,
         default: "f2f",
-        options: [
-            {name: "f2f", displayName: "Fixed addr. to Fixed addr."},
-            {name: "f2b", displayName: "Fixed addr. to Block addr."},
-            {name: "b2f", displayName: "Block addr. to Fixed addr."},
-            {name: "b2b", displayName: "Block addr. to Block addr."},
-            {name: "fill", displayName: "Fill Data Extended Mode"},
-            {name: "table", displayName: "Data Table Extended Mode"}
-        ],
+        options: getAddressModeOptions,
         onChange: onChangeAddressMode
     },
     {

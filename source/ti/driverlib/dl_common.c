@@ -48,10 +48,6 @@ void DL_Common_EnableCpuCycleCounter(void)
     }
 }
 
-static inline uint32_t DL_Common_GetCpuCycleCount(void)
-{
-    return DWT->CYCCNT;
-}
 
 void DL_Common_delayCycles(uint32_t cycles)
 {

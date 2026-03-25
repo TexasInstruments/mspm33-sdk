@@ -45,3 +45,16 @@ Documentation
    :maxdepth: 1
 
    ides_clang
+
+Arm GCC Toolchain
+-----------------------
+| The MSPM33 SDK supports development using the open-source `Arm GNU Toolchain <https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain>`_ .
+|
+| Arm GCC is supported by Code Composer Studio (CCS).
+
+Documentation
+~~~~~~~~~~~~~~~~~~~~
+.. toctree::
+   :maxdepth: 1
+
+   ides_gcc

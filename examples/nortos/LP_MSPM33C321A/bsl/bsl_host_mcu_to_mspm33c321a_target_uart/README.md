@@ -48,14 +48,16 @@ SysConfig allows developers to easily configure unused pins by selecting **Board
 
 ## Example Usage
 
-This example requires the usage of two LaunchPads. One of them will run the host application, which will invoke BSL on the other board. The host application will communicate with the target device using various BSL commands.
+This example requires the usage of two LaunchPads. One of them will run the host application, which will communicate with the invoked BSL on the other board, using various BSL commands.
 
 PA10 and PA11 are UART TX and RX pins on both the host device and target device. Connect the Host's TX pin PA10 to the target's RX pin PA11. Then connect the Host's RX pin PA11 to the target's TX pin PA10.
 
 Compile and load the example on the BSL host device. When the program has halted at main(), perform the below steps:
-1. On the LP-MSPM33C321A, hold the BSL Invoke button(S1), and then trigger a system reset by pressing the NRST button(ensuring that the BSL Invoke button is held while pressing the NRST button). Then let go of both buttons
+1. On the target LP-MSPM33C321A, hold the BSL Invoke button(S1), and then trigger a system reset by pressing the NRST button(ensuring that the BSL Invoke button is held while pressing the NRST button). Then let go of both buttons
 2. Within 4 seconds of completing Step 1, continue execution of the program on the host LP.
 
 If Step 1 and Step 2 are performed successfully, users will be able to connect to the target device and observe that its Flash has been programmed.
 
-> NOTE : Ensure that your target device does not have its Flash empty, one may load any dummy application(which does not enforce any GSC or TrustZone protections on flash) onto the flash of the target device.
+> NOTE : It is recommended that your target device does not have its Flash empty, one may load any dummy application(which does not enforce any GSC or TrustZone protections on memory which is to be programmed) onto the flash of the target device. This is to prevent it from going into low power mode.
+
+> NOTE : In order to connect to two LaunchPads, users will require starting two sessions of Code Composer Studio, and possibly have to change the Probe Serial Number of each LaunchPad

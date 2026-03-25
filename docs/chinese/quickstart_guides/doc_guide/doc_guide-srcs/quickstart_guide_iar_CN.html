@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>适用于 IAR 的 MSPM0 SDK 快速入门指南 &mdash; MSPM33 SDK Quick Start Guides 1.02.00.00 documentation</title>
+  <title>适用于 IAR 的 MSPM0 SDK 快速入门指南 &mdash; MSPM33 SDK Quick Start Guides 1.03.00.01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
@@ -33,7 +33,7 @@
             <a href="index.html" class="icon icon-home"> MSPM33 SDK Quick Start Guides
           </a>
               <div class="version">
-                1.02.00.00
+                1.03.00.01
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -106,16 +106,24 @@
 <ol class="arabic">
 <li><p>下载并安装最新 <a class="reference external" href="#prerequisites">MSPM0 SDK</a>。请注意，SDK 安装程序有 Windows 版、Linux 版和 MacOS 版。以下步骤显示在 Windows 版中，但 Linux 或 MacOS 版也应遵循类似方法。</p></li>
 <li><p>执行安装程序。点击 <strong>Next</strong>。</p>
-<p><img alt="image0" src="../_images/sdk_install_1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/sdk_install_1.png" />
+</figure>
 </li>
 <li><p>选择 <strong>Installation Directory</strong> 并点击 <strong>Next</strong>。注意安装目录，默认情况下为 <code class="docutils literal notranslate"><span class="pre">c:\ti</span></code>，SDK 将安装在 <code class="docutils literal notranslate"><span class="pre">C:\ti\mspm0_sdk_&lt;version&gt;\</span></code>。此路径在以下部分中称为 <code class="docutils literal notranslate"><span class="pre">&lt;MSPM0_SDK_INSTALL_DIR&gt;</span></code>。</p>
-<p><img alt="image1" src="../_images/sdk_install_2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/sdk_install_2.png" />
+</figure>
 </li>
 <li><p>点击 <strong>Next</strong></p>
-<p><img alt="image2" src="../_images/sdk_install_3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/sdk_install_3.png" />
+</figure>
 </li>
 <li><p>完成安装后，点击 <strong>Finish</strong>。</p>
-<p><img alt="image3" src="../_images/sdk_install_4.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/sdk_install_4.png" />
+</figure>
 </li>
 </ol>
 </section>
@@ -124,13 +132,19 @@
 <p>在 IAR 中，需要添加最新 MSPM0 SDK 版本。 此步骤只需执行一次，或在更新 SDK 时执行。</p>
 <ol class="arabic">
 <li><p>在 IAR 中，依次点击 <strong>Tools → Configure Custom Argument Variables</strong></p>
-<p><img alt="image4" src="../_images/iar_sdk_install_1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_sdk_install_1.png" />
+</figure>
 </li>
 <li><p>点击 <strong>Global</strong> 选项卡，然后点击 <strong>Import</strong></p>
-<p><img alt="image5" src="../_images/iar_sdk_install_2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_sdk_install_2.png" />
+</figure>
 </li>
 <li><p>导航至 SDK 文件夹中的 <code class="docutils literal notranslate"><span class="pre">&lt;MSPM0_SDK_INSTALL_DIR&gt;/tools/iar/</span></code>，然后打开 <strong>MSPM0_SDK.custom_argvars</strong>。</p>
-<p><img alt="image6" src="../_images/iar_sdk_install_3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_sdk_install_3.png" />
+</figure>
 </li>
 <li><p>SDK 变量现在应已安装在 IAR 中。点击“OK”关闭该窗口。</p>
 <div class="line-block">
@@ -138,7 +152,9 @@
 <div class="line">如果安装了 SDK 的早期版本，请确保将路径更新为您要使用的当前版本。</div>
 <div class="line">同样，如果在<a class="reference external" href="#install-sysconfig-for-mspm0">第 5 部分.为 MSPM0 安装 SysConfig</a> 中安装的 SysConfig 路径不正确或指向早期版本，请进行修改。</div>
 </div>
-<p><img alt="image7" src="../_images/iar_sdk_install_4.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_sdk_install_4.png" />
+</figure>
 </li>
 </ol>
 </section>
@@ -149,19 +165,27 @@
 <ol class="arabic">
 <li><p>从 <a class="reference external" href="https://www.ti.com/tool/SYSCONFIG">ti.com</a> 下载并安装 SysConfig 独立版本（1.19.x 或更高版本）</p></li>
 <li><p>在 IAR 中，从菜单中依次选择 <strong>Tools → Configure Viewers</strong>。</p>
-<p><img alt="image8" src="../_images/sysconfig_configure_viewers.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/sysconfig_configure_viewers.png" />
+</figure>
 </li>
 <li><p>点击 <strong>Import</strong></p>
-<p><img alt="image9" src="../_images/sysconfig_configure_viewer_import.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/sysconfig_configure_viewer_import.png" />
+</figure>
 </li>
 <li><p>导航至 SDK 文件夹中的 <code class="docutils literal notranslate"><span class="pre">&lt;MSPM0_SDK_INSTALL_DIR&gt;/tools/iar/</span></code>，然后打开 <strong>sysconfig_iar_setup.xml</strong>。</p>
-<p><img alt="image10" src="../_images/sysconfig_iar_setup.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/sysconfig_iar_setup.png" />
+</figure>
 </li>
 <li><div class="line-block">
 <div class="line">独立版 SysConfig 将与 .syscfg 文件关联。</div>
 <div class="line">点击“OK”关闭窗口。</div>
 </div>
-<p><img alt="image11" src="../_images/sysconfig_configure_viewers_done.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/sysconfig_configure_viewers_done.png" />
+</figure>
 </li>
 <li><p>仔细检查 <strong>SYSCONFIG_ROOT</strong> 自定义参数变量，确认其正确指向 SysConfig 文件夹，如<a class="reference external" href="#add-mspm0-sdk-to-iar">第 4 部分.将 MSPM0 SDK 添加到 IAR</a> 所述。</p></li>
 </ol>
@@ -170,16 +194,24 @@
 <h2>6. 在 IAR 中导入和编译 SDK 示例<a class="headerlink" href="#iar-sdk" title="Permalink to this heading">¶</a></h2>
 <ol class="arabic">
 <li><p>在 IAR 中，从菜单中依次选择 <strong>File → Open Workspace</strong>。</p>
-<p><img alt="image12" src="../_images/iar_example_1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_example_1.png" />
+</figure>
 </li>
 <li><p>在位于 <code class="docutils literal notranslate"><span class="pre">&lt;MSPM0_SDK_INSTALL_DIR&gt;/examples/</span></code> 的 SDK 示例中导航至 IAR 文件夹，并打开 .eww 工作区文件。例如 <code class="docutils literal notranslate"><span class="pre">&lt;MSPM0_SDK_INSTALL_DIR&gt;/examples/nortos/LP_MSPM0L1306/driverlib/gpio_toggle_output/iar/gpio_toggle_output_LP_MSPM0L1306_nortos_iar.template.eww</span></code>。</p>
-<p><img alt="image13" src="../_images/iar_example_2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_example_2.png" />
+</figure>
 </li>
 <li><p>点击消息上的“OK”。</p>
-<p><img alt="image14" src="../_images/iar_example_3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_example_3.png" />
+</figure>
 </li>
 <li><p>选择一个文件夹以安装示例。</p>
-<p><img alt="image15" src="../_images/iar_example_4.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_example_4.png" />
+</figure>
 </li>
 <li><p>要编译示例，在工程中右键点击并选择 <strong>Make</strong>。 请注意，SysConfig 工程将在<em>“SysConfig Generated Files”</em>文件夹中自动生成文件。</p>
 <div class="line-block">
@@ -187,11 +219,17 @@
 <div class="line">有关支持 SysConfig 的示例的完整列表，请查看 <a class="reference external" href="../../../sdk_users_guide/doc_guide/doc_guide-srcs/examples_guide_CN.html">MSPM0 SDK 示例指南</a>。</div>
 <div class="line">更多有关将 SysConfig 与 MSPM0 配合使用的一般信息，请参阅 SDK 工具指南中提供的<a class="reference external" href="../../../tools/sysconfig_guide/doc_guide/doc_guide-srcs/sysconfig_guide_CN.html">将 SysConfig 与 MSPM0 配合使用</a>。</div>
 </div>
-<p><img alt="image16" src="../_images/iar_example_5a.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_example_5a.png" />
+</figure>
 </li>
 <li><p>点击 <strong>Download and Debug</strong> 按钮下载代码。</p>
-<p><img alt="image17" src="../_images/iar_example_6a.png" /></p>
-<p><img alt="image18" src="../_images/iar_example_6b.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_example_6a.png" />
+</figure>
+<figure class="align-default">
+<img alt="" src="../_images/iar_example_6b.png" />
+</figure>
 </li>
 </ol>
 </section>

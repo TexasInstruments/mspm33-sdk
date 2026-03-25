@@ -92,6 +92,14 @@ __STATIC_INLINE void DL_Common_updateReg(
  */
 void DL_Common_delayCycles(uint32_t cycles);
 
+#if defined(__CM33_REV) && __CM33_REV >= 0x1U
+void DL_Common_EnableCpuCycleCounter(void);
+static inline uint32_t DL_Common_GetCpuCycleCount(void)
+{
+    return DWT->CYCCNT;
+}
+#endif
+
 #ifdef __cplusplus
 }
 #endif

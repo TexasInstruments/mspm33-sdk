@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>将 PEmicro 接口与 MSPM0 配合使用 &mdash; MSPM33 Tools Guide 1.02.00.00 documentation</title>
+  <title>将 PEmicro 接口与 MSPM0 配合使用 &mdash; MSPM33 Tools Guide 1.03.00.01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
@@ -33,7 +33,7 @@
             <a href="index.html" class="icon icon-home"> MSPM33 Tools Guide
           </a>
               <div class="version">
-                1.02.00.00
+                1.03.00.01
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -111,14 +111,20 @@
 <ol class="arabic">
 <li><p>下载 <a class="reference external" href="https://www.pemicro.com/downloads/download_file.cfm?download_id=412">PEmicro GDB Server 插件</a>。</p></li>
 <li><p>在 CCS 菜单栏中，依次点击“Help → Install New Software”。</p>
-<p><img alt="image0" src="../_images/pemicro_ccs_1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/pemicro_ccs_1.png" />
+</figure>
 </li>
 <li><p>按如下所示添加 PEmicro 存储库。点击“Add”按钮打开“Add Repository”对话框。</p></li>
 <li><p>然后点击“Archive”导航到下载的插件文件，并选择此文件。</p>
-<p><img alt="image1" src="../_images/pemicro_ccs_2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/pemicro_ccs_2.png" />
+</figure>
 </li>
 <li><p>用户可根据需要为存储库命名。选项随后将显示在“Available Software”窗口中。</p>
-<p><img alt="image2" src="../_images/pemicro_ccs_3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/pemicro_ccs_3.png" />
+</figure>
 </li>
 <li><p>选择适当插件，并按照说明继续安装</p>
 <p><strong>注意</strong>：如果插件未显示在窗口中，用户可尝试调整 CCS 代理设置。</p>
@@ -130,13 +136,19 @@
 <h3>3.2. 调试配置<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
 <ol class="arabic">
 <li><p>在 Project Explorer 中右键点击工程名称（本示例中为“Test”），显示以下对话框：</p>
-<p><img alt="image3" src="../_images/pemicro_ccs_4.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/pemicro_ccs_4.png" />
+</figure>
 </li>
 <li><p>然后选择“Debug Configurations”打开此窗口。</p>
-<p><img alt="image4" src="../_images/pemicro_ccs_5.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/pemicro_ccs_5.png" />
+</figure>
 </li>
 <li><p>双击“GDB PEmicro Interface Debugging”，创建“Test”工程的调试实例。</p>
-<p><img alt="image5" src="../_images/pemicro_ccs_6.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/pemicro_ccs_6.png" />
+</figure>
 </li>
 <li><p>对器件进行编程和调试</p></li>
 </ol>
@@ -160,7 +172,9 @@
 <h2>4. 在 Keil uVision IDE 上将 PEmicro 工具与 TI MSPM0 配合使用<a class="headerlink" href="#keil-uvision-ide-pemicro-ti-mspm0" title="Permalink to this heading">¶</a></h2>
 <ol class="arabic">
 <li><p>通过“Options for Target”-&gt;“Use”中的下拉框，用户可选择“Pemicro Debugger”，如下所示：</p>
-<p><img alt="image6" src="../_images/pemicro_keil_1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/pemicro_keil_1.png" />
+</figure>
 </li>
 </ol>
 </section>
@@ -168,7 +182,9 @@
 <h2>5. 在 IAR Workbench for Arm IDE 上将 PEmicro 工具与 TI MSPM0 配合使用<a class="headerlink" href="#iar-workbench-for-arm-ide-pemicro-ti-mspm0" title="Permalink to this heading">¶</a></h2>
 <ol class="arabic">
 <li><p>在“Options for Node MSPM0x_security”下的“Debugger”类别中，用户应从“Driver”下拉框中选择“PE micro”，如下所示：</p>
-<p><img alt="image7" src="../_images/pemicro_iar_1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/pemicro_iar_1.png" />
+</figure>
 </li>
 </ol>
 </section>

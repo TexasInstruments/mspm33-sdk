@@ -61,6 +61,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="#ecdsa">ECDSA 密钥生成</a></li>
 </ul>
 
         </div>
@@ -140,7 +141,9 @@
 <section id="id5">
 <h3>2.2 运行引导示例<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h3>
 <p>构建两个示例。在刷写设备之前，转到<strong>属性 → 调试</strong>，并从调试页面左侧的列表中选择 MSPM33 Flash 设置。然后将擦除方法配置为擦除主存储器和非主存储器（如下所示），并将重置类型配置为硬重置（如果可用）。</p>
-<p><img alt="image0" src="doc_guide-srcs/images/main_nonmain_erase.png" /></p>
+<figure class="align-default">
+<img alt="" src="doc_guide-srcs/images/main_nonmain_erase.png" />
+</figure>
 <p>之后，开始调试项目。现在应该进入主函数。现在设备上不应该有任何有效的镜像，因此运行示例应该会导致红色 LED 闪烁。</p>
 </section>
 <section id="id6">
@@ -148,10 +151,12 @@
 <p>要将二进制镜像加载到设备上，请在调试引导应用程序时按照以下步骤操作：</p>
 <ol class="arabic">
 <li><p>在刷写 CSC 镜像之前，确保将擦除配置设置为不擦除 Flash 存储器。</p>
-<p><img alt="image1" src="doc_guide-srcs/images/donot_erase_flash.png" /></p>
+<figure class="align-default">
+<img alt="" src="doc_guide-srcs/images/donot_erase_flash.png" />
+</figure>
 </li>
 <li><p>打开设备的内存浏览器，可以通过导航到<strong>查看 → 内存浏览器</strong>找到。要加载二进制镜像，暂停设备运行，选择<strong>加载内存</strong></p>
-<p><img alt="image2" src="doc_guide-srcs/images/load_mem1.png" /> <img alt="image3" src="doc_guide-srcs/images/load_mem2.png" /></p>
+<p><img alt="image0" src="doc_guide-srcs/images/load_mem1.png" /> <img alt="image1" src="doc_guide-srcs/images/load_mem2.png" /></p>
 </li>
 <li><p>指向在<a class="reference external" href="#应用程序镜像示例构建">构建应用程序镜像</a>中构建的特定示例镜像。建议在按照签名步骤后加载镜像。首先参考有关如何签名示例应用程序镜像的分步说明部分。生成签名镜像后，通过加载内存加载它。从下拉列表中选择二进制文件类型，如下所示。点击底部的<strong>下一步</strong>。</p></li>
 <li><p>最后，输入起始地址。这应该与第一个内存槽的值以及文件名中列出的值匹配。写入后，选择<strong>完成</strong>。</p></li>
@@ -167,9 +172,12 @@
 <p>ECDSA 和 MLDSA 目前是 CSC 支持的认证方法。 公钥将存储在设备闪存中，私钥将由开发人员安全维护。 mcuboot 文件夹中包含 imgtool.py python 脚本，可以签名镜像和创建密钥。</p>
 <p>为了生成新密钥，用户可以输入以下命令创建一个名为 newkey.pem 的密钥（或任何合适的名称）：</p>
 <p>``` cd source/third_party/mcuboot/</p>
-<p>#ECDSA 密钥生成 scripts/imgtool.py keygen -k newkey.pem</p>
 </section>
 </section>
+</section>
+<section id="ecdsa">
+<h1>ECDSA 密钥生成<a class="headerlink" href="#ecdsa" title="Permalink to this heading">¶</a></h1>
+<p>scripts/imgtool.py keygen -k newkey.pem</p>
 </section>
 
 

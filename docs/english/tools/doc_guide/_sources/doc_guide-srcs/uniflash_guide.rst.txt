@@ -4,7 +4,7 @@ UniFlash Guide for MSPM33
 1. Introduction
 ---------------
 
-This guide describes the installation of the UniFlash tool and general practice of using it with TI’s MSPM33 devices.
+This guide describes the installation of the UniFlash tool and general practice of using it with TI's MSPM33 devices.
 
 This document is not intended to explain the use of UniFlash in detail. Please refer to the `UniFlash Quick Start Guide <https://software-dl.ti.com/ccs/esd/uniflash/docs/v7_1/uniflash_quick_start_guide.html>`__ for more information.
 
@@ -26,36 +26,37 @@ UniFlash can connect and interact with the device either with a debugger connect
 
 The debugging interface such as XDS110 can be used by UniFlash to program the device. One can select the device (the on-chip version as shown below) and specific interface that will be used to start. Alternatively, UniFlash may auto-detect the MSPM33 LaunchPad if connected. The LaunchPad includes the Texas Instruments XDS110 USB Debug Probe.
 
-|image0|
+.. figure:: ./images/uniflash_guide/uniflash_guide_jtag_start.png
+   :alt: 
 
 3.1 Loading an Image.
 ~~~~~~~~~~~~~~~~~~~~~
 
 1. Compile an application that is in a compatible format, such as a .out. All possible file types are described in the `UniFlash Quick Start Guide <https://software-dl.ti.com/ccs/esd/uniflash/docs/v7_1/uniflash_quick_start_guide.html>`__.
 
-2. Upload the flash image file as shown. |image1|
+2. Upload the flash image file as shown. |image0|
 
-3. Adjust erase settings or other information as necessary. If performing a Factory Reset, please take special consideration as **NONMAIN will be erased in the process.** It is then the user’s responsibility to re-program non-main. It is recommended to verify this is correct behavior before proceeding with a Factory Reset.
+3. Adjust erase settings or other information as necessary. If performing a Factory Reset, please take special consideration as **NONMAIN will be erased in the process.** It is then the user's responsibility to re-program non-main. It is recommended to verify this is correct behavior before proceeding with a Factory Reset.
 
 Additionally, if using the factory reset, a password can be optionally provided. For more information, please refer to the corresponding device TRM.
 
 4. Click **Load Image**. The image should be loaded correctly.
 
-   |image2|
+   .. figure:: ./images/uniflash_guide/uniflash_guide_use_3.png
+      :alt: 
 
 3.2 Reading From Memory
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Using the Memory tab, UniFlash can also inspect the flash memory of the device simply by selecting **Read Target Device**.
 
-|image3|
+.. figure:: ./images/uniflash_guide/uniflash_guide_jtag_read.png
+   :alt: 
 
 5. Known Issues and Frequently Asked Questions (FAQ)
 ----------------------------------------------------
 
 Please refer to the `Known Issues and FAQ <../../../../../known_issues_FAQ.html>`__ for more information
 
-.. |image0| image:: ./images/uniflash_guide/uniflash_guide_jtag_start.png
-.. |image1| image:: ./images/uniflash_guide/uniflash_guide_use_2.png
-.. |image2| image:: ./images/uniflash_guide/uniflash_guide_use_3.png
-.. |image3| image:: ./images/uniflash_guide/uniflash_guide_jtag_read.png
+.. |image0| image:: ./images/uniflash_guide/uniflash_guide_use_2.png
+

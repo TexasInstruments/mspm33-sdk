@@ -46,20 +46,19 @@ TI 建议使用 ``cmsis_dsp_empty`` 来轻松启动包括库和头文件的空�
 
    在 CCS 中，可在 ``${COM_TI_MSPM0_SDK_INSTALL_DIR}/source/third_party/CMSIS/DSP/Include`` 中访问此路径
 
-   |image0|
+   .. figure:: ./images/cmsis_dsp_include.png
+      :alt: 
 
 2. 添加预编译库：
 
    在 CCS 中，TI Arm Clang 的库位于 ``${COM_TI_MSPM0_SDK_INSTALL_DIR}/source/third_party/CMSIS/DSP/lib/ticlang/m0p/arm_cortexM0l_math.a``
 
-   |image1|
+   .. figure:: ./images/cmsis_dsp_addLib.png
+      :alt: 
 
-3. 将“arm_math.h”包括到源文件：
+3. 将“arm\_math.h”包括到源文件：
 
-   |image2|
+   .. figure:: ./images/cmsis_dsp_source.png
+      :alt: 
 
 4.使用 CMSIS DSP 和 MSPM0 开始开发！
-
-.. |image0| image:: ./images/cmsis_dsp_include.png
-.. |image1| image:: ./images/cmsis_dsp_addLib.png
-.. |image2| image:: ./images/cmsis_dsp_source.png

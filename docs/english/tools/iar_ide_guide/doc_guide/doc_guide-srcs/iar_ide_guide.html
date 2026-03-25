@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IAR Embedded Workbench IDE Version 9.70.2 for MSPM33 MCUs &mdash; IAR Embedded Workbench IDE for MSPM33 MCUs Documentation 1.02.00.00 documentation</title>
+  <title>IAR Embedded Workbench IDE Version 9.70.2 for MSPM33 MCUs &mdash; IAR Embedded Workbench IDE for MSPM33 MCUs Documentation 1.03.00.01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
@@ -32,7 +32,7 @@
             <a href="index.html" class="icon icon-home"> IAR Embedded Workbench IDE for MSPM33 MCUs Documentation
           </a>
               <div class="version">
-                1.02.00.00
+                1.03.00.01
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -213,10 +213,14 @@
 <ol class="arabic">
 <li><p>Click <strong>Options</strong> → <strong>Debugger</strong> → <strong>Download</strong> → <strong>Override default .board file</strong> → <strong>Edit</strong>.</p></li>
 <li><p>Select the 2nd element and then click Okay:</p>
-<p><img alt="image0" src="../_images/iar_ide_non_main.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_ide_non_main.png" />
+</figure>
 </li>
 <li><p>Add <code class="docutils literal notranslate"><span class="pre">--non_main_erase</span></code> as an extra parameter:</p>
-<p><img alt="image1" src="../_images/iar_ide_non_main_2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_ide_non_main_2.png" />
+</figure>
 </li>
 </ol>
 </section>
@@ -224,7 +228,9 @@
 <h3>2.8 Overriding Pre-built libraries<a class="headerlink" href="#overriding-pre-built-libraries" title="Permalink to this heading">¶</a></h3>
 <p>Projects might include pre-built libraries which simplify development and build time; however, they don’t allow developers to modify source code easily.</p>
 <p>An example of such libraries is the MSPM33 DriverLib which is shown below.</p>
-<p><img alt="image2" src="../_images/iar_ide_lib.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_ide_lib.png" />
+</figure>
 </section>
 </section>
 <section id="debugging-the-application">
@@ -235,9 +241,13 @@
 <p><strong>Note</strong>: TI XDS-110 debug probes are enabled for use through the CMSIS-DAP protocol. However, the TI XDS native drivers currently give higher performance.</p>
 <p>To use them with EWARM, installation of the XDS emulation package is required. A copy of the emulation package is located in the EWARM installation under <code class="docutils literal notranslate"><span class="pre">\arm\drivers\ti-xds</span></code>. See the Readme.txt document that is also located in this folder. TI recommends installing the emulation package in <code class="docutils literal notranslate"><span class="pre">c:\ti\xds\ewarm_version</span></code>. Do not use XDS emulation packages from other EWARM versions, as they might not be compatible and can result in errors when debugging.</p>
 <p>To use the TI-XDS debug probes,select <strong>Options</strong> → <strong>Debugger</strong> → <strong>Driver</strong> → <strong>TI XDS</strong>:</p>
-<p><img alt="image3" src="../_images/iar_ide_xds110_select.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_ide_xds110_select.png" />
+</figure>
 <p>When the emulation package has been installed, XDS debug probes can be selected in <strong>Options</strong> → <strong>Debugger</strong> → <strong>TI XDS</strong>:</p>
-<p><img alt="image4" src="../_images/iar_ide_xds110.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_ide_xds110.png" />
+</figure>
 <ul class="simple">
 <li><p>Note the selected Emulator. The LaunchPads include an integrated TI XDS110 Emulator.</p></li>
 <li><p>The selected Interface is SWD which is supported by MSPM33.</p></li>
@@ -250,7 +260,9 @@
 <p>The C-SPY breakpoint mechanism uses a limited number of on-chip debugging resources (specifically 8 hardware breakpoints and 4 hardware watchpoints). Software breakpoints are not supported on MSPM33. This means that a maximum of 8 breakpoints can be set within C-SPY.</p>
 <p>Resetting a program and the Run To Cursor operation temporarily require a breakpoint. As a result, only 7 breakpoints can be active. If 8 breakpoints are being used, C-SPY will automatically disable a breakpoint.</p>
 <p>If the max number of breakpoints are set, the following warning will be displayed.</p>
-<p><img alt="image5" src="../_images/iar_ide_max_breakpoints.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_ide_max_breakpoints.png" />
+</figure>
 </section>
 <section id="additional-settings">
 <h3>3.3 Additional Settings<a class="headerlink" href="#additional-settings" title="Permalink to this heading">¶</a></h3>
@@ -258,11 +270,15 @@
 <ol class="arabic simple">
 <li><p>Click <strong>Options</strong> → <strong>TI XDS</strong> → <strong>Breakpoints</strong> and set the <strong>Default Breakpoint Type</strong> to <strong>Hardware</strong>. This is to make sure the debugger stops at main().</p></li>
 </ol>
-<p><img alt="image6" src="../_images/iar_ide_breakpoint_type.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_ide_breakpoint_type.png" />
+</figure>
 <ol class="arabic simple" start="2">
 <li><p>Click <strong>Options</strong> → <strong>TI XDS</strong> → <strong>Setup</strong> and set <strong>Reset</strong> to <strong>Device Reset</strong>.</p></li>
 </ol>
-<p><img alt="image7" src="../_images/iar_ide_reset_type.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_ide_reset_type.png" />
+</figure>
 </section>
 </section>
 <section id="known-issues-and-frequently-asked-questions-faqs">

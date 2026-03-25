@@ -27,14 +27,15 @@ UniFlash 可通过以下两种方式连接器件并与器件交互：使用通�
 
 UniFlash 可使用调试接口（如 XDS110）来编程器件。可选择器件（如下所示的片上版本）和将用于启动的特定接口。另外，UniFlash 还可以自动检测 MSPM0 LaunchPad（如果已连接）。LaunchPad 包括德州仪器（TI）XDS110 USB 调试探针。
 
-|image0|
+.. figure:: ./images/uniflash_guide/uniflash_guide_jtag_start.png
+   :alt: 
 
 3.1 加载映像。
 ~~~~~~~~~~~~~~
 
 1. 编译采用兼容格式的应用，例如 .out。\ `UniFlash 快速入门指南 <https://software-dl.ti.com/ccs/esd/uniflash/docs/v7_1/uniflash_quick_start_guide.html>`__\ 中说明了所有可能的文件类型。
 
-2. 如图所示上传闪存映像文件。 |image1|
+2. 如图所示上传闪存映像文件。 |image0|
 
 3. 根据需要调整擦除设置或其他信息。如果恢复出厂设置，请特别注意，因为 **NONMAIN 将在这个过程中擦除**\ 。随后用户需负责重新编程 NONMAIN。在恢复出厂设置之前，建议确认此行为是否正确。
 
@@ -42,21 +43,24 @@ UniFlash 可使用调试接口（如 XDS110）来编程器件。可选择器件�
 
 4. 点击 **Load Image**\ 。映像应正确加载。
 
-   |image2|
+   .. figure:: ./images/uniflash_guide/uniflash_guide_use_3.png
+      :alt: 
 
 3.2 从内存读取
 ~~~~~~~~~~~~~~
 
 在“Memory”选项卡中，只需选择 **Read Target Device**\ ，UniFlash 还可检测器件闪存。
 
-|image3|
+.. figure:: ./images/uniflash_guide/uniflash_guide_jtag_read.png
+   :alt: 
 
 4 通过引导加载程序编程器使用 UniFlash
 -------------------------------------
 
 引导加载程序编程器是通过器件的串行 UART 连接写入器件的另一种方法，不需要调试器。加载 UniFlash 时，所选器件可通过搜索器件名称并选择器件的引导加载程序选项来使用引导加载程序编程器，如下所示。
 
-|image4|
+.. figure:: ./images/uniflash_guide/uniflash_guide_bootloader_start.png
+   :alt: 
 
 4.1 硬件注意事项
 ~~~~~~~~~~~~~~~~
@@ -74,7 +78,8 @@ UniFlash 可使用调试接口（如 XDS110）来编程器件。可选择器件�
 
 **警告！**\ 使用 UniFlash 时，可以从“Erase”设置中选择“Factory Reset”选项来擦除闪存的 NONMAIN 区域。NONMAIN 部分包含有关器件的重要信息，包括引导加载程序接口。\ **如果已擦除，务必要在刷写周期内使用有效 NONMAIN 配置重新刷写器件。否则，器件不会按预期运行，并且可能不可恢复。**\ MSPM0 SDK 包括 SysConfig NONMAIN 配置器，可用于轻松安全地配置 NONMAIN。
 
-|image5|
+.. figure:: ./images/uniflash_guide/uniflash_guide_erase_setting.png
+   :alt: 
 
 器件基于 NONMAIN 区域中的引导配置例程 （BCR）恢复出厂设置有三种情形：
 
@@ -93,7 +98,8 @@ UniFlash 可使用调试接口（如 XDS110）来编程器件。可选择器件�
 
 2. 根据需要添加二进制映像。此文本文件将包括在开始时加载的位置。只有在未使用默认密码时，才需要密码。有关密码的详细信息，请参阅\ `使用密码 <#using-passwords>`__\ 。
 
-   |image6|
+   .. figure:: ./images/uniflash_guide/uniflash_guide_load_bootloader_image.png
+      :alt: 
 
 3. 根据需要在 **Settings & Utilities** 部分中调整任何设置。这可包括不同的擦除机制和自定义 CRC 验证。如果修改擦除机制，请参阅 `NONMAIN 注意事项 <#nonmain-considerations>`__\ 以确保器件不会变为不可恢复。
 
@@ -101,7 +107,8 @@ UniFlash 可使用调试接口（如 XDS110）来编程器件。可选择器件�
 
 5. 在 10 秒内，点击“Available Actions”选项卡中的 **Load Image**\ 。成功加载的程序应显示在控制台底部。
 
-|image7|
+.. figure:: ./images/uniflash_guide/uniflash_guide_bootloader_loaded.png
+   :alt: 
 
 **注意**\ ，如果映像大小不超过 1KB，则在使用引导加载程序时将显示以下错误。有关详细信息，请参阅\ `已知问题 <#known-issues-and-frequently-asked-questions-faq>`__\ 。
 
@@ -114,14 +121,15 @@ UniFlash 可使用调试接口（如 XDS110）来编程器件。可选择器件�
 
 ::
 
-   @0000
-   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-   ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-   q
+    @0000
+    ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+    ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+    q
 
 包含引导加载程序使用的自定义密码的文本文件可以置于所示文件。
 
-|image8|
+.. figure:: ./images/uniflash_guide/uniflash_guide_bootloader_password_provided.png
+   :alt: 
 
 4.5 使用引导加载程序从器件读取
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -132,7 +140,8 @@ UniFlash 可使用调试接口（如 XDS110）来编程器件。可选择器件�
 
 要成功从器件读取，需提供引导加载程序解锁密码。默认密码为 32 个 0xFF 字节，在 UniFlash 中编写为 8 个 0xFFFFFFFF 字。
 
-|image9|
+.. figure:: ./images/uniflash_guide/uniflash_guide_bootloader_read.png
+   :alt: 
 
 4.6 使用引导加载程序的当前限制
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -148,13 +157,5 @@ UniFlash 可使用调试接口（如 XDS110）来编程器件。可选择器件�
 
 有关详细信息，请参阅\ `已知问题和 FAQ <../../../../../known_issues_FAQ.html>`__
 
-.. |image0| image:: ./images/uniflash_guide/uniflash_guide_jtag_start.png
-.. |image1| image:: ./images/uniflash_guide/uniflash_guide_use_2.png
-.. |image2| image:: ./images/uniflash_guide/uniflash_guide_use_3.png
-.. |image3| image:: ./images/uniflash_guide/uniflash_guide_jtag_read.png
-.. |image4| image:: ./images/uniflash_guide/uniflash_guide_bootloader_start.png
-.. |image5| image:: ./images/uniflash_guide/uniflash_guide_erase_setting.png
-.. |image6| image:: ./images/uniflash_guide/uniflash_guide_load_bootloader_image.png
-.. |image7| image:: ./images/uniflash_guide/uniflash_guide_bootloader_loaded.png
-.. |image8| image:: ./images/uniflash_guide/uniflash_guide_bootloader_password_provided.png
-.. |image9| image:: ./images/uniflash_guide/uniflash_guide_bootloader_read.png
+.. |image0| image:: ./images/uniflash_guide/uniflash_guide_use_2.png
+

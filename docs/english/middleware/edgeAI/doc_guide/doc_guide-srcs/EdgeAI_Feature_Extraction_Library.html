@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feature Extraction User Guide for EdgeAI Applications on MSPM33 Devices &mdash; MSPM33 EdgeAI User Guide 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Edge AI Software Solution for MSPM33 Devices" href="EdgeAI_Software_Overview.html" />
+    <link rel="prev" title="Deploying Machine Learning Models on TI MSP Microcontrollers Using EdgeAI Studio GUI Tools" href="EdgeAI_Deployment_Guide_EdgeAI_Studio.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> MSPM33 EdgeAI User Guide
+          </a>
+              <div class="version">
+                1.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="EdgeAI_Deployment_Guide_CLI.html">Deploying Machine Learning Models on TI MSPM33 Microcontrollers Using CLI Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EdgeAI_Deployment_Guide_EdgeAI_Studio.html">Deploying Machine Learning Models on TI MSP Microcontrollers Using EdgeAI Studio GUI Tools</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Feature Extraction User Guide for EdgeAI Applications on MSPM33 Devices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#available-feature-extraction-functions">Available Feature Extraction Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#real-fast-fourier-transform-rfft">1. Real Fast Fourier Transform (RFFT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#windowing-mspm33-enhanced">2. Windowing (MSPM33 Enhanced)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#magnitude-scaling">3. Magnitude Scaling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#complex-magnitude-calculation">4. Complex Magnitude Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dc-component-removal">5. DC Component Removal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mean-removal">6. Mean Removal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bin-calculation">7. Bin Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#log-scaling">8. Log Scaling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#frame-concatenation">9. Frame Concatenation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#batch-normalization">10. Batch Normalization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-parameters">Configuration Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage-example">Usage Example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mspm33-floating-point">MSPM33 (Floating-Point)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#processing-pipeline">Processing Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#platform-specific-implementations">Platform-Specific Implementations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mspm33-cortex-m33">MSPM33 (Cortex-M33)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#performance-considerations">Performance Considerations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#general">General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mspm33-specific">MSPM33-Specific</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#best-practices">Best Practices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="EdgeAI_Software_Overview.html">Edge AI Software Solution for MSPM33 Devices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MSPM33 EdgeAI User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Feature Extraction User Guide for EdgeAI Applications on MSPM33 Devices</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="feature-extraction-user-guide-for-edgeai-applications-on-mspm33-devices">
+<h1>Feature Extraction User Guide for EdgeAI Applications on MSPM33 Devices<a class="headerlink" href="#feature-extraction-user-guide-for-edgeai-applications-on-mspm33-devices" title="Permalink to this heading">¶</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h2>
+<p>Feature extraction is a critical component of many EdgeAI applications, particularly for audio and vibration signal processing. The feature extraction module provides efficient signal processing functions optimized for embedded systems, leveraging ARM libraries for optimal performance.</p>
+<figure class="align-default" id="id1">
+<img alt="Feature Extraction Pipeline Overview" src="../_images/feature_extraction_pipeline.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 16 </span><span class="caption-text">Feature Extraction Pipeline Overview</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="available-feature-extraction-functions">
+<h2>Available Feature Extraction Functions<a class="headerlink" href="#available-feature-extraction-functions" title="Permalink to this heading">¶</a></h2>
+<p>The module supports the following feature extraction techniques:</p>
+<section id="real-fast-fourier-transform-rfft">
+<h3>1. Real Fast Fourier Transform (RFFT)<a class="headerlink" href="#real-fast-fourier-transform-rfft" title="Permalink to this heading">¶</a></h3>
+<p>Converts time-domain signals to frequency domain representation.</p>
+<figure class="align-default" id="id2">
+<img alt="RFFT Transformation" src="../_images/rfft_transformation.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 17 </span><span class="caption-text">RFFT Transformation</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p><strong>Functionality</strong>: Transforms raw input data into frequency components</p></li>
+<li><p><strong>Configuration</strong>: Enable with <code class="docutils literal notranslate"><span class="pre">FE_RFFT</span></code> define</p></li>
+<li><p><strong>Use case</strong>: Frequency analysis of audio or vibration signals</p></li>
+</ul>
+</section>
+<section id="windowing-mspm33-enhanced">
+<h3>2. Windowing (MSPM33 Enhanced)<a class="headerlink" href="#windowing-mspm33-enhanced" title="Permalink to this heading">¶</a></h3>
+<p>Applies window functions to reduce spectral leakage in FFT analysis.</p>
+<ul class="simple">
+<li><p><strong>Functionality</strong>: Multiplies input signal by window coefficients before FFT</p></li>
+<li><p><strong>Configuration</strong>: Enable with <code class="docutils literal notranslate"><span class="pre">FE_WINDOW</span></code> define</p></li>
+<li><p><strong>Supported Windows</strong>: Hann window with pre-computed coefficients</p></li>
+<li><p><strong>Available Sizes</strong>: 32, 64, 128, 256, 512, 1024, 2048, 4096 samples</p></li>
+<li><p><strong>Use case</strong>: Improved frequency resolution for spectral analysis</p></li>
+</ul>
+<p><strong>MSPM33 Advantage</strong>: Pre-computed floating-point Hann window coefficients (<code class="docutils literal notranslate"><span class="pre">fpu_fft_hann.h</span></code>) provide efficient windowing without runtime computation overhead.</p>
+</section>
+<section id="magnitude-scaling">
+<h3>3. Magnitude Scaling<a class="headerlink" href="#magnitude-scaling" title="Permalink to this heading">¶</a></h3>
+<p>Scales magnitude values for better numerical representation.</p>
+<figure class="align-default" id="id3">
+<img alt="Magnitude Scaling" src="../_images/magnitude_scaling.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 18 </span><span class="caption-text">Magnitude Scaling</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p><strong>Functionality</strong>: Applies scaling to prevent overflow/underflow</p></li>
+<li><p><strong>Configuration</strong>: Enable with <code class="docutils literal notranslate"><span class="pre">FE_COMPLEX_MAG_SCALE</span></code> define and set <code class="docutils literal notranslate"><span class="pre">FE_COMPLEX_MAG_SCALE_FACTOR</span></code></p></li>
+<li><p><strong>Use case</strong>: Normalizing signal magnitude to appropriate range for subsequent processing</p></li>
+</ul>
+</section>
+<section id="complex-magnitude-calculation">
+<h3>4. Complex Magnitude Calculation<a class="headerlink" href="#complex-magnitude-calculation" title="Permalink to this heading">¶</a></h3>
+<p>Calculates the magnitude of complex numbers resulting from FFT.</p>
+<figure class="align-default" id="id4">
+<img alt="Complex Magnitude Calculation" src="../_images/complex_magnitude.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 19 </span><span class="caption-text">Complex Magnitude Calculation</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p><strong>Functionality</strong>: Computes absolute values from complex FFT output</p></li>
+<li><p><strong>Configuration</strong>: Enable with <code class="docutils literal notranslate"><span class="pre">FE_MAG</span></code> define</p></li>
+<li><p><strong>Use case</strong>: Extracting power spectrum information</p></li>
+</ul>
+</section>
+<section id="dc-component-removal">
+<h3>5. DC Component Removal<a class="headerlink" href="#dc-component-removal" title="Permalink to this heading">¶</a></h3>
+<p>Removes DC offset from the signal.</p>
+<figure class="align-default" id="id5">
+<img alt="DC Component Removal" src="../_images/dc_removal.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 20 </span><span class="caption-text">DC Component Removal</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p><strong>Functionality</strong>: Excludes the first component (DC) from processing</p></li>
+<li><p><strong>Configuration</strong>: Enable with <code class="docutils literal notranslate"><span class="pre">FE_DC_REM</span></code> define</p></li>
+<li><p><strong>Use case</strong>: Eliminating signal bias for improved feature accuracy</p></li>
+</ul>
+</section>
+<section id="mean-removal">
+<h3>6. Mean Removal<a class="headerlink" href="#mean-removal" title="Permalink to this heading">¶</a></h3>
+<p>Removes the mean value from the input signal.</p>
+<ul class="simple">
+<li><p><strong>Functionality</strong>: Subtracts mean from each sample for zero-centered data</p></li>
+<li><p><strong>Configuration</strong>: Enable with <code class="docutils literal notranslate"><span class="pre">FE_MEAN_REM</span></code> define</p></li>
+<li><p><strong>Use case</strong>: Preprocessing for signals with varying DC offset</p></li>
+</ul>
+</section>
+<section id="bin-calculation">
+<h3>7. Bin Calculation<a class="headerlink" href="#bin-calculation" title="Permalink to this heading">¶</a></h3>
+<p>Groups frequency components into bins for dimensionality reduction.</p>
+<figure class="align-default" id="id6">
+<img alt="Bin Calculation" src="../_images/bin_calculation.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 21 </span><span class="caption-text">Bin Calculation</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p><strong>Functionality</strong>: Averages frequency components within defined bins</p></li>
+<li><p><strong>Configuration</strong>: Enable with <code class="docutils literal notranslate"><span class="pre">FE_BIN</span></code> define</p></li>
+<li><p><strong>Optional normalization</strong>: Enable with <code class="docutils literal notranslate"><span class="pre">FE_BIN_NORMALIZE</span></code> define</p></li>
+<li><p><strong>Use case</strong>: Reducing feature dimension while preserving spectral characteristics</p></li>
+</ul>
+</section>
+<section id="log-scaling">
+<h3>8. Log Scaling<a class="headerlink" href="#log-scaling" title="Permalink to this heading">¶</a></h3>
+<p>Applies logarithmic scaling to feature values.</p>
+<ul class="simple">
+<li><p><strong>Functionality</strong>: Converts linear magnitude to logarithmic scale (dB-like)</p></li>
+<li><p><strong>Configuration</strong>: Enable with <code class="docutils literal notranslate"><span class="pre">FE_LOG</span></code> define</p></li>
+<li><p><strong>Use case</strong>: Compressing dynamic range for audio and vibration signals</p></li>
+</ul>
+</section>
+<section id="frame-concatenation">
+<h3>9. Frame Concatenation<a class="headerlink" href="#frame-concatenation" title="Permalink to this heading">¶</a></h3>
+<p>Combines multiple frames for temporal context.</p>
+<ul class="simple">
+<li><p><strong>Functionality</strong>: Concatenates features from consecutive frames</p></li>
+<li><p><strong>Configuration</strong>: Set <code class="docutils literal notranslate"><span class="pre">FE_FRAMES_TO_CONCAT</span></code> parameter</p></li>
+<li><p><strong>Use case</strong>: Capturing temporal patterns in time-varying signals</p></li>
+</ul>
+</section>
+<section id="batch-normalization">
+<h3>10. Batch Normalization<a class="headerlink" href="#batch-normalization" title="Permalink to this heading">¶</a></h3>
+<p>Normalizes features for neural network input.</p>
+<ul class="simple">
+<li><p><strong>Functionality</strong>: Applies learned normalization parameters (mean, scale)</p></li>
+<li><p><strong>Configuration</strong>: Enable with batch normalization parameters in <code class="docutils literal notranslate"><span class="pre">user_input_config.h</span></code></p></li>
+<li><p><strong>Use case</strong>: Preparing features for quantized neural network inference</p></li>
+</ul>
+</section>
+</section>
+<section id="configuration-parameters">
+<h2>Configuration Parameters<a class="headerlink" href="#configuration-parameters" title="Permalink to this heading">¶</a></h2>
+<p>The following parameters can be configured in <code class="docutils literal notranslate"><span class="pre">user_input_config.h</span></code>:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">FE_FRAME_SIZE</span></code></p></td>
+<td><p>Size of input frame for processing</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">FE_FEATURE_SIZE_PER_FRAME</span></code></p></td>
+<td><p>Number of features to extract per frame</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">FE_BIN_SIZE</span></code></p></td>
+<td><p>Size of each frequency bin</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">FE_BIN_NORMALIZE</span></code></p></td>
+<td><p>When defined, normalizes bin values by dividing by bin size</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">FE_FRAMES_TO_CONCAT</span></code></p></td>
+<td><p>Number of frames to concatenate</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">NUM_OF_CHANNELS</span></code></p></td>
+<td><p>Number of input channels (for multi-sensor applications)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SKIP_NORMALIZE</span></code></p></td>
+<td><p>Skip normalization for int8 output</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">OUTPUT_INT</span></code></p></td>
+<td><p>Use int8 output type instead of float</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="usage-example">
+<h2>Usage Example<a class="headerlink" href="#usage-example" title="Permalink to this heading">¶</a></h2>
+<section id="mspm33-floating-point">
+<h3>MSPM33 (Floating-Point)<a class="headerlink" href="#mspm33-floating-point" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;feature_extract.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;fpu_fft_hann.h&quot;</span>
+
+<span class="c1">// Define buffers (floating-point for MSPM33)</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">rawInput</span><span class="p">[</span><span class="n">FE_FRAME_SIZE</span><span class="p">];</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">extractedFeatures</span><span class="p">[</span><span class="n">FE_FEATURE_SIZE_PER_FRAME</span><span class="p">];</span>
+
+<span class="c1">// Hann window coefficients (select based on frame size)</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">hannWindow</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HANN256</span><span class="p">;</span><span class="w">  </span><span class="c1">// For 256-point FFT</span>
+
+<span class="c1">// Initialize feature extraction</span>
+<span class="n">feature_extraction</span><span class="w"> </span><span class="n">fe_context</span><span class="p">;</span>
+<span class="n">fe_context</span><span class="p">.</span><span class="n">input_buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rawInput</span><span class="p">;</span>
+<span class="n">fe_context</span><span class="p">.</span><span class="n">output_buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">extractedFeatures</span><span class="p">;</span>
+<span class="n">FE_allocFeatureExtract</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fe_context</span><span class="p">);</span>
+<span class="n">FE_initFeatureExtract</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fe_context</span><span class="p">);</span>
+
+<span class="c1">// Process data with FPU-optimized operations</span>
+<span class="n">FE_runFeatureExtract</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fe_context</span><span class="p">);</span>
+
+<span class="c1">// Use extracted features for inference</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="processing-pipeline">
+<h2>Processing Pipeline<a class="headerlink" href="#processing-pipeline" title="Permalink to this heading">¶</a></h2>
+<figure class="align-default" id="id7">
+<img alt="Complete Processing Pipeline" src="../_images/processing_pipeline.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 22 </span><span class="caption-text">Complete Processing Pipeline</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>The feature extraction module implements a flexible pipeline:</p>
+<ol class="arabic simple">
+<li><p>Raw input data is copied to a scratch buffer</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">FE_MEAN_REM</span></code> is defined, mean is removed from the signal</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">FE_WINDOW</span></code> is defined, windowing function is applied (MSPM33)</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">FE_RFFT</span></code> is defined, FFT is performed</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">FE_COMPLEX_MAG_SCALE</span></code> is defined, scaling is applied</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">FE_DC_REM</span></code> is defined, DC component is removed</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">FE_MAG</span></code> is defined, complex magnitude is calculated</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">FE_BIN</span></code> is defined, bin calculation is performed</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">FE_LOG</span></code> is defined, log scaling is applied</p></li>
+<li><p>If frame concatenation is enabled, frames are combined</p></li>
+<li><p>Batch normalization or direct copy (based on configuration)</p></li>
+<li><p>Final features are copied to the output buffer</p></li>
+</ol>
+</section>
+<section id="platform-specific-implementations">
+<h2>Platform-Specific Implementations<a class="headerlink" href="#platform-specific-implementations" title="Permalink to this heading">¶</a></h2>
+<section id="mspm33-cortex-m33">
+<h3>MSPM33 (Cortex-M33)<a class="headerlink" href="#mspm33-cortex-m33" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Uses native floating-point operations with hardware FPU</p></li>
+<li><p>Pre-computed Hann window coefficients for efficient windowing</p></li>
+<li><p>Enhanced DAP integration for real-time visualization</p></li>
+<li><p>Located in: <code class="docutils literal notranslate"><span class="pre">source/m33/feature_extract/</span></code></p></li>
+</ul>
+<p><strong>Key MSPM33 Files:</strong> - <code class="docutils literal notranslate"><span class="pre">feature_extract.h</span></code> / <code class="docutils literal notranslate"><span class="pre">feature_extract.c</span></code> - Main API - <code class="docutils literal notranslate"><span class="pre">feature_extract_m33.c</span></code> - M33-optimized implementation - <code class="docutils literal notranslate"><span class="pre">fpu_fft_hann.h</span></code> - Pre-computed Hann window coefficients</p>
+</section>
+</section>
+<section id="performance-considerations">
+<h2>Performance Considerations<a class="headerlink" href="#performance-considerations" title="Permalink to this heading">¶</a></h2>
+<section id="general">
+<h3>General<a class="headerlink" href="#general" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>The module uses ARM optimized libraries for efficient computation</p></li>
+<li><p>Buffer swapping is used to minimize memory copies</p></li>
+<li><p>Configuration parameters should be adjusted based on available memory and computational resources</p></li>
+<li><p>Bin calculation can significantly reduce feature dimension, saving memory and computation in subsequent processing</p></li>
+</ul>
+</section>
+<section id="mspm33-specific">
+<h3>MSPM33-Specific<a class="headerlink" href="#mspm33-specific" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Leverage hardware FPU for floating-point operations</p></li>
+<li><p>Pre-computed Hann windows eliminate runtime computation</p></li>
+<li><p>Larger memory allows for bigger frame sizes and more features</p></li>
+<li><p>Native float precision reduces quantization errors</p></li>
+</ul>
+</section>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Permalink to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Select appropriate frame size</strong> based on your application requirements and sampling frequency</p></li>
+<li><p><strong>Configure bin size</strong> to balance feature resolution and dimensionality</p></li>
+<li><p><strong>Consider enabling normalization</strong> for consistent feature scaling across different input amplitudes</p></li>
+<li><p><strong>Remove DC component</strong> when analyzing AC signals to focus on frequency content</p></li>
+<li><p><strong>Use appropriate scaling factors</strong> to prevent numerical issues (overflow/underflow)</p></li>
+<li><p><strong>Enable windowing</strong> (MSPM33) for improved spectral analysis with reduced leakage</p></li>
+<li><p><strong>Use frame concatenation</strong> to capture temporal patterns in time-varying signals</p></li>
+<li><p><strong>Validate with test vectors</strong> using <code class="docutils literal notranslate"><span class="pre">FE_compareModelInput()</span></code> before deployment</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="EdgeAI_Deployment_Guide_EdgeAI_Studio.html" class="btn btn-neutral float-left" title="Deploying Machine Learning Models on TI MSP Microcontrollers Using EdgeAI Studio GUI Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="EdgeAI_Software_Overview.html" class="btn btn-neutral float-right" title="Edge AI Software Solution for MSPM33 Devices" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">1995-2023, Texas Instruments Incorporated. All rights reserved</a>, Texas Instruments Incorporated. All rights reserved. <br/>
+      <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

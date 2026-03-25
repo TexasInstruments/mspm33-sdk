@@ -20,7 +20,7 @@ This guide describes only the setup and basic operation of the software developm
 
 This guide applies to the use of the `TI XDS-110 <https://www.ti.com/tool/TMDSEMU110-U>`__ development tools series.
 
-These tools contain the most up-to-date materials available at the time of packaging. For the latest materials (including data sheets, user’s guides, software, and application information), visit the `TI MSPM33 website <https://www.ti.com/mspm33>`__ or contact your local TI sales office.
+These tools contain the most up-to-date materials available at the time of packaging. For the latest materials (including data sheets, user's guides, software, and application information), visit the `TI MSPM33 website <https://www.ti.com/mspm33>`__ or contact your local TI sales office.
 
 Information About Cautions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -36,11 +36,11 @@ Related Documentation From Texas Instruments
 
 MSPM33 development tools documentation:
 
--  `XDS110 Debug Probe User’s Guide <https://www.ti.com/lit/sprui94>`__
+-  `XDS110 Debug Probe User's Guide <https://www.ti.com/lit/sprui94>`__
 
 MSPM33 device documentation:
 
--  `LP-MSPM33C321A User’s Guide <https://www.ti.com/lit/slau969>`__
+-  `LP-MSPM33C321A User's Guide <https://www.ti.com/lit/slau969>`__
 -  `MSPM33 C-Series Technical Reference Manual <https://www.ti.com/lit/slau962>`__
 
 If You Need Assistance
@@ -69,16 +69,21 @@ Documentation for IAR EWARM is extensive, but the components of IAR EWARM (IDE, 
 
 The PDF files located throughout the EWARM directory tree contain the most up-to-date information. In addition, EWARM documentation is available online through the Help tab in the IDE.
 
-==================== ================================
-Tool                 User’s Guide
-==================== ================================
-IDE                  EWARM_IDEGuide.ENU.pdf
-Assembler            EWARM_AssemblerReference.ENU.pdf
-Compiler             EWARM_DevelopmentGuide.ENU.pdf
-C Library            EWARM_DevelopmentGuide.ENU.pdf
-Linker and Librarian EWARM_DevelopmentGuide.ENU.pdf
-Debugging            EWARM_DebuggingGuide.ENU.pdf
-==================== ================================
++------------------------+-------------------------------------+
+| Tool                   | User's Guide                        |
++========================+=====================================+
+| IDE                    | EWARM\_IDEGuide.ENU.pdf             |
++------------------------+-------------------------------------+
+| Assembler              | EWARM\_AssemblerReference.ENU.pdf   |
++------------------------+-------------------------------------+
+| Compiler               | EWARM\_DevelopmentGuide.ENU.pdf     |
++------------------------+-------------------------------------+
+| C Library              | EWARM\_DevelopmentGuide.ENU.pdf     |
++------------------------+-------------------------------------+
+| Linker and Librarian   | EWARM\_DevelopmentGuide.ENU.pdf     |
++------------------------+-------------------------------------+
+| Debugging              | EWARM\_DebuggingGuide.ENU.pdf       |
++------------------------+-------------------------------------+
 
 2.2 Creating an MSPM33 Project From the MSPM33 SDK
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -88,7 +93,7 @@ Please refer to the `MSPM33 SDK QuickStart Guide for IAR <../../../../quickstart
 2.3 Creating a Project From Scratch
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Note**: Creating a project from scratch is **not recommended** since creating the project from scratch doesn’t add all of the necessary device support files by default. To start from a blank project, TI recommends importing the Empty Driverlib example project from the MSPM33 SDK.
+**Note**: Creating a project from scratch is **not recommended** since creating the project from scratch doesn't add all of the necessary device support files by default. To start from a blank project, TI recommends importing the Empty Driverlib example project from the MSPM33 SDK.
 
 2.4 Using SysConfig with IAR
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -121,23 +126,25 @@ Click **Project** → **Options** → **Output Converter** → **Generate additi
 **Caution**: Extreme care should be taken when erasing and programming NONMAIN. If done incorrectly, the device will become **locked in a permanently unrecoverable state**.
 
 1. Click **Options** → **Debugger** → **Download** → **Override default .board file** → **Edit**.
-
 2. Select the 2nd element and then click Okay:
 
-   |image0|
+   .. figure:: ./images/iar_ide_guide/iar_ide_non_main.png
+      :alt: 
 
 3. Add ``--non_main_erase`` as an extra parameter:
 
-   |image1|
+   .. figure:: ./images/iar_ide_guide/iar_ide_non_main_2.png
+      :alt: 
 
 2.8 Overriding Pre-built libraries
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Projects might include pre-built libraries which simplify development and build time; however, they don’t allow developers to modify source code easily.
+Projects might include pre-built libraries which simplify development and build time; however, they don't allow developers to modify source code easily.
 
 An example of such libraries is the MSPM33 DriverLib which is shown below.
 
-|image2|
+.. figure:: ./images/iar_ide_guide/iar_ide_lib.png
+   :alt: 
 
 3. Debugging the Application
 ----------------------------
@@ -153,11 +160,13 @@ To use them with EWARM, installation of the XDS emulation package is required. A
 
 To use the TI-XDS debug probes,select **Options** → **Debugger** → **Driver** → **TI XDS**:
 
-|image3|
+.. figure:: ./images/iar_ide_guide/iar_ide_xds110_select.png
+   :alt: 
 
 When the emulation package has been installed, XDS debug probes can be selected in **Options** → **Debugger** → **TI XDS**:
 
-|image4|
+.. figure:: ./images/iar_ide_guide/iar_ide_xds110.png
+   :alt: 
 
 -  Note the selected Emulator. The LaunchPads include an integrated TI XDS110 Emulator.
 -  The selected Interface is SWD which is supported by MSPM33.
@@ -173,7 +182,8 @@ Resetting a program and the Run To Cursor operation temporarily require a breakp
 
 If the max number of breakpoints are set, the following warning will be displayed.
 
-|image5|
+.. figure:: ./images/iar_ide_guide/iar_ide_max_breakpoints.png
+   :alt: 
 
 3.3 Additional Settings
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -182,22 +192,15 @@ When running a project on the MSPM33 Launchpad, make sure to do the following:
 
 1. Click **Options** → **TI XDS** → **Breakpoints** and set the **Default Breakpoint Type** to **Hardware**. This is to make sure the debugger stops at main().
 
-|image6|
+.. figure:: ./images/iar_ide_guide/iar_ide_breakpoint_type.png
+   :alt: 
 
 2. Click **Options** → **TI XDS** → **Setup** and set **Reset** to **Device Reset**.
 
-|image7|
+.. figure:: ./images/iar_ide_guide/iar_ide_reset_type.png
+   :alt: 
 
 4. Known Issues and Frequently Asked Questions (FAQs)
 -----------------------------------------------------
 
 Please refer to `Known Issues and FAQ <../../../../../../known_issues_FAQ.html>`__ inside the SDK.
-
-.. |image0| image:: ./images/iar_ide_guide/iar_ide_non_main.png
-.. |image1| image:: ./images/iar_ide_guide/iar_ide_non_main_2.png
-.. |image2| image:: ./images/iar_ide_guide/iar_ide_lib.png
-.. |image3| image:: ./images/iar_ide_guide/iar_ide_xds110_select.png
-.. |image4| image:: ./images/iar_ide_guide/iar_ide_xds110.png
-.. |image5| image:: ./images/iar_ide_guide/iar_ide_max_breakpoints.png
-.. |image6| image:: ./images/iar_ide_guide/iar_ide_breakpoint_type.png
-.. |image7| image:: ./images/iar_ide_guide/iar_ide_reset_type.png

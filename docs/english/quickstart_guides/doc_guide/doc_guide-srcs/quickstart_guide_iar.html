@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MSPM33 SDK QuickStart Guide for IAR &mdash; MSPM33 SDK Quick Start Guides 1.02.00.00 documentation</title>
+  <title>MSPM33 SDK QuickStart Guide for IAR &mdash; MSPM33 SDK Quick Start Guides 1.03.00.01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
@@ -32,7 +32,7 @@
             <a href="index.html" class="icon icon-home"> MSPM33 SDK Quick Start Guides
           </a>
               <div class="version">
-                1.02.00.00
+                1.03.00.01
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -103,16 +103,24 @@
 <ol class="arabic">
 <li><p>Download and install the latest <a class="reference external" href="#prerequisites">MSPM33 SDK</a>. Note that there are SDK installers for Windows, Linux and MacOS. The steps below are shown in Windows, but a similar approach should be followed in Linux or MacOS.</p></li>
 <li><p>Execute the installer. Click <strong>Next</strong>.</p>
-<p><img alt="image0" src="../_images/sdk_install_1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/sdk_install_1.png" />
+</figure>
 </li>
 <li><p>Select an <strong>Installation Directory</strong> and click <strong>Next</strong>. Note the installation directory which by default is <code class="docutils literal notranslate"><span class="pre">c:\ti</span></code> which will install the SDK at <code class="docutils literal notranslate"><span class="pre">C:\ti\mspm33_sdk_&lt;version&gt;\</span></code>. This path will be referred to as <code class="docutils literal notranslate"><span class="pre">&lt;MSPM33_SDK_INSTALL_DIR&gt;</span></code> in sections below.</p>
-<p><img alt="image1" src="../_images/sdk_install_2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/sdk_install_2.png" />
+</figure>
 </li>
 <li><p>Click <strong>Next</strong></p>
-<p><img alt="image2" src="../_images/sdk_install_3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/sdk_install_3.png" />
+</figure>
 </li>
 <li><p>After installation is complete, click <strong>Finish</strong>.</p>
-<p><img alt="image3" src="../_images/sdk_install_4.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/sdk_install_4.png" />
+</figure>
 </li>
 </ol>
 </section>
@@ -121,13 +129,19 @@
 <p>In IAR, we need to add the latest MSPM33 SDK version. This step only has to be done once, or when the SDK is updated.</p>
 <ol class="arabic">
 <li><p>In IAR, click on <strong>Tools → Configure Custom Argument Variables</strong></p>
-<p><img alt="image4" src="../_images/iar_sdk_install_1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_sdk_install_1.png" />
+</figure>
 </li>
 <li><p>Click the <strong>Global</strong> tab, and then <strong>Import</strong></p>
-<p><img alt="image5" src="../_images/iar_sdk_install_2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_sdk_install_2.png" />
+</figure>
 </li>
 <li><p>Navigate to your SDK folder into <code class="docutils literal notranslate"><span class="pre">&lt;MSPM33_SDK_INSTALL_DIR&gt;/tools/iar/</span></code> and open <strong>MSPM33_SDK.custom_argvars</strong>.</p>
-<p><img alt="image6" src="../_images/iar_sdk_install_3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_sdk_install_3.png" />
+</figure>
 </li>
 <li><p>The SDK variables should now be installed in IAR. Click OK to close the window.</p>
 <div class="line-block">
@@ -135,7 +149,9 @@
 <div class="line">If you installed an earlier version of the SDK then make sure to update the path to the current version you want to use.</div>
 <div class="line">Similarly, if the SysConfig path installed on <a class="reference external" href="#install-sysconfig-for-mspm33">Section 5. Install SysConfig for MSPM33</a> is incorrect or pointing to an older version, then modify it.</div>
 </div>
-<p><img alt="image7" src="../_images/iar_sdk_install_4.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_sdk_install_4.png" />
+</figure>
 </li>
 </ol>
 </section>
@@ -146,19 +162,27 @@
 <ol class="arabic">
 <li><p>Download and install the standalone version (1.26.0.4407) of SysConfig from <a class="reference external" href="https://www.ti.com/tool/SYSCONFIG">ti.com</a></p></li>
 <li><p>In IAR, select <strong>Tools → Configure Viewers</strong> from the menu.</p>
-<p><img alt="image8" src="../_images/sysconfig_configure_viewers.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/sysconfig_configure_viewers.png" />
+</figure>
 </li>
 <li><p>Click <strong>Import</strong></p>
-<p><img alt="image9" src="../_images/sysconfig_configure_viewer_import.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/sysconfig_configure_viewer_import.png" />
+</figure>
 </li>
 <li><p>Navigate to your SDK folder into <code class="docutils literal notranslate"><span class="pre">&lt;MSPM33_SDK_INSTALL_DIR&gt;/tools/iar/</span></code> and open <strong>sysconfig_iar_setup.xml</strong>.</p>
-<p><img alt="image10" src="../_images/sysconfig_iar_setup.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/sysconfig_iar_setup.png" />
+</figure>
 </li>
 <li><div class="line-block">
 <div class="line">The standalone SysConfig will be associated to .syscfg files.</div>
 <div class="line">Click OK to close window.</div>
 </div>
-<p><img alt="image11" src="../_images/sysconfig_configure_viewers_done.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/sysconfig_configure_viewers_done.png" />
+</figure>
 </li>
 <li><p>Double-check that the <strong>SYSCONFIG_ROOT</strong> Custom Argument Variable is correctly pointing to the SysConfig folder as described in <a class="reference external" href="#add-mspm33-sdk-to-iar">Section 4. Add MSPM33 SDK to IAR</a>.</p></li>
 </ol>
@@ -167,16 +191,24 @@
 <h2>6. Import and Build an SDK Example in IAR<a class="headerlink" href="#import-and-build-an-sdk-example-in-iar" title="Permalink to this heading">¶</a></h2>
 <ol class="arabic">
 <li><p>In IAR, select <strong>File → Open Workspace</strong> from the menu.</p>
-<p><img alt="image12" src="../_images/iar_example_1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_example_1.png" />
+</figure>
 </li>
 <li><p>Navigate to an IAR folder in SDK example at <code class="docutils literal notranslate"><span class="pre">&lt;MSPM33_SDK_INSTALL_DIR&gt;/examples/</span></code> and open the .eww workspace file. For example <code class="docutils literal notranslate"><span class="pre">&lt;MSPM33_SDK_INSTALL_DIR&gt;/examples/nortos/LP_MSPM33C321A/driverlib/gpio_toggle_output/iar/gpio_toggle_output_LP_MSPM33C321A_nortos_iar.template.eww</span></code>.</p>
-<p><img alt="image13" src="../_images/iar_example_2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_example_2.png" />
+</figure>
 </li>
 <li><p>Click OK on the message.</p>
-<p><img alt="image14" src="../_images/iar_example_3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_example_3.png" />
+</figure>
 </li>
 <li><p>Select a folder to install the example.</p>
-<p><img alt="image15" src="../_images/iar_example_4.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_example_4.png" />
+</figure>
 </li>
 <li><p>To build the example, right click in the project and select <strong>Make</strong>. Note that SysConfig projects will automatically generate files in the <em>“SysConfig Generated Files”</em> folder.</p>
 <div class="line-block">
@@ -184,11 +216,17 @@
 <div class="line">For a complete list of examples supporting SysConfig, check the <a class="reference external" href="../../../sdk_users_guide/doc_guide/doc_guide-srcs/examples_guide.html">MSPM33 SDK Examples Guide</a>.</div>
 <div class="line">For more general information about using SysConfig with MSPM33, please refer to <a class="reference external" href="../../../tools/sysconfig_guide/doc_guide/doc_guide-srcs/sysconfig_guide.html">Using SysConfig with MSPM33</a> available in the SDK’s Tools Guide.</div>
 </div>
-<p><img alt="image16" src="../_images/iar_example_5a.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_example_5a.png" />
+</figure>
 </li>
 <li><p>Click the <strong>Download and Debug</strong> button to download the code.</p>
-<p><img alt="image17" src="../_images/iar_example_6a.png" /></p>
-<p><img alt="image18" src="../_images/iar_example_6b.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/iar_example_6a.png" />
+</figure>
+<figure class="align-default">
+<img alt="" src="../_images/iar_example_6b.png" />
+</figure>
 </li>
 </ol>
 </section>

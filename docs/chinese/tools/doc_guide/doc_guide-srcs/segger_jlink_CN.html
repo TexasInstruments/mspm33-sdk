@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>将 Segger 编程器与 MSPM0 配合使用 &mdash; MSPM33 Tools Guide 1.02.00.00 documentation</title>
+  <title>将 Segger 编程器与 MSPM0 配合使用 &mdash; MSPM33 Tools Guide 1.03.00.01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
@@ -33,7 +33,7 @@
             <a href="index.html" class="icon icon-home"> MSPM33 Tools Guide
           </a>
               <div class="version">
-                1.02.00.00
+                1.03.00.01
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -117,10 +117,14 @@
 <ol class="arabic">
 <li><p>从 <a class="reference external" href="https://www.segger.com/downloads/jlink/">Segger 网站</a>下载安装程序</p></li>
 <li><p>按照安装程序说明操作</p>
-<p><img alt="image0" src="../_images/segger_install_1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/segger_install_1.png" />
+</figure>
 </li>
 <li><p>安装程序将自动请求更新 IAR 或 Keil（如果已安装）</p>
-<p><img alt="image1" src="../_images/segger_install_2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/segger_install_2.png" />
+</figure>
 </li>
 </ol>
 </section>
@@ -129,23 +133,35 @@
 <ol class="arabic">
 <li><p>按照<a class="reference external" href="https://www.segger.com/products/debug-probes/j-link/technology/ides/ti-code-composer/">此处</a>说明和如下所示更新 Segger 驱动程序：</p>
 <p>1.1. 依次点击“Help → Install New Software”</p>
-<p><img alt="image2" src="../_images/segger_ccs_1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/segger_ccs_1.png" />
+</figure>
 <p>1.2. 按照<a class="reference external" href="https://www.segger.com/products/debug-probes/j-link/technology/ides/ti-code-composer/">此处</a>说明或如下所示添加 J-Link 存储库：</p>
-<p><img alt="image3" src="../_images/segger_ccs_2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/segger_ccs_2.png" />
+</figure>
 <p>1.3. 选择适当插件，并按照说明继续安装</p>
 <p><strong>注意：</strong>如果插件不可见，请在 CCS 中调整代理设置。</p>
-<p><img alt="image4" src="../_images/segger_ccs_3.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/segger_ccs_3.png" />
+</figure>
 <p>1.4. 确保插件版本正确。可能需要重新启动 CCS 才能正确更新插件版本。</p>
 </li>
 <li><p>在工程的“Connection”中选择“SEGGER J-Link Emulator”：</p>
 <p><strong>注意：</strong>如果未正确应用插件，则此选项不可用。</p>
-<p><img alt="image5" src="../_images/segger_ccs_4.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/segger_ccs_4.png" />
+</figure>
 </li>
 <li><p>打开工程内的 .ccxml 文件</p>
-<p><img alt="image6" src="../_images/segger_ccs_5.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/segger_ccs_5.png" />
+</figure>
 </li>
 <li><p>选择“CORTEX_M0P”内核，并在“Target Interface”中选择“SWD”</p>
-<p><img alt="image7" src="../_images/segger_ccs_6.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/segger_ccs_6.png" />
+</figure>
 </li>
 <li><p>对器件进行编程和调试。</p></li>
 </ol>
@@ -155,7 +171,9 @@
 <ol class="arabic">
 <li><p>安装最新 Segger 软件时，将更新适用于 IAR 的 Segger 驱动程序。</p></li>
 <li><p>更改调试器设置以使用 J-Link：</p>
-<p><img alt="image8" src="../_images/segger_iar_1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/segger_iar_1.png" />
+</figure>
 </li>
 <li><p>对器件进行编程和调试。</p></li>
 </ol>
@@ -165,10 +183,14 @@
 <ol class="arabic">
 <li><p>安装最新 Segger 软件时，将更新适用于 Keil 的 Segger 驱动程序。</p></li>
 <li><p>更改调试器设置以使用 J-Link：</p>
-<p><img alt="image9" src="../_images/segger_keil_1.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/segger_keil_1.png" />
+</figure>
 </li>
 <li><p>选择 SWD 接口</p>
-<p><img alt="image10" src="../_images/segger_keil_2.png" /></p>
+<figure class="align-default">
+<img alt="" src="../_images/segger_keil_2.png" />
+</figure>
 </li>
 <li><p>对器件进行编程和调试。</p></li>
 </ol>

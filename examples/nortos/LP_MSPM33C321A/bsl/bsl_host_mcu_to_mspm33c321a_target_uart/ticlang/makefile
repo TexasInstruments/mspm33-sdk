@@ -31,6 +31,7 @@ CFLAGS += -I.. \
     -mfloat-abi=hard \
     -mfpu=fpv5-sp-d16 \
     -DUART_Plugin \
+    -O2 \
     -g \
     @device.opt \
     "-I$(MSPM33_SDK_INSTALL_DIR)/source/third_party/CMSIS/Core/Include" \
@@ -39,9 +40,7 @@ CFLAGS += -I.. \
     -mcpu=cortex-m33 \
     -Wall
 
-LFLAGS += -mfloat-abi=hard \
-    -mfpu=fpv5-sp-d16 \
-    -ldevice.cmd.genlibs \
+LFLAGS += -ldevice.cmd.genlibs \
     "-L$(MSPM33_SDK_INSTALL_DIR)/source" \
     -L.. \
     ../ticlang/device_linker.cmd \

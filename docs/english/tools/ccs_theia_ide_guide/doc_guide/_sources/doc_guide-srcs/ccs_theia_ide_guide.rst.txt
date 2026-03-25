@@ -32,17 +32,17 @@ Related Documentation From Texas Instruments
 
 MSPM33 development tools documentation:
 
--  `XDS110 Debug Probe User’s Guide <https://www.ti.com/lit/sprui94>`__
+-  `XDS110 Debug Probe User's Guide <https://www.ti.com/lit/sprui94>`__
 
 MSPM33 device documentation:
 
--  `LP-MSPM33C321A User’s Guide <https://www.ti.com/lit/slau969>`__
+-  `LP-MSPM33C321A User's Guide <https://www.ti.com/lit/slau969>`__
 -  `MSPM33 C-Series Technical Reference Manual <https://www.ti.com/lit/slau962>`__
 
 Code Composer documentation:
 
 -  `Code Composer Studio Documentation <https://www.ti.com/tool/CCSTUDIO#tech-docs>`__
--  `Code Composer Studio Theia User’s Guide <https://software-dl.ti.com/ccs/esd/documents/users_guide_ccs_theia/index.html>`__
+-  `Code Composer Studio Theia User's Guide <https://software-dl.ti.com/ccs/esd/documents/users_guide_ccs_theia/index.html>`__
 
 If You Need Assistance
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -77,7 +77,7 @@ More documentation for CCS Theia is available at `TI.com <https://www.ti.com/too
 
 Some examples in the MSPM33 SDK have SysConfig support. `SysConfig <https://www.ti.com/tool/SYSCONFIG>`__ is an intuitive and comprehensive collection of graphical utilities for configuring pins, peripherals, radios, subsystems, and other components. SysConfig helps you manage, expose, and resolve conflicts visually so that you have more time to create differentiated applications.
 
-The SysConfig tool is delivered as a standalone installer, it can be used on the cloud at `dev.ti.com <https://dev.ti.com/sysconfig>`__, or it’s integrated into CCS Theia for better and easier experience.
+The SysConfig tool is delivered as a standalone installer, it can be used on the cloud at `dev.ti.com <https://dev.ti.com/sysconfig>`__, or it's integrated into CCS Theia for better and easier experience.
 
 After importing a MSPM33 project in CCS Theia, simply double-click the ``.syscfg`` file and this will open SysConfig. |image0|
 
@@ -110,17 +110,19 @@ CCS includes utilities which can be used to generate output objects in multiple 
 
 The following steps explain how to enable the TI TXT format using the Hex Utility which is integrated into CCS.
 
-Right-click on a project and select **Properties**. Select **Build** → **Tools** → **Arm Hex Utility** → **Output Format Options**. Then select the **TI-TXT hex (–ti_txt)** option.
+Right-click on a project and select **Properties**. Select **Build** → **Tools** → **Arm Hex Utility** → **Output Format Options**. Then select the **TI-TXT hex (--ti\_txt)** option.
 
-|image2|
+.. figure:: ./images/theia_ide_guide/ccstheia_outputtxt.png
+   :alt: 
 
 This same process can be used to generate other formats; however, some formats might require other parameters.
 
-A common one is Intel HEX format which in addition to selecting the output format **Intel hex (–intel, -i)**, requires to specify the memory and ROM width as parameters.
+A common one is Intel HEX format which in addition to selecting the output format **Intel hex (--intel, -i)**, requires to specify the memory and ROM width as parameters.
 
 When using Intel HEX for MSPM33, select a memory and ROM width of 8 in **Build** → **Tools** → **Arm Hex Utility** → **General Options**.
 
-|image3|
+.. figure:: ./images/theia_ide_guide/ccstheia_outputhex.png
+   :alt: 
 
 For more information, visit `Hex utility in CCS <https://software-dl.ti.com/ccs/esd/documents/ccs_hex-utility.html>`__.
 
@@ -133,15 +135,18 @@ The following steps explain how to enable intel Hex format using ObjCopy.
 
 1. Right-click on a project and select **Properties**. Select **Build** → **Tools** → **Arm ObjCopy Utility** and select **Enable Arm Objcopy Utility**.
 
-|image4|
+.. figure:: ./images/theia_ide_guide/ccstheia_objcopy1.png
+   :alt: 
 
 2. Specify the output file name using .hex extension.
 
-|image5|
+.. figure:: ./images/theia_ide_guide/ccstheia_objcopy2.png
+   :alt: 
 
 3. Specify the ``ihex`` output format.
 
-|image6|
+.. figure:: ./images/theia_ide_guide/ccstheia_objcopy3.png
+   :alt: 
 
 For more information about Objcopy, visit this `Objcopy guide <https://llvm.org/docs/CommandGuide/llvm-objcopy.html>`__.
 
@@ -155,21 +160,23 @@ This section describes step-by-step instructions to execute some functions or co
 2.5.1 Running a complete application from SRAM
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The following steps show how to modify a basic gpio_toggle_output example for the LP_MSPM33C321A to run from SRAM. Similar steps apply to other examples and devices.
+The following steps show how to modify a basic gpio\_toggle\_output example for the LP\_MSPM33C321A to run from SRAM. Similar steps apply to other examples and devices.
 
 1. Open the linker .cmd file and modify it to use SRAM as shown below:
 
-|image7|
+.. figure:: ./images/theia_ide_guide/ccstheia_runFromRAM_1.png
+   :alt: 
 
 2. Disable the System Reset which is executed by default in CCS.
 
    CCS includes .gel files which execute certain functions on the device. These files are included inside the CCS installation folder at ``<ccs>\ccs_base\emulation\gel>``. Make sure to set the highlighted address in ``OnTargetConnect`` function to be the same as the ``.intvecs`` address defined in linker file. The screenshot below shows the modification necessary for MSPM33C321A:
 
-|image8| |image9|
+|image2| |image3|
 
 3. Download code and note that the device will execute from SRAM.
 
-|image10|
+.. figure:: ./images/theia_ide_guide/ccstheia_runFromRAM_3.png
+   :alt: 
 
 2.5.2 Running a function from SRAM
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -178,15 +185,18 @@ The following steps show how to declare a function which is executed from SRAM.
 
 1. Move the function to the ``.TI.ramfunc`` section. This can be accomplished by declaring the function with the attributes ``__attribute__((section(".TI.ramfunc"))) __attribute__((noinline))`` as observed below:
 
-|image11|
+.. figure:: ./images/theia_ide_guide/ccstheia_runFunctionFromRAM_1.png
+   :alt: 
 
 2. The linker file should include a placement of ``.TI.ramfunc``. Note that the linker files included in MSPM33-SDK already include this placement but it will only be applicable if any functions are placed in ``.TI.ramfunc``.
 
-|image12|
+.. figure:: ./images/theia_ide_guide/ccstheia_runFunctionFromRAM_2.png
+   :alt: 
 
 3. Download code and note that the device will execute the function from SRAM.
 
-|image13|
+.. figure:: ./images/theia_ide_guide/ccstheia_runFunctionFromRAM_3.png
+   :alt: 
 
 3. Debugging the Application
 ----------------------------
@@ -202,7 +212,8 @@ TI offers a range of debug probes for Arm-based devices, including the XDS-110 w
 
 To use the TI-XDS debug probes, open the project options, click on **General** → **Connection** and select **Texas Instruments XDS110 USB Debug Probe**.
 
-|image14|
+.. figure:: ./images/theia_ide_guide/ccstheia_debug_connection_xds.png
+   :alt: 
 
 3.1.1 Flash Loader
 ^^^^^^^^^^^^^^^^^^
@@ -211,7 +222,8 @@ The Flash Loader settings allow to configure some settings when programming and 
 
 To view and modify these settings, open the project properties and select **Debug** → **Category:MSPM33 Flash Settings**.
 
-|image15|
+.. figure:: ./images/theia_ide_guide/ccstheia_flash_settings.png
+   :alt: 
 
 The Flash Loader has the following options:
 
@@ -222,7 +234,7 @@ The Flash Loader has the following options:
    -  **Erase MAIN memory only**: Only MAIN memory will be mass erased. An error will be thrown when attempting to write NONMAIN.
    -  **Erase MAIN and NONMAIN memory**: Both MAIN and NONMAIN will be mass erased. See `Erasing and Updating NONMAIN Memory <#erasing-and-updating-nonmain-memory>`__ for information about NONMAIN usage.
    -  **Erase MAIN and NONMAIN necessary sectors only**: Only sectors being updated will be erased, including both MAIN and NONMAIN. Check the device datasheet for information on the size of flash sectors. See `Erasing and Updating NONMAIN Memory <#erasing-and-updating-nonmain-memory>`__ for information about NONMAIN usage.
-   -  **Erase MAIN memory sectors by range**: Only sectors defined between **Sector Erase Start Address** and **Sector Erase End Address** will be erased. Check the device datasheet for information on the size of flash sectors and note that the addresses are inclusive. For example, a region from 0x0000_0100 to 0x0000_0400 on a MSPM0 device with 1kB sectors will erase sectors 0x0000_0000-0x0000_03FF and 0x0000_0400-0x0000_07FF. Note that only sectors in MAIN will be erased. An error will be thrown when attempting to write NONMAIN.
+   -  **Erase MAIN memory sectors by range**: Only sectors defined between **Sector Erase Start Address** and **Sector Erase End Address** will be erased. Check the device datasheet for information on the size of flash sectors and note that the addresses are inclusive. For example, a region from 0x0000\_0100 to 0x0000\_0400 on a MSPM0 device with 1kB sectors will erase sectors 0x0000\_0000-0x0000\_03FF and 0x0000\_0400-0x0000\_07FF. Note that only sectors in MAIN will be erased. An error will be thrown when attempting to write NONMAIN.
    -  **Do not erase Flash memory**: Flash will not be erased. An error will be thrown when attempting to write NONMAIN without erasing.
 
 -  **Advanced Configuration**: disables validating the device ID. Used for debugging purposes and not recommended to disable.
@@ -248,7 +260,8 @@ The CCS Theia debugger uses a limited number of on-chip debugging resources (spe
 
 CCS Theia can use a breakpoint to stop at main or halt the device at exit. These settings can be updated in the project properties by selecting **Debug** → **Category:Program/Memory Load Options**.
 
-|image16|
+.. figure:: ./images/theia_ide_guide/ccstheia_breakpoint.png
+   :alt: 
 
 3.3 DSSM Commands
 ~~~~~~~~~~~~~~~~~
@@ -272,20 +285,23 @@ To execute a DSSM Mass Erase or DSSM Factory Reset, follow the next steps:
 
 1. Go to an active project and open the **targetConfigs** folder.
 
-   |image17|
+   .. figure:: ./images/theia_ide_guide/ccstheia_dssm1.png
+      :alt: 
 
 2. Right-click the .ccxml file and select **Start Project-less Debug**.
 
-   |image18|
+   .. figure:: ./images/theia_ide_guide/ccstheia_dssm2.png
+      :alt: 
 
-3. On the debugger window menu, select **Scripts** → **MSPM33xxxx_Commands** (where MSPM33xxxx depends on the current MSPM33 device), and select one of the following options:
+3. On the debugger window menu, select **Scripts** → **MSPM33xxxx\_Commands** (where MSPM33xxxx depends on the current MSPM33 device), and select one of the following options:
 
-   -  **MSPM33_MailboxMassErase_Manual**: A mass erase will be performed asking the user to press the reset button.
-   -  **MSPM33_MailboxMassErase_Auto**: A mass erase will be performed forcing reset using the XDS110 reset line.
-   -  **MSPM33_MailboxFactoryReset_Manual**: A factory reset will be performed asking the user to press the reset button.
-   -  **MSPM33_MailboxFactoryReset_Auto**: A factory reset will be performed forcing reset using the XDS110 reset line.
+   -  **MSPM33\_MailboxMassErase\_Manual**: A mass erase will be performed asking the user to press the reset button.
+   -  **MSPM33\_MailboxMassErase\_Auto**: A mass erase will be performed forcing reset using the XDS110 reset line.
+   -  **MSPM33\_MailboxFactoryReset\_Manual**: A factory reset will be performed asking the user to press the reset button.
+   -  **MSPM33\_MailboxFactoryReset\_Auto**: A factory reset will be performed forcing reset using the XDS110 reset line.
 
-   |image19|
+   .. figure:: ./images/theia_ide_guide/ccstheia_dssm3.png
+      :alt: 
 
 3.3.1.1 DSSM after Power-up
 '''''''''''''''''''''''''''
@@ -305,21 +321,6 @@ Please refer to `Known Issues and FAQ <../../../../../../known_issues_FAQ.html>`
 
 .. |image0| image:: ./images/theia_ide_guide/ccstheia_sysconfig.png
 .. |image1| image:: ./images/theia_ide_guide/ccstheia_stack.png
-.. |image2| image:: ./images/theia_ide_guide/ccstheia_outputtxt.png
-.. |image3| image:: ./images/theia_ide_guide/ccstheia_outputhex.png
-.. |image4| image:: ./images/theia_ide_guide/ccstheia_objcopy1.png
-.. |image5| image:: ./images/theia_ide_guide/ccstheia_objcopy2.png
-.. |image6| image:: ./images/theia_ide_guide/ccstheia_objcopy3.png
-.. |image7| image:: ./images/theia_ide_guide/ccstheia_runFromRAM_1.png
-.. |image8| image:: ./images/theia_ide_guide/ccstheia_runFromRAM_2.png
-.. |image9| image:: ./images/theia_ide_guide/ccstheia_runFromRAM_4.png
-.. |image10| image:: ./images/theia_ide_guide/ccstheia_runFromRAM_3.png
-.. |image11| image:: ./images/theia_ide_guide/ccstheia_runFunctionFromRAM_1.png
-.. |image12| image:: ./images/theia_ide_guide/ccstheia_runFunctionFromRAM_2.png
-.. |image13| image:: ./images/theia_ide_guide/ccstheia_runFunctionFromRAM_3.png
-.. |image14| image:: ./images/theia_ide_guide/ccstheia_debug_connection_xds.png
-.. |image15| image:: ./images/theia_ide_guide/ccstheia_flash_settings.png
-.. |image16| image:: ./images/theia_ide_guide/ccstheia_breakpoint.png
-.. |image17| image:: ./images/theia_ide_guide/ccstheia_dssm1.png
-.. |image18| image:: ./images/theia_ide_guide/ccstheia_dssm2.png
-.. |image19| image:: ./images/theia_ide_guide/ccstheia_dssm3.png
+.. |image2| image:: ./images/theia_ide_guide/ccstheia_runFromRAM_2.png
+.. |image3| image:: ./images/theia_ide_guide/ccstheia_runFromRAM_4.png
+
