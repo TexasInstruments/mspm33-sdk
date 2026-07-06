@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectSpec>
+    <applicability>
+        <when>
+            <context
+                deviceFamily="ARM"
+                deviceId="MSPM33C321A"
+            />
+        </when>
+    </applicability>
+
+    <project
+        title="memory_hide_protect"
+        name="memory_hide_protect_LP_MSPM33C321A_nortos_gcc"
+        configurations="Debug"
+        toolChain="GNU"
+        connection="TIXDS110_Connection.xml"
+        device="MSPM33C321A"
+        ignoreDefaultDeviceSettings="true"
+        ignoreDefaultCCSSettings="true"
+        products="MSPM33-SDK;sysconfig"
+        compilerBuildOptions="
+            -I${PROJECT_ROOT}
+            -I${PROJECT_ROOT}/${ConfigName}
+            -D__MSPM33C321A__
+            -O2
+            -mfloat-abi=hard
+            -mfpu=fpv5-sp-d16
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/third_party/CMSIS/Core/Include
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source
+            -mcpu=cortex-m33
+            -mthumb
+            -std=c99
+            -std=c++11
+            -ffunction-sections
+            -fdata-sections
+            -g
+            -Wall
+            -I${CG_TOOL_ROOT}/arm-none-eabi/include
+        "
+        linkerBuildOptions="
+            -L${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/ti/driverlib/lib/gcc/m33/mspm33c321x
+            -mfloat-abi=hard
+            -mfpu=fpv5-sp-d16
+            -l:driverlib.a
+            -L${COM_TI_MSPM33_SDK_INSTALL_DIR}/source
+            -L${PROJECT_ROOT}
+            -L${PROJECT_BUILD_DIR}/syscfg
+            -mcpu=cortex-m33
+            -mthumb
+            -nostartfiles
+            -static
+            -Wl,--gc-sections
+            -lgcc
+            -lc
+            -lm
+            --specs=nosys.specs
+        "
+        sysConfigBuildOptions="
+            --output .
+            --product ${COM_TI_MSPM33_SDK_INSTALL_DIR}/.metadata/product.json
+            --compiler gcc
+        "
+        sourceLookupPath="${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/ti/driverlib"
+        description="HDP (Hide Protection) example demonstrating flash memory protection">
+        <property name="buildProfile" value="release"/>
+        <property name="isHybrid" value="true"/>
+        <file path="../memory_hide_protect.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../memory_hide_protect.syscfg" openOnCreation="true" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../README.md" openOnCreation="true" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../README.html" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../gcc/mspm33c321a.lds" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../gcc/startup_mspm33c321x_gcc.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../gcc/system_mspm33c321x.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="gcc">
+        </file>
+    </project>
+</projectSpec>

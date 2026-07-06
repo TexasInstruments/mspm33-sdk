@@ -1,0 +1,3765 @@
+Software Bill of Materials
+==========================
+
+Libraries - SOC Drivers
+-----------------------
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Component
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+[SDK_Install_Path]/source/ti/driverlib/\*
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Production or reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Production
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Process Compliance
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+BQ
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Certification
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+NA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Distribution
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TI Website / TI GitHub
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Comments
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Non-security peripheral drivers for HSADC, GPIO, UNICOMM-I2C, UNICOMM-SPI, UNICOMM-UART, timers, comparators, DMA, and other SOC IPs. Excludes security-specific drivers (AES, KeyStore, GSC, PKA, SHA).
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+Libraries - SOC Security Drivers & Support
+------------------------------------------
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Component
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+[SDK_Install_Path]/source/ti/driverlib/dl_aesadv.\ *, [SDK_Install_Path]/source/ti/driverlib/dl_keystorectl.*, [SDK_Install_Path]/source/ti/driverlib/dl_gsc.\ *, [SDK_Install_Path]/source/ti/driverlib/m33/dl_pka.*, [SDK_Install_Path]/source/ti/driverlib/m33/dl_shadrv.\ *, [SDK_Install_Path]/source/ti/devices/*, [SDK_Install_Path]/source/ti/hal/*, [SDK_Install_Path]/source/ti/clockTree/*, [SDK_Install_Path]/source/ti/project_config/*, [SDK_Install_Path]/source/ti/boards/*, [SDK_Install_Path]/source/ti/boosterpacks/\*
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Production or reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Process Compliance
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Early-Adopter
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Certification
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+NA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Distribution
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TI Website / TI GitHub
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Comments
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Security peripheral drivers (AES, KeyStore, GSC, PKA, SHA), device header support files, hardware abstraction layer, SysConfig metadata, and board-level support
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+Examples
+--------
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Component
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+[SDK_Install_Path]/examples/\*
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Production or reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Process Compliance
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Demo Quality
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Certification
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+NA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Distribution
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TI Website / TI GitHub
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Comments
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Driver and kernel examples showing how to use the driver APIs
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+Middleware - LIN Drivers
+------------------------
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Component
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+[SDK_Install_Path]/source/ti/driverlib/.meta/lin/*, [SDK_Install_Path]/examples/nortos/*/lin/\*
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Production or reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Process Compliance
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Demo Quality
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Certification
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+NA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Distribution
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TI Website / TI GitHub
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Comments
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+LIN protocol middleware driver and examples for MSPM33
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+Middleware - EEPROM Emulation
+-----------------------------
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Component
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+[SDK_Install_Path]/source/ti/eeprom/\*
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Production or reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Process Compliance
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Early-Adopter
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Certification
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+NA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Distribution
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TI Website / TI GitHub
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Comments
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+EEPROM emulation library using internal flash memory
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+Libraries - CMSIS
+-----------------
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Component
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+[SDK_Install_Path]/source/third_party/CMSIS/Core/*, [SDK_Install_Path]/source/third_party/CMSIS/DSP/*
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Production or reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Process Compliance
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+FOSS†
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Certification
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+NA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Distribution
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TI Website / TI GitHub
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Comments
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+CMSIS-Core and CMSIS-DSP - Common Microcontroller Software Interface Standard
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+OS - FreeRTOS
+-------------
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Component
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+[SDK_Install_Path]/kernel/freertos/\*
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Production or reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Process Compliance
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+FOSS†
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Certification
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+NA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Distribution
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TI Website / TI GitHub
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Comments
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+FreeRTOS Kernel - Reference RTOS for ARM Cortex-M33
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+Libraries - LVGL
+----------------
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Component
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+[SDK_Install_Path]/source/third_party/lvgl/\*
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Production or reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Process Compliance
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Demo Quality
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Certification
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+NA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Distribution
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TI Website / TI GitHub
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Comments
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+LVGL - Light and Versatile Graphics Library for embedded displays
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+MSP-AI - Feature Extraction Library
+-----------------------------------
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Component
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+[SDK_Install_Path]/source/ti/edgeAI/m33/feature_extract/\*
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Production or reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Process Compliance
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Early-Adopter
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Certification
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+NA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Distribution
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TI Website / TI GitHub
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Comments
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+MSP-AI Feature Extraction Library for signal processing and feature computation on M33 core
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+MSP-AI - Device Agent Protocol
+------------------------------
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Component
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+[SDK_Install_Path]/source/ti/edgeAI/m33/device_agent_protocol/\*
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Production or reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Process Compliance
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Early-Adopter
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Certification
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+NA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Distribution
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TI Website / TI GitHub
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Comments
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+MSP-AI Device Agent Protocol (DAP) enabling communication between host and MSP device for AI inferencing
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+MSP-AI - TinyML-Tensorlab
+-------------------------
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Component
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+[SDK_Install_Path]/examples/nortos/*/edgeAI/*/artifacts/\*
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Production or reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Process Compliance
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Demo Quality
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Certification
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+NA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Distribution
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TI Website / TI GitHub
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Comments
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TinyML-Tensorlab - pre-compiled TVM model binaries and header files bundled with edge AI examples
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+MSP-AI - Character Recognition GUI
+----------------------------------
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Component
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+[SDK_Install_Path]/tools/character_recognition/\*
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Production or reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Process Compliance
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Demo Quality
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Certification
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+NA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Distribution
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TI Website / TI GitHub
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Comments
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+MSP-AI Character Recognition GUI - binary host tool for character recognition demonstration
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+MSP-AI - Examples
+-----------------
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Component
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+[SDK_Install_Path]/examples/nortos/*/edgeAI/*
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Production or reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Process Compliance
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Demo Quality
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Certification
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+NA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Distribution
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TI Website / TI GitHub
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Comments
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+MSP-AI example applications for motor fault detection, waveform classification, PIR detection, and other AI inferencing use cases
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+MSP-CRYPTO-LIB - Cryptography Library
+-------------------------------------
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Component
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+[SDK_Install_Path]/source/ti/crypto/\*
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Production or reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Process Compliance
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Early-Adopter
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Certification
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+NA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Distribution
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TI Website / TI GitHub
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Comments
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+MSP Cryptography Library including ECC SW/HW libraries, SHA2SW, SHA3SW (MIT), Curve25519 (MIT), ML-DSA, RSA, and PKA module.
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+MSP-CRYPTO-LIB - Cryptography Examples
+--------------------------------------
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Component
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+[SDK_Install_Path]/examples/*/security/*
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Production or reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Process Compliance
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Demo Quality
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Certification
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+NA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Distribution
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TI Website / TI GitHub
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Comments
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+MSP Cryptography Example Suite demonstrating use of the crypto library
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+Boot Image Manager - Boot Manager
+---------------------------------
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Component
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+[SDK_Install_Path]/source/ti/boot_manager/\*
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Production or reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Process Compliance
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Early-Adopter
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Certification
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+NA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Distribution
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TI Website / TI GitHub
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Comments
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+MSPM33 Boot Manager and Customer Secure Code Example Suite including secure bootloading support
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+MCUBoot
+-------
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Component
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+[SDK_Install_Path]/source/third_party/mcuboot/\*
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Production or reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Process Compliance
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Demo Quality
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Certification
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+NA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Distribution
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TI Website / TI GitHub
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Comments
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+MCUBoot open-source secure bootloader, modified by TI for MSPM33 integration
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+MbedTLS
+-------
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Component
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+[SDK_Install_Path]/source/third_party/mbedtls/\*
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Production or reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Process Compliance
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Demo Quality
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Certification
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+NA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Distribution
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TI Website / TI GitHub
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Comments
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+MbedTLS cryptographic library
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+TF-PSA-Crypto
+-------------
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Component
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+[SDK_Install_Path]/source/third_party/tf-psa-crypto/\*
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Production or reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Process Compliance
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Demo Quality
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Certification
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+NA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Distribution
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TI Website / TI GitHub
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Comments
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TF-PSA-Crypto PSA Cryptography API implementation used by Trusted Firmware-M
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+Trusted Firmware-M
+------------------
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Component
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+[SDK_Install_Path]/source/third_party/trusted-firmware-m/\*
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Production or reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Process Compliance
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Demo Quality
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Certification
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+NA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Distribution
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TI Website / TI GitHub
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Comments
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Trusted Firmware-M ARM PSA reference implementation for Cortex-M33 TrustZone, providing Secure World firmware with PSA services (Crypto, Storage, Attestation, and Platform)
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+Tools - SysConfig
+-----------------
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Component
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SysConfig
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Production or reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Reference
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Process Compliance
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Early-Adopter
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Certification
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+NA
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Distribution
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TI Website / TI GitHub
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+Comments
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+Tool to configure SOC pinmux and driver parameters for MSPM33
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+--------------
+
+† FOSS: Free and Open Source Software. Refer to the manifest for individual component license details.

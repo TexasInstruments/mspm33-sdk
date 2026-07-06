@@ -1,0 +1,19 @@
+#-------------------------------------------------------------------------------
+# SPDX-FileCopyrightText: Copyright The TrustedFirmware-M Contributors
+#
+# SPDX-License-Identifier: BSD-3-Clause
+#
+#-------------------------------------------------------------------------------
+# This command writes 0x1 into the DMA350 Channel1 CH_CMD register, this causes
+# it to start running.
+
+CTRL:
+    XTYPE: 'fill'
+    TRANSIZE: 'word'
+    USEGPO: 1
+DESADDR: 'dma_channel_1_base_address + reg_offset_dma_channel_cmd'
+XSIZE:
+    DES: 1
+FILLVAL: 0x00000001
+GPOVAL0: 0x00000001
+LINKADDR: "program2_cmd0_exec_addr"

@@ -1,0 +1,12 @@
+#-------------------------------------------------------------------------------
+# SPDX-FileCopyrightText: Copyright The TrustedFirmware-M Contributors
+#
+# SPDX-License-Identifier: BSD-3-Clause
+#
+#-------------------------------------------------------------------------------
+# This command jumps to program 6
+
+CTRL:
+    USEGPO: 1
+GPOVAL0: 0x00000006
+LINKADDR: "program6_cmd0_exec_addr"

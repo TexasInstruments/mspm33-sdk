@@ -1,0 +1,65 @@
+适用于 CCS 的 MSPM33 SDK 快速入门指南
+=====================================
+
+1. 简介
+-------
+
+本指南旨在帮助用户进行初始设置并演示如何使用 TI Arm Clang 在 CCS 中运行他们的第一个 MSPM33 应用程序。 本指南不用于解释 CCS 的功能。 请参阅 CCS 中的帮助菜单提供的文档，或者参考 MSPM33 SDK 文档中的 `CCS IDE Guide for MSPM33 MCUs <../../../tools/ccs_ide_guide/doc_guide/doc_guide-srcs/ccs_ide_guide_CN.html>`__\ 。
+
+2. 前期准备
+-----------
+
+用户应已下载以下内容：
+
+-  `CCS 20.4.0 或更高版本 <https://www.ti.com/tool/download/CCSTUDIO>`__
+-  `SysConfig 1.26.0 <https://www.ti.com/tool/SYSCONFIG>`__ (包含在最新版本的 CCS 中)
+-  `TI Clang <https://www.ti.com/tool/download/ARM-CGT-CLANG-1/>`__ (包含在最新版本的 CCS 中)
+
+3. 在 CCS 中导入和构建示例
+--------------------------
+
+1. 在 CCS 中从入门页面打开 Resource Explorer
+
+   |image0|
+
+2. 在页面目录中选择 MSPM33 并选择 Examples 文件夹
+
+   |image1|
+
+3. 导航到 DriverLib 示例，按照下面的文件路径
+
+   |image2|
+
+4. 选择一个示例，选择 TI Clang 编译器文件夹，然后通过点击项目文件旁边的3个点来导入到 CCS IDE 中
+
+   |image3|
+
+5. 如果未安装 SDK，将弹出一条错误消息并提示用户安装 SDK
+
+   |image4|
+
+6. 安装 SDK 后，通过点击项目文件旁边的3个点将其导入到 CCS IDE 中
+
+|image5|
+
+5. 要构建示例，请在 Project Explorer 选项卡中单击您的示例，然后选择顶部的 **Build** 图标。
+
+   | **注意**\ ：一些示例包括对 SysConfig 的支持，以便更容易地进行设备配置。
+   | 下图还显示了用于为示例项目配置设备的 SysConfig 文件。
+   | 有关支持 SysConfig 的完整示例列表，请查看 `MSPM33 SDK Examples Guide <../../../sdk_users_guide/doc_guide/doc_guide-srcs/examples_guide_CN.html>`__\ 。
+   | 有关在 MSPM33 上使用 SysConfig 的更多一般信息，请参阅 SDK 工具指南中提供的 `Using SysConfig with MSPM33 <../../../tools/sysconfig_guide/doc_guide/doc_guide-srcs/sysconfig_guide_CN.html>`__\ 。
+
+   |image6|
+
+4. 已知问题和常见问题解答(FAQ)
+------------------------------
+
+请参阅 SDK 内部的 `Known Issues and FAQ <../../../../../known_issues_FAQ.html>`__\ 。
+
+.. |image0| image:: ./images/quickstart_guide_ccs/open_resource_explorer.png
+.. |image1| image:: ./images/quickstart_guide_ccs/select_examples.png
+.. |image2| image:: ./images/quickstart_guide_ccs/navigate_driverlib_examples.png
+.. |image3| image:: ./images/quickstart_guide_ccs/open_project_in_ccs.png
+.. |image4| image:: ./images/quickstart_guide_ccs/install_sdk.png
+.. |image5| image:: ./images/quickstart_guide_ccs/open_project_in_ccs.png
+.. |image6| image:: ./images/quickstart_guide_ccs/build_project.png

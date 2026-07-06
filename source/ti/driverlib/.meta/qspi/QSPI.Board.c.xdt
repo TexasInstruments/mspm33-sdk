@@ -1,0 +1,297 @@
+%%{
+/*
+ * Copyright (c) 2018-2019, Texas Instruments Incorporated - http://www.ti.com
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ */
+
+/*
+ *  ======== QSPI.Board.c.xdt ========
+ */
+
+    let QSPI = args[0];
+    let content = args[1];
+
+    let Common = system.getScript("/ti/driverlib/Common.js");
+
+    /* shorthand names for some common references in template below */
+    let instances = QSPI.$instances;
+    if (instances.length == 0) return;
+
+/*
+ * Standard Trampoline:
+ * In order to preserve spacing, it is important to also set the boolean
+ * values in the templates object based on whether that condition should
+ * produce any code
+ */
+
+
+    switch(content){
+        case "Call":
+            printCall();
+            break;
+        case "Reset":
+            printReset();
+            break;
+        case "Power":
+            printPower();
+            break;
+        case "GPIO":
+            printGPIO();
+            break;
+        case "Function":
+            printFunction();
+            break;
+        default:
+            /* do nothing */
+            return;
+            break;
+    }
+%%}
+%
+% function printCall(){
+%   for (let i in instances) {
+%       let inst = instances[i];
+    SYSCFG_DL_`inst.$name`_init();
+%   }
+% }
+%
+% function printReset(){
+% for (let i in instances) {
+%       let inst = instances[i];
+    DL_QSPI_reset(`inst.$name`_INST);
+%   }
+% }
+% function printPower(){
+% for (let i in instances) {
+%       let inst = instances[i];
+    DL_QSPI_enablePower(`inst.$name`_INST);
+%   }
+% }
+%
+% function printGPIO(){
+%   for (let i in instances) {
+%       let inst = instances[i];
+%   let usePICO = false;
+%   let usePOCI = false;
+%   let useIO2 = false;
+%   let useIO3 = false;
+%   if(inst.direction == "PICO_POCI") {
+%       usePICO = true;
+%       usePOCI = true;
+%   }
+%   if(inst.direction == "PICO_POCI_IO2_IO3") {
+%       usePICO = true;
+%       usePOCI = true;
+%       useIO2 = true;
+%       useIO3 = true;
+%   }
+%       /* all of these are defined in the header */
+%       let gpioStr = "GPIO_"+inst.$name;
+%       /* QSPI only supports Controller mode */
+%       /* SCLK - Output */
+%       try {
+%           if(!inst["sclkPinConfig"].enableConfig){
+    DL_GPIO_initPeripheralOutputFunction(
+        `gpioStr`_IOMUX_SCLK, `gpioStr`_IOMUX_SCLK_FUNC);
+%           }
+%       } catch (x){/* ignore any exception */}
+% if (usePICO) {
+%       /* PICO - Input for bidirectional */
+%       try {
+%           if(!inst["picoPinConfig"].enableConfig){
+    DL_GPIO_initPeripheralInputFunction(
+        `gpioStr`_IOMUX_PICO, `gpioStr`_IOMUX_PICO_FUNC);
+%               }
+%           } catch (x){/* ignore any exception */}
+%}
+% if (usePOCI) {
+%       /* POCI - Input */
+%       try {
+%           if(!inst["pociPinConfig"].enableConfig){
+    DL_GPIO_initPeripheralInputFunction(
+        `gpioStr`_IOMUX_POCI, `gpioStr`_IOMUX_POCI_FUNC);
+%               }
+%           } catch (x){/* ignore any exception */}
+%}
+% if (useIO2) {
+%       /* IO2 - Input for quad mode */
+%       try {
+%           if(!inst["io2PinConfig"].enableConfig){
+    DL_GPIO_initPeripheralInputFunction(
+        `gpioStr`_IOMUX_IO2, `gpioStr`_IOMUX_IO2_FUNC);
+%               }
+%           } catch (x){/* ignore any exception */}
+%}
+% if (useIO3) {
+%       /* IO3 - Input for quad mode */
+%       try {
+%           if(!inst["io3PinConfig"].enableConfig){
+    DL_GPIO_initPeripheralInputFunction(
+        `gpioStr`_IOMUX_IO3, `gpioStr`_IOMUX_IO3_FUNC);
+%               }
+%           } catch (x){/* ignore any exception */}
+%}
+%if(inst.frameFormat != "MOTO3"){
+%for (let csNum of inst.chipSelect) {
+%       /* CS - Output */
+%       try {
+%           if(!inst["cs"+csNum+"PinConfig"].enableConfig){
+    DL_GPIO_initPeripheralOutputFunction(
+        `gpioStr`_IOMUX_CS`csNum`, `gpioStr`_IOMUX_CS`csNum`_FUNC);
+%               }
+%           } catch (x){/* ignore any exception */}
+%}
+% }//if(inst.frameFormat != "MOTO3"
+% let initIOMux = Common.getGPIOConfigBoardC(inst);
+% /* Check if generating empty code */
+% if (/\S/.test(initIOMux)) {
+    `initIOMux`
+%}
+% } //for (let i in instances)
+% } //printGPIO
+%
+% /* Main Function */
+% function printFunction(){
+%   for (let i in instances) {
+%       let inst = instances[i];
+%       let instName = inst.$name;
+%
+static const DL_QSPI_Config g`instName`_config = {
+    .mode          = DL_QSPI_MODE_CONTROLLER,
+%if (inst.frameFormat == "TI_SYNC") {
+    .frameFormat   = DL_QSPI_FRAME_FORMAT_TI_SYNC,
+%} else {
+    .frameFormat   = DL_QSPI_FRAME_FORMAT_`inst.frameFormat`_POL`inst.polarity`_PHA`inst.phase`,
+%}
+    .parity        = DL_QSPI_PARITY_`inst.parity`,
+    .dataSize      = DL_QSPI_DATA_SIZE_`inst.dataSize`,
+    .bitOrder      = DL_QSPI_BIT_ORDER_MSB_FIRST,
+%    if (inst.frameFormat != "MOTO3") {
+%       let csArgs = "";
+%       /*
+%        * In Controller mode, multiple CS can be selected, but only 1
+%        * (defaultChipSelect) can be enabled at a time.
+%        */
+%       if(inst.chipSelect.length > 1) {
+%           csArgs = "DL_QSPI_CHIP_SELECT_" + inst.defaultChipSelect;
+%       } else {
+%           csArgs = "DL_QSPI_CHIP_SELECT_" + inst.chipSelect;
+%       }
+    .chipSelectPin = `csArgs`,
+%    } //if (inst.frameFormat != "MOTO3")
+};
+
+static const DL_QSPI_ClockConfig g`instName`_clockConfig = {
+    .clockSel    = DL_QSPI_CLOCK_`inst.qspiClkSrc`,
+    .divideRatio = DL_QSPI_CLOCK_DIVIDE_RATIO_`inst.qspiClkDiv`
+};
+
+SYSCONFIG_WEAK void SYSCFG_DL_`instName`_init(void) {
+    DL_QSPI_setClockConfig(`instName`_INST, (DL_QSPI_ClockConfig *) &g`instName`_clockConfig);
+
+    DL_QSPI_init(`instName`_INST, (DL_QSPI_Config *) &g`instName`_config);
+
+    /* Disable PACKEN - QSPI does not support packing */
+    DL_QSPI_disablePacking(`instName`_INST);
+
+    /* Configure Controller mode */
+    /*
+     * Set the bit rate clock divider to generate the serial output clock
+     *     outputBitRate = (qspiInputClock) / ((1 + SCR) * 2)
+     *     `inst.calculatedBitRateNum` = (`inst.basicClockSourceCalculated`)/((1 + `inst.scr`) * 2)
+     */
+    DL_QSPI_setBitRateSerialClockDivider(`instName`_INST, `inst.scr`);
+
+    /* Set chip select timing */
+    DL_QSPI_setChipSelectAssertDelay(`instName`_INST, `inst.chipSelectAssertDelay`);
+    DL_QSPI_setChipSelectDeAssertDelay(`instName`_INST, `inst.chipSelectDeAssertDelay`);
+
+    /* Set delayed sampling (0-15 QSPI clock cycles) */
+    DL_QSPI_setDelayedSampling(`instName`_INST, `inst.delayedSampling`);
+
+    /* Set internal SCLK sampling delay */
+    DL_QSPI_setDataSampleDelay(`instName`_INST, `inst.dataSampleDelay`);
+%if (inst.enableInternalLoopback == true){
+
+    DL_QSPI_enableLoopbackMode(`instName`_INST);
+%}
+% if (inst.parityDirection == "RX") {
+    DL_QSPI_disableTransmitParity(`instName`_INST);
+%}
+% if (inst.parityDirection == "TX") {
+    DL_QSPI_disableReceiveParity(`instName`_INST);
+%}
+%if (inst.enabledDMAEvent2Triggers != "None" && inst.enableDMAEvent2) {
+
+    /* Enable QSPI TX interrupt as a trigger for DMA */
+    DL_QSPI_enableDMATransmitEvent(`instName`_INST);
+%}
+%if (inst.enabledDMAEvent1Triggers != "None" && inst.enableDMAEvent1) {
+
+    /* Enable QSPI RX interrupt as a trigger for DMA */
+    DL_QSPI_enableDMAReceiveEvent(`instName`_INST, `inst.enabledDMAEvent1Triggers`);
+%}
+
+    /* Configure FIFO thresholds */
+    DL_QSPI_setFIFOThreshold(`instName`_INST, `inst.rxFifoThreshold`, `inst.txFifoThreshold`);
+%
+%   if (inst.enabledInterrupts.length > 0) {
+%%{
+    /* Create interrupt bit mask to be used in DL_QSPI_enableInterrupt() */
+    let intsToEnableOR = "(";
+    for (let intToEnable of inst.enabledInterrupts)
+    {
+        if (intToEnable == inst.enabledInterrupts[inst.enabledInterrupts.length - 1])
+        {
+            intsToEnableOR += ("DL_QSPI_INTERRUPT_" + intToEnable + ")");
+        }
+        else
+        {
+            intsToEnableOR += ("DL_QSPI_INTERRUPT_" + intToEnable + " |");
+            intsToEnableOR += "\n\t\t";
+        }
+    }
+%%}
+
+    DL_QSPI_enableInterrupt(`instName`_INST, `intsToEnableOR`);
+%        if(inst.interruptPriority !== "DEFAULT"){
+%               let irqnStr = inst.$name + "_INST_INT_IRQN";
+    NVIC_SetPriority(`irqnStr`, `inst.interruptPriority`);
+%        }
+%   }
+
+    /* Enable QSPI after configuration */
+    DL_QSPI_enable(`instName`_INST);
+}
+% } // for i < instances.length
+%
+%
+% } // printFunction()

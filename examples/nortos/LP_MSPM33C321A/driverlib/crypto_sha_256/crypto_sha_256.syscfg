@@ -1,0 +1,52 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ */
+//@cliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)" --part "Default"
+//@v2CliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)"
+// @cliArgs --board /ti/boards/LP_MSPM33C321A --rtos nortos
+
+
+/**
+ * Import the modules used in this configuration.
+ */
+const DMA   = scripting.addModule("/ti/driverlib/DMA", {}, false);
+const DMA1  = DMA.addInstance();
+const GPIO  = scripting.addModule("/ti/driverlib/GPIO", {}, false);
+const GPIO1 = GPIO.addInstance();
+const SHAW  = scripting.addModule("/ti/driverlib/SHAW");
+
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+DMA1.$name = "DMA0";
+
+const Board = scripting.addModule("/ti/driverlib/Board", {}, false);
+
+GPIO1.$name                               = "GPIO_LEDS";
+GPIO1.port                                = "PORTC";
+GPIO1.associatedPins.create(2);
+GPIO1.associatedPins[0].$name             = "PASS_LED";
+GPIO1.associatedPins[0].launchPadShortcut = "LED2GreenEn";
+GPIO1.associatedPins[1].$name             = "FAIL_LED";
+GPIO1.associatedPins[1].launchPadShortcut = "LED2RedEn";
+
+SHAW.enabledDMAEvent1Triggers           = "DL_SHAW_TRIGGER";
+SHAW.algorithm                          = "DL_SHAW_ALGORITHM_SHA_256";
+SHAW.DMA_CHANNEL_EVENT1.$name           = "CH0";
+SHAW.DMA_CHANNEL_EVENT1.transferMode    = "SINGLE_BLOCK";
+SHAW.DMA_CHANNEL_EVENT1.addressMode     = "b2f";
+SHAW.DMA_CHANNEL_EVENT1.enableInterrupt = true;
+SHAW.DMA_CHANNEL_EVENT1.srcIncrement    = "INCREMENT";
+SHAW.DMA_CHANNEL_EVENT1.peripheral.$assign = "DMA0_CH0";
+
+const SYSCTL = scripting.addModule("/ti/driverlib/SYSCTL", {}, false);
+
+const ProjectConfig              = scripting.addModule("/ti/project_config/ProjectConfig", {}, false);
+ProjectConfig.migrationCondition = true;
+
+ProjectConfig.genLinker  = true;
+ProjectConfig.genStartup = true;
+ProjectConfig.genOpts    = true;
+ProjectConfig.genLibs    = true;

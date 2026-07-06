@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IAR Project Connection File -->
+
+<iarProjectConnection version="1.2" name="blink_led" oneShot="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="IarProjectConnection_1.2.xsd">
+
+    <device>
+        <name>MSPM33C321A</name>
+    </device>
+
+    <asmIncludePath>
+        <path>$PROJ_DIR$</path>
+        <path>$MSPM33_SDK_INSTALL_DIR$/kernel/freertos/builds/LP_MSPM33C321A/release</path>
+    </asmIncludePath>
+
+    <includePath>
+        <path>$PROJ_DIR$</path>
+        <path>$MSPM33_SDK_INSTALL_DIR$/source/third_party/CMSIS/Core/Include</path>
+        <path>$MSPM33_SDK_INSTALL_DIR$/kernel/freertos/Source/include</path>
+        <path>$MSPM33_SDK_INSTALL_DIR$/source</path>
+        <path>$MSPM33_SDK_INSTALL_DIR$/kernel/freertos/Source/portable/IAR/ARM_CM33_NTZ/non_secure</path>
+        <path>$MSPM33_SDK_INSTALL_DIR$/source/ti/posix/iar</path>
+        <path>$MSPM33_SDK_INSTALL_DIR$/kernel/freertos/builds/LP_MSPM33C321A/release</path>
+    </includePath>
+
+    <defines>
+        <define>__MSPM33C321A__</define>
+    </defines>
+
+    <extraOptions>
+        <args>
+            <arg>--silent</arg>
+            <arg>-e</arg>
+            <arg>--aeabi</arg>
+            <arg>--thumb</arg>
+            <arg>--diag_suppress=Pa050</arg>
+        </args>
+    </extraOptions>
+
+    <linkerFile>
+        <override>true</override>
+        <path>$PROJ_DIR$/mspm33c321a.icf</path>
+    </linkerFile>
+
+    <linkerExtraOptions>
+        <args>
+            <arg>--redirect</arg>
+            <arg>ScanfSmall=_ScanfSmall</arg>
+            <arg>$MSPM33_SDK_INSTALL_DIR$/source/ti/driverlib/lib/iar/m33/mspm33c321x/driverlib.a</arg>
+            <arg>-L$MSPM33_SDK_INSTALL_DIR$/source</arg>
+            <arg>-L$PROJ_DIR$</arg>
+            <arg>$MSPM33_SDK_INSTALL_DIR$/kernel/freertos/builds/LP_MSPM33C321A/release/iar/freertos.lib</arg>
+            <arg>--silent</arg>
+        </args>
+    </linkerExtraOptions>
+
+    <customBuildTools>
+        <customBuildTool atRoot="true" name="SysConfig"> <!-- Custom build tool for entire project-->
+            <fileExtensions>.syscfg</fileExtensions>
+            <command>$SYSCONFIG_ROOT$/sysconfig_cli.bat -o $PROJ_DIR$ -s "$MSPM33_SDK_INSTALL_DIR$/.metadata/product.json" --compiler iar $FILE_PATH$</command>
+            <output>
+                <path>SysConfig_Generated_Files.ipcf</path>
+            </output>
+            <hasPrio>true</hasPrio> <!-- true: run this tool before all other tools-->
+        </customBuildTool>
+    </customBuildTools>
+
+    <heaps>
+        <heap> <!-- If omitted, id="0" -->
+            <size>0</size>
+        </heap>
+        <heap id="1">
+            <size>0</size>
+        </heap>
+    </heaps>
+    <stacks>
+        <stack> <!-- If omitted, id="0" -->
+            <size>512</size>
+        </stack>
+    </stacks>
+
+    <preBuild>
+        <command>iarbuild.exe $MSPM33_SDK_INSTALL_DIR$/kernel/freertos/builds/LP_MSPM33C321A/release/iar/freertos_builds_LP_MSPM33C321A_release.ewp Debug</command>
+    </preBuild>
+
+    <files>
+        <path copyTo="$PROJ_DIR$/blink_led.syscfg">$MSPM33_SDK_INSTALL_DIR$/examples/rtos/LP_MSPM33C321A/kernel/blink_led/blink_led.syscfg</path>
+        <path copyTo="$PROJ_DIR$/main-blinky.c">$MSPM33_SDK_INSTALL_DIR$/examples/rtos/LP_MSPM33C321A/kernel/blink_led/main-blinky.c</path>
+        <path copyTo="$PROJ_DIR$/main.c">$MSPM33_SDK_INSTALL_DIR$/examples/rtos/LP_MSPM33C321A/kernel/blink_led/main.c</path>
+        <path copyTo="$PROJ_DIR$/mspm33c321a.icf">$MSPM33_SDK_INSTALL_DIR$/examples/rtos/LP_MSPM33C321A/kernel/blink_led/freertos/iar/mspm33c321a.icf</path>
+        <path copyTo="$PROJ_DIR$/README.html">$MSPM33_SDK_INSTALL_DIR$/examples/rtos/LP_MSPM33C321A/kernel/blink_led/README.html</path>
+        <path copyTo="$PROJ_DIR$/README.md">$MSPM33_SDK_INSTALL_DIR$/examples/rtos/LP_MSPM33C321A/kernel/blink_led/README.md</path>
+        <group name="Excluded_From_Build" build="false">
+            <path copyTo="$PROJ_DIR$/Excluded_From_Build/syscfg_c.rov.xs">$MSPM33_SDK_INSTALL_DIR$/examples/rtos/LP_MSPM33C321A/kernel/blink_led/syscfg_c.rov.xs</path>
+        </group>
+        <group name="freertos/iar" build="true">
+            <path copyTo="$PROJ_DIR$/freertos/iar/startup_mspm33c321x_iar.c">$MSPM33_SDK_INSTALL_DIR$/examples/rtos/LP_MSPM33C321A/kernel/blink_led/freertos/iar/startup_mspm33c321x_iar.c</path>
+        </group>
+    </files>
+</iarProjectConnection>

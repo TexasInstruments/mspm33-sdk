@@ -1,0 +1,83 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ */
+//@cliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)" --part "Default"
+//@v2CliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)"
+// @cliArgs --board /ti/boards/LP_MSPM33C321A --rtos nortos
+
+
+/**
+ * Import the modules used in this configuration.
+ */
+const DMA    = scripting.addModule("/ti/driverlib/DMA", {}, false);
+const DMA1   = DMA.addInstance();
+const GPIO   = scripting.addModule("/ti/driverlib/GPIO", {}, false);
+const GPIO1  = GPIO.addInstance();
+const I2C    = scripting.addModule("/ti/driverlib/I2C", {}, false);
+const I2C1   = I2C.addInstance();
+const SYSCTL = scripting.addModule("/ti/driverlib/SYSCTL");
+
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+DMA1.$name                                    = "DMA0";
+DMA1.associatedChannels.create(2);
+DMA1.associatedChannels[0].$name              = "CH0";
+DMA1.associatedChannels[0].triggerSelect      = "UC15_0";
+DMA1.associatedChannels[0].srcLength          = "BYTE";
+DMA1.associatedChannels[0].dstLength          = "BYTE";
+DMA1.associatedChannels[0].dstIncDec          = "UNCHANGED";
+DMA1.associatedChannels[0].addressMode        = "b2b";
+DMA1.associatedChannels[0].triggerNumber      = "UC15_0_TX_TRIG";
+DMA1.associatedChannels[0].peripheral.$assign = "DMA0_CH0";
+DMA1.associatedChannels[1].$name              = "CH1";
+DMA1.associatedChannels[1].triggerSelect      = "UC15_0";
+DMA1.associatedChannels[1].srcLength          = "BYTE";
+DMA1.associatedChannels[1].dstLength          = "BYTE";
+DMA1.associatedChannels[1].addressMode        = "b2b";
+DMA1.associatedChannels[1].srcIncDec          = "UNCHANGED";
+DMA1.associatedChannels[1].peripheral.$assign = "DMA0_CH1";
+
+const Board                       = scripting.addModule("/ti/driverlib/Board", {}, false);
+Board.peripheral.$assign          = "DEBUGSS";
+Board.peripheral.swclkPin.$assign = "PA20";
+Board.peripheral.swdioPin.$assign = "PA19";
+
+GPIO1.$name                                 = "GPIO_LEDS";
+GPIO1.associatedPins.create(2);
+GPIO1.associatedPins[0].$name               = "FAIL_LED";
+GPIO1.associatedPins[0].assignedPort        = "PORTC";
+GPIO1.associatedPins[0].assignedPortSegment = "Upper";
+GPIO1.associatedPins[0].assignedPin         = "26";
+GPIO1.associatedPins[0].launchPadShortcut   = "LED2RedEn";
+GPIO1.associatedPins[0].pin.$assign         = "PC26";
+GPIO1.associatedPins[1].$name               = "PASS_LED";
+GPIO1.associatedPins[1].launchPadShortcut   = "LED2GreenEn";
+GPIO1.associatedPins[1].pin.$assign         = "PC27";
+
+I2C1.basicTargetAddress                = 0x50;
+I2C1.$name                             = "I2C";
+I2C1.basicControllerBusSpeed           = 400000;
+I2C1.basicEnableTarget                 = true;
+I2C1.peripheral.$assign                = "UC15_0";
+I2C1.peripheral.sdaPin.$assign         = "PA0";
+I2C1.peripheral.sclPin.$assign         = "PA1";
+I2C1.sdaPinConfig.$name                = "ti_driverlib_gpio_GPIOPinGeneric0";
+I2C1.sdaPinConfig.enableConfig         = true;
+I2C1.sdaPinConfig.internalResistor     = "PULL_UP";
+I2C1.sclPinConfig.$name                = "ti_driverlib_gpio_GPIOPinGeneric1";
+I2C1.sclPinConfig.enableConfig         = true;
+I2C1.sclPinConfig.internalResistor     = "PULL_UP";
+
+SYSCTL.forceDefaultClkConfig = true;
+SYSCTL.peripheral.$assign    = "SYSCTL";
+
+const ProjectConfig              = scripting.addModule("/ti/project_config/ProjectConfig", {}, false);
+ProjectConfig.migrationCondition = true;
+
+ProjectConfig.genLinker  = true;
+ProjectConfig.genStartup = true;
+ProjectConfig.genOpts    = true;
+ProjectConfig.genLibs    = true;

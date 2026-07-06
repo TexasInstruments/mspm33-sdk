@@ -1,0 +1,19 @@
+#-------------------------------------------------------------------------------
+# SPDX-FileCopyrightText: Copyright The TrustedFirmware-M Contributors
+#
+# SPDX-License-Identifier: BSD-3-Clause
+#
+#-------------------------------------------------------------------------------
+# Disable the wait for trigger on channel 1, since otherwise later programs in
+# channel 1 will inherit the trigger wait.
+
+CTRL:
+    XTYPE: 'fill'
+    TRANSIZE: 'word'
+    USEGPO: 1
+DESADDR: 'dma_channel_1_base_address + reg_offset_dma_channel_ctrl'
+XSIZE:
+    DES: 1
+FILLVAL: 0x00000000
+GPOVAL0: 0x00000002
+LINKADDR: "program2_cmd2_exec_addr"

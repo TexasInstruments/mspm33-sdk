@@ -1,0 +1,583 @@
+%%{
+/*
+ * Copyright (c) 2018-2019, Texas Instruments Incorporated - http://www.ti.com
+ * All rights reserved.
+ */
+
+    let GSC = args[0];
+    let content = args[1];
+
+    /* get the instances */
+    let instances = GSC.$instances;
+    if (instances.length == 0) return;
+
+    /* get first GSC instance */
+    let inst = instances[0];
+
+    /* get ti/drivers common utility functions */
+    let Common = system.getScript("/ti/driverlib/Common.js");
+
+     /* Map of peripherals that are secure by default */
+    const defaultSecurePeripherals = {
+        'DMA0': true,
+        'SYSCTL': true,
+        'CRC': true,
+        'TRNG': true,
+        'DEBUGSS': true,
+        'GSC': true
+    };
+
+    /* Map of peripherals that are privileged by default */
+    const defaultPrivilegedPeripherals = {
+        'DMA0': true,
+        'SYSCTL': true,
+        'GSC': true
+    };
+
+    /* Peripheral name mapping function */
+    function getAPIName(peripheralName) {
+        if (peripheralName.startsWith('GPIO')) return 'GPIO';
+        if (peripheralName.startsWith('ADC')) return 'ADC';
+        if (peripheralName.startsWith('ACOMP')) return 'ACOMP';
+        if (peripheralName.startsWith('TIMER') || peripheralName.startsWith('TIM')) return 'Timer';
+        if (peripheralName.startsWith('UC')) return 'UniComm';
+
+        const peripheralMap = {
+            'UC1_0': 'UniComm',
+            'UC1_1': 'UniComm',
+            'UC2': 'UniComm',
+            'UC15_0': 'UniComm',
+            'UC15_1': 'UniComm',
+            'UC12': 'UniComm',
+            'UC13_0': 'UniComm',
+            'UC13_1': 'UniComm',
+            'UC13_2': 'UniComm',
+            'UC13_3': 'UniComm',
+            'UC14': 'UniComm',
+            'I2S0': 'I2S',
+            'I2S1': 'I2S',
+            'ADC0': 'ADC',
+            'ADC1': 'ADC',
+            'ACOMP0': 'ACOMP',
+            'ACOMP1': 'ACOMP',
+            'MCAN0': 'MCAN',
+            'MCAN1': 'MCAN',
+            'GPIOA': 'GPIO',
+            'GPIOB': 'GPIO',
+            'GPIOC': 'GPIO',
+            'DMA0': 'DMA0',
+            'DMA1': 'DMA1',
+            'TIMA0_0': 'Timer',
+            'TIMA0_1': 'Timer',
+            'TIMG4_0': 'Timer',
+            'TIMG4_1': 'Timer',
+            'TIMG4_2': 'Timer',
+            'TIMG4_3': 'Timer',
+            'TIMG12_0': 'Timer',
+            'TIMG8_0': 'Timer',
+            'TIMG8_1': 'Timer',
+            'WWDT': 'WDT',
+            'SYSCTL': 'SYSCTL',
+            'GSC': 'GSC',
+            'VREF': 'VREF',
+            'QSPI': 'QSPI',
+            'DEBUGSS': 'DEBUGSS',
+            'LFSS': 'LFSS',
+            'CRC': 'CRC',
+            'AES': 'AES',
+            'SHA': 'SHA',
+            'PKA': 'PKA',
+            'TRNG': 'TRNG',
+            'KEYSTORECTL': 'KEYSTORECTL',
+            'EAM': 'EAM',
+            'WUC': 'WUC',
+            'FRIREGS': 'FRIREGS',
+            'MEMCFG': 'MEMCFG',
+            'IOMUX': 'IOMUX'
+        };
+        return peripheralMap[peripheralName] || peripheralName;
+    }
+
+    function getSecureEnum(peripheralName) {
+        const enumMap = {
+            'UC1_0': 'DL_GSC_SECURE_ACCESS_UNICOMM_UC1_0',
+            'UC1_1': 'DL_GSC_SECURE_ACCESS_UNICOMM_UC1_1',
+            'UC2': 'DL_GSC_SECURE_ACCESS_UNICOMM_UC2',
+            'UC15_0': 'DL_GSC_SECURE_ACCESS_UNICOMM_UC15_0',
+            'UC15_1': 'DL_GSC_SECURE_ACCESS_UNICOMM_UC15_1',
+            'UC12': 'DL_GSC_SECURE_ACCESS_UNICOMM_UC12',
+            'UC13_0': 'DL_GSC_SECURE_ACCESS_UNICOMM_UC13_0',
+            'UC13_1': 'DL_GSC_SECURE_ACCESS_UNICOMM_UC13_1',
+            'UC13_2': 'DL_GSC_SECURE_ACCESS_UNICOMM_UC13_2',
+            'UC13_3': 'DL_GSC_SECURE_ACCESS_UNICOMM_UC13_3',
+            'UC14': 'DL_GSC_SECURE_ACCESS_UNICOMM_UC14',
+            'ADC0': 'DL_GSC_ADC_SECURE_ACCESS_ADC0',
+            'ADC1': 'DL_GSC_ADC_SECURE_ACCESS_ADC1',
+            'ACOMP0': 'DL_GSC_ACOMP_SECURE_ACCESS_ACOMP0',
+            'ACOMP1': 'DL_GSC_ACOMP_SECURE_ACCESS_ACOMP1',
+            'TIMA0_0': 'DL_GSC_TIMER_SECURE_ACCESS_TIMA0_0',
+            'TIMA0_1': 'DL_GSC_TIMER_SECURE_ACCESS_TIMA0_1',
+            'TIMG4_0': 'DL_GSC_TIMER_SECURE_ACCESS_TIMG4_0',
+            'TIMG4_1': 'DL_GSC_TIMER_SECURE_ACCESS_TIMG4_1',
+            'TIMG4_2': 'DL_GSC_TIMER_SECURE_ACCESS_TIMG4_2',
+            'TIMG4_3': 'DL_GSC_TIMER_SECURE_ACCESS_TIMG4_3',
+            'TIMG12_0': 'DL_GSC_TIMER_SECURE_ACCESS_TIMG12_0',
+            'TIMG8_0': 'DL_GSC_TIMER_SECURE_ACCESS_TIMG8_0',
+            'TIMG8_1': 'DL_GSC_TIMER_SECURE_ACCESS_TIMG8_1'
+        };
+        return enumMap[peripheralName];
+    }
+
+    function getGPIOEnum(peripheralName) {
+        const enumMap = {
+            'GPIOA': 'DL_GSC_GPIO_SECURE_ACCESS_GPIOA',
+            'GPIOB': 'DL_GSC_GPIO_SECURE_ACCESS_GPIOB',
+            'GPIOC': 'DL_GSC_GPIO_SECURE_ACCESS_GPIOC'
+        };
+        return enumMap[peripheralName];
+    }
+
+    function needsInstanceParam(peripheralName) {
+        return peripheralName.startsWith('GPIO') ||
+               peripheralName.startsWith('ADC') ||
+               peripheralName.startsWith('ACOMP') ||
+               peripheralName.startsWith('TIM') ||
+               peripheralName.startsWith('UC');
+    }
+
+    function hasSRAMPageConfig(pageIndex) {
+        return (
+            inst[`p${pageIndex}_512b0_secure`] !== true ||
+            inst[`p${pageIndex}_512b0_priv`] !== true ||
+            inst[`p${pageIndex}_512b1_secure`] !== true ||
+            inst[`p${pageIndex}_512b1_priv`] !== true ||
+            inst[`p${pageIndex}_1kb_secure`] !== true ||
+            inst[`p${pageIndex}_1kb_priv`] !== true ||
+            inst[`p${pageIndex}_2kb_secure`] !== true ||
+            inst[`p${pageIndex}_2kb_priv`] !== true ||
+            inst[`p${pageIndex}_4kb0_secure`] !== true ||
+            inst[`p${pageIndex}_4kb0_priv`] !== true ||
+            inst[`p${pageIndex}_4kb1_secure`] !== true ||
+            inst[`p${pageIndex}_4kb1_priv`] !== true ||
+            inst[`p${pageIndex}_4kb2_secure`] !== true ||
+            inst[`p${pageIndex}_4kb2_priv`] !== true
+        );
+    }
+
+    function hasAnySRAMSecureConfig() {
+        for (let pageIndex = 0; pageIndex < 16; pageIndex++) {
+            if (
+                inst[`p${pageIndex}_512b0_secure`] !== true ||
+                inst[`p${pageIndex}_512b1_secure`] !== true ||
+                inst[`p${pageIndex}_1kb_secure`] !== true ||
+                inst[`p${pageIndex}_2kb_secure`] !== true ||
+                inst[`p${pageIndex}_4kb0_secure`] !== true ||
+                inst[`p${pageIndex}_4kb1_secure`] !== true ||
+                inst[`p${pageIndex}_4kb2_secure`] !== true
+            ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function hasAnySRAMPrivConfig() {
+        for (let pageIndex = 0; pageIndex < 16; pageIndex++) {
+            if (
+                inst[`p${pageIndex}_512b0_priv`] !== true ||
+                inst[`p${pageIndex}_512b1_priv`] !== true ||
+                inst[`p${pageIndex}_1kb_priv`] !== true ||
+                inst[`p${pageIndex}_2kb_priv`] !== true ||
+                inst[`p${pageIndex}_4kb0_priv`] !== true ||
+                inst[`p${pageIndex}_4kb1_priv`] !== true ||
+                inst[`p${pageIndex}_4kb2_priv`] !== true
+            ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function hasNonMainFlashConfig(bank, type) {
+        // Check if any sector in the specified bank has configuration (different from default)
+        for (let i = 0; i < 4; i++) {
+            // Default values: wep=false, sec=true, priv=false
+            let defaultValue = (type === 'sec');
+            if (inst[`nonmain_bank_${bank}_s${i}_${type}`] !== defaultValue) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    function hasFlashBankConfig(bank, type) {
+        let defaultValue = (type !== 'wep');
+        // Check fine-grained sectors 0-31
+        for (let i = 0; i < 32; i++) {
+            if (inst[`bank_${bank}_s${i}_${type}`] !== defaultValue) {
+                return true;
+            }
+        }
+        // Check blocks 0-27 (covering sectors 32-255)
+        for (let i = 0; i < 28; i++) {
+            if (inst[`bank_${bank}_b${i}_${type}`] !== defaultValue) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function generateSectorMask(bank, type) {
+        let mask = 0n;
+        // Fine-grained sectors 0-31
+        for (let i = 0; i < 32; i++) {
+            if (inst[`bank_${bank}_s${i}_${type}`] === true) {
+                mask |= 1n << BigInt(i);
+            }
+        }
+        let hexStr = mask.toString(16).toUpperCase();
+        return `0x${hexStr}u`;
+    }
+
+    // WEP block register (WEPROTB0 for Bank A, WEPROTB1 for Bank B):
+    // bits 31:4, 1 bit per 16KB block, bits 3:0 reserved.
+    // Blocks 0-27 map to bits 4-31.
+    function generateBlockMaskWEP(bank, type) {
+        let mask = 0n;
+        for (let i = 0; i < 28; i++) {
+            if (inst[`bank_${bank}_b${i}_${type}`] === true) {
+                mask |= 1n << BigInt(i + 4);
+            }
+        }
+        let hexStr = mask.toString(16).toUpperCase();
+        return `0x${hexStr}u`;
+    }
+
+    // Security block register: blocks 0-27 -> bits 4-31 of SECATTRIBB0 (Bank A) / SECATTRIBB1 (Bank B).
+    function generateBlockMask(bank, type) {
+        let mask = 0n;
+        for (let i = 0; i < 28; i++) {
+            if (inst[`bank_${bank}_b${i}_${type}`] === true) {
+                mask |= 1n << BigInt(i + 4);
+            }
+        }
+        let hexStr = mask.toString(16).toUpperCase();
+        return `0x${hexStr}u`;
+    }
+
+    function generateNonMainSectorMask(type) {
+        let mask = 0n;
+        for (let i = 0; i < 4; i++) {  // Non-Main Flash has 4 sectors
+            if (inst[`nonmain_s${i}_${type}`] === true) {
+                mask |= 1n << BigInt(i);
+            }
+        }
+        let hexStr = mask.toString(16).toUpperCase();
+        return `0x${hexStr}u`;
+    }
+
+    function generateDataFlashSectorMask(type) {
+        let mask = 0n;
+        for (let i = 0; i < 16; i++) {  // Data Flash has 16 sectors
+            if (inst[`data_flash_s${i}_${type}`] === true) {
+                mask |= 1n << BigInt(i);
+            }
+        }
+        let hexStr = mask.toString(16).toUpperCase();
+        return `0x${hexStr}u`;
+    }
+
+    switch(content) {
+        case "Call":
+            printCall();
+            break;
+        case "Reset":
+            printReset();
+            break;
+        case "Power":
+            printPower();
+            break;
+        case "GPIO":
+            printGPIO();
+            break;
+        case "Function":
+            printFunction();
+            break;
+        default:
+            return;
+    }
+%%}
+% function printCall() {
+    SYSCFG_DL_GSC_init();
+% }
+% function printReset() {
+% }
+% function printPower() {
+% }
+% function printGPIO() {
+% }
+% function printFunction() {
+/*
+ * GSC configuration and initialization
+ */
+SYSCONFIG_WEAK void SYSCFG_DL_GSC_init(void)
+{
+    % let hasPeripheralConfig = false;
+% for (let prop in inst) {
+%     if (prop.startsWith('secure_')) {
+%         let peripheralName = prop.replace('secure_', '').toUpperCase();
+%         let apiName = getAPIName(peripheralName);
+%         let enumValue = getSecureEnum(peripheralName);
+%         let gpioEnum = getGPIOEnum(peripheralName);
+%         let isDefaultSecure = defaultSecurePeripherals[peripheralName] === true;
+%
+%         if ((isDefaultSecure === false && inst[prop] === true) ||
+%             (isDefaultSecure === true && inst[prop] === false)) {
+%                if (!hasPeripheralConfig) {
+    /* Configure Peripheral Access Controls */
+%                 hasPeripheralConfig = true;
+%             }
+%             if (needsInstanceParam(peripheralName)) {
+    /* Configure `peripheralName` security access */
+%                 if (inst[prop]) {
+%                     if (peripheralName.startsWith('GPIO')) {
+    DL_GSC_allow`apiName`SecureAccess(GSC, `gpioEnum`);
+%                     } else if (peripheralName.startsWith('TIM')) {
+    DL_GSC_allow`apiName`SecureAccess(GSC, `enumValue`);
+%                     } else {
+    DL_GSC_allow`apiName`SecureAccess(GSC, `enumValue`);
+%                     }
+%                 } else {
+%                     if (peripheralName.startsWith('GPIO')) {
+    DL_GSC_allow`apiName`NonSecureAccess(GSC, `gpioEnum`);
+%                     } else if (peripheralName.startsWith('TIM')) {
+    DL_GSC_allow`apiName`NonSecureAccess(GSC, `enumValue`);
+%                     } else {
+    DL_GSC_allow`apiName`NonSecureAccess(GSC, `enumValue`);
+%                     }
+%                 }
+%             } else {
+    /* Configure `peripheralName` security access */
+%                 if (inst[prop]) {
+    DL_GSC_allow`apiName`SecureAccess(GSC);
+%                 } else {
+    DL_GSC_allow`apiName`NonSecureAccess(GSC);
+%                 }
+%             }
+%         }
+%     }
+% }
+% /* Configure Peripheral Privileged Access Controls */
+% for (let prop in inst) {
+%     if (prop.startsWith('privileged_')) {
+%         let peripheralName = prop.replace('privileged_', '').toUpperCase();
+%         let apiName = getAPIName(peripheralName);
+%         let isDefaultPrivileged = defaultPrivilegedPeripherals[peripheralName] === true;
+%
+%         if ((isDefaultPrivileged === false && inst[prop] === true) ||
+%             (isDefaultPrivileged === true && inst[prop] === false)) {
+%             if (!hasPeripheralConfig) {
+    /* Configure Peripheral Access Controls */
+%                 hasPeripheralConfig = true;
+%             }
+    /* Configure `peripheralName` privilege access */
+%             if (inst[prop]) {
+    DL_GSC_allow`apiName`PrivilegeAccess(GSC);
+%             } else {
+    DL_GSC_allow`apiName`NonPrivilegeAccess(GSC);
+%             }
+%         }
+%     }
+% }
+% let hasSecureConfig = hasAnySRAMSecureConfig();
+% let hasPrivConfig = hasAnySRAMPrivConfig();
+% if (hasSecureConfig || hasPrivConfig) {
+    /* Configure SRAM Security and Privilege Attributes */
+%    if (hasSecureConfig) {
+    DL_GSC_SRAMSecurityConfig sramSecConfig = {0};
+%    }
+%    if (hasPrivConfig) {
+    DL_GSC_SRAMSecurityConfig sramPrivConfig = {0};
+%    }
+%    for (let pageIndex = 0; pageIndex < 16; pageIndex++) {
+%        if (hasSRAMPageConfig(pageIndex)) {
+    /* Configure SRAM Page `pageIndex` */
+%            if (hasSecureConfig) {
+%                if (inst[`p${pageIndex}_512b0_secure`] === true) {
+    sramSecConfig.pages[`pageIndex`].chunk_512B_0 = true;
+%                } else {
+    sramSecConfig.pages[`pageIndex`].chunk_512B_0 = false;
+%                }
+%                if (inst[`p${pageIndex}_512b1_secure`] === true) {
+    sramSecConfig.pages[`pageIndex`].chunk_512B_1 = true;
+%                } else {
+    sramSecConfig.pages[`pageIndex`].chunk_512B_1 = false;
+%                }
+%                if (inst[`p${pageIndex}_1kb_secure`] === true) {
+    sramSecConfig.pages[`pageIndex`].chunk_1KB = true;
+%                } else {
+    sramSecConfig.pages[`pageIndex`].chunk_1KB = false;
+%                }
+%                if (inst[`p${pageIndex}_2kb_secure`] === true) {
+    sramSecConfig.pages[`pageIndex`].chunk_2KB = true;
+%                } else {
+    sramSecConfig.pages[`pageIndex`].chunk_2KB = false;
+%                }
+%                if (inst[`p${pageIndex}_4kb0_secure`] === true) {
+    sramSecConfig.pages[`pageIndex`].chunk_4KB_0 = true;
+%                } else {
+    sramSecConfig.pages[`pageIndex`].chunk_4KB_0 = false;
+%                }
+%                if (inst[`p${pageIndex}_4kb1_secure`] === true) {
+    sramSecConfig.pages[`pageIndex`].chunk_4KB_1 = true;
+%                } else {
+    sramSecConfig.pages[`pageIndex`].chunk_4KB_1 = false;
+%                }
+%                if (inst[`p${pageIndex}_4kb2_secure`] === true) {
+    sramSecConfig.pages[`pageIndex`].chunk_4KB_2 = true;
+%                } else {
+    sramSecConfig.pages[`pageIndex`].chunk_4KB_2 = false;
+%                }
+%            }
+%            if (hasPrivConfig) {
+%                if (inst[`p${pageIndex}_512b0_priv`] === true) {
+    sramPrivConfig.pages[`pageIndex`].chunk_512B_0 = true;
+%                } else {
+    sramPrivConfig.pages[`pageIndex`].chunk_512B_0 = false;
+%                }
+%                if (inst[`p${pageIndex}_512b1_priv`] === true) {
+    sramPrivConfig.pages[`pageIndex`].chunk_512B_1 = true;
+%                } else {
+    sramPrivConfig.pages[`pageIndex`].chunk_512B_1 = false;
+%                }
+%                if (inst[`p${pageIndex}_1kb_priv`] === true) {
+    sramPrivConfig.pages[`pageIndex`].chunk_1KB = true;
+%                } else {
+    sramPrivConfig.pages[`pageIndex`].chunk_1KB = false;
+%                }
+%                if (inst[`p${pageIndex}_2kb_priv`] === true) {
+    sramPrivConfig.pages[`pageIndex`].chunk_2KB = true;
+%                } else {
+    sramPrivConfig.pages[`pageIndex`].chunk_2KB = false;
+%                }
+%                if (inst[`p${pageIndex}_4kb0_priv`] === true) {
+    sramPrivConfig.pages[`pageIndex`].chunk_4KB_0 = true;
+%                } else {
+    sramPrivConfig.pages[`pageIndex`].chunk_4KB_0 = false;
+%                }
+%                if (inst[`p${pageIndex}_4kb1_priv`] === true) {
+    sramPrivConfig.pages[`pageIndex`].chunk_4KB_1 = true;
+%                } else {
+    sramPrivConfig.pages[`pageIndex`].chunk_4KB_1 = false;
+%                }
+%                if (inst[`p${pageIndex}_4kb2_priv`] === true) {
+    sramPrivConfig.pages[`pageIndex`].chunk_4KB_2 = true;
+%                } else {
+    sramPrivConfig.pages[`pageIndex`].chunk_4KB_2 = false;
+%                }
+%            }
+%        }
+%    }
+%    if (hasSecureConfig) {
+    /* Apply SRAM security configuration */
+    DL_GSC_configureSRAMSecurity(GSC, &sramSecConfig);
+%    }
+%    if (hasPrivConfig) {
+    /* Apply SRAM privilege configuration */
+    DL_GSC_configureSRAMPrivilege(GSC, &sramPrivConfig);
+%    }
+% }
+% if (hasFlashBankConfig('a', 'wep') || hasFlashBankConfig('a', 'sec') ||
+%     hasFlashBankConfig('b', 'wep') || hasFlashBankConfig('b', 'sec')) {
+    /* Configure Main Flash Protection */
+
+%     if (hasFlashBankConfig('a', 'wep') || hasFlashBankConfig('a', 'sec')) {
+    /* Configure Bank A Protection */
+%         let wepMaskA0 = generateSectorMask('a', 'wep');
+%         let wepMaskA1 = generateBlockMaskWEP('a', 'wep');
+%         let secMaskA0 = generateSectorMask('a', 'sec');
+%         let secMaskA1 = generateBlockMask('a', 'sec');
+
+%         if (wepMaskA0 !== '0x0u' || wepMaskA1 !== '0x0u') {
+    DL_GSC_configureMainFlashWriteProtect(GSC, DL_GSC_MAIN_FLASH_BANK_A,
+        GSC_FLASH_BANK_A_WEP_MASK0, GSC_FLASH_BANK_A_WEP_MASK1);
+%         }
+
+%         if (secMaskA0 !== '0x0u' || secMaskA1 !== '0x0u') {
+    DL_GSC_configureMainFlashSecurity(GSC, DL_GSC_MAIN_FLASH_BANK_A,
+        GSC_FLASH_BANK_A_SEC_MASK0, GSC_FLASH_BANK_A_SEC_MASK1);
+%         }
+%     }
+
+%     if (hasFlashBankConfig('b', 'wep') || hasFlashBankConfig('b', 'sec')) {
+    /* Configure Bank B Protection */
+%         let wepMaskB0 = generateSectorMask('b', 'wep');
+%         let wepMaskB1 = generateBlockMaskWEP('b', 'wep');
+%         let secMaskB0 = generateSectorMask('b', 'sec');
+%         let secMaskB1 = generateBlockMask('b', 'sec');
+
+%         if (wepMaskB0 !== '0x0u' || wepMaskB1 !== '0x0u') {
+    DL_GSC_configureMainFlashWriteProtect(GSC, DL_GSC_MAIN_FLASH_BANK_B,
+        GSC_FLASH_BANK_B_WEP_MASK0, GSC_FLASH_BANK_B_WEP_MASK1);
+%         }
+
+%         if (secMaskB0 !== '0x0u' || secMaskB1 !== '0x0u') {
+    DL_GSC_configureMainFlashSecurity(GSC, DL_GSC_MAIN_FLASH_BANK_B,
+        GSC_FLASH_BANK_B_SEC_MASK0, GSC_FLASH_BANK_B_SEC_MASK1);
+%         }
+%     }
+% }
+% if (hasNonMainFlashConfig('a', 'wep') || hasNonMainFlashConfig('a', 'sec') ||
+%     hasNonMainFlashConfig('b', 'wep') || hasNonMainFlashConfig('b', 'sec')) {
+
+    /* Configure Non-Main Flash Bank A */
+%     if (hasNonMainFlashConfig('a', 'wep')) {
+    /* Configure Write-Erase Protection */
+    DL_GSC_configureNONMAINWriteProtect(GSC, DL_GSC_MAIN_FLASH_BANK_A,
+        GSC_NONMAIN_FLASH_BANK_A_WEP_MASK, 0x0u);
+%     }
+
+    /* Configure Non-Main Flash Bank A */
+%     if (hasNonMainFlashConfig('a', 'sec')) {
+    /* Configure Security Attributes */
+    DL_GSC_configureNonMainFlashSecurity(GSC, GSC_NONMAIN_FLASH_BANK_A_SEC_MASK);
+%     }
+
+%     if (hasNonMainFlashConfig('a', 'priv')) {
+    /* Configure Privilege Attributes */
+    DL_GSC_configureNonMainFlashPrivilege(GSC, GSC_NONMAIN_FLASH_BANK_A_PRIV_MASK);
+%     }
+
+    /* Configure Non-Main Flash Bank B */
+%     if (hasNonMainFlashConfig('b', 'wep')) {
+    /* Configure Write-Erase Protection */
+    DL_GSC_configureNONMAINWriteProtect(GSC, DL_GSC_MAIN_FLASH_BANK_B,
+        GSC_NONMAIN_FLASH_BANK_B_WEP_MASK, 0x0u);
+%     }
+
+%     if (hasNonMainFlashConfig('b', 'sec')) {
+    /* Configure Security Attributes */
+    DL_GSC_configureNonMainFlashSecurity(GSC,
+        GSC_NONMAIN_FLASH_BANK_B_SEC_MASK, 0x0u);
+%     }
+
+%     if (hasNonMainFlashConfig('b', 'priv')) {
+    /* Configure Privilege Attributes */
+    DL_GSC_configureNonMainFlashPrivilege(GSC,
+        GSC_NONMAIN_FLASH_BANK_B_PRIV_MASK, 0x0u);
+%     }
+% }
+% /* Configure Data Flash Protection */
+% let dataFlashWepMask = generateDataFlashSectorMask('wep');
+% let dataFlashSecMask = generateDataFlashSectorMask('sec');
+% if (dataFlashWepMask !== '0x0u') {
+    /* Configure Data Flash Write Protection */
+    DL_GSC_configureDataFlashWriteProtect(GSC, GSC_FLASH_DATA_WEP_MASK);
+% }
+% if (dataFlashSecMask !== '0xFFFFu') {
+    /* Configure Data Flash Security */
+    DL_GSC_configureDataFlashSecurity(GSC, GSC_FLASH_DATA_SEC_MASK);
+% }
+}
+% }

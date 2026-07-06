@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectSpec>
+    <applicability>
+        <when>
+            <context
+                deviceFamily="ARM"
+                deviceId="MSPM33C321A"
+            />
+        </when>
+    </applicability>
+
+    <project
+        title="hal_i2c_loopback_interrupt"
+        name="hal_i2c_loopback_interrupt_LP_MSPM33C321A_nortos_gcc"
+        configurations="Debug"
+        toolChain="GNU"
+        connection="TIXDS110_Connection.xml"
+        device="MSPM33C321A"
+        ignoreDefaultDeviceSettings="true"
+        ignoreDefaultCCSSettings="true"
+        products="MSPM33-SDK;sysconfig"
+        compilerBuildOptions="
+            -I${PROJECT_ROOT}
+            -I${PROJECT_ROOT}/${ConfigName}
+            -O2
+            -mfloat-abi=hard
+            -mfpu=fpv5-sp-d16
+            @device.opt
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/third_party/CMSIS/Core/Include
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/examples/hal/I2c/hal_i2c_loopback_interrupt/LP_MSPM33C321A
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/ti/hal/mspm33/include
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/ti/hal/compiler/m33_ti_arm_clang
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source
+            -mcpu=cortex-m33
+            -mthumb
+            -std=c99
+            -std=c++11
+            -ffunction-sections
+            -fdata-sections
+            -g
+            -Wall
+            -I${CG_TOOL_ROOT}/arm-none-eabi/include
+        "
+        linkerBuildOptions="
+            -nostartfiles
+            -mfloat-abi=hard
+            -mfpu=fpv5-sp-d16
+            -Tdevice.lds.genlibs
+            -L${COM_TI_MSPM33_SDK_INSTALL_DIR}/source
+            -L${PROJECT_ROOT}
+            -L${PROJECT_BUILD_DIR}/syscfg
+            -mcpu=cortex-m33
+            -mthumb
+            -static
+            -Wl,--gc-sections
+            -lgcc
+            -lc
+            -lm
+            --specs=nosys.specs
+        "
+        sysConfigBuildOptions="
+            --output .
+            --product ${COM_TI_MSPM33_SDK_INSTALL_DIR}/.metadata/product.json
+            --compiler gcc
+        "
+        sourceLookupPath="${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/ti/driverlib"
+        description="I2C HAL loopback interrupt-driven example demonstrating interrupt-based controller-target communication with callback handling">
+        <property name="buildProfile" value="release"/>
+        <property name="isHybrid" value="true"/>
+        <file path="../app_cfg.h" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../hal_i2c_loopback_interrupt.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../ti/hal/mspm33/include/Uart_Hal.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="ti/hal/mspm33/include">
+        </file>
+        <file path="../ti/hal/mspm33/include/Uart_Hal_Cfg.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="ti/hal/mspm33/include">
+        </file>
+        <file path="../ti/hal/mspm33/include/I2c_Hal_Cfg.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="ti/hal/mspm33/include">
+        </file>
+        <file path="../ti/hal/mspm33/include/I2c_Hal.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="ti/hal/mspm33/include">
+        </file>
+        <file path="../ti/hal/mspm33/include/Spi_Hal_Cfg.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="ti/hal/mspm33/include">
+        </file>
+        <file path="../ti/hal/mspm33/include/Spi_Hal.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="ti/hal/mspm33/include">
+        </file>
+        <file path="../ti/hal/mspm33/src/I2c/I2c_Hal_Common.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="ti/hal/mspm33/src/I2c">
+        </file>
+        <file path="../ti/hal/mspm33/src/Uart/Uart_Hal.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="ti/hal/mspm33/src/Uart">
+        </file>
+        <file path="../ti/hal/mspm33/src/Spi/Spi_Hal.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="ti/hal/mspm33/src/Spi">
+        </file>
+        <file path="../ti/hal/mspm33/src/I2c/I2c_Hal_Common.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="ti/hal/mspm33/src/I2c">
+        </file>
+        <file path="../ti/hal/mspm33/src/I2c/I2c_Hal_Controller.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="ti/hal/mspm33/src/I2c">
+        </file>
+        <file path="../ti/hal/mspm33/src/I2c/I2c_Hal_Target.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="ti/hal/mspm33/src/I2c">
+        </file>
+        <file path="../example.syscfg" openOnCreation="true" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../README.md" openOnCreation="true" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../README.html" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+    </project>
+</projectSpec>

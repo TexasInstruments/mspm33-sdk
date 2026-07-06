@@ -1,0 +1,585 @@
+/*
+ * SPDX-FileCopyrightText: Copyright The TrustedFirmware-M Contributors
+ *
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ */
+
+#include "lcm_drv.h"
+#include "rse_test_common.h"
+
+#ifdef TEST_CC3XX
+#include "cc3xx_tests.h"
+#endif
+
+#include "rse_provisioning_tests.h"
+#include "test_state_transitions.h"
+#include "test_nv_counters.h"
+#include "test_otp_lcm.h"
+#include "test_drivers_kmu.h"
+#include "test_integrity_checker_drv.h"
+#include "test_rse_zero_count.h"
+#include "test_dpa_hardened_word_copy.h"
+#include "test_bl1_rse_kmu_keys.h"
+#include "test_atu_rse_drv.h"
+#include "test_atu_rse_lib.h"
+#if defined(RSE_SKU_ENABLED) || defined(RSE_HAS_SE_DEV_SOFT_LCS)
+#include "test_bl1_rse_sku_se_dev.h"
+#endif /* RSE_SKU_ENABLED || RSE_HAS_SE_DEV_SOFT_LCS */
+#ifdef TEST_DCSU_DRV
+#include "test_dcsu_drv.h"
+#endif /* TEST_DCSU_DRV */
+
+static struct conditional_test_t provisioning_tests[] = {
+    {
+        .any_tp_mode = true,
+        .any_lcs = true,
+        .any_sp_state = true,
+        .test = {
+            &rse_bl1_provisioning_test_0001,
+            "RSE_BL1_1_PROVISIONING_TEST_0001",
+            "Provisioning basic blob validation test"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .any_lcs = true,
+        .any_sp_state = true,
+        .test = {
+            &rse_bl1_provisioning_test_0002,
+            "RSE_BL1_1_PROVISIONING_TEST_0002",
+            "Provisioning negative blob validation test"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .any_lcs = true,
+        .any_sp_state = true,
+        .test = {
+            &rse_bl1_provisioning_test_0003,
+            "RSE_BL1_1_PROVISIONING_TEST_0003",
+            "Provisioning AES invalid key test"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .any_lcs = true,
+        .any_sp_state = true,
+        .test = {
+            &rse_bl1_provisioning_test_0004,
+            "RSE_BL1_1_PROVISIONING_TEST_0004",
+            "Provisioning ECDSA invalid key test"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .any_lcs = true,
+        .any_sp_state = true,
+        .test = {
+            &rse_bl1_provisioning_test_0005,
+            "RSE_BL1_1_PROVISIONING_TEST_0005",
+            "Provisioning required test"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_DM,
+        .any_sp_state = true,
+        .test = {
+            &rse_bl1_provisioning_test_0101,
+            "RSE_BL1_1_PROVISIONING_TEST_0101",
+            "Provisioning key TP mode set test"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .any_lcs = true,
+        .sp_enabled = LCM_TRUE,
+        .test = {
+            &rse_bl1_provisioning_test_0201,
+            "RSE_BL1_1_PROVISIONING_TEST_0201",
+            "Provisioning key setup test"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .any_lcs = true,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &rse_bl1_provisioning_test_0202,
+            "RSE_BL1_1_PROVISIONING_TEST_0202",
+            "Provisioning key setup negative test"
+        },
+    },
+    {
+        .tp_mode = LCM_TP_MODE_PCI,
+        .lcs = LCM_LCS_CM,
+        .any_sp_state = true,
+        .test = {
+            &rse_bl1_provisioning_test_0301,
+            "RSE_BL1_1_PROVISIONING_TEST_0301",
+            "Provisioning integration CM invalid blob LCS test"
+        },
+    },
+    {
+        .tp_mode = LCM_TP_MODE_PCI,
+        .lcs = LCM_LCS_DM,
+        .any_sp_state = true,
+        .test = {
+            &rse_bl1_provisioning_test_0302,
+            "RSE_BL1_1_PROVISIONING_TEST_0302",
+            "Provisioning integration DM invalid blob LCS test"
+        },
+    },
+    {
+        .tp_mode = LCM_TP_MODE_PCI,
+        .any_lcs = true,
+        .sp_enabled = LCM_TRUE,
+        .test = {
+            &rse_bl1_provisioning_test_0401,
+            "RSE_BL1_1_PROVISIONING_TEST_0401",
+            "Provisioning integration PCI negative authentication test"
+        },
+    },
+    {
+        .tp_mode = LCM_TP_MODE_TCI,
+        .any_lcs = true,
+        .sp_enabled = LCM_TRUE,
+        .test = {
+            &rse_bl1_provisioning_test_0402,
+            "RSE_BL1_1_PROVISIONING_TEST_0402",
+            "Provisioning integration TCI negative authentication test"
+        },
+    },
+    {
+        .tp_mode = LCM_TP_MODE_PCI,
+        .any_lcs = true,
+        .sp_enabled = LCM_TRUE,
+        .test = {
+            &rse_bl1_provisioning_test_0403,
+            "RSE_BL1_1_PROVISIONING_TEST_0403",
+            "Provisioning integration PCI positive test"
+        },
+    },
+    {
+        .tp_mode = LCM_TP_MODE_TCI,
+        .any_lcs = true,
+        .sp_enabled = LCM_TRUE,
+        .test = {
+            &rse_bl1_provisioning_test_0404,
+            "RSE_BL1_1_PROVISIONING_TEST_0404",
+            "Provisioning integration TCI positive test"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_CM,
+        .any_sp_state = true,
+        .test = {
+            &rse_bl1_provisioning_test_0405,
+            "RSE_BL1_1_PROVISIONING_TEST_0405",
+            "Provisioning ECDSA key in blob test setup"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_DM,
+        .any_sp_state = true,
+        .test = {
+            &rse_bl1_provisioning_test_0415,
+            "RSE_BL1_1_PROVISIONING_TEST_0415",
+            "Provisioning ECDSA key in blob DM test setup"
+        },
+    },
+#ifdef RSE_NON_ENDORSED_DM_PROVISIONING
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_CM,
+        .sp_enabled = LCM_TRUE,
+        .test = {
+            &rse_bl1_provisioning_test_0425,
+            "RSE_BL1_1_PROVISIONING_TEST_0425",
+            "Non endorsed provisioning CM policy enable setup"
+        },
+    },
+#endif
+    {
+        .tp_mode = LCM_TP_MODE_PCI,
+        .lcs = LCM_LCS_DM,
+        .sp_enabled = LCM_TRUE,
+        .test = {
+            &rse_bl1_provisioning_test_0406,
+            "RSE_BL1_1_PROVISIONING_TEST_0406",
+            "Provisioning ECDSA key in blob PCI positive test"
+        },
+    },
+    {
+        .tp_mode = LCM_TP_MODE_TCI,
+        .lcs = LCM_LCS_DM,
+        .sp_enabled = LCM_TRUE,
+        .test = {
+            &rse_bl1_provisioning_test_0407,
+            "RSE_BL1_1_PROVISIONING_TEST_0407",
+            "Provisioning ECDSA key in blob TCI positive test"
+        },
+    },
+    {
+        .tp_mode = LCM_TP_MODE_PCI,
+        .lcs = LCM_LCS_DM,
+        .sp_enabled = LCM_TRUE,
+        .test = {
+            &rse_bl1_provisioning_test_0408,
+            "RSE_BL1_1_PROVISIONING_TEST_0408",
+            "Provisioning invalid ECDSA key in blob PCI test"
+        },
+    },
+    {
+        .tp_mode = LCM_TP_MODE_TCI,
+        .lcs = LCM_LCS_DM,
+        .sp_enabled = LCM_TRUE,
+        .test = {
+            &rse_bl1_provisioning_test_0409,
+            "RSE_BL1_1_PROVISIONING_TEST_0409",
+            "Provisioning invalid ECDSA key in blob TCI test"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_CM,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &rse_bl1_provisioning_test_0501,
+            "RSE_BL1_1_PROVISIONING_TEST_0501",
+            "Provisioning auth plain invalid CM LCS test"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_DM,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &rse_bl1_provisioning_test_0502,
+            "RSE_BL1_1_PROVISIONING_TEST_0502",
+            "Provisioning auth plain invalid DM LCS test"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .any_lcs = true,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &rse_bl1_provisioning_test_0510,
+            "RSE_BL1_1_PROVISIONING_TEST_0510",
+            "Provisioning auth plain invalid code size test"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .any_lcs = true,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &rse_bl1_provisioning_test_0511,
+            "RSE_BL1_1_PROVISIONING_TEST_0511",
+            "Provisioning auth plain invalid data size test"
+        },
+    },
+#ifdef RSE_ROTPK_REVOCATION
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_SE,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &rse_bl1_provisioning_test_0600,
+            "RSE_BL1_1_PROVISIONING_TEST_0600",
+            "Provisioning CM ROTPK revocation invalid auth test"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_SE,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &rse_bl1_provisioning_test_0601,
+            "RSE_BL1_1_PROVISIONING_TEST_0601",
+            "Provisioning DM ROTPK revocation invalid auth test"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_SE,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &rse_bl1_provisioning_test_0602,
+            "RSE_BL1_1_PROVISIONING_TEST_0602",
+            "Provisioning CM ROTPK revocation invalid index test"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_SE,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &rse_bl1_provisioning_test_0603,
+            "RSE_BL1_1_PROVISIONING_TEST_0603",
+            "Provisioning DM ROTPK revocation invalid index test"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_SE,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &rse_bl1_provisioning_test_0604,
+            "RSE_BL1_1_PROVISIONING_TEST_0604",
+            "Provisioning CM ROTPK revocation invalid num ROTPKs test"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_SE,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &rse_bl1_provisioning_test_0605,
+            "RSE_BL1_1_PROVISIONING_TEST_0605",
+            "Provisioning DM ROTPK revocation invalid num ROTPKs test"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_SE,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &rse_bl1_provisioning_test_0606,
+            "RSE_BL1_1_PROVISIONING_TEST_0606",
+            "Provisioning CM ROTPK revocation invalid ROTPK size test"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_SE,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &rse_bl1_provisioning_test_0607,
+            "RSE_BL1_1_PROVISIONING_TEST_0607",
+            "Provisioning DM ROTPK revocation invalid ROTPK size test"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_SE,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &rse_bl1_provisioning_test_0610,
+            "RSE_BL1_1_PROVISIONING_TEST_0610",
+            "Provisioning CM ROTPK revocation success test"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_SE,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &rse_bl1_provisioning_test_0611,
+            "RSE_BL1_1_PROVISIONING_TEST_0611",
+            "Provisioning DM ROTPK revocation success test"
+        },
+    },
+#endif /* RSE_ROTPK_REVOCATION */
+#ifdef RSE_NON_ENDORSED_DM_PROVISIONING
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_SE,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &rse_bl1_provisioning_test_0700,
+            "RSE_BL1_1_PROVISIONING_TEST_0700",
+            "Provisioning non-endorsed DM ROTPK invalid size test"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_SE,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &rse_bl1_provisioning_test_0701,
+            "RSE_BL1_1_PROVISIONING_TEST_0701",
+            "Provisioning non-endorsed DM ROTPK invalid index test"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_SE,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &rse_bl1_provisioning_test_0702,
+            "RSE_BL1_1_PROVISIONING_TEST_0702",
+            "Provisioning non-endorsed DM ROTPK update not permitted test"
+        },
+    },
+#ifdef RSE_ROTPK_REVOCATION
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_SE,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &rse_bl1_provisioning_test_0703,
+            "RSE_BL1_1_PROVISIONING_TEST_0703",
+            "Authenticated plain data revoke to allow non-endorsed to succeed"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_SE,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &rse_bl1_provisioning_test_0704,
+            "RSE_BL1_1_PROVISIONING_TEST_0704",
+            "Provisioning non-endorsed DM ROTPK success test"
+        },
+    },
+#endif /* RSE_ROTPK_REVOCATION */
+#endif /* RSE_NON_ENDORSED_DM_PROVISIONING */
+};
+
+static struct conditional_test_t state_transitions[] = {
+    {
+        .tp_mode = LCM_TP_MODE_VIRGIN,
+        .any_lcs = true,
+        .any_sp_state = true,
+        .test = {
+            &rse_test_virgin_to_tci_or_pci,
+            "RSE_BL1_1_TRANSITIONING_TO_TCI/PCI",
+            "Provisioning transition from Virgin TP mode to TCI or PCI mode"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_CM,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &rse_test_cm_sp_enable,
+            "RSE_BL1_1_TRANSITIONING_TO_CM_SP_ENABLE",
+            "Provisioning transition to CM LCS secure provisioning enable mode"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_CM,
+        .sp_enabled = LCM_TRUE,
+        .test = {
+            &rse_test_cm_to_dm,
+            "RSE_BL1_1_TRANSITIONING_TO_DM",
+            "Provisioning transition to DM LCS"
+        },
+    },
+#ifdef RSE_SKU_ENABLED
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_CM,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &test_bl1_rse_sku_set_cm_policies,
+            "RSE_BL1_1_SKU_SET_CM_POLICIES",
+            "Setting test values for cm policies"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_DM,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &test_bl1_rse_sku_feature_control,
+            "RSE_BL1_1_SKU_FEATURE_CONTROL",
+            "Testing feature control"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_DM,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &test_bl1_rse_sku_ps_fc,
+            "RSE_BL1_1_SKU_PS_FC",
+            "Testing product specific feature control"
+        },
+    },
+#endif /* RSE_SKU_ENABLED */
+#ifdef RSE_HAS_SE_DEV_SOFT_LCS
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_SE,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &test_bl1_rse_sku_se_dev,
+            "RSE_BL1_1_SKU_SE_DEV",
+            "Testing se-dev soft lcs"
+        },
+    },
+#endif /* RSE_HAS_SE_DEV_SOFT_LCS */
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_DM,
+        .sp_enabled = LCM_FALSE,
+        .test = {
+            &rse_test_dm_sp_enable,
+            "RSE_BL1_1_TRANSITIONING_TO_DM_SP_ENABLE",
+            "Provisioning transition to DM LCS secure provisioning enable mode"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_DM,
+        .sp_enabled = LCM_TRUE,
+        .test = {
+            &rse_test_dm_to_se,
+            "RSE_BL1_1_TRANSITIONING_TO_SE",
+            "Provisioning transition to SE LCS"
+        },
+    },
+    {
+        .any_tp_mode = true,
+        .lcs = LCM_LCS_SE,
+        .any_sp_state = true,
+        .test = {
+            &rse_test_se_to_rma,
+            "RSE_BL1_1_TRANSITIONING_TO_RMA",
+            "Provisioning transition to RMA LCS"
+        },
+    },
+};
+
+static struct test_t bl1_1_extra_tests[200];
+
+void register_testsuite_extra_bl1_1(struct test_suite_t *p_test_suite)
+{
+    set_testsuite("RSE Tests", bl1_1_extra_tests, 0, p_test_suite);
+
+    add_common_nv_counter_tests(p_test_suite, ARRAY_SIZE(bl1_1_extra_tests));
+    add_common_otp_lcm_tests(p_test_suite, ARRAY_SIZE(bl1_1_extra_tests));
+    add_common_rse_zero_counter_tests(p_test_suite, ARRAY_SIZE(bl1_1_extra_tests));
+    add_common_dpa_hardened_word_copy_tests(p_test_suite, ARRAY_SIZE(bl1_1_extra_tests));
+
+    add_natdrv_integrity_checker_tests(p_test_suite, ARRAY_SIZE(bl1_1_extra_tests));
+
+    add_drivers_kmu_tests(p_test_suite, ARRAY_SIZE(bl1_1_extra_tests));
+
+    add_bl1_rse_kmu_keys_tests(p_test_suite, ARRAY_SIZE(bl1_1_extra_tests));
+
+    add_natdrv_atu_rse_drv_tests(p_test_suite, ARRAY_SIZE(bl1_1_extra_tests));
+    add_natdrv_atu_rse_lib_tests(p_test_suite, ARRAY_SIZE(bl1_1_extra_tests));
+
+#ifdef TEST_DCSU_DRV
+    add_dcsu_drv_tests_to_testsuite(p_test_suite, ARRAY_SIZE(bl1_1_extra_tests));
+#endif /* TEST_DCSU_DRV */
+
+    add_conditional_tests_to_testsuite(provisioning_tests, ARRAY_SIZE(provisioning_tests),
+                                      p_test_suite, ARRAY_SIZE(bl1_1_extra_tests));
+
+#ifdef TEST_CC3XX
+    add_cc3xx_tests_to_testsuite(p_test_suite, ARRAY_SIZE(bl1_1_extra_tests));
+#endif
+
+    /* This one must be added last in order for the state transitions to work */
+    add_conditional_tests_to_testsuite(state_transitions, ARRAY_SIZE(state_transitions),
+                                       p_test_suite, ARRAY_SIZE(bl1_1_extra_tests));
+}

@@ -1,0 +1,119 @@
+SDK Overview
+============
+
+The MSPM33 SDK provides the ultimate collection of software, tools and documentation to accelerate the development of applications for the MSPM33 MCU platform. The software is designed for optimal performance and memory utilization, providing a consistent and cohesive experience with a wide variety of drivers, libraries and easy-to-use examples under a single software package.
+
+1. SDK Components and Architecture
+----------------------------------
+
+.. raw:: html
+
+   <body>
+
+.. container:: mxgraph
+
+.. raw:: html
+
+   <script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
+
+The key features of the SDK are as follows:
+
+1.1 **Drivers and Support Files**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Support for the Arm Cortex M33 core and all MSPM33 devices with full support of their corresponding EVMs and peripherals.
+
+-  The **DriverLib** layer consists of comprehensive low-level drivers providing support for all device features with the highest optimization for performance and low memory footprint.
+-  Ready-to-use **device header files**.
+-  MSPM33 SDK currently does not support **TI-Drivers**
+
+1.2 **RTOS Support**
+~~~~~~~~~~~~~~~~~~~~
+
+The MSPM33 SDK includes support for FreeRTOS. The use of RTOS is optional.
+
+-  Integration with the widely popular **FreeRTOS** kernel.
+-  MSPM33 SDK currently does not support
+
+   -  **Driver Porting Layer (DPL)**
+   -  **POSIX**
+
+1.3 **Middleware**
+~~~~~~~~~~~~~~~~~~
+
+A wide variety of **Middleware** is included with libraries and protocol stacks for different applications and sectors, including automotive, appliances, building and factory automation, etc. Middleware is developed using the driver layers to provide a consistent and compatible experience.
+
+For a list of supported middleware, see the `MSPM33 SDK Document Overview <../../../MSPM33_SDK_Documentation_Overview.html>`__
+
+1.4 **Code Examples**
+~~~~~~~~~~~~~~~~~~~~~
+
+The MSPM33 SDK includes an extensive list of **code examples** at all levels which can be used not only to demonstrate and test device functionality, but to provide a reference and starting point to accelerate application development. Code examples include corresponding files for supported IDEs and compilers. To learn more about the examples offered, consult the `MSPM33 SDK Example Guide <./examples_guide.html>`__
+
+Examples include:
+
+-  DriverLib: simple and easy-to-use modular examples showing MSPM33 functionality
+-  Middleware: examples showcasing multiple middleware
+-  Demos: integrated ready-to-use demos
+-  RTOS: examples using kernel functionality
+-  And more …
+
+1.5 **Software Development Tools**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+MSPM33 is supported by a wide variety of tools from TI and 3rd parties. Visit the `MSPM33 Tools Guide <../../../tools/MSPM33_Tools_Guide.html>`__ for more information.
+
+-  **SysConfig** is an easy-to-use tool to configure device peripherals using an intuitive graphical interface. It can simplify PinMux outputs for any MSPM33 package, and automatically generate configuration code for development . To learn more, visit `Using Sysconfig With MSPM33 <../../../tools/sysconfig_guide/doc_guide/doc_guide-srcs/sysconfig_guide.html>`__.
+-  **Integrated Development environments (IDEs)** such as Code Composer Studio (CCS), IAR will allow the user to develop their own custom applications using the SDK from a starting point such as an example or cookbook.
+-  Support for multiple **compilers** including, but not limited to TI Arm Clang supported by CCS.
+-  Support for **debuggers and programmers** such as XDS-110.
+
+1.6 **Training Content**
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Get started faster than ever before with easy-to-use tutorials and trainings.
+
+-  **MSP Academy** provides a great starting point for all developers to learn about the MSPM33 MCU Platform. MSP Academy delivers easy-to-use training modules that span a wide range of topics in the MSP MCU portfolio. To learn more visit: `MSPM33 Academy <https://dev.ti.com/tirex/global?id=MSPM33-ACADEMY>`__.
+-  **TI Precision Labs** is the most comprehensive online classroom for analog signal chain and embedded processing designers. From foundational knowledge to advanced concepts, our logical, sequenced and comprehensive teaching approach is both intuitive and practical. For more information visit: `TI Precision Labs - Microcontrollers <https://training.ti.com/ti-precision-labs-microcontrollers?context=1139747-1149158>`__.
+
+2. SDK Structure
+----------------
+
+The MSPM33 SDK has the following structure:
+
+|image0|
+
+2.1. Examples Directory
+~~~~~~~~~~~~~~~~~~~~~~~
+
+The examples folder has the following structure:
+
+|image1|
+
+Code examples are provided ready-to-use for the different MSPM33 EVMs.
+
+Code examples include corresponding files for supported IDEs including `Code Composer Studio <https://www.ti.com/tool/CCSTUDIO>`__, `IAR Embedded Workbench for Arm <https://www.iar.com/ewarm>`__; and supported compilers: `TI Arm-Clang <https://www.ti.com/tool/download/ARM-CGT-CLANG-1>`__, and `IAR Arm compiler <https://www.iar.com/products/architectures/arm/iar-embedded-workbench-for-arm/>`__.
+
+Full source code is provided, except for some middleware examples which might be released as pre-built binaries due to licensing restrictions. Check the SDK manifest included with the SDK for more information.
+
+Check the corresponding MSP Academy and middleware documentation for more details on how to use all examples.
+
+2.2. Source directory
+~~~~~~~~~~~~~~~~~~~~~
+
+The source folder has the following structure:
+
+|image2|
+
+Full source code is provided and can be customized as needed, except for some middleware and 3rd party software which might be released as pre-built binaries due to licensing restrictions. Check the manifest included with the SDK for more information.
+
+Check the corresponding middleware, 3rd party, MSP Academy and SDK API documentation for more details.
+
+3. Getting Started
+------------------
+
+To get started, check the `MSPM33 SDK Documentation Overview <../../../MSPM33_SDK_Documentation_Overview.html>`__ and the `MSPM33 SDK QuickStart Guides <../../../quickstart_guides/MSPM33_SDK_Quick_Start_Guides.html>`__.
+
+.. |image0| image:: ./images/overview/sdk-guide-overview.png
+.. |image1| image:: ./images/overview/sdk-guide-example-file.png
+.. |image2| image:: ./images/overview/sdk-guide-source-file.png

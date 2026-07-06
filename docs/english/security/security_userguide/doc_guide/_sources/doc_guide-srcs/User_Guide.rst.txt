@@ -1,0 +1,367 @@
+MSPM33 Security User Guide
+==========================
+
+Introduction
+------------
+
+The MSPM33 platform implements a comprehensive security architecture designed to meet PSA-L2 certification requirements and provide robust security features for embedded applications. This user guide provides an overview of the security features, capabilities, and usage models for developers and system integrators.
+
+The MSPM33 security architecture is built around the following key customer requirements:
+
+-  **Root of Trust (RoT) Implementation** - An immutable RoT for PSA-L2 certification
+-  **Life Cycle Management** - Controlled security level transitions from open to closed states
+
+Security Offerings
+------------------
+
+The MSPM33 platform provides the following security features:
+
+PSA-L2 Compliance
+~~~~~~~~~~~~~~~~~
+
+The MSPM33 meets ARM Platform Security Architecture (PSA) Level 2 requirements, including:
+
+============================== ===============================================================================
+PSA Functional Requirements    Support
+============================== ===============================================================================
+Secure Boot                    Yes
+SW Isolation                   Temporal isolation using hide protect and spatial isolation using TrustZone/GSC
+Secure Storage                 Secure key storage using TRIM and NONMAIN sectors
+Secure Update                  Yes
+Secure State (Keys, Lifecycle) Lifecycle state compliant with PSA requirements
+Crypto                         HW support for AES, SHA, PKA
+Debug                          Secure debug entry and enablement using lifecycle states
+============================== ===============================================================================
+
+TrustZone Architecture
+~~~~~~~~~~~~~~~~~~~~~~
+
+The Cortex-M33 security is provided by ARM TrustZone architecture as part of the Secure Extensions in v8m. Key components include:
+
+-  **Implementation Dependent Attribution Unit (IDAU)** - CPU boundary logic that returns secure attributes associated with addresses
+-  **Secure Attribution Unit (SAU)** - Register-based CPU peripheral that provides further security granularity
+
+These components work together to provide secure (S), non-secure callable (NSC), and non-secure (NS) attributes to memory regions.
+
+Memory Protection
+~~~~~~~~~~~~~~~~~
+
+The MSPM33 implements comprehensive memory protection mechanisms:
+
+-  **SRAM Bank Security** - 16KB chunks with granular control (down to 512 bytes)
+-  **Flash Bank Security** - 2KB sector size with secure/non-secure and privilege/non-privilege access control
+-  **Hide Protection** - Temporal isolation mechanism to protect sensitive code
+
+Secure Lifecycle States
+-----------------------
+
+The MSPM33 implements a secure lifecycle management system that allows controlled transitions between different security states:
+
+Device Types and Lifecycle States
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. **1ST-BDAY (First Birthday)**
+
+   -  Initial state for devices fresh out of fabrication
+   -  Identified by specific bit patterns in flash memory
+
+2. **High Security (HS) States**
+
+   -  **HS-FS (Field Securable)** - Default shipping state, ready for key provisioning
+   -  **HS-KP (Keys Provisioned)** - State after customer keys are provisioned, ready for code provisioning
+   -  **HS-SE (Security Enforced)** - State after customer code is provisioned, with enforced security
+   -  **HS-FA (Failure Analysis)** - State for devices returned to TI for analysis
+   -  **DCOM (Decommissioned)** - End-of-life state when device is no longer usable
+
+Lifecycle State Transitions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-  Devices are shipped in the HS-FS state
+-  Transition to HS-KP occurs after successful key provisioning
+-  Transition to HS-SE occurs after secure firmware installation
+-  Transition to HS-FA requires customer authorization for device return
+-  Transition to DCOM is permanent and renders the device unusable
+
+Each lifecycle state has specific security properties and capabilities, controlling access to debug ports, secure assets, and programming capabilities.
+
+Root of Trust (RoT) Capabilities
+--------------------------------
+
+Secure Boot
+~~~~~~~~~~~
+
+The Secure Boot process ensures that only authenticated and integrity-verified code can execute on the device. Key features include:
+
+-  **Immutable Root of Trust (iRoT)** - Implemented in secure ROM
+-  **Image Verification** - SHA-256 hash verification of application image
+-  **Digital Signature Verification** - Using customer-provisioned keys
+-  **Fast Boot Option** - Using pre-verified images with integrity check
+
+The secure boot process follows these steps:
+
+1. Device powers up and ROM detects HS-SE state
+2. ROM checks if image has been pre-validated
+3. If not pre-validated, ROM reads image header and calculates SHA-256 hash
+4. ROM compares calculated hash against stored hash in TLV section
+5. ROM performs signature verification using customer RoT keys
+6. If verification passes, ROM stores hash, updates boot status, and executes application
+
+Performance requirements: \* < 20ms for pre-validated images \* < 50ms for full verification
+
+Crypto Drivers and Capabilities
+-------------------------------
+
+The MSPM33 provides hardware acceleration for cryptographic operations:
+
+PKA (Public Key Accelerator)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The EIP-150 PKA supports:
+
+-  **Key Agreement Schemes**
+
+   -  Elliptic Curve Diffie-Hellman (ECDH and ECDHE)
+   -  Elliptic curve Password Authenticated Key Exchange by Juggling (ECJ-PAKE)
+
+-  **Signature and Verification**
+
+   -  Elliptic curve Digital Signature Algorithm (ECDSA)
+   -  Edwards-curve Digital Signature Algorithm (EdDSA)
+   -  RSA-2048 signature verification (PSS and PKCS#1 v1.5 padding)
+
+-  **Curve Support**
+
+   -  NIST curves: P224, P256, P384, P521
+   -  Brainpool curves: 256R1, 384R1, 512R1
+   -  Curve25519 and Ed25519
+
+SHA (Secure Hash Algorithm)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The EIP-59c-8 SHA accelerator supports:
+
+-  SHA224/SHA256 with 512-bit block size
+-  HASH and HMAC support
+-  8-bit APB bus interface
+-  Streamlined data mode for maximum throughput
+-  DMA support for data transfer
+
+Performance for SHA-256 hash verification of 512KB flash, when core is running at 32 MHz:
+
+|image0|
+
+AES (Advanced Encryption Standard)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Hardware support for AES operations with the following capabilities: \* AES-128-bit block encryption and decryption \* Various modes of operation. Enc/decrypt only modes: CBC, CFB-1, CFB-8, CFB-128, OFB-128, CTR/ICM. Authentication only modes: CBC-MAC, CMAC. \* DMA triggers for input and output data
+
+MSP Crypto Library
+~~~~~~~~~~~~~~~~~~
+
+The MSP Crypto Library provides a comprehensive software cryptography library for MSPM33 devices, offering both hardware-accelerated and software-based cryptographic operations. The library is delivered as pre-built libraries with source code transparency for certain modules.
+
+**Note**: - Current crypto library is intented to be used just for evaluation purpose, not recommended to be used for production.
+
+Supported Modules
+^^^^^^^^^^^^^^^^^
+
+The crypto library includes the following cryptographic modules: \* **Elliptic Curve (EC)**: ECDSA signature generation and verification \* **RSA**: RSA-2048 signature verification (PKCS#1 v1.5 and PSS padding)
+
+MSPM33 Support
+^^^^^^^^^^^^^^
+
+For the MSPM33C321x devices, the crypto library provides: \* Hardware acceleration via PKA (Public Key Accelerator) for P-256 and P-384 curve operations \* Software-based implementation for P-521 curves \* Hardware acceleration via AES Advanced peripheral \* Hardware TRNG (True Random Number Generator) support
+
+ECDSA Support (This Release)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This release focuses on ECDSA (Elliptic Curve Digital Signature Algorithm) functionality for MSPM33 devices.
+
+**Available ECDSA Operations:**
+
+1. **Digital Signature Generation**
+
+   -  ``Crypto_ECDSA_sign()`` - Generic ECDSA signing for any supported curve
+   -  ``Crypto_ECDSA_P256_sign()`` - Optimized P-256 signing with reduced SRAM usage
+   -  ``Crypto_ECDSA_P384_sign()`` - Optimized P-384 signing with reduced SRAM usage
+   -  ``Crypto_ECDSA_P521_sign()`` - Optimized P-521 signing with reduced SRAM usage
+
+2. **Digital Signature Verification**
+
+   -  ``Crypto_ECDSA_verify()`` - Generic ECDSA verification for any supported curve
+   -  ``Crypto_ECDSA_P256_verify()`` - Optimized P-256 verification with reduced SRAM usage
+   -  ``Crypto_ECDSA_P384_verify()`` - Optimized P-384 verification with reduced SRAM usage
+   -  ``Crypto_ECDSA_P521_verify()`` - Optimized P-521 verification with reduced SRAM usage
+
+**Supported NIST Curves:** \* **P-256** (secp256r1): 256-bit prime field curve with hardware PKA acceleration \* **P-384** (secp384r1): 384-bit prime field curve with hardware PKA acceleration \* **P-521** (secp521r1): 521-bit prime field curve with software implementation
+
+**Key Features:** \* Hardware-accelerated PKA operations for P-256 and P-384 curves \* Software-based implementation for P-521 curve \* Curve-specific optimized APIs with reduced SRAM footprint \* Support for pre-hashed message digests (SHA-256 compatible) \* Comprehensive error checking and status reporting via ``crypto_ec_stat_t`` \* NIST CAVP test vector validated implementations
+
+**Example Applications**
+
+The SDK includes working examples demonstrating ECDSA operations:
+
+**ECDSA Signature Generation Examples:** \* ``ec_ecdsa_p256_sign`` - P-256 signature generation \* ``ec_ecdsa_p384_sign`` - P-384 signature generation \* ``ec_ecdsa_p521_sign`` - P-521 signature generation
+
+**ECDSA Signature Verification Examples:** \* ``ec_ecdsa_p256_sha256_verify`` - P-256 signature verification with SHA-256 \* ``ec_ecdsa_p384_verify`` - P-384 signature verification \* ``ec_ecdsa_p521_verify`` - P-521 signature verification
+
+**Performance Considerations**
+
+-  P-256 and P-384 curves benefit from hardware PKA acceleration for significantly improved performance
+-  P-521 curve uses software implementation
+-  Curve-specific optimized APIs (P256/P384/P521) provide better SRAM efficiency compared to generic APIs
+-  Pre-hashing messages before signing/verification is recommended for large data
+
+Security Architecture
+---------------------
+
+CPU Security
+~~~~~~~~~~~~
+
+The Cortex-M33 implements TrustZone security with:
+
+-  **IDAU** - Provides first-level attribution of NS and NSC based on address decoding
+-  **SAU** - Binds runtime attributes of address ranges into S, NS, or NSC
+
+Memory regions are mapped with specific security attributes: \* 0x0000.0000-0x00FF.FFFF: Flash Non-Secure \* 0x1000.0000-0x10FF.FFFF: Flash Secure \* 0x2000.0000-0x2FFF.FFFF: SRAM Non-Secure \* 0x3000.0000-0x3FFF.FFFF: SRAM Secure \* 0x4000.0000-0x4FFF.FFFF: Peripheral Non-Secure \* 0x5000.0000-0x5FFF.FFFF: Peripheral Secure
+
+Global Security Control (GSC)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The GSC peripheral contains settings for harmonizing security across bus initiators, memory, and peripherals:
+
+-  Controls access restrictions for bus firewalls and wrappers
+-  Manages security attributes for SRAM, flash, and peripherals
+-  Handles violation reporting and error logging
+
+.. _memory-protection-1:
+
+Memory Protection
+~~~~~~~~~~~~~~~~~
+
+SRAM Bank Security
+^^^^^^^^^^^^^^^^^^
+
+-  Implemented in 16KB chunks with granular control
+-  Each chunk can be configured as secure/non-secure and privileged/unprivileged
+-  Violations generate secure NMI and log access information
+
+Flash Protection
+^^^^^^^^^^^^^^^^
+
+-  Code flash uses 2KB sectors for first 64KB and 16KB chunks for remaining flash
+-  Data flash uses 2KB sectors for all 32KB
+-  Hide Protection allows temporal isolation of sensitive code
+
+Flash Programming Security
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Flash programming security is implemented with:
+
+-  **Flash Resource Ownership** - Checks if code thread has ownership of flash resource
+-  **Authorization Check** - GSC validates commands based on security attributes
+-  **Bank Erase Protection** - Prevents unauthorized bank erase operations
+
+Secure Debug
+------------
+
+The MSPM33 implements a comprehensive debug security architecture:
+
+Debug Levels
+~~~~~~~~~~~~
+
+The MSPM33 implements three hierarchical debug levels that control debugger access to system resources based on ARM TrustZone security domains. These levels provide granular control over debug capabilities while maintaining security boundaries between Secure and Non-Secure worlds.
+
+**Important Notes**: - Debug levels control what the **external debugger** can access through the Debug Subsystem Mailbox (DSSM), independent of the CPU’s execution context - TrustZone memory protection rules (enforced by SAU/IDAU and GSC) remain active during normal CPU execution regardless of debug level - The **physical SWD port** can be separately enabled/disabled via NONMAIN configuration (BCR), independent of the debug level setting
+
+Debug Level Definitions
+^^^^^^^^^^^^^^^^^^^^^^^
+
+-  **Level 0 (L0) - Full Debug Access**
+
+   -  **Debugger Access Scope**: External debugger has complete visibility into both Secure and Non-Secure regions via DSSM
+   -  **TrustZone Domains Visible to Debugger**: Full access to Secure (S) and Non-Secure (NS) memory, peripherals, and CPU state
+   -  **Debugger Capabilities**:
+
+      -  Debugger can read/write all SRAM banks (both secure and non-secure address ranges)
+      -  Debugger can access all flash sectors including secure boot code regions
+      -  Debugger has visibility of SAU/IDAU configuration registers
+      -  Debugger can access secure peripherals (GSC, secure crypto engines)
+      -  Debugger can view full CPU register state including secure stack pointers
+
+-  **Level 1 (L1) - Non-Secure Debug Only**
+
+   -  **Debugger Access Scope**: External debugger access restricted to Non-Secure regions only via DSSM
+   -  **TrustZone Domains Visible to Debugger**: Limited to Non-Secure (NS) memory and peripherals
+   -  **Debugger Capabilities**:
+
+      -  Debugger can read/write non-secure SRAM banks only
+      -  Debugger can access non-secure flash sectors and application code
+      -  Debugger can access non-secure peripherals
+      -  Debugger can view non-secure CPU state and registers
+      -  **Blocked from Debugger**: Secure memory regions, secure peripherals, SAU/IDAU configuration
+
+-  **Level 2 (L2) - No Debug Access via DSSM**
+
+   -  **Debugger Access Scope**: All debug access through DSSM disabled
+   -  **TrustZone Domains Visible to Debugger**: No access to any security domain via DSSM
+   -  **Debugger Capabilities**: No debug commands accepted through DSSM
+   -  **Note**: L2 restricts debug access through DSSM but does not physically disable the SWD port. The SWD port can be separately disabled via NONMAIN BCR configuration (``swdEnable`` setting)
+
+SWD Port Control
+^^^^^^^^^^^^^^^^
+
+The physical SWD port can be controlled independently of debug levels through NONMAIN BCR configuration:
+
+-  **SWD Port Enabled** (``swdEnable = true``): The Debug Subsystem Mailbox (DSSM) is accessible, allowing debug commands and authentication. Debug level (L0/L1/L2) determines what resources can be accessed.
+-  **SWD Port Disabled** (``swdEnable = false``): The physical SWD interface is completely disabled. All SWD-accessible functions (application debug, mass erase, factory reset, TI failure analysis) are inaccessible regardless of debug level configuration.
+
+Debug Security Mechanisms
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Debug access depends on lifecycle state:
+
+-  **HS-FS** - Password-based debug unlock
+-  **HS-KP** - Debug port closed
+-  **HS-SE** - Certificate-based debug unlock
+-  **HS-FA** - Certificate-based debug unlock with additional security measures
+
+Debug Port Unlock Methods
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-  **Password-based** - Using SHA-256 hash passwords
+-  **Certificate-based** - Using customer-signed certificates
+-  **Persistent/Non-persistent** - Options for keeping debug open through reset or for session only
+
+Secure Firmware offerings
+-------------------------
+
+CSC (MCUboot)
+~~~~~~~~~~~~~
+
+The Customer Secure Code (CSC) is an implementation of the publicly available mcuboot for devices in the MSP Family with advanced security features. CSC user guide and features list can be fount here: `CSC User Guide <../../../../middleware/boot_manager/Secure_Booting_Users_Guide.html>`__
+
+TFM
+~~~
+
+Trusted Firmware-M (TF-M) implements the Secure Processing Environment (SPE) for Armv8-M, Armv8.1-M architectures. It is the platform security architecture reference implementation aligning with PSA Certified guidelines, enabling chips, Real Time Operating Systems and devices to become PSA Certified.
+
+TF-M relies on an isolation boundary between the Non-secure Processing Environment (NSPE) and the Secure Processing Environment (SPE). It can but is not limited to using the Arm TrustZone technology on Armv8-M and Armv8.1-M architectures.
+
+TF-M consists of: \* Secure Boot to authenticate NSPE and SPE images \* TF-M Core for controlling the isolation, communication and execution within SPE and with NSPE \* Crypto, Internal Trusted Storage (ITS), Protected Storage (PS), Firmware Update and Attestation secure services
+
+|image1|
+
+Applications and Libraries in the Non-secure Processing Environment can utilize these secure services with a standardized set of PSA Functional APIs. Applications running on Cortex-M devices can leverage TF-M services to ensure secure connection with edge gateways and IoT cloud services. It also protects the critical security assets such as sensitive data, keys and certificates on the platform. TF-M is supported on several Cortex-M based Microcontrollers and Real Time Operating Systems (RTOS).
+
+**Note**: - Support for TFM will be enabled in future releases.
+
+Conclusion
+----------
+
+The MSPM33 security architecture provides a comprehensive set of features to protect embedded applications against various threats. By leveraging the secure boot, key provisioning, and other security capabilities, developers can build secure systems that protect sensitive code, data, and cryptographic assets.
+
+For more detailed information, please refer to the MSPM33 Technical Reference Manual and other TI documentation.
+
+.. |image0| image:: ./images/SHA_perf.png
+.. |image1| image:: ./images/design_for_TFM.png

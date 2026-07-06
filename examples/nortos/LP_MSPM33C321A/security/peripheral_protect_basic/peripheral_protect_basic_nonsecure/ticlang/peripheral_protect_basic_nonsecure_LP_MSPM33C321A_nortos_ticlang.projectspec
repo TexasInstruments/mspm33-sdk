@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectSpec>
+    <applicability>
+        <when>
+            <context
+                deviceFamily="ARM"
+                deviceId="MSPM33C321A"
+            />
+        </when>
+    </applicability>
+
+    <project
+        title="peripheral_protect_basic_nonsecure"
+        name="peripheral_protect_basic_nonsecure_LP_MSPM33C321A_nortos_ticlang"
+        configurations="Debug"
+        toolChain="TICLANG"
+        connection="TIXDS110_Connection.xml"
+        device="MSPM33C321A"
+        ignoreDefaultDeviceSettings="true"
+        ignoreDefaultCCSSettings="true"
+        products="MSPM33-SDK;sysconfig"
+        compilerBuildOptions="
+            -I${PROJECT_ROOT}
+            -I${PROJECT_ROOT}/${ConfigName}
+            -D__MSPM33C321A__
+            -O2
+            -mfloat-abi=hard
+            -mfpu=fpv5-sp-d16
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/third_party/CMSIS/Core/Include
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source
+            -mcpu=cortex-m33
+            -Wall
+        "
+        linkerBuildOptions="
+            -l${CCS_WORKSPACE_DIR}/peripheral_protect_basic_secure_LP_MSPM33C321A_nortos_ticlang/Debug/implib.o
+            -l${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/ti/driverlib/lib/ticlang/m33/mspm33c321x/driverlib.a
+            -L${COM_TI_MSPM33_SDK_INSTALL_DIR}/source
+            -L${PROJECT_ROOT}
+            -L${PROJECT_BUILD_DIR}/syscfg
+            -Wl,--rom_model
+            -Wl,--warn_sections
+            -L${CG_TOOL_ROOT}/lib
+            -llibc.a
+        "
+        sysConfigBuildOptions="
+            --output .
+            --product ${COM_TI_MSPM33_SDK_INSTALL_DIR}/.metadata/product.json
+            --compiler ticlang
+        "
+        sourceLookupPath="${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/ti/driverlib"
+        description="peripheral_protect_basic nonsecure example demonstrating peripheral access from non-secure context"
+        references="peripheral_protect_basic_secure_LP_MSPM33C321A_nortos_ticlang">
+        <property name="buildProfile" value="release"/>
+        <property name="isHybrid" value="true"/>
+        <file path="../peripheral_protect_basic_ns.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../nsc_example.h" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../peripheral_protect_basic_ns.syscfg" openOnCreation="true" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../README.md" openOnCreation="true" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../README.html" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../ticlang/mspm33c321a_ns.cmd" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../ticlang/startup_mspm33c321x_ticlang_ns.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <dependencies>
+            <dependency project="peripheral_protect_basic_secure_LP_MSPM33C321A_nortos_ticlang" />
+        </dependencies>
+    </project>
+    <import spec="../../peripheral_protect_basic_secure/ticlang/peripheral_protect_basic_secure_LP_MSPM33C321A_nortos_ticlang.projectspec" />
+</projectSpec>

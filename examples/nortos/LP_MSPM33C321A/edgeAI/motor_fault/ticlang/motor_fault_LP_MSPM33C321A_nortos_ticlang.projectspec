@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectSpec>
+    <applicability>
+        <when>
+            <context
+                deviceFamily="ARM"
+                deviceId="MSPM33C321A"
+            />
+        </when>
+    </applicability>
+
+    <project
+        title="motor_fault"
+        name="motor_fault_LP_MSPM33C321A_nortos_ticlang"
+        configurations="Debug"
+        toolChain="TICLANG"
+        connection="TIXDS110_Connection.xml"
+        device="MSPM33C321A"
+        ignoreDefaultDeviceSettings="true"
+        ignoreDefaultCCSSettings="true"
+        products="MSPM33-SDK;sysconfig"
+        compilerBuildOptions="
+            -I${PROJECT_ROOT}
+            -I${PROJECT_ROOT}/${ConfigName}
+            -DDEVICE_NAME=MSPM33C321A
+            -DARM_MATH_CM33
+            -O3
+            -gdwarf-3
+            -mfloat-abi=hard
+            -mfpu=fpv5-sp-d16
+            @device.opt
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/third_party/CMSIS/Core/Include
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/third_party/CMSIS/DSP/Include
+            -I${PROJECT_ROOT}/artifacts
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/examples/edgeAI/motor_fault/LP_MSPM33C321A/artifacts
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source
+            -mcpu=cortex-m33
+            -Wall
+        "
+        linkerBuildOptions="
+            -Wl,--heap_size=0x800
+            -L${PROJECT_ROOT}/artifacts
+            ../artifacts/mod.a
+            -ldevice.cmd.genlibs
+            -L${COM_TI_MSPM33_SDK_INSTALL_DIR}/source
+            -L${PROJECT_ROOT}
+            -L${PROJECT_BUILD_DIR}/syscfg
+            -Wl,--rom_model
+            -Wl,--warn_sections
+            -L${CG_TOOL_ROOT}/lib
+            -llibc.a
+        "
+        sysConfigBuildOptions="
+            --output .
+            --product ${COM_TI_MSPM33_SDK_INSTALL_DIR}/.metadata/product.json
+            --compiler ticlang
+        "
+        sourceLookupPath="${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/ti/driverlib"
+        description="Motor fault detection using feature extraction and neural network inference">
+        <property name="buildProfile" value="release"/>
+        <property name="isHybrid" value="true"/>
+        <file path="../artifacts/tvmgen_default.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="artifacts">
+        </file>
+        <file path="../motor_fault.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../test_vector.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../user_input_config.h" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../artifacts/mod.a" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="artifacts">
+        </file>
+        <file path="../ti/edgeAI/m33/feature_extract/feature_extract.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="ti/edgeAI/m33/feature_extract">
+        </file>
+        <file path="../ti/edgeAI/m33/feature_extract/feature_extract_m33.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="ti/edgeAI/m33/feature_extract">
+        </file>
+        <file path="../ti/edgeAI/m33/feature_extract/feature_extract.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="ti/edgeAI/m33/feature_extract">
+        </file>
+        <file path="../ti/edgeAI/m33/feature_extract/fpu_fft_hann.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="ti/edgeAI/m33/feature_extract">
+        </file>
+        <file path="../motor_fault.syscfg" openOnCreation="true" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../README.md" openOnCreation="true" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../README.html" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+    </project>
+</projectSpec>

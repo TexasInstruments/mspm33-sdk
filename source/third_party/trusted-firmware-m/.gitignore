@@ -1,0 +1,32 @@
+# List of files and extensions to be ignored
+
+# Eclipse
+*.project
+*.cproject
+.pydevproject
+.settings/
+
+# Visual Studio Code
+.vscode/
+
+# Local dependency repo
+localrepos.cmake
+
+# Garbage files
+/build*/
+/cmake_build*/
+*.orig
+**/__pycache__
+*.pyc
+
+.clang-format
+**/.DS_Store
+
+# Python venv
+venv
+.venv
+
+trusted_firmware_m.egg-info/
+
+# clangd
+.cache/

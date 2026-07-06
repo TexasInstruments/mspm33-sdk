@@ -1,0 +1,38 @@
+{
+    "prefix": "ti_mspm33",
+    "type": "transparent",
+    "mbedtls/h_condition": "defined(CRYPTO_HW_USE_MSPM33_SHA)",
+    "headers": ["../drivers/mspm33/include/ti_mspm33_sha_driver.h"],
+    "capabilities": [
+        {
+            "_comment": "Hash computation using SHA-224/256 multipart operations",
+            "mbedtls/c_condition": "defined(CRYPTO_HW_USE_MSPM33_SHA)",
+            "entry_points": ["hash_multipart"],
+            "algorithms": ["PSA_ALG_SHA_224", "PSA_ALG_SHA_256"],
+            "fallback": false
+        },
+        {
+            "_comment": "Hash computation using SHA-224/256 single-shot operations",
+            "mbedtls/c_condition": "defined(CRYPTO_HW_USE_MSPM33_SHA)",
+            "entry_points": ["hash_compute"],
+            "algorithms": ["PSA_ALG_SHA_224", "PSA_ALG_SHA_256"],
+            "fallback": false
+        },
+        {
+            "_comment": "MAC computation using HMAC-SHA224/256 multipart operations",
+            "mbedtls/c_condition": "defined(CRYPTO_HW_USE_MSPM33_SHA)",
+            "entry_points": ["mac_multipart"],
+            "algorithms": ["PSA_ALG_HMAC(PSA_ALG_SHA_224)", "PSA_ALG_HMAC(PSA_ALG_SHA_256)"],
+            "key_types": ["PSA_KEY_TYPE_HMAC"],
+            "fallback": false
+        },
+        {
+            "_comment": "MAC computation using HMAC-SHA224/256 single-shot operations",
+            "mbedtls/c_condition": "defined(CRYPTO_HW_USE_MSPM33_SHA)",
+            "entry_points": ["mac_compute"],
+            "algorithms": ["PSA_ALG_HMAC(PSA_ALG_SHA_224)", "PSA_ALG_HMAC(PSA_ALG_SHA_256)"],
+            "key_types": ["PSA_KEY_TYPE_HMAC"],
+            "fallback": false
+        }
+    ]
+}

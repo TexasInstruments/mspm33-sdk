@@ -1,0 +1,186 @@
+MSPM0 LIN 用户指南
+==================
+
+1. 引言
+-------
+
+LIN（本地互连网络）是一种串行网络协议，可在 汽车网络中以低成本实现简单通信。MSPM0 SDK 提供了一种使用 MSPM0 的通用异步接收器发送器（UART）模块 启动开发 LIN 应用程序的简单方法。
+
+SDK 中提供了示例应用程序，用于演示如何将 MSPM0 器件配置为 LIN 2.x 控制器或响应器。
+
+**注**\ ：“主”和“从”术语已过时，已分别替换为“控制器”和“响应器”。
+
+为了支持 LIN 协议，在 UART 模块中实现了以下 硬件增强功能：
+
+-  由 UART 时钟计时的 16 位向上计数器（LINCNT）
+-  计数器溢出时可中断
+-  具有两种可配置模式的 16 位捕获寄存器（LINC0）：
+
+   -  在 RXD 下降沿捕获LINCNT 值，捕获完成时可中断
+   -  比较 LINCNT，匹配时可中断
+
+-  具有可配置模式的 16 位捕获寄存器（LINC1）：
+
+   -  在 RXD 上升沿捕获 LINCNT 值，捕获完成时可中断
+
+**MSPM0 SDK LIN 应用程序仅限于使用 UART 硬件对 LIN 进行基本评估和/或提供指导来实现 LIN 驱动程序，不用于提供符合汽车标准的完整 LIN 栈。**
+
+2. 使用 SysConfig 为 LIN 配置 UART
+----------------------------------
+
+具有 UART 扩展功能的 UART 外设支持 LIN 模式。 有关 UART 外设的特定于器件的详细信息，请参考器件数据表。
+
+用户可以使用 SysConfig 轻松为 LIN 配置其器件。 有关如何下载、安装和开始使用 SysConfig 的更多详细信息，请参考\ `将 SysConfig 与 MSPM0 配合使用 <../../../../tools/sysconfig_guide/SysConfig_Guide_for_MSPM0_CN.html>`__\ 。
+
+要在 SysConfig 中将 LIN 添加到工程，如下所示添加 UART-LIN 模块。
+
+|image0|
+
+除了允许用户为 UART 外设配置基本的 UART 属性外，UART-LIN 模块还允许用户配置以下 LIN 设置：
+
+|image1|
+
+以下部分将详细介绍这些设置。
+
+启用 LIN 计数器
+~~~~~~~~~~~~~~~
+
+|image2|
+
+这会启用 16 位 LIN 向上计数器 LINCNT。LIN 计数器仅在计数器启用后计数。
+
+启用和配置 LIN 计数器比较匹配模式
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+|image3|
+
+**Counter Compare Match mode** 允许用户检测边沿事件之间的计时。方式是启用 LIN 计数器 LINCNT，以便与 16 位捕获寄存器 LINC0 中的设定值进行比较。此功能对于 LIN 中断检测很有用，当 RXD 在 9.5 个连续位中处于低电平时，可检测到有效中断。
+
+启用此模式时，SysConfig 提供一个 Tbit （传输一个位所需的标称时间）的计算值。Tbit 的计算方法为：
+
+-  Tbit =（UART 时钟源频率）/（UART 波特率）
+
+例如，时钟源的频率为 32MHz，波特率为 19200bps，则 **Tbit Width** 是：
+
+-  Tbit = (32,000,0000) / (19,200) = 1,666
+
+用户可以提供以 Tbit 为单位的计数器比较值。例如，要将计数器比较值设置为 9.5 Tbit，用户应该将 **Counter Compare Timing** 值设置为“9.5”。
+
+以 Tbit 为单位设置要比较的值后，SysConfig 还提供以周期为单位的值（计数器比较寄存器 LINC0 设置为此值）。在此示例中，以周期为单位的 **Counter Compare Value** 为 15,833。
+
+可启用中断功能，以便在计数器比较匹配时触发中断。在 **Interrupt Configuration** 部分中选择 **LINC0 match** 中断，以便在与设置的计数器比较值匹配时触发中断。
+
+|image4|
+
+启用 **Counter Compare Match mode** 时，会自动禁用 LINCNT 的另一种模式“Capture on RXD falling edge”。这两个选项是互斥的。
+
+启用在 RXD 下降沿捕获
+~~~~~~~~~~~~~~~~~~~~~
+
+|image5|
+
+“Capture on RXD Falling Edge”可使用户验证事件时序。方式是配置 16 位捕获寄存器 LINC0，使其在 RXD 下降沿捕获 LIN 计数器 LINCNT 的值。它可以与\ **启用在 RXD 上升沿捕获**\ 特性联合使用，通过测量信号的位时序并使用 LINC0 和 LINC1 中的值验证捕获时序，以执行同步域验证。
+
+可启用中断功能，以便在 RXD 下降沿触发中断。在 **Interrupt Configuration** 部分中选择 **LIN falling edge** 中断，以便在 LINC0 计数器在每个 RXD 下降沿将值捕获到 LINC0 寄存器时触发中断。
+
+|image6|
+
+启用 **Capture on RXD Falling Edge** 时，会自动禁用 LINCNT 的另一种模式 **Counter Compare Match mode**\ 。这两个选项是互斥的。
+
+启用在 RXD 下降沿计数器复位
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+|image7|
+
+启用 **Counter Reset on RXD Falling Edge** 时，LIN 计数器 LINCNT 将在 检测到 RXD 的下降沿时重置为值 0。在重置该值后，LIN 计数器将立即继续计数。在同步域验证期间，这有助于持续计算每个新下降沿上的位时间。
+
+启用在 RXD 低电平时计数
+~~~~~~~~~~~~~~~~~~~~~~~
+
+|image8|
+
+启用后，LIN 计数器 LINCNT 会在 RXD 上有低电平信号时计数。这有助于检测中断域，因此 LIN 计数器可以计算 RXD 低电平信号的长度，以确定它是否是中断域。 在计数前，必须首先启用 LIN 计数器。
+
+启用在 RXD 上升沿捕获
+~~~~~~~~~~~~~~~~~~~~~
+
+|image9|
+
+启用后，16 位捕获寄存器 LINC1 将在每个 RXD 上升沿捕获 LIN 计数器 LINCNT 的值。它可以与\ **启用在 RXD 下降沿捕获**\ 特性联合使用，通过测量信号的位时序并使用 LINC0 和 LINC1 中的值验证捕获时序，以执行同步域验证。
+
+可启用中断功能，以便在 RXD 上升沿触发中断。在 **Interrupt Configuration** 部分中选择 **LIN rising edge** 中断，以便在 LINC1 计数器在每个 RXD 上升沿将值捕获到 LINC0 寄存器时触发中断。
+
+|image10|
+
+快速配置文件
+~~~~~~~~~~~~
+
+UART-LIN 模块中提供了一个快速配置文件，就如何配置 LIN 设置给出了一些基本的建议。
+
+快速配置文件 **LIN at 19220 baud with Break Detection** 将 UART 外设配置为 19200 波特，并配置 LIN 设置以处理中断检测。
+
+|image11|
+
+|image12|
+
+选择配置文件后，用户可以修改这些设置，以更加适合其应用。
+
+有关 UART LIN 配置的更多详细信息，请参考特定于器件的技术参考手册 （TRM）。
+
+3. 示例应用程序
+---------------
+
+MSPM0 SDK 提供两个示例应用程序，以作为 LIN 应用程序的起点：
+
+-  **lin_commander**\ ：将 UART 配置为 LIN 命令器，并演示使用增强校验和的 LIN 2.0 数据包基本传输过程
+-  **lin_responder**\ ：将 UART 配置为 LIN 响应器，并演示接收的 LIN 报头的中断域检测和同步域验证
+
+在 ``<SDK_INSTALL_DIRECTORY>/examples/nortos/<LaunchPad>/lin`` 中可以找到这些示例。
+
+可以在两个不同的 MSPM0 器件上使用 **lin_commander** 和 **lin_responder** 示例进行彼此通信。 也可以在兼容 LIN 2.0 的网络分析器上使用任一示例。
+
+SDK 中的 LIN 示例配合德州仪器 （TI） `BOOSTXL-CANFD-LIN BoosterPack <https://www.ti.com/tool/BOOSTXL-CANFD-LIN>`__ 使用，它拥有 `TLIN2029-Q1 <https://www.ti.com/product/TLIN2029-Q1>`__ 故障保护 LIN 收发器。
+
+有关将 MSPM0 LaunchPad 连接到 LIN 收发器的更多详细信息，以及关于如何运行示例的详细说明，请参考示例 README 文件。
+
+修改示例应用程序
+~~~~~~~~~~~~~~~~
+
+每个 LIN 示例应用程序都包含一个 ``lin_config.c`` 和 ``lin_config.h`` 文件。 这些文件包含可基于用户应用程序修改的宏。 建议用户仅在熟悉示例应用程序的使用后 更改这些宏。
+
+``lin_config.h`` 包含结构 ``LIN_table_record_t`` 的定义， 该结构允许用户定义 PID、与该 PID 的数据域关联的字节数 以及收到该 PID 时的回调函数。
+
+下面是 ``LIN_table_record_t`` 结构的定义示例定义：
+
+::
+
+       LIN_table_record_t messageTable[LIN_COMMANDER_NUM_MSGS] = {
+           {0xBA, /* PID 0x3A */
+               8,
+               NULL},
+           {0x0D, /* PID 0x0D */
+               5,
+               LIN_processMessage_Rx}
+       };
+
+在此示例中，第一个结构成员是 ``{0xBA, 8, NULL}``\ 。
+
+-  ``0xBA`` 是代表 PID 0x3A 的帧 ID。请参考关于如何确定 PID 的 LIN 规范。
+-  ``8`` 是 PID 为 0x3A 的数据包的数据域中期望的字节数。
+-  ``NULL`` 告知应用程序当收到 PID 为 0x3A 的数据包时，不调用回调函数。
+
+该结构的第二个成员是 ``{0x0D, 5, LIN_processMessage_Rx}``\ 。此成员定义指向用户定义的回调函数 ``LIN_processMessage_Rx``\ ，它告知应用程序当收到 PID 为 0x0D 的数据包时调用此函数。
+
+.. |image0| image:: ./images/lin_guide_add_syscfg_module.png
+.. |image1| image:: ./images/lin_guide_syscfg_configs.png
+.. |image2| image:: ./images/lin_guide_enable_lin_counter.png
+.. |image3| image:: ./images/lin_guide_counter_compare_match_config.png
+.. |image4| image:: ./images/lin_guide_linc0_match.png
+.. |image5| image:: ./images/lin_guide_capture_on_rxd_falling.png
+.. |image6| image:: ./images/lin_guide_lin_falling_edge_int.png
+.. |image7| image:: ./images/lin_guide_counter_reset.png
+.. |image8| image:: ./images/lin_guide_count_while_low.png
+.. |image9| image:: ./images/lin_guide_capture_on_rxd_rising.png
+.. |image10| image:: ./images/lin_guide_lin_rising_edge_int.png
+.. |image11| image:: ./images/lin_guide_syscfg_profile.png
+.. |image12| image:: ./images/lin_guide_profile_settings.png

@@ -1,0 +1,54 @@
+#-------------------------------------------------------------------------------
+# SPDX-FileCopyrightText: Copyright The TrustedFirmware-M Contributors
+#
+# SPDX-License-Identifier: BSD-3-Clause
+#
+#-------------------------------------------------------------------------------
+
+menu "Secure partitions"
+
+rsource "protected_storage/Kconfig"
+rsource "initial_attestation/Kconfig"
+rsource "firmware_update/Kconfig"
+rsource "crypto/Kconfig"
+rsource "platform/Kconfig"
+rsource "internal_trusted_storage/Kconfig"
+
+choice PARTITION_LOG_LEVEL
+    prompt "Secure Partition Log Level"
+    default LOG_LEVEL_NONE
+
+    config LOG_LEVEL_VERBOSE
+        bool "Verbose"
+
+    config LOG_LEVEL_INFO
+        bool "Info"
+
+    config LOG_LEVEL_WARNING
+        bool "Warning"
+
+    config LOG_LEVEL_NOTICE
+        bool "Notice"
+
+    config LOG_LEVEL_ERROR
+        bool "Error"
+
+    config LOG_LEVEL_NONE
+        bool "None"
+endchoice
+
+config TFM_PARTITION_LOG_LEVEL
+    int
+    default 50 if LOG_LEVEL_VERBOSE
+    default 40 if LOG_LEVEL_INFO
+    default 30 if LOG_LEVEL_WARN
+    default 20 if LOG_LEVEL_NOTICE
+    default 10 if LOG_LEVEL_ERROR
+    default 0 if LOG_LEVEL_NONE
+
+config TFM_SP_LOG_RAW_ENABLED
+    bool
+    default y if TFM_PARTITION_LOG_LEVEL != 0 || TFM_S_REG_TEST || TFM_NS_REG_TEST
+    default n
+
+endmenu

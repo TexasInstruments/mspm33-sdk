@@ -1,0 +1,7 @@
+var searchData=
+[
+  ['general_20purpose_20input_2foutput_20_28gpio_29_13227',['General Purpose Input/Output (GPIO)',['../group___g_p_i_o.html',1,'']]],
+  ['general_20purpose_20timer_20advance_20_28tima_29_13228',['General Purpose Timer Advance (TIMA)',['../group___t_i_m_a.html',1,'']]],
+  ['general_20purpose_20timer_20g_20_28timg_29_13229',['General Purpose Timer G (TIMG)',['../group___t_i_m_g.html',1,'']]],
+  ['global_20security_20controller_20_28gsc_29_13230',['Global SECURITY Controller (GSC)',['../group___g_s_c.html',1,'']]]
+];

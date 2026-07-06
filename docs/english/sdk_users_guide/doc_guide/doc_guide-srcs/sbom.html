@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Software Bill of Materials &mdash; MSPM33 SDK User Guide 1.04.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SDK Overview" href="sdk_users_guide.html" />
+    <link rel="prev" title="MSPM33 SDK Examples Guide" href="examples_guide.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> MSPM33 SDK User Guide
+          </a>
+              <div class="version">
+                1.04.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="examples_guide.html">MSPM33 SDK Examples Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Software Bill of Materials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#libraries-soc-drivers">Libraries - SOC Drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libraries-soc-security-drivers-support">Libraries - SOC Security Drivers &amp; Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#middleware-lin-drivers">Middleware - LIN Drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#middleware-eeprom-emulation">Middleware - EEPROM Emulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libraries-cmsis">Libraries - CMSIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#os-freertos">OS - FreeRTOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libraries-lvgl">Libraries - LVGL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#msp-ai-feature-extraction-library">MSP-AI - Feature Extraction Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#msp-ai-device-agent-protocol">MSP-AI - Device Agent Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#msp-ai-tinyml-tensorlab">MSP-AI - TinyML-Tensorlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#msp-ai-character-recognition-gui">MSP-AI - Character Recognition GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#msp-ai-examples">MSP-AI - Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#msp-crypto-lib-cryptography-library">MSP-CRYPTO-LIB - Cryptography Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#msp-crypto-lib-cryptography-examples">MSP-CRYPTO-LIB - Cryptography Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#boot-image-manager-boot-manager">Boot Image Manager - Boot Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mcuboot">MCUBoot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mbedtls">MbedTLS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tf-psa-crypto">TF-PSA-Crypto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#trusted-firmware-m">Trusted Firmware-M</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tools-sysconfig">Tools - SysConfig</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sdk_users_guide.html">SDK Overview</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MSPM33 SDK User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Software Bill of Materials</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="software-bill-of-materials">
+<h1>Software Bill of Materials<a class="headerlink" href="#software-bill-of-materials" title="Permalink to this heading">¶</a></h1>
+<section id="libraries-soc-drivers">
+<h2>Libraries - SOC Drivers<a class="headerlink" href="#libraries-soc-drivers" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default"><tr><td><p>Component</p>
+</td><td><p>[SDK_Install_Path]/source/ti/driverlib/*</p>
+</td></tr><tr><td><p>Production or reference</p>
+</td><td><p>Production</p>
+</td></tr><tr><td><p>Process Compliance</p>
+</td><td><p>BQ</p>
+</td></tr><tr><td><p>Certification</p>
+</td><td><p>NA</p>
+</td></tr><tr><td><p>Distribution</p>
+</td><td><p>TI Website / TI GitHub</p>
+</td></tr><tr><td><p>Comments</p>
+</td><td><p>Non-security peripheral drivers for HSADC, GPIO, UNICOMM-I2C, UNICOMM-SPI, UNICOMM-UART, timers, comparators, DMA, and other SOC IPs. Excludes security-specific drivers (AES, KeyStore, GSC, PKA, SHA).</p>
+</td></tr></table></section>
+<section id="libraries-soc-security-drivers-support">
+<h2>Libraries - SOC Security Drivers &amp; Support<a class="headerlink" href="#libraries-soc-security-drivers-support" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default"><tr><td><p>Component</p>
+</td><td><p>[SDK_Install_Path]/source/ti/driverlib/dl_aesadv.<em>, [SDK_Install_Path]/source/ti/driverlib/dl_keystorectl.</em>, [SDK_Install_Path]/source/ti/driverlib/dl_gsc.<em>, [SDK_Install_Path]/source/ti/driverlib/m33/dl_pka.</em>, [SDK_Install_Path]/source/ti/driverlib/m33/dl_shadrv.<em>, [SDK_Install_Path]/source/ti/devices/</em>, [SDK_Install_Path]/source/ti/hal/<em>, [SDK_Install_Path]/source/ti/clockTree/</em>, [SDK_Install_Path]/source/ti/project_config/<em>, [SDK_Install_Path]/source/ti/boards/</em>, [SDK_Install_Path]/source/ti/boosterpacks/*</p>
+</td></tr><tr><td><p>Production or reference</p>
+</td><td><p>Reference</p>
+</td></tr><tr><td><p>Process Compliance</p>
+</td><td><p>Early-Adopter</p>
+</td></tr><tr><td><p>Certification</p>
+</td><td><p>NA</p>
+</td></tr><tr><td><p>Distribution</p>
+</td><td><p>TI Website / TI GitHub</p>
+</td></tr><tr><td><p>Comments</p>
+</td><td><p>Security peripheral drivers (AES, KeyStore, GSC, PKA, SHA), device header support files, hardware abstraction layer, SysConfig metadata, and board-level support</p>
+</td></tr></table></section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default"><tr><td><p>Component</p>
+</td><td><p>[SDK_Install_Path]/examples/*</p>
+</td></tr><tr><td><p>Production or reference</p>
+</td><td><p>Reference</p>
+</td></tr><tr><td><p>Process Compliance</p>
+</td><td><p>Demo Quality</p>
+</td></tr><tr><td><p>Certification</p>
+</td><td><p>NA</p>
+</td></tr><tr><td><p>Distribution</p>
+</td><td><p>TI Website / TI GitHub</p>
+</td></tr><tr><td><p>Comments</p>
+</td><td><p>Driver and kernel examples showing how to use the driver APIs</p>
+</td></tr></table></section>
+<section id="middleware-lin-drivers">
+<h2>Middleware - LIN Drivers<a class="headerlink" href="#middleware-lin-drivers" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default"><tr><td><p>Component</p>
+</td><td><p>[SDK_Install_Path]/source/ti/driverlib/.meta/lin/<em>, [SDK_Install_Path]/examples/nortos/</em>/lin/*</p>
+</td></tr><tr><td><p>Production or reference</p>
+</td><td><p>Reference</p>
+</td></tr><tr><td><p>Process Compliance</p>
+</td><td><p>Demo Quality</p>
+</td></tr><tr><td><p>Certification</p>
+</td><td><p>NA</p>
+</td></tr><tr><td><p>Distribution</p>
+</td><td><p>TI Website / TI GitHub</p>
+</td></tr><tr><td><p>Comments</p>
+</td><td><p>LIN protocol middleware driver and examples for MSPM33</p>
+</td></tr></table></section>
+<section id="middleware-eeprom-emulation">
+<h2>Middleware - EEPROM Emulation<a class="headerlink" href="#middleware-eeprom-emulation" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default"><tr><td><p>Component</p>
+</td><td><p>[SDK_Install_Path]/source/ti/eeprom/*</p>
+</td></tr><tr><td><p>Production or reference</p>
+</td><td><p>Reference</p>
+</td></tr><tr><td><p>Process Compliance</p>
+</td><td><p>Early-Adopter</p>
+</td></tr><tr><td><p>Certification</p>
+</td><td><p>NA</p>
+</td></tr><tr><td><p>Distribution</p>
+</td><td><p>TI Website / TI GitHub</p>
+</td></tr><tr><td><p>Comments</p>
+</td><td><p>EEPROM emulation library using internal flash memory</p>
+</td></tr></table></section>
+<section id="libraries-cmsis">
+<h2>Libraries - CMSIS<a class="headerlink" href="#libraries-cmsis" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default"><tr><td><p>Component</p>
+</td><td><p>[SDK_Install_Path]/source/third_party/CMSIS/Core/<em>, [SDK_Install_Path]/source/third_party/CMSIS/DSP/</em></p>
+</td></tr><tr><td><p>Production or reference</p>
+</td><td><p>Reference</p>
+</td></tr><tr><td><p>Process Compliance</p>
+</td><td><p>FOSS†</p>
+</td></tr><tr><td><p>Certification</p>
+</td><td><p>NA</p>
+</td></tr><tr><td><p>Distribution</p>
+</td><td><p>TI Website / TI GitHub</p>
+</td></tr><tr><td><p>Comments</p>
+</td><td><p>CMSIS-Core and CMSIS-DSP - Common Microcontroller Software Interface Standard</p>
+</td></tr></table></section>
+<section id="os-freertos">
+<h2>OS - FreeRTOS<a class="headerlink" href="#os-freertos" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default"><tr><td><p>Component</p>
+</td><td><p>[SDK_Install_Path]/kernel/freertos/*</p>
+</td></tr><tr><td><p>Production or reference</p>
+</td><td><p>Reference</p>
+</td></tr><tr><td><p>Process Compliance</p>
+</td><td><p>FOSS†</p>
+</td></tr><tr><td><p>Certification</p>
+</td><td><p>NA</p>
+</td></tr><tr><td><p>Distribution</p>
+</td><td><p>TI Website / TI GitHub</p>
+</td></tr><tr><td><p>Comments</p>
+</td><td><p>FreeRTOS Kernel - Reference RTOS for ARM Cortex-M33</p>
+</td></tr></table></section>
+<section id="libraries-lvgl">
+<h2>Libraries - LVGL<a class="headerlink" href="#libraries-lvgl" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default"><tr><td><p>Component</p>
+</td><td><p>[SDK_Install_Path]/source/third_party/lvgl/*</p>
+</td></tr><tr><td><p>Production or reference</p>
+</td><td><p>Reference</p>
+</td></tr><tr><td><p>Process Compliance</p>
+</td><td><p>Demo Quality</p>
+</td></tr><tr><td><p>Certification</p>
+</td><td><p>NA</p>
+</td></tr><tr><td><p>Distribution</p>
+</td><td><p>TI Website / TI GitHub</p>
+</td></tr><tr><td><p>Comments</p>
+</td><td><p>LVGL - Light and Versatile Graphics Library for embedded displays</p>
+</td></tr></table></section>
+<section id="msp-ai-feature-extraction-library">
+<h2>MSP-AI - Feature Extraction Library<a class="headerlink" href="#msp-ai-feature-extraction-library" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default"><tr><td><p>Component</p>
+</td><td><p>[SDK_Install_Path]/source/ti/edgeAI/m33/feature_extract/*</p>
+</td></tr><tr><td><p>Production or reference</p>
+</td><td><p>Reference</p>
+</td></tr><tr><td><p>Process Compliance</p>
+</td><td><p>Early-Adopter</p>
+</td></tr><tr><td><p>Certification</p>
+</td><td><p>NA</p>
+</td></tr><tr><td><p>Distribution</p>
+</td><td><p>TI Website / TI GitHub</p>
+</td></tr><tr><td><p>Comments</p>
+</td><td><p>MSP-AI Feature Extraction Library for signal processing and feature computation on M33 core</p>
+</td></tr></table></section>
+<section id="msp-ai-device-agent-protocol">
+<h2>MSP-AI - Device Agent Protocol<a class="headerlink" href="#msp-ai-device-agent-protocol" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default"><tr><td><p>Component</p>
+</td><td><p>[SDK_Install_Path]/source/ti/edgeAI/m33/device_agent_protocol/*</p>
+</td></tr><tr><td><p>Production or reference</p>
+</td><td><p>Reference</p>
+</td></tr><tr><td><p>Process Compliance</p>
+</td><td><p>Early-Adopter</p>
+</td></tr><tr><td><p>Certification</p>
+</td><td><p>NA</p>
+</td></tr><tr><td><p>Distribution</p>
+</td><td><p>TI Website / TI GitHub</p>
+</td></tr><tr><td><p>Comments</p>
+</td><td><p>MSP-AI Device Agent Protocol (DAP) enabling communication between host and MSP device for AI inferencing</p>
+</td></tr></table></section>
+<section id="msp-ai-tinyml-tensorlab">
+<h2>MSP-AI - TinyML-Tensorlab<a class="headerlink" href="#msp-ai-tinyml-tensorlab" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default"><tr><td><p>Component</p>
+</td><td><p>[SDK_Install_Path]/examples/nortos/<em>/edgeAI/</em>/artifacts/*</p>
+</td></tr><tr><td><p>Production or reference</p>
+</td><td><p>Reference</p>
+</td></tr><tr><td><p>Process Compliance</p>
+</td><td><p>Demo Quality</p>
+</td></tr><tr><td><p>Certification</p>
+</td><td><p>NA</p>
+</td></tr><tr><td><p>Distribution</p>
+</td><td><p>TI Website / TI GitHub</p>
+</td></tr><tr><td><p>Comments</p>
+</td><td><p>TinyML-Tensorlab - pre-compiled TVM model binaries and header files bundled with edge AI examples</p>
+</td></tr></table></section>
+<section id="msp-ai-character-recognition-gui">
+<h2>MSP-AI - Character Recognition GUI<a class="headerlink" href="#msp-ai-character-recognition-gui" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default"><tr><td><p>Component</p>
+</td><td><p>[SDK_Install_Path]/tools/character_recognition/*</p>
+</td></tr><tr><td><p>Production or reference</p>
+</td><td><p>Reference</p>
+</td></tr><tr><td><p>Process Compliance</p>
+</td><td><p>Demo Quality</p>
+</td></tr><tr><td><p>Certification</p>
+</td><td><p>NA</p>
+</td></tr><tr><td><p>Distribution</p>
+</td><td><p>TI Website / TI GitHub</p>
+</td></tr><tr><td><p>Comments</p>
+</td><td><p>MSP-AI Character Recognition GUI - binary host tool for character recognition demonstration</p>
+</td></tr></table></section>
+<section id="msp-ai-examples">
+<h2>MSP-AI - Examples<a class="headerlink" href="#msp-ai-examples" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default"><tr><td><p>Component</p>
+</td><td><p>[SDK_Install_Path]/examples/nortos/<em>/edgeAI/</em></p>
+</td></tr><tr><td><p>Production or reference</p>
+</td><td><p>Reference</p>
+</td></tr><tr><td><p>Process Compliance</p>
+</td><td><p>Demo Quality</p>
+</td></tr><tr><td><p>Certification</p>
+</td><td><p>NA</p>
+</td></tr><tr><td><p>Distribution</p>
+</td><td><p>TI Website / TI GitHub</p>
+</td></tr><tr><td><p>Comments</p>
+</td><td><p>MSP-AI example applications for motor fault detection, waveform classification, PIR detection, and other AI inferencing use cases</p>
+</td></tr></table></section>
+<section id="msp-crypto-lib-cryptography-library">
+<h2>MSP-CRYPTO-LIB - Cryptography Library<a class="headerlink" href="#msp-crypto-lib-cryptography-library" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default"><tr><td><p>Component</p>
+</td><td><p>[SDK_Install_Path]/source/ti/crypto/*</p>
+</td></tr><tr><td><p>Production or reference</p>
+</td><td><p>Reference</p>
+</td></tr><tr><td><p>Process Compliance</p>
+</td><td><p>Early-Adopter</p>
+</td></tr><tr><td><p>Certification</p>
+</td><td><p>NA</p>
+</td></tr><tr><td><p>Distribution</p>
+</td><td><p>TI Website / TI GitHub</p>
+</td></tr><tr><td><p>Comments</p>
+</td><td><p>MSP Cryptography Library including ECC SW/HW libraries, SHA2SW, SHA3SW (MIT), Curve25519 (MIT), ML-DSA, RSA, and PKA module.</p>
+</td></tr></table></section>
+<section id="msp-crypto-lib-cryptography-examples">
+<h2>MSP-CRYPTO-LIB - Cryptography Examples<a class="headerlink" href="#msp-crypto-lib-cryptography-examples" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default"><tr><td><p>Component</p>
+</td><td><p>[SDK_Install_Path]/examples/<em>/security/</em></p>
+</td></tr><tr><td><p>Production or reference</p>
+</td><td><p>Reference</p>
+</td></tr><tr><td><p>Process Compliance</p>
+</td><td><p>Demo Quality</p>
+</td></tr><tr><td><p>Certification</p>
+</td><td><p>NA</p>
+</td></tr><tr><td><p>Distribution</p>
+</td><td><p>TI Website / TI GitHub</p>
+</td></tr><tr><td><p>Comments</p>
+</td><td><p>MSP Cryptography Example Suite demonstrating use of the crypto library</p>
+</td></tr></table></section>
+<section id="boot-image-manager-boot-manager">
+<h2>Boot Image Manager - Boot Manager<a class="headerlink" href="#boot-image-manager-boot-manager" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default"><tr><td><p>Component</p>
+</td><td><p>[SDK_Install_Path]/source/ti/boot_manager/*</p>
+</td></tr><tr><td><p>Production or reference</p>
+</td><td><p>Reference</p>
+</td></tr><tr><td><p>Process Compliance</p>
+</td><td><p>Early-Adopter</p>
+</td></tr><tr><td><p>Certification</p>
+</td><td><p>NA</p>
+</td></tr><tr><td><p>Distribution</p>
+</td><td><p>TI Website / TI GitHub</p>
+</td></tr><tr><td><p>Comments</p>
+</td><td><p>MSPM33 Boot Manager and Customer Secure Code Example Suite including secure bootloading support</p>
+</td></tr></table></section>
+<section id="mcuboot">
+<h2>MCUBoot<a class="headerlink" href="#mcuboot" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default"><tr><td><p>Component</p>
+</td><td><p>[SDK_Install_Path]/source/third_party/mcuboot/*</p>
+</td></tr><tr><td><p>Production or reference</p>
+</td><td><p>Reference</p>
+</td></tr><tr><td><p>Process Compliance</p>
+</td><td><p>Demo Quality</p>
+</td></tr><tr><td><p>Certification</p>
+</td><td><p>NA</p>
+</td></tr><tr><td><p>Distribution</p>
+</td><td><p>TI Website / TI GitHub</p>
+</td></tr><tr><td><p>Comments</p>
+</td><td><p>MCUBoot open-source secure bootloader, modified by TI for MSPM33 integration</p>
+</td></tr></table></section>
+<section id="mbedtls">
+<h2>MbedTLS<a class="headerlink" href="#mbedtls" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default"><tr><td><p>Component</p>
+</td><td><p>[SDK_Install_Path]/source/third_party/mbedtls/*</p>
+</td></tr><tr><td><p>Production or reference</p>
+</td><td><p>Reference</p>
+</td></tr><tr><td><p>Process Compliance</p>
+</td><td><p>Demo Quality</p>
+</td></tr><tr><td><p>Certification</p>
+</td><td><p>NA</p>
+</td></tr><tr><td><p>Distribution</p>
+</td><td><p>TI Website / TI GitHub</p>
+</td></tr><tr><td><p>Comments</p>
+</td><td><p>MbedTLS cryptographic library</p>
+</td></tr></table></section>
+<section id="tf-psa-crypto">
+<h2>TF-PSA-Crypto<a class="headerlink" href="#tf-psa-crypto" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default"><tr><td><p>Component</p>
+</td><td><p>[SDK_Install_Path]/source/third_party/tf-psa-crypto/*</p>
+</td></tr><tr><td><p>Production or reference</p>
+</td><td><p>Reference</p>
+</td></tr><tr><td><p>Process Compliance</p>
+</td><td><p>Demo Quality</p>
+</td></tr><tr><td><p>Certification</p>
+</td><td><p>NA</p>
+</td></tr><tr><td><p>Distribution</p>
+</td><td><p>TI Website / TI GitHub</p>
+</td></tr><tr><td><p>Comments</p>
+</td><td><p>TF-PSA-Crypto PSA Cryptography API implementation used by Trusted Firmware-M</p>
+</td></tr></table></section>
+<section id="trusted-firmware-m">
+<h2>Trusted Firmware-M<a class="headerlink" href="#trusted-firmware-m" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default"><tr><td><p>Component</p>
+</td><td><p>[SDK_Install_Path]/source/third_party/trusted-firmware-m/*</p>
+</td></tr><tr><td><p>Production or reference</p>
+</td><td><p>Reference</p>
+</td></tr><tr><td><p>Process Compliance</p>
+</td><td><p>Demo Quality</p>
+</td></tr><tr><td><p>Certification</p>
+</td><td><p>NA</p>
+</td></tr><tr><td><p>Distribution</p>
+</td><td><p>TI Website / TI GitHub</p>
+</td></tr><tr><td><p>Comments</p>
+</td><td><p>Trusted Firmware-M ARM PSA reference implementation for Cortex-M33 TrustZone, providing Secure World firmware with PSA services (Crypto, Storage, Attestation, and Platform)</p>
+</td></tr></table></section>
+<section id="tools-sysconfig">
+<h2>Tools - SysConfig<a class="headerlink" href="#tools-sysconfig" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default"><tr><td><p>Component</p>
+</td><td><p>SysConfig</p>
+</td></tr><tr><td><p>Production or reference</p>
+</td><td><p>Reference</p>
+</td></tr><tr><td><p>Process Compliance</p>
+</td><td><p>Early-Adopter</p>
+</td></tr><tr><td><p>Certification</p>
+</td><td><p>NA</p>
+</td></tr><tr><td><p>Distribution</p>
+</td><td><p>TI Website / TI GitHub</p>
+</td></tr><tr><td><p>Comments</p>
+</td><td><p>Tool to configure SOC pinmux and driver parameters for MSPM33</p>
+</td></tr></table><hr class="docutils" />
+<p>† FOSS: Free and Open Source Software. Refer to the manifest for individual component license details.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="examples_guide.html" class="btn btn-neutral float-left" title="MSPM33 SDK Examples Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sdk_users_guide.html" class="btn btn-neutral float-right" title="SDK Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">1995-2023, Texas Instruments Incorporated. All rights reserved</a>, Texas Instruments Incorporated. All rights reserved. <br/>
+      <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

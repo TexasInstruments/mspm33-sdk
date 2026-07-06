@@ -1,0 +1,52 @@
+#
+# SPDX-FileCopyrightText: Copyright The TrustedFirmware-M Contributors
+#
+# SPDX-License-Identifier: BSD-3-Clause
+#
+
+# References:
+#
+# EditorConfig rules https://editorconfig.org/
+# TF-M coding rules  https://trustedfirmware-m.readthedocs.io/en/latest/contributing/coding_guide.html
+root = true
+
+################################
+# Default settings for all files
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+tab_width = 4
+indent_style = space
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+################################
+# Assembler
+[*.{S,s}]
+indent_size = 8
+tab_width = 8
+
+# The file categories below are left empty intentionally
+# for potential customisation in future
+
+################################
+# C and C++
+[*.{c,h,cpp,hpp}]
+max_line_length = 100
+
+################################
+# Python code
+[*.py]
+
+################################
+#CMake specific settings
+[{CMakeLists.txt,*.cmake}]
+
+################################
+#Documentation
+[*.{rst,md}]
+
+################################
+# json,yaml and xml files
+[{*.json,*.yaml,*.xml}]

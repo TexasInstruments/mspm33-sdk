@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IAR Project Connection File -->
+
+<iarProjectConnection version="1.2" name="FreeRTOS kernel project" oneShot="true"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="IarProjectConnection_1.2.xsd">
+
+  <device>
+    <name>MSPM33C321A</name>
+  </device>
+
+  <extraOptions>
+    <args>
+      <arg>-D__MSPM33C321A__</arg>
+      <arg>-Dewarm</arg>
+      <arg>-I$MSPM33_SDK_INSTALL_DIR$/kernel/freertos/Source/include</arg>
+      <arg>-I$MSPM33_SDK_INSTALL_DIR$/kernel/freertos/Source/portable/IAR/ARM_CM33_NTZ/non_secure</arg>
+      <arg>-I$MSPM33_SDK_INSTALL_DIR$/source/third_party/CMSIS/Core/Include</arg>
+      <arg>-I$MSPM33_SDK_INSTALL_DIR$/source</arg>
+      <arg>-I$PROJ_DIR$/..</arg>
+      <arg>--debug</arg>
+      <arg>--silent</arg>
+      <arg>-e</arg>
+      <arg>--aeabi</arg>
+      <arg>--thumb</arg>
+      <arg>--diag_suppress=Pa050</arg>
+    </args>
+  </extraOptions>
+
+  <asmIncludePath>
+    <path>$MSPM33_SDK_INSTALL_DIR$/kernel/freertos/Source/include</path>
+    <path>$PROJ_DIR$/..</path>
+  </asmIncludePath>
+
+  <files>
+    <group name="Source files">
+      <path reference="$PROJ_DIR$/croutine.c">$MSPM33_SDK_INSTALL_DIR$/kernel/freertos/Source/croutine.c</path>
+      <path reference="$PROJ_DIR$/event_groups.c">$MSPM33_SDK_INSTALL_DIR$/kernel/freertos/Source/event_groups.c</path>
+      <path reference="$PROJ_DIR$/list.c">$MSPM33_SDK_INSTALL_DIR$/kernel/freertos/Source/list.c</path>
+      <path reference="$PROJ_DIR$/queue.c">$MSPM33_SDK_INSTALL_DIR$/kernel/freertos/Source/queue.c</path>
+      <path reference="$PROJ_DIR$/stream_buffer.c">$MSPM33_SDK_INSTALL_DIR$/kernel/freertos/Source/stream_buffer.c</path>
+      <path reference="$PROJ_DIR$/tasks.c">$MSPM33_SDK_INSTALL_DIR$/kernel/freertos/Source/tasks.c</path>
+      <path reference="$PROJ_DIR$/timers.c">$MSPM33_SDK_INSTALL_DIR$/kernel/freertos/Source/timers.c</path>
+      <path reference="$PROJ_DIR$/port.c">$MSPM33_SDK_INSTALL_DIR$/kernel/freertos/Source/portable/IAR/ARM_CM33_NTZ/non_secure/port.c</path>
+      <path reference="$PROJ_DIR$/portasm.s">$MSPM33_SDK_INSTALL_DIR$/kernel/freertos/Source/portable/IAR/ARM_CM33_NTZ/non_secure/portasm.s</path>
+      <path reference="$PROJ_DIR$/mpu_wrappers_v2_asm.S">$MSPM33_SDK_INSTALL_DIR$/kernel/freertos/Source/portable/IAR/ARM_CM33_NTZ/non_secure/mpu_wrappers_v2_asm.S</path>
+      <path reference="$PROJ_DIR$/heap_4.c">$MSPM33_SDK_INSTALL_DIR$/kernel/freertos/Source/portable/MemMang/heap_4.c</path>
+      <path reference="$PROJ_DIR$/startup_mspm33c321x_iar.c">$MSPM33_SDK_INSTALL_DIR$/source/ti/devices/msp/m33/startup_system_files/iar/startup_mspm33c321x_iar.c</path>
+      <path reference="$PROJ_DIR$/system_mspm33c321x.c">$MSPM33_SDK_INSTALL_DIR$/source/ti/devices/msp/m33/startup_system_files/system_mspm33c321x.c</path>
+    </group>
+
+    <group name="Header files">
+      <path reference="$PROJ_DIR$/FreeRTOSConfig.h">./../FreeRTOSConfig.h</path>
+    </group>
+  </files>
+</iarProjectConnection>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<ProjectOpt xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="project_optx.xsd">
+
+  <SchemaVersion>1.0</SchemaVersion>
+
+  <Header>### uVision Project, (C) Keil Software</Header>
+
+  <Extensions>
+    <cExt>*.c</cExt>
+    <aExt>*.s*; *.src; *.a*</aExt>
+    <oExt>*.obj; *.o</oExt>
+    <lExt>*.lib</lExt>
+    <tExt>*.txt; *.h; *.inc; *.md</tExt>
+    <pExt>*.plm</pExt>
+    <CppX>*.cpp; *.cc; *.cxx</CppX>
+    <nMigrate>0</nMigrate>
+  </Extensions>
+
+  <Target>
+    <TargetName>crcp_calculate_checksum_dma_32bit_LP_MSPM33C321A_nortos_keil</TargetName>
+    <ToolsetNumber>0x4</ToolsetNumber>
+    <ToolsetName>ARM-ADS</ToolsetName>
+    <TargetOption>
+      <OPTTT><gFlags>1</gFlags><BeepAtEnd>0</BeepAtEnd><RunSim>0</RunSim><RunTarget>1</RunTarget><RunAbUc>0</RunAbUc></OPTTT>
+      <DebugOpt>
+        <uSim>0</uSim>
+        <uTrg>1</uTrg>
+        <nTsel>14</nTsel>
+        <tLdApp>1</tLdApp>
+        <tGomain>1</tGomain>
+        <tIfile></tIfile>
+        <pMon>BIN\CMSIS_AGDI_V8M.DLL</pMon>
+      </DebugOpt>
+      <TargetDriverDllRegistry>
+        <SetRegEntry><Number>0</Number><Key>CMSIS_AGDI</Key><Name>-X"XDS110 with CMSIS-DAP" -O200 -S8 -C1 -P00000000 -N00("ARM CoreSight SW-DP") -D00(6BA02477) -L00(0) -TO65554 -TC10000000 -TT10000000 -TP20 -TDS8007 -TDT0 -TDC1F -TIEFFFFFFFF -TIP8 -FO7 -FD0 -FC1000 -FN1 -FF0MSPM33C_MAIN_1MB_NS.FLM -FS00 -FL0100000 -FP0($$Device:MSPM33C321A$02_Flash_Programming\FlashARM\MSPM33C_MAIN_1MB_NS.FLM)</Name></SetRegEntry>
+        <SetRegEntry><Number>0</Number><Key>UL2V8M</Key><Name>UL2V8M(-S0 -C0 -P0 -FD30000000 -FC40000 -FN1 -FF0MSPM33C_MAIN_1MB_S -FS010000000 -FL0100000 -FP0($$Device:MSPM33C321A$02_Flash_Programming\FlashARM\MSPM33C_MAIN_1MB_S.FLM))</Name></SetRegEntry>
+      </TargetDriverDllRegistry>
+    </TargetOption>
+  </Target>
+
+</ProjectOpt>

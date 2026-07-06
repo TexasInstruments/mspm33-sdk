@@ -1,0 +1,45 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --board "/ti/boards/LP_MSPM33C321A" --product "mspm33_sdk@1.02.00.00"
+ * @v2CliArgs --board "/ti/boards/LP_MSPM33C321A" --product "mspm33_sdk@1.02.00.00"
+ * @versions {"tool":"1.26.0+4407"}
+ */
+// @cliArgs --board /ti/boards/LP_MSPM33C321A --rtos nortos
+
+/**
+ * Import the modules used in this configuration.
+ */
+const GPIO          = scripting.addModule("/ti/driverlib/GPIO", {}, false);
+const GPIO1         = GPIO.addInstance();
+const PKA           = scripting.addModule("/ti/driverlib/PKA");
+const ProjectConfig = scripting.addModule("/ti/project_config/ProjectConfig");
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+GPIO1.$name                               = "GPIO_LEDS";
+GPIO1.associatedPins.create(2);
+GPIO1.associatedPins[0].$name             = "PASS_LED";
+GPIO1.associatedPins[0].launchPadShortcut = "LED2GreenEn";
+GPIO1.associatedPins[1].$name             = "FAIL_LED";
+GPIO1.associatedPins[1].launchPadShortcut = "LED2RedEn";
+
+const Board = scripting.addModule("/ti/driverlib/Board", {}, false);
+
+const SYSCTL = scripting.addModule("/ti/driverlib/SYSCTL", {}, false);
+
+ProjectConfig.genLinker  = false;
+ProjectConfig.genStartup = false;
+
+/**
+ * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
+ * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
+ * re-solve from scratch.
+ */
+GPIO1.associatedPins[0].pin.$suggestSolution = "boosterpack.31";
+GPIO1.associatedPins[1].pin.$suggestSolution = "boosterpack.32";
+Board.peripheral.$suggestSolution            = "DEBUGSS";
+Board.peripheral.swclkPin.$suggestSolution   = "j25_expansion.16";
+Board.peripheral.swdioPin.$suggestSolution   = "j25_expansion.14";
+SYSCTL.peripheral.$suggestSolution           = "SYSCTL";

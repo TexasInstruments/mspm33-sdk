@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectSpec>
+    <applicability>
+        <when>
+            <context
+                deviceFamily="ARM"
+                deviceId="MSPM33C321A"
+            />
+        </when>
+    </applicability>
+
+    <project
+        title="pir_detection_ai"
+        name="pir_detection_ai_LP_MSPM33C321A_nortos_ticlang"
+        configurations="Debug"
+        toolChain="TICLANG"
+        connection="TIXDS110_Connection.xml"
+        device="MSPM33C321A"
+        ignoreDefaultDeviceSettings="true"
+        ignoreDefaultCCSSettings="true"
+        products="MSPM33-SDK;sysconfig"
+        compilerBuildOptions="
+            -I${PROJECT_ROOT}
+            -I${PROJECT_ROOT}/${ConfigName}
+            -DDEVICE_NAME=MSPM33C321A
+            -DARM_MATH_CM33
+            -O0
+            -Wall
+            -gdwarf-3
+            -mfloat-abi=hard
+            -mfpu=fpv5-sp-d16
+            @device.opt
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/third_party/CMSIS/Core/Include
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/third_party/CMSIS/DSP/Include
+            -I${PROJECT_ROOT}/artifacts
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/examples/edgeAI/pir_detection_ai/LP_MSPM33C321A/artifacts
+            -I${PROJECT_ROOT}/feature_extraction
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/examples/edgeAI/pir_detection_ai/LP_MSPM33C321A/feature_extraction
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source
+            -mcpu=cortex-m33
+        "
+        linkerBuildOptions="
+            -Wl,--heap_size=0x800
+            -L${PROJECT_ROOT}/artifacts
+            ../artifacts/mod.a
+            -L${PROJECT_ROOT}/feature_extraction
+            -ldevice.cmd.genlibs
+            -L${COM_TI_MSPM33_SDK_INSTALL_DIR}/source
+            -L${PROJECT_ROOT}
+            -L${PROJECT_BUILD_DIR}/syscfg
+            -Wl,--rom_model
+            -Wl,--warn_sections
+            -L${CG_TOOL_ROOT}/lib
+            -llibc.a
+        "
+        sysConfigBuildOptions="
+            --output .
+            --product ${COM_TI_MSPM33_SDK_INSTALL_DIR}/.metadata/product.json
+            --compiler ticlang
+        "
+        sourceLookupPath="${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/ti/driverlib"
+        description="PIR detection AI with feature extraction and neural network inference">
+        <property name="buildProfile" value="release"/>
+        <property name="isHybrid" value="true"/>
+        <file path="../artifacts/tvmgen_default.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="artifacts">
+        </file>
+        <file path="../artifacts/user_input_config.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="artifacts">
+        </file>
+        <file path="../feature_extraction/feature_extract.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="feature_extraction">
+        </file>
+        <file path="../feature_extraction/feature_extract.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="feature_extraction">
+        </file>
+        <file path="../feature_extraction/feature_extract_app.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="feature_extraction">
+        </file>
+        <file path="../feature_extraction/feature_extract_app.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="feature_extraction">
+        </file>
+        <file path="../feature_extraction/ti_edgeai_fe_config.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="feature_extraction">
+        </file>
+        <file path="../pir_detection_ai.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../test_vector.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../artifacts/mod.a" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="artifacts">
+        </file>
+        <file path="../pir_detection_ai.syscfg" openOnCreation="true" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../README.md" openOnCreation="true" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../README.html" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+    </project>
+</projectSpec>

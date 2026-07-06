@@ -1,0 +1,239 @@
+#-------------------------------------------------------------------------------
+# SPDX-FileCopyrightText: Copyright The TrustedFirmware-M Contributors
+#
+# SPDX-License-Identifier: BSD-3-Clause
+#
+#-------------------------------------------------------------------------------
+
+set(is_v8.1m    "$<STREQUAL:${TFM_SYSTEM_ARCHITECTURE},armv8.1-m.main>")
+set(is_v8m_base "$<STREQUAL:${TFM_SYSTEM_ARCHITECTURE},armv8-m.base>")
+set(is_v8m_main "$<STREQUAL:${TFM_SYSTEM_ARCHITECTURE},armv8-m.main>")
+set(is_v8.0m    "$<OR:${is_v8m_main},${is_v8m_base}>")
+set(is_v8.xm    "$<OR:${is_v8.1m},${is_v8.0m}>")
+
+############################### PSA CRYPTO CONFIG ##############################
+# Make sure these are available even if the TFM_PARTITION_CRYPTO is not defined
+
+# Interface library target for client-only builds of PSA Crypto
+add_library(psa_crypto_config INTERFACE)
+target_compile_definitions(psa_crypto_config
+    INTERFACE
+        $<BUILD_INTERFACE:TFM_PSA_CRYPTO_CLIENT_ONLY>
+        $<BUILD_INTERFACE:TF_PSA_CRYPTO_CONFIG_FILE="${TFM_TF_PSA_CRYPTO_CONFIG_PATH}">
+        $<BUILD_INTERFACE:$<$<BOOL:${MBEDTLS_PSA_CRYPTO_PLATFORM_FILE}>:MBEDTLS_PSA_CRYPTO_PLATFORM_FILE="${MBEDTLS_PSA_CRYPTO_PLATFORM_FILE}">>
+)
+# The following is required for tfm_plat_crypto_nv_seed.h
+target_include_directories(psa_crypto_config
+    INTERFACE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../../../platform/include>
+)
+# This defines the configuration files for the users of the library directly
+add_library(psa_crypto_library_config INTERFACE)
+target_compile_definitions(psa_crypto_library_config
+    INTERFACE
+        TF_PSA_CRYPTO_CONFIG_FILE="${TFM_TF_PSA_CRYPTO_CONFIG_PATH}"
+)
+
+target_include_directories(psa_crypto_library_config
+    INTERFACE
+        # The following is required for mbedtls_entropy_nv_seed_config.h
+        ${CMAKE_SOURCE_DIR}/platform/include
+        # Workaround: needed for private headers in drivers/builtin/include/mbedtls/private
+        # which are included by some of the TF-PSA-Crypto interface headers.
+        ${TF_PSA_CRYPTO_PATH}/drivers/builtin/include
+)
+
+if (NOT TFM_PARTITION_CRYPTO)
+    return()
+endif()
+
+find_package(Python3)
+
+cmake_minimum_required(VERSION 3.21)
+
+add_library(tfm_psa_rot_partition_crypto STATIC)
+
+add_dependencies(tfm_psa_rot_partition_crypto manifest_tool)
+
+target_sources(tfm_psa_rot_partition_crypto
+    PRIVATE
+        crypto_init.c
+        crypto_alloc.c
+        crypto_cipher.c
+        crypto_hash.c
+        crypto_mac.c
+        crypto_aead.c
+        crypto_asymmetric.c
+        crypto_key_derivation.c
+        crypto_key_management.c
+        crypto_rng.c
+        crypto_library.c
+        $<$<BOOL:${CRYPTO_TFM_BUILTIN_KEYS_DRIVER}>:psa_driver_api/tfm_builtin_key_loader.c>
+)
+
+# The generated sources
+target_sources(tfm_psa_rot_partition_crypto
+    PRIVATE
+        ${CMAKE_BINARY_DIR}/generated/secure_fw/partitions/crypto/auto_generated/intermedia_tfm_crypto.c
+)
+
+target_sources(tfm_partitions
+    INTERFACE
+        ${CMAKE_BINARY_DIR}/generated/secure_fw/partitions/crypto/auto_generated/load_info_tfm_crypto.c
+)
+
+# Set include directory
+target_include_directories(tfm_psa_rot_partition_crypto
+    PRIVATE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+        ${CMAKE_BINARY_DIR}/generated/secure_fw/partitions/crypto
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../../../interface/include>
+)
+
+target_include_directories(tfm_partitions
+    INTERFACE
+        ${CMAKE_BINARY_DIR}/generated/secure_fw/partitions/crypto
+)
+
+# Linking to external interfaces
+target_link_libraries(tfm_psa_rot_partition_crypto
+    PRIVATE
+        platform_s
+        crypto_service_tfpsacrypto
+        tfm_config
+        tfm_log_headers
+)
+
+target_compile_definitions(tfm_psa_rot_partition_crypto
+    PRIVATE
+        $<$<STREQUAL:${CRYPTO_HW_ACCELERATOR_TYPE},cc312>:CRYPTO_HW_ACCELERATOR_CC312>
+)
+
+############################ Partition Defs ####################################
+
+target_link_libraries(tfm_partitions
+    INTERFACE
+        tfm_psa_rot_partition_crypto
+)
+
+target_compile_definitions(tfm_config
+    INTERFACE
+        TFM_PARTITION_CRYPTO
+)
+
+############################### TF-PSA-Crypto ##################################
+add_library(crypto_service_tfpsacrypto_config INTERFACE)
+
+target_compile_definitions(crypto_service_tfpsacrypto_config
+    INTERFACE
+        $<$<BOOL:${TFM_TF_PSA_CRYPTO_PLATFORM_EXTRA_CONFIG_PATH}>:TF_PSA_CRYPTO_USER_CONFIG_FILE="${TFM_TF_PSA_CRYPTO_PLATFORM_EXTRA_CONFIG_PATH}">
+        $<$<BOOL:${PLATFORM_DEFAULT_NV_SEED}>:PLATFORM_DEFAULT_NV_SEED>
+        $<$<BOOL:${PLATFORM_DEFAULT_CRYPTO_KEYS}>:PLATFORM_DEFAULT_CRYPTO_KEYS>
+        $<$<BOOL:${CRYPTO_TFM_BUILTIN_KEYS_DRIVER}>:PSA_CRYPTO_DRIVER_TFM_BUILTIN_KEY_LOADER>
+        $<$<BOOL:${CRYPTO_TFM_OPAQUE_KEYS_DRIVER}>:CC3XX_CRYPTO_OPAQUE_KEYS>
+)
+
+target_include_directories(crypto_service_tfpsacrypto_config
+    INTERFACE
+        $<$<BOOL:${CRYPTO_TFM_OPAQUE_KEYS_DRIVER}>:${PLATFORM_DIR}/ext/target/arm/drivers/cc3xx/psa_driver_api/include>
+ )
+
+target_link_libraries(crypto_service_tfpsacrypto_config
+    INTERFACE
+        tfm_config
+        psa_crypto_library_config
+)
+
+set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
+set(CMAKE_POLICY_DEFAULT_CMP0048 NEW)
+set(TF_PSA_CRYPTO_AS_SUBPROJECT ON)
+set(ENABLE_TESTING OFF)
+set(ENABLE_PROGRAMS OFF)
+set(TF_PSA_CRYPTO_FATAL_WARNINGS OFF)
+set(INSTALL_TF_PSA_CRYPTO_HEADERS OFF)
+set(LIB_INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/tfpsacrypto/install)
+set(GEN_FILES OFF)
+
+# Set the prefix to be used by TF-PSA-Crypto targets
+set(TF_PSA_CRYPTO_TARGET_PREFIX crypto_service_)
+
+# If the project is configured with CMAKE_BUILD_TYPE="Debug", the value of
+# TF_PSA_CRYPTO_BUILD_TYPE will be set "RelWithDebInfo" to optimize the space
+# of the Debug build. If the goal is to debug TF-PSA-Crypto code itself, the
+# TF_PSA_CRYPTO_BUILD_TYPE must be set manually here
+set(SAVED_BUILD_TYPE ${CMAKE_BUILD_TYPE})
+set(CMAKE_BUILD_TYPE ${TF_PSA_CRYPTO_BUILD_TYPE})
+add_subdirectory(${TF_PSA_CRYPTO_PATH} ${CMAKE_CURRENT_BINARY_DIR}/tfpsacrypto EXCLUDE_FROM_ALL)
+set(CMAKE_BUILD_TYPE ${SAVED_BUILD_TYPE})
+
+if(NOT TARGET ${TF_PSA_CRYPTO_TARGET_PREFIX}tfpsacrypto)
+    message(FATAL_ERROR "[Crypto service] Target ${TF_PSA_CRYPTO_TARGET_PREFIX}tfpsacrypto does not exist. Have the patches in ${CMAKE_SOURCE_DIR}/lib/ext/tf-psa-crypto been applied to the TF-PSA-Crypto repo at ${TF_PSA_CRYPTO_PATH} ?
+    Hint: The command might be `cd ${TF_PSA_CRYPTO_PATH} && git apply ${CMAKE_SOURCE_DIR}/lib/ext/tf-psa-crypto/*.patch`")
+endif()
+
+target_include_directories(${TF_PSA_CRYPTO_TARGET_PREFIX}tfpsacrypto
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_CURRENT_SOURCE_DIR}/psa_driver_api
+        # The following is required for psa/error.h
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../../../interface/include>
+)
+
+# Fix platform_s and crypto_service_tfpsacrypto libraries cyclic linking
+set_target_properties(${TF_PSA_CRYPTO_TARGET_PREFIX}tfpsacrypto PROPERTIES LINK_INTERFACE_MULTIPLICITY 3)
+
+target_sources(${TF_PSA_CRYPTO_TARGET_PREFIX}tfpsacrypto
+    PRIVATE
+        $<$<NOT:$<BOOL:${CRYPTO_HW_ACCELERATOR}>>:${CMAKE_CURRENT_SOURCE_DIR}/tfm_mbedcrypto_alt.c>
+)
+
+target_compile_options(${TF_PSA_CRYPTO_TARGET_PREFIX}tfpsacrypto
+    PRIVATE
+        $<$<C_COMPILER_ID:GNU,Clang>:-Wno-unused-const-variable>
+        $<$<C_COMPILER_ID:GNU,Clang>:-Wno-unused-parameter>
+        $<$<C_COMPILER_ID:ARMClang>:-Wno-unused-const-variable>
+        $<$<C_COMPILER_ID:ARMClang>:-Wno-unused-parameter>
+)
+
+target_link_libraries(${TF_PSA_CRYPTO_TARGET_PREFIX}tfpsacrypto
+    PRIVATE
+        platform_s
+    PUBLIC
+        crypto_service_tfpsacrypto_config
+    INTERFACE
+        platform_common_interface
+    )
+
+############################### TF-PSA-Crypto internal targets #################
+
+target_compile_definitions(${TF_PSA_CRYPTO_TARGET_PREFIX}p256-m
+    PRIVATE
+        # Code is branchless but UMLAL might take a variable amount of cycles
+        # depedening on inputs if ${is_v8.1m} is false. We don't aim to protect
+        # against side channel so this is a acknowledged behaviour
+        MUL64_IS_CONSTANT_TIME
+        MULADD64_IGNORE_ASM
+)
+
+set(_tfpsa_internal_targets
+    ${TF_PSA_CRYPTO_TARGET_PREFIX}p256-m
+    ${TF_PSA_CRYPTO_TARGET_PREFIX}builtin
+    ${TF_PSA_CRYPTO_TARGET_PREFIX}everest
+    ${TF_PSA_CRYPTO_TARGET_PREFIX}platform
+    ${TF_PSA_CRYPTO_TARGET_PREFIX}pqcp
+    ${TF_PSA_CRYPTO_TARGET_PREFIX}utilities
+    ${TF_PSA_CRYPTO_TARGET_PREFIX}extras
+)
+
+foreach(_tfpsa_target ${_tfpsa_internal_targets})
+    # Passing TF-PSA-Crypto configuration and required include paths to internal targets
+    target_link_libraries(${_tfpsa_target}
+        PRIVATE
+            crypto_service_tfpsacrypto_config
+    )
+    # Propagating FPU flags to internal targets
+    target_compile_options(${_tfpsa_target}
+        PRIVATE
+            ${COMPILER_CP_FLAG}
+    )
+endforeach()

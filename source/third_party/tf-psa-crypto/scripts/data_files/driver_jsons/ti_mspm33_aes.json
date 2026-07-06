@@ -1,0 +1,36 @@
+{
+    "prefix": "ti_mspm33_aes",
+    "type": "transparent",
+    "mbedtls/h_condition": "defined(CRYPTO_HW_USE_MSPM33_AES)",
+    "headers": ["../drivers/mspm33/include/ti_mspm33_aes_driver.h"],
+    "capabilities": [
+        {
+            "entry_points": ["cipher_encrypt", "cipher_decrypt"],
+            "algorithms": ["PSA_ALG_ECB_NO_PADDING", "PSA_ALG_CBC_NO_PADDING", "PSA_ALG_CTR", "PSA_ALG_CFB", "PSA_ALG_OFB"],
+            "key_types": ["PSA_KEY_TYPE_AES"],
+            "key_sizes": [128, 256],
+            "fallback": false
+        },
+        {
+            "entry_points": ["cipher_multipart"],
+            "algorithms": ["PSA_ALG_ECB_NO_PADDING", "PSA_ALG_CBC_NO_PADDING", "PSA_ALG_CTR", "PSA_ALG_CFB", "PSA_ALG_OFB"],
+            "key_types": ["PSA_KEY_TYPE_AES"],
+            "key_sizes": [128, 256],
+            "fallback": false
+        },
+        {
+            "entry_points": ["aead_encrypt", "aead_decrypt"],
+            "algorithms": ["PSA_ALG_GCM", "PSA_ALG_CCM"],
+            "key_types": ["PSA_KEY_TYPE_AES"],
+            "key_sizes": [128, 256],
+            "fallback": false
+        },
+        {
+            "entry_points": ["aead_multipart"],
+            "algorithms": ["PSA_ALG_GCM", "PSA_ALG_CCM"],
+            "key_types": ["PSA_KEY_TYPE_AES"],
+            "key_sizes": [128, 256],
+            "fallback": false
+        }
+    ]
+}

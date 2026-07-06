@@ -1,0 +1,85 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --device "MSPM33C321X" --part "Default" --package "LQFP-100(PFA)" --product "mspm33_sdk@1.02.00.00"
+ * @v2CliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)" --product "mspm33_sdk@1.02.00.00"
+ * @versions {"tool":"1.26.0+4407"}
+ */
+// @cliArgs --board /ti/boards/LP_MSPM33C321A --rtos nortos
+
+/**
+ * Import the modules used in this configuration.
+ */
+const GPIO          = scripting.addModule("/ti/driverlib/GPIO", {}, false);
+const GPIO1         = GPIO.addInstance();
+const PWM           = scripting.addModule("/ti/driverlib/PWM", {}, false);
+const PWM1          = PWM.addInstance();
+const TIMERFault    = scripting.addModule("/ti/driverlib/TIMERFault", {}, false);
+const TIMERFault1   = TIMERFault.addInstance();
+const ProjectConfig = scripting.addModule("/ti/project_config/ProjectConfig");
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+GPIO1.$name                                 = "GPIO_LEDS";
+GPIO1.port                                  = "PORTC";
+GPIO1.associatedPins.create(2);
+GPIO1.associatedPins[0].$name               = "USER_LED_1";
+GPIO1.associatedPins[0].launchPadShortcut   = "LED2GreenEn";
+GPIO1.associatedPins[0].initialValue        = "SET";
+GPIO1.associatedPins[1].$name               = "USER_TEST";
+GPIO1.associatedPins[1].assignedPortSegment = "Upper";
+GPIO1.associatedPins[1].assignedPin         = "16";
+GPIO1.associatedPins[1].initialValue        = "SET";
+
+const Board                       = scripting.addModule("/ti/driverlib/Board", {}, false);
+Board.peripheral.$assign          = "DEBUGSS";
+Board.peripheral.swclkPin.$assign = "PA20";
+Board.peripheral.swdioPin.$assign = "PA19";
+
+PWM1.$name                      = "PWM_0";
+PWM1.interrupts                 = ["FAULT_EVENT"];
+PWM1.faultHandlerEn             = true;
+PWM1.faultSource                = ["0"];
+PWM1.timerCount                 = 100;
+PWM1.faultInputEn               = "FIEN_ENABLED";
+PWM1.faultInput                 = "FI_DEPENDENT";
+PWM1.faultInputFilterEn         = true;
+PWM1.faultTimerCountEntry       = "FAULT_ENTRY_CTR_SUSP_COUNT";
+PWM1.faultTimerCountExit        = "FAULT_EXIT_CTR_CVAE_ACTION";
+PWM1.faultPin1Sense             = "SENSE_HIGH";
+PWM1.faultChannel0BehaviorEntry = "HIGH";
+PWM1.faultChannel0BehaviorExit  = "LOW";
+PWM1.faultChannel1BehaviorEntry = "LOW";
+PWM1.faultChannel1BehaviorExit  = "HIGH";
+PWM1.faultInputDetect           = true;
+PWM1.peripheral.$assign         = "TIMA0_0";
+PWM1.peripheral.ccp0Pin.$assign = "PB14";
+PWM1.peripheral.ccp1Pin.$assign = "PA1";
+PWM1.PWM_CHANNEL_0.$name        = "ti_driverlib_pwm_PWMTimerCC0";
+PWM1.PWM_CHANNEL_0.dutyCycle    = 80;
+PWM1.PWM_CHANNEL_1.$name        = "ti_driverlib_pwm_PWMTimerCC1";
+PWM1.PWM_CHANNEL_1.dutyCycle    = 90;
+PWM1.ccp0PinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric0";
+PWM1.ccp1PinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric2";
+
+const SYSCTL              = scripting.addModule("/ti/driverlib/SYSCTL", {}, false);
+SYSCTL.peripheral.$assign = "SYSCTL";
+
+TIMERFault1.$name                            = "FAULT_0";
+PWM1.associatedFault                         = TIMERFault1;
+TIMERFault1.enabledFaults                    = ["0"];
+TIMERFault1.faultPin0.$assign                = "PA26";
+TIMERFault1.faultPin0Config.$name            = "ti_driverlib_gpio_GPIOPinGeneric1";
+TIMERFault1.faultPin0Config.enableConfig     = true;
+TIMERFault1.faultPin0Config.internalResistor = "PULL_DOWN";
+
+ProjectConfig.migrationCondition = true;
+
+/**
+ * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
+ * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
+ * re-solve from scratch.
+ */
+GPIO1.associatedPins[0].pin.$suggestSolution = "PC27";
+GPIO1.associatedPins[1].pin.$suggestSolution = "PC16";

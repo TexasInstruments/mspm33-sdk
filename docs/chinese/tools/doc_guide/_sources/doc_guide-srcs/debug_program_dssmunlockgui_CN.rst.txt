@@ -1,0 +1,4 @@
+.. toctree::
+   :maxdepth: 1
+
+   MSPM0 Factory Reset GUI Tool <https://dev.ti.com/gallery/view/TIMSPGC/MSPM0_Factory_Reset_Tool/>

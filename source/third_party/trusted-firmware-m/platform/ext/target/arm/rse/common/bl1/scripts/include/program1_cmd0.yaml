@@ -1,0 +1,16 @@
+#-------------------------------------------------------------------------------
+# SPDX-FileCopyrightText: Copyright The TrustedFirmware-M Contributors
+#
+# SPDX-License-Identifier: BSD-3-Clause
+#
+#-------------------------------------------------------------------------------
+# This command sets GPO value to 0x1. This is done to show that this channel
+# started executing (before the next command which waits for a trigger).
+
+CTRL:
+    USEGPO: 1
+GPOEN0: 0x0000001F
+GPOVAL0: 0x00000001
+LINKATTR:
+  LINKMEMATTR: 'normal_non_cacheable_non_shareable'
+LINKADDR: "program1_cmd1_exec_addr"

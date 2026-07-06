@@ -1,0 +1,73 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ */
+//@cliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)" --part "Default"
+//@v2CliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)"
+// @cliArgs --board /ti/boards/LP_MSPM33C321A --rtos nortos
+
+
+/**
+ * Import the modules used in this configuration.
+ */
+const GPIO   = scripting.addModule("/ti/driverlib/GPIO", {}, false);
+const GPIO1  = GPIO.addInstance();
+const HSADC  = scripting.addModule("/ti/driverlib/HSADC", {}, false);
+const HSADC1 = HSADC.addInstance();
+const RTCA   = scripting.addModule("/ti/driverlib/RTCA");
+const SYSCTL = scripting.addModule("/ti/driverlib/SYSCTL");
+const VREF   = scripting.addModule("/ti/driverlib/VREF");
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+GPIO1.$name                               = "GPIO_LEDS";
+GPIO1.associatedPins.create(2);
+GPIO1.associatedPins[0].$name             = "PASS_LED";
+GPIO1.associatedPins[0].launchPadShortcut = "LED2GreenEn";
+GPIO1.associatedPins[0].pin.$assign       = "PC27";
+GPIO1.associatedPins[1].$name             = "FAIL_LED";
+GPIO1.associatedPins[1].launchPadShortcut = "LED2RedEn";
+GPIO1.associatedPins[1].pin.$assign       = "PC26";
+
+const Board                       = scripting.addModule("/ti/driverlib/Board", {}, false);
+Board.peripheral.$assign          = "DEBUGSS";
+Board.peripheral.swclkPin.$assign = "PA20";
+Board.peripheral.swdioPin.$assign = "PA19";
+
+HSADC1.$name              = "HSADC0";
+HSADC1.disChan11          = true;
+HSADC1.adcClockPrescaler  = "DL_HSADC_CLOCK_DIVIDE_8_0";
+HSADC1.enabledSOCs        = ["ADC_SOC_NUMBER0"];
+HSADC1.soc0Channel        = "ADC_CH_ADCIN_11";
+HSADC1.enabledInts        = ["ADC_INT_NUMBER_1"];
+HSADC1.enableInterrupt1   = true;
+HSADC1.enabledSEQs        = ["ADC_SEQ_NUMBER1"];
+HSADC1.seq1Enable         = true;
+HSADC1.seq1SampleWindow   = 200;
+HSADC1.peripheral.$assign = "ADC0";
+
+RTCA.calSec                        = 45;
+RTCA.calMin                        = 32;
+RTCA.calHour                       = 10;
+RTCA.calDOW                        = "1";
+RTCA.calDOM                        = 5;
+RTCA.calMonth                      = "4";
+RTCA.calYear                       = 2021;
+RTCA.offsetCalFreq                 = "512";
+RTCA.peripheral.$assign            = "LFSS";
+RTCA.peripheral.rtcaOutPin.$assign = "PA9";
+
+SYSCTL.LFCLKSource                  = "LFXT";
+SYSCTL.peripheral.$assign           = "SYSCTL";
+SYSCTL.peripheral.lfxInPin.$assign  = "PA3";
+SYSCTL.peripheral.lfxOutPin.$assign = "PA4";
+
+VREF.basicMode                     = "DL_VREF_ENABLE_ENABLE";
+VREF.advClockConfigEnable          = true;
+VREF.peripheral.$assign            = "VREF";
+VREF.peripheral.vrefPosPin.$assign = "PA23";
+VREF.vrefPosPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric0";
+
+const ProjectConfig              = scripting.addModule("/ti/project_config/ProjectConfig", {}, false);
+ProjectConfig.migrationCondition = true;

@@ -1,0 +1,12026 @@
+MSPM0 SDK 示例指南
+==================
+
+1.引言
+------
+
+MSPM0 SDK 随附大量代码示例， 可帮助工程师使用德州仪器 (TI) 的 MSPM0 系列微控制器开发应用。
+
+示例文件夹分为 RTOS 和非 RTOS 子文件夹（目前 仅支持非 RTOS）。这些文件夹包含每个 LaunchPad 的示例，并根据功能进行整理，例如较低层的 Driverlib 示例、较高层的 TI 驱动程序示例，以及 GUI Composer、LIN、IQMath 等中间层的示例。
+
+一些示例支持 `SysConfig <https://www.ti.com/tool/SYSCONFIG>`__\ ， 可简化器件配置并加快软件开发。 请参阅“SDK 快速入门指南”，更详细地了解如何 开始使用 SysConfig 并在下面各节中搜索 SysConfig 字符 |image0| 。
+
+2.MSPM0 SDK 示例
+----------------
+
+2.1 演示
+~~~~~~~~
+
+MSPM0 SDK 包含多个演示，展示了 各种器件的功能。
+
+每个演示都自带文档、完整的源代码，以及对应 其所支持的不同 IDE 和编译器的工程文件， 因而使得演示简单易用。
+
+敬请期待更多示例和功能。
+
+2.1.1 开箱即用体验
+^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+out_of_box
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+MSPM0 LaunchPad 的开箱即用体验
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+是
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2 DriverLib
+~~~~~~~~~~~~~
+
+DriverLib 是一组底层驱动程序，可提供用于 访问 MSPM0 寄存器和完整器件功能的 API。
+
+以下示例使用 Driverlib API 演示了 器件功能，既涵盖了切换 GPIO 输出引脚等简单用例， 也介绍了使用多个外设的更复杂 用例。
+
+每个示例都自带文档、完整的源代码，以及 对应其所支持的不同 IDE 和编译器的工程文件， 因而使得示例简单易用。
+
+2.2.1 AES 加速器 (AES)
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+aes_cbc_256_enc_dec
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+AES256 CBC 加密和解密示例
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image1|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+aes_cfb_256_decrypt
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+AES CFB 256 位解密示例
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image2|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+aes_ofb_128_encrypt
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+AES OFB 128 位加密示例
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image3|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2.2 模数转换器 (ADC)
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+adc12_14bit_resolution
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+在启用硬件均值的情况下使用 DMA 以最大频率执行 ADC12 转换
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image4|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image5|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+adc12_max_freq_dma
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用 DMA 以最大频率执行 ADC12 转换
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image6|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image7|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+adc12_max_freq_dma_8bit
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用 DMA 以最大频率和 8 位分辨率执行 ADC12 转换
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image8|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image9|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+adc12_monitor_supply
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+ADC12 监测电压电源通道
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image10|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image11|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+adc12_simultaneous_trigger_event
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+由计时器事件触发双重 ADC12 转换
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image12|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+adc12_simultaneous_trigger_event_stop
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+在 STOP 模式下由计时器事件触发双重 ADC12 转换
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image13|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+adc12_single_conversion
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+由软件触发简单的 ADC12 单次转换
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image14|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image15|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+adc12_single_conversion_vref_external
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+由软件使用外部基准触发 ADC12 单次转换
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image16|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image17|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+adc12_single_conversion_vref_internal
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+由软件使用内部 VREF 触发 ADC12 单次转换
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image18|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image19|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+adc12_triggered_by_timer_event
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+由计时器事件触发 ADC12 转换
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image20|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image21|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+adc12_triggered_by_timer_event_stop
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+在 STOP 模式下由计时器事件触发 ADC12 转换
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image22|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image23|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+adc12_window_comparator
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+在重复模式下使用窗口比较器功能执行 ADC12 单次转换
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image24|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image25|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2.3 比较器 (COMP)
+^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+comp_analog_filter
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+比较器使用外部输入且具有迟滞和输出模拟滤波器
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image26|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image27|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+comp_dac_to_timer_event
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用 8 位 DAC 的比较器输出触发计时器事件以测量计时
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image28|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image29|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+comp_hs_dac_vref_external
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+比较器处于高速模式并将 8 位 DAC 与外部 VREF 搭配使用
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image30|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image31|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+comp_hs_tima_pwm_fault
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+高速模式下的比较器触发 TIMA 故障
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image32|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+comp_lp_dac_vref_internal
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+比较器处于低速模式并将 8 位 DAC 与内部 VREF 搭配使用
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image33|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2.4 控制器局域网 (CAN)
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+mcan_loopback
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+MCAN 使用环回模式发送和接收消息
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image34|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+mcan_message_rx
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+示例配置用于接收 CAN 和 CAN-FD 帧
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image35|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+mcan_message_rx_tcan114x
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+示例配置用于使用 BOOSTXL-TCAN1145 boosterpack 接收 CAN 和 CAN-FD 帧。
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image36|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+mcan_multi_message_tx
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+CAN-FD 在 GPIO 中断时发送两条具有唯一 ID 的消息
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image37|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+mcan_multi_message_tx_tcan114x
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+CAN-FD 在 GPIO 中断时使用 BOOSTXL-TCAN1145 boosterpack 发送两条具有唯一 ID 的消息。
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image38|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+mcan_single_message_tx
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+CAN-FD 在 GPIO 中断时发送一条消息
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image39|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2.5 循环冗余校验 (CRC)
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+crc_calculate_checksum
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+存储块的 CRC32 校验和计算
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image40|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image41|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+crc_calculate_checksum_dma
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用 DMA 块传输对存储块进行 CRC32 检验和计算
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image42|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image43|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2.6 数模转换器 (DAC)
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+dac12_dma_sampletimegen
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+DAC12 将 DMA 与采样时间发生器搭配使用来生成正弦波
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image44|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+dac12_fifo_sampletimegen
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+DAC12 使用 FIFO 和采样时间发生器发送重复性信号
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image45|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+dac12_fifo_timer_event
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+DAC12 使用 FIFO 发送锯齿状信号并由计时器事件触发
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image46|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+dac12_fixed_voltage_vref_internal
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+DAC12 设置固定电压输出
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image47|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2.7 直接存储器访问 (DMA)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+dma_block_transfer
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+DMA 从闪存主存储器复制到 SRAM 存储器
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image48|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image49|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+dma_fill_data
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用 DMA 对 SRAM 进行 DMA 存储器填充
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image50|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image51|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+dma_table_transfer
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+DMA 将表格模式与 DMA 搭配使用
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image52|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image53|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2.8 事件管理器
+^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+event_input_triggers_output
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+事件配置用于在按下开关时切换 LED
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image54|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image55|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2.9 GPIO
+^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+gpio_input_capture
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+GPIO 通过输入捕获引脚触发中断
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image56|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image57|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+gpio_simultaneous_interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+演示如何同时处理三个 GPIO 中断
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image58|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+gpio_software_poll
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+GPIO 输出根据轮询输入进行设置
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image59|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image60|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+gpio_toggle_output
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+GPIO 翻转输出引脚
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image61|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image62|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+gpio_toggle_output_hiz
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+GPIO 翻转配置为高阻态的输出引脚
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image63|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image64|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2.10 通用放大器 (GPAMP)
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+gpamp_buffer_to_adc
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+GPAmp 配置为缓冲模式并输出到 ADC
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image65|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image66|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+gpamp_general_purpose_rri
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+GPAmp 配置为通用轨到轨模式
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image67|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image68|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2.11 内部集成电路 (I2C)
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+i2c_controller_rw_multibyte_fifo_interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+I2C 控制器使用中断与 FIFO 来读取和写入多个字节
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image69|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image70|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+i2c_controller_rw_multibyte_fifo_poll
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+I2C 控制器使用轮询 FIFO 来读取和写入多个字节
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image71|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image72|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+i2c_controller_target_dynamic_switching
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+I2C 在控制器模式与目标模式之间动态转换
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image73|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image74|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+i2c_multicontroller_arbitration
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+I2C 控制器检测到仲裁错误
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image75|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image76|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+i2c_target_rw_multibyte_fifo_interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+I2C 目标使用中断来读取和写入多个字节
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image77|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image78|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+i2c_target_rw_multibyte_fifo_interrupts_stop
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+I2C 目标在 STOP 模式下使用中断来读取和写入多个字节
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image79|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image80|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+i2c_target_rw_multibyte_fifo_poll
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+I2C 目标使用轮询 FIFO 来读取和写入多个字节
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image81|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image82|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2.12 数学加速器 (MATHACL)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+mathacl_mpy_div_op
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用定点的 MATHACL 乘法和除法
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image83|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+mathacl_trig_op
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+三角函数的 MATHACL 实现
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image84|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2.13 非易失性存储器 (FLASHCTL)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+flashctl_blank_verify
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+“闪存空白验证”命令的实现
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image85|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image86|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+flashctl_dynamic_memory_protection
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+闪存配置为具有动态保护
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image87|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image88|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+flashctl_ecc_error_injection
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+闪存 ECC 测试及 SEC 与 DED 错误检测
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image89|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+flashctl_multiple_size_read_verify
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+针对多种数据大小且带有和不带 ECC 的闪存读取验证命令实现
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image90|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image91|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+flashctl_multiple_size_write
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+不同大小数据的闪存写入
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image92|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image93|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+flashctl_nonmain_memory_write
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+非主闪存存储器的读取和写入
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image94|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image95|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+flashctl_program_with_ecc
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+具有 ECC 的闪存编程
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image96|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2.14 运算放大器 (OPA)
+^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+opa_burnout_current_source_to_adc
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+缓冲模式下的 OPA 向 ADC 提供烧毁电流源
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image97|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image98|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+opa_dac8_output_buffer
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+OPA 处于输出缓冲模式并使用 8 位 DAC
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image99|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image100|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+opa_general_purpose_rri
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+OPA 处于通用模式并采用轨到轨配置
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image101|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image102|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+opa_inverting_pga_with_dac
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+OPA 采用同相 PGA 配置并使用 DAC12 作为偏置
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image103|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+opa_non_inverting_pga
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+OPA 采用同相 PGA 配置
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image104|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image105|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+opa_signal_chain_to_adc
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+两个 OPA 配置为 TIA 和 PGA 并连接到 ADC
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image106|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2.15 其他
+^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+cinit_bypass
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+旁路 CINIT 跳过变量初始化
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image107|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image108|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+empty
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用 DriverLib 的空白启动工程
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image109|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image110|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+empty_driverlib_src
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用 DriverLib 的空白启动工程
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image111|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image112|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+empty_library
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用 DriverLib 的空白启动库工程
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+是
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+是
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+nvic_interrupt_disable
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+NVIC 用于演示禁用中断的最佳方法
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image113|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image114|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+nvic_interrupt_grouping
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+NVIC 配置和中断分组用法
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image115|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image116|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+sram_parity
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+初始化和使用奇偶校验 SRAM
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image117|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+systick_periodic_timer
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SysTick 生成周期性中断
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image118|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image119|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2.16 实时时钟 (RTC)
+^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+rtc_calendar_alarm_standby
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+RTC 设置日历报警并在报警触发时切换 GPIO
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image120|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+rtc_offset_calibration_lfxt
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+晶体的 RTC 偏移校正
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image121|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+rtc_periodic_alarm_lfosc_standby
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用 LFOSC 在 STANDBY 状态下定期报警的 RTC 实现
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image122|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+rtc_periodic_alarm_lfxt_standby
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用 LFXT 在 STANDBY 状态下定期报警的 RTC 实现
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image123|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2.17 串行外设接口 (SPI)
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+spi_controller_command_data_control
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+采用命令数据 (CD) 控制的 SPI 控制器传输
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image124|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image125|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+spi_controller_echo_interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SPI 控制器使用 Motorola 格式传输数据
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image126|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image127|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+spi_controller_internal_loopback_poll
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SPI 控制器具有内部环回并使用轮询
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image128|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image129|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+spi_controller_multibyte_fifo_dma_interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SPI 控制器使用 FIFO 和 DMA 来读取和写入多个字节
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image130|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image131|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+spi_controller_multibyte_fifo_poll
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SPI 控制器使用轮询 FIFO 来读取和写入多个字节
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image132|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image133|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+spi_controller_register_format
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SPI 控制器使用寄存器格式发送和读取数据
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image134|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image135|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+spi_controller_repeated_multibyte_fifo_dma_interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SPI 控制器使用 FIFO 和 DMA 每秒读取和写入多个字节
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image136|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image137|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+spi_peripheral_echo_interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SPI 外设使用 Motorola 格式回传数据
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image138|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image139|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+spi_peripheral_multibyte_fifo_dma_interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SPI 外设使用 FIFO 和 DMA 来读取和写入多个字节
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image140|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image141|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+spi_peripheral_multibyte_fifo_poll
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SPI 外设使用轮询 FIFO 来读取和写入多个字节
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image142|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image143|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+spi_peripheral_register_format
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SPI 外设使用寄存器格式发送和读取数据
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image144|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image145|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+spi_peripheral_repeated_multibyte_fifo_dma_interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SPI 外设使用 FIFO 和 DMA 来读取和写入多个字节
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image146|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image147|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2.18 系统控制器 (SYSCTL)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+sysctl_frequency_clock_counter
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+通过频率时钟计数器 (FCC) 监视 SYSOSC
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image148|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+sysctl_hfxt_run
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+将外部 HFXT 设置为 HSCLK 和 MCLK 的源 (48MHz)
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image149|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+sysctl_lfxt_standby
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+将 LFXT 设置为 LFCLK 的源 (32kHz) 并设置 STANDBY0 下的电源策略
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image150|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+sysctl_mclk_syspll
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+将 MCLK 设置为从 SYSPLL 运行 (80MHz)
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image151|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+sysctl_power_policy_sleep_to_standby
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SYSCTL 在 SLEEP 模式和 STANDBY 模式之间切换
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image152|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image153|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+sysctl_power_policy_sleep_to_stop
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+SYSCTL 在 SLEEP 模式和 STOP 模式之间切换
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image154|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image155|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+sysctl_shutdown
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+显示 SHUTDOWN、STOP、STANDBY 和 SLEEP 后的正确唤醒机制
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image156|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image157|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2.19 计时器 - 高级 (TIMA)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+tima_timer_mode_periodic_repeat_count
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TimerA 处于定期模式并使用重复计数功能
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image158|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+tima_timer_mode_pwm_dead_band
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TimerA 输出具有死区插入的 PWM 信号
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image159|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+tima_trigger_fail_mechanism
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TimerA 演示故障检测
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image160|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2.20 计时器 - 通用 (TIMG)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timg_qei_mode
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+TimerG 使用 QEI 来对正交编码器的相对位置输出进行解码
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image161|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2.21 计时器 - 通用 (TIMx)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timx_timer_mode_capture_duty_and_period
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+计时器计算周期和占空比
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image162|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image163|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timx_timer_mode_capture_edge_capture
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用计时器捕获模式进行计时器边沿时间检测
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image164|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image165|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timx_timer_mode_compare_edge_count
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用比较模式的计时器边沿计数功能
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image166|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image167|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timx_timer_mode_one_shot_standby
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+器件处于 STANDBY 模式时，计时器处于单次触发模式
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image168|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image169|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timx_timer_mode_periodic_sleep
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+器件处于 SLEEP 模式时，计时器处于定期模式
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image170|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image171|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timx_timer_mode_periodic_standby
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+器件处于 STANDBY 模式时，计时器处于定期模式
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image172|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image173|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timx_timer_mode_periodic_stop
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+器件处于 STOP 模式时，计时器处于定期模式
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image174|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image175|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timx_timer_mode_pwm_center_stop
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+器件处于 STOP 模式时，计时器处于 PWM 中心对齐模式
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image176|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image177|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timx_timer_mode_pwm_cross_trigger_stop_restore
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+器件退出 STOP 模式后，计时器处于 PWM 模式并在软件中保持
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image178|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timx_timer_mode_pwm_edge_sleep
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+器件处于 SLEEP 模式时，计时器处于 PWM 边沿对齐模式
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image179|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image180|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+timx_timer_mode_pwm_edge_sleep_shadow
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+计时器使用影子加载功能来更新 PWM 占空比
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image181|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image182|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2.22 真随机数发生器 (TRNG)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+trng_sample
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+进行 TRNG 采样，以使用随机数据填充缓冲区
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image183|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+trng_sample_stop_restore
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+在器件退出 STOP 模式后，TRNG 对随机数据进行采样并在 SW 中保持
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image184|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2.23 通用异步收发器 (UART)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_echo_interrupts_standby
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+当器件处于 STANDBY 模式时 UART RX/TX 使用中断来回显
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image185|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image186|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_extend_manchester_echo
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART 扩展模块使用曼彻斯特编码来回显接收的数据包
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image187|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image188|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_extend_manchester_send_packet
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART 扩展模块使用曼彻斯特编码和解码来发送数据包
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image189|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image190|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_external_loopback_interrupt
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用中断的 UART RX/TX 外部环回
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image191|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image192|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_internal_loopback_standby_restore
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+器件退出 STANDBY 模式后 UART 内部环回并在软件中保持
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image193|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_rw_multibyte_fifo_poll
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART RX/TX（使用具有轮询功能的 FIFO）
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image194|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image195|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_rx_hw_flow_control
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用硬件流控制的 UART RX
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image196|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image197|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_rx_multibyte_fifo_dma_interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用 DMA 触发器的 UART RX
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image198|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image199|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_tx_console_multibyte_repeated_fifo_dma
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART TX 到控制台（使用连续 DMA 触发器）
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image200|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image201|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_tx_hw_flow_control
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用硬件流控制的 UART TX
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image202|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image203|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_tx_multibyte_fifo_dma_interrupts
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用 DMA 触发器的 UART TX
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image204|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image205|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.2.24 窗口看门狗计时器 (WWDT)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+wwdt_interval_timer_lfosc_standby
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+器件处于 STANDBY 模式时，WWDT 使用 LFOSC 并处于间隔计时器模式
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image206|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image207|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+wwdt_interval_timer_lfxt_standby
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+器件处于 STANDBY 模式时，WWDT 使用 LFXT 并处于间隔计时器模式
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image208|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+wwdt_window_mode_periodic_reset
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+支持定期复位的 WWDT 窗口看门狗模式
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image209|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image210|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.3 TI 驱动程序
+~~~~~~~~~~~~~~~
+
+“TI 驱动程序”提供了一系列稳健而直观的 功能 API，使开发人员能够以可移植、功能丰富的方式访问外设。
+
+MSPM0 的 TI 驱动程序正在开发当中，但下面的示例简要介绍了 预期的功能。
+
+2.3.1 FreeRTOS
+^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_callback/freertos
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用回调的 UART 简单回显
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+是
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_echo/freertos
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART 简单回显
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+是
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+是
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.3.2 No RTOS
+^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+uart_echo/nortos
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+UART 简单回显
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+是
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+watchdog_interval
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+看门狗驱动程序处于间隔模式
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+是
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+watchdog_reset
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+看门狗驱动程序处于复位模式
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+是
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.4 启动映像管理器 (BIM)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+MSPM0 SDK 包括启动映像管理器实现， 展示了用户如何验证器件中所加载映像的 完整性和真实性。
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+bim_sample_image
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+对 BIM 的 GPIO 翻转映像进行采样
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image211|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+boot_application
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用 MCUBoot 的启动映像管理器
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image212|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.5 引导加载程序 (BSL)
+~~~~~~~~~~~~~~~~~~~~~~
+
+引导加载程序 (BSL) 提供了一种 通过标准 UART 或 I2C 串行接口对器件存储器进行烧录和/或验证的 方法。此外，BSL 还支持基于 MAIN 闪存的通讯插件，以启用 其他接口和功能。
+
+MSPM0 SDK 包含多个示例，展示了如何在 MAIN 闪存中实现各种通讯插件以及其他 BSL 功能。
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+bsl_host_mcu_i2c
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+显示 BSL I2C 闪存接口的实现
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+是
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+bsl_host_mcu_uart
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+显示 BSL uart 闪存接口的实现
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+是
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+bsl_i2c_flash_interface
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+显示 BSL I2C 闪存接口的实现
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image213|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image214|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+bsl_software_invoke
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+在应用程序请求时跳转到 ROM 引导加载程序
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image215|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image216|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+bsl_uart_flash_interface
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+显示 BSL UART 闪存接口的实现
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image217|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image218|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+secondary_bsl
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+在 MAIN 闪存实现次级引导加载程序来覆盖 ROM BSL
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image219|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image220|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.6 指导手册
+~~~~~~~~~~~~
+
+“MSPM0 SDK 指导手册”包含多个实例，展示了使用多个外设实现更复杂的功能。
+
+这些示例使用多个 DriverLib API 并包括完整的源代码和文档以及详细的使用说明。
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+adc_dma_ping_pong
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+将 ADC 数据捕获到 2 个（乒乓）缓冲器
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image221|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+adc_to_spi_controller
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+通过 SPI 从连接的目标器件读取 ADC 数据
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image222|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image223|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+adc_to_spi_peripheral
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+对 ADC 进行采样并响应由控制器发送的 SPI 命令
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image224|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image225|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+adc_to_uart
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+对 ADC 值进行采样并通过 UART 发送
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image226|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image227|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+programmable_gain_amplifier_1
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用可编程增益放大器来动态调整增益
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image228|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+programmable_gain_amplifier_2
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用可编程增益放大器来动态调整增益并使用集成式 ADC 来捕获值
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image229|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+pwm_led_driver
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用计时器产生脉动 LED 效果
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image230|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image231|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+temp_sense_thermistor
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用集成式运算放大器和 ADC 对 LaunchPad 热敏电阻进行采样
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image232|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+transimpedance_amplifier
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+配置跨阻放大器拓扑中的运算放大器
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image233|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7 EEPROM
+~~~~~~~~~~
+
+MSPM0 通过其内部闪存支持模拟 EEPROM。 与使用外部串行 EEPROM 相比，使用内部闪存的模拟 EEPROM 可节省引脚用量和成本。
+
+MSPM0 SDK 包含一个库和多个示例，展示了其所支持的解决方案 实现方式。
+
+2.7.1 A 型
+^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+eeprom_emulation_type_a
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+演示 A 型 EEPROM 仿真以存储非易失性数据
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+是
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+是
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+eeprom_emulation_type_a_test
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+演示 A 型 EEPROM 仿真的更详细用例，以存储非易失性数据块
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+是
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+是
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.7.2 B 型
+^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+eeprom_emulation_type_b
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+演示 B 型 EEPROM 仿真以存储用户数据
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+是
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+是
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+eeprom_emulation_type_b_test
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+演示 B 型 EEPROM 仿真的更详细用例，以存储用户数据
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+是
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+是
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.8 GUI Composer
+~~~~~~~~~~~~~~~~
+
+GUI Composer 是一款基于浏览器的工具，用于开发 PC 端 基于 HTML 的 GUI，从而补充嵌入式工程或应用程序。
+
+MSPM0 SDK 包含一个库和多个示例，展示了其所支持的协议 实现方式。
+
+2.8.1 流媒体协议
+^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+gc_simple_json
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+演示使用 JSON 格式字符串进行 GUI Composer 通信的基本用例
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image234|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image235|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+gc_simple_messagepack
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+演示使用 MessagePack 协议进行 GUI Composer 通信的基本用例
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image236|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image237|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.9 IQMath
+~~~~~~~~~~
+
+IQMath 是一组高度优化的 高精度定点数运算函数库。
+
+MSPM0 SDK 包括 IQMath 的使用示例，使用简单的 C 运行时系统 (RTS) 函数，并利用 MathAcl 硬件加速器。
+
+2.9.1 编译器 RTS 库
+^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+iqmath_rts_ops_test
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+利用 IQMath 的 RTS 实现来实施各种定点运算
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image238|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image239|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.9.2 MathACL
+^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+iqmath_mathacl_ops_test
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+利用 IQMath 的 MathACL 实现来实施各种定点运算
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image240|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.10 RTOS 内核
+~~~~~~~~~~~~~~
+
+MSPM0 SDK 包含一组用于测试 内核功能的示例。
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+blink_led
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+使用两个任务的简单 FreeRTOS LED 闪烁演示
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image241|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image242|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+posix_demo
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+简单的 Posix FreeRTOS 闪烁 LED 演示
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image243|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image244|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.11 LIN
+~~~~~~~~
+
+本地互连网络 (LIN) 是汽车中 常用的一种易于实现的低成本多点通信总线。
+
+MSPM0 SDK 包含易于使用的指挥官和 响应者示例。
+
+2.11.1 指挥官
+^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+lin_commander
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+演示 LIN 指挥官使用 UART 发送和接收 LIN 2.0 数据包的基本实现
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image245|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image246|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.11.2 响应者
+^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+lin_responder
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+演示 LIN 响应者使用 UART 发送和接收 LIN 2.0 数据包的基本实现
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image247|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image248|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.12 有刷电机控制
+~~~~~~~~~~~~~~~~~
+
+MSPM0 SDK 包含一个示例，用于 通过 DRV8706-Q1 EVM 评估有刷电机控制库。该固件有专用的 GUI 上位机，旨在帮助用户快速进行测试和评估。
+
+更多示例和功能即将推出，敬请期待。
+
+2.12.1 DRV8706-Q1
+^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+drv8706s-q1evm-gui-firmware
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+适用于 LP_MSPM0L1306 和 DRV8706S-Q1 EVM GUI 的固件
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image249|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.13 步进电机控制
+~~~~~~~~~~~~~~~~~
+
+MSPM0 SDK 包含多个示例，用于 通过 DRV8411A 和 DRV8889-q1 EVM 评估步进电机控制库。这些固件 有专用的 GUI 上位机，旨在帮助用户快速进行测试和评估。
+
+更多示例和功能即将推出，敬请期待。
+
+2.13.1 DRV8411A
+^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+drv8411aevm-gui-firmware
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+适用于 LP_MSPM0L1306 和 DRV8411AEVM GUI 的固件
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image250|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.13.2 DRV8889-Q1
+^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+drv8889-q1evm-gui-firmware
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+适用于 LP_MSPM0L1306 和 DRV8889-Q1 EVM GUI 的固件
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image251|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.14 SMBus
+~~~~~~~~~~
+
+系统管理总线 (SMBus) 是一种适用于轻量级通信的 简单单端双线总线。
+
+MSPM0 SDK 包含适用于控制器和 目标的易用示例。
+
+2.14.1 控制器
+^^^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+smbus_controller
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+演示 SMBus 控制器使用 I2C 来测试所有 SMBus 2.0 协议的基本实现
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image252|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+2.14.2 目标
+^^^^^^^^^^^
+
+.. raw:: html
+
+   <table class="docutils align-default">
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+工程名称
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th rowspan="2">
+
+说明
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th colspan="2">
+
+.. raw:: html
+
+   <p style="text-align: center;">
+
+EVM
+
+.. raw:: html
+
+   </p>
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0G3507
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   <th>
+
+LP_MSPM0L1306
+
+.. raw:: html
+
+   </th>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   <tr>
+
+.. raw:: html
+
+   <td>
+
+smbus_target
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td>
+
+演示 SMBus 目标使用 I2C 来测试所有 SMBus 2.0 协议的基本实现
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+否
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   <td align="center">
+
+|image253|
+
+.. raw:: html
+
+   </td>
+
+.. raw:: html
+
+   </tr>
+
+.. raw:: html
+
+   </table>
+
+.. |image0| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image1| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image2| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image3| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image4| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image5| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image6| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image7| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image8| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image9| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image10| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image11| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image12| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image13| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image14| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image15| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image16| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image17| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image18| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image19| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image20| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image21| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image22| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image23| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image24| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image25| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image26| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image27| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image28| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image29| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image30| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image31| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image32| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image33| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image34| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image35| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image36| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image37| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image38| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image39| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image40| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image41| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image42| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image43| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image44| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image45| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image46| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image47| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image48| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image49| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image50| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image51| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image52| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image53| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image54| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image55| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image56| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image57| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image58| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image59| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image60| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image61| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image62| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image63| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image64| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image65| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image66| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image67| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image68| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image69| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image70| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image71| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image72| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image73| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image74| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image75| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image76| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image77| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image78| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image79| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image80| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image81| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image82| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image83| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image84| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image85| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image86| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image87| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image88| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image89| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image90| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image91| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image92| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image93| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image94| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image95| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image96| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image97| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image98| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image99| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image100| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image101| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image102| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image103| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image104| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image105| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image106| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image107| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image108| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image109| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image110| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image111| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image112| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image113| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image114| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image115| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image116| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image117| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image118| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image119| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image120| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image121| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image122| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image123| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image124| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image125| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image126| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image127| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image128| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image129| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image130| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image131| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image132| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image133| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image134| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image135| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image136| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image137| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image138| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image139| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image140| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image141| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image142| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image143| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image144| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image145| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image146| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image147| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image148| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image149| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image150| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image151| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image152| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image153| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image154| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image155| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image156| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image157| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image158| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image159| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image160| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image161| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image162| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image163| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image164| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image165| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image166| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image167| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image168| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image169| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image170| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image171| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image172| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image173| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image174| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image175| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image176| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image177| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image178| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image179| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image180| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image181| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image182| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image183| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image184| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image185| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image186| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image187| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image188| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image189| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image190| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image191| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image192| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image193| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image194| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image195| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image196| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image197| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image198| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image199| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image200| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image201| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image202| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image203| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image204| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image205| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image206| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image207| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image208| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image209| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image210| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image211| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image212| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image213| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image214| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image215| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image216| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image217| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image218| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image219| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image220| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image221| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image222| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image223| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image224| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image225| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image226| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image227| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image228| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image229| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image230| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image231| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image232| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image233| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image234| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image235| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image236| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image237| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image238| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image239| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image240| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image241| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image242| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image243| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image244| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image245| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image246| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image247| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image248| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image249| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image250| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image251| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image252| image:: ./images/examples_guide/ex_sysconfig.png
+.. |image253| image:: ./images/examples_guide/ex_sysconfig.png

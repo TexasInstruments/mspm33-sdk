@@ -1,0 +1,61 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ */
+//@cliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)" --part "Default"
+//@v2CliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)"
+// @cliArgs --board /ti/boards/LP_MSPM33C321A --rtos nortos
+
+/**
+ * Import the modules used in this configuration.
+ */
+const GPIO   = scripting.addModule("/ti/driverlib/GPIO", {}, false);
+const GPIO1  = GPIO.addInstance();
+const QSPI   = scripting.addModule("/ti/driverlib/QSPI", {}, false);
+const QSPI1  = QSPI.addInstance();
+const SYSCTL = scripting.addModule("/ti/driverlib/SYSCTL");
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+const divider3       = system.clockTree["EXTDIVMCLK"];
+divider3.divideValue = 1;
+
+const multiplier2         = system.clockTree["PLL_QDIV"];
+multiplier2.multiplyValue = 10;
+
+GPIO1.$name                               = "GPIO_LEDS";
+GPIO1.associatedPins.create(2);
+GPIO1.associatedPins[0].$name             = "PASS_LED";
+GPIO1.associatedPins[0].launchPadShortcut = "LED2GreenEn";
+GPIO1.associatedPins[0].pin.$assign       = "PC27";
+GPIO1.associatedPins[1].$name             = "FAIL_LED";
+GPIO1.associatedPins[1].launchPadShortcut = "LED2RedEn";
+GPIO1.associatedPins[1].pin.$assign       = "PC26";
+
+const Board                       = scripting.addModule("/ti/driverlib/Board", {}, false);
+Board.peripheral.$assign          = "DEBUGSS";
+Board.peripheral.swclkPin.$assign = "PA20";
+Board.peripheral.swdioPin.$assign = "PA19";
+
+QSPI1.$name                      = "QSPI_0";
+QSPI1.direction                  = "PICO_POCI_IO2_IO3";
+QSPI1.targetBitRate              = 40000000;
+QSPI1.sclkPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric0";
+QSPI1.picoPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric1";
+QSPI1.pociPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric2";
+QSPI1.cs0PinConfig.$name         = "ti_driverlib_gpio_GPIOPinGeneric3";
+QSPI1.peripheral.$assign         = "QSPI";
+QSPI1.peripheral.sclkPin.$assign = "PB16";
+QSPI1.peripheral.picoPin.$assign = "PA12";
+QSPI1.peripheral.pociPin.$assign = "PA14";
+QSPI1.peripheral.io2Pin.$assign  = "PA13";
+QSPI1.peripheral.io3Pin.$assign  = "PB15";
+QSPI1.peripheral.cs0Pin.$assign  = "PC0";
+QSPI1.io2PinConfig.$name         = "ti_driverlib_gpio_GPIOPinGeneric4";
+QSPI1.io3PinConfig.$name         = "ti_driverlib_gpio_GPIOPinGeneric5";
+
+SYSCTL.clockTreeEn = true;
+
+const ProjectConfig              = scripting.addModule("/ti/project_config/ProjectConfig", {}, false);
+ProjectConfig.migrationCondition = true;

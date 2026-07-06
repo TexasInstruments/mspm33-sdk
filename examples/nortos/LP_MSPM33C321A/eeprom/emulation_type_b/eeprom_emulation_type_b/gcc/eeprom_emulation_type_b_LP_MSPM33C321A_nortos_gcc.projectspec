@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectSpec>
+    <applicability>
+        <when>
+            <context
+                deviceFamily="ARM"
+                deviceId="MSPM33C321A"
+            />
+        </when>
+    </applicability>
+
+    <project
+        title="eeprom_emulation_type_b"
+        name="eeprom_emulation_type_b_LP_MSPM33C321A_nortos_gcc"
+        configurations="Debug"
+        toolChain="GNU"
+        connection="TIXDS110_Connection.xml"
+        device="MSPM33C321A"
+        ignoreDefaultDeviceSettings="true"
+        ignoreDefaultCCSSettings="true"
+        products="MSPM33-SDK"
+        compilerBuildOptions="
+            -I${PROJECT_ROOT}
+            -D__MSPM33C321A__
+            -O2
+            -mfloat-abi=hard
+            -mfpu=fpv5-sp-d16
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/third_party/CMSIS/Core/Include
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source
+            -mcpu=cortex-m33
+            -mthumb
+            -std=c99
+            -std=c++11
+            -ffunction-sections
+            -fdata-sections
+            -g
+            -Wall
+            -I${CG_TOOL_ROOT}/arm-none-eabi/include
+        "
+        linkerBuildOptions="
+            -L${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/ti/driverlib/lib/gcc/m33/mspm33c321x
+            -nostartfiles
+            -mfloat-abi=hard
+            -mfpu=fpv5-sp-d16
+            -l:driverlib.a
+            -L${COM_TI_MSPM33_SDK_INSTALL_DIR}/source
+            -L${PROJECT_ROOT}
+            -mcpu=cortex-m33
+            -mthumb
+            -static
+            -Wl,--gc-sections
+            -lgcc
+            -lc
+            -lm
+            --specs=nosys.specs
+        "
+        sourceLookupPath="${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/ti/driverlib"
+        description="Demonstrates Type B EEPROM emulation to store user data">
+        <property name="buildProfile" value="release"/>
+        <property name="isHybrid" value="true"/>
+        <file path="../main.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../ti/eeprom/emulation_type_a/eeprom_emulation_type_a.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="ti/eeprom/emulation_type_a">
+        </file>
+        <file path="../ti/eeprom/emulation_type_b/eeprom_emulation_type_b.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="ti/eeprom/emulation_type_b">
+        </file>
+        <file path="../ti/eeprom/emulation_type_a/eeprom_emulation_type_a.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="ti/eeprom/emulation_type_a">
+        </file>
+        <file path="../ti/eeprom/emulation_type_b/eeprom_emulation_type_b.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="ti/eeprom/emulation_type_b">
+        </file>
+        <file path="../ti_msp_dl_config.h" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../ti_msp_dl_config.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../README.md" openOnCreation="true" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../README.html" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../gcc/mspm33c321a.lds" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../gcc/startup_mspm33c321x_gcc.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../gcc/system_mspm33c321x.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="gcc">
+        </file>
+    </project>
+</projectSpec>

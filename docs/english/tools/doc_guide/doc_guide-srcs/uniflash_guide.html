@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UniFlash Guide for MSPM33 &mdash; MSPM33 Tools Guide 1.04.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="debug_program_bslhost.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="debug_program_uniflash.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> MSPM33 Tools Guide
+          </a>
+              <div class="version">
+                1.04.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ides.html">IDEs and Compilers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="codegen_easeofuse.html">Code Generation and Ease-of-Use</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="debug_program.html">Debugging and Programming Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="debug_program.html#xds-110">XDS-110</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="debug_program.html#uniflash">UniFlash</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="debug_program.html#id2">Documentation</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">UniFlash Guide for MSPM33</a></li>
+<li class="toctree-l4"><a class="reference external" href="https://software-dl.ti.com/ccs/esd/uniflash/docs/v5_0/quick_start_guide/uniflash_quick_start_guide.html">UniFlash generic Quick Start Guide (external)</a></li>
+<li class="toctree-l4"><a class="reference external" href="https://software-dl.ti.com/ccs/esd/uniflash/docs/uniflash.html">UniFlash documentation (external)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="debug_program.html#bsl-host">BSL Host</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MSPM33 Tools Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="debug_program.html">Debugging and Programming Tools</a> &raquo;</li>
+          <li><a href="debug_program_uniflash.html">&lt;no title&gt;</a> &raquo;</li>
+      <li>UniFlash Guide for MSPM33</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="uniflash-guide-for-mspm33">
+<h1>UniFlash Guide for MSPM33<a class="headerlink" href="#uniflash-guide-for-mspm33" title="Permalink to this heading">¶</a></h1>
+<section id="introduction">
+<h2>1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h2>
+<p>This guide describes the installation of the UniFlash tool and general practice of using it with TI’s MSPM33 devices.</p>
+<p>This document is not intended to explain the use of UniFlash in detail. Please refer to the <a class="reference external" href="https://software-dl.ti.com/ccs/esd/uniflash/docs/v7_1/uniflash_quick_start_guide.html">UniFlash Quick Start Guide</a> for more information.</p>
+</section>
+<section id="prerequisites">
+<h2>2. Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">¶</a></h2>
+<p>The user is expected to have downloaded the following:</p>
+<ul class="simple">
+<li><p>UniFlash 9.3.0 or newer (Download latest version from <a class="reference external" href="https://www.ti.com/tool/UNIFLASH">ti.com</a> or access on the cloud at <a class="reference external" href="https://dev.ti.com/uniflash">dev.ti.com</a>)</p></li>
+<li><p>Compiled application image(s)</p>
+<ul>
+<li><p>Can be in multiple file formats for debugger connections including .out, .bin, .hex, .txt</p></li>
+<li><p>Use your preferred IDE and compiler to build your application</p></li>
+</ul>
+</li>
+</ul>
+<p>UniFlash can connect and interact with the device either with a debugger connected via SWD to the device.</p>
+</section>
+<section id="using-uniflash-with-mspm33-via-the-debugger">
+<h2>3. Using UniFlash with MSPM33 via the Debugger<a class="headerlink" href="#using-uniflash-with-mspm33-via-the-debugger" title="Permalink to this heading">¶</a></h2>
+<p>The debugging interface such as XDS110 can be used by UniFlash to program the device. One can select the device (the on-chip version as shown below) and specific interface that will be used to start. Alternatively, UniFlash may auto-detect the MSPM33 LaunchPad if connected. The LaunchPad includes the Texas Instruments XDS110 USB Debug Probe.</p>
+<p><img alt="image0" src="../_images/uniflash_guide_jtag_start.png" /></p>
+<section id="loading-an-image">
+<h3>3.1 Loading an Image.<a class="headerlink" href="#loading-an-image" title="Permalink to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Compile an application that is in a compatible format, such as a .out. All possible file types are described in the <a class="reference external" href="https://software-dl.ti.com/ccs/esd/uniflash/docs/v7_1/uniflash_quick_start_guide.html">UniFlash Quick Start Guide</a>.</p></li>
+<li><p>Upload the flash image file as shown. <img alt="image1" src="../_images/uniflash_guide_use_2.png" /></p></li>
+<li><p>Adjust erase settings or other information as necessary. If performing a Factory Reset, please take special consideration as <strong>NONMAIN will be erased in the process.</strong> It is then the user’s responsibility to re-program non-main. It is recommended to verify this is correct behavior before proceeding with a Factory Reset.</p></li>
+</ol>
+<p>Additionally, if using the factory reset, a password can be optionally provided. For more information, please refer to the corresponding device TRM.</p>
+<ol class="arabic" start="4">
+<li><p>Click <strong>Load Image</strong>. The image should be loaded correctly.</p>
+<p><img alt="image2" src="../_images/uniflash_guide_use_3.png" /></p>
+</li>
+</ol>
+</section>
+<section id="reading-from-memory">
+<h3>3.2 Reading From Memory<a class="headerlink" href="#reading-from-memory" title="Permalink to this heading">¶</a></h3>
+<p>Using the Memory tab, UniFlash can also inspect the flash memory of the device simply by selecting <strong>Read Target Device</strong>.</p>
+<p><img alt="image3" src="../_images/uniflash_guide_jtag_read.png" /></p>
+</section>
+</section>
+<section id="known-issues-and-frequently-asked-questions-faq">
+<h2>5. Known Issues and Frequently Asked Questions (FAQ)<a class="headerlink" href="#known-issues-and-frequently-asked-questions-faq" title="Permalink to this heading">¶</a></h2>
+<p>Please refer to the <a class="reference external" href="../../../../../known_issues_FAQ.html">Known Issues and FAQ</a> for more information</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="debug_program_uniflash.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="debug_program_bslhost.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">1995-2023, Texas Instruments Incorporated. All rights reserved</a>, Texas Instruments Incorporated. All rights reserved. <br/>
+      <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

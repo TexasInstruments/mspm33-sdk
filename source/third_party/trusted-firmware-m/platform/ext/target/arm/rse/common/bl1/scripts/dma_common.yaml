@@ -1,0 +1,202 @@
+#-------------------------------------------------------------------------------
+# SPDX-License-Identifier: BSD-3-Clause
+# SPDX-FileCopyrightText: Copyright The TrustedFirmware-M Contributors
+#-------------------------------------------------------------------------------
+
+#This file contains:
+# - DMA command header word bit map
+# - Register offsets within register frame
+# - DMA Channel config register bitfield masks and offsets
+
+cmd_header_bit_offsets:
+    REGCLEAR: 0
+    Reserved: 1
+    INTREN: 2
+    CTRL: 3
+    SRCADDR: 4
+    SRCADDRHI: 5
+    DESADDR: 6
+    DESADDRHI: 7
+    XSIZE: 8
+    XSIZEHI: 9
+    SRCTRANSCFG: 10
+    DESTRANSCFG: 11
+    XADDRINC: 12
+    YADDRSTRIDE: 13
+    FILLVAL: 14
+    YSIZE: 15
+    TMPLTCFG: 16
+    SRCTMPLT: 17
+    DESTMPLT: 18
+    SRCTRIGINCFG: 19
+    DESTRIGINCFG: 20
+    TRIGOUTCFG: 21
+    GPOEN0: 22
+    Reserved: 23
+    GPOVAL0: 24
+    Reserved: 25
+    STREAMINTCFG: 26
+    Reserved: 27
+    LINKATTR: 28
+    AUTOCFG: 29
+    LINKADDR: 30
+    LINKADDRHI: 31
+
+reg_offset:
+    dma_channel:
+        cmd: 0x0
+        ctrl: 0xC
+        srcaddr: 0x10
+        srcaddrhi: 0x14
+        desaddr: 0x18
+        desaddrhi: 0x1C
+        xsize: 0x20
+        xsizehi: 0x24
+        srctranscfg: 0x28
+        destranscfg: 0x2C
+        xaddrinc: 0x30
+        yaddrstride: 0x34
+        fillval: 0x38
+        ysize: 0x03C
+        tmpltcfg: 0x40
+        srctmplt: 0x44
+        destmplt: 0x48
+        srctrigincfg: 0x4C
+        destrigincfg: 0x50
+        trigoutcfg: 0x54
+        gpoen0: 0x58
+        gpoval0: 0x60
+        streamintcfg: 0x68
+        linkattr: 0x70
+        autocfg: 0x74
+        linkaddr: 0x78
+        linkaddrhi: 0x7C
+    system_control:
+        reset_syndrome: 0x100
+        initsvtor0: 0x110
+        cpuwait: 0x120
+        dma_boot_en: 0x254
+        lcm_dcu_force_disable: 0x25C
+    sam:
+        sammem0: 0x14
+    integrity_checker:
+        icda: 0x18
+        icdl: 0x1C
+        iceva: 0x20
+        icc: 0x4
+    dcsu:
+        soc_unique_id0: 0x0
+        soc_unique_id1: 0x4
+        soc_unique_id2: 0x8
+        soc_family_id0: 0xC
+        soc_serial_number0: 0x10
+        soc_serial_number1: 0x14
+        die_id: 0x18
+        reset_syndrome: 0x30
+        boot_info: 0xF4
+        device_status: 0xF0
+    kmu:
+        slot7: 0x210
+    tram:
+        trkeylb0: 0x08
+        trc: 0x4
+    ilcu:
+        trig_mux_ctrl: 0x4
+
+ch_reg_field_desc:
+    CTRL:
+        USEGPO:
+            MASK: 0x1
+            OFFSET: 28
+        USEDESTRIGIN:
+            MASK: 0x1
+            OFFSET: 26
+        USESRCTRIGIN:
+            MASK: 0x1
+            OFFSET: 25
+        DONETYPE:
+            MASK: 0x3
+            OFFSET: 21
+        XTYPE:
+            MASK: 0x3
+            OFFSET: 0x9
+            DECODE:
+                disable: 0x0
+                continue: 0x1
+                wrap: 0x2
+                fill: 0x3
+        TRANSIZE:
+            MASK: 0x3
+            OFFSET: 0x0
+            DECODE:
+                byte: 0x0
+                halfword: 0x1
+                word: 0x2
+                doubleword: 0x3
+    XSIZE:
+        SRC:
+            MASK: 0xFFFF
+            OFFSET: 0
+        DES:
+            MASK: 0xFFFF
+            OFFSET: 16
+    SRCTRANSCFG:
+        MAXBURSTLEN:
+            MASK: 0xF
+            OFFSET: 16
+        NONSECUREATTR:
+            MASK: 1
+            OFFSET: 10
+        SRCMEMATTR:
+            MASK: 0x3FF
+            OFFSET: 0
+            DECODE:
+                device: 0x0
+                normal_non_cacheable_non_shareable: 0x44
+    DESTRANSCFG:
+        MAXBURSTLEN:
+            MASK: 0xF
+            OFFSET: 16
+        NONSECUREATTR:
+            MASK: 1
+            OFFSET: 10
+        DESMEMATTR:
+            MASK: 0x3FF
+            OFFSET: 0
+            DECODE:
+                device: 0x0
+                normal_non_cacheable_non_shareable: 0x44
+    LINKATTR:
+        LINKMEMATTR:
+            MASK: 0x3FF
+            OFFSET: 0
+            DECODE:
+                device: 0x0
+                normal_non_cacheable_non_shareable: 0x44
+    SRCTRIGINCFG:
+        SRCTRIGINTYPE:
+            MASK: 0x3
+            OFFSET: 8
+            DECODE:
+                sw: 0
+                hw: 2
+        SRCTRIGINSEL:
+            MASK: 0xFF
+            OFFSET: 0
+    DESTRIGINCFG:
+        DESTRIGINTYPE:
+            MASK: 0x3
+            OFFSET: 8
+            DECODE:
+                sw: 0
+                hw: 2
+        DESTRIGINSEL:
+            MASK: 0xFF
+            OFFSET: 0
+    XADDRINC:
+        SRC:
+            MASK: 0xFFFF
+            OFFSET: 0
+        DES:
+            MASK: 0xFFFF
+            OFFSET: 16

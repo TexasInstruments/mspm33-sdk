@@ -1,0 +1,28 @@
+/*
+ * SPDX-FileCopyrightText: Copyright The TrustedFirmware-M Contributors
+ *
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ */
+
+#ifndef __TFM_VERSION_H__
+#define __TFM_VERSION_H__
+
+/*
+ * Defines for TFM version.
+ */
+#cmakedefine TFM_VERSION        @TFM_VERSION@
+#cmakedefine TFM_VERSION_FULL   @TFM_VERSION_FULL@
+
+#define VERSTR(x)          #x
+#define VERCON(x)          VERSTR(x)
+
+#define VERSION_STR        VERCON(TFM_VERSION)
+#define VERSION_FULLSTR    VERCON(TFM_VERSION_FULL)
+
+/*
+ * Define for the build timestamp string
+ */
+#cmakedefine BUILD_TIMESTAMP "@BUILD_TIMESTAMP@"
+
+#endif /* __TFM_VERSION_H__ */

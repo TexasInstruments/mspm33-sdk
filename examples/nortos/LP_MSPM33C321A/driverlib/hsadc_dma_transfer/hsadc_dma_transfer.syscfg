@@ -1,0 +1,59 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ */
+//@cliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)" --part "Default"
+//@v2CliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)"
+// @cliArgs --board /ti/boards/LP_MSPM33C321A --rtos nortos
+
+/**
+ * Import the modules used in this configuration.
+ */
+const DMA           = scripting.addModule("/ti/driverlib/DMA", {}, false);
+const DMA1          = DMA.addInstance();
+const HSADC         = scripting.addModule("/ti/driverlib/HSADC", {}, false);
+const HSADC1        = HSADC.addInstance();
+const VREF          = scripting.addModule("/ti/driverlib/VREF");
+const ProjectConfig = scripting.addModule("/ti/project_config/ProjectConfig");
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+DMA1.$name                                    = "DMA0";
+DMA1.associatedChannels.create(1);
+DMA1.associatedChannels[0].$name              = "CH0";
+DMA1.associatedChannels[0].triggerSelect      = "ADC0";
+DMA1.associatedChannels[0].enableInterrupt    = true;
+DMA1.associatedChannels[0].destIncrement      = "INCREMENT";
+DMA1.associatedChannels[0].srcIncDec          = "UNCHANGED";
+DMA1.associatedChannels[0].transferMode       = "FULL_CH_REPEAT_SINGLE";
+DMA1.associatedChannels[0].addressMode        = "f2b";
+DMA1.associatedChannels[0].peripheral.$assign = "DMA0_CH0";
+
+const Board                       = scripting.addModule("/ti/driverlib/Board", {}, false);
+Board.peripheral.$assign          = "DEBUGSS";
+Board.peripheral.swclkPin.$assign = "PA20";
+Board.peripheral.swdioPin.$assign = "PA19";
+
+HSADC1.$name                             = "HSADC0";
+HSADC1.adcClockPrescaler                 = "DL_HSADC_CLOCK_DIVIDE_4_0";
+HSADC1.enabledSOCs                       = ["ADC_SOC_NUMBER0","ADC_SOC_NUMBER1"];
+HSADC1.enabledSEQs                       = ["ADC_SEQ_NUMBER1"];
+HSADC1.seqEndSOC                         = "ADC_SOC_NUMBER1";
+HSADC1.seq1SampleWindow                  = 16;
+HSADC1.seq1Enable                        = true;
+HSADC1.enabledDMAInts                    = ["ADC_INT_NUMBER_1"];
+HSADC1.dmaInterrupt1SOCSource            = "ADC_SOC_NUMBER1";
+HSADC1.enableDMAInterrupt1               = true;
+HSADC1.enableDMAInterrupt1ContinuousMode = true;
+HSADC1.peripheral.$assign                = "ADC0";
+HSADC1.peripheral.adcPin0.$assign        = "PA27";
+
+const SYSCTL              = scripting.addModule("/ti/driverlib/SYSCTL", {}, false);
+SYSCTL.peripheral.$assign = "SYSCTL";
+
+VREF.peripheral.$assign            = "VREF";
+VREF.peripheral.vrefPosPin.$assign = "PA23";
+VREF.vrefPosPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric0";
+
+ProjectConfig.migrationCondition = true;

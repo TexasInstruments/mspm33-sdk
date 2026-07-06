@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>将 Segger 编程器与 MSPM0 配合使用 &mdash; MSPM33 Tools Guide 1.04.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="debug_program_pemicro_CN.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="debug_program_segger_CN.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> MSPM33 Tools Guide
+          </a>
+              <div class="version">
+                1.04.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ides_CN.html">IDEs and Compilers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="codegen_easeofuse_CN.html">代码生成和易用性</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="debug_program_CN.html">Debugging and Programming Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="debug_program_CN.html#xds-110">XDS-110</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug_program_CN.html#msp-gang">MSP-GANG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug_program_CN.html#uniflash">UniFlash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug_program_CN.html#bsl-host">BSL Host</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug_program_CN.html#mspm0-factory-reset-gui-tool">MSPM0 Factory Reset GUI Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug_program_CN.html#elprotronic">Elprotronic</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="debug_program_CN.html#segger">Segger</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="debug_program_CN.html#id8">Documentation</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">将 Segger 编程器与 MSPM0 配合使用</a></li>
+<li class="toctree-l4"><a class="reference external" href="https://www.segger.com/downloads/jlink/UM08001">J-Link/J-Trace User Guide (external)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="debug_program_CN.html#pemicro">PEmicro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug_program_CN.html#lauterbach">Lauterbach</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MSPM33 Tools Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="debug_program_CN.html">Debugging and Programming Tools</a> &raquo;</li>
+          <li><a href="debug_program_segger_CN.html">&lt;no title&gt;</a> &raquo;</li>
+      <li>将 Segger 编程器与 MSPM0 配合使用</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="segger-mspm0">
+<h1>将 Segger 编程器与 MSPM0 配合使用<a class="headerlink" href="#segger-mspm0" title="Permalink to this heading">¶</a></h1>
+<section id="id1">
+<h2>1. 引言<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<p>本指南说明了如何将 Segger 编程器与 MSPM0 配合使用。</p>
+<p>本文档不用于详细说明如何使用 Segger 工具。有关详细文档，请参阅相应的 IDE 或 Segger 文档。</p>
+</section>
+<section id="id2">
+<h2>2. 先决条件<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h2>
+<p>用户应已下载以下各项：</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.segger.com/downloads/jlink/">J-Link 软件包 v7.88i 或更高版本</a></p></li>
+<li><p>可选：</p>
+<ul>
+<li><p>使用您首选的 IDE 和编译器来编译应用程序</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="j-link">
+<h2>3. 安装 J-Link 软件包<a class="headerlink" href="#j-link" title="Permalink to this heading">¶</a></h2>
+<p>J-Link 软件包 v7.88i 或更高版本支持 MSPM0。</p>
+<ol class="arabic">
+<li><p>从 <a class="reference external" href="https://www.segger.com/downloads/jlink/">Segger 网站</a>下载安装程序</p></li>
+<li><p>按照安装程序说明操作</p>
+<p><img alt="image0" src="../_images/segger_install_1.png" /></p>
+</li>
+<li><p>安装程序将自动请求更新 IAR 或 Keil（如果已安装）</p>
+<p><img alt="image1" src="../_images/segger_install_2.png" /></p>
+</li>
+</ol>
+</section>
+<section id="segger-j-link-ccs">
+<h2>4. 将 Segger J-Link 与 CCS 配合使用<a class="headerlink" href="#segger-j-link-ccs" title="Permalink to this heading">¶</a></h2>
+<ol class="arabic">
+<li><p>按照<a class="reference external" href="https://www.segger.com/products/debug-probes/j-link/technology/ides/ti-code-composer/">此处</a>说明和如下所示更新 Segger 驱动程序：</p>
+<p>1.1. 依次点击“Help → Install New Software”</p>
+<p><img alt="image2" src="../_images/segger_ccs_1.png" /></p>
+<p>1.2. 按照<a class="reference external" href="https://www.segger.com/products/debug-probes/j-link/technology/ides/ti-code-composer/">此处</a>说明或如下所示添加 J-Link 存储库：</p>
+<p><img alt="image3" src="../_images/segger_ccs_2.png" /></p>
+<p>1.3. 选择适当插件，并按照说明继续安装</p>
+<p><strong>注意：</strong>如果插件不可见，请在 CCS 中调整代理设置。</p>
+<p><img alt="image4" src="../_images/segger_ccs_3.png" /></p>
+<p>1.4. 确保插件版本正确。可能需要重新启动 CCS 才能正确更新插件版本。</p>
+</li>
+<li><p>在工程的“Connection”中选择“SEGGER J-Link Emulator”：</p>
+<p><strong>注意：</strong>如果未正确应用插件，则此选项不可用。</p>
+<p><img alt="image5" src="../_images/segger_ccs_4.png" /></p>
+</li>
+<li><p>打开工程内的 .ccxml 文件</p>
+<p><img alt="image6" src="../_images/segger_ccs_5.png" /></p>
+</li>
+<li><p>选择“CORTEX_M0P”内核，并在“Target Interface”中选择“SWD”</p>
+<p><img alt="image7" src="../_images/segger_ccs_6.png" /></p>
+</li>
+<li><p>对器件进行编程和调试。</p></li>
+</ol>
+</section>
+<section id="segger-j-link-iar">
+<h2>5. 将 Segger J-Link 与 IAR 配合使用<a class="headerlink" href="#segger-j-link-iar" title="Permalink to this heading">¶</a></h2>
+<ol class="arabic">
+<li><p>安装最新 Segger 软件时，将更新适用于 IAR 的 Segger 驱动程序。</p></li>
+<li><p>更改调试器设置以使用 J-Link：</p>
+<p><img alt="image8" src="../_images/segger_iar_1.png" /></p>
+</li>
+<li><p>对器件进行编程和调试。</p></li>
+</ol>
+</section>
+<section id="segger-j-link-keil">
+<h2>6. 将 Segger J-Link 与 Keil 配合使用<a class="headerlink" href="#segger-j-link-keil" title="Permalink to this heading">¶</a></h2>
+<ol class="arabic">
+<li><p>安装最新 Segger 软件时，将更新适用于 Keil 的 Segger 驱动程序。</p></li>
+<li><p>更改调试器设置以使用 J-Link：</p>
+<p><img alt="image9" src="../_images/segger_keil_1.png" /></p>
+</li>
+<li><p>选择 SWD 接口</p>
+<p><img alt="image10" src="../_images/segger_keil_2.png" /></p>
+</li>
+<li><p>对器件进行编程和调试。</p></li>
+</ol>
+</section>
+<section id="segger-j-flash-ccs">
+<h2>7. 将 Segger J-Flash 与 CCS 十六进制实用程序配合使用<a class="headerlink" href="#segger-j-flash-ccs" title="Permalink to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>使用 CCS 十六进制实用程序为 Segger J-Flash 软件生成输出文件时，请遵循 CCS IDE 指南中<a class="reference external" href="../../ccs_ide_guide/doc_guide/doc_guide-srcs/ccs_ide_guide_CN.html#how-to-generate-ti-txt-and-other-format-files">如何生成 TI .TXT（及其他格式）文件</a>部分的说明。</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="debug_program_segger_CN.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="debug_program_pemicro_CN.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">1995-2023, Texas Instruments Incorporated. All rights reserved</a>, Texas Instruments Incorporated. All rights reserved. <br/>
+      <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+#-------------------------------------------------------------------------------
+# SPDX-FileCopyrightText: Copyright The TrustedFirmware-M Contributors
+#
+# SPDX-License-Identifier: BSD-3-Clause
+#
+#-------------------------------------------------------------------------------
+# This command sets DMA boot enable to 0.
+
+CTRL:
+    XTYPE: 'fill'
+    TRANSIZE: 'word'
+    USEGPO: 1
+DESADDR: 'rse_system_control_registers_base_address + reg_offset_system_control_dma_boot_en'
+XSIZE:
+    DES: 1
+DESTRANSCFG:
+    DESMEMATTR: 'device'
+FILLVAL: 0x00000000
+GPOEN0: 0x0000001F
+GPOVAL0: 0x00000001
+LINKATTR:
+  LINKMEMATTR: 'normal_non_cacheable_non_shareable'
+LINKADDR: "program0_cmd1_exec_addr"

@@ -1,0 +1,141 @@
+/*
+ * Copyright (c) 2020, Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+#include "ti_msp_dl_config.h"
+#include <stdio.h>
+#include <stdbool.h>
+#include <math.h>
+#include "uart_console.h"
+
+/*
+ * Number of bytes for SPI packet size
+ * The packet will be transmitted by the SPI controller.
+ * This example uses FIFOs, and the maximum FIFO size is 4.
+ */
+#define SPI_PACKET_SIZE (1024)
+
+/* Data for SPI to transmit */
+uint8_t gTxPacket[SPI_PACKET_SIZE];
+
+/* Data for SPI to receive */
+uint8_t gRxPacket[SPI_PACKET_SIZE];
+
+/*
+ * Expected return value if transmission is successful
+ * using spi_peripheral_fifo_dma_interrupts
+ */
+uint8_t expectedRxMessage[SPI_PACKET_SIZE];
+
+volatile bool gDMATXDataTransferred,
+    gDMARXDataTransferred;
+
+uint32_t t1 = 0, t2 = 0;
+uint32_t counter_diff = 0;
+double line_throughput = 0;
+int main(void)
+{
+    for(uint32_t i = 0; i < SPI_PACKET_SIZE; i ++){
+        gTxPacket[i] = expectedRxMessage[i] = (i % 256);
+    }
+    SYSCFG_DL_init();
+    NVIC_EnableIRQ(SPI_0_INST_INT_IRQN);
+
+    gDMATXDataTransferred = false;
+    gDMARXDataTransferred = false;
+
+    while(1)
+    {
+        DL_SPI_flushTXFIFO(SPI_0_INST);
+        DL_SPI_flushRXFIFO(SPI_0_INST);
+        /*
+        * Configure DMA0 source, destination and size to transfer data from
+        * gTxPacket to TXDATA. The DMA0 transfer will start when TX interrupt is
+        * set, which it should already be set (which indicates that the SPI is
+        * ready to transfer) so the DMA0 will begin this transfer when the channel
+        * is enabled.
+        */
+        DL_DMA_setSrcAddr(DMA0, DMA0_CH1_CHAN_ID, (uint32_t) &gTxPacket[0]);
+        DL_DMA_setDestAddr(
+            DMA0, DMA0_CH1_CHAN_ID, (uint32_t)(&SPI_0_INST->spi->TXDATA));
+        DL_DMA_setTransferSize(
+            DMA0, DMA0_CH1_CHAN_ID, sizeof(gTxPacket) / sizeof(gTxPacket[0]));
+
+        /*
+        * Configure DMA0 source, destination and size from RXDATA to gRxPacket.
+        * The DMA0 transfer will start when the RX interrupt is set, which happens
+        * when the device receives data.
+        */
+        DL_DMA_setSrcAddr(
+            DMA0, DMA0_CH0_CHAN_ID, (uint32_t)(&SPI_0_INST->spi->RXDATA));
+        DL_DMA_setDestAddr(DMA0, DMA0_CH0_CHAN_ID, (uint32_t) &gRxPacket[0]);
+        DL_DMA_setTransferSize(DMA0, DMA0_CH0_CHAN_ID, SPI_PACKET_SIZE);
+
+        DL_DMA_enableChannel(DMA0, DMA0_CH0_CHAN_ID);
+        
+        t1 = DL_Common_GetCpuCycleCount();
+        DL_DMA_enableChannel(DMA0, DMA0_CH1_CHAN_ID);
+
+        /*
+         * Wait in SLEEP mode until SPI_PACKET_SIZE bytes have been transferred
+         * from gTxPacket to the SPI TXFIFO, and the DMA0 interrupt is triggered
+         */
+        while (false == gDMATXDataTransferred) {
+            __WFE();
+        }
+        
+        while(false == gDMARXDataTransferred){
+            __WFE();
+        }
+        counter_diff = t2 - t1;
+        line_throughput = (((1.0 * SPI_PACKET_SIZE * 8 * CPUCLK_FREQ)/(t2 - t1))/(1.0e6));
+        uart_printf(UART_0_INST,"Throughput: %.8f Mbps\n", line_throughput);
+        gDMATXDataTransferred = false;
+        gDMARXDataTransferred = false;
+    }
+}
+
+void SPI_0_INST_IRQHandler(void)
+{
+    switch (DL_SPI_getPendingInterrupt(SPI_0_INST)) {
+        case DL_SPI_IIDX_DMA_DONE_TX:
+            /* DMA0 is done transferring data from gTxPacket to TXFIFO */
+            gDMATXDataTransferred = true;
+            break;
+        case DL_SPI_IIDX_DMA_DONE_RX:
+            /* DMA0 is done transferring data from RXFIFO to gRxPacket*/
+            gDMARXDataTransferred = true;
+            t2 = DL_Common_GetCpuCycleCount();
+            break;
+        default:
+            break;
+    }
+}

@@ -1,0 +1,59 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ */
+//@cliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)" --part "Default"
+//@v2CliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)"
+// @cliArgs --board /ti/boards/LP_MSPM33C321A --rtos nortos
+
+/**
+ * Import the modules used in this configuration.
+ */
+const Board  = scripting.addModule("/ti/driverlib/Board");
+const COMP   = scripting.addModule("/ti/driverlib/COMP", {}, false);
+const COMP1  = COMP.addInstance();
+const GPIO   = scripting.addModule("/ti/driverlib/GPIO", {}, false);
+const GPIO1  = GPIO.addInstance();
+const SYSCTL = scripting.addModule("/ti/driverlib/SYSCTL");
+const VREF   = scripting.addModule("/ti/driverlib/VREF");
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+Board.peripheral.$assign          = "DEBUGSS";
+Board.peripheral.swclkPin.$assign = "PA20";
+Board.peripheral.swdioPin.$assign = "PA19";
+
+COMP1.$name                           = "COMP_0";
+COMP1.enabledInterrupts               = ["DL_COMP_INTERRUPT_OUTPUT_EDGE"];
+COMP1.channelEnable                   = ["POS"];
+COMP1.posChannel                      = "DL_COMP_IPSEL_CHANNEL_6";
+COMP1.vSource                         = "DL_COMP_REF_SOURCE_VREF_DAC";
+COMP1.setDACCode0                     = 0x7F;
+COMP1.controlSelect                   = "DL_COMP_DAC_CONTROL_SW";
+COMP1.terminalSelect                  = "DL_COMP_REF_TERMINAL_SELECT_NEG";
+COMP1.CMPPRD                          = 15;
+COMP1.BLKPRD                          = 240;
+COMP1.WIN_MODE                        = true;
+COMP1.IP0DACCODE                      = 127;
+COMP1.WAKEUP_ENABLE                   = true;
+COMP1.peripheral.$assign              = "COMP0";
+COMP1.peripheral.compPinVMON0.$assign = "PA18";
+
+GPIO1.$name                               = "GPIO_LEDS";
+GPIO1.associatedPins[0].$name             = "PASS_LED";
+GPIO1.associatedPins[0].launchPadShortcut = "LED2GreenEn";
+GPIO1.associatedPins[0].pin.$assign       = "PC27";
+
+SYSCTL.powerPolicy           = "STOP";
+SYSCTL.forceDefaultClkConfig = true;
+SYSCTL.peripheral.$assign    = "SYSCTL";
+
+VREF.basicMode                     = "DL_VREF_ENABLE_ENABLE";
+VREF.checkVREFReady                = true;
+VREF.peripheral.$assign            = "VREF";
+VREF.peripheral.vrefPosPin.$assign = "PA23";
+VREF.vrefPosPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric0";
+
+const ProjectConfig              = scripting.addModule("/ti/project_config/ProjectConfig", {}, false);
+ProjectConfig.migrationCondition = true;

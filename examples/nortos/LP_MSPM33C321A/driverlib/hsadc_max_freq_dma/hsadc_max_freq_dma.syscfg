@@ -1,0 +1,80 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ */
+//@cliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)" --part "Default"
+//@v2CliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)"
+// @cliArgs --board /ti/boards/LP_MSPM33C321A --rtos nortos
+
+/**
+ * Import the modules used in this configuration.
+ */
+const DMA           = scripting.addModule("/ti/driverlib/DMA", {}, false);
+const DMA1          = DMA.addInstance();
+const HSADC         = scripting.addModule("/ti/driverlib/HSADC", {}, false);
+const HSADC1        = HSADC.addInstance();
+const SYSCTL        = scripting.addModule("/ti/driverlib/SYSCTL");
+const TIMER         = scripting.addModule("/ti/driverlib/TIMER", {}, false);
+const TIMER1        = TIMER.addInstance();
+const VREF          = scripting.addModule("/ti/driverlib/VREF");
+const ProjectConfig = scripting.addModule("/ti/project_config/ProjectConfig");
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+const divider3       = system.clockTree["EXTDIVMCLK"];
+divider3.divideValue = 1;
+
+const multiplier2         = system.clockTree["PLL_QDIV"];
+multiplier2.multiplyValue = 10;
+
+DMA1.$name                                    = "DMA0";
+DMA1.associatedChannels.create(1);
+DMA1.associatedChannels[0].$name              = "CH0";
+DMA1.associatedChannels[0].triggerSelect      = "ADC0";
+DMA1.associatedChannels[0].srcLength          = "HALF_WORD";
+DMA1.associatedChannels[0].dstLength          = "HALF_WORD";
+DMA1.associatedChannels[0].destIncrement      = "INCREMENT";
+DMA1.associatedChannels[0].addressMode        = "f2b";
+DMA1.associatedChannels[0].transferMode       = "SINGLE_BLOCK";
+DMA1.associatedChannels[0].peripheral.$assign = "DMA0_CH0";
+
+const Board                       = scripting.addModule("/ti/driverlib/Board", {}, false);
+Board.peripheral.$assign          = "DEBUGSS";
+Board.peripheral.swclkPin.$assign = "PA20";
+Board.peripheral.swdioPin.$assign = "PA19";
+
+HSADC1.$name                             = "HSADC0";
+HSADC1.enabledSEQs                       = ["ADC_SEQ_NUMBER1"];
+HSADC1.seq1SampleWindow                  = 16;
+HSADC1.seq1Enable                        = true;
+HSADC1.enabledDMAInts                    = ["ADC_INT_NUMBER_1"];
+HSADC1.enableDMAInterrupt1               = true;
+HSADC1.enableDMAInterrupt1ContinuousMode = true;
+HSADC1.enabledSOCs                       = ["ADC_SOC_NUMBER0"];
+HSADC1.seq1TriggerSel                    = "ADC_TRIGGER_GEN_SUB_0";
+HSADC1.seq1sampleCAPResetSelect          = "ADC_CAP_RESET_VREFHIBY2";
+HSADC1.ADCsubscriber1Channel             = 1;
+HSADC1.peripheral.$assign                = "ADC0";
+HSADC1.peripheral.adcPin0.$assign        = "PA27";
+
+SYSCTL.MCLKSource     = "HSCLK";
+SYSCTL.EXCLKSource    = "HFCLK";
+SYSCTL.SYSPLL_Pdiv    = 1;
+SYSCTL.SYSPLL_CLK0En  = true;
+SYSCTL.SYSPLL_CLK1En  = true;
+SYSCTL.SYSPLL_CLK2XEn = true;
+SYSCTL.clockTreeEn    = true;
+
+TIMER1.$name                       = "TIMER_0";
+TIMER1.timerMode                   = "PERIODIC";
+TIMER1.event1PublisherChannel      = 1;
+TIMER1.event1ControllerInterruptEn = ["ZERO_EVENT"];
+TIMER1.timerPeriod                 = "106.25 ns";
+TIMER1.peripheral.$assign          = "TIMA0_0";
+
+VREF.peripheral.$assign            = "VREF";
+VREF.peripheral.vrefPosPin.$assign = "PA23";
+VREF.vrefPosPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric0";
+
+ProjectConfig.migrationCondition = true;

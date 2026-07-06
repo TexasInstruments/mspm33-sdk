@@ -1,0 +1,162 @@
+%%{
+/*
+ * Copyright (c) 2022, Texas Instruments Incorporated - http://www.ti.com
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ */
+
+/*
+ *  ======== oscillator.Board.c.xdt ========
+ */
+
+    let Common = system.getScript("/ti/driverlib/Common.js");
+
+    let mod = system.modules["/ti/clockTree/divider.js"];
+
+    let mdivInst = _.find(mod.$instances, ['$name', 'MDIV']);
+    let udivInst = _.find(mod.$instances, ['$name', 'UDIV']);
+    let mfpdivInst = _.find(mod.$instances, ['$name', 'HFCLK4MFPCLKDIV']);
+    let extdivmclkInst = _.find(mod.$instances, ['$name', 'EXTDIVMCLK']);
+    let extdivcanInst = _.find(mod.$instances, ['$name', 'EXTDIVCAN']);
+    let i2sdivInst = _.find(mod.$instances, ['$name', 'I2SDIV']);
+    let mclkdivby2Inst = _.find(mod.$instances, ['$name', 'MCLKDIVBY2']);
+    let mclkdivby4Inst = _.find(mod.$instances, ['$name', 'MCLKDIVBY4']);
+
+    mod = system.modules["/ti/clockTree/mux.js"];
+
+    let sysctlmuxInst = _.find(mod.$instances, ['$name', 'SYSCTLMUX'])
+    let i2smuxInst = _.find(mod.$instances, ['$name', 'I2SCLKMUX'])
+    let canmuxInst = _.find(mod.$instances, ['$name', 'CANCLKMUX'])
+
+    if(!Common.isDeviceFamily_PARENT_MSPM33C321X()){
+        if(_.isUndefined(mdivInst)) {
+            throw 'Not all divider elements are defined appropriately';
+        }
+    }
+
+    let mdivStr = "";
+    let udivStr = "";
+    let mfpdivStr = "";
+    let extdivmclkStr = "";
+    let extdivcanclkStr = "";
+    let i2sclkdivStr = "";
+    let mclkDivCfgStr = "";
+
+    if(!Common.isDeviceFamily_PARENT_MSPM33C321X()){
+        if(_.endsWith(sysctlmuxInst.inputSelect, "MDIV")){
+            if(mdivInst.isMDIVEnabled){
+                if(mdivInst.divideValue === 1){
+                    mdivStr = "DL_SYSCTL_setMCLKDivider(DL_SYSCTL_MCLK_DIVIDER_DISABLE);"
+                } else {
+                    mdivStr = "DL_SYSCTL_setMCLKDivider(DL_SYSCTL_MCLK_DIVIDER_" + mdivInst.divideValue + ");";
+                }
+            }
+        }
+    }
+
+    if(_.endsWith(sysctlmuxInst.inputSelect, "MDIV")){
+        if(mdivInst.isMDIVEnabled){
+            if(mdivInst.divideValue === 1){
+                extdivmclkStr = "DL_SYSCTL_setMCLKDivider(DL_SYSCTL_MCLK_DIVIDER_DISABLE);";
+            } else {
+                extdivmclkStr = "DL_SYSCTL_setMCLKDivider(DL_SYSCTL_MCLK_DIVIDER_" + mdivInst.divideValue + ");";
+            }
+        }
+    }
+
+    if(Common.isDeviceFamily_PARENT_MSPM33C321X()){
+        if(!_.isUndefined(extdivmclkInst)){
+                if(extdivmclkInst.divideValue === 1){
+                extdivmclkStr =  "DL_SYSCTL_disablePLLDivider( );";
+                } else {
+                extdivmclkStr = "DL_SYSCTL_enablePLLDivider(DL_SYSCTL_PLL_DIVIDER_DIV" + extdivmclkInst.divideValue + ");";
+                }
+        }
+    }
+
+    if(Common.isDeviceFamily_PARENT_MSPM33C321X()){
+        if(_.endsWith(canmuxInst.inputSelect, "EXTDIVCAN")){
+            if(!_.isUndefined(extdivcanInst)){
+                    if(extdivcanInst.divideValue != 1){
+                        extdivcanclkStr = "DL_SYSCTL_enableCANCLKDivider(DL_SYSCTL_CANPLL_DIVIDER_DIV" + extdivcanInst.divideValue + ");";
+                    }
+            }
+        }
+    }
+
+     if(Common.isDeviceFamily_PARENT_MSPM33C321X()){
+        if(_.endsWith(i2smuxInst.inputSelect, "I2SDIV")){
+            if(!_.isUndefined(i2sdivInst)){
+                    if(i2sdivInst.divideValue != 1){
+                        i2sclkdivStr = "DL_SYSCTL_enableI2SCLKDivider(DL_SYSCTL_I2SPLL_DIVIDER_DIV" + i2sdivInst.divideValue + ");";
+                    }
+            }
+        }
+     }
+
+    if(!_.isUndefined(mfpdivInst)){
+        if(mfpdivInst.divideValue != 1){
+            mfpdivStr = "DL_SYSCTL_setHFCLKDividerForMFPCLK(DL_SYSCTL_HFCLK_MFPCLK_DIVIDER_" + mfpdivInst.divideValue + ");";
+        }
+    }
+
+    if(Common.isDeviceFamily_PARENT_MSPM33C321X()){
+        if(!_.isUndefined(mclkdivby2Inst) && !_.isUndefined(mclkdivby4Inst)){
+            let div2 = mclkdivby2Inst.divideValue;
+            let div4 = mclkdivby4Inst.divideValue;
+            if(div2 !== 1 || div4 !== 1){
+                mclkDivCfgStr = "DL_SYSCTL_setULPCLKDivider(DL_SYSCTL_ULPCLK_DIV_1_DIV_" + div2 + "_DIV_" + div4 + ");";
+            }
+        }
+    }
+
+%%}
+%
+% if(mdivStr !== ""){
+    `mdivStr`
+% }
+% if(udivStr !== ""){
+    `udivStr`
+% }
+% if(mfpdivStr !== ""){
+    `mfpdivStr`
+% }
+% if(extdivmclkStr !== ""){
+    `extdivmclkStr`
+% }
+% if(extdivcanclkStr !== ""){
+    `extdivcanclkStr`
+% }
+% if(i2sclkdivStr !== ""){
+    `i2sclkdivStr`
+% }
+% if(mclkDivCfgStr !== ""){
+    `mclkDivCfgStr`
+% }

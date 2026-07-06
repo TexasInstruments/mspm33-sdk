@@ -1,0 +1,516 @@
+From 67d948ea2f9504c5af2979e83b531daaec51e607 Mon Sep 17 00:00:00 2001
+From: David Vincze <david.vincze@arm.com>
+Date: Wed, 8 Apr 2026 15:27:17 +0000
+Subject: [PATCH] bootutil: Parse key ID for built-in keys
+
+When MCUBOOT_BUILTIN_KEY is enabled, the key id TLV entry is added
+to the image with the new IMAGE_TLV_KEYID type. Parse this entry while
+validating the image to identify the key used to sign the image.
+In this scenario the IMAGE_TLV_KEYHASH or IMAGE_TLV_PUBKEY entries
+are not needed.
+
+This replaces the previous PoC code that simply assigned the
+image_index to the key ID.
+
+Signed-off-by: Maulik Patel <maulik.patel@arm.com>
+Signed-off-by: David Vincze <david.vincze@arm.com>
+Change-Id: If194aaf281d34c3a2260881b9831d64c3cf386d3
+---
+ boot/bootutil/include/bootutil/crypto/ecdsa.h |  5 --
+ boot/bootutil/include/bootutil/image.h        | 13 ++--
+ boot/bootutil/include/bootutil/sign_key.h     | 18 ++++-
+ boot/bootutil/src/bootutil_find_key.c         | 69 ++++++++++++-------
+ boot/bootutil/src/bootutil_priv.h             |  4 +-
+ boot/bootutil/src/image_ecdsa.c               |  6 +-
+ boot/bootutil/src/image_ed25519.c             |  4 +-
+ boot/bootutil/src/image_rsa.c                 |  4 +-
+ boot/bootutil/src/image_validate.c            | 35 +++++-----
+ scripts/imgtool/image.py                      | 22 ++++--
+ scripts/imgtool/main.py                       | 10 ++-
+ 11 files changed, 121 insertions(+), 69 deletions(-)
+
+diff --git a/boot/bootutil/include/bootutil/crypto/ecdsa.h b/boot/bootutil/include/bootutil/crypto/ecdsa.h
+index 35f0930fa..eb2fe9c66 100644
+--- a/boot/bootutil/include/bootutil/crypto/ecdsa.h
++++ b/boot/bootutil/include/bootutil/crypto/ecdsa.h
+@@ -394,11 +394,6 @@ static inline void bootutil_ecdsa_init(bootutil_ecdsa_context *ctx)
+     ctx->required_algorithm = 0;
+ 
+ #else /* !MCUBOOT_BUILTIN_KEY */
+-    /* The incoming key ID is equal to the image index. The key ID value must be
+-     * shifted (by one in this case) because zero is reserved (PSA_KEY_ID_NULL)
+-     * and considered invalid.
+-     */
+-    ctx->key_id++; /* Make sure it is not equal to 0. */
+ #if defined(MCUBOOT_SIGN_EC256)
+     ctx->curve_byte_count = 32;
+     ctx->required_algorithm = PSA_ALG_SHA_256;
+diff --git a/boot/bootutil/include/bootutil/image.h b/boot/bootutil/include/bootutil/image.h
+index 3d103f8da..fab8fcba9 100644
+--- a/boot/bootutil/include/bootutil/image.h
++++ b/boot/bootutil/include/bootutil/image.h
+@@ -3,7 +3,7 @@
+  *
+  * Copyright (c) 2016-2019 Linaro LTD
+  * Copyright (c) 2016-2019 JUUL Labs
+- * Copyright (c) 2019-2023 Arm Limited
++ * Copyright (c) 2019-2025 Arm Limited
+  *
+  * Original license:
+  *
+@@ -98,6 +98,7 @@ extern "C" {
+  */
+ #define IMAGE_TLV_KEYHASH           0x01    /* hash of the public key */
+ #define IMAGE_TLV_PUBKEY            0x02    /* public key */
++#define IMAGE_TLV_KEYID             0x03    /* Signing key ID */
+ #define IMAGE_TLV_SHA256            0x10    /* SHA256 of image hdr and body */
+ #define IMAGE_TLV_SHA384            0x11    /* SHA384 of image hdr and body */
+ #define IMAGE_TLV_SHA512            0x12    /* SHA512 of image hdr and body */
+@@ -237,11 +238,13 @@ int32_t bootutil_get_img_security_cnt(struct boot_loader_state *state, int slot,
+                                       const struct flash_area *fap,
+                                       uint32_t *img_security_cnt);
+ 
+-#if !defined(MCUBOOT_HW_KEY)
+-int bootutil_find_key(uint8_t *keyhash, uint8_t keyhash_len);
+-#else
++#if defined(MCUBOOT_BUILTIN_KEY)
++int bootutil_find_key(uint8_t image_index, uint8_t *key_id_buf, uint8_t key_id_buf_len);
++#elif defined(MCUBOOT_HW_KEY)
+ int bootutil_find_key(uint8_t image_index, uint8_t *key, uint16_t key_len);
+-#endif
++#else
++int bootutil_find_key(uint8_t image_index, uint8_t *keyhash, uint8_t keyhash_len);
++#endif /* MCUBOOT_BUILTIN_KEY */
+ 
+ int
+ bootutil_img_hash(struct boot_loader_state *state,
+diff --git a/boot/bootutil/include/bootutil/sign_key.h b/boot/bootutil/include/bootutil/sign_key.h
+index a5e81d350..f7a377843 100644
+--- a/boot/bootutil/include/bootutil/sign_key.h
++++ b/boot/bootutil/include/bootutil/sign_key.h
+@@ -28,6 +28,8 @@
+ /* mcuboot_config.h is needed for MCUBOOT_HW_KEY to work */
+ #include "mcuboot_config/mcuboot_config.h"
+ 
++#include "bootutil/fault_injection_hardening.h"
++
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+@@ -39,7 +41,21 @@ struct bootutil_key {
+ };
+ 
+ extern const struct bootutil_key bootutil_keys[];
+-#else
++
++#ifdef MCUBOOT_BUILTIN_KEY
++/**
++ * Verify that the specified key ID is valid for authenticating the given image.
++ *
++ * @param[in]  image_index   Index of the image to be verified.
++ * @param[in]  key_id        Identifier of the key to be verified against the image.
++ *
++ * @return                   FIH_SUCCESS if the key ID is valid for the image;
++ *                           FIH_FAILURE on failure.
++ */
++fih_ret boot_verify_key_id_for_image(uint8_t image_index, uint32_t key_id);
++#endif /* MCUBOOT_BUILTIN_KEY */
++
++#else /* !MCUBOOT_HW_KEY */
+ struct bootutil_key {
+     uint8_t *key;
+     unsigned int *len;
+diff --git a/boot/bootutil/src/bootutil_find_key.c b/boot/bootutil/src/bootutil_find_key.c
+index 7d34e05f4..b6f15fba0 100644
+--- a/boot/bootutil/src/bootutil_find_key.c
++++ b/boot/bootutil/src/bootutil_find_key.c
+@@ -51,34 +51,27 @@ BOOT_LOG_MODULE_DECLARE(mcuboot);
+ #ifdef EXPECTED_SIG_TLV
+ #if !defined(MCUBOOT_BYPASS_KEY_MATCH)
+ /* Find functions are only needed when key is checked first */
+-#if !defined(MCUBOOT_BUILTIN_KEY)
+-#if !defined(MCUBOOT_HW_KEY)
+-int bootutil_find_key(uint8_t *keyhash, uint8_t keyhash_len)
++#if defined(MCUBOOT_BUILTIN_KEY)
++int bootutil_find_key(uint8_t image_index, uint8_t *key_id_buf, uint8_t key_id_buf_len)
+ {
+-    bootutil_sha_context sha_ctx;
+-    int i;
+-    const struct bootutil_key *key;
+-    uint8_t hash[IMAGE_HASH_SIZE];
++    uint32_t key_id;
++    FIH_DECLARE(fih_rc, FIH_FAILURE);
+ 
+-    BOOT_LOG_DBG("bootutil_find_key");
++    BOOT_LOG_DBG("bootutil_find_key: image_index %d", image_index);
++    /* Key id is passed */
++    assert(key_id_buf_len == sizeof(uint32_t));
++    memcpy(&key_id, key_id_buf, sizeof(key_id));
+ 
+-    if (keyhash_len > IMAGE_HASH_SIZE) {
+-        return -1;
++    /* Check if key id is associated with the image */
++    FIH_CALL(boot_verify_key_id_for_image, fih_rc, image_index, key_id);
++    if (FIH_EQ(fih_rc, FIH_SUCCESS)) {
++        return (int32_t)key_id;
+     }
+ 
+-    for (i = 0; i < bootutil_key_cnt; i++) {
+-        key = &bootutil_keys[i];
+-        bootutil_sha_init(&sha_ctx);
+-        bootutil_sha_update(&sha_ctx, key->key, *key->len);
+-        bootutil_sha_finish(&sha_ctx, hash);
+-        bootutil_sha_drop(&sha_ctx);
+-        if (!memcmp(hash, keyhash, keyhash_len)) {
+-            return i;
+-        }
+-    }
+     return -1;
+ }
+-#else /* !MCUBOOT_HW_KEY */
++
++#elif defined(MCUBOOT_HW_KEY)
+ extern unsigned int pub_key_len;
+ int bootutil_find_key(uint8_t image_index, uint8_t *key, uint16_t key_len)
+ {
+@@ -116,13 +109,41 @@ int bootutil_find_key(uint8_t image_index, uint8_t *key, uint16_t key_len)
+ 
+     return -1;
+ }
+-#endif /* !MCUBOOT_HW_KEY */
+-#endif /* !MCUBOOT_BUILTIN_KEY */
++
++#else /* !defined MCUBOOT_BUILTIN_KEY && !defined MCUBOOT_HW_KEY */
++int bootutil_find_key(uint8_t image_index, uint8_t *keyhash, uint8_t keyhash_len)
++{
++    bootutil_sha_context sha_ctx;
++    int i;
++    const struct bootutil_key *key;
++    uint8_t hash[IMAGE_HASH_SIZE];
++    (void)image_index;
++
++    BOOT_LOG_DBG("bootutil_find_key");
++
++    if (keyhash_len > IMAGE_HASH_SIZE) {
++        return -1;
++    }
++
++    for (i = 0; i < bootutil_key_cnt; i++) {
++        key = &bootutil_keys[i];
++        bootutil_sha_init(&sha_ctx);
++        bootutil_sha_update(&sha_ctx, key->key, *key->len);
++        bootutil_sha_finish(&sha_ctx, hash);
++        bootutil_sha_drop(&sha_ctx);
++        if (!memcmp(hash, keyhash, keyhash_len)) {
++            return i;
++        }
++    }
++    return -1;
++}
++#endif /* MCUBOOT_HW_KEY */
+ 
+ #else /* !MCUBOOT_BYPASS_KEY_MATCH */
+ #if !defined(MCUBOOT_HW_KEY)
+-int bootutil_find_key(uint8_t *key, uint8_t key_len)
++int bootutil_find_key(uint8_t image_index, uint8_t *key, uint8_t key_len)
+ {
++    (void)image_index;
+     (void)key;
+     (void)key_len;
+ 
+diff --git a/boot/bootutil/src/bootutil_priv.h b/boot/bootutil/src/bootutil_priv.h
+index ea676f3af..dbdea7c2b 100644
+--- a/boot/bootutil/src/bootutil_priv.h
++++ b/boot/bootutil/src/bootutil_priv.h
+@@ -3,7 +3,7 @@
+  *
+  * Copyright (c) 2017-2020 Linaro LTD
+  * Copyright (c) 2017-2019 JUUL Labs
+- * Copyright (c) 2019-2021 Arm Limited
++ * Copyright (c) 2019-2025 Arm Limited
+  *
+  * Original license:
+  *
+@@ -288,7 +288,7 @@ struct boot_sector_buffer {
+  * an image and mlen to length of the hash.
+  */
+ fih_ret bootutil_verify_sig(uint8_t *msg, uint32_t mlen, uint8_t *sig,
+-                            size_t slen, uint8_t key_id);
++                            size_t slen, uint32_t key_id);
+ 
+ fih_ret boot_fih_memequal(const void *s1, const void *s2, size_t n);
+ 
+diff --git a/boot/bootutil/src/image_ecdsa.c b/boot/bootutil/src/image_ecdsa.c
+index 30c7d0d0f..ae0cea626 100644
+--- a/boot/bootutil/src/image_ecdsa.c
++++ b/boot/bootutil/src/image_ecdsa.c
+@@ -3,7 +3,7 @@
+  *
+  * Copyright (c) 2016-2019 JUUL Labs
+  * Copyright (c) 2017 Linaro LTD
+- * Copyright (C) 2021-2024 Arm Limited
++ * Copyright (C) 2021-2025 Arm Limited
+  *
+  * Original license:
+  *
+@@ -41,7 +41,7 @@ BOOT_LOG_MODULE_DECLARE(mcuboot);
+ #if !defined(MCUBOOT_BUILTIN_KEY)
+ fih_ret
+ bootutil_verify_sig(uint8_t *hash, uint32_t hlen, uint8_t *sig, size_t slen,
+-                    uint8_t key_id)
++                    uint32_t key_id)
+ {
+     int rc;
+     bootutil_ecdsa_context ctx;
+@@ -74,7 +74,7 @@ out:
+ #else /* !MCUBOOT_BUILTIN_KEY */
+ fih_ret
+ bootutil_verify_sig(uint8_t *hash, uint32_t hlen, uint8_t *sig, size_t slen,
+-                    uint8_t key_id)
++                    uint32_t key_id)
+ {
+     int rc;
+     bootutil_ecdsa_context ctx;
+diff --git a/boot/bootutil/src/image_ed25519.c b/boot/bootutil/src/image_ed25519.c
+index 94d0142ec..9b52e6352 100644
+--- a/boot/bootutil/src/image_ed25519.c
++++ b/boot/bootutil/src/image_ed25519.c
+@@ -2,7 +2,7 @@
+  * SPDX-License-Identifier: Apache-2.0
+  *
+  * Copyright (c) 2019 JUUL Labs
+- * Copyright (c) 2021-2023 Arm Limited
++ * Copyright (c) 2021-2025 Arm Limited
+  * Copyright (c) 2025 Nordic Semiconductor ASA
+  */
+ 
+@@ -85,7 +85,7 @@ bootutil_import_key(uint8_t **cp, uint8_t *end)
+  */
+ fih_ret
+ bootutil_verify_sig(uint8_t *msg, uint32_t mlen, uint8_t *sig, size_t slen,
+-                    uint8_t key_id)
++                    uint32_t key_id)
+ {
+     int rc;
+     FIH_DECLARE(fih_rc, FIH_FAILURE);
+diff --git a/boot/bootutil/src/image_rsa.c b/boot/bootutil/src/image_rsa.c
+index 5479b75eb..a1e277d50 100644
+--- a/boot/bootutil/src/image_rsa.c
++++ b/boot/bootutil/src/image_rsa.c
+@@ -3,7 +3,7 @@
+  *
+  * Copyright (c) 2017-2018 Linaro LTD
+  * Copyright (c) 2017-2019 JUUL Labs
+- * Copyright (c) 2020-2023 Arm Limited
++ * Copyright (c) 2020-2025 Arm Limited
+  *
+  * Original license:
+  *
+@@ -262,7 +262,7 @@ bootutil_cmp_rsasig(bootutil_rsa_context *ctx, uint8_t *hash, uint32_t hlen,
+ 
+ fih_ret
+ bootutil_verify_sig(uint8_t *hash, uint32_t hlen, uint8_t *sig, size_t slen,
+-  uint8_t key_id)
++                    uint32_t key_id)
+ {
+     bootutil_rsa_context ctx;
+     int rc;
+diff --git a/boot/bootutil/src/image_validate.c b/boot/bootutil/src/image_validate.c
+index 3e8031b76..c6652b76c 100644
+--- a/boot/bootutil/src/image_validate.c
++++ b/boot/bootutil/src/image_validate.c
+@@ -3,7 +3,7 @@
+  *
+  * Copyright (c) 2017-2019 Linaro LTD
+  * Copyright (c) 2016-2019 JUUL Labs
+- * Copyright (c) 2019-2024 Arm Limited
++ * Copyright (c) 2019-2025 Arm Limited
+  * Copyright (c) 2025 Nordic Semiconductor ASA
+  *
+  * Original license:
+@@ -98,21 +98,24 @@ BOOT_LOG_MODULE_DECLARE(mcuboot);
+ #endif
+ 
+ #ifdef EXPECTED_SIG_TLV
++#if defined(MCUBOOT_BUILTIN_KEY)
++/* For MCUBOOT_BUILTIN_KEY, key id is passed */
++#define EXPECTED_KEY_TLV     IMAGE_TLV_KEYID
++#define KEY_BUF_SIZE         sizeof(uint32_t)
+ 
+-#if !defined(MCUBOOT_BUILTIN_KEY)
+-#if !defined(MCUBOOT_HW_KEY)
+-/* The key TLV contains the hash of the public key. */
+-#   define EXPECTED_KEY_TLV     IMAGE_TLV_KEYHASH
+-#   define KEY_BUF_SIZE         IMAGE_HASH_SIZE
+-#else
++#elif defined(MCUBOOT_HW_KEY)
+ /* The key TLV contains the whole public key.
+  * Add a few extra bytes to the key buffer size for encoding and
+  * for public exponent.
+  */
+-#   define EXPECTED_KEY_TLV     IMAGE_TLV_PUBKEY
+-#   define KEY_BUF_SIZE         (SIG_BUF_SIZE + 24)
+-#endif /* !MCUBOOT_HW_KEY */
+-#endif /* !MCUBOOT_BUILTIN_KEY */
++#define EXPECTED_KEY_TLV     IMAGE_TLV_PUBKEY
++#define KEY_BUF_SIZE         (SIG_BUF_SIZE + 24)
++
++#else /* !MCUBOOT_BUILTIN_KEY && !MCUBOOT_HW_KEY */
++/* The key TLV contains the hash of the public key. */
++#define EXPECTED_KEY_TLV     IMAGE_TLV_KEYHASH
++#define KEY_BUF_SIZE         IMAGE_HASH_SIZE
++#endif /* MCUBOOT_BUILTIN_KEY */
+ #endif /* EXPECTED_SIG_TLV */
+ 
+ #if defined(MCUBOOT_SIGN_PURE)
+@@ -169,6 +172,7 @@ static int bootutil_check_for_pure(const struct image_header *hdr, const struct
+ static const uint16_t allowed_unprot_tlvs[] = {
+      IMAGE_TLV_KEYHASH,
+      IMAGE_TLV_PUBKEY,
++     IMAGE_TLV_KEYID,
+      IMAGE_TLV_SHA256,
+      IMAGE_TLV_SHA384,
+      IMAGE_TLV_SHA512,
+@@ -216,14 +220,7 @@ bootutil_img_validate(struct boot_loader_state *state,
+     uint32_t img_sz;
+ #ifdef EXPECTED_SIG_TLV
+     FIH_DECLARE(valid_signature, FIH_FAILURE);
+-#ifndef MCUBOOT_BUILTIN_KEY
+     int key_id = -1;
+-#else
+-    /* Pass a key ID equal to the image index, the underlying crypto library
+-     * is responsible for mapping the image index to a builtin key ID.
+-     */
+-    int key_id = image_index;
+-#endif /* !MCUBOOT_BUILTIN_KEY */
+ #ifdef MCUBOOT_HW_KEY
+     uint8_t key_buf[KEY_BUF_SIZE];
+ #endif
+@@ -377,7 +374,7 @@ bootutil_img_validate(struct boot_loader_state *state,
+             if (rc) {
+                 goto out;
+             }
+-            key_id = bootutil_find_key(buf, len);
++            key_id = bootutil_find_key(image_index, buf, len);
+ #else
+             rc = LOAD_IMAGE_DATA(hdr, fap, off, key_buf, len);
+             if (rc) {
+diff --git a/scripts/imgtool/image.py b/scripts/imgtool/image.py
+index 04036b213..f34833bce 100755
+--- a/scripts/imgtool/image.py
++++ b/scripts/imgtool/image.py
+@@ -1,6 +1,6 @@
+ # Copyright 2018 Nordic Semiconductor ASA
+ # Copyright 2017-2020 Linaro Limited
+-# Copyright 2019-2024 Arm Limited
++# Copyright 2019-2025 Arm Limited
+ #
+ # SPDX-License-Identifier: Apache-2.0
+ #
+@@ -71,6 +71,7 @@ IMAGE_F = {
+ TLV_VALUES = {
+         'KEYHASH': 0x01,
+         'PUBKEY': 0x02,
++        'KEYID': 0x03,
+         'SHA256': 0x10,
+         'SHA384': 0x11,
+         'SHA512': 0x12,
+@@ -138,15 +139,21 @@ class TLV:
+         """
+         e = STRUCT_ENDIAN_DICT[self.endian]
+         if isinstance(kind, int):
+-            if not TLV_VENDOR_RES_MIN <= kind <= TLV_VENDOR_RES_MAX:
++            if kind in TLV_VALUES.values():
++                buf = struct.pack(e + 'BBH', kind, 0, len(payload))
++            elif TLV_VENDOR_RES_MIN <= kind <= TLV_VENDOR_RES_MAX:
++                # Custom vendor-reserved tag
++                buf = struct.pack(e + 'HH', kind, len(payload))
++            else:
+                 msg = (
+                     f"Invalid custom TLV type value '0x{kind:04x}', allowed "
+                     f"value should be between 0x{TLV_VENDOR_RES_MIN:04x} and "
+                     "0x{TLV_VENDOR_RES_MAX:04x}"
+                 )
+                 raise click.UsageError(msg)
+-            buf = struct.pack(e + 'HH', kind, len(payload))
+         else:
++            if kind not in TLV_VALUES:
++                raise click.UsageError(f"Unknown TLV type string: {kind}")
+             buf = struct.pack(e + 'BBH', TLV_VALUES[kind], 0, len(payload))
+         self.buf += buf
+         self.buf += payload
+@@ -324,6 +331,7 @@ class Image:
+         self.non_bootable = non_bootable
+         self.vid = vid
+         self.cid = cid
++        self.psa_key_id = None
+ 
+         if self.max_align == DEFAULT_MAX_ALIGN:
+             self.boot_magic = bytes([
+@@ -712,7 +720,9 @@ class Image:
+             return
+ 
+         if key is not None or fixed_sig is not None:
+-            if public_key_format == 'hash':
++            if self.psa_key_id is not None:
++                tlv.add('KEYID', self.psa_key_id.to_bytes(4, self.endian))
++            elif public_key_format == 'hash':
+                 tlv.add('KEYHASH', pubbytes)
+             else:
+                 tlv.add('PUBKEY', pub)
+@@ -806,6 +816,10 @@ class Image:
+     def get_infile_data(self):
+         return self.infile_data
+ 
++    def set_key_id(self, psa_key_id):
++        """Set key ID (integer) to be inserted before the signature."""
++        self.psa_key_id = psa_key_id
++
+     def add_header(self, enckey, protected_tlv_size, compression_flags, aes_length=128):
+         """Install the image header."""
+ 
+diff --git a/scripts/imgtool/main.py b/scripts/imgtool/main.py
+index a579b1f76..68587be2c 100755
+--- a/scripts/imgtool/main.py
++++ b/scripts/imgtool/main.py
+@@ -1,7 +1,7 @@
+ #! /usr/bin/env python3
+ #
+ # Copyright 2017-2020 Linaro Limited
+-# Copyright 2019-2023 Arm Limited
++# Copyright 2019-2025 Arm Limited
+ #
+ # SPDX-License-Identifier: Apache-2.0
+ #
+@@ -451,6 +451,8 @@ class BasedIntParamType(click.ParamType):
+               help='send to OUTFILE the payload or payload''s digest instead '
+               'of complied image. These data can be used for external image '
+               'signing')
++@click.option('--psa-key-id', type=int, required=False,
++              help='Integer key ID of the signing key.')
+ @click.command(help='''Create a signed or unsigned image\n
+                INFILE and OUTFILE are parsed as Intel HEX if the params have
+                .hex extension, otherwise binary format is used''')
+@@ -464,7 +466,7 @@ def sign(key, public_key_format, align, version, pad_sig, header_size,
+          dependencies, load_addr, hex_addr, erased_val, save_enctlv,
+          security_counter, boot_record, custom_tlv, custom_tlv_file, rom_fixed, max_align,
+          clear, fix_sig, fix_sig_pubkey, sig_out, user_sha, hmac_sha, is_pure,
+-         vector_to_sign, non_bootable, vid, cid):
++         vector_to_sign, non_bootable, vid, cid, psa_key_id):
+ 
+     if confirm or test:
+         # Confirmed but non-padded images don't make much sense, because
+@@ -480,6 +482,10 @@ def sign(key, public_key_format, align, version, pad_sig, header_size,
+                       non_bootable=non_bootable, vid=vid, cid=cid)
+     compression_tlvs = {}
+     img.load(infile)
++    # If the user passed a PSA key ID, apply it here:
++    if psa_key_id is not None:
++        click.echo(f"Signing with PSA key ID: {psa_key_id}")
++        img.set_key_id(psa_key_id)
+     key = load_key(key) if key else None
+     enckey = load_key(encrypt) if encrypt else None
+     if enckey and key and ((isinstance(key, keys.ECDSA256P1) and
+-- 
+2.34.1
+

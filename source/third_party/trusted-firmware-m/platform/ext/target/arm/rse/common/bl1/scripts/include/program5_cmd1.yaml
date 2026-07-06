@@ -1,0 +1,16 @@
+#-------------------------------------------------------------------------------
+# SPDX-FileCopyrightText: Copyright The TrustedFirmware-M Contributors
+#
+# SPDX-License-Identifier: BSD-3-Clause
+#
+#-------------------------------------------------------------------------------
+# This command waits for trigger 4, then sets GPO value to 0x06
+
+CTRL:
+    USEGPO: 1
+    USESRCTRIGIN: 1
+SRCTRIGINCFG:
+  SRCTRIGINTYPE: 'hw'
+  SRCTRIGINSEL: 'sam_integrity_checker'
+GPOVAL0: 0x00000006
+LINKADDR: "program5_cmd2_exec_addr"

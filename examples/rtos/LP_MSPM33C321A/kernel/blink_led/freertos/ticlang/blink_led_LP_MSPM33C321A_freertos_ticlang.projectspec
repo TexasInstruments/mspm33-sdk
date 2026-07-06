@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectSpec>
+    <applicability>
+        <when>
+            <context
+                deviceFamily="ARM"
+                deviceId="MSPM33C321A"
+            />
+        </when>
+    </applicability>
+
+    <import spec="${COM_TI_MSPM33_SDK_INSTALL_DIR}/kernel/freertos/builds/LP_MSPM33C321A/release/ticlang/freertos_builds_LP_MSPM33C321A_release_ticlang.projectspec"/>
+
+    <project
+        title="blink_led"
+        name="blink_led_LP_MSPM33C321A_freertos_ticlang"
+        configurations="Debug"
+        toolChain="TICLANG"
+        connection="TIXDS110_Connection.xml"
+        device="MSPM33C321A"
+        ignoreDefaultDeviceSettings="true"
+        ignoreDefaultCCSSettings="true"
+        references="freertos_builds_LP_MSPM33C321A_release_ticlang"
+        products="sysconfig"
+        compilerBuildOptions="
+            -I${PROJECT_ROOT}
+            -I${PROJECT_ROOT}/${ConfigName}
+            -D__MSPM33C321A__
+            -O2
+            -mfloat-abi=hard
+            -mfpu=fpv5-sp-d16
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/third_party/CMSIS/Core/Include
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/kernel/freertos/Source/include
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/kernel/freertos/Source/portable/TI_ARM_CLANG/ARM_CM33_NTZ/non_secure
+            -I${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/ti/posix/ticlang
+            -I${WORKSPACE_LOC}/freertos_builds_LP_MSPM33C321A_release_ticlang
+            -mcpu=cortex-m33
+            -Wall
+        "
+        linkerBuildOptions="
+            -i${WORKSPACE_LOC}/freertos_builds_LP_MSPM33C321A_release_ticlang/Debug
+            -lfreertos_builds_LP_MSPM33C321A_release_ticlang.lib
+            -l${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/ti/driverlib/lib/ticlang/m33/mspm33c321x/driverlib.a
+            -L${COM_TI_MSPM33_SDK_INSTALL_DIR}/source
+            -L${PROJECT_ROOT}
+            -L${PROJECT_BUILD_DIR}/syscfg
+            -Wl,--rom_model
+            -Wl,--warn_sections
+            -L${CG_TOOL_ROOT}/lib
+            -llibc.a
+        "
+        sysConfigBuildOptions="
+            --output .
+            --product ${COM_TI_MSPM33_SDK_INSTALL_DIR}/.metadata/product.json
+            --compiler ticlang
+        "
+        sourceLookupPath="${COM_TI_MSPM33_SDK_INSTALL_DIR}/source/ti/driverlib"
+        description="Simple FreeRTOS LED blinky demo using two tasks">
+        <property name="buildProfile" value="release"/>
+        <property name="isHybrid" value="true"/>
+        <file path="../../main.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../main-blinky.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../syscfg_c.rov.xs" openOnCreation="false" excludeFromBuild="true" action="copy">
+        </file>
+        <file path="../../blink_led.syscfg" openOnCreation="true" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../README.md" openOnCreation="true" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../README.html" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../freertos/ticlang/mspm33c321a.cmd" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../freertos/ticlang/startup_mspm33c321x_ticlang.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="freertos/ticlang">
+        </file>
+    </project>
+</projectSpec>

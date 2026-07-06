@@ -1,0 +1,337 @@
+/*
+ * Copyright (c) 2023-2025 ARM Limited
+ * Copyright (c) 2023-2025 Cypress Semiconductor Corporation (an Infineon company)
+ * or an affiliate of Cypress Semiconductor Corporation. All rights reserved.
+ *
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ */
+
+#include "cy_device.h"
+#include "cy_scb_uart.h"
+
+#include "config_tfm.h"
+#if DOMAIN_S
+#include "platform_svc_api.h"
+#endif
+#include "uart_stdout.h"
+#include "uart_pdl_stdout.h"
+
+#include "coverity_check.h"
+
+#include <stdio.h>
+#include <limits.h>
+
+#if (IFX_CORE == IFX_CM33) && DOMAIN_S
+#include "tfm_peripherals_def.h"
+
+#define IFX_UART_PDL_SCB                IFX_TFM_SPM_UART
+#define IFX_UART_PDL_SCB_CONFIG         IFX_TFM_SPM_UART_config
+#ifdef IFX_TFM_SPM_UART_FLUSH
+#define IFX_UART_PDL_SCB_FLUSH          IFX_TFM_SPM_UART_FLUSH
+#endif
+
+#elif (IFX_CORE == IFX_CM33) && DOMAIN_NS
+
+#if !IFX_UART_USE_SPM_LOG_MSG
+#include "cycfg_peripherals.h"
+#define IFX_UART_PDL_SCB                IFX_TFM_CM33_NSPE_UART
+#endif
+
+#elif (IFX_CORE == IFX_CM55) && DOMAIN_NS
+
+#if !IFX_UART_USE_SPM_LOG_MSG
+#include "cycfg_peripherals.h"
+#define IFX_UART_PDL_SCB                IFX_TFM_CM55_NSPE_UART
+#endif
+#endif /* (IFX_CORE == IFX_CM33) && DOMAIN_S */
+
+#ifndef IFX_UART_USE_SPM_LOG_MSG
+#define IFX_UART_USE_SPM_LOG_MSG        1
+#endif
+
+#if IFX_UART_USE_SPM_LOG_MSG
+#include "ifx_platform_api.h"
+#if DOMAIN_S
+#include <string.h>
+#include "protection_shared_data.h"
+#endif /* DOMAIN_S */
+#endif /* IFX_UART_USE_SPM_LOG_MSG */
+
+static bool is_stdio_initialized = false;
+
+#if DOMAIN_S
+
+#if IFX_PRINT_CORE_PREFIX
+#ifndef IFX_PRINT_CORE_PREFIX_LIMIT
+/* How much bytes is printed without adding a core prefix */
+#define IFX_PRINT_CORE_PREFIX_LIMIT         512u
+#endif /* IFX_PRINT_CORE_PREFIX_LIMIT */
+
+/* Last core id used to optimize core prefix output */
+static ifx_stdio_core_id_t ifx_stdio_core_id = (ifx_stdio_core_id_t)-1;
+/* How much bytes stdio_output_string_raw processed for active core id */
+static uint32_t ifx_stdio_core_out_len = 0;
+#endif /* IFX_PRINT_CORE_PREFIX */
+
+int32_t stdio_output_string_raw(const char *str, uint32_t len, ifx_stdio_core_id_t core_id)
+{
+#if IFX_UART_ENABLED
+#if IFX_PRINT_CORE_PREFIX
+    if ((ifx_stdio_core_id != core_id) || (ifx_stdio_core_out_len >= IFX_PRINT_CORE_PREFIX_LIMIT)) {
+        /* Get core prefix for core_id */
+        const char *core_prefix = IFX_STDIO_CORE_STR(core_id);
+        size_t core_prefix_len = strlen(core_prefix);
+        ifx_stdio_core_id = core_id;
+        ifx_stdio_core_out_len = 0;
+
+        /* Add prefix */
+        TFM_COVERITY_DEVIATE_BLOCK(MISRA_C_2023_Rule_7_4, "DRIVERS-13923, Cy_SCB_UART_PutArrayBlocking() uses the second parameter as const")
+        TFM_COVERITY_DEVIATE_BLOCK(MISRA_C_2023_Rule_11_8, "DRIVERS-13923, Although we cast away the const, function works with string as read only")
+        Cy_SCB_UART_PutArrayBlocking(IFX_UART_PDL_SCB,
+                                     (uint8_t *)core_prefix,
+                                     core_prefix_len);
+        TFM_COVERITY_BLOCK_END(MISRA_C_2023_Rule_11_8)
+        TFM_COVERITY_BLOCK_END(MISRA_C_2023_Rule_7_4)
+    }
+
+    ifx_stdio_core_out_len += len;
+#endif /* IFX_PRINT_CORE_PREFIX */
+
+    TFM_COVERITY_DEVIATE_LINE(MISRA_C_2023_Rule_11_8, "DRIVERS-13923, Although we cast away the const, function works with string as read only")
+    Cy_SCB_UART_PutArrayBlocking(IFX_UART_PDL_SCB, (uint8_t *)str, len);
+
+#if IFX_UART_PDL_SCB_FLUSH
+    /* Wait while UART is transmitting */
+    while (!Cy_SCB_UART_IsTxComplete(IFX_UART_PDL_SCB)) {}
+#endif
+#endif /* IFX_UART_ENABLED */
+
+    return (len < (uint32_t)INT_MAX) ? (int32_t)len : INT_MAX;
+}
+#endif /* DOMAIN_S */
+
+/**
+ * \note Current implementation doesn't work if access to UART is done
+ *      by multiple threads.
+ *
+ * \ref IFX_PRINT_CORE_PREFIX optional configuration can be used to provide prefix
+ * to the messages. It's useful if system has only one serial port and there is
+ * output from multiple cores/images.
+ */
+TFM_COVERITY_DEVIATE_LINE(MISRA_C_2023_Directive_4_6, "The definition of stdio_output_string is in the non-platform header")
+int stdio_output_string(const char *str, uint32_t len)
+{
+#if IFX_UART_USE_SPM_LOG_MSG
+#if DOMAIN_S
+    /* Check if running in exception handler */
+    if (IFX_IS_SPM_INITILIZING() || (__get_IPSR() != 0U)) {
+        /* In exception handler (SPM privileges) or SPM is not initialzed.
+         * It's safe to access SCB directly */
+        return stdio_output_string_raw(str, len, IFX_STDIO_CORE_S_ID);
+    } else {
+        /* ifx_call_platform_uart_log calls SPM to print message via SVC request.
+         * Finally it will be handled by \ref stdio_output_string_raw.*/
+        return ifx_call_platform_uart_log(str, len, IFX_STDIO_CORE_S_ID);
+    }
+#else
+    /* ifx_platform_log_msg calls Platform service to print message, while
+     * Platform service redirects this message to SPM through SVC request.
+     * Finally it will be handled by \ref stdio_output_string_raw. */
+    return (int32_t)ifx_platform_log_msg(str, len);
+#endif
+#else
+
+#if IFX_UART_ENABLED
+#if defined(IFX_STDIO_PREFIX)
+    /* Validate that IFX_STDIO_PREFIX is a string not a pointer */
+    const char check_prefix[] = IFX_STDIO_PREFIX; (void)check_prefix;
+    /* Add prefix */
+    TFM_COVERITY_DEVIATE_BLOCK(MISRA_C_2023_Rule_7_4, "DRIVERS-13923, Cy_SCB_UART_PutArrayBlocking() uses the second parameter as const")
+    Cy_SCB_UART_PutArrayBlocking(IFX_UART_PDL_SCB,
+                                 IFX_STDIO_PREFIX,
+                                 sizeof(IFX_STDIO_PREFIX) - 1U);
+    TFM_COVERITY_BLOCK_END(MISRA_C_2023_Rule_7_4)
+#endif
+    /* Consider to use synchronization if there is need to share
+     * UART between multiple partitions/threads/cores.
+     * Cy_SCB_UART_PutArrayBlocking has problems if there is more than
+     * one thread/core which access UART at the same time. */
+     TFM_COVERITY_DEVIATE_LINE(MISRA_C_2023_Rule_11_8, "DRIVERS-13923, Although we lose const during cast string to void *, function works with string as read only")
+     Cy_SCB_UART_PutArrayBlocking(IFX_UART_PDL_SCB, (void *)str, len);
+
+#if IFX_UART_PDL_SCB_FLUSH
+    /* Wait while UART is transmitting */
+    while (!Cy_SCB_UART_IsTxComplete(IFX_UART_PDL_SCB)) {}
+#endif
+#endif /* IFX_UART_ENABLED */
+
+    return (len < (uint32_t)INT_MAX) ? (int)len : INT_MAX;
+#endif /* IFX_UART_USE_SPM_LOG_MSG */
+}
+
+/* __ARMCC_VERSION is only defined starting from Arm compiler version 6 */
+#if defined(__ARMCC_VERSION)
+#include <rt_misc.h>
+#include <rt_sys.h>
+
+/* Redirects printf to STDIO_DRIVER in case of ARMCLANG */
+int fputc(int ch, FILE *f)
+{
+    (void)f;
+
+    /* Send byte to USART */
+    (void)stdio_output_string((const char *)&ch, 1);
+
+    /* Return character written */
+    return ch;
+}
+
+#define DEFAULT_HANDLE 0x100
+
+FILEHANDLE _sys_open(const char *name, int openmode)
+{
+    (void)name;
+    (void)openmode;
+
+    return DEFAULT_HANDLE;
+}
+
+int _sys_close(FILEHANDLE fh)
+{
+    (void)fh;
+
+    return 0;
+}
+
+int _sys_write(FILEHANDLE fh, const unsigned char *buf,
+               unsigned len, int mode)
+{
+    (void)fh;
+    (void)buf;
+    (void)len;
+    (void)mode;
+
+    return 0;
+}
+
+int _sys_read(FILEHANDLE fh, unsigned char *buf,
+              unsigned len, int mode)
+{
+    (void)fh;
+    (void)buf;
+    (void)len;
+    (void)mode;
+
+    return 0;
+}
+
+void _ttywrch(int ch)
+{
+    /* Arm C runtime may call this low-level debug character hook.
+     * TF-M does not use semihosting/host console here, so provide a
+     * dummy definition to satisfy the runtime without extra dependencies. */
+    (void)ch;
+ for (;;);
+}
+
+int _sys_istty(FILEHANDLE fh)
+{
+    (void)fh;
+
+    return 1;
+}
+
+int _sys_seek(FILEHANDLE fh, long pos)
+{
+    (void)fh;
+    (void)pos;
+
+    return -1;
+}
+
+int _sys_ensure(FILEHANDLE fh)
+{
+    (void)fh;
+
+    return 0;
+}
+
+long _sys_flen(FILEHANDLE fh)
+{
+    (void)fh;
+
+    return 0;
+}
+
+void _sys_exit(int returncode)
+{
+    /* Required by Arm C runtime as process-exit hook.
+     * Bare-metal TF-M has no process to return to, so trap execution. */
+    (void)returncode;
+    while(1) {};
+}
+
+#elif defined(__GNUC__)
+/* Redirects printf to STDIO_DRIVER in case of GNUARM */
+TFM_COVERITY_DEVIATE_BLOCK(MISRA_C_2023_Directive_4_6, "This definition overrides weak function _write, so we keep numerical types")
+TFM_COVERITY_DEVIATE_BLOCK(MISRA_C_2023_Rule_21_2, "This definition overrides weak function _write, that has a _ symbol")
+TFM_COVERITY_DEVIATE_LINE(MISRA_C_2023_Rule_8_4, "This definition overrides weak function")
+int _write(int fd, char *str, int len)
+{
+    (void)fd;
+
+    /* Send string and return the number of characters written */
+    return (int)stdio_output_string(str, (uint32_t)len);
+}
+TFM_COVERITY_BLOCK_END(MISRA_C_2023_Rule_21_2)
+TFM_COVERITY_BLOCK_END(MISRA_C_2023_Directive_4_6)
+#elif defined(__ICCARM__)
+int putchar(int ch)
+{
+    /* Send byte to USART */
+    (void)stdio_output_string((const char *)&ch, 1);
+
+    /* Return character written */
+    return ch;
+}
+#endif
+
+void stdio_init(void)
+{
+#if defined(IFX_UART_PDL_INITIALIZE_UART) && IFX_UART_ENABLED
+    cy_en_scb_uart_status_t retval;
+
+    retval = Cy_SCB_UART_Init(IFX_UART_PDL_SCB, &IFX_UART_PDL_SCB_CONFIG, NULL);
+
+    Cy_SCB_UART_ClearRxFifo(IFX_UART_PDL_SCB);
+    Cy_SCB_UART_ClearTxFifo(IFX_UART_PDL_SCB);
+
+    if (CY_SCB_UART_SUCCESS == retval) {
+        Cy_SCB_UART_Enable(IFX_UART_PDL_SCB);
+    }
+#endif
+
+    is_stdio_initialized = true;
+}
+
+void stdio_is_initialized_reset(void)
+{
+    is_stdio_initialized = false;
+}
+
+bool stdio_is_initialized(void)
+{
+    return is_stdio_initialized;
+}
+
+void stdio_uninit(void)
+{
+#if defined(IFX_UART_PDL_INITIALIZE_UART) && IFX_UART_ENABLED
+    Cy_SCB_UART_Disable(IFX_UART_PDL_SCB, NULL);
+
+    Cy_SCB_UART_DeInit(IFX_UART_PDL_SCB);
+#endif
+
+    is_stdio_initialized = false;
+}

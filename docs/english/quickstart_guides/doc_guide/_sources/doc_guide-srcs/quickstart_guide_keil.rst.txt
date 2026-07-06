@@ -1,0 +1,190 @@
+MSPM33 SDK QuickStart Guide for Keil
+====================================
+
+1. Introduction
+---------------
+
+This guide is intended to assist users in the initial setup and demonstration of running their first MSPM33 application with Keil. This guide is not intended to explain the functionality of Keil. Please refer to the `Keil <https://www.keil.com/>`__ documentation or the `Keil IDE Guide for MSPM33 MCUs <../../../tools/keil_ide_guide/doc_guide/doc_guide-srcs/keil_ide_guide.html>`__ included with the MSPM33 SDK documentation.
+
+2. Prerequisites
+----------------
+
+The user is expected to have downloaded the following:
+
+-  `MSPM33 SDK <https://www.ti.com/tool/LP-MSPM33C321A>`__
+
+-  `Keil MDK-Arm with uVision <https://www2.keil.com/mdk5>`__ v5.38a or later.
+
+-  `SysConfig 1.28.0 <https://www.ti.com/tool/SYSCONFIG>`__
+
+3. Install the MSPM33 CMSIS-Pack
+--------------------------------
+
+1. Install `Keil MDK-Arm with uVision <#prerequisites>`__
+
+2. In uVision, select **Project → Manage → Pack Installer**
+
+   |image0|
+
+3. In the Pack Installer, select the Texas Instruments devices and select the corresponding MSPM33 family. Then on the right side, install the device specific pack as well as any other pack that may be necessary.
+
+4. Approve the license terms
+
+5. The Pack Installer should show support for the MSPM33 devices.
+
+   |image1|
+
+4. Install the MSPM33 SDK
+-------------------------
+
+1. Download and install the latest `MSPM33 SDK <#prerequisites>`__. Note that there are SDK installers for Windows, Linux and MacOS. The steps below are shown in Windows, but a similar approach should be followed in Linux or MacOS.
+
+2. Execute the installer. Click **Next**.
+
+   |image2|
+
+3. Select an **Installation Directory** and click **Next**. Note the installation directory which by default is ``c:\ti`` which will install the SDK at ``C:\ti\mspm33_sdk_<version>\``. This path will be referred to as ``<MSPM33_SDK_INSTALL_DIR>`` in sections below.
+
+   |image3|
+
+4. Click **Next**
+
+   |image4|
+
+5. After installation is complete, click **Finish**.
+
+   |image5|
+
+5. Using SysConfig with Keil IDE
+--------------------------------
+
+The MSPM33 SDK can also be used with the SysConfig GUI, which can be used to greatly enhance the user experience with the SDK.
+
+A detailed explanation of the installation and usage of SysConfig with MSPM33 is available at `Using SysConfig with MSPM33 <../../../tools/sysconfig_guide/doc_guide/doc_guide-srcs/sysconfig_guide.html>`__ available in the SDK’s Tools Guide.
+
+1. In Keil uVision, select **Tools → Customize Tools Menu** from the menu.
+
+   |image6|
+
+2. Click **Import**
+
+   |image7|
+
+3. Navigate to your SDK folder into ``<MSPM33_SDK_INSTALL_DIR>/tools/keil/`` and open **MSPM33_SDK_syscfg_menu_import.cfg**.
+
+   |image8|
+
+4. Click OK to close window.
+
+   |image9|
+
+5. The Tool will now appear on the menu. It will be used to open the GUI as explained on the next section.
+
+::
+
+   ![](./images/quickstart_guide_keil/keil_customize_tools_view.png)
+
+**Note:** If you run into an error using the configured tool, ensure the imported .cfg file is pointing to the correct paths for the MSPM33 SDK and for SysConfig.
+
+1. Navigate to your SDK folder into ``<MSPM33_SDK_INSTALL_DIR>/tools/keil/``, and open ``<MSPM33_SDK_INSTALL_DIR>/tools/keil/MSPM33_SDK_syscfg_menu_import.cfg`` for editing.
+
+2. Check and modify the SysConfig and SDK versions and paths if needed.
+
+   2.1. The SysConfig version and path is highlighted in red and it should match what was selected during section `Downloading and Installing MSPM33 SysConfig <#downloading-and-installing-mspm33-sysconfig>`__.
+
+   2.2. The SDK version and path is highlighted in blue and corresponds to the ``MSPM33_SDK_INSTALL_DIR``.
+
+   |image10|
+
+6. Import and Build an SDK Example in Keil uVision
+--------------------------------------------------
+
+1. In Keil uVision, select **Project → Open Project**
+
+   |image11|
+
+2. Navigate to a Keil folder in SDK example at ``<MSPM33_SDK_INSTALL_DIR>/examples/`` and open the .uvprojx project file by double-clicking it (**Note:** For the rtos example, use .uvmpw work space file). For example ``<MSPM33_SDK_INSTALL_DIR>/examples/nortos/LP_MSPM33C321A/driverlib/gpio_toggle_output_hiz/keil/gpio_toggle_output_hiz.uvprojx``.
+
+   |image12|
+
+3. The project is ready to build and debug.
+
+|image13|
+
+4. **For SysConfig projects**: To open a *.syscfg file using the SysConfig GUI, ensure you have followed the setup instructions in on section*\ `Enabling SysConfig in Keil <#enabling-sysconfig-in-keil>`__\ *. Double click on the*.syscfg file in your project.
+
+   4.1. With the \*.syscfg file opened on the viewer, click on **Tools** and select the SysConfig tool.
+
+   |image14|
+
+   | 4.2. This will open SysConfig and allow you to configure peripherals, IO pins, and other settings.
+   | Note that this approach only allows one SysConfig GUI to be open at a time.
+
+   |image15|
+
+   4.3. Save your changes in the SysConfig viewer, and switch back to Keil uVision to build your code example.
+
+7. Downloading and debugging to MSPM33 using Keil
+-------------------------------------------------
+
+Keil supports multiple debuggers. This section shows how to use the XDS-110 debugging tool in CMSIS-DAP mode. The XDS-110 is integrated into the MSPM33 LaunchPads.
+
+7.1 Using CMSIS-DAP
+~~~~~~~~~~~~~~~~~~~
+
+1. Go to the options window for the Keil project imported in the previous step by right clicking on the project folder
+
+|image16|
+
+2. Go to the debug tab and click on the settings button and make sure the settings match those shown in the image below.
+
+|image17|
+
+3. Check that description matches that of the image. If not, click on the add button and select the corresponding MSPM33 MAIN option. The device type is On-chip flash.
+
+|image18|
+
+4. Click Ok on the bottom of the windows to close out the windows and apply all the changes made to the debug settings
+
+|image19|
+
+5. Flash the device with the project by pressing the Load button as shown below
+
+|image20|
+
+6. Hover over the debug tab on the main screen and choose start/stop debug session
+
+|image21|
+
+7. This will start the debug session.
+
+|image22|
+
+8. Known Issues and Frequently Asked Questions (FAQs)
+-----------------------------------------------------
+
+Please refer to `Known Issues and FAQ <../../../../../known_issues_FAQ.html>`__ inside the SDK.
+
+.. |image0| image:: ./images/quickstart_guide_keil/keil_install_1.png
+.. |image1| image:: ./images/quickstart_guide_keil/keil_install_2.png
+.. |image2| image:: ./images/quickstart_guide_keil/sdk_install_1.png
+.. |image3| image:: ./images/quickstart_guide_keil/sdk_install_2.png
+.. |image4| image:: ./images/quickstart_guide_keil/sdk_install_3.png
+.. |image5| image:: ./images/quickstart_guide_keil/sdk_install_4.png
+.. |image6| image:: ./images/quickstart_guide_keil/keil_customize_tools.png
+.. |image7| image:: ./images/quickstart_guide_keil/keil_customize_tools_import.png
+.. |image8| image:: ./images/quickstart_guide_keil/keil_customize_tools_import_file.png
+.. |image9| image:: ./images/quickstart_guide_keil/keil_customize_tools_title.png
+.. |image10| image:: ./images/quickstart_guide_keil/keil_customize_cfg.png
+.. |image11| image:: ./images/quickstart_guide_keil/keil_example_1.png
+.. |image12| image:: ./images/quickstart_guide_keil/keil_example_2.png
+.. |image13| image:: ./images/quickstart_guide_keil/keil_example_3.png
+.. |image14| image:: ./images/quickstart_guide_keil/keil_sysconfig_open.png
+.. |image15| image:: ./images/quickstart_guide_keil/keil_sysconfig_view.png
+.. |image16| image:: ./images/quickstart_guide_keil/keil_CMSIS_example_1.png
+.. |image17| image:: ./images/quickstart_guide_keil/keil_CMSIS_example_4.png
+.. |image18| image:: ./images/quickstart_guide_keil/keil_CMSIS_example_3.png
+.. |image19| image:: ./images/quickstart_guide_keil/keil_CMSIS_example_5.png
+.. |image20| image:: ./images/quickstart_guide_keil/keil_CMSIS_example_8.png
+.. |image21| image:: ./images/quickstart_guide_keil/keil_CMSIS_example_6.png
+.. |image22| image:: ./images/quickstart_guide_keil/keil_CMSIS_example_7.png

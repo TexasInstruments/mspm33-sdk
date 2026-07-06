@@ -1,0 +1,6 @@
+[submodule "framework"]
+	path = framework
+	url = ssh://git@bitbucket.itg.ti.com/mspsec/mbedtls-framework.git
+[submodule "mldsa-native"]
+	path = drivers/pqcp/mldsa-native
+	url = ssh://git@bitbucket.itg.ti.com/mspsec/mldsa-native.git

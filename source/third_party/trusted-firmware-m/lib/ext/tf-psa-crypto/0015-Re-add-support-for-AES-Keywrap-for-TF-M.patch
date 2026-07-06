@@ -1,0 +1,248 @@
+From d8d5b0c3e8cc9e02cdc38d0fdf064303f5e8ae24 Mon Sep 17 00:00:00 2001
+From: David Vincze <david.vincze@arm.com>
+Date: Thu, 2 Apr 2026 13:33:21 +0000
+Subject: [PATCH 15/17] Re-add support for AES Keywrap for TF-M
+
+AES keywrap support was previously added for TF-M (commit dc5843f252)
+but was unintentionally removed when the PSA interface headers were
+aligned to TF-PSA-Crypto 1.0.0 (commit 9f2d6c6) since these changes
+were not included in any .patch files.
+
+Change-Id: I09dd45f93b3e42f8afa51c87014e6e73c3532499
+Signed-off-by: Waleed Elmelegy <waleed.elmelegy@arm.com>
+Signed-off-by: David Vincze <david.vincze@arm.com>
+---
+ include/psa/crypto.h        | 126 ++++++++++++++++++++++++++++++++++++
+ include/psa/crypto_values.h |  65 +++++++++++++++++++
+ 2 files changed, 191 insertions(+)
+
+diff --git a/include/psa/crypto.h b/include/psa/crypto.h
+index 1bd257431..d53e79b33 100644
+--- a/include/psa/crypto.h
++++ b/include/psa/crypto.h
+@@ -3142,6 +3142,132 @@ psa_status_t psa_verify_message(mbedtls_svc_key_id_t key,
+                                 const uint8_t *signature,
+                                 size_t signature_length);
+ 
++/**
++ * \function psa_unwrap_key
++ *
++ * \brief Unwrap and import a key using a specified wrapping key.
++ *
++ * The key is unwrapped and extracted from the `data` buffer. Its location,
++ * policy, and type are taken from `attributes`. The wrapped key determines the
++ * size. `psa_get_key_bits(attributes)` must either match the size or be `0`.
++ * Zero-sized keys must be rejected by the implementation.
++ *
++ * \note The function first decrypts \c data using \c alg and `wrapping_key`, then
++ *       processes the result and `attributes` as if calling `psa_import_key()`.
++ *
++ * \note The key material remains within the cryptoprocessor, providing an extra
++ *       layer of protection.
++ *
++ * \note The API does not support asymmetric private key objects outside of a
++ *       key pair. If the public key is missing, it will be reconstructed from
++ *       the private key.
++ *
++ * \note Implementation recommendation: support unwrapping keys created via
++ *       `psa_wrap_key()` using the same algorithm and compatible attributes.
++ *       Reject clearly malformed or truncated data.
++ *
++ * \param attributes            The attributes for the new key.
++ *                              The following attributes are required for all
++ *                              keys:
++ *                                - The key type determines how the decrypted
++ *                                  `data` buffer is interpreted.
++ *                              The following attributes must be set for keys
++ *                              used in cryptographic operations:
++ *                                - The key permitted-algorithm policy, see
++ *                                  \ref permitted-algorithms.
++ *                                - The key usage flags, see \ref key-usage-flags.
++ *                              The following attributes must be set for keys
++ *                              that do not use the default volatile lifetime:
++ *                                - The key lifetime, see \ref key-lifetimes.
++ *                                - The key identifier is required for a key
++ *                                  with a persistent lifetime, see
++ *                                  \ref key-identifiers.
++ *                              The following attributes are optional:
++ *                                - If the key size is nonzero, it must be equal
++ *                                  to the key size determined from `data`.
++ *
++ *                              \note This is an input parameter: it is not
++ *                              updated with the final key attributes.
++ *                              The final attributes of the new key can be
++ *                              queried by calling `psa_get_key_attributes()` with
++ *                              the key's identifier.
++ *
++ * \param wrapping_key          Identifier of the key to use for the unwrapping
++ *                              operation. It must permit the usage
++ *                              `PSA_KEY_USAGE_UNWRAP`.
++ *
++ * \param alg                   The key-wrapping algorithm: a value of type
++ *                              `psa_algorithm_t` such that
++ *                              `PSA_ALG_IS_KEY_WRAP(alg)` is true.
++ *
++ * \param[in] data                  Buffer containing the wrapped key data.
++ *                              The content of this buffer is unwrapped using
++ *                              the algorithm `alg`, and then interpreted
++ *                              according to the type declared in `attributes`.
++ *
++ * \param data_length           Size of the `data` buffer in bytes.
++ *
++ * \param key                   On success, an identifier for the newly created
++ *                              key. `PSA_KEY_ID_NULL` on failure.
++ *
++ * \retval #PSA_SUCCESS
++ *         Success. If the key is persistent, the key material and metadata have
++ *         been saved to persistent storage.
++ *
++ * \retval #PSA_ERROR_ALREADY_EXISTS
++ *         Attempt to create a persistent key, but a persistent key with the
++ *         same identifier already exists.
++ *
++ * \retval #PSA_ERROR_INVALID_SIGNATURE
++ *         The wrapped key data could not be authenticated.
++ *
++ * \retval #PSA_ERROR_INVALID_HANDLE
++ *         `wrapping_key` is not a valid key identifier.
++ *
++ * \retval #PSA_ERROR_NOT_SUPPORTED
++ *         The following conditions can result in this error:
++ *           - `alg` is not supported or is not a key-wrapping algorithm.
++ *           - `wrapping_key` is not supported for use with `alg`.
++ *           - The key attributes are not supported, either generally or in the
++ *             specified storage location.
++ *
++ * \retval #PSA_ERROR_INVALID_ARGUMENT
++ *         The following conditions can result in this error:
++ *           - `alg` is not a key-wrapping algorithm.
++ *           - `wrapping_key` is not compatible with `alg`.
++ *           - The key type is invalid.
++ *           - The key size is nonzero and is incompatible with the data.
++ *           - The key lifetime is invalid.
++ *           - The key identifier is invalid for the key lifetime.
++ *           - Invalid key usage flags.
++ *           - Invalid permitted algorithm.
++ *           - Invalid key attributes overall.
++ *           - Invalid key format or data layout.
++ *
++ * \retval #PSA_ERROR_NOT_PERMITTED
++ *         The following conditions can result in this error:
++ *           - `wrapping_key` lacks the `PSA_KEY_USAGE_UNWRAP` flag or does not
++ *             permit the requested algorithm.
++ *           - Creating a key with the specified attributes is not allowed by
++ *             implementation policy.
++ *
++ * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
++ * \retval #PSA_ERROR_INSUFFICIENT_STORAGE
++ * \retval #PSA_ERROR_COMMUNICATION_FAILURE
++ * \retval #PSA_ERROR_STORAGE_FAILURE
++ * \retval #PSA_ERROR_DATA_CORRUPT
++ * \retval #PSA_ERROR_DATA_INVALID
++ * \retval #PSA_ERROR_CORRUPTION_DETECTED
++ * \retval #PSA_ERROR_BAD_STATE
++ *         The library requires initializing by a call to `psa_crypto_init()`.
++ */
++psa_status_t psa_unwrap_key(const psa_key_attributes_t * attributes,
++                            psa_key_id_t wrapping_key,
++                            psa_algorithm_t alg,
++                            const uint8_t * data,
++                            size_t data_length,
++                            psa_key_id_t * key);
++
+ /**
+  * \brief Sign a hash or short message with a private key.
+  *
+diff --git a/include/psa/crypto_values.h b/include/psa/crypto_values.h
+index 8d851f889..f6b0e8d7f 100644
+--- a/include/psa/crypto_values.h
++++ b/include/psa/crypto_values.h
+@@ -779,6 +779,7 @@
+ #define PSA_ALG_CATEGORY_KEY_DERIVATION         ((psa_algorithm_t) 0x08000000)
+ #define PSA_ALG_CATEGORY_KEY_AGREEMENT          ((psa_algorithm_t) 0x09000000)
+ #define PSA_ALG_CATEGORY_XOF                    ((psa_algorithm_t) 0x0d000000)
++#define PSA_ALG_CATEGORY_KEY_WRAP               ((psa_algorithm_t) 0x0B000000)
+ 
+ /** Whether an algorithm is vendor-defined.
+  *
+@@ -2321,6 +2322,48 @@
+ #define PSA_ALG_GET_HASH(alg) \
+     (((alg) & 0x000000ff) == 0 ? ((psa_algorithm_t) 0) : 0x02000000 | ((alg) & 0x000000ff))
+ 
++/**
++ * The AES-KW key-wrapping algorithm.
++ *
++ * This is the NIST Key Wrap algorithm, using an AES key-encryption key, as
++ * defined in [NIST SP 800-38F](https://doi.org/10.6028/NIST.SP.800-38F).
++ * The algorithm is also specified in [RFC 3394](https://datatracker.ietf.org/
++ * doc/html/rfc3394).
++ *
++ * Keys to be wrapped must have a length that is a multiple of the AES
++ * 'semi-block' size — that is, a multiple of 8 bytes.
++ *
++ * To wrap keys whose lengths are not a multiple of the AES semi-block size,
++ * use \c PSA_ALG_AES_KWP.
++ */
++#define PSA_ALG_AES_KW ((psa_algorithm_t)0x0B400100)
++
++/**
++ * The AES-KWP key-wrapping algorithm with padding.
++ *
++ * This is the NIST Key Wrap with Padding algorithm, using an AES key-encryption
++ * key, as defined in [NIST SP 800-38F](https://doi.org/10.6028/NIST.SP.800-38F).
++ * The algorithm is also specified in [RFC 5649](https://datatracker.ietf.org/
++ * doc/html/rfc5649).
++ *
++ * This algorithm can wrap a key of any length.
++ */
++#define PSA_ALG_AES_KWP ((psa_algorithm_t)0x0BC00200)
++
++/**
++ * \brief Check whether the specified algorithm is a key-wrapping algorithm.
++ *
++ * \param alg                   An algorithm identifier; a value of type
++ *                              \c psa_algorithm_t.
++ *
++ * \return                       1 if \c alg is a key-wrapping algorithm,
++ *                               0 otherwise. This macro can return either
++ *                               0 or 1 if \c alg is not a supported algorithm
++ *                              identifier.
++ */
++#define PSA_ALG_IS_KEY_WRAP(alg)                                     \
++    (((alg) & PSA_ALG_CATEGORY_MASK) == PSA_ALG_CATEGORY_AES_KEY_WRAP)
++
+ /**@}*/
+ 
+ /** \defgroup key_lifetimes Key lifetimes
+@@ -2709,6 +2752,28 @@ static inline int mbedtls_svc_key_id_is_null(mbedtls_svc_key_id_t key)
+  */
+ #define PSA_KEY_USAGE_VERIFY_DERIVATION         ((psa_key_usage_t) 0x00008000)
+ 
++
++/**
++ * Permission to wrap another key with the key.
++ *
++ * This flag is required to use the key in a key-wrapping operation.
++ *
++ * The flag must be present on keys used with the following APIs:
++ *   - `psa_wrap_key()`
++ */
++#define PSA_KEY_USAGE_WRAP ((psa_key_usage_t)0x00010000)
++
++/**
++ * \brief Permission to unwrap another key with the key.
++ *
++ * This flag is required to use the key in a key-unwrapping operation.
++ *
++ * The flag must be present on keys used with the following APIs:
++ *   - `psa_unwrap_key()`
++ */
++#define PSA_KEY_USAGE_UNWRAP ((psa_key_usage_t)0x00020000)
++
++
+ /**@}*/
+ 
+ /** \defgroup derivation Key derivation
+-- 
+2.34.1
+

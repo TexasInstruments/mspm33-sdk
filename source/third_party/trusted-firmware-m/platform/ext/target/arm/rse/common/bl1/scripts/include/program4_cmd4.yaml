@@ -1,0 +1,17 @@
+#-------------------------------------------------------------------------------
+# SPDX-FileCopyrightText: Copyright The TrustedFirmware-M Contributors
+#
+# SPDX-License-Identifier: BSD-3-Clause
+#
+#-------------------------------------------------------------------------------
+# Wait for trigger 5 (the integrity checker success trigger) and if it succeeds,
+# then run the first command in the recently-loaded OTP ICS (program 5)
+
+CTRL:
+    USEGPO: 1
+    USESRCTRIGIN: 1
+SRCTRIGINCFG:
+  SRCTRIGINTYPE: 'hw'
+  SRCTRIGINSEL: 'integrity_checker'
+GPOVAL0: 0x00000004
+LINKADDR: 'program5_cmd0_exec_addr'

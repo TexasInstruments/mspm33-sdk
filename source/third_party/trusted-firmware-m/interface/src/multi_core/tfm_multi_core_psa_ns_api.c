@@ -1,0 +1,154 @@
+/*
+ * SPDX-FileCopyrightText: Copyright The TrustedFirmware-M Contributors
+ *
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ */
+
+#include <stdint.h>
+#include <stdbool.h>
+#include <string.h>
+
+#include "psa/api_broker.h"
+#include "psa/client.h"
+#include "psa/error.h"
+#include "tfm_ns_mailbox.h"
+
+/*
+ * TODO
+ * Currently, force all the non-secure client to share the same ID.
+ *
+ * It requires a more clear mechanism to synchronize the non-secure client
+ * ID with SPE in dual core scenario.
+ * In current design, the value is transferred to SPE via mailbox message.
+ * A dedicated routine to receive the non-secure client information in
+ * TF-M core/SPM in dual core scenario should be added besides current
+ * implementation for single Armv8-M.
+ * The non-secure client identification is shared with SPE in
+ * single Armv8-M scenario via CMSIS TrustZone context management API,
+ * which may not work in dual core scenario.
+ */
+#define NON_SECURE_CLIENT_ID            (-1)
+
+/*
+ * TODO
+ * Require a formal definition of errors related to mailbox in PSA client call.
+ */
+#define PSA_INTER_CORE_COMM_ERR         (INT32_MIN + 0xFF)
+
+/*
+ **** API functions for Multi Core Interface ***
+ *
+ * Thir names are resolved in the api_broker header file.
+ *
+ * The client always calls the APIs with the standard names.
+ */
+
+uint32_t PSA_FRAMEWORK_VERSION_MULTICORE(void)
+{
+    struct psa_client_params_t params = {0};
+    uint32_t version = PSA_VERSION_NONE;
+    int32_t ret;
+    struct mailbox_reply_t reply = {.return_val = MAILBOX_GENERIC_ERROR};
+
+    ret = tfm_ns_mailbox_client_call(MAILBOX_PSA_FRAMEWORK_VERSION,
+                                     &params, NON_SECURE_CLIENT_ID,
+                                     &reply);
+    if (ret == MAILBOX_SUCCESS) {
+        version = (uint32_t)reply.return_val;
+    }
+
+    return version;
+}
+
+uint32_t PSA_VERSION_MULTICORE(uint32_t sid)
+{
+    struct psa_client_params_t params;
+    uint32_t version = PSA_VERSION_NONE;
+    int32_t ret;
+    struct mailbox_reply_t reply = {.return_val = MAILBOX_GENERIC_ERROR};
+
+    params.psa_version_params.sid = sid;
+
+    ret = tfm_ns_mailbox_client_call(MAILBOX_PSA_VERSION, &params,
+                                     NON_SECURE_CLIENT_ID,
+                                     &reply);
+    if (ret == MAILBOX_SUCCESS) {
+        version = (uint32_t)reply.return_val;
+    }
+
+    return version;
+}
+
+psa_handle_t PSA_CONNECT_MULTICORE(uint32_t sid, uint32_t version)
+{
+    struct psa_client_params_t params;
+    psa_handle_t psa_handle = PSA_NULL_HANDLE;
+    int32_t ret;
+    struct mailbox_reply_t reply = {.return_val = MAILBOX_GENERIC_ERROR};
+
+    params.psa_connect_params.sid = sid;
+    params.psa_connect_params.version = version;
+
+    ret = tfm_ns_mailbox_client_call(MAILBOX_PSA_CONNECT, &params,
+                                     NON_SECURE_CLIENT_ID,
+                                     &reply);
+    if (ret == MAILBOX_SUCCESS) {
+        psa_handle = (psa_handle_t)reply.return_val;
+    }
+
+    return psa_handle;
+}
+
+psa_status_t PSA_CALL_MULTICORE(psa_handle_t handle, int32_t type,
+                      const psa_invec *in_vec, size_t in_len,
+                      psa_outvec *out_vec, size_t out_len)
+{
+    struct psa_client_params_t params;
+    int32_t ret;
+    struct mailbox_reply_t reply = {.return_val = MAILBOX_GENERIC_ERROR, .out_vec_len = {0}};
+    psa_status_t status = PSA_INTER_CORE_COMM_ERR;
+
+    if ((in_len > IOVEC_LEN(params.psa_call_params.in_vec)) ||
+        (out_len > IOVEC_LEN(params.psa_call_params.out_vec)) ||
+        ((in_len + out_len) > PSA_MAX_IOVEC) ||
+        ((in_vec == NULL) && (in_len > 0U)) ||
+        ((out_vec == NULL) && (out_len > 0U))) {
+        return PSA_ERROR_PROGRAMMER_ERROR;
+    }
+
+    params.psa_call_params.handle = handle;
+    params.psa_call_params.type = type;
+    if (in_len > 0U) {
+        memcpy(params.psa_call_params.in_vec, in_vec, sizeof(in_vec[0]) * in_len);
+    }
+    params.psa_call_params.in_len = in_len;
+    if (out_len > 0U) {
+        memcpy(params.psa_call_params.out_vec, out_vec, sizeof(out_vec[0]) * out_len);
+    }
+    params.psa_call_params.out_len = out_len;
+
+    ret = tfm_ns_mailbox_client_call(MAILBOX_PSA_CALL, &params,
+                                     NON_SECURE_CLIENT_ID,
+                                     &reply);
+    if (ret == MAILBOX_SUCCESS) {
+        status = (psa_status_t)reply.return_val;
+    }
+
+    for (size_t i = 0; i < out_len; i++) {
+        out_vec[i].len = reply.out_vec_len[i];
+    }
+
+    return status;
+}
+
+void PSA_CLOSE_MULTICORE(psa_handle_t handle)
+{
+    struct psa_client_params_t params;
+    struct mailbox_reply_t reply = {.return_val = MAILBOX_GENERIC_ERROR};
+
+    params.psa_close_params.handle = handle;
+
+    (void)tfm_ns_mailbox_client_call(MAILBOX_PSA_CLOSE, &params,
+                                     NON_SECURE_CLIENT_ID, &reply);
+}

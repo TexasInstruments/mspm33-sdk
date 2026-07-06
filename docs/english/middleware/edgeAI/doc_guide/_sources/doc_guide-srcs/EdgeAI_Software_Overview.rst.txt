@@ -1,0 +1,145 @@
+Edge AI Software Solution for MSPM33 Devices
+============================================
+
+Overview
+--------
+
+The Edge AI Software solution for MSPM33 devices is a comprehensive framework designed to enable artificial intelligence capabilities on Texas Instruments’ MSPM33 microcontroller units. This solution empowers developers to implement machine learning models directly on resource-constrained MSPM33 devices, enabling real-time inference at the edge with minimal power consumption.
+
+Software Components in SDK
+--------------------------
+
+The Edge AI software solution consists of the following key components:
+
+1. Feature Extraction Library
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Feature Extraction module provides capabilities to process raw sensor data and extract meaningful features that can be used as inputs to machine learning models. This component supports:
+
+-  Signal processing functions
+-  Time-domain feature extraction
+-  Frequency-domain transformations (FFT)
+-  Statistical feature calculations
+-  Windowing functions (Hann window with pre-computed coefficients)
+
+The feature extraction library leverages ARM CMSIS-DSP functions for efficient signal processing operations.
+
+**MSPM33-Specific Enhancements:** - FPU-optimized floating-point FFT operations - Pre-computed Hann window coefficients for various FFT sizes (32, 64, 128, 256, 512, 1024, 2048, 4096) - Enhanced precision with native floating-point support - Optimized batch normalization for neural network inputs
+
+2. Device Agent Protocol (DAP)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Communication interfaces for device management and data exchange between the MSP device and Model Composer GUI. This is needed for the data capture and live preview features of the Model Composer. The communication interface is implemented using UART and is configurable for different data formats and baud rates.
+
+**MSPM33-Specific DAP Features:** - Enhanced DAP core implementation optimized for Cortex-M33 - Modular architecture with separate DAP Core, DAP Interface, and DAP Link layers - Support for high-speed UART communication - Improved data throughput for real-time visualization
+
+3. Examples
+~~~~~~~~~~~
+
+The solution includes a variety of example applications demonstrating Edge AI capabilities:
+
+Basic Examples
+^^^^^^^^^^^^^^
+
+-  **Waveform Classifier AI**: Classification of different waveform patterns
+
+Advanced Examples
+^^^^^^^^^^^^^^^^^
+
+-  **Character Recognition**: Basic OCR capabilities (digit recognition using CNN)
+-  **Motor Fault AI**: Detection of motor faults through vibration analysis
+-  **AC Arc Fault Detection**: Safety-critical application for electrical systems
+-  **PIR Motion Detection**: Passive infrared sensor-based motion detection
+
+MSPM33-Specific Examples
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+-  **Generic Time Series Classification**: Configurable time series classification framework
+-  **Generic Time Series Anomaly Detection**: Anomaly detection for various sensor inputs
+-  **Generic Time Series Forecasting**: Predictive analytics for time series data
+-  **Generic Time Series Regression**: Regression models for continuous output prediction
+-  **Arc Fault Detection**: Optimized arc fault detection for MSPM33
+-  **Blower Imbalance Detection**: HVAC system fault monitoring
+-  **Motor Fault with Live Preview**: Real-time motor fault visualization
+-  **Torque Measurement**: Torque sensing and measurement application
+
+Data Collection and Visualization
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+-  **AC Arc Fault Data Capture**: Tools for capturing arc fault data for training
+-  **Motor Fault AI Data Capture**: Utilities for collecting motor vibration data
+-  **Motor Fault AI Live Preview**: Real-time visualization of motor fault detection
+-  **Time Series Data Capture**: General-purpose time series data collection
+-  **Time Series Live Preview**: Visualization tools for time series analysis
+-  **PIR Detection Data Capture**: PIR sensor data collection
+
+Hardware Support
+----------------
+
+The Edge AI software solution supports the following microcontroller families:
+
+MSPM33 Family (Cortex-M33)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-  **MSPM33C321A** LaunchPad development kit
+
+   -  Arm Cortex-M33 core with TrustZone security
+   -  Hardware FPU for optimized floating-point operations
+   -  Enhanced memory and peripheral capabilities
+
+Development Environment
+-----------------------
+
+The solution is designed to be used with:
+
+-  Code Composer Studio (CCS Theia)
+-  TI MSPM33 SDK (for MSPM33 devices)
+-  ARM CMSIS-DSP library
+-  CLI Tools (Pytorch based framework to train and develop AI/ML Models)
+-  CCStudio™ Edge AI Studio (GUI which enables accelerated development by enabling data capture)
+
+Development Workflow
+--------------------
+
+The Edge AI software solution supports the following workflow:
+
+1. **Data Collection**: Use data capture examples to collect sensor data from your application
+2. **Model Training**: Train models using collected data on a desktop environment
+3. **Model Deployment**: Deploy trained models to MSP devices using the provided framework
+4. **Performance Optimization**: Use NPU-accelerated variants for improved performance
+5. **Inference Visualization**: Leverage live preview tools to visualize the inference results on the GUI in real time
+
+Performance Considerations
+--------------------------
+
+When implementing Edge AI applications on MSP devices, consider:
+
+1. **Memory Constraints**: Optimize models to fit within the limited RAM and flash memory
+2. **Processing Power**: Balance model complexity with real-time requirements
+3. **Energy Efficiency**: Leverage low-power modes when inference is not needed
+4. **NPU Acceleration**: Use NPU-optimized versions for computationally intensive models
+5. **Real-time Requirements**: Consider sampling rates and processing latency for your application
+
+MSPM33-Specific Performance Benefits
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-  **FPU Acceleration**: Native floating-point operations provide faster feature extraction
+-  **Enhanced Memory**: Larger RAM and flash enables more complex models
+-  **TrustZone Security**: Secure execution environment for sensitive AI applications
+-  **Higher Clock Speed**: Improved inference throughput for real-time applications
+
+Related Documentation
+---------------------
+
+For detailed deployment instructions, refer to the following guides:
+
+-  `Deploying Models Using CLI Tools <./EdgeAI_Deployment_Guide_CLI.md>`__ - Command-line interface workflow for model training and deployment
+-  `Deploying Models Using CCStudio™ Edge AI Studio GUI <./EdgeAI_Deployment_Guide_EdgeAI_Studio.md>`__ - GUI-based workflow
+-  `Feature Extraction Library Guide <./EdgeAI_Feature_Extraction_Library.md>`__ - Detailed documentation on the feature extraction module
+
+Conclusion
+----------
+
+The Edge AI Software solution for MSP devices enables developers to bring machine learning capabilities to ultra-low-power edge devices. By leveraging efficient feature extraction, optimized inference engines, and optional NPU acceleration, developers can create intelligent embedded systems for a wide range of applications while maintaining the power efficiency expected from MSP microcontrollers.
+
+The comprehensive set of examples provides a foundation for rapid development and exploration of Edge AI capabilities, from basic waveform classification to advanced use cases like motor fault detection and character recognition, with dedicated tools for both standard CPU execution and NPU-accelerated performance.

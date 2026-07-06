@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MSPM33 SDK Examples Guide &mdash; MSPM33 SDK User Guide 1.04.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Software Bill of Materials" href="sbom.html" />
+    <link rel="prev" title="MSPM33 SDK User Guide" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> MSPM33 SDK User Guide
+          </a>
+              <div class="version">
+                1.04.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MSPM33 SDK Examples Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mspm33-sdk-examples">2. MSPM33 SDK Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#demos">2.1 Demos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#freertos">2.2 FreeRTOS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bsl-boot-strap-loader">2.3 BSL (Boot Strap Loader)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cmsis-dsp">2.4 CMSIS DSP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#crypto">2.5 Crypto</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ec-ecdsa">2.5.1 EC ECDSA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hash">2.5.2 Hash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pqc-ml-dsa">2.5.3 PQC ML-DSA</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#security">2.6 Security</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#boot-manager">2.7 Boot Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lin">2.8 LIN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dap-data-access-port">2.9 DAP (Data Access Port)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#edgeai">2.10 EdgeAI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#driverlib">2.11 DriverLib</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#aesadv">2.11.1 aesadv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#comparator-comp">2.11.2 Comparator (COMP)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#crcp">2.11.3 CRCP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#crypto-sha">2.11.4 Crypto SHA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#direct-memory-access-dma">2.11.5 Direct Memory Access (DMA)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eam">2.11.6 EAM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#non-volatile-memory-flashctl">2.11.7 Non-Volatile Memory (FLASHCTL)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gpio">2.11.8 GPIO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#high-speed-adc-hsadc">2.11.9 High-Speed ADC (HSADC)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#inter-integrated-circuit-i2c">2.11.10 Inter-Integrated Circuit (I2C)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#i2s">2.11.11 I2S</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#iwdt">2.11.12 IWDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#controller-area-network-mcan">2.11.13 Controller Area Network (MCAN)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#timer-advanced-tima">2.11.14 Timer - Advanced (TIMA)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#timer-general-purpose-timg">2.11.15 Timer - General Purpose (TIMG)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#timer-generic-timx">2.11.16 Timer - Generic (TIMX)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#real-time-clock-rtc">2.11.17 Real-Time Clock (RTC)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scratchpad">2.11.18 Scratchpad</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spi">2.11.19 SPI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#system-control-sysctl">2.11.20 System Control (SYSCTL)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#systick">2.11.21 SysTick</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tamperio">2.11.22 TamperIO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#true-random-number-generator-trng">2.11.23 True Random Number Generator (TRNG)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#universal-asynchronous-receiver-transmitter-uart">2.11.24 Universal Asynchronous Receiver Transmitter (UART)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wwdt">2.11.25 WWDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other">2.11.26 Other</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#hal">2.12 HAL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#eeprom-emulation">2.13 EEPROM Emulation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#type-a">2.13.1 Type A</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#type-b">2.13.2 Type B</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#crypto-msp-crypto-library">2.14 Crypto (MSP Crypto Library)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#aes-cipher">2.14.1 AES Cipher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sha-3-hash">2.14.2 SHA-3 Hash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pqc-ml-kem">2.14.3 PQC ML-KEM</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#security-psa-crypto-tf-psa-crypto-with-aesadv-hw-acceleration">2.15 Security (PSA Crypto — TF-PSA-Crypto with AESADV HW acceleration)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trusted-firmware-m-tf-m">2.16 Trusted Firmware-M (TF-M)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sbom.html">Software Bill of Materials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdk_users_guide.html">SDK Overview</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MSPM33 SDK User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>MSPM33 SDK Examples Guide</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mspm33-sdk-examples-guide">
+<h1>MSPM33 SDK Examples Guide<a class="headerlink" href="#mspm33-sdk-examples-guide" title="Permalink to this heading">¶</a></h1>
+<section id="introduction">
+<h2>1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h2>
+<p>The MSPM33 SDK is packaged with a wide selection of code examples to enable engineers to develop applications on Texas Instruments’ MSPM33 family of microcontrollers.</p>
+<p>The examples folder is divided into RTOS and non-RTOS subfolders. These folders contain examples for each LaunchPad and are organized based on function with lower-level Driverlib examples, crypto examples, security examples, boot manager examples, BSL examples, CMSIS DSP examples, LIN examples, EdgeAI examples, EEPROM emulation examples, HAL examples, Trusted Firmware-M examples, and demo applications.</p>
+<p>Some examples support <a class="reference external" href="https://www.ti.com/tool/SYSCONFIG">SysConfig</a> to simplify the device configuration and accelerate software development. Refer to the SDK QuickStart guide for more details on how to get started using SysConfig, and look for the SysConfig symbol <img alt="image0" src="../_images/ex_sysconfig.png" /> in the sections below.</p>
+</section>
+<section id="mspm33-sdk-examples">
+<h2>2. MSPM33 SDK Examples<a class="headerlink" href="#mspm33-sdk-examples" title="Permalink to this heading">¶</a></h2>
+<section id="demos">
+<h3>2.1 Demos<a class="headerlink" href="#demos" title="Permalink to this heading">¶</a></h3>
+<p>The MSPM33 SDK includes several demos to showcase the functionalities of various devices.</p>
+<p>Each demo is packaged with its own documentation, full source code, and project files for different supported IDEs and compilers, making the demos easy to use.</p>
+<p>Stay tuned for more examples and functionality.</p>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>cc3200boosterpack_audio_playback</p>
+</td><td><p>Audio playback demo using CC3200 BoosterPack</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>lvgl</p>
+</td><td><p>LVGL graphics library demonstration</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>qspi_flash_readback_DMA</p>
+</td><td><p>QSPI NOR Flash readback using DMA in QPI mode</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>qspi_flash_readback_QPI</p>
+</td><td><p>QSPI NOR Flash readback in QPI mode</p>
+</td><td align="center"><p>Y</p>
+</td></tr></table></section>
+<section id="freertos">
+<h3>2.2 FreeRTOS<a class="headerlink" href="#freertos" title="Permalink to this heading">¶</a></h3>
+<p>The MSPM33 SDK includes FreeRTOS examples to demonstrate how to use the FreeRTOS real-time operating system with MSPM33 devices.</p>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>blink_led</p>
+</td><td><p>Simple FreeRTOS LED blinky demo using two tasks</p>
+</td><td align="center"><p>Y</p>
+</td></tr></table></section>
+<section id="bsl-boot-strap-loader">
+<h3>2.3 BSL (Boot Strap Loader)<a class="headerlink" href="#bsl-boot-strap-loader" title="Permalink to this heading">¶</a></h3>
+<p>The MSPM33 SDK includes BSL examples to demonstrate boot strap loader functionality for firmware updates.</p>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>bsl_host_mcu_to_mspm33c321a_target_i2c</p>
+</td><td><p>BSL host MCU to MSPM33C321A target using I2C communication</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>bsl_host_mcu_to_mspm33c321a_target_uart</p>
+</td><td><p>BSL host MCU to MSPM33C321A target using UART communication</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>secondary_bsl_empty</p>
+</td><td><p>Empty secondary BSL project template</p>
+</td><td align="center"><p>Y</p>
+</td></tr></table></section>
+<section id="cmsis-dsp">
+<h3>2.4 CMSIS DSP<a class="headerlink" href="#cmsis-dsp" title="Permalink to this heading">¶</a></h3>
+<p>The MSPM33 SDK includes CMSIS DSP examples to demonstrate digital signal processing capabilities.</p>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>cmsis_dsp_empty</p>
+</td><td><p>Empty CMSIS DSP project template</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>cmsis_dsp_fft_q15</p>
+</td><td><p>CMSIS DSP FFT Q15 format example</p>
+</td><td align="center"><p>Y</p>
+</td></tr></table></section>
+<section id="crypto">
+<h3>2.5 Crypto<a class="headerlink" href="#crypto" title="Permalink to this heading">¶</a></h3>
+<p>The MSPM33 SDK includes crypto examples using the MSP-CRYPTO-LIB to demonstrate cryptographic operations on MSPM33 devices.</p>
+<section id="ec-ecdsa">
+<h4>2.5.1 EC ECDSA<a class="headerlink" href="#ec-ecdsa" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>ec_ecdsa_p256_sign</p>
+</td><td><p>ECDSA sign function over NIST curve P-256</p>
+</td><td align="center"><p><img alt="image1" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>ec_ecdsa_p256_sha256_verify</p>
+</td><td><p>ECDSA verify function over NIST curve P-256 with SHA-256 pre-hash</p>
+</td><td align="center"><p><img alt="image2" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>ec_ecdsa_p384_sign</p>
+</td><td><p>ECDSA sign function over NIST curve P-384</p>
+</td><td align="center"><p><img alt="image3" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>ec_ecdsa_p384_verify</p>
+</td><td><p>ECDSA verify function over NIST curve P-384</p>
+</td><td align="center"><p><img alt="image4" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>ec_ecdsa_p521_sign</p>
+</td><td><p>ECDSA sign function over NIST curve P-521</p>
+</td><td align="center"><p><img alt="image5" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>ec_ecdsa_p521_verify</p>
+</td><td><p>ECDSA verify function over NIST curve P-521</p>
+</td><td align="center"><p><img alt="image6" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="hash">
+<h4>2.5.2 Hash<a class="headerlink" href="#hash" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>hash_sha256</p>
+</td><td><p>SHA-256 hash computation</p>
+</td><td align="center"><p><img alt="image7" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>hash_sha384</p>
+</td><td><p>SHA-384 hash computation</p>
+</td><td align="center"><p><img alt="image8" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>hash_sha512</p>
+</td><td><p>SHA-512 hash computation</p>
+</td><td align="center"><p><img alt="image9" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="pqc-ml-dsa">
+<h4>2.5.3 PQC ML-DSA<a class="headerlink" href="#pqc-ml-dsa" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>pqc_mldsa_44_keygen</p>
+</td><td><p>ML-DSA-44 key generation</p>
+</td><td align="center"><p><img alt="image10" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>pqc_mldsa_44_sign_pure</p>
+</td><td><p>ML-DSA-44 pure sign</p>
+</td><td align="center"><p><img alt="image11" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>pqc_mldsa_44_sign_ctx_pure</p>
+</td><td><p>ML-DSA-44 sign with context (pure)</p>
+</td><td align="center"><p><img alt="image12" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>pqc_mldsa_44_sign_ctx_prehash</p>
+</td><td><p>ML-DSA-44 sign with context (pre-hash)</p>
+</td><td align="center"><p><img alt="image13" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>pqc_mldsa_44_verify_ctx_pure</p>
+</td><td><p>ML-DSA-44 verify with context (pure)</p>
+</td><td align="center"><p><img alt="image14" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>pqc_mldsa_44_verify_ctx_prehash</p>
+</td><td><p>ML-DSA-44 verify with context (pre-hash)</p>
+</td><td align="center"><p><img alt="image15" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>pqc_mldsa_65_keygen</p>
+</td><td><p>ML-DSA-65 key generation</p>
+</td><td align="center"><p><img alt="image16" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>pqc_mldsa_65_sign_pure</p>
+</td><td><p>ML-DSA-65 pure sign</p>
+</td><td align="center"><p><img alt="image17" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>pqc_mldsa_65_sign_ctx_pure</p>
+</td><td><p>ML-DSA-65 sign with context (pure)</p>
+</td><td align="center"><p><img alt="image18" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>pqc_mldsa_65_sign_ctx_prehash</p>
+</td><td><p>ML-DSA-65 sign with context (pre-hash)</p>
+</td><td align="center"><p><img alt="image19" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>pqc_mldsa_65_verify_pure</p>
+</td><td><p>ML-DSA-65 verify (pure)</p>
+</td><td align="center"><p><img alt="image20" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>pqc_mldsa_87_keygen</p>
+</td><td><p>ML-DSA-87 key generation</p>
+</td><td align="center"><p><img alt="image21" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>pqc_mldsa_87_sign_pure</p>
+</td><td><p>ML-DSA-87 pure sign</p>
+</td><td align="center"><p><img alt="image22" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>pqc_mldsa_87_sign_ctx_pure</p>
+</td><td><p>ML-DSA-87 sign with context (pure)</p>
+</td><td align="center"><p><img alt="image23" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>pqc_mldsa_87_sign_ctx_prehash</p>
+</td><td><p>ML-DSA-87 sign with context (pre-hash)</p>
+</td><td align="center"><p><img alt="image24" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>pqc_mldsa_87_verify_ctx_pure</p>
+</td><td><p>ML-DSA-87 verify with context (pure)</p>
+</td><td align="center"><p><img alt="image25" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>pqc_mldsa_87_verify_ctx_prehash</p>
+</td><td><p>ML-DSA-87 verify with context (pre-hash)</p>
+</td><td align="center"><p><img alt="image26" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+</section>
+<section id="security">
+<h3>2.6 Security<a class="headerlink" href="#security" title="Permalink to this heading">¶</a></h3>
+<p>The MSPM33 SDK includes security examples to demonstrate the security features of MSPM33 devices.</p>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>debug_unlock_L2</p>
+</td><td><p>Debug unlock Level 2 security example</p>
+</td><td align="center"><p><img alt="image27" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>empty</p>
+</td><td><p>Empty security project template</p>
+</td><td align="center"><p><img alt="image28" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>gpio_toggle</p>
+</td><td><p>GPIO toggle example with security features</p>
+</td><td align="center"><p><img alt="image29" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>memory_hide_protect</p>
+</td><td><p>Memory hide and protection example</p>
+</td><td align="center"><p><img alt="image30" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>memory_protect</p>
+</td><td><p>Memory protection example</p>
+</td><td align="center"><p><img alt="image31" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>peripheral_protect_basic</p>
+</td><td><p>Basic peripheral protection example</p>
+</td><td align="center"><p><img alt="image32" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>peripheral_protect_dma</p>
+</td><td><p>DMA peripheral protection example</p>
+</td><td align="center"><p><img alt="image33" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="boot-manager">
+<h3>2.7 Boot Manager<a class="headerlink" href="#boot-manager" title="Permalink to this heading">¶</a></h3>
+<p>The MSPM33 SDK includes boot manager examples to demonstrate secure booting capabilities.</p>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>customer_secure_code</p>
+</td><td><p>Customer Secure Code based off MCUBoot</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>customer_secure_sample_image</p>
+</td><td><p>Customer Secure Sample Image for secure boot</p>
+</td><td align="center"><p>Y</p>
+</td></tr></table></section>
+<section id="lin">
+<h3>2.8 LIN<a class="headerlink" href="#lin" title="Permalink to this heading">¶</a></h3>
+<p>The MSPM33 SDK includes LIN (Local Interconnect Network) examples demonstrating LIN communication.</p>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>lin_commander</p>
+</td><td><p>LIN Commander example</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>lin_responder</p>
+</td><td><p>LIN Responder example</p>
+</td><td align="center"><p>Y</p>
+</td></tr></table></section>
+<section id="dap-data-access-port">
+<h3>2.9 DAP (Data Access Port)<a class="headerlink" href="#dap-data-access-port" title="Permalink to this heading">¶</a></h3>
+<p>The MSPM33 SDK includes DAP examples to demonstrate data access port streaming capabilities.</p>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>dap_streaming</p>
+</td><td><p>DAP streaming example</p>
+</td><td align="center"><p>Y</p>
+</td></tr></table></section>
+<section id="edgeai">
+<h3>2.10 EdgeAI<a class="headerlink" href="#edgeai" title="Permalink to this heading">¶</a></h3>
+<p>The MSPM33 SDK includes EdgeAI examples demonstrating AI inference, data capture, and live preview capabilities using the msp-ai middleware. Examples cover motor fault detection, AC arc fault detection, PIR motion detection, waveform classification, character recognition, and generic timeseries analysis.</p>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>ac_arc_fault_data_capture</p>
+</td><td><p>AC arc fault detection data capture</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>ac_arc_fault_deploy</p>
+</td><td><p>AC arc fault detection AI inference</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>ac_arc_fault_detection_live_preview</p>
+</td><td><p>AC arc fault detection live preview</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>arc_fault</p>
+</td><td><p>Arc fault detection using AI inference</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>blower_imbalance</p>
+</td><td><p>Blower imbalance detection using AI inference</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>character_recognition</p>
+</td><td><p>Single digit character recognition using AI</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>generic_timeseries_anomalydetection</p>
+</td><td><p>Generic timeseries anomaly detection using AI</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>generic_timeseries_classification</p>
+</td><td><p>Generic timeseries classification using AI</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>generic_timeseries_classification_live_preview</p>
+</td><td><p>Generic timeseries classification live preview</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>generic_timeseries_forecasting</p>
+</td><td><p>Generic timeseries forecasting using AI</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>generic_timeseries_regression</p>
+</td><td><p>Generic timeseries regression using AI</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>motor_fault</p>
+</td><td><p>Motor fault detection using AI inference</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>motor_fault_data_capture</p>
+</td><td><p>Motor fault detection data capture</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>motor_fault_deploy</p>
+</td><td><p>Motor fault detection AI deployment</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>motor_fault_live_preview</p>
+</td><td><p>Motor fault detection live preview</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>pir_detection_ai</p>
+</td><td><p>PIR motion detection using AI inference</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>pir_detection_data_capture</p>
+</td><td><p>PIR sensor data capture</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>pir_detection_live_preview</p>
+</td><td><p>PIR motion detection live preview</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>timeseries_data_capture</p>
+</td><td><p>Timeseries ADC data capture</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>torque_measurement</p>
+</td><td><p>Torque measurement using AI inference</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>waveform_classifier_ai</p>
+</td><td><p>Waveform signal classification using AI</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>tida_010997_boosterpack_data_capture</p>
+</td><td><p>TIDA-010997 BoosterPack data capture for AI inference</p>
+</td><td align="center"><p>Y</p>
+</td></tr></table></section>
+<section id="driverlib">
+<h3>2.11 DriverLib<a class="headerlink" href="#driverlib" title="Permalink to this heading">¶</a></h3>
+<p>DriverLib is a set of low level drivers providing an API for accessing MSPM33 registers and full device functionality.</p>
+<p>The examples below use the Driverlib API to demonstrate the device functionality and range from simple use cases such as toggling a GPIO output pin to more complex use cases where multiple device peripherals are used.</p>
+<p>Each example is packaged with its own documentation, full source code, and project files for different supported IDEs and compilers, making the examples easy to use.</p>
+<section id="aesadv">
+<h4>2.11.1 aesadv<a class="headerlink" href="#aesadv" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>aesadv_cbc_256_enc_dec</p>
+</td><td><p>AES256 CBC encryption and decryption example</p>
+</td><td align="center"><p><img alt="image34" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>aesadv_cfb_256_enc_dec</p>
+</td><td><p>AES CFB 256 bit encryption and decryption example</p>
+</td><td align="center"><p><img alt="image35" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>aesadv_ctr_128_enc_dec</p>
+</td><td><p>AES CTR 128 bit encryption and decryption example</p>
+</td><td align="center"><p><img alt="image36" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>aesadv_ecb_256_encrypt</p>
+</td><td><p>AES ECB 256 bit encryption example</p>
+</td><td align="center"><p><img alt="image37" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>aesadv_ecb_256_encrypt_interrupt</p>
+</td><td><p>AES ECB 256 bit encryption example using interrupts</p>
+</td><td align="center"><p><img alt="image38" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>aesadv_gcm_128_enc_dec</p>
+</td><td><p>AES GCM 128 bit encryption and decryption example, with keystore</p>
+</td><td align="center"><p><img alt="image39" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>aesadv_gcm_auto_128_enc_dec</p>
+</td><td><p>AES GCM auto 128 bit encryption and decryption example</p>
+</td><td align="center"><p><img alt="image40" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>aesadv_ofb_256_enc_dec</p>
+</td><td><p>AES OFB 256 bit encryption and decryption example</p>
+</td><td align="center"><p><img alt="image41" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="comparator-comp">
+<h4>2.11.2 Comparator (COMP)<a class="headerlink" href="#comparator-comp" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>comp_analog_filter</p>
+</td><td><p>Comparator using external inputs with hysteresis and output analog filter</p>
+</td><td align="center"><p><img alt="image42" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>comp_analog_wakeup_windowmode</p>
+</td><td><p>Comparator Analog Wakeup feature in window mode</p>
+</td><td align="center"><p><img alt="image43" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>comp_dac_to_timer_event</p>
+</td><td><p>Comparator output using 8-bit DAC triggers a timer event to measure timing</p>
+</td><td align="center"><p><img alt="image44" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>comp_hs_dac_vref_external</p>
+</td><td><p>Comparator in high-speed mode using 8-bit DAC with external VREF</p>
+</td><td align="center"><p><img alt="image45" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>comp_hs_tima_pwm_fault</p>
+</td><td><p>Comparator in high-speed mode triggers a TIMA fault</p>
+</td><td align="center"><p><img alt="image46" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>comp_lp_dac_vref_internal</p>
+</td><td><p>Comparator in low-power mode using 8-bit DAC with internal VREF</p>
+</td><td align="center"><p><img alt="image47" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="crcp">
+<h4>2.11.3 CRCP<a class="headerlink" href="#crcp" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>crcp_calculate_checksum</p>
+</td><td><p>CRCP16 checksum calculation of a memory block</p>
+</td><td align="center"><p><img alt="image48" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>crcp_calculate_checksum_32bit</p>
+</td><td><p>CRCP32 checksum calculation of a memory block</p>
+</td><td align="center"><p><img alt="image49" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>crcp_calculate_checksum_dma</p>
+</td><td><p>CRCP16 checksum calculation of a memory block using DMA block transfer</p>
+</td><td align="center"><p><img alt="image50" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>crcp_calculate_checksum_dma_32bit</p>
+</td><td><p>CRCP32 checksum calculation of a memory block using DMA block transfer</p>
+</td><td align="center"><p><img alt="image51" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="crypto-sha">
+<h4>2.11.4 Crypto SHA<a class="headerlink" href="#crypto-sha" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>crypto_sha_224</p>
+</td><td><p>SHA-224 hash calculation example</p>
+</td><td align="center"><p><img alt="image52" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>crypto_sha_256</p>
+</td><td><p>SHA-256 hash calculation example</p>
+</td><td align="center"><p><img alt="image53" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>crypto_sha_256_hmac</p>
+</td><td><p>SHA-256 HMAC calculation example</p>
+</td><td align="center"><p><img alt="image54" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="direct-memory-access-dma">
+<h4>2.11.5 Direct Memory Access (DMA)<a class="headerlink" href="#direct-memory-access-dma" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>dma_block_transfer</p>
+</td><td><p>DMA copies from Flash main memory to SRAM memory</p>
+</td><td align="center"><p><img alt="image55" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>dma_fill_data</p>
+</td><td><p>DMA memory fill of SRAM using DMA</p>
+</td><td align="center"><p><img alt="image56" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>dma_table_transfer</p>
+</td><td><p>DMA using Table mode with DMA</p>
+</td><td align="center"><p><img alt="image57" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>dma1_block_transfer</p>
+</td><td><p>DMA1 copies from Flash main memory to SRAM memory</p>
+</td><td align="center"><p><img alt="image58" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>dma1_fill_data</p>
+</td><td><p>DMA1 memory fill of SRAM using DMA</p>
+</td><td align="center"><p><img alt="image59" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>dma1_table_transfer</p>
+</td><td><p>DMA1 using Table mode with DMA</p>
+</td><td align="center"><p><img alt="image60" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>dma_gather_transfer</p>
+</td><td><p>DMA gather mode transfer example</p>
+</td><td align="center"><p><img alt="image61" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="eam">
+<h4>2.11.6 EAM<a class="headerlink" href="#eam" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>eam_fpi_security_error</p>
+</td><td><p>EAM FPI security error example</p>
+</td><td align="center"><p><img alt="image62" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="non-volatile-memory-flashctl">
+<h4>2.11.7 Non-Volatile Memory (FLASHCTL)<a class="headerlink" href="#non-volatile-memory-flashctl" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>flashctl_dynamic_memory_protection</p>
+</td><td><p>Flash configured with dynamic protection</p>
+</td><td align="center"><p><img alt="image63" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>flashctl_ecc_error_injection</p>
+</td><td><p>Flash ECC testing and SEC and DED error detection</p>
+</td><td align="center"><p><img alt="image64" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>flashctl_multiple_size_read_verify</p>
+</td><td><p>Implementation of Flash read verify commands on multiple data sizes, with and without ECC</p>
+</td><td align="center"><p><img alt="image65" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>flashctl_multiple_size_write</p>
+</td><td><p>Flash writing of different size data</p>
+</td><td align="center"><p><img alt="image66" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>flashctl_program_with_ecc</p>
+</td><td><p>Flash writing of different size data with ECC</p>
+</td><td align="center"><p><img alt="image67" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>flashctl_interrupt_mode_write</p>
+</td><td><p>Flash write using interrupt mode</p>
+</td><td align="center"><p><img alt="image68" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>flashctl_nonmain_memory_write</p>
+</td><td><p>Flash write to non-main memory region</p>
+</td><td align="center"><p><img alt="image69" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="gpio">
+<h4>2.11.8 GPIO<a class="headerlink" href="#gpio" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>gpio_input_capture</p>
+</td><td><p>GPIO triggers interrupt by input capture pin</p>
+</td><td align="center"><p><img alt="image70" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>gpio_simultaneous_interrupts</p>
+</td><td><p>Demonstrates how to simultaneously service three GPIO interrupts</p>
+</td><td align="center"><p><img alt="image71" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>gpio_software_poll</p>
+</td><td><p>GPIO output is set based on polled input</p>
+</td><td align="center"><p><img alt="image72" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>gpio_toggle_output</p>
+</td><td><p>GPIO toggling an output pin</p>
+</td><td align="center"><p><img alt="image73" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>gpio_toggle_output_cpp</p>
+</td><td><p>GPIO toggling output pins using C++</p>
+</td><td align="center"><p><img alt="image74" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>gpio_toggle_output_hiz</p>
+</td><td><p>GPIO toggling an ouputput pin configured as Hi-Z</p>
+</td><td align="center"><p><img alt="image75" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="high-speed-adc-hsadc">
+<h4>2.11.9 High-Speed ADC (HSADC)<a class="headerlink" href="#high-speed-adc-hsadc" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>hsadc_conversion_continuous</p>
+</td><td><p>HSADC continuous conversion example</p>
+</td><td align="center"><p><img alt="image76" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>hsadc_conversion_software_trigger</p>
+</td><td><p>HSADC conversion triggered by software</p>
+</td><td align="center"><p><img alt="image77" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>hsadc_dma_transfer</p>
+</td><td><p>HSADC using DMA for data transfer</p>
+</td><td align="center"><p><img alt="image78" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>hsadc_interrupt</p>
+</td><td><p>HSADC using interrupts</p>
+</td><td align="center"><p><img alt="image79" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>hsadc_max_freq_dma</p>
+</td><td><p>HSADC maximum frequency conversion with DMA transfer</p>
+</td><td align="center"><p><img alt="image80" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>hsadc_ppb_data_processing</p>
+</td><td><p>HSADC post-processing block data processing</p>
+</td><td align="center"><p><img alt="image81" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>hsadc_ppb_limit</p>
+</td><td><p>HSADC post-processing block limit detection</p>
+</td><td align="center"><p><img alt="image82" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>hsadc_ppb_oversampling</p>
+</td><td><p>HSADC post-processing block oversampling</p>
+</td><td align="center"><p><img alt="image83" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>hsadc_pre_emption</p>
+</td><td><p>HSADC pre-emption example</p>
+</td><td align="center"><p><img alt="image84" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>hsadc_results_fifo</p>
+</td><td><p>HSADC results FIFO example</p>
+</td><td align="center"><p><img alt="image85" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>hsadc_single_conversion</p>
+</td><td><p>HSADC single conversion example</p>
+</td><td align="center"><p><img alt="image86" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>hsadc_single_conversion_vref_external</p>
+</td><td><p>HSADC single conversion with external reference</p>
+</td><td align="center"><p><img alt="image87" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>hsadc_single_conversion_vref_internal</p>
+</td><td><p>HSADC single conversion with internal reference</p>
+</td><td align="center"><p><img alt="image88" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>hsadc_triggered_by_timer_event</p>
+</td><td><p>HSADC conversion triggered by a timer event</p>
+</td><td align="center"><p><img alt="image89" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="inter-integrated-circuit-i2c">
+<h4>2.11.10 Inter-Integrated Circuit (I2C)<a class="headerlink" href="#inter-integrated-circuit-i2c" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>i2c_controller_display_throughput</p>
+</td><td><p>I2C Controller display throughput measurement</p>
+</td><td align="center"><p><img alt="image90" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>i2c_controller_rw_multibyte_fifo_interrupts</p>
+</td><td><p>I2C Controller reading and writing multiple bytes using interrupts with FIFO</p>
+</td><td align="center"><p><img alt="image91" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>i2c_controller_rw_multibyte_fifo_poll</p>
+</td><td><p>I2C Controller reading and writing multiple bytes polling FIFO</p>
+</td><td align="center"><p><img alt="image92" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>i2c_dma_transfer_controller</p>
+</td><td><p>I2C Controller reading and writing multiple bytes using DMA</p>
+</td><td align="center"><p><img alt="image93" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>i2c_dma_transfer_target</p>
+</td><td><p>I2C Target reading and writing multiple bytes using DMA</p>
+</td><td align="center"><p><img alt="image94" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>i2c_target_display_throughput</p>
+</td><td><p>I2C Target display throughput measurement</p>
+</td><td align="center"><p><img alt="image95" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>i2c_target_rw_multibyte_fifo_interrupts</p>
+</td><td><p>I2C Target reading and writing multiple bytes using interrupts</p>
+</td><td align="center"><p><img alt="image96" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>i2c_target_rw_multibyte_fifo_interrupts_stop</p>
+</td><td><p>I2C Target reading and writing multiple bytes using interrupts while in STOP mode</p>
+</td><td align="center"><p><img alt="image97" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>i2c_target_rw_multibyte_fifo_poll</p>
+</td><td><p>I2C Target reading and writing multiple bytes polling FIFO</p>
+</td><td align="center"><p><img alt="image98" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>i2c_controller_rw_byte_poll</p>
+</td><td><p>I2C Controller reading and writing a single byte using polling</p>
+</td><td align="center"><p><img alt="image99" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>i2c_target_rw_byte_poll</p>
+</td><td><p>I2C Target reading and writing a single byte using polling</p>
+</td><td align="center"><p><img alt="image100" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>i2c_multicontroller_arbitration</p>
+</td><td><p>I2C multi-controller bus arbitration example</p>
+</td><td align="center"><p><img alt="image101" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="i2s">
+<h4>2.11.11 I2S<a class="headerlink" href="#i2s" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>i2s_controller_write_multibyte_fifo_poll</p>
+</td><td><p>I2S Controller write multibyte FIFO with polling</p>
+</td><td align="center"><p><img alt="image102" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>i2s_target_read_multibyte_fifo_poll</p>
+</td><td><p>I2S Target read multibyte FIFO with polling</p>
+</td><td align="center"><p><img alt="image103" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="iwdt">
+<h4>2.11.12 IWDT<a class="headerlink" href="#iwdt" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>iwdt_periodic_reset</p>
+</td><td><p>Periodic reset of the independent watchdog timer</p>
+</td><td align="center"><p><img alt="image104" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="controller-area-network-mcan">
+<h4>2.11.13 Controller Area Network (MCAN)<a class="headerlink" href="#controller-area-network-mcan" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>mcan_loopback</p>
+</td><td><p>MCAN transmits and receives messages using loopback mode</p>
+</td><td align="center"><p><img alt="image105" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>mcan_message_rx</p>
+</td><td><p>Example configured to receive CAN and CAN-FD frames</p>
+</td><td align="center"><p><img alt="image106" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>mcan_multi_message_tx</p>
+</td><td><p>CAN-FD transmits two messages with unique ID on GPIO interrupt</p>
+</td><td align="center"><p><img alt="image107" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>mcan_single_message_tx</p>
+</td><td><p>CAN-FD transmits a single message on GPIO interrupt</p>
+</td><td align="center"><p><img alt="image108" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="timer-advanced-tima">
+<h4>2.11.14 Timer - Advanced (TIMA)<a class="headerlink" href="#timer-advanced-tima" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>tima_timer_mode_periodic_repeat_count</p>
+</td><td><p>TIMA timer in periodic mode with repeat count</p>
+</td><td align="center"><p><img alt="image109" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>tima_timer_mode_pwm_dead_band</p>
+</td><td><p>TIMA timer in PWM mode with dead band</p>
+</td><td align="center"><p><img alt="image110" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>tima_trigger_fail_mechanism</p>
+</td><td><p>TIMA trigger fail-safe mechanism example</p>
+</td><td align="center"><p><img alt="image111" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="timer-general-purpose-timg">
+<h4>2.11.15 Timer - General Purpose (TIMG)<a class="headerlink" href="#timer-general-purpose-timg" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>timg_32bit_timer_mode_periodic_sleep</p>
+</td><td><p>TIMG 32-bit timer in periodic mode with sleep</p>
+</td><td align="center"><p><img alt="image112" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>timg_32bit_timer_mode_pwm_edge_sleep</p>
+</td><td><p>TIMG 32-bit timer in PWM edge mode with sleep</p>
+</td><td align="center"><p><img alt="image113" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>timg_qei_mode</p>
+</td><td><p>TIMG Quadrature Encoder Interface (QEI) mode example</p>
+</td><td align="center"><p><img alt="image114" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="timer-generic-timx">
+<h4>2.11.16 Timer - Generic (TIMX)<a class="headerlink" href="#timer-generic-timx" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>timx_timer_mode_capture_duty_and_period</p>
+</td><td><p>TIMX timer in capture mode measuring duty cycle and period</p>
+</td><td align="center"><p><img alt="image115" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>timx_timer_mode_capture_edge_capture</p>
+</td><td><p>TIMX timer in capture mode with edge capture</p>
+</td><td align="center"><p><img alt="image116" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>timx_timer_mode_compare_edge_count</p>
+</td><td><p>TIMX timer in compare mode with edge count</p>
+</td><td align="center"><p><img alt="image117" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>timx_timer_mode_one_shot_standby</p>
+</td><td><p>TIMX timer in one-shot mode with standby</p>
+</td><td align="center"><p><img alt="image118" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>timx_timer_mode_periodic_sleep</p>
+</td><td><p>TIMX timer in periodic mode with sleep</p>
+</td><td align="center"><p><img alt="image119" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>timx_timer_mode_periodic_standby</p>
+</td><td><p>TIMX timer in periodic mode with standby</p>
+</td><td align="center"><p><img alt="image120" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>timx_timer_mode_periodic_stop</p>
+</td><td><p>TIMX timer in periodic mode with stop</p>
+</td><td align="center"><p><img alt="image121" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>timx_timer_mode_pwm_center_stop</p>
+</td><td><p>TIMX timer in PWM center mode with stop</p>
+</td><td align="center"><p><img alt="image122" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>timx_timer_mode_pwm_edge_sleep</p>
+</td><td><p>TIMX timer in PWM edge mode with sleep</p>
+</td><td align="center"><p><img alt="image123" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>timx_timer_mode_pwm_edge_sleep_shadow</p>
+</td><td><p>TIMX timer in PWM edge mode with sleep and shadow</p>
+</td><td align="center"><p><img alt="image124" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>timx_timer_mode_pwm_cross_trigger_stop_restore</p>
+</td><td><p>TIMX timer in PWM mode with cross trigger stop and restore</p>
+</td><td align="center"><p><img alt="image125" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="real-time-clock-rtc">
+<h4>2.11.17 Real-Time Clock (RTC)<a class="headerlink" href="#real-time-clock-rtc" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>rtc_a_tamper_timestamp_event</p>
+</td><td><p>Generates a time stamp event on RTC_A upon tamper detection</p>
+</td><td align="center"><p><img alt="image126" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>rtc_a_calibration_lfxt_utc</p>
+</td><td><p>RTC_A calibration using LFXT with UTC time</p>
+</td><td align="center"><p><img alt="image127" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>rtc_a_calendar_alarm_standby</p>
+</td><td><p>RTC_A sets calendar alarm and toggles GPIO when alarm is triggered</p>
+</td><td align="center"><p><img alt="image128" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>rtc_a_offset_calibration_lfxt</p>
+</td><td><p>RTC_A offset correction of crystal</p>
+</td><td align="center"><p><img alt="image129" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>rtc_a_periodic_alarm_lfosc_standby</p>
+</td><td><p>RTC_A implementation of periodic alarm in STANDBY using LFOSC</p>
+</td><td align="center"><p><img alt="image130" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>rtc_a_periodic_alarm_lfxt_standby</p>
+</td><td><p>RTC_A implementation of periodic alarm in STANDBY using LFXT</p>
+</td><td align="center"><p><img alt="image131" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>rtc_a_temperature_calibration_lfxt</p>
+</td><td><p>RTC_A temperature calibration of crystal</p>
+</td><td align="center"><p><img alt="image132" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="scratchpad">
+<h4>2.11.18 Scratchpad<a class="headerlink" href="#scratchpad" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>scratchpad_erase_on_tamper</p>
+</td><td><p>Scratchpad erase on tamper detection</p>
+</td><td align="center"><p><img alt="image133" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>scratchpad_retain_on_vdd_loss</p>
+</td><td><p>Scratchpad retain on VDD loss</p>
+</td><td align="center"><p><img alt="image134" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="spi">
+<h4>2.11.19 SPI<a class="headerlink" href="#spi" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>spi_controller_command_data_control</p>
+</td><td><p>SPI controller command data control</p>
+</td><td align="center"><p><img alt="image135" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>spi_controller_display_throughput</p>
+</td><td><p>SPI Controller display throughput measurement</p>
+</td><td align="center"><p><img alt="image136" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>spi_controller_fifo_dma_interrupts</p>
+</td><td><p>SPI controller using FIFO with DMA and interrupts</p>
+</td><td align="center"><p><img alt="image137" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>spi_controller_internal_loopback_poll</p>
+</td><td><p>SPI controller internal loopback with polling</p>
+</td><td align="center"><p><img alt="image138" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>spi_controller_multibyte_fifo_poll</p>
+</td><td><p>SPI controller multibyte FIFO with polling</p>
+</td><td align="center"><p><img alt="image139" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>spi_controller_register_format</p>
+</td><td><p>SPI controller register format</p>
+</td><td align="center"><p><img alt="image140" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>spi_controller_repeated_fifo_dma_interrupts</p>
+</td><td><p>SPI controller repeated FIFO with DMA and interrupts</p>
+</td><td align="center"><p><img alt="image141" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>spi_peripheral_command_data_control</p>
+</td><td><p>SPI peripheral command data control</p>
+</td><td align="center"><p><img alt="image142" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>spi_peripheral_display_throughput</p>
+</td><td><p>SPI Peripheral display throughput measurement</p>
+</td><td align="center"><p><img alt="image143" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>spi_peripheral_fifo_dma_interrupts</p>
+</td><td><p>SPI peripheral using FIFO with DMA and interrupts</p>
+</td><td align="center"><p><img alt="image144" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>spi_peripheral_multibyte_fifo_poll</p>
+</td><td><p>SPI peripheral multibyte FIFO with polling</p>
+</td><td align="center"><p><img alt="image145" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>spi_peripheral_register_format</p>
+</td><td><p>SPI peripheral register format</p>
+</td><td align="center"><p><img alt="image146" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>spi_peripheral_repeated_fifo_dma_interrupts</p>
+</td><td><p>SPI peripheral repeated FIFO with DMA and interrupts</p>
+</td><td align="center"><p><img alt="image147" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="system-control-sysctl">
+<h4>2.11.20 System Control (SYSCTL)<a class="headerlink" href="#system-control-sysctl" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>sysctl_cpureset</p>
+</td><td><p>System control CPU reset example</p>
+</td><td align="center"><p><img alt="image148" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>sysctl_frequency_clock_counter</p>
+</td><td><p>System control frequency clock counter example</p>
+</td><td align="center"><p><img alt="image149" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>sysctl_hfxt_run</p>
+</td><td><p>System control HFXT run example</p>
+</td><td align="center"><p><img alt="image150" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>sysctl_lfxt_standby</p>
+</td><td><p>System control LFXT standby example</p>
+</td><td align="center"><p><img alt="image151" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>sysctl_mclk_syspll</p>
+</td><td><p>System control MCLK SYSPLL example</p>
+</td><td align="center"><p><img alt="image152" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>sysctl_power_policy_sleep_to_standby</p>
+</td><td><p>System control power policy sleep to standby example</p>
+</td><td align="center"><p><img alt="image153" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>sysctl_power_policy_sleep_to_stop</p>
+</td><td><p>System control power policy sleep to stop example</p>
+</td><td align="center"><p><img alt="image154" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>sysctl_shutdown</p>
+</td><td><p>System control shutdown example</p>
+</td><td align="center"><p><img alt="image155" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="systick">
+<h4>2.11.21 SysTick<a class="headerlink" href="#systick" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>systick_periodic_timer</p>
+</td><td><p>SysTick periodic timer example</p>
+</td><td align="center"><p><img alt="image156" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="tamperio">
+<h4>2.11.22 TamperIO<a class="headerlink" href="#tamperio" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>tamperio_heartbeat</p>
+</td><td><p>TamperIO heartbeat example</p>
+</td><td align="center"><p><img alt="image157" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="true-random-number-generator-trng">
+<h4>2.11.23 True Random Number Generator (TRNG)<a class="headerlink" href="#true-random-number-generator-trng" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>trng_sample</p>
+</td><td><p>TRNG sample generation example</p>
+</td><td align="center"><p><img alt="image158" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>trng_sample_stop_restore</p>
+</td><td><p>TRNG sample with stop and restore example</p>
+</td><td align="center"><p><img alt="image159" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="universal-asynchronous-receiver-transmitter-uart">
+<h4>2.11.24 Universal Asynchronous Receiver Transmitter (UART)<a class="headerlink" href="#universal-asynchronous-receiver-transmitter-uart" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>uart_extend_irda_receive_packet</p>
+</td><td><p>UART extend IrDA receive packet example</p>
+</td><td align="center"><p><img alt="image160" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>uart_extend_irda_send_packet</p>
+</td><td><p>UART extend IrDA send packet example</p>
+</td><td align="center"><p><img alt="image161" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>uart_extend_manchester_echo</p>
+</td><td><p>UART extend Manchester echo example</p>
+</td><td align="center"><p><img alt="image162" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>uart_extend_manchester_send_packet</p>
+</td><td><p>UART extend Manchester send packet example</p>
+</td><td align="center"><p><img alt="image163" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>uart_internal_loopback_spgss0_uc1</p>
+</td><td><p>UART internal loopback SPGSS0 UC1 example</p>
+</td><td align="center"><p><img alt="image164" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>uart_internal_loopback_standby_restore</p>
+</td><td><p>UART internal loopback standby restore example</p>
+</td><td align="center"><p><img alt="image165" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>uart_internal_loopback_with_interrupt_spgss0_uc1</p>
+</td><td><p>UART internal loopback with interrupt SPGSS0 UC1 example</p>
+</td><td align="center"><p><img alt="image166" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>uart_rx_console_multibyte_repeated_fifo_dma</p>
+</td><td><p>UART RX console multibyte repeated FIFO DMA example</p>
+</td><td align="center"><p><img alt="image167" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>uart_rx_display_throughput</p>
+</td><td><p>UART RX display throughput measurement</p>
+</td><td align="center"><p><img alt="image168" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>uart_rx_echo_interrupts_standby</p>
+</td><td><p>UART RX echo interrupts standby example</p>
+</td><td align="center"><p><img alt="image169" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>uart_rx_external_data_receive</p>
+</td><td><p>UART RX external data receive example</p>
+</td><td align="center"><p><img alt="image170" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>uart_rx_hw_flow_control</p>
+</td><td><p>UART RX hardware flow control example</p>
+</td><td align="center"><p><img alt="image171" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>uart_rx_multibyte_fifo_dma_interrupts</p>
+</td><td><p>UART RX multibyte FIFO DMA interrupts example</p>
+</td><td align="center"><p><img alt="image172" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>uart_rx_rw_multibyte_fifo_poll</p>
+</td><td><p>UART RX read/write multibyte FIFO poll example</p>
+</td><td align="center"><p><img alt="image173" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>uart_tx_console_multibyte_repeated_fifo_dma</p>
+</td><td><p>UART TX console multibyte repeated FIFO DMA example</p>
+</td><td align="center"><p><img alt="image174" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>uart_tx_display_throughput</p>
+</td><td><p>UART TX display throughput measurement</p>
+</td><td align="center"><p><img alt="image175" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>uart_tx_echo_interrupts_standby</p>
+</td><td><p>UART TX echo interrupts standby example</p>
+</td><td align="center"><p><img alt="image176" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>uart_tx_external_data_send</p>
+</td><td><p>UART TX external data send example</p>
+</td><td align="center"><p><img alt="image177" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>uart_tx_hw_flow_control</p>
+</td><td><p>UART TX hardware flow control example</p>
+</td><td align="center"><p><img alt="image178" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>uart_tx_multibyte_fifo_dma_interrupts</p>
+</td><td><p>UART TX multibyte FIFO DMA interrupts example</p>
+</td><td align="center"><p><img alt="image179" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>uart_tx_rw_multibyte_fifo_poll</p>
+</td><td><p>UART TX read/write multibyte FIFO poll example</p>
+</td><td align="center"><p><img alt="image180" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>uart_rs485_send_packet</p>
+</td><td><p>UART RS-485 send packet example</p>
+</td><td align="center"><p><img alt="image181" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>uart_rs485_receive_packet</p>
+</td><td><p>UART RS-485 receive packet example</p>
+</td><td align="center"><p><img alt="image182" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="wwdt">
+<h4>2.11.25 WWDT<a class="headerlink" href="#wwdt" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>wwdt_interval_timer_lfosc_standby</p>
+</td><td><p>WWDT interval timer using LFOSC in STANDBY mode</p>
+</td><td align="center"><p><img alt="image183" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>wwdt_interval_timer_lfxt_standby</p>
+</td><td><p>WWDT interval timer using LFXT in STANDBY mode</p>
+</td><td align="center"><p><img alt="image184" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>wwdt_window_mode_periodic_reset</p>
+</td><td><p>WWDT window mode with periodic reset</p>
+</td><td align="center"><p><img alt="image185" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="other">
+<h4>2.11.26 Other<a class="headerlink" href="#other" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>empty</p>
+</td><td><p>Empty start-up project using DriverLib</p>
+</td><td align="center"><p><img alt="image186" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>empty_driverlib_library</p>
+</td><td><p>Empty start-up project using DriverLib as a library</p>
+</td><td align="center"><p><img alt="image187" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+</section>
+<section id="hal">
+<h3>2.12 HAL<a class="headerlink" href="#hal" title="Permalink to this heading">¶</a></h3>
+<p>The MSPM33 SDK includes HAL (Hardware Abstraction Layer) examples demonstrating the HAL abstraction layer for I2C, SPI, and UART peripherals.</p>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>hal_i2c_loopback_interrupt</p>
+</td><td><p>HAL I2C loopback using interrupts</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>hal_i2c_loopback_poll</p>
+</td><td><p>HAL I2C loopback using polling</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>hal_spi_internal_loopback</p>
+</td><td><p>HAL SPI internal loopback example</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>hal_uart_loopback</p>
+</td><td><p>HAL UART loopback example</p>
+</td><td align="center"><p>Y</p>
+</td></tr></table></section>
+<section id="eeprom-emulation">
+<h3>2.13 EEPROM Emulation<a class="headerlink" href="#eeprom-emulation" title="Permalink to this heading">¶</a></h3>
+<p>The MSPM33 SDK includes EEPROM emulation examples demonstrating Type A and Type B emulation algorithms.</p>
+<section id="type-a">
+<h4>2.13.1 Type A<a class="headerlink" href="#type-a" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>eeprom_emulation_type_a</p>
+</td><td><p>EEPROM emulation Type A example</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>eeprom_emulation_type_a_test</p>
+</td><td><p>EEPROM emulation Type A test example</p>
+</td><td align="center"><p>Y</p>
+</td></tr></table></section>
+<section id="type-b">
+<h4>2.13.2 Type B<a class="headerlink" href="#type-b" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>eeprom_emulation_type_b</p>
+</td><td><p>EEPROM emulation Type B example</p>
+</td><td align="center"><p>Y</p>
+</td></tr><tr><td><p>eeprom_emulation_type_b_test</p>
+</td><td><p>EEPROM emulation Type B test example</p>
+</td><td align="center"><p>Y</p>
+</td></tr></table></section>
+</section>
+<section id="crypto-msp-crypto-library">
+<h3>2.14 Crypto (MSP Crypto Library)<a class="headerlink" href="#crypto-msp-crypto-library" title="Permalink to this heading">¶</a></h3>
+<p>The MSPM33 SDK includes additional crypto examples using the MSP Crypto Library for AES cipher operations, SHA-3 hashing, and PQC ML-KEM key encapsulation.</p>
+<section id="aes-cipher">
+<h4>2.14.1 AES Cipher<a class="headerlink" href="#aes-cipher" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>cipher_aes256</p>
+</td><td><p>AES-256 cipher example</p>
+</td><td align="center"><p><img alt="image188" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>cipher_aes256_cbc</p>
+</td><td><p>AES-256 CBC mode cipher example</p>
+</td><td align="center"><p><img alt="image189" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>cipher_aes256_ccm</p>
+</td><td><p>AES-256 CCM mode cipher example</p>
+</td><td align="center"><p><img alt="image190" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>cipher_aes256_cmac</p>
+</td><td><p>AES-256 CMAC authentication example</p>
+</td><td align="center"><p><img alt="image191" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>cipher_aes256_ctr</p>
+</td><td><p>AES-256 CTR mode cipher example</p>
+</td><td align="center"><p><img alt="image192" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="sha-3-hash">
+<h4>2.14.2 SHA-3 Hash<a class="headerlink" href="#sha-3-hash" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>hash_sha3_224</p>
+</td><td><p>SHA3-224 hash computation</p>
+</td><td align="center"><p><img alt="image193" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>hash_sha3_256</p>
+</td><td><p>SHA3-256 hash computation</p>
+</td><td align="center"><p><img alt="image194" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>hash_sha3_384</p>
+</td><td><p>SHA3-384 hash computation</p>
+</td><td align="center"><p><img alt="image195" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>hash_sha3_512</p>
+</td><td><p>SHA3-512 hash computation</p>
+</td><td align="center"><p><img alt="image196" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="pqc-ml-kem">
+<h4>2.14.3 PQC ML-KEM<a class="headerlink" href="#pqc-ml-kem" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>pqc_mlkem_768_keygen</p>
+</td><td><p>ML-KEM-768 key generation</p>
+</td><td align="center"><p><img alt="image197" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>pqc_mlkem_768_encap</p>
+</td><td><p>ML-KEM-768 key encapsulation</p>
+</td><td align="center"><p><img alt="image198" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>pqc_mlkem_768_decap</p>
+</td><td><p>ML-KEM-768 key decapsulation</p>
+</td><td align="center"><p><img alt="image199" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>pqc_mlkem_1024_sequence</p>
+</td><td><p>ML-KEM-1024 full keygen/encap/decap sequence</p>
+</td><td align="center"><p><img alt="image200" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+</section>
+<section id="security-psa-crypto-tf-psa-crypto-with-aesadv-hw-acceleration">
+<h3>2.15 Security (PSA Crypto — TF-PSA-Crypto with AESADV HW acceleration)<a class="headerlink" href="#security-psa-crypto-tf-psa-crypto-with-aesadv-hw-acceleration" title="Permalink to this heading">¶</a></h3>
+<p>The MSPM33 SDK includes PSA Crypto examples using TF-PSA-Crypto with AESADV hardware acceleration.</p>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>aes_cbc_tf_psa_crypto</p>
+</td><td><p>AES CBC using TF-PSA-Crypto with AESADV HW acceleration</p>
+</td><td align="center"><p><img alt="image201" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>aes_ccm_tf_psa_crypto</p>
+</td><td><p>AES CCM using TF-PSA-Crypto with AESADV HW acceleration</p>
+</td><td align="center"><p><img alt="image202" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>aes_cfb_ofb_tf_psa_crypto</p>
+</td><td><p>AES CFB/OFB using TF-PSA-Crypto with AESADV HW acceleration</p>
+</td><td align="center"><p><img alt="image203" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>aes_cmac_tf_psa_crypto</p>
+</td><td><p>AES CMAC using TF-PSA-Crypto with AESADV HW acceleration</p>
+</td><td align="center"><p><img alt="image204" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>aes_ctr_tf_psa_crypto</p>
+</td><td><p>AES CTR using TF-PSA-Crypto with AESADV HW acceleration</p>
+</td><td align="center"><p><img alt="image205" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>aes_gcm_tf_psa_crypto</p>
+</td><td><p>AES GCM using TF-PSA-Crypto with AESADV HW acceleration</p>
+</td><td align="center"><p><img alt="image206" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>aes_gcm_ccm_multipart_tf_psa_crypto</p>
+</td><td><p>AES GCM/CCM multi-part using TF-PSA-Crypto with AESADV HW acceleration</p>
+</td><td align="center"><p><img alt="image207" src="../_images/ex_sysconfig.png" /></p>
+</td></tr><tr><td><p>sha_tf_psa_crypto</p>
+</td><td><p>SHA using TF-PSA-Crypto with AESADV HW acceleration</p>
+</td><td align="center"><p><img alt="image208" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+<section id="trusted-firmware-m-tf-m">
+<h3>2.16 Trusted Firmware-M (TF-M)<a class="headerlink" href="#trusted-firmware-m-tf-m" title="Permalink to this heading">¶</a></h3>
+<p>The MSPM33 SDK includes Trusted Firmware-M examples demonstrating TrustZone-based secure/non-secure partitioning.</p>
+<table class="docutils align-default"><tr><th rowspan="2"><p>Project Name</p>
+</th><th rowspan="2"><p>Description</p>
+</th><th><p style="text-align: center;"><p>EVM</p>
+</p></th></tr><tr><th><p>LP_MSPM33C321A</p>
+</th></tr><tr><td><p>tfm_empty_ns</p>
+</td><td><p>Empty TF-M non-secure application template</p>
+</td><td align="center"><p><img alt="image209" src="../_images/ex_sysconfig.png" /></p>
+</td></tr></table></section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="MSPM33 SDK User Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sbom.html" class="btn btn-neutral float-right" title="Software Bill of Materials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">1995-2023, Texas Instruments Incorporated. All rights reserved</a>, Texas Instruments Incorporated. All rights reserved. <br/>
+      <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+[submodule "framework"]
+	path = framework
+	url = ssh://git@bitbucket.itg.ti.com/mspsec/mbedtls-framework.git
+[submodule "tf-psa-crypto"]
+	path = tf-psa-crypto
+	url = ssh://git@bitbucket.itg.ti.com/mspsec/tf-psa-crypto.git
+	branch = tf-psa-crypto-1.1-LTS-master

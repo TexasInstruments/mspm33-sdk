@@ -1,0 +1,106 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ */
+//@cliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)" --part "Default"
+//@v2CliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)"
+// @cliArgs --board /ti/boards/LP_MSPM33C321A --rtos nortos
+
+/**
+ * Import the modules used in this configuration.
+ */
+const GPIO   = scripting.addModule("/ti/driverlib/GPIO", {}, false);
+const GPIO1  = GPIO.addInstance();
+const GPIO2  = GPIO.addInstance();
+const MCAN   = scripting.addModule("/ti/driverlib/MCAN", {}, false);
+const MCAN1  = MCAN.addInstance();
+const SYSCTL = scripting.addModule("/ti/driverlib/SYSCTL");
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+GPIO1.$name                               = "GPIO_LEDS";
+GPIO1.associatedPins.create(2);
+GPIO1.associatedPins[0].launchPadShortcut = "LED2GreenEn";
+GPIO1.associatedPins[0].$name             = "USER_LED2";
+GPIO1.associatedPins[0].pin.$assign       = "PC27";
+GPIO1.associatedPins[1].launchPadShortcut = "LED2RedEn";
+GPIO1.associatedPins[1].$name             = "USER_LED1";
+GPIO1.associatedPins[1].pin.$assign       = "PC26";
+
+const Board                       = scripting.addModule("/ti/driverlib/Board", {}, false);
+Board.peripheral.$assign          = "DEBUGSS";
+Board.peripheral.swclkPin.$assign = "PA20";
+Board.peripheral.swdioPin.$assign = "PA19";
+
+GPIO2.portSegment                        = "Upper";
+GPIO2.$name                              = "GPIO_SWITCHES";
+GPIO2.associatedPins[0].interruptEn      = true;
+GPIO2.associatedPins[0].polarity         = "FALL";
+GPIO2.associatedPins[0].direction        = "INPUT";
+GPIO2.associatedPins[0].internalResistor = "PULL_UP";
+GPIO2.associatedPins[0].assignedPin      = "17";
+GPIO2.associatedPins[0].$name            = "USER_SWITCH_1";
+GPIO2.associatedPins[0].pin.$assign      = "PC17";
+
+MCAN1.wkupReqEnable                    = true;
+MCAN1.emulationEnable                  = true;
+MCAN1.autoWkupEnable                   = true;
+MCAN1.tdcEnable                        = true;
+MCAN1.additionalCoreConfig             = true;
+MCAN1.rrfe                             = true;
+MCAN1.rrfs                             = true;
+MCAN1.anfe                             = "1";
+MCAN1.anfs                             = "1";
+MCAN1.rxFIFO0waterMark                 = 0;
+MCAN1.spPercent                        = 87;
+MCAN1.useCalcNomVal                    = false;
+MCAN1.useCalcDataVal                   = false;
+MCAN1.txEventFIFOWaterMark             = 0;
+MCAN1.stdFiltElem                      = "001";
+MCAN1.stdFiltType                      = "01";
+MCAN1.stdFiltID1                       = 3;
+MCAN1.stdFiltID2                       = 4;
+MCAN1.$name                            = "MCAN1";
+MCAN1.flesa                            = 0;
+MCAN1.lse                              = 0;
+MCAN1.rxFIFO1waterMark                 = 0;
+MCAN1.lss                              = 0;
+MCAN1.nomTimeSeg2_manual               = 19;
+MCAN1.nomTimeSeg1_manual               = 138;
+MCAN1.nomSynchJumpWidth_manual         = 19;
+MCAN1.dataTimeSeg1_manual              = 16;
+MCAN1.dataTimeSeg2_manual              = 1;
+MCAN1.dataSynchJumpWidth_manual        = 1;
+MCAN1.txStartAddr                      = 0;
+MCAN1.txBufNum                         = 1;
+MCAN1.txEventFIFOStartAddr             = 0;
+MCAN1.rxFIFO1startAddr                 = 0;
+MCAN1.rxFIFO0startAddr                 = 0;
+MCAN1.rxBufStartAddr                   = 0;
+MCAN1.rxFIFO0size                      = 0;
+MCAN1.rxFIFO1size                      = 0;
+MCAN1.peripheral.$assign               = "CANFD1";
+MCAN1.peripheral.rxPin.$assign         = "PC22";
+MCAN1.peripheral.txPin.$assign         = "PC21";
+MCAN1.txPinConfig.$name                = "ti_driverlib_gpio_GPIOPinGeneric0";
+MCAN1.rxPinConfig.$name                = "ti_driverlib_gpio_GPIOPinGeneric1";
+
+SYSCTL.HFCLKSource                  = "HFXT";
+SYSCTL.useHFCLK_Manual              = true;
+SYSCTL.HFCLK_Freq                   = 40000000;
+SYSCTL.forceDefaultClkConfig        = true;
+SYSCTL.HFXTStartup                  = 10;
+SYSCTL.HFCLKMonitor                 = true;
+SYSCTL.CANCLKSource                 = "HFCLK";
+SYSCTL.peripheral.$assign           = "SYSCTL";
+SYSCTL.peripheral.hfxInPin.$assign  = "PA5";
+SYSCTL.peripheral.hfxOutPin.$assign = "PA6";
+
+const ProjectConfig              = scripting.addModule("/ti/project_config/ProjectConfig", {}, false);
+ProjectConfig.migrationCondition = true;
+
+ProjectConfig.genLinker  = true;
+ProjectConfig.genStartup = true;
+ProjectConfig.genOpts    = true;
+ProjectConfig.genLibs    = true;

@@ -1,0 +1,45 @@
+/*
+ * SPDX-License-Identifier: BSD-3-Clause
+ * SPDX-FileCopyrightText: Copyright The TrustedFirmware-M Contributors
+ */
+
+#include "rse_persistent_data.h"
+
+#include <assert.h>
+#include <stdbool.h>
+#include <string.h>
+#include "region_defs.h"
+#include "device_definition.h"
+
+static bool is_persistent_data_initialized(struct rse_persistent_data *persistent_data)
+{
+    return RSE_GET_PERSISTENT_DATA_INITIALIZED_FLAG();
+}
+
+static void initialize_rse_persistent_data(struct rse_persistent_data *persistent_data)
+{
+    memset(persistent_data, 0, sizeof(struct rse_persistent_data));
+
+    RSE_SET_PERSISTENT_DATA_FLAG(RSE_PERSISTENT_DATA_FLAGS_LAST_BOOT_DEBUG_CODE,
+                                 LAST_BOOT_DEBUG_CODE_BLOCK_CERT_DEBUG);
+    RSE_SET_PERSISTENT_DATA_INITIALISED_FLAG(1);
+}
+
+void rse_setup_persistent_data(void)
+{
+    assert(sizeof(struct rse_persistent_data) <= PERSISTENT_DATA_SIZE);
+    assert((uintptr_t)RSE_PERSISTENT_DATA % __alignof__(struct rse_persistent_data) == 0);
+
+    /*
+     * If initialization magic is wrong then assume the persistent data is not
+     * initialized or corrupted so initialize the persistent data to 0.
+     */
+    if (!is_persistent_data_initialized(RSE_PERSISTENT_DATA)) {
+        initialize_rse_persistent_data(RSE_PERSISTENT_DATA);
+    }
+
+#ifdef RSE_ENABLE_CHIP_OUTPUT_DATA
+    /* Assume that the COD reply validity across cold resets is not guaranteed */
+    RSE_PERSISTENT_DATA->bl1_data.cod_reply_is_valid = false;
+#endif /* RSE_ENABLE_CHIP_OUTPUT_DATA */
+}

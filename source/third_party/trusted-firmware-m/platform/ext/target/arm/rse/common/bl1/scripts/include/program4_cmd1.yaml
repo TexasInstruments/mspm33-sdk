@@ -1,0 +1,25 @@
+#-------------------------------------------------------------------------------
+# SPDX-FileCopyrightText: Copyright The TrustedFirmware-M Contributors
+#
+# SPDX-License-Identifier: BSD-3-Clause
+#
+#-------------------------------------------------------------------------------
+# This command copies the entire OTP DMA ICS section into VM0.
+
+CTRL:
+    USEGPO: 1
+    TRANSIZE: 'word'
+    XTYPE: 'continue'
+SRCADDR: "otp_base_address"
+DESADDR: "vm0_base_address"
+XSIZE:
+  SRC: "otp_size / 4"
+  DES: "otp_size / 4"
+SRCTRANSCFG:
+    SRCMEMATTR: 'device'
+DESTRANSCFG:
+    DESMEMATTR: 'normal_non_cacheable_non_shareable'
+    MAXBURSTLEN: 0xF
+XADDRINC: 0x00010001
+GPOVAL0: 0x00000003
+LINKADDR: "program4_cmd2_exec_addr"

@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MSPM33 Security User Guide &mdash; Security User Guide for MSPM33 MCUs 1.04.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Security User Guide for MSPM33 MCUs" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Security User Guide for MSPM33 MCUs
+          </a>
+              <div class="version">
+                1.04.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MSPM33 Security User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#security-offerings">Security Offerings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#psa-l2-compliance">PSA-L2 Compliance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trustzone-architecture">TrustZone Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#memory-protection">Memory Protection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#secure-lifecycle-states">Secure Lifecycle States</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#device-types-and-lifecycle-states">Device Types and Lifecycle States</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lifecycle-state-transitions">Lifecycle State Transitions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#root-of-trust-rot-capabilities">Root of Trust (RoT) Capabilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#secure-boot">Secure Boot</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#crypto-drivers-and-capabilities">Crypto Drivers and Capabilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pka-public-key-accelerator">PKA (Public Key Accelerator)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sha-secure-hash-algorithm">SHA (Secure Hash Algorithm)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aes-advanced-encryption-standard">AES (Advanced Encryption Standard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#msp-crypto-library">MSP Crypto Library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#supported-modules">Supported Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mspm33-support">MSPM33 Support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ecdsa-support-this-release">ECDSA Support (This Release)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#security-architecture">Security Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cpu-security">CPU Security</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#global-security-control-gsc">Global Security Control (GSC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#memory-protection-1">Memory Protection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sram-bank-security">SRAM Bank Security</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flash-protection">Flash Protection</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#flash-programming-security">Flash Programming Security</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#secure-debug">Secure Debug</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#debug-levels">Debug Levels</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#debug-level-definitions">Debug Level Definitions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#swd-port-control">SWD Port Control</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#debug-security-mechanisms">Debug Security Mechanisms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debug-port-unlock-methods">Debug Port Unlock Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#secure-firmware-offerings">Secure Firmware offerings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#csc-mcuboot">CSC (MCUboot)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tfm">TFM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Security User Guide for MSPM33 MCUs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>MSPM33 Security User Guide</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mspm33-security-user-guide">
+<h1>MSPM33 Security User Guide<a class="headerlink" href="#mspm33-security-user-guide" title="Permalink to this heading">¶</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h2>
+<p>The MSPM33 platform implements a comprehensive security architecture designed to meet PSA-L2 certification requirements and provide robust security features for embedded applications. This user guide provides an overview of the security features, capabilities, and usage models for developers and system integrators.</p>
+<p>The MSPM33 security architecture is built around the following key customer requirements:</p>
+<ul class="simple">
+<li><p><strong>Root of Trust (RoT) Implementation</strong> - An immutable RoT for PSA-L2 certification</p></li>
+<li><p><strong>Life Cycle Management</strong> - Controlled security level transitions from open to closed states</p></li>
+</ul>
+</section>
+<section id="security-offerings">
+<h2>Security Offerings<a class="headerlink" href="#security-offerings" title="Permalink to this heading">¶</a></h2>
+<p>The MSPM33 platform provides the following security features:</p>
+<section id="psa-l2-compliance">
+<h3>PSA-L2 Compliance<a class="headerlink" href="#psa-l2-compliance" title="Permalink to this heading">¶</a></h3>
+<p>The MSPM33 meets ARM Platform Security Architecture (PSA) Level 2 requirements, including:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>PSA Functional Requirements</p></th>
+<th class="head"><p>Support</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Secure Boot</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>SW Isolation</p></td>
+<td><p>Temporal isolation using hide protect and spatial isolation using TrustZone/GSC</p></td>
+</tr>
+<tr class="row-even"><td><p>Secure Storage</p></td>
+<td><p>Secure key storage using TRIM and NONMAIN sectors</p></td>
+</tr>
+<tr class="row-odd"><td><p>Secure Update</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Secure State (Keys, Lifecycle)</p></td>
+<td><p>Lifecycle state compliant with PSA requirements</p></td>
+</tr>
+<tr class="row-odd"><td><p>Crypto</p></td>
+<td><p>HW support for AES, SHA, PKA</p></td>
+</tr>
+<tr class="row-even"><td><p>Debug</p></td>
+<td><p>Secure debug entry and enablement using lifecycle states</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="trustzone-architecture">
+<h3>TrustZone Architecture<a class="headerlink" href="#trustzone-architecture" title="Permalink to this heading">¶</a></h3>
+<p>The Cortex-M33 security is provided by ARM TrustZone architecture as part of the Secure Extensions in v8m. Key components include:</p>
+<ul class="simple">
+<li><p><strong>Implementation Dependent Attribution Unit (IDAU)</strong> - CPU boundary logic that returns secure attributes associated with addresses</p></li>
+<li><p><strong>Secure Attribution Unit (SAU)</strong> - Register-based CPU peripheral that provides further security granularity</p></li>
+</ul>
+<p>These components work together to provide secure (S), non-secure callable (NSC), and non-secure (NS) attributes to memory regions.</p>
+</section>
+<section id="memory-protection">
+<h3>Memory Protection<a class="headerlink" href="#memory-protection" title="Permalink to this heading">¶</a></h3>
+<p>The MSPM33 implements comprehensive memory protection mechanisms:</p>
+<ul class="simple">
+<li><p><strong>SRAM Bank Security</strong> - 16KB chunks with granular control (down to 512 bytes)</p></li>
+<li><p><strong>Flash Bank Security</strong> - 2KB sector size with secure/non-secure and privilege/non-privilege access control</p></li>
+<li><p><strong>Hide Protection</strong> - Temporal isolation mechanism to protect sensitive code</p></li>
+</ul>
+</section>
+</section>
+<section id="secure-lifecycle-states">
+<h2>Secure Lifecycle States<a class="headerlink" href="#secure-lifecycle-states" title="Permalink to this heading">¶</a></h2>
+<p>The MSPM33 implements a secure lifecycle management system that allows controlled transitions between different security states:</p>
+<section id="device-types-and-lifecycle-states">
+<h3>Device Types and Lifecycle States<a class="headerlink" href="#device-types-and-lifecycle-states" title="Permalink to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>1ST-BDAY (First Birthday)</strong></p>
+<ul class="simple">
+<li><p>Initial state for devices fresh out of fabrication</p></li>
+<li><p>Identified by specific bit patterns in flash memory</p></li>
+</ul>
+</li>
+<li><p><strong>High Security (HS) States</strong></p>
+<ul class="simple">
+<li><p><strong>HS-FS (Field Securable)</strong> - Default shipping state, ready for key provisioning</p></li>
+<li><p><strong>HS-KP (Keys Provisioned)</strong> - State after customer keys are provisioned, ready for code provisioning</p></li>
+<li><p><strong>HS-SE (Security Enforced)</strong> - State after customer code is provisioned, with enforced security</p></li>
+<li><p><strong>HS-FA (Failure Analysis)</strong> - State for devices returned to TI for analysis</p></li>
+<li><p><strong>DCOM (Decommissioned)</strong> - End-of-life state when device is no longer usable</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="lifecycle-state-transitions">
+<h3>Lifecycle State Transitions<a class="headerlink" href="#lifecycle-state-transitions" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Devices are shipped in the HS-FS state</p></li>
+<li><p>Transition to HS-KP occurs after successful key provisioning</p></li>
+<li><p>Transition to HS-SE occurs after secure firmware installation</p></li>
+<li><p>Transition to HS-FA requires customer authorization for device return</p></li>
+<li><p>Transition to DCOM is permanent and renders the device unusable</p></li>
+</ul>
+<p>Each lifecycle state has specific security properties and capabilities, controlling access to debug ports, secure assets, and programming capabilities.</p>
+</section>
+</section>
+<section id="root-of-trust-rot-capabilities">
+<h2>Root of Trust (RoT) Capabilities<a class="headerlink" href="#root-of-trust-rot-capabilities" title="Permalink to this heading">¶</a></h2>
+<section id="secure-boot">
+<h3>Secure Boot<a class="headerlink" href="#secure-boot" title="Permalink to this heading">¶</a></h3>
+<p>The Secure Boot process ensures that only authenticated and integrity-verified code can execute on the device. Key features include:</p>
+<ul class="simple">
+<li><p><strong>Immutable Root of Trust (iRoT)</strong> - Implemented in secure ROM</p></li>
+<li><p><strong>Image Verification</strong> - SHA-256 hash verification of application image</p></li>
+<li><p><strong>Digital Signature Verification</strong> - Using customer-provisioned keys</p></li>
+<li><p><strong>Fast Boot Option</strong> - Using pre-verified images with integrity check</p></li>
+</ul>
+<p>The secure boot process follows these steps:</p>
+<ol class="arabic simple">
+<li><p>Device powers up and ROM detects HS-SE state</p></li>
+<li><p>ROM checks if image has been pre-validated</p></li>
+<li><p>If not pre-validated, ROM reads image header and calculates SHA-256 hash</p></li>
+<li><p>ROM compares calculated hash against stored hash in TLV section</p></li>
+<li><p>ROM performs signature verification using customer RoT keys</p></li>
+<li><p>If verification passes, ROM stores hash, updates boot status, and executes application</p></li>
+</ol>
+<p>Performance requirements: * &lt; 20ms for pre-validated images * &lt; 50ms for full verification</p>
+</section>
+</section>
+<section id="crypto-drivers-and-capabilities">
+<h2>Crypto Drivers and Capabilities<a class="headerlink" href="#crypto-drivers-and-capabilities" title="Permalink to this heading">¶</a></h2>
+<p>The MSPM33 provides hardware acceleration for cryptographic operations:</p>
+<section id="pka-public-key-accelerator">
+<h3>PKA (Public Key Accelerator)<a class="headerlink" href="#pka-public-key-accelerator" title="Permalink to this heading">¶</a></h3>
+<p>The EIP-150 PKA supports:</p>
+<ul class="simple">
+<li><p><strong>Key Agreement Schemes</strong></p>
+<ul>
+<li><p>Elliptic Curve Diffie-Hellman (ECDH and ECDHE)</p></li>
+<li><p>Elliptic curve Password Authenticated Key Exchange by Juggling (ECJ-PAKE)</p></li>
+</ul>
+</li>
+<li><p><strong>Signature and Verification</strong></p>
+<ul>
+<li><p>Elliptic curve Digital Signature Algorithm (ECDSA)</p></li>
+<li><p>Edwards-curve Digital Signature Algorithm (EdDSA)</p></li>
+<li><p>RSA-2048 signature verification (PSS and PKCS#1 v1.5 padding)</p></li>
+</ul>
+</li>
+<li><p><strong>Curve Support</strong></p>
+<ul>
+<li><p>NIST curves: P224, P256, P384, P521</p></li>
+<li><p>Brainpool curves: 256R1, 384R1, 512R1</p></li>
+<li><p>Curve25519 and Ed25519</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="sha-secure-hash-algorithm">
+<h3>SHA (Secure Hash Algorithm)<a class="headerlink" href="#sha-secure-hash-algorithm" title="Permalink to this heading">¶</a></h3>
+<p>The EIP-59c-8 SHA accelerator supports:</p>
+<ul class="simple">
+<li><p>SHA224/SHA256 with 512-bit block size</p></li>
+<li><p>HASH and HMAC support</p></li>
+<li><p>8-bit APB bus interface</p></li>
+<li><p>Streamlined data mode for maximum throughput</p></li>
+<li><p>DMA support for data transfer</p></li>
+</ul>
+<p>Performance for SHA-256 hash verification of 512KB flash, when core is running at 32 MHz:</p>
+<p><img alt="image0" src="../_images/SHA_perf.png" /></p>
+</section>
+<section id="aes-advanced-encryption-standard">
+<h3>AES (Advanced Encryption Standard)<a class="headerlink" href="#aes-advanced-encryption-standard" title="Permalink to this heading">¶</a></h3>
+<p>Hardware support for AES operations with the following capabilities: * AES-128-bit block encryption and decryption * Various modes of operation. Enc/decrypt only modes: CBC, CFB-1, CFB-8, CFB-128, OFB-128, CTR/ICM. Authentication only modes: CBC-MAC, CMAC. * DMA triggers for input and output data</p>
+</section>
+<section id="msp-crypto-library">
+<h3>MSP Crypto Library<a class="headerlink" href="#msp-crypto-library" title="Permalink to this heading">¶</a></h3>
+<p>The MSP Crypto Library provides a comprehensive software cryptography library for MSPM33 devices, offering both hardware-accelerated and software-based cryptographic operations. The library is delivered as pre-built libraries with source code transparency for certain modules.</p>
+<p><strong>Note</strong>: - Current crypto library is intented to be used just for evaluation purpose, not recommended to be used for production.</p>
+<section id="supported-modules">
+<h4>Supported Modules<a class="headerlink" href="#supported-modules" title="Permalink to this heading">¶</a></h4>
+<p>The crypto library includes the following cryptographic modules: * <strong>Elliptic Curve (EC)</strong>: ECDSA signature generation and verification * <strong>RSA</strong>: RSA-2048 signature verification (PKCS#1 v1.5 and PSS padding)</p>
+</section>
+<section id="mspm33-support">
+<h4>MSPM33 Support<a class="headerlink" href="#mspm33-support" title="Permalink to this heading">¶</a></h4>
+<p>For the MSPM33C321x devices, the crypto library provides: * Hardware acceleration via PKA (Public Key Accelerator) for P-256 and P-384 curve operations * Software-based implementation for P-521 curves * Hardware acceleration via AES Advanced peripheral * Hardware TRNG (True Random Number Generator) support</p>
+</section>
+<section id="ecdsa-support-this-release">
+<h4>ECDSA Support (This Release)<a class="headerlink" href="#ecdsa-support-this-release" title="Permalink to this heading">¶</a></h4>
+<p>This release focuses on ECDSA (Elliptic Curve Digital Signature Algorithm) functionality for MSPM33 devices.</p>
+<p><strong>Available ECDSA Operations:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Digital Signature Generation</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Crypto_ECDSA_sign()</span></code> - Generic ECDSA signing for any supported curve</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Crypto_ECDSA_P256_sign()</span></code> - Optimized P-256 signing with reduced SRAM usage</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Crypto_ECDSA_P384_sign()</span></code> - Optimized P-384 signing with reduced SRAM usage</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Crypto_ECDSA_P521_sign()</span></code> - Optimized P-521 signing with reduced SRAM usage</p></li>
+</ul>
+</li>
+<li><p><strong>Digital Signature Verification</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Crypto_ECDSA_verify()</span></code> - Generic ECDSA verification for any supported curve</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Crypto_ECDSA_P256_verify()</span></code> - Optimized P-256 verification with reduced SRAM usage</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Crypto_ECDSA_P384_verify()</span></code> - Optimized P-384 verification with reduced SRAM usage</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Crypto_ECDSA_P521_verify()</span></code> - Optimized P-521 verification with reduced SRAM usage</p></li>
+</ul>
+</li>
+</ol>
+<p><strong>Supported NIST Curves:</strong> * <strong>P-256</strong> (secp256r1): 256-bit prime field curve with hardware PKA acceleration * <strong>P-384</strong> (secp384r1): 384-bit prime field curve with hardware PKA acceleration * <strong>P-521</strong> (secp521r1): 521-bit prime field curve with software implementation</p>
+<p><strong>Key Features:</strong> * Hardware-accelerated PKA operations for P-256 and P-384 curves * Software-based implementation for P-521 curve * Curve-specific optimized APIs with reduced SRAM footprint * Support for pre-hashed message digests (SHA-256 compatible) * Comprehensive error checking and status reporting via <code class="docutils literal notranslate"><span class="pre">crypto_ec_stat_t</span></code> * NIST CAVP test vector validated implementations</p>
+<p><strong>Example Applications</strong></p>
+<p>The SDK includes working examples demonstrating ECDSA operations:</p>
+<p><strong>ECDSA Signature Generation Examples:</strong> * <code class="docutils literal notranslate"><span class="pre">ec_ecdsa_p256_sign</span></code> - P-256 signature generation * <code class="docutils literal notranslate"><span class="pre">ec_ecdsa_p384_sign</span></code> - P-384 signature generation * <code class="docutils literal notranslate"><span class="pre">ec_ecdsa_p521_sign</span></code> - P-521 signature generation</p>
+<p><strong>ECDSA Signature Verification Examples:</strong> * <code class="docutils literal notranslate"><span class="pre">ec_ecdsa_p256_sha256_verify</span></code> - P-256 signature verification with SHA-256 * <code class="docutils literal notranslate"><span class="pre">ec_ecdsa_p384_verify</span></code> - P-384 signature verification * <code class="docutils literal notranslate"><span class="pre">ec_ecdsa_p521_verify</span></code> - P-521 signature verification</p>
+<p><strong>Performance Considerations</strong></p>
+<ul class="simple">
+<li><p>P-256 and P-384 curves benefit from hardware PKA acceleration for significantly improved performance</p></li>
+<li><p>P-521 curve uses software implementation</p></li>
+<li><p>Curve-specific optimized APIs (P256/P384/P521) provide better SRAM efficiency compared to generic APIs</p></li>
+<li><p>Pre-hashing messages before signing/verification is recommended for large data</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="security-architecture">
+<h2>Security Architecture<a class="headerlink" href="#security-architecture" title="Permalink to this heading">¶</a></h2>
+<section id="cpu-security">
+<h3>CPU Security<a class="headerlink" href="#cpu-security" title="Permalink to this heading">¶</a></h3>
+<p>The Cortex-M33 implements TrustZone security with:</p>
+<ul class="simple">
+<li><p><strong>IDAU</strong> - Provides first-level attribution of NS and NSC based on address decoding</p></li>
+<li><p><strong>SAU</strong> - Binds runtime attributes of address ranges into S, NS, or NSC</p></li>
+</ul>
+<p>Memory regions are mapped with specific security attributes: * 0x0000.0000-0x00FF.FFFF: Flash Non-Secure * 0x1000.0000-0x10FF.FFFF: Flash Secure * 0x2000.0000-0x2FFF.FFFF: SRAM Non-Secure * 0x3000.0000-0x3FFF.FFFF: SRAM Secure * 0x4000.0000-0x4FFF.FFFF: Peripheral Non-Secure * 0x5000.0000-0x5FFF.FFFF: Peripheral Secure</p>
+</section>
+<section id="global-security-control-gsc">
+<h3>Global Security Control (GSC)<a class="headerlink" href="#global-security-control-gsc" title="Permalink to this heading">¶</a></h3>
+<p>The GSC peripheral contains settings for harmonizing security across bus initiators, memory, and peripherals:</p>
+<ul class="simple">
+<li><p>Controls access restrictions for bus firewalls and wrappers</p></li>
+<li><p>Manages security attributes for SRAM, flash, and peripherals</p></li>
+<li><p>Handles violation reporting and error logging</p></li>
+</ul>
+</section>
+<section id="memory-protection-1">
+<span id="id1"></span><h3>Memory Protection<a class="headerlink" href="#memory-protection-1" title="Permalink to this heading">¶</a></h3>
+<section id="sram-bank-security">
+<h4>SRAM Bank Security<a class="headerlink" href="#sram-bank-security" title="Permalink to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Implemented in 16KB chunks with granular control</p></li>
+<li><p>Each chunk can be configured as secure/non-secure and privileged/unprivileged</p></li>
+<li><p>Violations generate secure NMI and log access information</p></li>
+</ul>
+</section>
+<section id="flash-protection">
+<h4>Flash Protection<a class="headerlink" href="#flash-protection" title="Permalink to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Code flash uses 2KB sectors for first 64KB and 16KB chunks for remaining flash</p></li>
+<li><p>Data flash uses 2KB sectors for all 32KB</p></li>
+<li><p>Hide Protection allows temporal isolation of sensitive code</p></li>
+</ul>
+</section>
+</section>
+<section id="flash-programming-security">
+<h3>Flash Programming Security<a class="headerlink" href="#flash-programming-security" title="Permalink to this heading">¶</a></h3>
+<p>Flash programming security is implemented with:</p>
+<ul class="simple">
+<li><p><strong>Flash Resource Ownership</strong> - Checks if code thread has ownership of flash resource</p></li>
+<li><p><strong>Authorization Check</strong> - GSC validates commands based on security attributes</p></li>
+<li><p><strong>Bank Erase Protection</strong> - Prevents unauthorized bank erase operations</p></li>
+</ul>
+</section>
+</section>
+<section id="secure-debug">
+<h2>Secure Debug<a class="headerlink" href="#secure-debug" title="Permalink to this heading">¶</a></h2>
+<p>The MSPM33 implements a comprehensive debug security architecture:</p>
+<section id="debug-levels">
+<h3>Debug Levels<a class="headerlink" href="#debug-levels" title="Permalink to this heading">¶</a></h3>
+<p>The MSPM33 implements three hierarchical debug levels that control debugger access to system resources based on ARM TrustZone security domains. These levels provide granular control over debug capabilities while maintaining security boundaries between Secure and Non-Secure worlds.</p>
+<p><strong>Important Notes</strong>: - Debug levels control what the <strong>external debugger</strong> can access through the Debug Subsystem Mailbox (DSSM), independent of the CPU’s execution context - TrustZone memory protection rules (enforced by SAU/IDAU and GSC) remain active during normal CPU execution regardless of debug level - The <strong>physical SWD port</strong> can be separately enabled/disabled via NONMAIN configuration (BCR), independent of the debug level setting</p>
+<section id="debug-level-definitions">
+<h4>Debug Level Definitions<a class="headerlink" href="#debug-level-definitions" title="Permalink to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Level 0 (L0) - Full Debug Access</strong></p>
+<ul>
+<li><p><strong>Debugger Access Scope</strong>: External debugger has complete visibility into both Secure and Non-Secure regions via DSSM</p></li>
+<li><p><strong>TrustZone Domains Visible to Debugger</strong>: Full access to Secure (S) and Non-Secure (NS) memory, peripherals, and CPU state</p></li>
+<li><p><strong>Debugger Capabilities</strong>:</p>
+<ul>
+<li><p>Debugger can read/write all SRAM banks (both secure and non-secure address ranges)</p></li>
+<li><p>Debugger can access all flash sectors including secure boot code regions</p></li>
+<li><p>Debugger has visibility of SAU/IDAU configuration registers</p></li>
+<li><p>Debugger can access secure peripherals (GSC, secure crypto engines)</p></li>
+<li><p>Debugger can view full CPU register state including secure stack pointers</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Level 1 (L1) - Non-Secure Debug Only</strong></p>
+<ul>
+<li><p><strong>Debugger Access Scope</strong>: External debugger access restricted to Non-Secure regions only via DSSM</p></li>
+<li><p><strong>TrustZone Domains Visible to Debugger</strong>: Limited to Non-Secure (NS) memory and peripherals</p></li>
+<li><p><strong>Debugger Capabilities</strong>:</p>
+<ul>
+<li><p>Debugger can read/write non-secure SRAM banks only</p></li>
+<li><p>Debugger can access non-secure flash sectors and application code</p></li>
+<li><p>Debugger can access non-secure peripherals</p></li>
+<li><p>Debugger can view non-secure CPU state and registers</p></li>
+<li><p><strong>Blocked from Debugger</strong>: Secure memory regions, secure peripherals, SAU/IDAU configuration</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Level 2 (L2) - No Debug Access via DSSM</strong></p>
+<ul>
+<li><p><strong>Debugger Access Scope</strong>: All debug access through DSSM disabled</p></li>
+<li><p><strong>TrustZone Domains Visible to Debugger</strong>: No access to any security domain via DSSM</p></li>
+<li><p><strong>Debugger Capabilities</strong>: No debug commands accepted through DSSM</p></li>
+<li><p><strong>Note</strong>: L2 restricts debug access through DSSM but does not physically disable the SWD port. The SWD port can be separately disabled via NONMAIN BCR configuration (<code class="docutils literal notranslate"><span class="pre">swdEnable</span></code> setting)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="swd-port-control">
+<h4>SWD Port Control<a class="headerlink" href="#swd-port-control" title="Permalink to this heading">¶</a></h4>
+<p>The physical SWD port can be controlled independently of debug levels through NONMAIN BCR configuration:</p>
+<ul class="simple">
+<li><p><strong>SWD Port Enabled</strong> (<code class="docutils literal notranslate"><span class="pre">swdEnable</span> <span class="pre">=</span> <span class="pre">true</span></code>): The Debug Subsystem Mailbox (DSSM) is accessible, allowing debug commands and authentication. Debug level (L0/L1/L2) determines what resources can be accessed.</p></li>
+<li><p><strong>SWD Port Disabled</strong> (<code class="docutils literal notranslate"><span class="pre">swdEnable</span> <span class="pre">=</span> <span class="pre">false</span></code>): The physical SWD interface is completely disabled. All SWD-accessible functions (application debug, mass erase, factory reset, TI failure analysis) are inaccessible regardless of debug level configuration.</p></li>
+</ul>
+</section>
+</section>
+<section id="debug-security-mechanisms">
+<h3>Debug Security Mechanisms<a class="headerlink" href="#debug-security-mechanisms" title="Permalink to this heading">¶</a></h3>
+<p>Debug access depends on lifecycle state:</p>
+<ul class="simple">
+<li><p><strong>HS-FS</strong> - Password-based debug unlock</p></li>
+<li><p><strong>HS-KP</strong> - Debug port closed</p></li>
+<li><p><strong>HS-SE</strong> - Certificate-based debug unlock</p></li>
+<li><p><strong>HS-FA</strong> - Certificate-based debug unlock with additional security measures</p></li>
+</ul>
+</section>
+<section id="debug-port-unlock-methods">
+<h3>Debug Port Unlock Methods<a class="headerlink" href="#debug-port-unlock-methods" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Password-based</strong> - Using SHA-256 hash passwords</p></li>
+<li><p><strong>Certificate-based</strong> - Using customer-signed certificates</p></li>
+<li><p><strong>Persistent/Non-persistent</strong> - Options for keeping debug open through reset or for session only</p></li>
+</ul>
+</section>
+</section>
+<section id="secure-firmware-offerings">
+<h2>Secure Firmware offerings<a class="headerlink" href="#secure-firmware-offerings" title="Permalink to this heading">¶</a></h2>
+<section id="csc-mcuboot">
+<h3>CSC (MCUboot)<a class="headerlink" href="#csc-mcuboot" title="Permalink to this heading">¶</a></h3>
+<p>The Customer Secure Code (CSC) is an implementation of the publicly available mcuboot for devices in the MSP Family with advanced security features. CSC user guide and features list can be fount here: <a class="reference external" href="../../../../middleware/boot_manager/Secure_Booting_Users_Guide.html">CSC User Guide</a></p>
+</section>
+<section id="tfm">
+<h3>TFM<a class="headerlink" href="#tfm" title="Permalink to this heading">¶</a></h3>
+<p>Trusted Firmware-M (TF-M) implements the Secure Processing Environment (SPE) for Armv8-M, Armv8.1-M architectures. It is the platform security architecture reference implementation aligning with PSA Certified guidelines, enabling chips, Real Time Operating Systems and devices to become PSA Certified.</p>
+<p>TF-M relies on an isolation boundary between the Non-secure Processing Environment (NSPE) and the Secure Processing Environment (SPE). It can but is not limited to using the Arm TrustZone technology on Armv8-M and Armv8.1-M architectures.</p>
+<p>TF-M consists of: * Secure Boot to authenticate NSPE and SPE images * TF-M Core for controlling the isolation, communication and execution within SPE and with NSPE * Crypto, Internal Trusted Storage (ITS), Protected Storage (PS), Firmware Update and Attestation secure services</p>
+<p><img alt="image1" src="../_images/design_for_TFM.png" /></p>
+<p>Applications and Libraries in the Non-secure Processing Environment can utilize these secure services with a standardized set of PSA Functional APIs. Applications running on Cortex-M devices can leverage TF-M services to ensure secure connection with edge gateways and IoT cloud services. It also protects the critical security assets such as sensitive data, keys and certificates on the platform. TF-M is supported on several Cortex-M based Microcontrollers and Real Time Operating Systems (RTOS).</p>
+<p><strong>Note</strong>: - Support for TFM will be enabled in future releases.</p>
+</section>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">¶</a></h2>
+<p>The MSPM33 security architecture provides a comprehensive set of features to protect embedded applications against various threats. By leveraging the secure boot, key provisioning, and other security capabilities, developers can build secure systems that protect sensitive code, data, and cryptographic assets.</p>
+<p>For more detailed information, please refer to the MSPM33 Technical Reference Manual and other TI documentation.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Security User Guide for MSPM33 MCUs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">1995-2023, Texas Instruments Incorporated. All rights reserved</a>, Texas Instruments Incorporated. All rights reserved. <br/>
+      <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

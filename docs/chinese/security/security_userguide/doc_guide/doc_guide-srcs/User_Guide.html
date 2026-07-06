@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MSPM33 安全用户指南 &mdash; Security User Guide for MSPM33 MCUs 1.04.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Security User Guide for MSPM33 MCUs" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Security User Guide for MSPM33 MCUs
+          </a>
+              <div class="version">
+                1.04.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MSPM33 安全用户指南</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">安全产品</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#psa-l2">PSA-L2合规性</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trustzone">TrustZone架构</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">内存保护</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">安全生命周期状态</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">设备类型和生命周期状态</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">生命周期状态转换</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#rot">信任根(RoT)能力</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">安全引导</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">加密驱动程序和能力</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pka">PKA(公钥加速器)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sha">SHA(安全哈希算法)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aes">AES(高级加密标准)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#msp">MSP加密库</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id9">支持的模块</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">MSPM33支持</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ecdsa">ECDSA支持(本次发布)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">安全架构</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cpu">CPU安全</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gsc">全局安全控制(GSC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">内存保护</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sram">SRAM银行安全</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id14">闪存保护</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">闪存编程安全</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id16">安全调试</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id17">调试级别</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id18">调试级别定义</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#swd">SWD端口控制</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id19">调试安全机制</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id20">调试端口解锁方法</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id21">安全固件产品</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#csc-mcuboot">CSC (MCUboot)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tfm">TFM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id22">结论</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Security User Guide for MSPM33 MCUs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>MSPM33 安全用户指南</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mspm33">
+<h1>MSPM33 安全用户指南<a class="headerlink" href="#mspm33" title="Permalink to this heading">¶</a></h1>
+<section id="id1">
+<h2>简介<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<p>MSPM33平台实现了全面的安全架构，旨在满足PSA-L2认证要求，并为嵌入式应用提供强大的安全功能。本用户指南为开发人员和系统集成商提供安全功能、能力和使用模式的概述。</p>
+<p>MSPM33安全架构围绕以下关键客户需求构建：</p>
+<ul class="simple">
+<li><p><strong>信任根(RoT)实现</strong> - 用于PSA-L2认证的不可变信任根</p></li>
+<li><p><strong>安全密钥配置</strong> - 能够将设备识别为真正的TI设备并安全地配置客户信任根密钥</p></li>
+<li><p><strong>安全固件安装、安全引导和调试</strong> - 验证应用程序映像的完整性和真实性、快速引导选项和安全调试访问</p></li>
+<li><p><strong>生命周期管理</strong> - 从开放状态到封闭状态的受控安全级别转换</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>安全产品<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h2>
+<p>MSPM33平台提供以下安全功能：</p>
+<section id="psa-l2">
+<h3>PSA-L2合规性<a class="headerlink" href="#psa-l2" title="Permalink to this heading">¶</a></h3>
+<p>MSPM33满足ARM平台安全架构(PSA)2级要求，包括：</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>PSA功能要求</p></th>
+<th class="head"><p>支持</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>安全引导</p></td>
+<td><p>是</p></td>
+</tr>
+<tr class="row-odd"><td><p>软件隔离</p></td>
+<td><p>使用隐藏保护的时间隔离和使用TrustZone/GSC的空间隔离</p></td>
+</tr>
+<tr class="row-even"><td><p>安全存储</p></td>
+<td><p>使用TRIM和NONMAIN扇区的安全密钥存储</p></td>
+</tr>
+<tr class="row-odd"><td><p>安全更新</p></td>
+<td><p>是</p></td>
+</tr>
+<tr class="row-even"><td><p>安全状态(密钥、生命周期)</p></td>
+<td><p>符合PSA要求的生命周期状态</p></td>
+</tr>
+<tr class="row-odd"><td><p>加密</p></td>
+<td><p>AES、SHA、PKA的硬件支持</p></td>
+</tr>
+<tr class="row-even"><td><p>调试</p></td>
+<td><p>使用生命周期状态的安全调试入口和启用</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="trustzone">
+<h3>TrustZone架构<a class="headerlink" href="#trustzone" title="Permalink to this heading">¶</a></h3>
+<p>Cortex-M33安全性由ARM TrustZone架构作为v8m安全扩展的一部分提供。关键组件包括：</p>
+<ul class="simple">
+<li><p><strong>实现相关属性单元(IDAU)</strong> - 返回与地址相关的安全属性的CPU边界逻辑</p></li>
+<li><p><strong>安全属性单元(SAU)</strong> - 基于寄存器的CPU外设，提供进一步的安全粒度</p></li>
+</ul>
+<p>这些组件共同为内存区域提供安全(S)、非安全可调用(NSC)和非安全(NS)属性。</p>
+</section>
+<section id="id3">
+<h3>内存保护<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
+<p>MSPM33实现了全面的内存保护机制：</p>
+<ul class="simple">
+<li><p><strong>SRAM银行安全</strong> - 16KB块，具有精细控制(最小到512字节)</p></li>
+<li><p><strong>Flash银行安全</strong> - 2KB扇区大小，具有安全/非安全和特权/非特权访问控制</p></li>
+<li><p><strong>隐藏保护</strong> - 保护敏感代码的时间隔离机制</p></li>
+</ul>
+</section>
+</section>
+<section id="id4">
+<h2>安全生命周期状态<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h2>
+<p>MSPM33实现了安全生命周期管理系统，允许在不同安全状态之间进行受控转换：</p>
+<section id="id5">
+<h3>设备类型和生命周期状态<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>1ST-BDAY (首次生日)</strong></p>
+<ul class="simple">
+<li><p>刚出厂设备的初始状态</p></li>
+<li><p>通过闪存中的特定位模式识别</p></li>
+</ul>
+</li>
+<li><p><strong>高安全(HS)状态</strong></p>
+<ul class="simple">
+<li><p><strong>HS-FS (现场可保护)</strong> - 默认出货状态，准备进行密钥配置</p></li>
+<li><p><strong>HS-KP (密钥已配置)</strong> - 客户密钥配置后的状态，准备进行代码配置</p></li>
+<li><p><strong>HS-SE (安全强制执行)</strong> - 客户代码配置后的状态，强制执行安全措施</p></li>
+<li><p><strong>HS-FA (故障分析)</strong> - 设备返回TI进行分析的状态</p></li>
+<li><p><strong>DCOM (退役)</strong> - 设备不再可用的生命周期结束状态</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="id6">
+<h3>生命周期状态转换<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>设备以HS-FS状态出货</p></li>
+<li><p>成功密钥配置后转换为HS-KP</p></li>
+<li><p>安全固件安装后转换为HS-SE</p></li>
+<li><p>转换为HS-FA需要客户授权设备返回</p></li>
+<li><p>转换为DCOM是永久性的，使设备无法使用</p></li>
+</ul>
+<p>每个生命周期状态都有特定的安全属性和能力，控制对调试端口、安全资产和编程能力的访问。</p>
+</section>
+</section>
+<section id="rot">
+<h2>信任根(RoT)能力<a class="headerlink" href="#rot" title="Permalink to this heading">¶</a></h2>
+<section id="id7">
+<h3>安全引导<a class="headerlink" href="#id7" title="Permalink to this heading">¶</a></h3>
+<p>安全引导过程确保只有经过身份验证和完整性验证的代码才能在设备上执行。主要功能包括：</p>
+<ul class="simple">
+<li><p><strong>不可变信任根(iRoT)</strong> - 在安全ROM中实现</p></li>
+<li><p><strong>映像验证</strong> - 应用程序映像的SHA-256哈希验证</p></li>
+<li><p><strong>数字签名验证</strong> - 使用客户配置的密钥</p></li>
+<li><p><strong>快速引导选项</strong> - 使用预验证映像进行完整性检查</p></li>
+</ul>
+<p>安全引导过程遵循以下步骤：</p>
+<ol class="arabic simple">
+<li><p>设备上电，ROM检测HS-SE状态</p></li>
+<li><p>ROM检查映像是否已预验证</p></li>
+<li><p>如果未预验证，ROM读取映像头并计算SHA-256哈希</p></li>
+<li><p>ROM将计算的哈希与TLV部分中存储的哈希进行比较</p></li>
+<li><p>ROM使用客户RoT密钥执行签名验证</p></li>
+<li><p>如果验证通过，ROM存储哈希，更新引导状态，并执行应用程序</p></li>
+</ol>
+<p>性能要求： * 预验证映像 &lt; 20ms * 完全验证 &lt; 50ms</p>
+</section>
+</section>
+<section id="id8">
+<h2>加密驱动程序和能力<a class="headerlink" href="#id8" title="Permalink to this heading">¶</a></h2>
+<p>MSPM33为加密操作提供硬件加速：</p>
+<section id="pka">
+<h3>PKA(公钥加速器)<a class="headerlink" href="#pka" title="Permalink to this heading">¶</a></h3>
+<p>EIP-150 PKA支持：</p>
+<ul class="simple">
+<li><p><strong>密钥协商方案</strong></p>
+<ul>
+<li><p>椭圆曲线Diffie-Hellman(ECDH和ECDHE)</p></li>
+<li><p>椭圆曲线密码认证密钥交换(ECJ-PAKE)</p></li>
+</ul>
+</li>
+<li><p><strong>签名和验证</strong></p>
+<ul>
+<li><p>椭圆曲线数字签名算法(ECDSA)</p></li>
+<li><p>Edwards曲线数字签名算法(EdDSA)</p></li>
+<li><p>RSA-2048(需要SDK软件开发)</p></li>
+</ul>
+</li>
+<li><p><strong>曲线支持</strong></p>
+<ul>
+<li><p>NIST曲线：P224、P256、P384、P521</p></li>
+<li><p>Brainpool曲线：256R1、384R1、512R1</p></li>
+<li><p>Curve25519和Ed25519</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="sha">
+<h3>SHA(安全哈希算法)<a class="headerlink" href="#sha" title="Permalink to this heading">¶</a></h3>
+<p>EIP-59c-8 SHA加速器支持：</p>
+<ul class="simple">
+<li><p>SHA224/SHA256，512位块大小</p></li>
+<li><p>支持HASH和HMAC</p></li>
+<li><p>8位APB总线接口</p></li>
+<li><p>最大吞吐量的流线型数据模式</p></li>
+<li><p>支持DMA数据传输</p></li>
+</ul>
+<p>当核心以32 MHz运行时，512KB闪存的SHA-256哈希验证性能：</p>
+<p><img alt="image0" src="../_images/SHA_perf.png" /></p>
+</section>
+<section id="aes">
+<h3>AES(高级加密标准)<a class="headerlink" href="#aes" title="Permalink to this heading">¶</a></h3>
+<p>AES操作的硬件支持，具有以下功能： * AES-128位块加密和解密 * 各种操作模式。仅加密/解密模式：CBC、CFB-1、CFB-8、CFB-128、OFB-128、CTR/ICM。仅认证模式：CBC-MAC、CMAC。 * 输入和输出数据的DMA触发器</p>
+</section>
+<section id="msp">
+<h3>MSP加密库<a class="headerlink" href="#msp" title="Permalink to this heading">¶</a></h3>
+<p>MSP加密库为MSPM33设备提供全面的软件加密库，提供基于硬件加速和软件的加密操作。该库以预构建库的形式交付，某些模块具有源代码透明性。</p>
+<section id="id9">
+<h4>支持的模块<a class="headerlink" href="#id9" title="Permalink to this heading">¶</a></h4>
+<p>加密库包括以下加密模块： * <strong>椭圆曲线(EC)</strong>：ECDSA签名生成和验证</p>
+</section>
+<section id="id10">
+<h4>MSPM33支持<a class="headerlink" href="#id10" title="Permalink to this heading">¶</a></h4>
+<p>对于MSPM33C321x设备，加密库提供： * 通过PKA(公钥加速器)对P-256曲线操作进行硬件加速 * P-384和P-521曲线的软件实现 * 通过AES高级外设进行硬件加速 * 硬件TRNG(真随机数生成器)支持</p>
+</section>
+<section id="ecdsa">
+<h4>ECDSA支持(本次发布)<a class="headerlink" href="#ecdsa" title="Permalink to this heading">¶</a></h4>
+<p>本次发布重点关注MSPM33设备的ECDSA(椭圆曲线数字签名算法)功能。</p>
+<p><strong>可用的ECDSA操作：</strong></p>
+<ol class="arabic simple">
+<li><p><strong>数字签名生成</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Crypto_ECDSA_sign()</span></code> - 适用于任何支持曲线的通用ECDSA签名</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Crypto_ECDSA_P256_sign()</span></code> - 优化的P-256签名，减少SRAM使用</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Crypto_ECDSA_P384_sign()</span></code> - 优化的P-384签名，减少SRAM使用</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Crypto_ECDSA_P521_sign()</span></code> - 优化的P-521签名，减少SRAM使用</p></li>
+</ul>
+</li>
+<li><p><strong>数字签名验证</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Crypto_ECDSA_verify()</span></code> - 适用于任何支持曲线的通用ECDSA验证</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Crypto_ECDSA_P256_verify()</span></code> - 优化的P-256验证，减少SRAM使用</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Crypto_ECDSA_P384_verify()</span></code> - 优化的P-384验证，减少SRAM使用</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Crypto_ECDSA_P521_verify()</span></code> - 优化的P-521验证，减少SRAM使用</p></li>
+</ul>
+</li>
+</ol>
+<p><strong>支持的NIST曲线：</strong> * <strong>P-256</strong>(secp256r1)：256位素域曲线，具有硬件PKA加速 * <strong>P-384</strong>(secp384r1)：384位素域曲线，软件实现 * <strong>P-521</strong>(secp521r1)：521位素域曲线，软件实现</p>
+<p><strong>主要特点：</strong> * P-256曲线的硬件加速PKA操作 * P-384和P-521曲线的软件实现 * 特定曲线优化API，减少SRAM占用 * 支持预哈希消息摘要(兼容SHA-256) * 通过<code class="docutils literal notranslate"><span class="pre">crypto_ec_stat_t</span></code>进行全面的错误检查和状态报告 * NIST CAVP测试向量验证的实现</p>
+<p><strong>示例应用</strong></p>
+<p>SDK包含演示ECDSA操作的工作示例：</p>
+<p><strong>ECDSA签名生成示例：</strong> * <code class="docutils literal notranslate"><span class="pre">ec_ecdsa_p256_sign</span></code> - P-256签名生成 * <code class="docutils literal notranslate"><span class="pre">ec_ecdsa_p384_sign</span></code> - P-384签名生成 * <code class="docutils literal notranslate"><span class="pre">ec_ecdsa_p521_sign</span></code> - P-521签名生成</p>
+<p><strong>ECDSA签名验证示例：</strong> * <code class="docutils literal notranslate"><span class="pre">ec_ecdsa_p256_sha256_verify</span></code> - 使用SHA-256的P-256签名验证 * <code class="docutils literal notranslate"><span class="pre">ec_ecdsa_p384_verify</span></code> - P-384签名验证 * <code class="docutils literal notranslate"><span class="pre">ec_ecdsa_p521_verify</span></code> - P-521签名验证</p>
+<p><strong>性能考虑</strong></p>
+<ul class="simple">
+<li><p>P-256曲线受益于硬件PKA加速，性能显著提高</p></li>
+<li><p>P-384和P-521曲线使用软件实现</p></li>
+<li><p>特定曲线优化API(P256/P384/P521)与通用API相比提供更好的SRAM效率</p></li>
+<li><p>建议在签名/验证前对大型数据进行预哈希处理</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="id11">
+<h2>安全架构<a class="headerlink" href="#id11" title="Permalink to this heading">¶</a></h2>
+<section id="cpu">
+<h3>CPU安全<a class="headerlink" href="#cpu" title="Permalink to this heading">¶</a></h3>
+<p>Cortex-M33实现TrustZone安全，包括：</p>
+<ul class="simple">
+<li><p><strong>IDAU</strong> - 基于地址解码提供NS和NSC的一级属性</p></li>
+<li><p><strong>SAU</strong> - 将地址范围的运行时属性绑定为S、NS或NSC</p></li>
+</ul>
+<p>内存区域映射有特定的安全属性： * 0x0000.0000-0x00FF.FFFF：闪存非安全 * 0x1000.0000-0x10FF.FFFF：闪存安全 * 0x2000.0000-0x2FFF.FFFF：SRAM非安全 * 0x3000.0000-0x3FFF.FFFF：SRAM安全 * 0x4000.0000-0x4FFF.FFFF：外设非安全 * 0x5000.0000-0x5FFF.FFFF：外设安全</p>
+</section>
+<section id="gsc">
+<h3>全局安全控制(GSC)<a class="headerlink" href="#gsc" title="Permalink to this heading">¶</a></h3>
+<p>GSC外设包含用于协调总线启动器、内存和外设之间安全性的设置：</p>
+<ul class="simple">
+<li><p>控制总线防火墙和包装器的访问限制</p></li>
+<li><p>管理SRAM、闪存和外设的安全属性</p></li>
+<li><p>处理违规报告和错误日志</p></li>
+</ul>
+</section>
+<section id="id12">
+<span id="id13"></span><h3>内存保护<a class="headerlink" href="#id12" title="Permalink to this heading">¶</a></h3>
+<section id="sram">
+<h4>SRAM银行安全<a class="headerlink" href="#sram" title="Permalink to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>以16KB块实现，具有精细控制</p></li>
+<li><p>每个块可配置为安全/非安全和特权/非特权</p></li>
+<li><p>违规生成安全NMI并记录访问信息</p></li>
+</ul>
+</section>
+<section id="id14">
+<h4>闪存保护<a class="headerlink" href="#id14" title="Permalink to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>代码闪存对前64KB使用2KB扇区，对剩余闪存使用16KB块</p></li>
+<li><p>数据闪存对所有32KB使用2KB扇区</p></li>
+<li><p>隐藏保护允许敏感代码的时间隔离</p></li>
+</ul>
+</section>
+</section>
+<section id="id15">
+<h3>闪存编程安全<a class="headerlink" href="#id15" title="Permalink to this heading">¶</a></h3>
+<p>闪存编程安全通过以下方式实现：</p>
+<ul class="simple">
+<li><p><strong>闪存资源所有权</strong> - 检查代码线程是否拥有闪存资源</p></li>
+<li><p><strong>授权检查</strong> - GSC根据安全属性验证命令</p></li>
+<li><p><strong>银行擦除保护</strong> - 防止未授权的银行擦除操作</p></li>
+</ul>
+</section>
+</section>
+<section id="id16">
+<h2>安全调试<a class="headerlink" href="#id16" title="Permalink to this heading">¶</a></h2>
+<p>MSPM33实现了全面的调试安全架构：</p>
+<section id="id17">
+<h3>调试级别<a class="headerlink" href="#id17" title="Permalink to this heading">¶</a></h3>
+<p>MSPM33实现了三个分层调试级别，基于ARM TrustZone安全域控制调试器对系统资源的访问。这些级别在维护安全和非安全世界之间的安全边界的同时，提供对调试功能的精细控制。</p>
+<p><strong>重要说明</strong>： - 调试级别控制<strong>外部调试器</strong>通过调试子系统邮箱(DSSM)可以访问的内容，与CPU的执行上下文无关 - 无论调试级别如何，TrustZone内存保护规则(由SAU/IDAU和GSC强制执行)在正常CPU执行期间保持活动状态 - <strong>物理SWD端口</strong>可以通过NONMAIN配置(BCR)单独启用/禁用，与调试级别设置无关</p>
+<section id="id18">
+<h4>调试级别定义<a class="headerlink" href="#id18" title="Permalink to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>级别0(L0) - 完全调试访问</strong></p>
+<ul>
+<li><p><strong>调试器访问范围</strong>：外部调试器通过DSSM对安全和非安全区域都有完全可见性</p></li>
+<li><p><strong>调试器可见的TrustZone域</strong>：完全访问安全(S)和非安全(NS)内存、外设和CPU状态</p></li>
+<li><p><strong>调试器功能</strong>：</p>
+<ul>
+<li><p>调试器可以读/写所有SRAM银行(安全和非安全地址范围)</p></li>
+<li><p>调试器可以访问所有闪存扇区，包括安全引导代码区域</p></li>
+<li><p>调试器可以查看SAU/IDAU配置寄存器</p></li>
+<li><p>调试器可以访问安全外设(GSC、安全加密引擎)</p></li>
+<li><p>调试器可以查看完整的CPU寄存器状态，包括安全堆栈指针</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>级别1(L1) - 仅非安全调试</strong></p>
+<ul>
+<li><p><strong>调试器访问范围</strong>：外部调试器访问仅限于通过DSSM的非安全区域</p></li>
+<li><p><strong>调试器可见的TrustZone域</strong>：限于非安全(NS)内存和外设</p></li>
+<li><p><strong>调试器功能</strong>：</p>
+<ul>
+<li><p>调试器只能读/写非安全SRAM银行</p></li>
+<li><p>调试器可以访问非安全闪存扇区和应用程序代码</p></li>
+<li><p>调试器可以访问非安全外设</p></li>
+<li><p>调试器可以查看非安全CPU状态和寄存器</p></li>
+<li><p><strong>对调试器屏蔽</strong>：安全内存区域、安全外设、SAU/IDAU配置</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>级别2(L2) - 通过DSSM无调试访问</strong></p>
+<ul>
+<li><p><strong>调试器访问范围</strong>：通过DSSM禁用所有调试访问</p></li>
+<li><p><strong>调试器可见的TrustZone域</strong>：通过DSSM无法访问任何安全域</p></li>
+<li><p><strong>调试器功能</strong>：不接受通过DSSM的调试命令</p></li>
+<li><p><strong>注意</strong>：L2限制通过DSSM的调试访问，但不会物理禁用SWD端口。SWD端口可以通过NONMAIN BCR配置(<code class="docutils literal notranslate"><span class="pre">swdEnable</span></code>设置)单独禁用</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="swd">
+<h4>SWD端口控制<a class="headerlink" href="#swd" title="Permalink to this heading">¶</a></h4>
+<p>物理SWD端口可以通过NONMAIN BCR配置独立于调试级别进行控制：</p>
+<ul class="simple">
+<li><p><strong>SWD端口启用</strong>(<code class="docutils literal notranslate"><span class="pre">swdEnable</span> <span class="pre">=</span> <span class="pre">true</span></code>)：调试子系统邮箱(DSSM)可访问，允许调试命令和认证。调试级别(L0/L1/L2)决定可以访问哪些资源。</p></li>
+<li><p><strong>SWD端口禁用</strong>(<code class="docutils literal notranslate"><span class="pre">swdEnable</span> <span class="pre">=</span> <span class="pre">false</span></code>)：物理SWD接口完全禁用。无论调试级别配置如何，所有SWD可访问功能(应用程序调试、完全擦除、工厂重置、TI故障分析)都无法访问。</p></li>
+</ul>
+</section>
+</section>
+<section id="id19">
+<h3>调试安全机制<a class="headerlink" href="#id19" title="Permalink to this heading">¶</a></h3>
+<p>调试访问取决于生命周期状态：</p>
+<ul class="simple">
+<li><p><strong>HS-FS</strong> - 基于密码的调试解锁</p></li>
+<li><p><strong>HS-KP</strong> - 调试端口关闭</p></li>
+<li><p><strong>HS-SE</strong> - 基于证书的调试解锁</p></li>
+<li><p><strong>HS-FA</strong> - 基于证书的调试解锁，具有额外的安全措施</p></li>
+</ul>
+</section>
+<section id="id20">
+<h3>调试端口解锁方法<a class="headerlink" href="#id20" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>基于密码</strong> - 使用SHA-256哈希密码</p></li>
+<li><p><strong>基于证书</strong> - 使用客户签名的证书</p></li>
+<li><p><strong>持久/非持久</strong> - 保持调试在重置后开放或仅用于会话的选项</p></li>
+</ul>
+</section>
+</section>
+<section id="id21">
+<h2>安全固件产品<a class="headerlink" href="#id21" title="Permalink to this heading">¶</a></h2>
+<section id="csc-mcuboot">
+<h3>CSC (MCUboot)<a class="headerlink" href="#csc-mcuboot" title="Permalink to this heading">¶</a></h3>
+<p>客户安全代码(CSC)是公开可用的mcuboot在具有高级安全功能的MSP系列设备上的实现。CSC用户指南和功能列表可在此处找到： <a class="reference external" href="../../../../middleware/boot_manager/Secure_Booting_Users_Guide_CN.html">CSC用户指南</a></p>
+</section>
+<section id="tfm">
+<h3>TFM<a class="headerlink" href="#tfm" title="Permalink to this heading">¶</a></h3>
+<p>Trusted Firmware-M(TF-M)为Armv8-M、Armv8.1-M架构实现安全处理环境(SPE)。它是符合PSA认证指南的平台安全架构参考实现，使芯片、实时操作系统和设备能够获得PSA认证。</p>
+<p>TF-M依赖于非安全处理环境(NSPE)和安全处理环境(SPE)之间的隔离边界。它可以但不限于在Armv8-M和Armv8.1-M架构上使用Arm TrustZone技术。</p>
+<p>TF-M包括： * 安全引导，用于验证NSPE和SPE映像 * TF-M核心，用于控制SPE内部以及与NSPE之间的隔离、通信和执行 * 加密、内部可信存储(ITS)、受保护存储(PS)、固件更新和证明安全服务</p>
+<p><img alt="image1" src="../_images/design_for_TFM.png" /></p>
+<p>非安全处理环境中的应用程序和库可以使用标准化的PSA功能API集利用这些安全服务。运行在Cortex-M设备上的应用程序可以利用TF-M服务确保与边缘网关和IoT云服务的安全连接。它还保护平台上的关键安全资产，如敏感数据、密钥和证书。TF-M在多个基于Cortex-M的微控制器和实时操作系统(RTOS)上受支持。</p>
+<p><strong>注意</strong>： - 对TFM的支持将在未来版本中启用。</p>
+</section>
+</section>
+<section id="id22">
+<h2>结论<a class="headerlink" href="#id22" title="Permalink to this heading">¶</a></h2>
+<p>MSPM33安全架构提供了一套全面的功能，以保护嵌入式应用程序免受各种威胁。通过利用安全引导、密钥配置和其他安全功能，开发人员可以构建安全系统，保护敏感代码、数据和加密资产。</p>
+<p>有关更详细的信息，请参阅MSPM33技术参考手册和其他TI文档。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Security User Guide for MSPM33 MCUs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">1995-2023, Texas Instruments Incorporated. All rights reserved</a>, Texas Instruments Incorporated. All rights reserved. <br/>
+      <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

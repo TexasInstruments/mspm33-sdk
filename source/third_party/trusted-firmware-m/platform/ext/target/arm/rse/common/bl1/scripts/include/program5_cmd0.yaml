@@ -1,0 +1,50 @@
+#-------------------------------------------------------------------------------
+# SPDX-FileCopyrightText: Copyright The TrustedFirmware-M Contributors
+#
+# SPDX-License-Identifier: BSD-3-Clause
+#
+#-------------------------------------------------------------------------------
+# This command loads the SAM configuration from OTP into the SAM registers
+# (FIXME which ones?)
+
+CTRL:
+    USEGPO: 1
+    TRANSIZE: 'word'
+    XTYPE: 'continue'
+SRCADDR: "program5_cmd0_exec_addr + program5_cmd0_size - 0x60"
+DESADDR: "sam_base_address + reg_offset_sam_sammem0"
+XSIZE:
+    SRC: 0x18
+    DES: 0x18
+SRCTRANSCFG:
+    SRCMEMATTR: 'device'
+DESTRANSCFG:
+    DESMEMATTR: 'device'
+XADDRINC: 0x00010001
+GPOVAL0: 0x00000005
+LINKADDR: "program5_cmd1_exec_addr"
+
+SAMEM0: 0xFFFFFFFF
+SAMEM1: 0x0000001F
+SAMIM0: 0xF99FFFFF
+SAMIM1: 0x0000001F
+SAMRRLS0: 0xCCCCBB8B
+SAMRRLS1: 0xCCCCCCCC
+SAMRRLS2: 0xCCCCCCCC
+SAMRRLS3: 0xCCCCCCCC
+SAMRRLS4: 0x000CCCAC
+SAMRRLS5: 0x00000000
+SAMRRLS6: 0x00000000
+SAMRRLS7: 0x00000000
+SAMEC0: 0x00000000
+SAMEC1: 0x00000000
+SAMEC2: 0x00000000
+SAMEC3: 0x00000000
+SAMEC4: 0x00000000
+SAMEC5: 0x00000000
+SAMEC6: 0x00000000
+SAMEC7: 0x00000000
+SAMECTIV: 0x00000000
+SAMWDCIV: 0x00000000
+SAMRL: 0x00000000
+SAMICV: 0x000001CE

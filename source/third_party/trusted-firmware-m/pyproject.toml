@@ -1,0 +1,89 @@
+[project]
+name = "trusted-firmware-m"
+description = "Trusted Firmware-M (TF-M) Python dependencies."
+authors = [{ name = "Arm Ltd." }]
+license = "BSD-3-Clause"
+readme = "readme.rst"
+version = "2.3.0"
+
+requires-python = ">=3.10"
+
+dependencies = [
+    "pyhsslms (>=2.0.0,<2.1.0)",
+    "cbor2 (>=5.6.5,<6.0.0)",
+    "click (>=8.1.8,<9.0.0)",
+    "cryptography (>=41.0.0)",
+    "pyasn1 (>=0.6.1,<0.7.0)",
+    "imgtool (>=2.1.0,<3.0.0)",
+    "jinja2 (>=3.1.6,<4.0.0)",
+    "jsonschema (>=4.23.0,<5.0.0)",
+    "pyyaml (>=6.0.2,<7.0.0)",
+    "ecdsa (>=0.19.1,<0.20.0)",
+    "kconfiglib (>=14.1.0,<15.0.0)",
+    "networkx (>=3.1,<4.0)",
+    "pyelftools (>=0.32,<0.33)",
+    "rich (>=13.9.4,<14.0.0)",
+    "libclang (>=18.1.1,<19.0.0)",
+    "pandas==2.3.1",
+    "numpy==2.2.6",
+    "python-pkcs11==0.8.1"
+]
+
+[project.optional-dependencies]
+docs = [
+  "Sphinx>=7,<9",
+  "sphinx-rtd-theme>=3.0.0",
+  "sphinxcontrib-plantuml==0.30",
+  "sphinxcontrib-svg2pdfconverter==1.3.0",
+  "sphinx-tabs==3.4.7",
+  "jinja2==3.1.6",
+  "graphviz==0.20.3",
+  "latex==0.7.0",
+  "myst-parser>=4,<5",
+  "setuptools==78.1.0",
+  "docutils==0.20"
+]
+
+[project.scripts]
+mcuboot_imagesign_wrapper = "bl2.wrapper:main"
+mcuboot_imagesign_assemble = "bl2.assemble:main"
+
+bl1_1_create_bl1_2_image = "bl1.create_bl1_2_img:main"
+bl1_1_create_provisioning_bundle = "bl1.create_provisioning_bundle:main"
+
+c_include = "tfm_tools.c_include:main"
+c_macro = "tfm_tools.c_macro:main"
+sign_then_encrypt_data = "tfm_tools.sign_then_encrypt_data:main"
+sign_data = "tfm_tools.sign_data:main"
+encrypt_data = "tfm_tools.encrypt_data:main"
+c_struct = "tfm_tools.c_struct:main"
+tfm_gen_armclang_shared_symbols = "tfm_tools.tfm_gen_armclang_shared_symbols:main"
+hex_generation = "tfm_tools.hex_generation:main"
+
+rse_create_blob_message = "rse_scripts.create_blob_message:main"
+rse_create_cm_provisioning_bundle = "rse_scripts.create_cm_provisioning_bundle:main"
+rse_create_combined_provisioning_bundle = "rse_scripts.create_combined_provisioning_bundle:main"
+rse_create_dm_chained_provisioning_bundle = "rse_scripts.create_dm_chained_provisioning_bundle:main"
+rse_create_dm_provisioning_bundle = "rse_scripts.create_dm_provisioning_bundle:main"
+rse_create_otp_layout_specification = "rse_scripts.create_otp_layout_specification:main"
+rse_create_plain_data_message = "rse_scripts.create_plain_data_message:main"
+rse_derive_provisioning_key = "rse_scripts.derive_provisioning_key:main"
+rse_derive_provisioning_master_key = "rse_scripts.derive_provisioning_master_key:main"
+rse_create_non_endorsed_provisioning_plain_data_message = "rse_scripts.create_non_endorsed_provisioning_plain_data_message:main"
+rse_create_plain_data_handler_provisioning_bundle = "rse_scripts.create_plain_data_handler_provisioning_bundle:main"
+rse_create_routing_tables_source_file = "rse_scripts.create_routing_tables_source_file:main"
+rse_create_otp_config = "rse_scripts.create_otp_config:main"
+
+[tool.setuptools]
+packages = ["tfm_tools", "bl2", "bl1", "rse", "rse_scripts"]
+
+[tool.setuptools.package-dir]
+tfm_tools = "tools/modules"
+bl2 = "bl2/ext/mcuboot/scripts"
+bl1 = "bl1/bl1_1/scripts"
+rse = "platform/ext/target/arm/rse/common/scripts/modules"
+rse_scripts = "platform/ext/target/arm/rse/common/scripts"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"

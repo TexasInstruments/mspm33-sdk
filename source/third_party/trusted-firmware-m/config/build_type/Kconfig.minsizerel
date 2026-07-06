@@ -1,0 +1,19 @@
+#-------------------------------------------------------------------------------
+# SPDX-FileCopyrightText: Copyright The TrustedFirmware-M Contributors
+#
+# SPDX-License-Identifier: BSD-3-Clause
+#
+#-------------------------------------------------------------------------------
+
+if BL2
+config BL2_LOG_LEVEL
+    default LOG_LEVEL_NONE
+endif
+
+choice SPM_LOG_LEVEL
+    default LOG_LEVEL_NONE
+endchoice
+
+choice PARTITION_LOG_LEVEL
+    default LOG_LEVEL_NONE
+endchoice

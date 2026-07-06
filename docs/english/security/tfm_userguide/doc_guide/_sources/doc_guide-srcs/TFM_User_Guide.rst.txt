@@ -1,0 +1,148 @@
+Trusted Firmware-M (TF-M) for MSPM33C321A
+=========================================
+
+Introduction
+------------
+
+This document describes Texas Instruments’ integration of Trusted Firmware-M (TF-M) for the MSPM33C321A microcontroller. TF-M is ARM’s PSA (Platform Security Architecture) reference implementation that provides standardized security services on Arm Cortex-M33 devices with TrustZone.
+
+For general TF-M architecture and PSA API documentation, refer to the official TF-M documentation bundled with the SDK at ``source/third_party/trusted-firmware-m/docs/``.
+
+**Note**: Secure boot integration with TF-M is not supported in this release. The SDK includes a separate MCUboot-based secure bootloader (`Customer Secure Code / CSC <../../../middleware/boot_manager/Secure_Booting_Users_Guide.html>`__), but it currently runs as a standalone component and does not chain into TF-M. TrustZone-aware boot with CSC is planned for a future release.
+
+What TF-M Provides on MSPM33
+----------------------------
+
+TF-M partitions the MSPM33C321A into Secure (SPE) and Non-Secure (NSPE) execution environments, exposing the following PSA services to NS applications:
+
+============================== ================================== ========================================
+Service                        PSA API Header                     Description
+============================== ================================== ========================================
+Crypto                         ``psa/crypto.h``                   AES, SHA-256, ECDSA with HW acceleration
+Internal Trusted Storage (ITS) ``psa/internal_trusted_storage.h`` Tamper-resistant storage in data flash
+Protected Storage (PS)         ``psa/protected_storage.h``        Encrypted and authenticated storage
+Initial Attestation            ``psa/initial_attestation.h``      CBOR device identity token
+Platform                       ``psa/platform.h``                 System reset, lifecycle queries
+============================== ================================== ========================================
+
+TI Hardware Acceleration
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Hardware acceleration is **disabled by default**. It is enabled via the ``MSPM33_HW_CRYPTO`` CMake flag in the Phase 1 (SPE) build, which requires pointing TF-M at the SDK’s ``tf-psa-crypto`` fork:
+
+.. code:: bash
+
+   -DMSPM33_HW_CRYPTO=ON \
+   -DTF_PSA_CRYPTO_PATH=<SDK_ROOT>/source/third_party/tf-psa-crypto
+
+When enabled, the following MSPM33 hardware accelerators are used by the PSA Crypto service:
+
+============ =============== ===============================
+Accelerator  Driver          Operations
+============ =============== ===============================
+AES Advanced ``dl_aesadv.c`` AES-128/256 CBC, GCM, CCM, CMAC
+SHAW         ``dl_shadrv.c`` SHA-224/256
+TRNG         ``dl_trng.c``   ``psa_generate_random()``
+============ =============== ===============================
+
+**Note**: Without ``MSPM33_HW_CRYPTO=ON``, TF-M uses software-only crypto (Mbed TLS). PKA (public-key acceleration for ECDSA/RSA) is not yet integrated into TF-M’s PSA Crypto path.
+
+Memory Layout
+-------------
+
+========== ========================= ====== ===============================
+Region     Address Range             Size   Contents
+========== ========================= ====== ===============================
+S Flash    0x1000_0000 - 0x1007_FFFF 512 KB TF-M firmware (``tfm_s.bin``)
+NS Flash   0x0008_0000 - 0x000F_FFFF 512 KB NS application (``tfm_ns.bin``)
+S SRAM     0x3000_0000 - 0x3001_FFFF 128 KB TF-M runtime data
+NS SRAM    0x2002_0000 - 0x2003_FFFF 128 KB NS application data
+Data Flash 0x8000_0000 - 0x8000_7FFF 32 KB  ITS, PS, NV counters
+========== ========================= ====== ===============================
+
+Prerequisites
+-------------
+
+TF-M uses a CMake-based build system separate from the SDK’s Bazel build. The following tools must be installed before building:
+
+========================== =============== ==================================================================================================================================
+Tool                       Minimum Version Notes
+========================== =============== ==================================================================================================================================
+GNU Arm Embedded Toolchain 12.2.Rel1       Only GCC toolchain is supported for MSPM33 in this release
+CMake                      3.21            Must be on ``PATH``; verify with ``cmake --version``
+Python                     3.8             Required by TF-M build scripts; install TF-M dependencies via ``pip install -e .`` from ``source/third_party/trusted-firmware-m/``
+make / ninja               any recent      Build tool invoked by CMake
+========================== =============== ==================================================================================================================================
+
+**Toolchain download**: `developer.arm.com/downloads/-/arm-gnu-toolchain-downloads <https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads>`__
+
+**Supported host OS**: Linux (Ubuntu 18.04+), Windows 10 x64 (Git Bash / MSYS2 / CCS Terminal)
+
+For the full list of supported environments, refer to: ``<SDK_ROOT>/source/third_party/trusted-firmware-m/docs/getting_started/tfm_getting_started.rst``
+
+TI-Specific CMake Variables
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+====================== ============================ =================================================================================
+Variable               Required                     Description
+====================== ============================ =================================================================================
+``TI_SDK_PATH``        Always                       Path to MSP-SDK root
+``MSPM33_HW_CRYPTO``   Optional                     Set to ``ON`` to enable hardware crypto acceleration (default: ``OFF``)
+``TF_PSA_CRYPTO_PATH`` When ``MSPM33_HW_CRYPTO=ON`` Path to SDK’s tf-psa-crypto fork: ``<SDK_ROOT>/source/third_party/tf-psa-crypto``
+====================== ============================ =================================================================================
+
+Getting Started
+---------------
+
+The SDK includes a minimal TF-M example that serves as a starting point:
+
+::
+
+   examples/trusted-firmware-m/empty/LP_MSPM33C321A/
+
+This example builds a minimal NS application that calls ``psa_framework_version()`` to confirm TF-M is running. Its ``README.md`` covers: - Build prerequisites and CMake build instructions (two-phase SPE + NS build) - Flashing both ``tfm_s.bin`` and ``tfm_ns.bin`` using CCS - UART expected output and debugging with CCS - Adding PSA Crypto, ITS, and PS API calls to the NS application
+
+Enabling and Disabling PSA Services
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+All PSA services (Crypto, ITS, PS, Attestation, Platform) are enabled by default in the MSPM33 platform configuration. To disable individual services, pass the corresponding flag in the Phase 1 (SPE) CMake configure step:
+
+======================== =================================================== =======
+Service                  CMake Flag                                          Default
+======================== =================================================== =======
+Crypto                   ``-DTFM_PARTITION_CRYPTO=ON/OFF``                   ON
+Internal Trusted Storage ``-DTFM_PARTITION_INTERNAL_TRUSTED_STORAGE=ON/OFF`` ON
+Protected Storage        ``-DTFM_PARTITION_PROTECTED_STORAGE=ON/OFF``        ON
+Initial Attestation      ``-DTFM_PARTITION_INITIAL_ATTESTATION=ON/OFF``      ON
+Platform                 ``-DTFM_PARTITION_PLATFORM=ON/OFF``                 ON
+======================== =================================================== =======
+
+For all available platform options, see: ``<SDK_ROOT>/source/third_party/trusted-firmware-m/platform/ext/target/ti/LP_MSPM33C321A/config.cmake``
+
+TI Platform Files
+-----------------
+
+Platform-specific TF-M integration for MSPM33C321A:
+
+::
+
+   source/third_party/trusted-firmware-m/platform/ext/target/ti/LP_MSPM33C321A/
+
+================== =======================================================
+File/Directory     Purpose
+================== =======================================================
+``cmsis_drivers/`` Flash and UART CMSIS driver implementations
+``Device/``        Startup code and base address definitions
+``partition/``     Flash layout and memory region definitions
+``src/``           Platform HAL (``target_cfg.c``, ``tfm_hal_platform.c``)
+``gcc/``           GCC linker scripts for S/NS images
+``config.cmake``   Platform CMake configuration and partition options
+================== =======================================================
+
+Related Documentation
+---------------------
+
+-  `MSPM33 Security User Guide <../security_userguide/Security_UserGuide_for_MSPM33.html>`__ — TrustZone, GSC, lifecycle states, crypto accelerators
+-  `Customer Secure Code (CSC) User Guide <../../../middleware/boot_manager/Secure_Booting_Users_Guide.html>`__ — MCUboot-based secure bootloader (standalone, not yet integrated with TF-M)
+-  MSPM33C321A Technical Reference Manual — Available on ti.com
+-  TF-M Getting Started Guide (bundled with SDK): ``source/third_party/trusted-firmware-m/docs/getting_started/tfm_getting_started.rst``

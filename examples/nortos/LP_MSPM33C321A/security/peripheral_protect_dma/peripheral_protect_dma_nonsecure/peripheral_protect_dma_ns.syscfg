@@ -1,0 +1,52 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --device "MSPM33C321X" --part "Default" --package "LQFP-100(PFA)" --product "mspm33_sdk@1.01.01.00"
+ * @v2CliArgs --device "MSPM33C321A" --package "LQFP-100(PFA)" --product "mspm33_sdk@1.01.01.00"
+ * @versions {"tool":"1.26.0+4341"}
+ */
+// @cliArgs --board /ti/boards/LP_MSPM33C321A --rtos nortos
+
+/**
+ * Import the modules used in this configuration.
+ */
+const DMA    = scripting.addModule("/ti/driverlib/DMA", {}, false);
+const DMA1   = DMA.addInstance();
+const SYSCTL = scripting.addModule("/ti/driverlib/SYSCTL");
+const GPIO          = scripting.addModule("/ti/driverlib/GPIO", {}, false);
+const GPIO1         = GPIO.addInstance();
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+DMA1.$name                                    = "DMA1";
+DMA1.associatedChannels.create(1);
+DMA1.associatedChannels[0].$name              = "CH0";
+DMA1.associatedChannels[0].transferMode       = "SINGLE_BLOCK";
+DMA1.associatedChannels[0].enableInterrupt    = true;
+DMA1.associatedChannels[0].addressMode        = "b2b";
+DMA1.associatedChannels[0].peripheral.$assign = "DMA1_CH0";
+
+const Board                       = scripting.addModule("/ti/driverlib/Board", {}, false);
+Board.peripheral.$assign          = "DEBUGSS";
+Board.peripheral.swclkPin.$assign = "PA20";
+Board.peripheral.swdioPin.$assign = "PA19";
+
+SYSCTL.forceDefaultClkConfig = true;
+SYSCTL.peripheral.$assign    = "SYSCTL";
+
+GPIO1.$name                               = "GPIO_LEDS";
+GPIO1.associatedPins.create(2);
+GPIO1.associatedPins[0].$name             = "PASS_LED";
+GPIO1.associatedPins[0].launchPadShortcut = "LED2GreenEn";
+GPIO1.associatedPins[1].$name             = "FAIL_LED";
+GPIO1.associatedPins[1].launchPadShortcut = "LED2RedEn";
+
+const ProjectConfig              = scripting.addModule("/ti/project_config/ProjectConfig", {}, false);
+ProjectConfig.migrationCondition = true;
+ProjectConfig.genLinker          = false;
+ProjectConfig.genStartup         = false;
+ProjectConfig.genOpts            = false;
+ProjectConfig.genLibs            = false;
+GPIO1.associatedPins[0].pin.$suggestSolution = "PC27";
+GPIO1.associatedPins[1].pin.$suggestSolution = "PC26";

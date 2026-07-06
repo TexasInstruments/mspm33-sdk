@@ -1,0 +1,19 @@
+Code Generation and Ease-of-Use
+=================================
+
+SysConfig
+----------------------
+| `SysConfig <https://www.ti.com/tool/SYSCONFIG>`_ is an intuitive and comprehensive collection of graphical utilities for configuring pins, peripherals, radios, subsystems, and other components.
+| SysConfig helps you manage, expose and resolve conflicts visually so that you have more time to create differentiated applications.
+|
+| The tool's output includes C header and code files that can be used with software development kit (SDK) examples or used to configure custom software.
+|
+| The SysConfig tool automatically selects the pinmux settings that satisfy the entered requirements.
+| The SysConfig tool is delivered integrated in CCS, as a standalone installer, or can be used via the dev.ti.com cloud tools portal.
+
+Documentation
+~~~~~~~~~~~~~~~~~~~~
+.. toctree::
+   :maxdepth: 1
+
+   codegen_easeofuse_sysconfig

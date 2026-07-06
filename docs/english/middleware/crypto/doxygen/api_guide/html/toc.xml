@@ -1,0 +1,486 @@
+<toc label="MSP Crypto Library" topic="index.html">
+  <topic label="MSP Crypto Library Overview" href="index.html">
+    <topic label="Introduction" href="index.html#autotoc_md0"/>
+  </topic>
+  <topic label="Data Structures" href="annotated.html">
+    <topic label="Data Structures" href="annotated.html">
+      <topic label="crypto_block128_t" href="unioncrypto__block128__t.html">
+        <topic label="w" href="unioncrypto__block128__t.html#a32ac6312969f9402b039c613f82ac617"/>
+        <topic label="b" href="unioncrypto__block128__t.html#a9d10e88d737a89f7a591714fdd3f4bbe"/>
+      </topic>
+      <topic label="crypto_block256_t" href="unioncrypto__block256__t.html">
+        <topic label="w" href="unioncrypto__block256__t.html#a7742514332ddfef7d3796a79bd6bfd88"/>
+        <topic label="b" href="unioncrypto__block256__t.html#ab4ad5864dd1864a3c2c9229da1dfd174"/>
+      </topic>
+      <topic label="crypto_block32_t" href="unioncrypto__block32__t.html">
+        <topic label="w" href="unioncrypto__block32__t.html#a0dc7952e35d0c8959ba839717bbc2ea4"/>
+        <topic label="b" href="unioncrypto__block32__t.html#a4773caf82e49a6b12e3aa39f03b12eec"/>
+      </topic>
+      <topic label="crypto_drbg_ctx_t" href="structcrypto__drbg__ctx__t.html">
+        <topic label="k" href="structcrypto__drbg__ctx__t.html#a52cfa637bc4b319c2e9d380f6eddfce3"/>
+        <topic label="v" href="structcrypto__drbg__ctx__t.html#aea1c481e49ca029e3a1f2c2975db4a8f"/>
+        <topic label="reseedCounter" href="structcrypto__drbg__ctx__t.html#a2727b27547d514d96b52268b3323bde0"/>
+        <topic label="initialized" href="structcrypto__drbg__ctx__t.html#a59538e85a36a025cdf910c7522d9a277"/>
+      </topic>
+      <topic label="crypto_ec_curve_t" href="structcrypto__ec__curve__t.html">
+        <topic label="data_p" href="structcrypto__ec__curve__t.html#aeb4e59d21982ef48d5063e14de9f9050"/>
+        <topic label="data_r" href="structcrypto__ec__curve__t.html#abe919fccd5f2fd68ac5adf547966171a"/>
+        <topic label="data_a" href="structcrypto__ec__curve__t.html#a0b879cf1cb9aaf6a26ed1087b0ac95c9"/>
+        <topic label="data_b" href="structcrypto__ec__curve__t.html#a4a6e99ac7d1cd9e1823b491157561f0f"/>
+        <topic label="data_Gx" href="structcrypto__ec__curve__t.html#a060548768cdb963d6f18a097f1cc6517"/>
+        <topic label="data_Gy" href="structcrypto__ec__curve__t.html#ae51396b8a284612429d48404a86d3fbd"/>
+        <topic label="bufLen" href="structcrypto__ec__curve__t.html#a55762aa84c8f5b965152a6001568267f"/>
+      </topic>
+      <topic label="crypto_rsa_fast_verify_pk_t" href="structcrypto__rsa__fast__verify__pk__t.html">
+        <topic label="n" href="structcrypto__rsa__fast__verify__pk__t.html#a609dff99fafeb5d6e7fd11c93c03a508"/>
+        <topic label="rr" href="structcrypto__rsa__fast__verify__pk__t.html#a47ee06eb78da41a9951f2ab98ff545c2"/>
+        <topic label="n0inv" href="structcrypto__rsa__fast__verify__pk__t.html#a30a867f55b0a265c680bec367fd29e54"/>
+      </topic>
+      <topic label="crypto_sha256_ctx_t" href="structcrypto__sha256__ctx__t.html">
+        <topic label="bitsProcessed" href="structcrypto__sha256__ctx__t.html#a4e1a49dff332cbffd345a93e083d89b5"/>
+        <topic label="offsetWb" href="structcrypto__sha256__ctx__t.html#a0945c1016b2f605ae27c0c56fdd2a9fa"/>
+        <topic label="reserved1" href="structcrypto__sha256__ctx__t.html#a10068d7ef274e438c3f432bc98ef595d"/>
+        <topic label="digestSize" href="structcrypto__sha256__ctx__t.html#ab0d632f335f975dc1e0a2f918d0c36e3"/>
+        <topic label="reserved2" href="structcrypto__sha256__ctx__t.html#a55a8d8b173de6ac9ffcb3dafce778f0b"/>
+        <topic label="quickSettings" href="structcrypto__sha256__ctx__t.html#ab2c996286567e6ccdc99e4a976124fa5"/>
+        <topic label="digest32" href="structcrypto__sha256__ctx__t.html#a77db16479877988519a7678948f1d8bb"/>
+        <topic label="Ws32" href="structcrypto__sha256__ctx__t.html#a5de3516df98457e88e6d8f558ee64946"/>
+      </topic>
+      <topic label="crypto_sha3_ctx_t" href="structcrypto__sha3__ctx__t.html">
+        <topic label="b" href="structcrypto__sha3__ctx__t.html#ac1a56bff5a3352bb8b527d9be57941a3"/>
+        <topic label="q" href="structcrypto__sha3__ctx__t.html#a3c6efd58007e66b636ef1c8b1f612fbd"/>
+        <topic label="state" href="structcrypto__sha3__ctx__t.html#a40a31fc1df87aef1974e7cbfce3ebca7"/>
+        <topic label="pt" href="structcrypto__sha3__ctx__t.html#a3d9069cdcc5d2918ab8d4d848f2e1501"/>
+        <topic label="rsize" href="structcrypto__sha3__ctx__t.html#ae3c091c70c0cbde13c4406b775d24fa2"/>
+        <topic label="mdlen" href="structcrypto__sha3__ctx__t.html#afb6a44db849c059d48c391b185eb8e00"/>
+      </topic>
+      <topic label="crypto_sha512_ctx_t" href="structcrypto__sha512__ctx__t.html">
+        <topic label="bitsProcessed" href="structcrypto__sha512__ctx__t.html#a46e7a0bfa698793645997a4d94ec7035"/>
+        <topic label="offsetWb" href="structcrypto__sha512__ctx__t.html#a10d8937db59c35b647916904ee4f6eee"/>
+        <topic label="reserved1" href="structcrypto__sha512__ctx__t.html#adf0eb4c04a39bb35d77a5f01cb5f9a7d"/>
+        <topic label="digestSize" href="structcrypto__sha512__ctx__t.html#a99dc691b7f1cb9bb5be6453bce35231b"/>
+        <topic label="reserved2" href="structcrypto__sha512__ctx__t.html#ada73e760630168d785ec3d1cfb8a480e"/>
+        <topic label="quickSettings" href="structcrypto__sha512__ctx__t.html#a0c5554137a8f079f2ebe9be2bed782a6"/>
+        <topic label="digest64" href="structcrypto__sha512__ctx__t.html#aa565f9b38ef34aee42be2d9113c5f92d"/>
+        <topic label="Ws64" href="structcrypto__sha512__ctx__t.html#a669d6119c9f1408f0cfddceab0e95075"/>
+      </topic>
+    </topic>
+    <topic label="Data Fields" href="functions.html">
+      <topic label="All" href="functions.html"/>
+      <topic label="Variables" href="functions_vars.html"/>
+    </topic>
+  </topic>
+  <topic label="Files" href="files.html">
+    <topic label="File List" href="files.html">
+      <topic label="aes.h" href="aes_8h.html">
+        <topic label="Crypto_AES_init" href="aes_8h.html#a8d37ec055460de134b03fc5fb5c5f48f"/>
+        <topic label="Crypto_AES_deinit" href="aes_8h.html#a7d844090aa90e1de5e6e5f55a4a6b02c"/>
+        <topic label="Crypto_AES_setSessionKey" href="aes_8h.html#ab63a37829df01b2b16812fe1bd3fe152"/>
+        <topic label="Crypto_AES_encrypt" href="aes_8h.html#ac1c8513176230fa441d89d05d0abdf25"/>
+        <topic label="Crypto_AES_decrypt" href="aes_8h.html#a63e6863e79285bd3ac1e8c3b25041a71"/>
+        <topic label="Crypto_AES_CBC_encrypt" href="aes_8h.html#a628522c6262764987573909dea34a0c6"/>
+        <topic label="Crypto_AES_CBC_decrypt" href="aes_8h.html#a07f27a006123941f8a723ff7df1af866"/>
+        <topic label="Crypto_AES_CBC_MAC" href="aes_8h.html#a16f7c3adcaf2c9b33b467bd05795cd1b"/>
+        <topic label="Crypto_AES_CTR_encrypt" href="aes_8h.html#a8545064ff10cf5551b273c3501a1ee48"/>
+        <topic label="Crypto_AES_CTR_decrypt" href="aes_8h.html#a43f6df5d4047c318ce03bbca3f98c391"/>
+        <topic label="Crypto_AES_CCM_encryptAndGen" href="aes_8h.html#a71946fd418ced9c030db5bec1215a363"/>
+        <topic label="Crypto_AES_CCM_decryptAndVer" href="aes_8h.html#a33f14a1fb6ee652bd7b1ac02c535e7d1"/>
+        <topic label="Crypto_AES_CMAC_genTag" href="aes_8h.html#ae0135e9d0d3efc951170757cfb971725"/>
+        <topic label="Crypto_AES_CMAC_verTag" href="aes_8h.html#ab9e86813cb75356d62532384a4df8f30"/>
+      </topic>
+      <topic label="aes_hw_aesadv.h" href="aes__hw__aesadv_8h.html"/>
+      <topic label="aes_type.h" href="aes__type_8h.html">
+        <topic label="CRYPTO_AES_STATE_BYTES" href="aes__type_8h.html#a355babbcff4a272bcbc37e3c2f5a06b9"/>
+        <topic label="CRYPTO_AES_STATE_WORDS" href="aes__type_8h.html#a603386ad26e6ce803669ebe52c23a590"/>
+        <topic label="CRYPTO_AES_KEY_128_WORDS" href="aes__type_8h.html#af7e7cec98aef47488aa00ada3e6c4f08"/>
+        <topic label="CRYPTO_AES_KEY_256_WORDS" href="aes__type_8h.html#ada036ff061d04bd2d600ef88eae325d4"/>
+        <topic label="CRYPTO_AES_CTR_NONCE_WORDS" href="aes__type_8h.html#a7730fcaecd79aeb74f5f09f7dbab9b03"/>
+        <topic label="CRYPTO_AES_CCM_NONCE_BYTES_MAX" href="aes__type_8h.html#a7ad57a65d96f7912e0c8d27ad337e2d5"/>
+        <topic label="CRYPTO_AES_CCM_NONCE_BYTES_MIN" href="aes__type_8h.html#a44557b5b5bff8af1f5ab358f1f33b384"/>
+        <topic label="CRYPTO_AES_CCM_TAG_BYTES_MAX" href="aes__type_8h.html#a158c92263d033f1ec1e08e43b2df340e"/>
+        <topic label="CRYPTO_AES_CCM_TAG_BYTES_MIN" href="aes__type_8h.html#a4637f1c09d959b6d808bd4121afc7fcc"/>
+        <topic label="crypto_aes_stat_t" href="aes__type_8h.html#a82805031992e602c1c9b7e1957f44459">
+          <topic label="CRYPTO_AES_TAG_INVALID_ERR" href="aes__type_8h.html#a82805031992e602c1c9b7e1957f44459a6208847841b4696291879f7d108c3b0f"/>
+          <topic label="CRYPTO_AES_HW_ERR" href="aes__type_8h.html#a82805031992e602c1c9b7e1957f44459a3e4072ba1570cf9f5ca4c801687a500a"/>
+          <topic label="CRYPTO_AES_KEYWRITE_ERR" href="aes__type_8h.html#a82805031992e602c1c9b7e1957f44459a893f17fc5d6c3889710a71d90b4f3ed5"/>
+          <topic label="CRYPTO_AES_ALIGNMENT_ERR" href="aes__type_8h.html#a82805031992e602c1c9b7e1957f44459a770f4be13472a996430b66eb62253d29"/>
+          <topic label="CRYPTO_AES_PARAM_ERR" href="aes__type_8h.html#a82805031992e602c1c9b7e1957f44459a86802be48fd6ba7929a399523d4e2255"/>
+          <topic label="CRYPTO_AES_OK" href="aes__type_8h.html#a82805031992e602c1c9b7e1957f44459a591b0befaca9d6950f77cfc551a6f75a"/>
+          <topic label="CRYPTO_AES_OK_TAG_VALID" href="aes__type_8h.html#a82805031992e602c1c9b7e1957f44459acf24b4c0b044f3beadc7acdf1efd3b18"/>
+        </topic>
+        <topic label="crypto_aes_keytype_t" href="aes__type_8h.html#a87f5edbb30128aa51bec3f9df29a02d5">
+          <topic label="CRYPTO_AES_KEYTYPE_128" href="aes__type_8h.html#a87f5edbb30128aa51bec3f9df29a02d5abec569c58ce0576e39a50ee08219d950"/>
+          <topic label="CRYPTO_AES_KEYTYPE_256" href="aes__type_8h.html#a87f5edbb30128aa51bec3f9df29a02d5acad9ea3d0b0fe6c03131bcc0984e3e38"/>
+        </topic>
+        <topic label="crypto_aes_key_t" href="aes__type_8h.html#aae2a909dc635778fc5ac03354b5e9257">
+          <topic label="CRYPTO_AES_KEYSEL_SESSION" href="aes__type_8h.html#aae2a909dc635778fc5ac03354b5e9257a8a0b92e55b09c9ff9bbc76da0c4edf2c"/>
+          <topic label="CRYPTO_AES_KEYSEL_SLOT0" href="aes__type_8h.html#aae2a909dc635778fc5ac03354b5e9257a4ab1fb51fa15970ff85f2d8f49987eef"/>
+          <topic label="CRYPTO_AES_KEYSEL_SLOT1" href="aes__type_8h.html#aae2a909dc635778fc5ac03354b5e9257a04444687d6cc3b9d2efa00f2011e88e1"/>
+          <topic label="CRYPTO_AES_KEYSEL_SLOT2" href="aes__type_8h.html#aae2a909dc635778fc5ac03354b5e9257afd27e42398fe83e6362d5596420c5778"/>
+          <topic label="CRYPTO_AES_KEYSEL_SLOT3" href="aes__type_8h.html#aae2a909dc635778fc5ac03354b5e9257a9d32cb38d079bae4228e88bd402375ef"/>
+        </topic>
+        <topic label="crypto_aes_op_t" href="aes__type_8h.html#a32ac1283c49f1f3cd8354f0a965987bb">
+          <topic label="CRYPTO_AES_OP_ENC" href="aes__type_8h.html#a32ac1283c49f1f3cd8354f0a965987bbaea93d0c0f00c52808de4fde4b797e741"/>
+          <topic label="CRYPTO_AES_OP_DEC" href="aes__type_8h.html#a32ac1283c49f1f3cd8354f0a965987bbac4f7441df01d72add065c1cc6268328e"/>
+          <topic label="CRYPTO_AES_OP_TAG" href="aes__type_8h.html#a32ac1283c49f1f3cd8354f0a965987bbae21e28b3512483af051899e74605b6ea"/>
+        </topic>
+      </topic>
+      <topic label="curve25519.h" href="curve25519_8h.html">
+        <topic label="X25519_KEY_LENGTH" href="curve25519_8h.html#a789dc1fbfc04138d7609cbd52593a75c"/>
+        <topic label="ED25519_PUBLIC_KEY_LENGTH" href="curve25519_8h.html#a22e905c9d530f02460f95d7b89099372"/>
+        <topic label="ED25519_PRIVATE_KEY_LENGTH" href="curve25519_8h.html#a5fa0706fdc0e8f1eb034eebab838ca71"/>
+        <topic label="ED25519_SIGNATURE_LENGTH" href="curve25519_8h.html#a2bfe5e580ac477e6a1caca0310ff266e"/>
+        <topic label="crypto_x25519_stat_t" href="curve25519_8h.html#a7e7d9050bad3d3d2b99b4c889004b5f7">
+          <topic label="CRYPTO_X25519_STAT_SUCCESS" href="curve25519_8h.html#a7e7d9050bad3d3d2b99b4c889004b5f7accf9fbc0069c8beaa17d9a3bd397a20b"/>
+          <topic label="CRYPTO_X25519_STAT_INVALID_PARAM" href="curve25519_8h.html#a7e7d9050bad3d3d2b99b4c889004b5f7a3d44fdb18a74e41d91c2865800b2bdcf"/>
+          <topic label="CRYPTO_X25519_STAT_ERROR" href="curve25519_8h.html#a7e7d9050bad3d3d2b99b4c889004b5f7aab0ac48f2fa84fd4aaec1915131ab156"/>
+        </topic>
+        <topic label="crypto_ed25519_stat_t" href="curve25519_8h.html#a0086c8c93166f3f8e9ccb399c87652fb">
+          <topic label="CRYPTO_ED25519_STAT_SUCCESS" href="curve25519_8h.html#a0086c8c93166f3f8e9ccb399c87652fba20c06b9f41fb688df9137ee5a1fec3c8"/>
+          <topic label="CRYPTO_ED25519_STAT_VALID_SIGNATURE" href="curve25519_8h.html#a0086c8c93166f3f8e9ccb399c87652fba7e628a8ae9971ea09ebabd33310015ac"/>
+          <topic label="CRYPTO_ED25519_STAT_INVALID_SIGNATURE" href="curve25519_8h.html#a0086c8c93166f3f8e9ccb399c87652fba13a035e24a348f73ddc20c67eb776e00"/>
+          <topic label="CRYPTO_ED25519_STAT_INVALID_PARAM" href="curve25519_8h.html#a0086c8c93166f3f8e9ccb399c87652fbaac9e7d9ac08a2c9a504749420c1b1f1f"/>
+          <topic label="CRYPTO_ED25519_STAT_ERROR" href="curve25519_8h.html#a0086c8c93166f3f8e9ccb399c87652fba0565b2c1ef084b2f1e60d5785f2c7760"/>
+        </topic>
+        <topic label="Crypto_X25519_keyGen" href="curve25519_8h.html#a8315bcdc72783395705cb14ad5843ae4"/>
+        <topic label="Crypto_X25519_keyExchange" href="curve25519_8h.html#a8dd681a033c818c53ed7ed3ca02b5b50"/>
+        <topic label="Crypto_ED25519_keyGen" href="curve25519_8h.html#ae0709b1be52c84e3e994cd543487cafb"/>
+        <topic label="Crypto_ED25519_sign" href="curve25519_8h.html#a7fce59cd3ce8f6ca6044cf6bb18d643b"/>
+        <topic label="Crypto_ED25519_verify" href="curve25519_8h.html#a548bbc8fd197108a5f0ef3d8ddd7fd95"/>
+      </topic>
+      <topic label="drbg.h" href="drbg_8h.html">
+        <topic label="crypto_drbg_ctx_t" href="structcrypto__drbg__ctx__t.html">
+          <topic label="k" href="structcrypto__drbg__ctx__t.html#a52cfa637bc4b319c2e9d380f6eddfce3"/>
+          <topic label="v" href="structcrypto__drbg__ctx__t.html#aea1c481e49ca029e3a1f2c2975db4a8f"/>
+          <topic label="reseedCounter" href="structcrypto__drbg__ctx__t.html#a2727b27547d514d96b52268b3323bde0"/>
+          <topic label="initialized" href="structcrypto__drbg__ctx__t.html#a59538e85a36a025cdf910c7522d9a277"/>
+        </topic>
+        <topic label="CRYPTO_DRBG_CTR_RESEED_INTERVAL" href="drbg_8h.html#ae28e4964f9d0082f72e5ce6ec3473f7d"/>
+        <topic label="CRYPTO_DRBG_CTR_MAX_WORDS_PER_REQ" href="drbg_8h.html#a27d52610b0d6f8594dbaa3d311538e58"/>
+        <topic label="crypto_drbg_stat_t" href="drbg_8h.html#a3f7ad5675b78fb5c43b1a33c65804943">
+          <topic label="CRYPTO_DRBG_AES_ERR" href="drbg_8h.html#a3f7ad5675b78fb5c43b1a33c65804943a76e727e76e40e3a1acface6f3e6d78c0"/>
+          <topic label="CRYPTO_DRBG_RESEED_REQUIRED" href="drbg_8h.html#a3f7ad5675b78fb5c43b1a33c65804943a02b6887831bc5a56fae43eb5408aedc1"/>
+          <topic label="CRYPTO_DRBG_NOINIT_ERR" href="drbg_8h.html#a3f7ad5675b78fb5c43b1a33c65804943a6f7af7c20a61e6e71755e59d9f479da0"/>
+          <topic label="CRYPTO_DRBG_PARAM_ERR" href="drbg_8h.html#a3f7ad5675b78fb5c43b1a33c65804943af648cc14d656c1f91fe9f6b28f51680e"/>
+          <topic label="CRYPTO_DRBG_OK" href="drbg_8h.html#a3f7ad5675b78fb5c43b1a33c65804943adb71b45c8a33619c3840d57cd09cbaf9"/>
+        </topic>
+        <topic label="Crypto_DRBG_initialize" href="drbg_8h.html#ab2e0c1706eab3f9156c2bfe4a59fd4e3"/>
+        <topic label="Crypto_DRBG_generate" href="drbg_8h.html#a667c82d3a5edcfe0397b652f2a12a85b"/>
+        <topic label="Crypto_DRBG_uninit" href="drbg_8h.html#a83f629128e34de272cbce9761c0869e1"/>
+      </topic>
+      <topic label="ec.h" href="ec_8h.html">
+        <topic label="crypto_ec_stat_t" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5">
+          <topic label="CRYPTO_EC_STAT_ORDER_LARGER_THAN_255_WORDS" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a2629e05b86fb18d33ce8368f12cb24f4"/>
+          <topic label="CRYPTO_EC_STAT_ORDER_EVEN" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a35c256b21afd994ad8d11807e49dd5d7"/>
+          <topic label="CRYPTO_EC_STAT_ORDER_MSW_IS_ZERO" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a711accac5dc4626663f4e2697864677f"/>
+          <topic label="CRYPTO_EC_STAT_ECC_KEY_TOO_LONG" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a94fd46a2780c9f1ceed3930ec4c6aa88"/>
+          <topic label="CRYPTO_EC_STAT_ECC_KEY_LENGTH_ZERO" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5ac18d1ce3b32644ea2cd23460ba142957"/>
+          <topic label="CRYPTO_EC_STAT_ECC_X_LARGER_THAN_PRIME" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a0da096bf6d879d7f0058c7dd89637dcd"/>
+          <topic label="CRYPTO_EC_STAT_ECC_Y_LARGER_THAN_PRIME" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a08b972fd974d32de2dbfca1542f024e8"/>
+          <topic label="CRYPTO_EC_STAT_ECC_X_ZERO" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5ad1af13657513c05b43cbf42b0442b021"/>
+          <topic label="CRYPTO_EC_STAT_ECC_Y_ZERO" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5ab3add5aae433279e085442309e076a5f"/>
+          <topic label="CRYPTO_EC_STAT_ECC_POINT_NOT_ON_CURVE" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a3d49485d20191b709eefe9e302e868ec"/>
+          <topic label="CRYPTO_EC_STAT_ECC_POINT_ON_CURVE" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a354c7192ecbd2bf6f9e78b18545a8719"/>
+          <topic label="CRYPTO_EC_STAT_PRIVATE_KEY_ZERO" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a4f01f4c7399ab80e021b81366258d3f4"/>
+          <topic label="CRYPTO_EC_STAT_PRIVATE_KEY_LARGER_EQUAL_ORDER" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a9e7429b232a202db610b96aef510f183"/>
+          <topic label="CRYPTO_EC_STAT_PRIVATE_VALID" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a23c71b744f2214f0c49a6b73ccbad9d0"/>
+          <topic label="CRYPTO_EC_STAT_DIGEST_TOO_LONG" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5aee286508f11c4a392bb440022613d6bd"/>
+          <topic label="CRYPTO_EC_STAT_DIGEST_LENGTH_ZERO" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a691968d70eaa685c347f32dc654340e2"/>
+          <topic label="CRYPTO_EC_STAT_ECDSA_SIGN_OK" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a95ea018a5fc04fa334edb3788acd8a23"/>
+          <topic label="CRYPTO_EC_STAT_ECDSA_SIGN_PKA_ERROR" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5ad60d6752d1328055f436568ebc121d85"/>
+          <topic label="CRYPTO_EC_STAT_ECDSA_INVALID_SIGNATURE" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a1776b58b986e0ddd928c347d45619fd7"/>
+          <topic label="CRYPTO_EC_STAT_ECDSA_VALID_SIGNATURE" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a18eb106d00ce9eae22a3ba370428faba"/>
+          <topic label="CRYPTO_EC_STAT_SIG_P1_TOO_LONG" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5addb6594add25abe00faf6a2abe136771"/>
+          <topic label="CRYPTO_EC_STAT_SIG_P1_LENGTH_ZERO" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a87859513b6422e660be5c10327da000e"/>
+          <topic label="CRYPTO_EC_STAT_SIG_P2_TOO_LONG" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5ae47ad8e0240d3c4ea8036194576c396c"/>
+          <topic label="CRYPTO_EC_STAT_SIG_P2_LENGTH_ZERO" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5ab898049298cdffd8cc9934355aebfbd8"/>
+          <topic label="CRYPTO_EC_STAT_MODULUS_EVEN" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a06aa0096f9c961313a17510671bbc34b"/>
+          <topic label="CRYPTO_EC_STAT_MODULUS_LARGER_THAN_255_WORDS" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a400bf82aaefeaf1d739a358a400b05dc"/>
+          <topic label="CRYPTO_EC_STAT_MODULUS_LENGTH_ZERO" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a5070499cc45ac20dc45e4dd16ea4070e"/>
+          <topic label="CRYPTO_EC_STAT_MODULUS_MSW_IS_ZERO" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a33693479805fd0e7fac3c779e7d67d94"/>
+          <topic label="CRYPTO_EC_STAT_SCALAR_TOO_LONG" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a8d2f8bdaf124811c0a540b87acce3511"/>
+          <topic label="CRYPTO_EC_STAT_SCALAR_LENGTH_ZERO" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a4f6b7510e7ecc7c9cbda3610ffe04ce9"/>
+          <topic label="CRYPTO_EC_STAT_ORDER_TOO_LONG" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a3800297600cd9a79ae266d535e103ae8"/>
+          <topic label="CRYPTO_EC_STAT_ORDER_LENGTH_ZERO" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a564d8dac551ce12907f76b57ac1de615"/>
+          <topic label="CRYPTO_EC_STAT_X_COORD_TOO_LONG" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5ab44a0af0ea9907345a6350aece83b0b8"/>
+          <topic label="CRYPTO_EC_STAT_X_COORD_LENGTH_ZERO" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5aa582da2ce5dc765846be32a3ce3438b7"/>
+          <topic label="CRYPTO_EC_STAT_Y_COORD_TOO_LONG" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a2fbeafedfeb670c844aa8cd794ca89a2"/>
+          <topic label="CRYPTO_EC_STAT_Y_COORD_LENGTH_ZERO" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a0d71faa53fdce52df2d3fcd7ca3680b6"/>
+          <topic label="CRYPTO_EC_STAT_A_COEF_TOO_LONG" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a930c5c13a211cbd2e9f1b2e15ffb73e4"/>
+          <topic label="CRYPTO_EC_STAT_A_COEF_LENGTH_ZERO" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a4e50f092d26ea40bdb2d23be07c2ca10"/>
+          <topic label="CRYPTO_EC_STAT_BAD_WINDOW_SIZE" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5aaf73bc5dae7705d59351b08774f59703"/>
+          <topic label="CRYPTO_EC_STAT_FAULT_DETECTION" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5abc82adb1d04196394bc479dff0ce42c1"/>
+          <topic label="CRYPTO_EC_STAT_SCALAR_MUL_OK" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5ae35958bb7776cf1fde29cb6756804f62"/>
+          <topic label="CRYPTO_EC_STAT_KEYGEN_OK" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5ad53620d4a6a50515ed4d7e84b8d89c9b"/>
+          <topic label="CRYPTO_EC_STAT_SHARED_KEY_OK" href="ec_8h.html#ac6a79710347d51d6fa153f6510eaa9c5a5b1a71b8171d6414d85654cfaa79906b"/>
+        </topic>
+        <topic label="Crypto_EC_keyGen" href="ec_8h.html#a7d31d739cb4456147bc14e5c67747372"/>
+        <topic label="Crypto_ECDSA_sign" href="ec_8h.html#af5dc8284935cbd6415a411b59f2e145e"/>
+        <topic label="Crypto_ECDSA_P256_sign" href="ec_8h.html#a7a74b66eb03e30098c18e9a1b3f15ea6"/>
+        <topic label="Crypto_ECDSA_P384_sign" href="ec_8h.html#a5c03546db0f0661276ecd78eeb06b933"/>
+        <topic label="Crypto_ECDSA_P521_sign" href="ec_8h.html#ae9b7e7d6ef8f0b3b680039fe020f1449"/>
+        <topic label="Crypto_ECDSA_verify" href="ec_8h.html#a27a3b8547d82eca2fcee473db027c904"/>
+        <topic label="Crypto_ECDSA_P256_verify" href="ec_8h.html#a6156b5e4ce7418fd053fc156596c125d"/>
+        <topic label="Crypto_ECDSA_P384_verify" href="ec_8h.html#a3ff1ca8af8747d7ea53d6fe0c50fdae4"/>
+        <topic label="Crypto_ECDSA_P521_verify" href="ec_8h.html#ae86676005d78a6143fc972f72bb3b7a8"/>
+        <topic label="Crypto_ECDH_getSharedSecret" href="ec_8h.html#a0ee293cb2440c7b7c183344c184239d5"/>
+      </topic>
+      <topic label="ec_curves.h" href="ec__curves_8h.html">
+        <topic label="crypto_ec_curve_t" href="structcrypto__ec__curve__t.html">
+          <topic label="data_p" href="structcrypto__ec__curve__t.html#aeb4e59d21982ef48d5063e14de9f9050"/>
+          <topic label="data_r" href="structcrypto__ec__curve__t.html#abe919fccd5f2fd68ac5adf547966171a"/>
+          <topic label="data_a" href="structcrypto__ec__curve__t.html#a0b879cf1cb9aaf6a26ed1087b0ac95c9"/>
+          <topic label="data_b" href="structcrypto__ec__curve__t.html#a4a6e99ac7d1cd9e1823b491157561f0f"/>
+          <topic label="data_Gx" href="structcrypto__ec__curve__t.html#a060548768cdb963d6f18a097f1cc6517"/>
+          <topic label="data_Gy" href="structcrypto__ec__curve__t.html#ae51396b8a284612429d48404a86d3fbd"/>
+          <topic label="bufLen" href="structcrypto__ec__curve__t.html#a55762aa84c8f5b965152a6001568267f"/>
+        </topic>
+        <topic label="Crypto_EC_Curve_NIST256" href="ec__curves_8h.html#a80046d3344f16caade88ad88fdb764a3"/>
+        <topic label="Crypto_EC_Curve_NIST384" href="ec__curves_8h.html#a8b369186e07adbf06eacb1fea45065b5"/>
+        <topic label="Crypto_EC_Curve_NIST521" href="ec__curves_8h.html#a759933192ac4e505f3bce648eac84086"/>
+      </topic>
+      <topic label="entropy.h" href="entropy_8h.html"/>
+      <topic label="ml-dsa-type.h" href="ml-dsa-type_8h.html">
+        <topic label="crypto_mldsa_stat_t" href="ml-dsa-type_8h.html#abd964f3d28930cd52880c06ed674bdc2">
+          <topic label="CRYPTO_MLDSA_STAT_INVALID_MODE" href="ml-dsa-type_8h.html#abd964f3d28930cd52880c06ed674bdc2a2ad6e4b3140f5c3ef06a85f089396260"/>
+          <topic label="CRYPTO_MLDSA_STAT_SIG_LEN_INVALID" href="ml-dsa-type_8h.html#abd964f3d28930cd52880c06ed674bdc2ab19e1ee42209a476de61fb6e2471cd07"/>
+          <topic label="CRYPTO_MLDSA_STAT_RAND_TOO_SMALL" href="ml-dsa-type_8h.html#abd964f3d28930cd52880c06ed674bdc2a6432dfb6da86c1b42bf2c47a20298b52"/>
+          <topic label="CRYPTO_MLDSA_STAT_CTX_TOO_LONG" href="ml-dsa-type_8h.html#abd964f3d28930cd52880c06ed674bdc2aa722ac1b5d45792d0c4c03440cf390ad"/>
+          <topic label="CRYPTO_MLDSA_STAT_SEED_TOO_SMALL" href="ml-dsa-type_8h.html#abd964f3d28930cd52880c06ed674bdc2a6dd870ee3dc925f030c92f3f38e1dd6f"/>
+          <topic label="CRYPTO_MLDSA_STAT_INVALID_SIGNATURE_FORM" href="ml-dsa-type_8h.html#abd964f3d28930cd52880c06ed674bdc2aa0e5152ef2e4dfe89fdbe312789ce05b"/>
+          <topic label="CRYPTO_MLDSA_STAT_WORKZONE_TOO_SMALL" href="ml-dsa-type_8h.html#abd964f3d28930cd52880c06ed674bdc2ab22e8be42aeb3ca3dd401015397f3046"/>
+          <topic label="CRYPTO_MLDSA_STAT_INVALID_SIGNATURE" href="ml-dsa-type_8h.html#abd964f3d28930cd52880c06ed674bdc2a5b7b11a15a3dfb64e985cfd705d5b090"/>
+          <topic label="CRYPTO_MLDSA_STAT_OK" href="ml-dsa-type_8h.html#abd964f3d28930cd52880c06ed674bdc2ac5624f53550da0805e4448a2b47626d0"/>
+          <topic label="CRYPTO_MLDSA_STAT_VALID_SIGNATURE" href="ml-dsa-type_8h.html#abd964f3d28930cd52880c06ed674bdc2a6cfe8ecbf3f4cd8822e97b3770b89cbb"/>
+        </topic>
+        <topic label="crypto_mldsa_mode_t" href="ml-dsa-type_8h.html#abd61c616b13b7cb2da052ebf5d38b3c6">
+          <topic label="CRYPTO_MLDSA_SIG_MODE_PURE" href="ml-dsa-type_8h.html#abd61c616b13b7cb2da052ebf5d38b3c6a0594706536dc15655304fa2751d1f6ef"/>
+          <topic label="CRYPTO_MLDSA_SIG_MODE_PREHASH" href="ml-dsa-type_8h.html#abd61c616b13b7cb2da052ebf5d38b3c6a23d89cb653c87382de65d0e87fbbc4e1"/>
+        </topic>
+      </topic>
+      <topic label="ml-dsa.h" href="ml-dsa_8h.html">
+        <topic label="CRYPTO_MLDSA_KEYGEN_SEED_LEN" href="ml-dsa_8h.html#ad461fa1b42066615e4872dad97870a67"/>
+        <topic label="CRYPTO_MLDSA_44_SK_LEN" href="ml-dsa_8h.html#a6a4e94bdffef8d5f330d8f42d7f21b5e"/>
+        <topic label="CRYPTO_MLDSA_44_PK_LEN" href="ml-dsa_8h.html#a75b1a2b143b5ee96dade07c428160844"/>
+        <topic label="CRYPTO_MLDSA_44_SIG_LEN" href="ml-dsa_8h.html#af22aca27b817c71ebdc077ec1e28044d"/>
+        <topic label="CRYPTO_MLDSA_65_SK_LEN" href="ml-dsa_8h.html#a2f76b50e68201f3bc905832dfc509707"/>
+        <topic label="CRYPTO_MLDSA_65_PK_LEN" href="ml-dsa_8h.html#a8c5f9a453b0bd79c98da54644236eb47"/>
+        <topic label="CRYPTO_MLDSA_65_SIG_LEN" href="ml-dsa_8h.html#a3d7bfa0e70007675d4ccc0a7bfe25bb6"/>
+        <topic label="CRYPTO_MLDSA_87_SK_LEN" href="ml-dsa_8h.html#a06990d68608f159baa55e8d56f05c567"/>
+        <topic label="CRYPTO_MLDSA_87_PK_LEN" href="ml-dsa_8h.html#ab7d35f17e114fbe587f666496966bbda"/>
+        <topic label="CRYPTO_MLDSA_87_SIG_LEN" href="ml-dsa_8h.html#a2497f3dca2978df1f74e212d716897ea"/>
+        <topic label="Crypto_MLDSA_44_keyGen" href="ml-dsa_8h.html#a9b191b043b76edc4074c3cdb02b95efb"/>
+        <topic label="Crypto_MLDSA_44_sign" href="ml-dsa_8h.html#afce3dc918902179f8554d3b302c4bd6a"/>
+        <topic label="Crypto_MLDSA_44_verify" href="ml-dsa_8h.html#ab5bfb6116ef8544ab459d9d4ed62934d"/>
+        <topic label="Crypto_MLDSA_65_keyGen" href="ml-dsa_8h.html#a717828f53a90327a289d395fce65ade2"/>
+        <topic label="Crypto_MLDSA_65_sign" href="ml-dsa_8h.html#a771d3201f7fd8f0a81d6ccfe52aefa8c"/>
+        <topic label="Crypto_MLDSA_65_verify" href="ml-dsa_8h.html#a1a630a96ca3cef02ce6a12bb58e758be"/>
+        <topic label="Crypto_MLDSA_87_keyGen" href="ml-dsa_8h.html#a83c95f934c07fdb4226d93a0aca8dbf2"/>
+        <topic label="Crypto_MLDSA_87_sign" href="ml-dsa_8h.html#ad5a5c2ee979f6ad4e7ca24dbf96eb96d"/>
+        <topic label="Crypto_MLDSA_87_verify" href="ml-dsa_8h.html#abbd5bf288727de87df69bb034f2b7589"/>
+      </topic>
+      <topic label="ml-kem-type.h" href="ml-kem-type_8h.html">
+        <topic label="crypto_mlkem_stat_t" href="ml-kem-type_8h.html#a4d922d8edd8cdbeef8213302f4146804">
+          <topic label="CRYPTO_MLKEM_STAT_SEED_TOO_SMALL" href="ml-kem-type_8h.html#a4d922d8edd8cdbeef8213302f4146804a121acd2dc0f2dd6c46bf3ada9f316183"/>
+          <topic label="CRYPTO_MLKEM_STAT_OK" href="ml-kem-type_8h.html#a4d922d8edd8cdbeef8213302f4146804a201f806525080bd126ba235edb727dc4"/>
+        </topic>
+      </topic>
+      <topic label="ml-kem.h" href="ml-kem_8h.html">
+        <topic label="CRYPTO_MLKEM_KEYGEN_SEED_LEN" href="ml-kem_8h.html#ae4894ece8753412331a2e7a16018eebf"/>
+        <topic label="CRYPTO_MLKEM_ENCAPS_SEED_LEN" href="ml-kem_8h.html#a9479220eb56d854ffa69c7b2a3609ea4"/>
+        <topic label="CRYPTO_MLKEM_512_EK_LEN" href="ml-kem_8h.html#a064a6ccd6cdb3721a27679452f767577"/>
+        <topic label="CRYPTO_MLKEM_512_DK_LEN" href="ml-kem_8h.html#a5e13637f704372b7857de8bd94930b33"/>
+        <topic label="CRYPTO_MLKEM_512_CIPHER_TEXT_LEN" href="ml-kem_8h.html#a883cc561349ac25090df10521bbbb3cb"/>
+        <topic label="CRYPTO_MLKEM_768_EK_LEN" href="ml-kem_8h.html#a37eadeac001ee2f22fee18e6e23074a4"/>
+        <topic label="CRYPTO_MLKEM_768_DK_LEN" href="ml-kem_8h.html#aee3bd49da41a3315e928660f1c4b879d"/>
+        <topic label="CRYPTO_MLKEM_768_CIPHER_TEXT_LEN" href="ml-kem_8h.html#aec95f75ab8456f41401cf3becabd6740"/>
+        <topic label="CRYPTO_MLKEM_1024_EK_LEN" href="ml-kem_8h.html#a08908ac8af684e93112f861666979e6a"/>
+        <topic label="CRYPTO_MLKEM_1024_DK_LEN" href="ml-kem_8h.html#a36dc82358de7e5a166e36a8dfdd00d58"/>
+        <topic label="CRYPTO_MLKEM_1024_CIPHER_TEXT_LEN" href="ml-kem_8h.html#a61409677f8ee02d558d9d99e21fa2e4b"/>
+        <topic label="CRYPTO_MLKEM_SHARED_SECRET_LEN" href="ml-kem_8h.html#aff1a3ab5bac7d11f48df85ec05cf43b6"/>
+        <topic label="Crypto_MLKEM_512_keyGen" href="ml-kem_8h.html#a92ce1923fb228638506312fb57629f44"/>
+        <topic label="Crypto_MLKEM_512_encaps" href="ml-kem_8h.html#af0918d731d1acbdc98874693f913045a"/>
+        <topic label="Crypto_MLKEM_512_decaps" href="ml-kem_8h.html#ad60045a328c88cc593b346a85c5fbced"/>
+        <topic label="Crypto_MLKEM_768_keyGen" href="ml-kem_8h.html#a7b6fc9b200024da7b35f1e5ab0ad0713"/>
+        <topic label="Crypto_MLKEM_768_encaps" href="ml-kem_8h.html#a9d284f0ca0850d0c339ef0c7dca8ab7f"/>
+        <topic label="Crypto_MLKEM_768_decaps" href="ml-kem_8h.html#a08a43c5d98d7f6caad221170c2fea9d8"/>
+        <topic label="Crypto_MLKEM_1024_keyGen" href="ml-kem_8h.html#a1e1c97e37544e38e38eceedd6aeb94c1"/>
+        <topic label="Crypto_MLKEM_1024_encaps" href="ml-kem_8h.html#a4b76a8740e7805d585ffd8c1b34705c4"/>
+        <topic label="Crypto_MLKEM_1024_decaps" href="ml-kem_8h.html#affd5edd4b25fdedb0b156a3c27e35c78"/>
+      </topic>
+      <topic label="msp-crypto-lib.h" href="msp-crypto-lib_8h.html"/>
+      <topic label="rsa.h" href="rsa_8h.html">
+        <topic label="Crypto_RSA_preparePkFromModulus" href="rsa_8h.html#a7848bbae61fc3df183d25fed674f1db6"/>
+        <topic label="Crypto_RSA_PKCS1P5_fastVerify" href="rsa_8h.html#aed9f12cff4b975894e5369f305c88b86"/>
+        <topic label="Crypto_RSA_PKCS1P5_verify" href="rsa_8h.html#af003b6b49d0062773fbc9305e0419080"/>
+        <topic label="Crypto_RSA_PSS_fastVerify" href="rsa_8h.html#aace14cf2d6c85f0ddd9d622dde15fb2d"/>
+        <topic label="Crypto_RSA_PSS_verify" href="rsa_8h.html#a714bee70146854970b04c8415b249195"/>
+      </topic>
+      <topic label="rsa_type.h" href="rsa__type_8h.html">
+        <topic label="crypto_rsa_fast_verify_pk_t" href="structcrypto__rsa__fast__verify__pk__t.html">
+          <topic label="n" href="structcrypto__rsa__fast__verify__pk__t.html#a609dff99fafeb5d6e7fd11c93c03a508"/>
+          <topic label="rr" href="structcrypto__rsa__fast__verify__pk__t.html#a47ee06eb78da41a9951f2ab98ff545c2"/>
+          <topic label="n0inv" href="structcrypto__rsa__fast__verify__pk__t.html#a30a867f55b0a265c680bec367fd29e54"/>
+        </topic>
+        <topic label="CRYPTO_RSA_KEY_SIZE_BITS" href="rsa__type_8h.html#a409ff369c607975ef0ea22063b398c68"/>
+        <topic label="CRYPTO_RSA_NUMBYTES" href="rsa__type_8h.html#a754d8411c83fd6c17496f1c90a4d9afd"/>
+        <topic label="CRYPTO_RSA_NUMWORDS" href="rsa__type_8h.html#a3087c6d9144c967f0534313e0c842205"/>
+        <topic label="crypto_rsa_stat_t" href="rsa__type_8h.html#ac52e64e8aa001ff5d2ebd5047f73b158">
+          <topic label="CRYPTO_RSA_STAT_OK" href="rsa__type_8h.html#ac52e64e8aa001ff5d2ebd5047f73b158aad6d83a7759af6552c554592289d60ba"/>
+          <topic label="CRYPTO_RSA_STAT_ERR_PARAM" href="rsa__type_8h.html#ac52e64e8aa001ff5d2ebd5047f73b158a06744f9df1c7b8bab94685f080aa74b1"/>
+          <topic label="CRYPTO_RSA_STAT_ERR_OVERFLOW" href="rsa__type_8h.html#ac52e64e8aa001ff5d2ebd5047f73b158a46906cf5d21054eed8bd9bca6dba9cf0"/>
+          <topic label="CRYPTO_RSA_STAT_ERR_BNMATH" href="rsa__type_8h.html#ac52e64e8aa001ff5d2ebd5047f73b158ac3f83bf0e85f96ebdca7992aa120b872"/>
+          <topic label="CRYPTO_RSA_STAT_ERR_UNSUPPORTED_MD_ALG" href="rsa__type_8h.html#ac52e64e8aa001ff5d2ebd5047f73b158ac67561924686b79ac8338384401536e2"/>
+          <topic label="CRYPTO_RSA_STAT_ERR_BAD_EB" href="rsa__type_8h.html#ac52e64e8aa001ff5d2ebd5047f73b158adeeea6a2f4d0a7ac6d2274db3ac15333"/>
+          <topic label="CRYPTO_RSA_STAT_ERR_BAD_TAG" href="rsa__type_8h.html#ac52e64e8aa001ff5d2ebd5047f73b158ae4d9b1fe999c5ea06fd9dd03e53da498"/>
+          <topic label="CRYPTO_RSA_STAT_ERR_PSS_INCONSISTENT_EM" href="rsa__type_8h.html#ac52e64e8aa001ff5d2ebd5047f73b158a57144035a648599aa2c515c2501afa03"/>
+          <topic label="CRYPTO_RSA_STAT_INVALID_SIGNATURE" href="rsa__type_8h.html#ac52e64e8aa001ff5d2ebd5047f73b158af78021c1aafed36b58d5e7178fe9d969"/>
+          <topic label="CRYPTO_RSA_STAT_VALID_SIGNATURE" href="rsa__type_8h.html#ac52e64e8aa001ff5d2ebd5047f73b158af98d22b7864d6d27f46aa82e1f1756f0"/>
+        </topic>
+        <topic label="crypto_rsa_endianness_t" href="rsa__type_8h.html#a266a926afe044e993c57d3f1cd359efc">
+          <topic label="CRYPTO_RSA_LITTLE_ENDIAN" href="rsa__type_8h.html#a266a926afe044e993c57d3f1cd359efcab318cd23f096a8faa83042b7734646ad"/>
+          <topic label="CRYPTO_RSA_BIG_ENDIAN" href="rsa__type_8h.html#a266a926afe044e993c57d3f1cd359efca622b6b9cc32cfba7f0f8a7cc789594da"/>
+        </topic>
+        <topic label="crypto_rsa_md_t" href="rsa__type_8h.html#a916e1dbd57bc4f8c33964bf9f57ed963">
+          <topic label="CRYPTO_RSA_MD_SHA256" href="rsa__type_8h.html#a916e1dbd57bc4f8c33964bf9f57ed963a5ce80538448e95c8120d7ea8099031b5"/>
+        </topic>
+      </topic>
+      <topic label="sha.h" href="sha_8h.html">
+        <topic label="crypto_sha256_ctx_t" href="structcrypto__sha256__ctx__t.html">
+          <topic label="bitsProcessed" href="structcrypto__sha256__ctx__t.html#a4e1a49dff332cbffd345a93e083d89b5"/>
+          <topic label="offsetWb" href="structcrypto__sha256__ctx__t.html#a0945c1016b2f605ae27c0c56fdd2a9fa"/>
+          <topic label="reserved1" href="structcrypto__sha256__ctx__t.html#a10068d7ef274e438c3f432bc98ef595d"/>
+          <topic label="digestSize" href="structcrypto__sha256__ctx__t.html#ab0d632f335f975dc1e0a2f918d0c36e3"/>
+          <topic label="reserved2" href="structcrypto__sha256__ctx__t.html#a55a8d8b173de6ac9ffcb3dafce778f0b"/>
+          <topic label="quickSettings" href="structcrypto__sha256__ctx__t.html#ab2c996286567e6ccdc99e4a976124fa5"/>
+          <topic label="digest32" href="structcrypto__sha256__ctx__t.html#a77db16479877988519a7678948f1d8bb"/>
+          <topic label="Ws32" href="structcrypto__sha256__ctx__t.html#a5de3516df98457e88e6d8f558ee64946"/>
+        </topic>
+        <topic label="crypto_sha512_ctx_t" href="structcrypto__sha512__ctx__t.html">
+          <topic label="bitsProcessed" href="structcrypto__sha512__ctx__t.html#a46e7a0bfa698793645997a4d94ec7035"/>
+          <topic label="offsetWb" href="structcrypto__sha512__ctx__t.html#a10d8937db59c35b647916904ee4f6eee"/>
+          <topic label="reserved1" href="structcrypto__sha512__ctx__t.html#adf0eb4c04a39bb35d77a5f01cb5f9a7d"/>
+          <topic label="digestSize" href="structcrypto__sha512__ctx__t.html#a99dc691b7f1cb9bb5be6453bce35231b"/>
+          <topic label="reserved2" href="structcrypto__sha512__ctx__t.html#ada73e760630168d785ec3d1cfb8a480e"/>
+          <topic label="quickSettings" href="structcrypto__sha512__ctx__t.html#a0c5554137a8f079f2ebe9be2bed782a6"/>
+          <topic label="digest64" href="structcrypto__sha512__ctx__t.html#aa565f9b38ef34aee42be2d9113c5f92d"/>
+          <topic label="Ws64" href="structcrypto__sha512__ctx__t.html#a669d6119c9f1408f0cfddceab0e95075"/>
+        </topic>
+        <topic label="crypto_sha3_ctx_t" href="structcrypto__sha3__ctx__t.html">
+          <topic label="b" href="structcrypto__sha3__ctx__t.html#ac1a56bff5a3352bb8b527d9be57941a3"/>
+          <topic label="q" href="structcrypto__sha3__ctx__t.html#a3c6efd58007e66b636ef1c8b1f612fbd"/>
+          <topic label="state" href="structcrypto__sha3__ctx__t.html#a40a31fc1df87aef1974e7cbfce3ebca7"/>
+          <topic label="pt" href="structcrypto__sha3__ctx__t.html#a3d9069cdcc5d2918ab8d4d848f2e1501"/>
+          <topic label="rsize" href="structcrypto__sha3__ctx__t.html#ae3c091c70c0cbde13c4406b775d24fa2"/>
+          <topic label="mdlen" href="structcrypto__sha3__ctx__t.html#afb6a44db849c059d48c391b185eb8e00"/>
+        </topic>
+        <topic label="CRYPTO_SHA224_DIGEST_LEN" href="sha_8h.html#a7c7c3ac5f1dfcf9c3eeadb5b18af22d2"/>
+        <topic label="CRYPTO_SHA256_DIGEST_LEN" href="sha_8h.html#ab8d0ed5878867e7992ed6070e464d6c4"/>
+        <topic label="CRYPTO_SHA384_DIGEST_LEN" href="sha_8h.html#a14ce7333ac7ecfe264b6f431454f0a96"/>
+        <topic label="CRYPTO_SHA512_DIGEST_LEN" href="sha_8h.html#a1a6a3462c61e8c8731d3926980b2f3af"/>
+        <topic label="CRYPTO_SHA3_224_DIGEST_LEN" href="sha_8h.html#a54268778a34e26d6af946c05b1fa5db8"/>
+        <topic label="CRYPTO_SHA3_256_DIGEST_LEN" href="sha_8h.html#a96594ab8be01d098f6b9de68458a6b69"/>
+        <topic label="CRYPTO_SHA3_384_DIGEST_LEN" href="sha_8h.html#ae2a853c5481b23515b50ded6ff3ade18"/>
+        <topic label="CRYPTO_SHA3_512_DIGEST_LEN" href="sha_8h.html#a51079a68974ca0cb678b6bf4ec4b9a74"/>
+        <topic label="CRYPTO_SHAKE128_RATE" href="sha_8h.html#a7fb5cdd69559b52352ffe08b766d25ca"/>
+        <topic label="CRYPTO_SHAKE256_RATE" href="sha_8h.html#a7e5aba41e4c826f7b0ae8e8de2f386e5"/>
+        <topic label="Crypto_SHA224_update" href="sha_8h.html#a8ead4e0c89cc296976d84936dd24b48b"/>
+        <topic label="Crypto_SHA224_final" href="sha_8h.html#afda55f1aebbf85901b50816d662cb1a8"/>
+        <topic label="Crypto_SHA384_update" href="sha_8h.html#adde511faecee7b5cde0d3b205b74de0b"/>
+        <topic label="Crypto_SHA384_final" href="sha_8h.html#a60679cf8d8718816dfdfe6f132d4603f"/>
+        <topic label="Crypto_SHA3_224_update" href="sha_8h.html#ae90d32d050dbab52e7f154cd04bd7c4b"/>
+        <topic label="Crypto_SHA3_224_final" href="sha_8h.html#a4232faa2b283ab00c47de440cdd219bc"/>
+        <topic label="Crypto_SHA3_256_update" href="sha_8h.html#abc444738d4b525f0be6f32dd72ae7d14"/>
+        <topic label="Crypto_SHA3_256_final" href="sha_8h.html#a617327b7a1d968fca4d7533c6859d117"/>
+        <topic label="Crypto_SHA3_384_update" href="sha_8h.html#a32d42bfa3b92f86a950bfdc5ec92e58e"/>
+        <topic label="Crypto_SHA3_384_final" href="sha_8h.html#a073d0fae511fff4e7cb218a6316d2575"/>
+        <topic label="Crypto_SHA3_512_update" href="sha_8h.html#ac42be3cf06e7672d590185a9244b1b85"/>
+        <topic label="Crypto_SHA3_512_final" href="sha_8h.html#a7b6e377c778afdf2261ae0f2cb4a1421"/>
+        <topic label="Crypto_SHAKE128_absorb" href="sha_8h.html#a73ae0772c3d5c058a6e9a4558b093513"/>
+        <topic label="Crypto_SHAKE128_xof" href="sha_8h.html#a45cde352aa494b084136f8ba666d85c9"/>
+        <topic label="Crypto_SHAKE128_squeeze" href="sha_8h.html#abdbb680b4f369a01b21d99f5aa6f53d8"/>
+        <topic label="Crypto_SHAKE256_absorb" href="sha_8h.html#a0cb5c0fbd6540f76452a8c95db5c74c4"/>
+        <topic label="Crypto_SHAKE256_xof" href="sha_8h.html#ae750ca9fdd50766d73d1c73b6a33bcee"/>
+        <topic label="Crypto_SHAKE256_squeeze" href="sha_8h.html#a9b5333465a30a6e6fb1e4ecfde4c0e52"/>
+        <topic label="crypto_shake_ctx_t" href="sha_8h.html#a513bb34a3e3286ec00ed71e494f0ad60"/>
+        <topic label="crypto_hash_stat_t" href="sha_8h.html#aef98426041f5ac1238b331e6a937c7dc">
+          <topic label="CRYPTO_HASH_STAT_OK" href="sha_8h.html#aef98426041f5ac1238b331e6a937c7dca1e7ed68963a3b2f7b0a8fb4b76e77915"/>
+          <topic label="CRYPTO_HASH_STAT_ERROR" href="sha_8h.html#aef98426041f5ac1238b331e6a937c7dcad94d03ec0d40528ae53e3bcc419b4b6d"/>
+          <topic label="CRYPTO_HASH_STAT_LENGTH_TOO_LARGE" href="sha_8h.html#aef98426041f5ac1238b331e6a937c7dca9a279ec4159cc8840dbaa7d0bc346690"/>
+          <topic label="CRYPTO_HASH_STAT_NULL_INPUT" href="sha_8h.html#aef98426041f5ac1238b331e6a937c7dca75a4cabc46352c2f87eb54d5f2663c84"/>
+        </topic>
+        <topic label="Crypto_SHA224" href="sha_8h.html#abfc9ca022612837dc8afecd8a5cea4af"/>
+        <topic label="Crypto_SHA224_init" href="sha_8h.html#a05946ccebbf22b6d81748d86cf8b32bf"/>
+        <topic label="Crypto_SHA256" href="sha_8h.html#ac5bfaaa560494249caa0f531cb53eecc"/>
+        <topic label="Crypto_SHA256_init" href="sha_8h.html#ab95c769378228304b63171238ba23293"/>
+        <topic label="Crypto_SHA256_update" href="sha_8h.html#aad1ef3e97768bbc1552956dc6cd6de14"/>
+        <topic label="Crypto_SHA256_final" href="sha_8h.html#a730528670de9140ae6b69bf313367040"/>
+        <topic label="Crypto_SHA384" href="sha_8h.html#a62cbe557491204133b928e947408e59d"/>
+        <topic label="Crypto_SHA384_init" href="sha_8h.html#a0dea66e87a5d32cf70219ed7f2737a52"/>
+        <topic label="Crypto_SHA512" href="sha_8h.html#a494afe3b7d7dd9e1fe6c55572ec58c8e"/>
+        <topic label="Crypto_SHA512_init" href="sha_8h.html#a7965e4681c8e390dffd36465766fd222"/>
+        <topic label="Crypto_SHA512_update" href="sha_8h.html#a9fe705964d42ea6a73eeeca86dcd2472"/>
+        <topic label="Crypto_SHA512_final" href="sha_8h.html#ac155afc401f378c2fe05dab82ef8ee19"/>
+        <topic label="Crypto_SHA3_224" href="sha_8h.html#a66437681d7d56f9159ee21547da960f9"/>
+        <topic label="Crypto_SHA3_224_init" href="sha_8h.html#a46a501eef68e030f769bebed0521bf5a"/>
+        <topic label="Crypto_SHA3_256" href="sha_8h.html#afa4872c52a21d63404fca8397c0e189a"/>
+        <topic label="Crypto_SHA3_256_init" href="sha_8h.html#a511f89004a58fe19be28db5fa9fa5f0a"/>
+        <topic label="Crypto_SHA3_384" href="sha_8h.html#ab5e4e09fd09d11a2ee5e3feb45d4a89b"/>
+        <topic label="Crypto_SHA3_384_init" href="sha_8h.html#a4f75abc95f092572efbc4ec1a69ab5d8"/>
+        <topic label="Crypto_SHA3_512" href="sha_8h.html#a8271ccc78b4bae6ae2052ad81d736580"/>
+        <topic label="Crypto_SHA3_512_init" href="sha_8h.html#a9fd193d88b224406192acb2746d909b9"/>
+        <topic label="Crypto_SHA3_update" href="sha_8h.html#ae4accbfc54a654eb279129771c837d50"/>
+        <topic label="Crypto_SHA3_final" href="sha_8h.html#a990cd29fb23db469f3fea992f9f33512"/>
+        <topic label="Crypto_SHAKE128" href="sha_8h.html#af77a51c07eb7e3ed63f52b1e1a29f314"/>
+        <topic label="Crypto_SHAKE128_init" href="sha_8h.html#ac494e35f6e7889a8f719fcf5c15ebebd"/>
+        <topic label="Crypto_SHAKE256" href="sha_8h.html#abc98dceba138f7df4b041ed6a7c4e349"/>
+        <topic label="Crypto_SHAKE256_init" href="sha_8h.html#a92246cd0883ba5bcb730fd7d6333baaa"/>
+        <topic label="Crypto_SHAKE_xof" href="sha_8h.html#a3aae93a4d87ea4b73de6b465ec35cf1e"/>
+        <topic label="Crypto_SHAKE_squeeze" href="sha_8h.html#a3a87a217f6d3c99b9f6a9cda2dd8aec2"/>
+      </topic>
+      <topic label="utilities.h" href="utilities_8h.html">
+        <topic label="crypto_block32_t" href="unioncrypto__block32__t.html">
+          <topic label="w" href="unioncrypto__block32__t.html#a0dc7952e35d0c8959ba839717bbc2ea4"/>
+          <topic label="b" href="unioncrypto__block32__t.html#a4773caf82e49a6b12e3aa39f03b12eec"/>
+        </topic>
+        <topic label="crypto_block128_t" href="unioncrypto__block128__t.html">
+          <topic label="w" href="unioncrypto__block128__t.html#a32ac6312969f9402b039c613f82ac617"/>
+          <topic label="b" href="unioncrypto__block128__t.html#a9d10e88d737a89f7a591714fdd3f4bbe"/>
+        </topic>
+        <topic label="crypto_block256_t" href="unioncrypto__block256__t.html">
+          <topic label="w" href="unioncrypto__block256__t.html#a7742514332ddfef7d3796a79bd6bfd88"/>
+          <topic label="b" href="unioncrypto__block256__t.html#ab4ad5864dd1864a3c2c9229da1dfd174"/>
+        </topic>
+        <topic label="CRYPTO_BLOCK32_LEN_WORDS" href="utilities_8h.html#a4d640dc28ba86b65dfe699b2ff9af125"/>
+        <topic label="CRYPTO_BLOCK32_LEN" href="utilities_8h.html#a0b73701e58bc94017160877cba5498c4"/>
+        <topic label="CRYPTO_BLOCK128_LEN_WORDS" href="utilities_8h.html#a7672e690c26ad3d853ce4d350e63ee11"/>
+        <topic label="CRYPTO_BLOCK128_LEN" href="utilities_8h.html#a5794f5d72e81e050939fadf141e2397d"/>
+        <topic label="CRYPTO_BLOCK256_LEN_WORDS" href="utilities_8h.html#a6260d3d5e8e088b7c53e0da75e0f0951"/>
+        <topic label="CRYPTO_BLOCK256_LEN" href="utilities_8h.html#af08252ac4ad4ec2b47ae2cf2c7b2b1c9"/>
+        <topic label="CRYPTO_PMCU_DELAY" href="utilities_8h.html#ae1c89b482cdf6f10c35b47488a7ecae3"/>
+        <topic label="Crypto_copy8" href="utilities_8h.html#ad3bcb35a2b0384ce94b02125392d0d9e"/>
+        <topic label="Crypto_copy32" href="utilities_8h.html#ad0a59f4403b2e0bb61454399ca67b7ed"/>
+        <topic label="Crypto_set8" href="utilities_8h.html#acb0c768ba6bcd1de1baeab067e5ff28e"/>
+        <topic label="Crypto_set32" href="utilities_8h.html#a1e11243948cfc1d819415d1b3a950b1b"/>
+        <topic label="Crypto_xor32" href="utilities_8h.html#a399d2ced528564d0c5475fc77803656f"/>
+        <topic label="Crypto_reverseBytes32" href="utilities_8h.html#aa8aba5d3f97314ec406671adb1187117"/>
+        <topic label="Crypto_copyReverse8" href="utilities_8h.html#abc82d27cad111a4babed0fee126fc741"/>
+        <topic label="Crypto_delay" href="utilities_8h.html#ae5fd9a9fb82a5b0bffa75afb1c914aec"/>
+        <topic label="Crypto_memcmp" href="utilities_8h.html#aa75a96232b0ce4e0ba820803a6e11fb7"/>
+        <topic label="Crypto_memcmp32" href="utilities_8h.html#a7f77c56203fb4b3e103f02f688870c04"/>
+        <topic label="Crypto_copyReversePad" href="utilities_8h.html#a66438df5974e294952ad30c3abb51c59"/>
+        <topic label="Crypto_reverseInPlaceBytewise" href="utilities_8h.html#a95add37deb2bc6db8f510baa139f9656"/>
+      </topic>
+    </topic>
+    <topic label="Globals" href="globals.html">
+      <topic label="All" href="globals.html"/>
+      <topic label="Functions" href="globals_func.html"/>
+      <topic label="Variables" href="globals_vars.html"/>
+      <topic label="Typedefs" href="globals_type.html"/>
+      <topic label="Enumerations" href="globals_enum.html"/>
+      <topic label="Enumerator" href="globals_eval.html"/>
+      <topic label="Macros" href="globals_defs.html"/>
+    </topic>
+  </topic>
+  <topic label="Disclaimer" href="_disclaimer.html"/>
+</toc>

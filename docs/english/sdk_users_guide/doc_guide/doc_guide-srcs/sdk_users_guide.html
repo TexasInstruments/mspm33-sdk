@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SDK Overview &mdash; MSPM33 SDK User Guide 1.04.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Software Bill of Materials" href="sbom.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> MSPM33 SDK User Guide
+          </a>
+              <div class="version">
+                1.04.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="examples_guide.html">MSPM33 SDK Examples Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sbom.html">Software Bill of Materials</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SDK Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#sdk-components-and-architecture">1. SDK Components and Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#drivers-and-support-files">1.1 <strong>Drivers and Support Files</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rtos-support">1.2 <strong>RTOS Support</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#middleware">1.3 <strong>Middleware</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#code-examples">1.4 <strong>Code Examples</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#software-development-tools">1.5 <strong>Software Development Tools</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#training-content">1.6 <strong>Training Content</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sdk-structure">2. SDK Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#examples-directory">2.1. Examples Directory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#source-directory">2.2. Source directory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-started">3. Getting Started</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MSPM33 SDK User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>SDK Overview</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sdk-overview">
+<h1>SDK Overview<a class="headerlink" href="#sdk-overview" title="Permalink to this heading">¶</a></h1>
+<p>The MSPM33 SDK provides the ultimate collection of software, tools and documentation to accelerate the development of applications for the MSPM33 MCU platform. The software is designed for optimal performance and memory utilization, providing a consistent and cohesive experience with a wide variety of drivers, libraries and easy-to-use examples under a single software package.</p>
+<section id="sdk-components-and-architecture">
+<h2>1. SDK Components and Architecture<a class="headerlink" href="#sdk-components-and-architecture" title="Permalink to this heading">¶</a></h2>
+<body><script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script><p>The key features of the SDK are as follows:</p>
+<section id="drivers-and-support-files">
+<h3>1.1 <strong>Drivers and Support Files</strong><a class="headerlink" href="#drivers-and-support-files" title="Permalink to this heading">¶</a></h3>
+<p>Support for the Arm Cortex M33 core and all MSPM33 devices with full support of their corresponding EVMs and peripherals.</p>
+<ul class="simple">
+<li><p>The <strong>DriverLib</strong> layer consists of comprehensive low-level drivers providing support for all device features with the highest optimization for performance and low memory footprint.</p></li>
+<li><p>Ready-to-use <strong>device header files</strong>.</p></li>
+<li><p>MSPM33 SDK currently does not support <strong>TI-Drivers</strong></p></li>
+</ul>
+</section>
+<section id="rtos-support">
+<h3>1.2 <strong>RTOS Support</strong><a class="headerlink" href="#rtos-support" title="Permalink to this heading">¶</a></h3>
+<p>The MSPM33 SDK includes support for FreeRTOS. The use of RTOS is optional.</p>
+<ul class="simple">
+<li><p>Integration with the widely popular <strong>FreeRTOS</strong> kernel.</p></li>
+<li><p>MSPM33 SDK currently does not support</p>
+<ul>
+<li><p><strong>Driver Porting Layer (DPL)</strong></p></li>
+<li><p><strong>POSIX</strong></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="middleware">
+<h3>1.3 <strong>Middleware</strong><a class="headerlink" href="#middleware" title="Permalink to this heading">¶</a></h3>
+<p>A wide variety of <strong>Middleware</strong> is included with libraries and protocol stacks for different applications and sectors, including automotive, appliances, building and factory automation, etc. Middleware is developed using the driver layers to provide a consistent and compatible experience.</p>
+<p>For a list of supported middleware, see the <a class="reference external" href="../../../MSPM33_SDK_Documentation_Overview.html">MSPM33 SDK Document Overview</a></p>
+</section>
+<section id="code-examples">
+<h3>1.4 <strong>Code Examples</strong><a class="headerlink" href="#code-examples" title="Permalink to this heading">¶</a></h3>
+<p>The MSPM33 SDK includes an extensive list of <strong>code examples</strong> at all levels which can be used not only to demonstrate and test device functionality, but to provide a reference and starting point to accelerate application development. Code examples include corresponding files for supported IDEs and compilers. To learn more about the examples offered, consult the <a class="reference external" href="./examples_guide.html">MSPM33 SDK Example Guide</a></p>
+<p>Examples include:</p>
+<ul class="simple">
+<li><p>DriverLib: simple and easy-to-use modular examples showing MSPM33 functionality</p></li>
+<li><p>Middleware: examples showcasing multiple middleware</p></li>
+<li><p>Demos: integrated ready-to-use demos</p></li>
+<li><p>RTOS: examples using kernel functionality</p></li>
+<li><p>And more …</p></li>
+</ul>
+</section>
+<section id="software-development-tools">
+<h3>1.5 <strong>Software Development Tools</strong><a class="headerlink" href="#software-development-tools" title="Permalink to this heading">¶</a></h3>
+<p>MSPM33 is supported by a wide variety of tools from TI and 3rd parties. Visit the <a class="reference external" href="../../../tools/MSPM33_Tools_Guide.html">MSPM33 Tools Guide</a> for more information.</p>
+<ul class="simple">
+<li><p><strong>SysConfig</strong> is an easy-to-use tool to configure device peripherals using an intuitive graphical interface. It can simplify PinMux outputs for any MSPM33 package, and automatically generate configuration code for development . To learn more, visit <a class="reference external" href="../../../tools/sysconfig_guide/doc_guide/doc_guide-srcs/sysconfig_guide.html">Using Sysconfig With MSPM33</a>.</p></li>
+<li><p><strong>Integrated Development environments (IDEs)</strong> such as Code Composer Studio (CCS), IAR will allow the user to develop their own custom applications using the SDK from a starting point such as an example or cookbook.</p></li>
+<li><p>Support for multiple <strong>compilers</strong> including, but not limited to TI Arm Clang supported by CCS.</p></li>
+<li><p>Support for <strong>debuggers and programmers</strong> such as XDS-110.</p></li>
+</ul>
+</section>
+<section id="training-content">
+<h3>1.6 <strong>Training Content</strong><a class="headerlink" href="#training-content" title="Permalink to this heading">¶</a></h3>
+<p>Get started faster than ever before with easy-to-use tutorials and trainings.</p>
+<ul class="simple">
+<li><p><strong>MSP Academy</strong> provides a great starting point for all developers to learn about the MSPM33 MCU Platform. MSP Academy delivers easy-to-use training modules that span a wide range of topics in the MSP MCU portfolio. To learn more visit: <a class="reference external" href="https://dev.ti.com/tirex/global?id=MSPM33-ACADEMY">MSPM33 Academy</a>.</p></li>
+<li><p><strong>TI Precision Labs</strong> is the most comprehensive online classroom for analog signal chain and embedded processing designers. From foundational knowledge to advanced concepts, our logical, sequenced and comprehensive teaching approach is both intuitive and practical. For more information visit: <a class="reference external" href="https://training.ti.com/ti-precision-labs-microcontrollers?context=1139747-1149158">TI Precision Labs - Microcontrollers</a>.</p></li>
+</ul>
+</section>
+</section>
+<section id="sdk-structure">
+<h2>2. SDK Structure<a class="headerlink" href="#sdk-structure" title="Permalink to this heading">¶</a></h2>
+<p>The MSPM33 SDK has the following structure:</p>
+<p><img alt="image0" src="../_images/sdk-guide-overview.png" /></p>
+<section id="examples-directory">
+<h3>2.1. Examples Directory<a class="headerlink" href="#examples-directory" title="Permalink to this heading">¶</a></h3>
+<p>The examples folder has the following structure:</p>
+<p><img alt="image1" src="../_images/sdk-guide-example-file.png" /></p>
+<p>Code examples are provided ready-to-use for the different MSPM33 EVMs.</p>
+<p>Code examples include corresponding files for supported IDEs including <a class="reference external" href="https://www.ti.com/tool/CCSTUDIO">Code Composer Studio</a>, <a class="reference external" href="https://www.iar.com/ewarm">IAR Embedded Workbench for Arm</a>; and supported compilers: <a class="reference external" href="https://www.ti.com/tool/download/ARM-CGT-CLANG-1">TI Arm-Clang</a>, and <a class="reference external" href="https://www.iar.com/products/architectures/arm/iar-embedded-workbench-for-arm/">IAR Arm compiler</a>.</p>
+<p>Full source code is provided, except for some middleware examples which might be released as pre-built binaries due to licensing restrictions. Check the SDK manifest included with the SDK for more information.</p>
+<p>Check the corresponding MSP Academy and middleware documentation for more details on how to use all examples.</p>
+</section>
+<section id="source-directory">
+<h3>2.2. Source directory<a class="headerlink" href="#source-directory" title="Permalink to this heading">¶</a></h3>
+<p>The source folder has the following structure:</p>
+<p><img alt="image2" src="../_images/sdk-guide-source-file.png" /></p>
+<p>Full source code is provided and can be customized as needed, except for some middleware and 3rd party software which might be released as pre-built binaries due to licensing restrictions. Check the manifest included with the SDK for more information.</p>
+<p>Check the corresponding middleware, 3rd party, MSP Academy and SDK API documentation for more details.</p>
+</section>
+</section>
+<section id="getting-started">
+<h2>3. Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading">¶</a></h2>
+<p>To get started, check the <a class="reference external" href="../../../MSPM33_SDK_Documentation_Overview.html">MSPM33 SDK Documentation Overview</a> and the <a class="reference external" href="../../../quickstart_guides/MSPM33_SDK_Quick_Start_Guides.html">MSPM33 SDK QuickStart Guides</a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="sbom.html" class="btn btn-neutral float-left" title="Software Bill of Materials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">1995-2023, Texas Instruments Incorporated. All rights reserved</a>, Texas Instruments Incorporated. All rights reserved. <br/>
+      <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
